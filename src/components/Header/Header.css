@@ -33,6 +33,17 @@
     font-weight: 600;
 }
 
+/* Overriding */
+.dropdown-menu {
+    background-color: var(--red-100)!important;
+}
+
+@media screen and (min-width: 400px) {
+    .dropdown-menu {
+        width: 0!important;
+    }    
+}
+
 @media screen and (min-width: 992px) {
     .NavbarCollapseNavItem {
         padding: 0 1rem;
