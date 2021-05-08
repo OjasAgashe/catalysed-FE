@@ -13,7 +13,9 @@ Catalysed FronEnd codebase
     
     `npm i @types/react-router-dom`
 
-    
+    `npm install react-bootstrap bootstrap`
+
+    `npm i @types/react-bootstrap`
 
 
 1. Add remote origin to new created folder 'catalysed-frontend'
@@ -35,3 +37,7 @@ Catalysed FronEnd codebase
     ```
 
 1. Create pages/OrganisationRegistration.tsx in src
+
+1. Navbar
+
+    ![NavbarSS](NavbarSS.JPG)

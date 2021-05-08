@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+.Navbar {   
+    background-image: url("../../assets/Illustrations/header-background.webp");
+    box-shadow: 0 2px 5px var(--blue-gray-300);
+    padding: 0 1rem;
+}
+
+.NavbarBrand {
+    display: flex;
+    align-items: center;
+}
+
+.NavbarBrandLogo {
+    width: 51px;
+    height: 41px;
+    border-radius: 5px;
+}
+
+.NavbarBrandText {
+    color: var(--blue-gray-600);
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.NavbarCollapse {
+    justify-content: flex-end;
+}
+
+.NavbarCollapseNavItem {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+@media screen and (min-width: 992px) {
+    .NavbarCollapseNavItem {
+        padding: 0 1rem;
+    }
+}
