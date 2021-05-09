@@ -12,6 +12,7 @@ const Footer = () => {
                 <Link className="FooterLinkThree" to="/">FAQ</Link>
             </div>
             <div className="FooterCopyright">
+                {/* Change Year */}
                 © Year CatalysEd, Org.
             </div>
         </div>

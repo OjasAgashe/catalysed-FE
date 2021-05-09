@@ -2,6 +2,8 @@ import React from "react";
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 import "./Header.css";
 import Logo from "../../assets/Illustrations/logo.png";
+import { Link } from "react-router-dom";
+import { ORGANISATION_REGISTRATION } from "../../routes/Routes";
 
 const Header = () => {
   return (
@@ -47,8 +49,11 @@ const Header = () => {
             id="Register-NavDropdown"
             className="NavbarCollapseNavItem"
           >
+            <NavDropdown.Item as={Link} to={ORGANISATION_REGISTRATION}>
+              Organiser
+            </NavDropdown.Item>
+            
             {/* Change NavDropdown.Item as Link to respective pages */}
-            <NavDropdown.Item>Organiser</NavDropdown.Item>
             <NavDropdown.Item>Mentor</NavDropdown.Item>
             <NavDropdown.Item>Student</NavDropdown.Item>
           </NavDropdown>

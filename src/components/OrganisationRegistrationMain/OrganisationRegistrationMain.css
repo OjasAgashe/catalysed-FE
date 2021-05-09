@@ -1,67 +1,26 @@
-.OrganisationRegistrationMain {
-  background-color: var(--red-100);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 85vh;
+.MdNavigateNextIcon {
+  font-size: 1.2rem;
+  animation: scale-size 1s infinite;
 }
 
-.OrganisationRegistrationMainForm {
-  background-color: var(--white);
-  padding: 1rem 1.5rem;
-  border-radius: 5px;
-  box-shadow: 2px 2px 10px var(--blue-gray-300);
-}
-
-.OrganisationRegistrationMainForm
-  :is(.FormControlFirstname, .FormControlLastname, .FormControlEmail, .FormControlPassword, .FormControlConfirmPassword) {
-  margin-top: 0.5rem;
-  border: none;
-  border-bottom: 1px solid var(--blue-gray-600);
-}
-
-.OrganisationRegistrationMainForm
-  :is(.FormControlFirstname, .FormControlLastname, .FormControlEmail, .FormControlPassword, .FormControlConfirmPassword):focus {
-  box-shadow: none !important;
-}
-
-.FormButtonContainer {
-    text-align: center;
-}
-
-.FormButton {
-  margin-top: 2rem;
-  background-color: var(--blue-gray-600)!important;
-  border-color: var(--blue-gray-600)!important;
-}
-
-.FormButton:hover {
-    background-color: var(--blue-gray-500)!important;
-    border-color: var(--blue-gray-500)!important;
-}
-
-.FormButton:focus {
-  box-shadow: none !important;
+@keyframes scale-size {
+  50% {
+    transform: scale(1.1);
+  }
 }
 
 :is(.FormTextOr, .FormTextLogin) {
-    display: block;
-    text-align: center;
-    font-size: 1rem!important;
+  display: block;
+  text-align: center;
+  font-size: 1rem !important;
 }
 
 :is(.FormTextOr, .FormTextLoginSpan) {
-    font-weight: 600;
-    color: var(--blue-gray-600);
+  font-weight: 600;
+  color: var(--blue-gray-600);
 }
 
 .FormTextLoginSpan:hover {
-    cursor: pointer;
-    color: var(--blue-gray-500);
-}
-
-@media screen and (max-width: 500px) {
-  .OrganisationRegistrationMainForm {
-    margin: 0 1rem;
-  }
+  cursor: pointer;
+  color: var(--blue-gray-500);
 }
