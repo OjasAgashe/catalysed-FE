@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import OrganisationRegistration from "../../pages/OrganisationRegistration";
 import { ORGANISATION_REGISTRATION } from "../../routes/Routes";
+import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import "./App.css";
 
@@ -15,6 +16,7 @@ function App() {
             <OrganisationRegistration />
           </Route>
         </Switch>
+        <Footer />
       </Router>
     </div>
   );

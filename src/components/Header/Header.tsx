@@ -5,7 +5,7 @@ import Logo from "../../assets/Illustrations/logo.png";
 
 const Header = () => {
   return (
-    <Navbar expand="md" className="Navbar">
+    <Navbar expand="lg" className="Navbar">
       {/* Change Navbar.Brand as Link to common homepage */}
       <Navbar.Brand className="NavbarBrand">
         <img src={Logo} className="NavbarBrandLogo" alt="brand logo" />
