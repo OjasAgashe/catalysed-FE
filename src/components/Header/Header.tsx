@@ -3,7 +3,7 @@ import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 import "./Header.css";
 import Logo from "../../assets/Illustrations/logo.png";
 import { Link } from "react-router-dom";
-import { ORGANISATION_REGISTRATION } from "../../routes/Routes";
+import { ORGANISATION_REGISTER } from "../../routes/Routes";
 
 const Header = () => {
   return (
@@ -49,7 +49,7 @@ const Header = () => {
             id="Register-NavDropdown"
             className="NavbarCollapseNavItem"
           >
-            <NavDropdown.Item as={Link} to={ORGANISATION_REGISTRATION}>
+            <NavDropdown.Item as={Link} to={ORGANISATION_REGISTER}>
               Organiser
             </NavDropdown.Item>
             

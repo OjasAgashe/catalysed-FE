@@ -1,5 +1,4 @@
 
-export const ORGANISATION_REGISTRATION = '/';
-export const ORGANISATION_DETAILS = '/organisation-details';
+export const ORGANISATION_REGISTER = '/';
 export const LOGIN = '/login';
 export const HOME = '/home';

@@ -1,11 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import OrganisationDetails from "../../pages/OrganisationDetails";
-import OrganisationRegistration from "../../pages/OrganisationRegistration";
-import {
-  ORGANISATION_DETAILS,
-  ORGANISATION_REGISTRATION,
-} from "../../routes/Routes";
+import OrganisationRegister from "../../pages/OrganisationRegister";
+import { ORGANISATION_REGISTER } from "../../routes/Routes";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import "./App.css";
@@ -16,11 +12,8 @@ function App() {
       <Router>
         <Header />
         <Switch>
-          <Route path={ORGANISATION_REGISTRATION} exact>
-            <OrganisationRegistration />
-          </Route>
-          <Route path={ORGANISATION_DETAILS}>
-            <OrganisationDetails />
+          <Route path={ORGANISATION_REGISTER}>
+            <OrganisationRegister />
           </Route>
         </Switch>
         <Footer />

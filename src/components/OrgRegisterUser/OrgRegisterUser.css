@@ -1,0 +1,10 @@
+.MdNavigateNextIcon {
+  font-size: 1.2rem;
+  animation: scale-size 1s infinite;
+}
+
+@keyframes scale-size {
+  50% {
+    transform: scale(1.1);
+  }
+}

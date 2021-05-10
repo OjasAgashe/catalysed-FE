@@ -1,0 +1,30 @@
+.ProgressStep {
+  align-self: flex-end;
+}
+
+.Line {
+  width: 25px;
+}
+
+.HalfLine {
+  width: 12.5px;
+}
+
+:is(.Line, .HalfLine) {
+  border-radius: 5px;
+  border: 2px solid var(--blue-gray-300);
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.Circle {
+  border-radius: 50%;
+  border: 2px solid var(--blue-gray-300);
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+}
+
+:is(.Line1, .Circle1, .Line2, .Line3, .Circle2, .Line4) {
+  border-color: var(--emerald-300);
+}
