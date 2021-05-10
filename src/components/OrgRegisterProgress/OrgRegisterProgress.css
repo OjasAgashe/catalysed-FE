@@ -1,30 +1,48 @@
+.ProgressStepContainer {
+  padding: 2rem 0;
+}
+
 .ProgressStep {
-  align-self: flex-end;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ProgressText {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
 }
 
 .Line {
-  width: 25px;
-}
-
-.HalfLine {
-  width: 12.5px;
-}
-
-:is(.Line, .HalfLine) {
   border-radius: 5px;
-  border: 2px solid var(--blue-gray-300);
-  display: inline-block;
-  margin-bottom: 10px;
+  width: 50px;
+  border: 2px solid var(--white);
 }
 
 .Circle {
   border-radius: 50%;
-  border: 2px solid var(--blue-gray-300);
   width: 25px;
   height: 25px;
-  display: inline-block;
+  background-color: var(--white);
+  text-align: center;
+  color: var(--blue-gray-600);
 }
 
-:is(.Line1, .Circle1, .Line2, .Line3, .Circle2, .Line4) {
-  border-color: var(--emerald-300);
+.CurrentLine,
+.CurrentCircle {
+  border-color: var(--cyan-shade);
+  background-color: var(--cyan-shade);
+}
+
+.VisitedLine,
+.VisitedCircle {
+  border-color: var(--green-400);
+  background-color: var(--green-400);
+  color: var(--white);
+}
+
+.BiCheckIcon {
+  font-size: 1.5rem;
 }

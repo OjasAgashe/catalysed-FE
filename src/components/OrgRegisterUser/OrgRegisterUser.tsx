@@ -2,17 +2,12 @@ import React, { useEffect } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import "./OrgRegisterUser.css";
 import { MdNavigateNext } from "react-icons/md";
-import OrgRegisterProgress from "../OrgRegisterProgress/OrgRegisterProgress";
 
 type OrgRegisterUserProps = {
-  currentOrgRegister: String;
   setCurrentOrgRegister: React.Dispatch<React.SetStateAction<String>>;
 };
 
-const OrgRegisterUser = ({
-  currentOrgRegister,
-  setCurrentOrgRegister,
-}: OrgRegisterUserProps) => {
+const OrgRegisterUser = ({ setCurrentOrgRegister }: OrgRegisterUserProps) => {
   useEffect(() => {
     document.title = "Organisation Register | CatalysEd";
     setCurrentOrgRegister("user");
@@ -28,10 +23,6 @@ const OrgRegisterUser = ({
 
   return (
     <div className="OrgRegisterUser">
-      <div className="OrgRegisterProgressContainer">
-        <div className="OrgRegisterUserText">User Details</div>
-        <OrgRegisterProgress currentOrgRegister={currentOrgRegister} />
-      </div>
       <Form
         className="OrgRegisterUserForm"
         onSubmit={handleOrgRegisterUserFormSubmit}

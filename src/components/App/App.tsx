@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import OrganisationRegister from "../../pages/OrganisationRegister";
+import OrganisationRegister from "../../pages/OrganisationRegister/OrganisationRegister";
 import { ORGANISATION_REGISTER } from "../../routes/Routes";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";

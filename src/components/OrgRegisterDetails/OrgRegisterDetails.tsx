@@ -1,15 +1,12 @@
 import React, { useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
-import OrgRegisterProgress from "../OrgRegisterProgress/OrgRegisterProgress";
 import "./OrgRegisterDetails.css";
 
 type OrgRegisterDetailsProps = {
-  currentOrgRegister: String;
   setCurrentOrgRegister: React.Dispatch<React.SetStateAction<String>>;
 };
 
 const OrgRegisterDetails = ({
-  currentOrgRegister,
   setCurrentOrgRegister,
 }: OrgRegisterDetailsProps) => {
   useEffect(() => {
@@ -25,10 +22,6 @@ const OrgRegisterDetails = ({
 
   return (
     <div className="OrgRegisterDetails">
-      <div className="OrgRegisterProgressContainer">
-        <div className="OrgRegisterDetailsText">Organisation Details</div>
-        <OrgRegisterProgress currentOrgRegister={currentOrgRegister} />
-      </div>
       <Form
         className="OrgRegisterDetailsForm"
         onSubmit={handleOrgRegisterDetailsFormSubmit}
