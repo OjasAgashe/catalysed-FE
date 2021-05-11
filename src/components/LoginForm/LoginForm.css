@@ -1,0 +1,10 @@
+.FormTextForgotPassword {
+    display: block;
+    font-weight: 600;
+}
+
+@media screen and (max-width: 520px) {
+  .LoginFormContainer {
+    width: 100%;
+  }
+}

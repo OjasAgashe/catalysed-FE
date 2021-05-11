@@ -10,6 +10,7 @@ import {
 import "./OrgRegisterDetails.css";
 import { AiFillLinkedin, AiOutlineTwitter } from "react-icons/ai";
 import { FaFacebook } from "react-icons/fa";
+import { GiClick } from "react-icons/gi";
 
 type OrgRegisterDetailsProps = {
   setCurrentOrgRegister: React.Dispatch<React.SetStateAction<string>>;
@@ -35,17 +36,6 @@ const OrgRegisterDetails = ({
   ) => {
     if (selected !== null) {
       setPrependValue(selected);
-      // switch (selected) {
-      //   case "twitter":
-      //     setPrependValue("https://twitter.com/");
-      //     break;
-      //   case "linkedIn":
-      //     setPrependValue("https://www.linkedin.com/");
-      //     break;
-      //   case "facebook":
-      //     setPrependValue("https://www.facebook.com/");
-      //     break;
-      // }
     }
   };
 
@@ -105,7 +95,7 @@ const OrgRegisterDetails = ({
 
         <div className="FormButtonContainer">
           <Button type="submit" className="FormButton">
-            Register now
+            Register now <GiClick />
           </Button>
         </div>
       </Form>
