@@ -99,63 +99,6 @@ const OrgRegisterDetails = ({
           </Button>
         </div>
       </Form>
-      {/* <br />
-      <Form
-        className="OrgRegisterDetailsForm"
-        onSubmit={handleOrgRegisterDetailsFormSubmit}
-      >
-        <Form.Control type="text" placeholder="Organisation Name" />
-
-        <Form.Control
-          className="FormControlAboutOrgDemo"
-          placeholder="Write About Your Organisation"
-        />
-
-        <Row className="RowSocialInputOrgRegister">
-          <Col className="ColOne">
-            <DropdownButton
-              className="SocialDropdown"
-              title={`${prependValue ? prependValue : "Social"}`}
-            >
-              <Dropdown.Item
-                eventKey="None"
-                onSelect={(selected) => handleSocialDropdownSelect(selected)}
-              >
-                <span className="SocialTitle">None</span>
-              </Dropdown.Item>
-              <Dropdown.Item
-                eventKey="twitter"
-                onSelect={(selected) => handleSocialDropdownSelect(selected)}
-              >
-                <AiOutlineTwitter className="TwitterDropdown" />
-              </Dropdown.Item>
-              <Dropdown.Item
-                eventKey="linkedIn"
-                onSelect={(selected) => handleSocialDropdownSelect(selected)}
-              >
-                <AiFillLinkedin className="LinkedInDropdown" />
-              </Dropdown.Item>
-              <Dropdown.Item
-                eventKey="facebook"
-                onSelect={(selected) => handleSocialDropdownSelect(selected)}
-              >
-                <FaFacebook className="FacebookDropdown" />
-              </Dropdown.Item>
-            </DropdownButton>
-          </Col>
-          <Col className="ColTwo">
-            <Form.Control type="text" placeholder="Link" />
-          </Col>
-        </Row>
-
-        <Form.Control type="text" placeholder="Organisation Website Link" />
-
-        <div className="FormButtonContainer">
-          <Button type="submit" className="FormButton">
-            Register now <GiClick />
-          </Button>
-        </div>
-      </Form> */}
     </div>
   );
 };

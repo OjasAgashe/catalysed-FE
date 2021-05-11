@@ -5,16 +5,19 @@ import "./LoadingProgress.css";
 
 const LoadingProgress = () => {
   return (
-    <div className="LoadingProgressContainer">
-      <div className="BounceLoaderContainer">
-        <BounceLoader color="#2bc0ef" css="display:block; margin:0 auto;" />
-        <span>Registering You...</span>
-      </div>
-      {/* <br /> */}
-      <div className="EmailSentIconContainer">
-        <AiFillCheckCircle className="EmailSentTickIcon" />
-        <span>Registration Successful !</span>
-        <span>Verification mail sent for account activation</span>
+    <div className="LoadingProgressModal">
+      <div className="LoadingProgressContainer">
+        <div className="BounceLoaderContainer">
+          <BounceLoader color="#2bc0ef" css="display:block; margin:0 auto;" />
+          <br />
+          <span>Registering You...</span>
+        </div>
+        <div className="EmailSentIconContainer">
+          <AiFillCheckCircle className="EmailSentTickIcon" />
+          <span>Registration Successful !</span>
+          <br />
+          <span>Verification mail sent for account activation</span>
+        </div>
       </div>
     </div>
   );

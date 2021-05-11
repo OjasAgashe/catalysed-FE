@@ -14,7 +14,7 @@
 
 /* Components */
 
-/* OrgRegisterUser, OrgRegisterDetails */
+/* OrgRegisterUser, OrgRegisterDetails, LoginForm */
 
 :is(.OrgRegisterUserForm, .OrgRegisterDetailsForm, .LoginForm) {
   background-color: var(--white);

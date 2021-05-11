@@ -15,8 +15,8 @@ const OrganisationRegister = () => {
         <OrgRegisterProgress currentOrgRegister={currentOrgRegister} />
       </div>
 
-      <LoadingProgress />
-      {/* <br /> */}
+      {/* <LoadingProgress /> */}
+
       {currentOrgRegister === "user" && (
         <OrgRegisterUser setCurrentOrgRegister={setCurrentOrgRegister} />
       )}
