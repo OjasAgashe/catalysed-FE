@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
 import OrgRegisterDetails from "../../components/OrgRegisterDetails/OrgRegisterDetails";
 import OrgRegisterProgress from "../../components/OrgRegisterProgress/OrgRegisterProgress";
 import OrgRegisterUser from "../../components/OrgRegisterUser/OrgRegisterUser";
@@ -14,6 +15,8 @@ const OrganisationRegister = () => {
         <OrgRegisterProgress currentOrgRegister={currentOrgRegister} />
       </div>
 
+      <LoadingProgress />
+      {/* <br /> */}
       {currentOrgRegister === "user" && (
         <OrgRegisterUser setCurrentOrgRegister={setCurrentOrgRegister} />
       )}

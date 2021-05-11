@@ -7,7 +7,7 @@ const LoginForm = () => {
   return (
     <div className="LoginFormContainer">
       <Form className="LoginForm">
-        <Form.Control type="email" placeholder="Your Official Email Id" />
+        <Form.Control type="email" placeholder="Email id" />
         <Form.Control type="password" placeholder="Password" />
 
         <div className="FormButtonContainer">
