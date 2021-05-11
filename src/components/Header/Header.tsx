@@ -3,11 +3,11 @@ import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 import "./Header.css";
 import Logo from "../../assets/Illustrations/logo.png";
 import { Link } from "react-router-dom";
-import { ORGANISATION_REGISTER } from "../../routes/Routes";
+import { LOGIN, ORGANISATION_REGISTER } from "../../routes/Routes";
 
 const Header = () => {
   return (
-    <Navbar expand="lg" className="Navbar">
+    <Navbar collapseOnSelect expand="lg" className="Navbar">
       {/* Change Navbar.Brand as Link to common homepage */}
       <Navbar.Brand className="NavbarBrand">
         <img src={Logo} className="NavbarBrandLogo" alt="brand logo" />
@@ -19,7 +19,9 @@ const Header = () => {
       <Navbar.Collapse className="NavbarCollapse" id="navbar-nav">
         <Nav>
           {/* Change Home as Link to common homepage */}
-          <Nav.Link className="NavbarCollapseNavItem">Home</Nav.Link>
+          <Nav.Link className="NavbarCollapseNavItem" eventKey="1">
+            Home
+          </Nav.Link>
 
           <NavDropdown
             title="Ecosystem"
@@ -27,8 +29,8 @@ const Header = () => {
             className="NavbarCollapseNavItem"
           >
             {/* Change NavDropdown.Item as Link to respective pages */}
-            <NavDropdown.Item>Organisations</NavDropdown.Item>
-            <NavDropdown.Item>Programs</NavDropdown.Item>
+            <NavDropdown.Item eventKey="2">Organisations</NavDropdown.Item>
+            <NavDropdown.Item eventKey="3">Programs</NavDropdown.Item>
           </NavDropdown>
 
           <NavDropdown
@@ -37,28 +39,37 @@ const Header = () => {
             className="NavbarCollapseNavItem"
           >
             {/* Change NavDropdown.Item as Link to respective pages */}
-            <NavDropdown.Item>How to get started</NavDropdown.Item>
-            <NavDropdown.Item>In-depth guide</NavDropdown.Item>
+            <NavDropdown.Item eventKey="4">How to get started</NavDropdown.Item>
+            <NavDropdown.Item eventKey="5">In-depth guide</NavDropdown.Item>
           </NavDropdown>
 
           {/* Change FAQ as Link to FAQ page */}
-          <Nav.Link className="NavbarCollapseNavItem">FAQ</Nav.Link>
+          <Nav.Link className="NavbarCollapseNavItem" eventKey="6">
+            FAQ
+          </Nav.Link>
 
           <NavDropdown
             title="Register"
             id="Register-NavDropdown"
             className="NavbarCollapseNavItem"
           >
-            <NavDropdown.Item as={Link} to={ORGANISATION_REGISTER}>
+            <NavDropdown.Item as={Link} to={ORGANISATION_REGISTER} eventKey="7">
               Organiser
             </NavDropdown.Item>
-            
+
             {/* Change NavDropdown.Item as Link to respective pages */}
-            <NavDropdown.Item>Mentor</NavDropdown.Item>
-            <NavDropdown.Item>Student</NavDropdown.Item>
+            <NavDropdown.Item eventKey="8">Mentor</NavDropdown.Item>
+            <NavDropdown.Item eventKey="9">Student</NavDropdown.Item>
           </NavDropdown>
 
-          <Nav.Link className="NavbarCollapseNavItem">Log In</Nav.Link>
+          <Nav.Link
+            className="NavbarCollapseNavItem"
+            as={Link}
+            to={LOGIN}
+            eventKey="10"
+          >
+            Log In
+          </Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

@@ -2,6 +2,51 @@
   resize: none;
 }
 
+/* Overriding user agent */
+.RowSocialInputOrgRegister .col {
+  align-self: baseline;
+}
+
+.RowSocialInputOrgRegister .ColTwo {
+  flex-grow: 4 !important;
+}
+
+.RowSocialInputOrgRegister .dropdown-toggle.btn-primary {
+  background-color: inherit !important;
+  color: var(--blue-gray-600) !important;
+  border-color: var(--blue-gray-600) !important;
+}
+
+.RowSocialInputOrgRegister .dropdown-toggle.btn-primary:focus {
+  box-shadow: none !important;
+}
+
+.SocialDropdown .dropdown-menu {
+  min-width: 5rem !important;
+  padding: 0 !important;
+  text-align: center !important;
+  font-size: 1.5rem !important;
+  background-color: var(--white) !important;
+}
+/* Overriding end */
+
+.SocialTitle {
+  font-size: 1rem;
+  color: var(--blue-gray-500);
+}
+
+.TwitterDropdown {
+  color: var(--twitter-code);
+}
+
+.LinkedInDropdown {
+  color: var(--linkedIn-code);
+}
+
+.FacebookDropdown {
+  color: var(--facebook-code);
+}
+
 @media screen and (max-width: 520px) {
   .OrgRegisterDetails {
     width: 100%;

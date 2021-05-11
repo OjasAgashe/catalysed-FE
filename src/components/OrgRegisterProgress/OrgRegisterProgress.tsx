@@ -3,7 +3,7 @@ import { BiCheck } from "react-icons/bi";
 import "./OrgRegisterProgress.css";
 
 type OrgRegisterProgressProps = {
-  currentOrgRegister: String;
+  currentOrgRegister: string;
 };
 
 const OrgRegisterProgress = ({

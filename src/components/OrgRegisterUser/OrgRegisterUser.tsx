@@ -4,7 +4,7 @@ import "./OrgRegisterUser.css";
 import { MdNavigateNext } from "react-icons/md";
 
 type OrgRegisterUserProps = {
-  setCurrentOrgRegister: React.Dispatch<React.SetStateAction<String>>;
+  setCurrentOrgRegister: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const OrgRegisterUser = ({ setCurrentOrgRegister }: OrgRegisterUserProps) => {

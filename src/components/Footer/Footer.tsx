@@ -13,7 +13,7 @@ const Footer = () => {
             </div>
             <div className="FooterCopyright">
                 {/* Change Year */}
-                © Year CatalysEd, Org.
+                © 2021 CatalysEd, Org.
             </div>
         </div>
     )

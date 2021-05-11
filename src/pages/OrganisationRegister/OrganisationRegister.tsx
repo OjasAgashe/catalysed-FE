@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import OrgRegisterDetails from "../../components/OrgRegisterDetails/OrgRegisterDetails";
 import OrgRegisterProgress from "../../components/OrgRegisterProgress/OrgRegisterProgress";
 import OrgRegisterUser from "../../components/OrgRegisterUser/OrgRegisterUser";
-import './OrganisationRegister.css';
+import "./OrganisationRegister.css";
 
 const OrganisationRegister = () => {
-  const [currentOrgRegister, setCurrentOrgRegister] = useState<String>("user");
+  const [currentOrgRegister, setCurrentOrgRegister] = useState<string>("user");
 
   return (
     <div className="OrgRegisterPage">

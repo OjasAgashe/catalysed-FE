@@ -12,7 +12,7 @@ function App() {
       <Router>
         <Header />
         <Switch>
-          <Route path={ORGANISATION_REGISTER}>
+          <Route path={ORGANISATION_REGISTER} exact>
             <OrganisationRegister />
           </Route>
         </Switch>
