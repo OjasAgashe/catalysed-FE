@@ -14,8 +14,7 @@ const LoadingProgress = () => {
         </div>
         <div className="EmailSentIconContainer">
           <AiFillCheckCircle className="EmailSentTickIcon" />
-          <span>Registration Successful !</span>
-          <br />
+          <span className="RegistrationSuccessText">Registration Successful !</span>
           <span>Verification mail sent for account activation</span>
         </div>
       </div>

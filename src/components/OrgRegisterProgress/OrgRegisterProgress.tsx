@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BiCheck } from "react-icons/bi";
 import "./OrgRegisterProgress.css";
 
@@ -9,10 +9,6 @@ type OrgRegisterProgressProps = {
 const OrgRegisterProgress = ({
   currentOrgRegister,
 }: OrgRegisterProgressProps) => {
-  useEffect(() => {
-    console.log(currentOrgRegister);
-  });
-
   return (
     <div className="ProgressStepContainer">
       <div className="ProgressStep">

@@ -5,6 +5,7 @@
   top: inherit;
   left: 0;
   background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1;
 }
 
 .LoadingProgressContainer {
@@ -37,4 +38,9 @@
 .EmailSentTickIcon {
   color: var(--success-code);
   font-size: 2rem;
+}
+
+.EmailSentIconContainer .RegistrationSuccessText {
+  margin-top: 1rem;
+  margin-bottom: 0.8rem;
 }
