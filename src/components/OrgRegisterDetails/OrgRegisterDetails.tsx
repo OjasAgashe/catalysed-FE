@@ -44,10 +44,16 @@ const OrgRegisterDetails = ({
     (event) => {
       if (validated) setValidated(false);
 
+      console.clear();
+      console.log(orgRegisterData);
+
       if (event.target.name !== "socialMedia") {
         setOrgRegisterData((prevState) => ({
           ...prevState,
-          [`orgDetails.${event.target.name}`]: event.target.value,
+          orgDetails: {
+            ...prevState.orgDetails,
+            [event.target.name]: event.target.value,
+          },
         }));
       }
 

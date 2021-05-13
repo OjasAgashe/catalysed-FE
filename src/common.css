@@ -36,6 +36,10 @@
   border-color: var(--light-blue-300) !important;
 }
 
+.form-control:valid {
+  background: none !important;
+}
+
 /* End Overriding */
 
 /* Form Button of LoginForm, OrgRegisterDetails, OrgRegisterUser */

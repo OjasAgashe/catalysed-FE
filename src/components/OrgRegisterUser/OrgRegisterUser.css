@@ -1,3 +1,22 @@
+.EyeIconInputGroup {
+  align-self: flex-end !important;
+}
+
+.EyeIconButton {
+  background-color: var(--white) !important;
+  border: none !important;
+  border-bottom: 1px solid var(--blue-gray-600) !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+.EyeIconButton:focus {
+  box-shadow: none !important;
+}
+
+:is(.EyeInvisibleIcon, .EyeVisibleIcon) {
+  color: var(--black);
+}
+
 .MdNavigateNextIcon {
   font-size: 1.2rem;
   animation: scale-size 1s infinite;
