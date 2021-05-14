@@ -40,13 +40,13 @@ const OrganisationRegister = () => {
 
       {/* <LoadingProgress /> */}
 
-      {/* {currentOrgRegister === "user" && (
+      {currentOrgRegister === "user" && (
         <OrgRegisterUser
           orgRegisterData={orgRegisterData}
           setOrgRegisterData={setOrgRegisterData}
           setCurrentOrgRegister={setCurrentOrgRegister}
         />
-      )} */}
+      )}
       {currentOrgRegister === "details" && (
         <OrgRegisterDetails
           orgRegisterData={orgRegisterData}
