@@ -107,7 +107,7 @@ const OrgRegisterDetails = ({
     if (selected !== null) {
       if (validated) setValidated(false);
 
-            if (socialMediaLinkIsInvalid) setSocialMediaLinkIsInvalid(false);
+      if (socialMediaLinkIsInvalid) setSocialMediaLinkIsInvalid(false);
 
       setDropdownSelected(selected);
     }

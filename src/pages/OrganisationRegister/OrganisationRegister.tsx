@@ -9,7 +9,7 @@ import "./OrganisationRegister.css";
 
 const OrganisationRegister = () => {
   const [currentOrgRegister, setCurrentOrgRegister] =
-    useState<string>("details");
+    useState<string>("user");
   const [orgRegisterData, setOrgRegisterData] =
     useStateWithCallbackLazy<OrgRegisterData>({
       firstName: "",
