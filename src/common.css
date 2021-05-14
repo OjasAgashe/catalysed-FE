@@ -1,22 +1,22 @@
 /* Pages */
 
-/* OrganisationRegister, Login */
+/* OrganisationRegister, Login, StudentMentorRegister */
 
-:is(.OrgRegisterPage, .LoginPage) {
+:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage) {
   background-color: var(--red-100);
+  min-height: 85vh;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 85vh;
-  padding: 1.5rem;
 }
 
 /* Components */
 
-/* OrgRegisterUser, OrgRegisterDetails, LoginForm */
+/* OrgRegisterUser, OrgRegisterDetails, LoginForm, StudentMentorRegister (page) */
 
-:is(.OrgRegisterUserForm, .OrgRegisterDetailsForm, .LoginForm) {
+:is(.OrgRegisterUserForm, .OrgRegisterDetailsForm, .LoginForm, .StudentMentorRegisterBox) {
   background-color: var(--white);
   padding: 1rem 1.5rem;
   border-radius: 5px;

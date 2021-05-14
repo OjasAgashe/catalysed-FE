@@ -3,7 +3,11 @@ import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 import "./Header.css";
 import Logo from "../../assets/Illustrations/logo.png";
 import { Link } from "react-router-dom";
-import { LOGIN, ORGANISATION_REGISTER } from "../../routes/Routes";
+import {
+  LOGIN,
+  ORGANISATION_REGISTER,
+  STUDENT_MENTOR_REGISTER,
+} from "../../routes/Routes";
 
 const Header = () => {
   return (
@@ -57,9 +61,20 @@ const Header = () => {
               Organiser
             </NavDropdown.Item>
 
-            {/* Change NavDropdown.Item as Link to respective pages */}
-            <NavDropdown.Item eventKey="8">Mentor</NavDropdown.Item>
-            <NavDropdown.Item eventKey="9">Student</NavDropdown.Item>
+            <NavDropdown.Item
+              as={Link}
+              to={STUDENT_MENTOR_REGISTER}
+              eventKey="8"
+            >
+              Mentor
+            </NavDropdown.Item>
+            <NavDropdown.Item
+              as={Link}
+              to={STUDENT_MENTOR_REGISTER}
+              eventKey="9"
+            >
+              Student
+            </NavDropdown.Item>
           </NavDropdown>
 
           <Nav.Link
