@@ -17,6 +17,9 @@ const OrgRegisterDetails = ({
   const [dropdownSelected, setDropdownSelected] = useState<string>("");
   const [validated, setValidated] = useState<boolean>(false);
 
+  const [orgNameFeedback, setOrgNameFeedback] = useState<string>("");
+  const [orgNameIsInvalid, setOrgNameIsInvalid] = useState<boolean>(false);
+
   const [socialMediaLink, setSocialMediaLink] = useState<string>("");
   const [socialMediaFeedback, setSocialMediaFeedback] = useState<string>("");
   const [socialMediaLinkIsInvalid, setSocialMediaLinkIsInvalid] =
@@ -49,6 +52,8 @@ const OrgRegisterDetails = ({
       if (validated) setValidated(false);
 
       if (socialMediaLinkIsInvalid) setSocialMediaLinkIsInvalid(false);
+
+      if (orgNameIsInvalid) setOrgNameIsInvalid(false);
 
       if (event.target.name !== "socialMedia") {
         setOrgRegisterData((prevState: OrgRegisterData) => ({
@@ -109,6 +114,8 @@ const OrgRegisterDetails = ({
 
       if (socialMediaLinkIsInvalid) setSocialMediaLinkIsInvalid(false);
 
+      if (orgNameIsInvalid) setOrgNameIsInvalid(false);
+
       setDropdownSelected(selected);
     }
   };
@@ -119,10 +126,40 @@ const OrgRegisterDetails = ({
 
       setValidated(true);
 
-      if (socialMediaLink && dropdownSelected === "") {
-        setSocialMediaFeedback("Only dropdown options are acceptable");
-        setSocialMediaLinkIsInvalid(true);
+      const onlyAlphabets = /^[a-zA-Z]*$/;
+
+      if (
+        orgRegisterData.orgDetails.name &&
+        !onlyAlphabets.test(orgRegisterData.orgDetails.name)
+      ) {
+        setOrgNameFeedback("Name must contain only Alphabet");
+        setOrgNameIsInvalid(true);
         return;
+      }
+
+      if (socialMediaLink) {
+        let isInValidLink = false;
+
+        const startsWith = /^(https|http|www).*/;
+
+        if (dropdownSelected !== "" && startsWith.test(socialMediaLink)) {
+          let validLink = false;
+          for (let index = 0; index < possibleSocialBaseURL.length; index++) {
+            let baseURL = possibleSocialBaseURL[index];
+
+            if (socialMediaLink.includes(baseURL)) {
+              validLink = true;
+              break;
+            }
+          }
+          if (!validLink) isInValidLink = true;
+        }
+
+        if (dropdownSelected === "" || isInValidLink) {
+          setSocialMediaFeedback("Only dropdown options are acceptable");
+          setSocialMediaLinkIsInvalid(true);
+          return;
+        }
       }
 
       if (event.currentTarget.checkValidity() === true) {
@@ -179,6 +216,8 @@ const OrgRegisterDetails = ({
         socialMediaLink={socialMediaLink}
         socialMediaLinkIsInvalid={socialMediaLinkIsInvalid}
         socialMediaFeedback={socialMediaFeedback}
+        orgNameFeedback={orgNameFeedback}
+        orgNameIsInvalid={orgNameIsInvalid}
       />
     </div>
   );
