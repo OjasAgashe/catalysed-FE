@@ -3,12 +3,8 @@
 }
 
 /* Overriding user agent */
-.RowSocialInputOrgRegister .col {
-  align-self: baseline;
-}
-
-.RowSocialInputOrgRegister .ColTwo {
-  flex-grow: 4 !important;
+.SocialDropdown {
+  align-self: flex-end !important;
 }
 
 .RowSocialInputOrgRegister .dropdown-toggle.btn-primary {
@@ -30,11 +26,6 @@
 }
 /* Overriding end */
 
-.SocialTitle {
-  font-size: 1rem;
-  color: var(--blue-gray-500);
-}
-
 .TwitterDropdown {
   color: var(--twitter-code);
 }
@@ -45,6 +36,10 @@
 
 .FacebookDropdown {
   color: var(--facebook-code);
+}
+
+.InstagramDropdown {
+  color: var(--instagram-code);
 }
 
 @media screen and (max-width: 520px) {

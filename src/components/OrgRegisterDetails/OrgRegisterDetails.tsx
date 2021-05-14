@@ -1,21 +1,11 @@
 import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Col,
-  Dropdown,
-  DropdownButton,
-  Form,
-  Row,
-} from "react-bootstrap";
 import "./OrgRegisterDetails.css";
-import { AiFillLinkedin, AiOutlineTwitter } from "react-icons/ai";
-import { FaFacebook } from "react-icons/fa";
-import { GiClick } from "react-icons/gi";
 import { OrgRegisterData } from "../../types/OrganisationRegister";
+import OrgRegisterDetailsForm from "./OrgRegisterDetailsForm";
 
 type OrgRegisterDetailsProps = {
   orgRegisterData: OrgRegisterData;
-  setOrgRegisterData: React.Dispatch<React.SetStateAction<OrgRegisterData>>;
+  setOrgRegisterData: any;
   setCurrentOrgRegister: React.Dispatch<React.SetStateAction<string>>;
 };
 
@@ -24,16 +14,30 @@ const OrgRegisterDetails = ({
   setOrgRegisterData,
   setCurrentOrgRegister,
 }: OrgRegisterDetailsProps) => {
-  const [prependValue, setPrependValue] = useState<string>("");
+  const [dropdownSelected, setDropdownSelected] = useState<string>("");
   const [validated, setValidated] = useState<boolean>(false);
 
   const [socialMediaLink, setSocialMediaLink] = useState<string>("");
   const [socialMediaFeedback, setSocialMediaFeedback] = useState<string>("");
+  const [socialMediaLinkIsInvalid, setSocialMediaLinkIsInvalid] =
+    useState<boolean>(false);
+
+  const possibleSocialMedia: string[] = [
+    "twitter",
+    "linkedIn",
+    "facebook",
+    "instagram",
+  ];
 
   const possibleSocialBaseURL: string[] = [
-    "https://twitter.com",
+    "https://www.twitter.com",
     "https://www.linkedin.com",
     "https://www.facebook.com",
+    "https://www.instagram.com",
+    "https://twitter.com",
+    "https://linkedin.com",
+    "https://facebook.com",
+    "https://instagram.com",
   ];
 
   useEffect(() => {
@@ -44,11 +48,10 @@ const OrgRegisterDetails = ({
     (event) => {
       if (validated) setValidated(false);
 
-      console.clear();
-      console.log(orgRegisterData);
+      if (socialMediaLinkIsInvalid) setSocialMediaLinkIsInvalid(false);
 
       if (event.target.name !== "socialMedia") {
-        setOrgRegisterData((prevState) => ({
+        setOrgRegisterData((prevState: OrgRegisterData) => ({
           ...prevState,
           orgDetails: {
             ...prevState.orgDetails,
@@ -58,29 +61,43 @@ const OrgRegisterDetails = ({
       }
 
       if (event.target.name === "socialMedia") {
-        setSocialMediaLink(event.target.value);
+        const targetValue = event.target.value;
+        let baseURLPresent = false;
 
-        if (socialMediaLink && prependValue === "") {
-          possibleSocialBaseURL.forEach((baseURL, index) => {
-            if (socialMediaLink.includes(baseURL)) {
+        setSocialMediaLink(targetValue);
+
+        if (targetValue) {
+          for (let index = 0; index < possibleSocialBaseURL.length; index++) {
+            let baseURL = possibleSocialBaseURL[index];
+
+            if (targetValue.includes(baseURL)) {
               switch (index) {
                 case 0:
-                  setPrependValue("twitter");
+                case 4:
+                  setDropdownSelected("twitter");
                   break;
                 case 1:
-                  setPrependValue("linkedIn");
+                case 5:
+                  setDropdownSelected("linkedIn");
                   break;
                 case 2:
-                  setPrependValue("facebook");
+                case 6:
+                  setDropdownSelected("facebook");
+                  break;
+                case 3:
+                case 7:
+                  setDropdownSelected("instagram");
                   break;
               }
+              baseURLPresent = true;
+              setSocialMediaLink(targetValue.replace(baseURL, ""));
+              break;
             }
-
-            if (prependValue) {
-              setPrependValue("None");
-            }
-          });
+          }
         }
+
+        if (targetValue === "" || baseURLPresent === false)
+          setDropdownSelected("");
       }
     };
 
@@ -88,7 +105,11 @@ const OrgRegisterDetails = ({
     selected
   ) => {
     if (selected !== null) {
-      setPrependValue(selected);
+      if (validated) setValidated(false);
+
+            if (socialMediaLinkIsInvalid) setSocialMediaLinkIsInvalid(false);
+
+      setDropdownSelected(selected);
     }
   };
 
@@ -98,121 +119,67 @@ const OrgRegisterDetails = ({
 
       setValidated(true);
 
-      // if (socialMediaLink)
+      if (socialMediaLink && dropdownSelected === "") {
+        setSocialMediaFeedback("Only dropdown options are acceptable");
+        setSocialMediaLinkIsInvalid(true);
+        return;
+      }
 
       if (event.currentTarget.checkValidity() === true) {
-      } else {
-        console.log("validity fails");
+        let code: string = "";
+        let link: string = "";
+
+        for (let index = 0; index < possibleSocialMedia.length; index++) {
+          let social = possibleSocialMedia[index];
+
+          if (social === dropdownSelected) {
+            switch (index) {
+              case 0:
+                code = "TWITTER";
+                break;
+              case 1:
+                code = "LINKED_IN";
+                break;
+              case 2:
+                code = "FACEBOOK";
+                break;
+              case 3:
+                code = "INSTAGRAM";
+                break;
+            }
+            link = possibleSocialBaseURL[index] + socialMediaLink;
+            break;
+          }
+        }
+
+        const socialMedia: { code: string; link: string } = { code, link };
+
+        setOrgRegisterData(
+          (prevState: OrgRegisterData) => ({
+            ...prevState,
+            orgDetails: {
+              ...prevState.orgDetails,
+              socialMedia,
+            },
+          }),
+          (orgRegisterData: OrgRegisterData) => console.log(orgRegisterData)
+        );
       }
     };
 
   return (
     <div className="OrgRegisterDetails">
-      <Form
-        noValidate
+      <OrgRegisterDetailsForm
         validated={validated}
-        className="OrgRegisterDetailsForm"
-        onSubmit={handleOrgRegisterDetailsFormSubmit}
-      >
-        <Form.Group>
-          <Form.Control
-            required
-            name="name"
-            type="text"
-            placeholder="Organisation Name"
-            value={orgRegisterData.orgDetails.name}
-            onChange={handleOrgRegisterDetailsChange}
-          />
-          <Form.Control.Feedback type="invalid">
-            Organisation name is required.
-          </Form.Control.Feedback>
-        </Form.Group>
-
-        <Form.Group>
-          <Form.Control
-            required
-            name="description"
-            className="FormControlAboutOrg"
-            as="textarea"
-            rows={3}
-            placeholder="Write About Your Organisation"
-            value={orgRegisterData.orgDetails.description}
-            onChange={handleOrgRegisterDetailsChange}
-          />
-          <Form.Control.Feedback type="invalid">
-            Organisation description is required.
-          </Form.Control.Feedback>
-        </Form.Group>
-
-        <Row className="RowSocialInputOrgRegister">
-          <Col className="ColOne">
-            <DropdownButton
-              className="SocialDropdown"
-              title={`${prependValue ? prependValue : "Social"}`}
-            >
-              <Dropdown.Item
-                eventKey="None"
-                onSelect={handleSocialDropdownSelect}
-              >
-                <span className="SocialTitle">None</span>
-              </Dropdown.Item>
-              <Dropdown.Item
-                eventKey="twitter"
-                onSelect={handleSocialDropdownSelect}
-              >
-                <AiOutlineTwitter className="TwitterDropdown" />
-              </Dropdown.Item>
-              <Dropdown.Item
-                eventKey="linkedIn"
-                onSelect={handleSocialDropdownSelect}
-              >
-                <AiFillLinkedin className="LinkedInDropdown" />
-              </Dropdown.Item>
-              <Dropdown.Item
-                eventKey="facebook"
-                onSelect={handleSocialDropdownSelect}
-              >
-                <FaFacebook className="FacebookDropdown" />
-              </Dropdown.Item>
-            </DropdownButton>
-          </Col>
-          <Col className="ColTwo">
-            <Form.Control
-              required
-              name="socialMedia"
-              type="text"
-              placeholder="Link"
-              value={socialMediaLink}
-              onChange={handleOrgRegisterDetailsChange}
-            />
-            <Form.Control.Feedback type="invalid">
-              {socialMediaFeedback
-                ? socialMediaFeedback
-                : "Social media link is required."}
-            </Form.Control.Feedback>
-          </Col>
-        </Row>
-
-        <Form.Group>
-          <Form.Control
-            required
-            name="orgWebsite"
-            type="text"
-            placeholder="Organisation Website Link"
-            value={orgRegisterData.orgDetails.orgWebsite}
-            onChange={handleOrgRegisterDetailsChange}
-          />
-          <Form.Control.Feedback type="invalid">
-            Organisation website link is required.
-          </Form.Control.Feedback>
-        </Form.Group>
-
-        <div className="FormButtonContainer">
-          <Button type="submit" className="FormButton">
-            Register now <GiClick />
-          </Button>
-        </div>
-      </Form>
+        handleOrgRegisterDetailsFormSubmit={handleOrgRegisterDetailsFormSubmit}
+        orgRegisterData={orgRegisterData}
+        handleOrgRegisterDetailsChange={handleOrgRegisterDetailsChange}
+        dropdownSelected={dropdownSelected}
+        handleSocialDropdownSelect={handleSocialDropdownSelect}
+        socialMediaLink={socialMediaLink}
+        socialMediaLinkIsInvalid={socialMediaLinkIsInvalid}
+        socialMediaFeedback={socialMediaFeedback}
+      />
     </div>
   );
 };

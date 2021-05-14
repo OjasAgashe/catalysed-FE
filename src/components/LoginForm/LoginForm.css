@@ -1,6 +1,26 @@
 .FormTextForgotPassword {
-    display: block;
-    font-weight: 600;
+  display: block;
+  font-weight: 600;
+}
+
+:is(.FormTextOr, .FormTextSignUp) {
+  display: block;
+  text-align: center;
+  font-size: 1rem !important;
+}
+
+:is(.FormTextOr, .FormTextSignUpLink) {
+  font-weight: 600;
+  color: var(--blue-gray-600);
+}
+
+.FormTextSignUpLink {
+  text-decoration: none;
+}
+
+.FormTextSignUpLink:hover {
+  cursor: pointer;
+  color: var(--blue-gray-500);
 }
 
 @media screen and (max-width: 520px) {
