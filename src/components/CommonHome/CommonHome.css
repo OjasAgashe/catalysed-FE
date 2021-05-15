@@ -81,33 +81,97 @@
   font-weight: bold;
 }
 
-:is(.CommonHomeSectionThree, .CommonHomeSectionFour) {
+.CommonHomeSectionSix .TextContainer p {
+  font-size: 1.3rem !important;
+}
+
+.CommonHomeSectionSeven {
+  background-color: var(--red-100);
   display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem;
 }
 
-.CommonHomeSectionThree {
-  background-color: var(--drover-code-100);
+.CommonHomeForm {
+  box-shadow: 1px 1px 10px var(--light-blue-300) !important;
 }
 
-.CommonHomeSectionThree .MouseImgContainer {
+.CommonHomeFormText {
+  display: block;
+  text-align: center !important;
+  font-size: 2.5rem !important;
+  font-weight: 450;
+  color: var(--blue-gray-700) !important;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--blue-gray-300);
+}
+
+.CommonHomeFormMessage {
+  resize: none;
+}
+
+.CommonHomeFormButton {
+  width: 100% !important;
+}
+
+.CommonHomeFormButton .IoIosSendIcon {
+  color: var(--white);
+  vertical-align: middle !important;
+  font-size: 1.3rem;
+}
+
+.CommonHomeSectionThree .MouseImgContainer,
+.CommonHomeSectionFive .BuildingImgContainer {
   background-color: var(--common-home-section-three);
 }
 
-:is(.CommonHomeSectionThree, .CommonHomeSectionFour) .TextContainer {
+:is(.CommonHomeSectionThree, .CommonHomeSectionFive) {
+  background-color: var(--drover-code-100);
+}
+
+:is(.CommonHomeSectionThree, .CommonHomeSectionFive) .TextContainer {
+  max-width: 600px;
+}
+
+:is(.CommonHomeSectionThree, .CommonHomeSectionFive) .TextContainer p {
+  color: var(--blue-gray-600);
+}
+
+:is(.CommonHomeSectionFour, .CommonHomeSectionSix) {
+  background-color: var(--common-home-section-four);
+}
+
+:is(.CommonHomeSectionFour, .CommonHomeSectionSix) .TextContainer {
+  max-width: 700px;
+}
+
+:is(.CommonHomeSectionFour, .CommonHomeSectionSix) .TextContainer p {
+  color: var(--blue-gray-700);
+}
+
+:is(.CommonHomeSectionFour, .CommonHomeSectionSix) .TextContainer h3 {
+  padding: 0 4rem;
+}
+
+:is(.CommonHomeSectionThree, .CommonHomeSectionFour, .CommonHomeSectionFive, .CommonHomeSectionSix) {
+  display: flex;
+}
+
+:is(.CommonHomeSectionThree, .CommonHomeSectionFour, .CommonHomeSectionFive, .CommonHomeSectionSix)
+  .TextContainer {
   display: flex;
   flex-direction: column;
   text-align: justify;
   justify-content: center;
   align-items: center;
-}
-
-.CommonHomeSectionThree .TextContainer {
-  max-width: 600px;
   margin: auto;
   margin-top: 4rem;
 }
 
-:is(.CommonHomeSectionThree, .CommonHomeSectionFour) .TextContainer h3 {
+:is(.CommonHomeSectionThree, .CommonHomeSectionFour, .CommonHomeSectionFive, .CommonHomeSectionSix)
+  .TextContainer
+  h3 {
   text-align: center;
   font-family: "Playfair Display", serif;
   font-size: 2.5rem;
@@ -115,17 +179,118 @@
   margin-bottom: 4rem;
 }
 
-:is(.CommonHomeSectionThree, .CommonHomeSectionFour) .TextContainer p {
+:is(.CommonHomeSectionThree, .CommonHomeSectionFour, .CommonHomeSectionFive, .CommonHomeSectionSix)
+  .TextContainer
+  p {
   font-size: 1.5rem;
-  color: var(--blue-gray-600);
 }
 
 @media screen and (max-width: 400px) {
-  :is(.CommonHomeSectionOne, .CommonHomeSectionTwo, .CommonHomeSectionThree) {
+  :is(.CommonHomeSectionOne, .CommonHomeSectionTwo, .CommonHomeSectionThree, .CommonHomeSectionFour, .CommonHomeSectionFive, .CommonHomeSectionSix) {
+    flex-wrap: wrap;
+  }
+
+  .GirlContainer,
+  .BoyContainer {
+    overflow: hidden;
+  }
+
+  .SearchImg,
+  .MouseImg,
+  .BuildingImg,
+  .CalendarImg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .CommonHomeSectionTwo :is(.LeftPart, .RightPart) {
+    width: 100%;
+  }
+
+  .CommonHomeSectionFour .TextContainer h3 {
+    padding: 0;
+    font-size: 2.2rem;
+  }
+
+  :is(.CommonHomeSectionFour, .CommonHomeSectionSix) .TextContainer {
+    width: fit-content;
+  }
+
+  .CommonHomeSectionSeven {
+    padding: 2rem 0;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .CommonHomeSectionTwo {
     flex-wrap: wrap;
   }
 
   .CommonHomeSectionTwo :is(.LeftPart, .RightPart) {
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 1130px) {
+  .CommonHomeSectionOne .TextContainer h4 {
+    margin-top: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  :is(.CommonHomeSectionThree, .CommonHomeSectionFour, .CommonHomeSectionFive, .CommonHomeSectionSix)
+    .TextContainer {
+    margin: 1rem;
+  }
+}
+
+@media screen and (max-width: 1115px) and (min-width: 410px) {
+  .BoyImg {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 850px) and (min-width: 410px) {
+  .MouseImgContainer,
+  .BuildingImgContainer {
+    height: 35rem;
+    overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 740px) and (min-width: 647px) {
+  .GirlContainer {
+    width: 50rem;
+    height: 25rem;
+    overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 648px) and (min-width: 410px) {
+  .GirlContainer {
+    display: none;
+  }
+
+  .MouseImg,
+  .BuildingImg {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 550px) and (min-width: 410px) {
+  .CommonHomeSectionFour .TextContainer p {
+    padding-right: 4rem;
+  }
+}
+
+@media screen and (max-width: 1035px) {
+  .CalendarImgContainer {
+    width: 50rem;
+    overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 548px) and (min-width: 410px) {
+  .CalendarImgContainer {
+    display: none;
   }
 }

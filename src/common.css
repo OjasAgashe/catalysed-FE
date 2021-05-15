@@ -14,9 +14,9 @@
 
 /* Components */
 
-/* OrgRegisterUser, OrgRegisterDetails, LoginForm, StudentMentorRegister (page) */
+/* OrgRegisterUser, OrgRegisterDetails, LoginForm, StudentMentorRegister (page), CommonHome */
 
-:is(.OrgRegisterUserForm, .OrgRegisterDetailsForm, .LoginForm, .StudentMentorRegisterBox) {
+:is(.OrgRegisterUserForm, .OrgRegisterDetailsForm, .LoginForm, .StudentMentorRegisterBox, .CommonHomeForm) {
   background-color: var(--white);
   padding: 1rem 1.5rem;
   border-radius: 5px;
@@ -87,13 +87,13 @@
 }
 
 @media screen and (max-width: 500px) {
-  :is(.OrgRegisterUserForm, .OrgRegisterDetailsForm, .LoginForm) {
+  :is(.OrgRegisterUserForm, .OrgRegisterDetailsForm, .LoginForm, .CommonHomeForm) {
     margin: 0 1rem;
   }
 }
 
 @media screen and (min-width: 520px) {
-  :is(.OrgRegisterUserForm, .OrgRegisterDetailsForm, .LoginForm) {
+  :is(.OrgRegisterUserForm, .OrgRegisterDetailsForm, .LoginForm, .CommonHomeForm) {
     width: 29.25rem;
   }
 }
