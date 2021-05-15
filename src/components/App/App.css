@@ -1,16 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Macondo&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap");
+
 :root {
+  --barley-corn: #bc9b5d;
   --black: black;
   --blue-gray-300: #cbd5e1;
   --blue-gray-500: #64748b;
   --blue-gray-600: #475569;
   --blue-gray-700: #334155;
+  --common-home-section-three: rgb(247, 245, 225);
   --cyan-shade: #2bc0ef;
+  --drover-code: #ffef98;
+  --drover-code-100: #fff099;
   --facebook-code: #4267b2;
+  --floral-white: #fcf8ed;
   --green-400: #4ade80;
   --instagram-code: #e1306c;
   --light-blue-300: #7dd3fc;
   --linkedIn-code: #0077b5;
   --red-100: #fef2f2;
+  --rightpart-quote-code: #f3a78f;
   --success-code: #4bb543;
   --twitter-code: #1da1f2;
   --white: white;

@@ -1,4 +1,4 @@
-export const ORGANISATION_REGISTER = "/";
+export const HOME = "/";
 export const LOGIN = "/login";
-export const STUDENT_MENTOR_REGISTER = "/student-mentor-register";
-export const HOME = "/home";
+export const ORGANISATION_REGISTER = "/organiser/register";
+export const STUDENT_MENTOR_REGISTER = "/student-mentor/register";

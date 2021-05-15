@@ -2,17 +2,24 @@ import React, { useEffect, useState } from "react";
 import "./OrgRegisterDetails.css";
 import { OrgRegisterData } from "../../types/OrganisationRegister";
 import OrgRegisterDetailsForm from "./OrgRegisterDetailsForm";
+import axios from "axios";
 
 type OrgRegisterDetailsProps = {
   orgRegisterData: OrgRegisterData;
   setOrgRegisterData: any;
   setCurrentOrgRegister: React.Dispatch<React.SetStateAction<string>>;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setEmailSent: React.Dispatch<React.SetStateAction<boolean>>;
+  setProcessing: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const OrgRegisterDetails = ({
   orgRegisterData,
   setOrgRegisterData,
   setCurrentOrgRegister,
+  setLoading,
+  setEmailSent,
+  setProcessing,
 }: OrgRegisterDetailsProps) => {
   const [dropdownSelected, setDropdownSelected] = useState<string>("");
   const [validated, setValidated] = useState<boolean>(false);
@@ -24,6 +31,8 @@ const OrgRegisterDetails = ({
   const [socialMediaFeedback, setSocialMediaFeedback] = useState<string>("");
   const [socialMediaLinkIsInvalid, setSocialMediaLinkIsInvalid] =
     useState<boolean>(false);
+
+  const [error, setError] = useState<string>("");
 
   const possibleSocialMedia: string[] = [
     "twitter",
@@ -199,7 +208,25 @@ const OrgRegisterDetails = ({
               socialMedia,
             },
           }),
-          (orgRegisterData: OrgRegisterData) => console.log(orgRegisterData)
+          async (orgRegisterData: OrgRegisterData) => {
+            try {
+              setProcessing(true);
+              setLoading(true);
+              setError("");
+
+              await axios({
+                method: "post",
+                url: "https://level-abode-312509.el.r.appspot.com/register/organization",
+                data: orgRegisterData,
+              });
+
+              setLoading(false);
+              setEmailSent(true);
+            } catch (error) {
+              setProcessing(false);
+              setError(error.response.data.message);
+            }
+          }
         );
       }
     };
@@ -207,6 +234,7 @@ const OrgRegisterDetails = ({
   return (
     <div className="OrgRegisterDetails">
       <OrgRegisterDetailsForm
+        error={error}
         validated={validated}
         handleOrgRegisterDetailsFormSubmit={handleOrgRegisterDetailsFormSubmit}
         orgRegisterData={orgRegisterData}

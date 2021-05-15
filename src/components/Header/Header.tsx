@@ -1,9 +1,10 @@
 import React from "react";
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 import "./Header.css";
-import Logo from "../../assets/Illustrations/logo.png";
 import { Link } from "react-router-dom";
+import { Logo } from "../../assets/Illustrations/Illustrations";
 import {
+  HOME,
   LOGIN,
   ORGANISATION_REGISTER,
   STUDENT_MENTOR_REGISTER,
@@ -12,8 +13,7 @@ import {
 const Header = () => {
   return (
     <Navbar collapseOnSelect expand="lg" className="Navbar">
-      {/* Change Navbar.Brand as Link to common homepage */}
-      <Navbar.Brand className="NavbarBrand">
+      <Navbar.Brand as={Link} to={HOME} className="NavbarBrand">
         <img src={Logo} className="NavbarBrandLogo" alt="brand logo" />
         &nbsp;<span className="NavbarBrandText">CatalysEd</span>
       </Navbar.Brand>
@@ -22,8 +22,12 @@ const Header = () => {
 
       <Navbar.Collapse className="NavbarCollapse" id="navbar-nav">
         <Nav>
-          {/* Change Home as Link to common homepage */}
-          <Nav.Link className="NavbarCollapseNavItem" eventKey="1">
+          <Nav.Link
+            as={Link}
+            to={HOME}
+            className="NavbarCollapseNavItem"
+            eventKey="1"
+          >
             Home
           </Nav.Link>
 

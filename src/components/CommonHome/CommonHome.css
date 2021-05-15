@@ -1,0 +1,131 @@
+.CommonHomeContainer {
+  max-width: inherit;
+}
+
+.CommonHomeSectionOne {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--floral-white);
+}
+
+.CommonHomeSectionOne .TextContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto 4rem;
+  text-align: justify;
+}
+
+.CommonHomeSectionOne .TextContainer h1 {
+  color: var(--barley-corn);
+  font-size: 4rem;
+  font-family: "Roboto", sans-serif;
+}
+
+.CommonHomeSectionOne .TextContainer h4 {
+  font-size: 1.3rem;
+  margin-top: 2.5rem;
+  margin-bottom: 4rem;
+}
+
+.CommonHomeSectionOne .TextContainer p {
+  font-weight: 600;
+  word-spacing: 10px;
+}
+
+.CommonHomeSectionOne .TextContainer :is(h4, p) {
+  color: var(--blue-gray-500);
+  font-family: "Poppins", sans-serif;
+}
+
+.CommonHomeSectionTwo {
+  display: flex;
+}
+
+.CommonHomeSectionTwo .LeftPart {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+.CommonHomeSectionTwo :is(.LeftPart, .RightPart) {
+  width: 50%;
+  padding: 5rem;
+  text-align: justify;
+  font-size: 1.4rem;
+}
+
+.CommonHomeSectionTwo :is(.LeftPart, .RightPart) h2 {
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 3rem;
+}
+
+.CommonHomeSectionTwo :is(.LeftPart, .RightPart) blockquote {
+  line-height: 1.8;
+  padding-bottom: 1rem;
+}
+
+.CommonHomeSectionTwo :is(.LeftPart, .RightPart) span {
+  font-family: "Macondo", cursive;
+  font-size: 2rem;
+}
+
+.LeftPart span {
+  color: var(--drover-code);
+}
+
+.RightPart span {
+  color: var(--rightpart-quote-code);
+  font-size: 2.2rem !important;
+  font-weight: bold;
+}
+
+:is(.CommonHomeSectionThree, .CommonHomeSectionFour) {
+  display: flex;
+}
+
+.CommonHomeSectionThree {
+  background-color: var(--drover-code-100);
+}
+
+.CommonHomeSectionThree .MouseImgContainer {
+  background-color: var(--common-home-section-three);
+}
+
+:is(.CommonHomeSectionThree, .CommonHomeSectionFour) .TextContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: justify;
+  justify-content: center;
+  align-items: center;
+}
+
+.CommonHomeSectionThree .TextContainer {
+  max-width: 600px;
+  margin: auto;
+  margin-top: 4rem;
+}
+
+:is(.CommonHomeSectionThree, .CommonHomeSectionFour) .TextContainer h3 {
+  text-align: center;
+  font-family: "Playfair Display", serif;
+  font-size: 2.5rem;
+  letter-spacing: 4px;
+  margin-bottom: 4rem;
+}
+
+:is(.CommonHomeSectionThree, .CommonHomeSectionFour) .TextContainer p {
+  font-size: 1.5rem;
+  color: var(--blue-gray-600);
+}
+
+@media screen and (max-width: 400px) {
+  :is(.CommonHomeSectionOne, .CommonHomeSectionTwo, .CommonHomeSectionThree) {
+    flex-wrap: wrap;
+  }
+
+  .CommonHomeSectionTwo :is(.LeftPart, .RightPart) {
+    width: 100%;
+  }
+}

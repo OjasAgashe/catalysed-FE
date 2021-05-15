@@ -65,6 +65,27 @@
 
 /* End Form Button */
 
+/* Icon on password input */
+
+.EyeIconInputGroup {
+  align-self: flex-end !important;
+}
+
+.EyeIconButton {
+  background-color: var(--white) !important;
+  border: none !important;
+  border-bottom: 1px solid var(--blue-gray-600) !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+.EyeIconButton:focus {
+  box-shadow: none !important;
+}
+
+:is(.EyeInvisibleIcon, .EyeVisibleIcon) {
+  color: var(--black);
+}
+
 @media screen and (max-width: 500px) {
   :is(.OrgRegisterUserForm, .OrgRegisterDetailsForm, .LoginForm) {
     margin: 0 1rem;

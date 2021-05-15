@@ -8,8 +8,11 @@ import { useStateWithCallbackLazy } from "use-state-with-callback";
 import "./OrganisationRegister.css";
 
 const OrganisationRegister = () => {
-  const [currentOrgRegister, setCurrentOrgRegister] =
-    useState<string>("user");
+  const [currentOrgRegister, setCurrentOrgRegister] = useState<string>("user");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [emailSent, setEmailSent] = useState<boolean>(false);
+  const [processing, setProcessing] = useState<boolean>(false);
+
   const [orgRegisterData, setOrgRegisterData] =
     useStateWithCallbackLazy<OrgRegisterData>({
       firstName: "",
@@ -38,7 +41,7 @@ const OrganisationRegister = () => {
         <OrgRegisterProgress currentOrgRegister={currentOrgRegister} />
       </div>
 
-      {/* <LoadingProgress /> */}
+      {processing && <LoadingProgress loading={loading} emailSent={emailSent} loadingMessage="Registering You..."/>}
 
       {currentOrgRegister === "user" && (
         <OrgRegisterUser
@@ -52,6 +55,9 @@ const OrganisationRegister = () => {
           orgRegisterData={orgRegisterData}
           setOrgRegisterData={setOrgRegisterData}
           setCurrentOrgRegister={setCurrentOrgRegister}
+          setLoading={setLoading}
+          setEmailSent={setEmailSent}
+          setProcessing={setProcessing}
         />
       )}
     </div>
