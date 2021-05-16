@@ -1,44 +1,47 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer } from "react";
 import "./OrgRegisterUser.css";
-import { OrgRegisterData } from "../../types/OrganisationRegister";
+import {
+  OrgRegisterActionType,
+  OrgRegisterData,
+} from "../../types/OrganisationRegister";
 import OrgRegisterUserForm from "./OrgRegisterUserForm";
+import { orgRegisterUserReducer } from "../../reducers/orgRegisterUserReducer";
 
 type OrgRegisterUserProps = {
   orgRegisterData: OrgRegisterData;
   setOrgRegisterData: any;
-  setCurrentOrgRegister: React.Dispatch<React.SetStateAction<string>>;
+  orgRegisterDispatch: React.Dispatch<OrgRegisterActionType>;
 };
 
 const OrgRegisterUser = ({
   orgRegisterData,
   setOrgRegisterData,
-  setCurrentOrgRegister,
+  orgRegisterDispatch,
 }: OrgRegisterUserProps) => {
-  const [validated, setValidated] = useState<boolean>(false);
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [showConfirmPassword, setShowConfirmPassword] =
-    useState<boolean>(false);
-
-  const [passwordFeedback, setPasswordFeedback] = useState<string>("");
-  const [passwordIsInvalid, setPasswordIsInvalid] = useState<boolean>(false);
-
-  const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [confirmPasswordFeedback, setConfirmPasswordFeedback] =
-    useState<string>("");
-  const [confirmPasswordIsInvalid, setConfirmPasswordIsInvalid] =
-    useState<boolean>(false);
+  const [state, dispatch] = useReducer(orgRegisterUserReducer, {
+    validated: false,
+    showPassword: false,
+    showConfirmPassword: false,
+    passwordFeedback: "",
+    passwordIsInvalid: false,
+    confirmPassword: "",
+    confirmPasswordFeedback: "",
+    confirmPasswordIsInvalid: false,
+  });
 
   useEffect(() => {
-    setCurrentOrgRegister("user");
+    orgRegisterDispatch({ type: "currentOrgRegister", payload: "user" });
   });
 
   const handleOrgRegisterUserChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
-      if (passwordIsInvalid) setPasswordIsInvalid(false);
+      if (state.passwordIsInvalid)
+        dispatch({ type: "passwordIsInvalid", payload: false });
 
-      if (confirmPasswordIsInvalid) setConfirmPasswordIsInvalid(false);
+      if (state.confirmPasswordIsInvalid)
+        dispatch({ type: "confirmPasswordIsInvalid", payload: false });
 
-      if (validated) setValidated(false);
+      if (state.validated) dispatch({ type: "validated", payload: false });
 
       if (event.target.name !== "confirmPassword") {
         setOrgRegisterData((prevState: OrgRegisterData) => ({
@@ -48,7 +51,7 @@ const OrgRegisterUser = ({
       }
 
       if (event.target.name === "confirmPassword") {
-        setConfirmPassword(event.target.value);
+        dispatch({ type: "confirmPassword", payload: event.target.value });
       }
     };
 
@@ -56,7 +59,7 @@ const OrgRegisterUser = ({
     (event) => {
       event.preventDefault();
 
-      setValidated(true);
+      dispatch({ type: "validated", payload: true });
 
       const strongPasswordPattern =
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
@@ -65,45 +68,42 @@ const OrgRegisterUser = ({
         orgRegisterData.password &&
         !strongPasswordPattern.test(orgRegisterData.password)
       ) {
-        setPasswordFeedback(
-          "Password must have atleast 8 character with 1 lowercase & 1 uppercase letter, 1 number & 1 special character."
-        );
-        setPasswordIsInvalid(true);
+        dispatch({
+          type: "passwordFeedback",
+          payload:
+            "Password must have atleast 8 character with 1 lowercase & 1 uppercase letter, 1 number & 1 special character.",
+        });
+
+        dispatch({ type: "passwordIsInvalid", payload: true });
         return;
       }
 
       if (
         orgRegisterData.password &&
-        orgRegisterData.password !== confirmPassword
+        orgRegisterData.password !== state.confirmPassword
       ) {
-        setConfirmPasswordFeedback(
-          "Confirm password should match with password"
-        );
-        setConfirmPasswordIsInvalid(true);
+        dispatch({
+          type: "confirmPasswordFeedback",
+          payload: "Confirm password should match with password",
+        });
+
+        dispatch({ type: "confirmPasswordIsInvalid", payload: true });
         return;
       }
 
       if (event.currentTarget.checkValidity() === true) {
-        setCurrentOrgRegister("details");
+        orgRegisterDispatch({ type: "currentOrgRegister", payload: "details" });
       }
     };
 
   return (
     <div className="OrgRegisterUser">
       <OrgRegisterUserForm
-        validated={validated}
         handleOrgRegisterUserFormSubmit={handleOrgRegisterUserFormSubmit}
         orgRegisterData={orgRegisterData}
         handleOrgRegisterUserChange={handleOrgRegisterUserChange}
-        showPassword={showPassword}
-        passwordIsInvalid={passwordIsInvalid}
-        setShowPassword={setShowPassword}
-        passwordFeedback={passwordFeedback}
-        showConfirmPassword={showConfirmPassword}
-        confirmPassword={confirmPassword}
-        confirmPasswordIsInvalid={confirmPasswordIsInvalid}
-        setShowConfirmPassword={setShowConfirmPassword}
-        confirmPasswordFeedback={confirmPasswordFeedback}
+        state={state}
+        dispatch={dispatch}
       />
     </div>
   );

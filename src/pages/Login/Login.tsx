@@ -1,9 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer } from "react";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
 import LoginForm from "../../components/LoginForm/LoginForm";
+import { loginReducer } from "../../reducers/loginReducer";
 
 const Login = () => {
-  const [loading, setLoading] = useState<boolean>(false);
+  const [state, dispatch] = useReducer(loginReducer, {
+    error: "",
+    validated: false,
+    showPassword: false,
+    loading: false,
+  });
 
   useEffect(() => {
     document.title = "Login | CatalysEd";
@@ -11,14 +17,14 @@ const Login = () => {
 
   return (
     <div className="LoginPage">
-      {loading && (
+      {state.loading && (
         <LoadingProgress
-          loading={loading}
+          loading={state.loading}
           emailSent={false}
           loadingMessage="Signing You..."
         />
       )}
-      <LoginForm setLoading={setLoading} />
+      <LoginForm state={state} dispatch={dispatch} />
     </div>
   );
 };

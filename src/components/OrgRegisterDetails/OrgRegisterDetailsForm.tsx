@@ -13,46 +13,36 @@ import {
 } from "react-icons/ai";
 import { FaFacebook } from "react-icons/fa";
 import { GiClick } from "react-icons/gi";
-import { OrgRegisterData } from "../../types/OrganisationRegister";
+import {
+  OrgRegisterData,
+  OrgRegisterDetailsActionType,
+  OrgRegisterDetailsState,
+} from "../../types/OrganisationRegister";
 import Error from "../Error/Error";
 
 type OrgRegisterDetailsFormProps = {
-  error: string;
-  validated: boolean;
   handleOrgRegisterDetailsFormSubmit: React.FormEventHandler<HTMLFormElement>;
   orgRegisterData: OrgRegisterData;
   handleOrgRegisterDetailsChange: React.ChangeEventHandler<HTMLInputElement>;
-  dropdownSelected: string;
   handleSocialDropdownSelect: (selected: string | null) => void;
-  socialMediaLink: string;
-  socialMediaLinkIsInvalid: boolean;
-  socialMediaFeedback: string;
-  orgNameFeedback: string;
-  orgNameIsInvalid: boolean;
+  state: OrgRegisterDetailsState;
+  dispatch: React.Dispatch<OrgRegisterDetailsActionType>;
 };
 
 const OrgRegisterDetailsForm = ({
-  error,
-  validated,
   handleOrgRegisterDetailsFormSubmit,
   orgRegisterData,
   handleOrgRegisterDetailsChange,
-  dropdownSelected,
   handleSocialDropdownSelect,
-  socialMediaLink,
-  socialMediaLinkIsInvalid,
-  socialMediaFeedback,
-  orgNameFeedback,
-  orgNameIsInvalid,
+  state,
+  dispatch,
 }: OrgRegisterDetailsFormProps) => {
   return (
     <>
-      {error && (
-        <Error message={ error }/>
-      )}
+      {state.error && <Error message={state.error} />}
       <Form
         noValidate
-        validated={validated}
+        validated={state.validated}
         className="OrgRegisterDetailsForm"
         onSubmit={handleOrgRegisterDetailsFormSubmit}
       >
@@ -64,11 +54,11 @@ const OrgRegisterDetailsForm = ({
             placeholder="Organisation Name"
             value={orgRegisterData.orgDetails.name}
             onChange={handleOrgRegisterDetailsChange}
-            isInvalid={orgNameIsInvalid}
+            isInvalid={state.orgNameIsInvalid}
           />
           <Form.Control.Feedback type="invalid">
-            {orgNameFeedback
-              ? orgNameFeedback
+            {state.orgNameFeedback
+              ? state.orgNameFeedback
               : "Organisation name is required"}
           </Form.Control.Feedback>
         </Form.Group>
@@ -95,7 +85,9 @@ const OrgRegisterDetailsForm = ({
           <DropdownButton
             as={InputGroup.Prepend}
             className="SocialDropdown"
-            title={`${dropdownSelected ? dropdownSelected : "Social"}`}
+            title={`${
+              state.dropdownSelected ? state.dropdownSelected : "Social"
+            }`}
           >
             <Dropdown.Item
               eventKey="twitter"
@@ -128,13 +120,13 @@ const OrgRegisterDetailsForm = ({
             name="socialMedia"
             type="text"
             placeholder="Link"
-            value={socialMediaLink}
+            value={state.socialMediaLink}
             onChange={handleOrgRegisterDetailsChange}
-            isInvalid={socialMediaLinkIsInvalid}
+            isInvalid={state.socialMediaLinkIsInvalid}
           />
           <Form.Control.Feedback type="invalid">
-            {socialMediaFeedback
-              ? socialMediaFeedback
+            {state.socialMediaFeedback
+              ? state.socialMediaFeedback
               : "Social media link is required."}
           </Form.Control.Feedback>
         </InputGroup>

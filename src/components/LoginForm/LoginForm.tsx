@@ -5,20 +5,16 @@ import { Link } from "react-router-dom";
 import { ORGANISATION_REGISTER } from "../../routes/Routes";
 import "./LoginForm.css";
 import Error from "../Error/Error";
-import { LoginData } from "../../types/Login";
+import { LoginActionType, LoginData, LoginState } from "../../types/Login";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import axios from "axios";
 
 type LoginFormProps = {
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  state: LoginState;
+  dispatch: React.Dispatch<LoginActionType>;
 };
 
-const LoginForm = ({ setLoading }: LoginFormProps) => {
-  const [error, setError] = useState<string>("");
-  const [validated, setValidated] = useState<boolean>(false);
-
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-
+const LoginForm = ({ state, dispatch }: LoginFormProps) => {
   const [loginData, setLoginData] = useState<LoginData>({
     email: "",
     password: "",
@@ -27,7 +23,7 @@ const LoginForm = ({ setLoading }: LoginFormProps) => {
   const handleLoginChange: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
-    if (validated) setValidated(false);
+    if (state.validated) dispatch({ type: "validated", payload: false });
 
     setLoginData((prevState: LoginData) => ({
       ...prevState,
@@ -40,12 +36,12 @@ const LoginForm = ({ setLoading }: LoginFormProps) => {
   ) => {
     event.preventDefault();
 
-    setValidated(true);
+    dispatch({ type: "validated", payload: true });
 
     if (event.currentTarget.checkValidity() === true) {
       try {
-        setLoading(true);
-        setError("");
+        dispatch({ type: "loading", payload: true });
+        dispatch({ type: "error", payload: "" });
 
         const response = await axios({
           method: "post",
@@ -55,19 +51,22 @@ const LoginForm = ({ setLoading }: LoginFormProps) => {
 
         console.log(response);
       } catch (error) {
-        setError(error.response.data.message);
+        dispatch({
+          type: "error",
+          payload: error.response?.data?.message ?? "",
+        });
       } finally {
-        setLoading(false);
+        dispatch({ type: "loading", payload: false });
       }
     }
   };
 
   return (
     <div className="LoginFormContainer">
-      {error && <Error message={error} />}
+      {state.error && <Error message={state.error} />}
       <Form
         noValidate
-        validated={validated}
+        validated={state.validated}
         className="LoginForm"
         onSubmit={handleLoginFormSubmit}
       >
@@ -89,7 +88,7 @@ const LoginForm = ({ setLoading }: LoginFormProps) => {
           <Form.Control
             required
             name="password"
-            type={showPassword ? "text" : "password"}
+            type={state.showPassword ? "text" : "password"}
             placeholder="Password"
             value={loginData.password}
             onChange={handleLoginChange}
@@ -97,9 +96,11 @@ const LoginForm = ({ setLoading }: LoginFormProps) => {
           <InputGroup.Append className="EyeIconInputGroup">
             <Button
               className="EyeIconButton"
-              onClick={() => setShowPassword((prevState) => !prevState)}
+              onClick={() =>
+                dispatch({ type: "showPassword", payload: !state.showPassword })
+              }
             >
-              {showPassword ? (
+              {state.showPassword ? (
                 <AiOutlineEye className="EyeVisibleIcon" />
               ) : (
                 <AiOutlineEyeInvisible className="EyeInvisibleIcon" />

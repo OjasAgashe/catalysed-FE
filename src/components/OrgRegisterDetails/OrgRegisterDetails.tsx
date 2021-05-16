@@ -1,38 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer } from "react";
 import "./OrgRegisterDetails.css";
-import { OrgRegisterData } from "../../types/OrganisationRegister";
+import {
+  OrgRegisterActionType,
+  OrgRegisterData,
+} from "../../types/OrganisationRegister";
 import OrgRegisterDetailsForm from "./OrgRegisterDetailsForm";
 import axios from "axios";
+import { orgRegisterDetailsReducer } from "../../reducers/orgRegisterDetailsReducer";
 
 type OrgRegisterDetailsProps = {
   orgRegisterData: OrgRegisterData;
   setOrgRegisterData: any;
-  setCurrentOrgRegister: React.Dispatch<React.SetStateAction<string>>;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  setEmailSent: React.Dispatch<React.SetStateAction<boolean>>;
-  setProcessing: React.Dispatch<React.SetStateAction<boolean>>;
+  orgRegisterDispatch: React.Dispatch<OrgRegisterActionType>;
 };
 
 const OrgRegisterDetails = ({
   orgRegisterData,
   setOrgRegisterData,
-  setCurrentOrgRegister,
-  setLoading,
-  setEmailSent,
-  setProcessing,
+  orgRegisterDispatch,
 }: OrgRegisterDetailsProps) => {
-  const [dropdownSelected, setDropdownSelected] = useState<string>("");
-  const [validated, setValidated] = useState<boolean>(false);
-
-  const [orgNameFeedback, setOrgNameFeedback] = useState<string>("");
-  const [orgNameIsInvalid, setOrgNameIsInvalid] = useState<boolean>(false);
-
-  const [socialMediaLink, setSocialMediaLink] = useState<string>("");
-  const [socialMediaFeedback, setSocialMediaFeedback] = useState<string>("");
-  const [socialMediaLinkIsInvalid, setSocialMediaLinkIsInvalid] =
-    useState<boolean>(false);
-
-  const [error, setError] = useState<string>("");
+  const [state, dispatch] = useReducer(orgRegisterDetailsReducer, {
+    dropdownSelected: "",
+    validated: false,
+    orgNameFeedback: "",
+    orgNameIsInvalid: false,
+    socialMediaLink: "",
+    socialMediaFeedback: "",
+    socialMediaLinkIsInvalid: false,
+    error: "",
+  });
 
   const possibleSocialMedia: string[] = [
     "twitter",
@@ -53,16 +49,18 @@ const OrgRegisterDetails = ({
   ];
 
   useEffect(() => {
-    setCurrentOrgRegister("details");
+    orgRegisterDispatch({ type: "currentOrgRegister", payload: "details" });
   });
 
   const handleOrgRegisterDetailsChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
-      if (validated) setValidated(false);
+      if (state.validated) dispatch({ type: "validated", payload: false });
 
-      if (socialMediaLinkIsInvalid) setSocialMediaLinkIsInvalid(false);
+      if (state.socialMediaLinkIsInvalid)
+        dispatch({ type: "socialMediaLinkIsInvalid", payload: false });
 
-      if (orgNameIsInvalid) setOrgNameIsInvalid(false);
+      if (state.orgNameIsInvalid)
+        dispatch({ type: "orgNameIsInvalid", payload: false });
 
       if (event.target.name !== "socialMedia") {
         setOrgRegisterData((prevState: OrgRegisterData) => ({
@@ -78,7 +76,7 @@ const OrgRegisterDetails = ({
         const targetValue = event.target.value;
         let baseURLPresent = false;
 
-        setSocialMediaLink(targetValue);
+        dispatch({ type: "socialMediaLink", payload: targetValue });
 
         if (targetValue) {
           for (let index = 0; index < possibleSocialBaseURL.length; index++) {
@@ -88,30 +86,37 @@ const OrgRegisterDetails = ({
               switch (index) {
                 case 0:
                 case 4:
-                  setDropdownSelected("twitter");
+                  dispatch({ type: "dropdownSelected", payload: "twitter" });
                   break;
+
                 case 1:
                 case 5:
-                  setDropdownSelected("linkedIn");
+                  dispatch({ type: "dropdownSelected", payload: "linkedIn" });
                   break;
+
                 case 2:
                 case 6:
-                  setDropdownSelected("facebook");
+                  dispatch({ type: "dropdownSelected", payload: "facebook" });
                   break;
+
                 case 3:
                 case 7:
-                  setDropdownSelected("instagram");
+                  dispatch({ type: "dropdownSelected", payload: "instagram" });
                   break;
               }
+
               baseURLPresent = true;
-              setSocialMediaLink(targetValue.replace(baseURL, ""));
+              dispatch({
+                type: "socialMediaLink",
+                payload: targetValue.replace(baseURL, ""),
+              });
               break;
             }
           }
         }
 
         if (targetValue === "" || baseURLPresent === false)
-          setDropdownSelected("");
+          dispatch({ type: "dropdownSelected", payload: "" });
       }
     };
 
@@ -119,13 +124,15 @@ const OrgRegisterDetails = ({
     selected
   ) => {
     if (selected !== null) {
-      if (validated) setValidated(false);
+      if (state.validated) dispatch({ type: "validated", payload: false });
 
-      if (socialMediaLinkIsInvalid) setSocialMediaLinkIsInvalid(false);
+      if (state.socialMediaLinkIsInvalid)
+        dispatch({ type: "socialMediaLinkIsInvalid", payload: false });
 
-      if (orgNameIsInvalid) setOrgNameIsInvalid(false);
+      if (state.orgNameIsInvalid)
+        dispatch({ type: "orgNameIsInvalid", payload: false });
 
-      setDropdownSelected(selected);
+      dispatch({ type: "dropdownSelected", payload: selected });
     }
   };
 
@@ -133,7 +140,7 @@ const OrgRegisterDetails = ({
     (event) => {
       event.preventDefault();
 
-      setValidated(true);
+      dispatch({ type: "validated", payload: true });
 
       const onlyAlphabets = /^[a-zA-Z]*$/;
 
@@ -141,22 +148,30 @@ const OrgRegisterDetails = ({
         orgRegisterData.orgDetails.name &&
         !onlyAlphabets.test(orgRegisterData.orgDetails.name)
       ) {
-        setOrgNameFeedback("Name must contain only Alphabet");
-        setOrgNameIsInvalid(true);
+        dispatch({
+          type: "orgNameFeedback",
+          payload: "Name must contain only Alphabet",
+        });
+
+        dispatch({ type: "orgNameIsInvalid", payload: true });
+
         return;
       }
 
-      if (socialMediaLink) {
+      if (state.socialMediaLink) {
         let isInValidLink = false;
 
         const startsWith = /^(https|http|www).*/;
 
-        if (dropdownSelected !== "" && startsWith.test(socialMediaLink)) {
+        if (
+          state.dropdownSelected !== "" &&
+          startsWith.test(state.socialMediaLink)
+        ) {
           let validLink = false;
           for (let index = 0; index < possibleSocialBaseURL.length; index++) {
             let baseURL = possibleSocialBaseURL[index];
 
-            if (socialMediaLink.includes(baseURL)) {
+            if (state.socialMediaLink.includes(baseURL)) {
               validLink = true;
               break;
             }
@@ -164,9 +179,14 @@ const OrgRegisterDetails = ({
           if (!validLink) isInValidLink = true;
         }
 
-        if (dropdownSelected === "" || isInValidLink) {
-          setSocialMediaFeedback("Only dropdown options are acceptable");
-          setSocialMediaLinkIsInvalid(true);
+        if (state.dropdownSelected === "" || isInValidLink) {
+          dispatch({
+            type: "socialMediaFeedback",
+            payload: "Only dropdown options are acceptable",
+          });
+
+          dispatch({ type: "socialMediaLinkIsInvalid", payload: true });
+
           return;
         }
       }
@@ -178,7 +198,7 @@ const OrgRegisterDetails = ({
         for (let index = 0; index < possibleSocialMedia.length; index++) {
           let social = possibleSocialMedia[index];
 
-          if (social === dropdownSelected) {
+          if (social === state.dropdownSelected) {
             switch (index) {
               case 0:
                 code = "TWITTER";
@@ -193,7 +213,7 @@ const OrgRegisterDetails = ({
                 code = "INSTAGRAM";
                 break;
             }
-            link = possibleSocialBaseURL[index] + socialMediaLink;
+            link = possibleSocialBaseURL[index] + state.socialMediaLink;
             break;
           }
         }
@@ -210,9 +230,10 @@ const OrgRegisterDetails = ({
           }),
           async (orgRegisterData: OrgRegisterData) => {
             try {
-              setProcessing(true);
-              setLoading(true);
-              setError("");
+              orgRegisterDispatch({ type: "processing", payload: true });
+              orgRegisterDispatch({ type: "loading", payload: true });
+
+              dispatch({ type: "error", payload: "" });
 
               await axios({
                 method: "post",
@@ -220,11 +241,15 @@ const OrgRegisterDetails = ({
                 data: orgRegisterData,
               });
 
-              setLoading(false);
-              setEmailSent(true);
+              orgRegisterDispatch({ type: "loading", payload: false });
+              orgRegisterDispatch({ type: "emailSent", payload: true });
             } catch (error) {
-              setProcessing(false);
-              setError(error.response.data.message);
+              orgRegisterDispatch({ type: "processing", payload: false });
+
+              dispatch({
+                type: "error",
+                payload: error.response?.data?.message ?? "",
+              });
             }
           }
         );
@@ -234,18 +259,12 @@ const OrgRegisterDetails = ({
   return (
     <div className="OrgRegisterDetails">
       <OrgRegisterDetailsForm
-        error={error}
-        validated={validated}
         handleOrgRegisterDetailsFormSubmit={handleOrgRegisterDetailsFormSubmit}
         orgRegisterData={orgRegisterData}
         handleOrgRegisterDetailsChange={handleOrgRegisterDetailsChange}
-        dropdownSelected={dropdownSelected}
         handleSocialDropdownSelect={handleSocialDropdownSelect}
-        socialMediaLink={socialMediaLink}
-        socialMediaLinkIsInvalid={socialMediaLinkIsInvalid}
-        socialMediaFeedback={socialMediaFeedback}
-        orgNameFeedback={orgNameFeedback}
-        orgNameIsInvalid={orgNameIsInvalid}
+        state={state}
+        dispatch={dispatch}
       />
     </div>
   );

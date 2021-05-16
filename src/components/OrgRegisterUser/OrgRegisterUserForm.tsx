@@ -2,43 +2,31 @@ import React from "react";
 import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
 import { MdNavigateNext } from "react-icons/md";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { OrgRegisterData } from "../../types/OrganisationRegister";
+import {
+  OrgRegisterData,
+  OrgRegisterUserActionType,
+  OrgRegisterUserState,
+} from "../../types/OrganisationRegister";
 
 type OrgRegisterUserFormProps = {
-  validated: boolean;
   handleOrgRegisterUserFormSubmit: React.FormEventHandler<HTMLFormElement>;
   orgRegisterData: OrgRegisterData;
   handleOrgRegisterUserChange: React.ChangeEventHandler<HTMLInputElement>;
-  showPassword: boolean;
-  passwordIsInvalid: boolean;
-  setShowPassword: React.Dispatch<React.SetStateAction<boolean>>;
-  passwordFeedback: string;
-  showConfirmPassword: boolean;
-  confirmPassword: string;
-  confirmPasswordIsInvalid: boolean;
-  setShowConfirmPassword: React.Dispatch<React.SetStateAction<boolean>>;
-  confirmPasswordFeedback: string;
+  state: OrgRegisterUserState;
+  dispatch: React.Dispatch<OrgRegisterUserActionType>;
 };
 
 const OrgRegisterUserForm = ({
-  validated,
   handleOrgRegisterUserFormSubmit,
   orgRegisterData,
   handleOrgRegisterUserChange,
-  showPassword,
-  passwordIsInvalid,
-  setShowPassword,
-  passwordFeedback,
-  showConfirmPassword,
-  confirmPassword,
-  confirmPasswordIsInvalid,
-  setShowConfirmPassword,
-  confirmPasswordFeedback,
+  state,
+  dispatch,
 }: OrgRegisterUserFormProps) => {
   return (
     <Form
       noValidate
-      validated={validated}
+      validated={state.validated}
       className="OrgRegisterUserForm"
       onSubmit={handleOrgRegisterUserFormSubmit}
     >
@@ -89,18 +77,20 @@ const OrgRegisterUserForm = ({
         <Form.Control
           required
           name="password"
-          type={showPassword ? "text" : "password"}
+          type={state.showPassword ? "text" : "password"}
           placeholder="Password"
           value={orgRegisterData.password}
           onChange={handleOrgRegisterUserChange}
-          isInvalid={passwordIsInvalid}
+          isInvalid={state.passwordIsInvalid}
         />
         <InputGroup.Append className="EyeIconInputGroup">
           <Button
             className="EyeIconButton"
-            onClick={() => setShowPassword((prevState) => !prevState)}
+            onClick={() =>
+              dispatch({ type: "showPassword", payload: !state.showPassword })
+            }
           >
-            {showPassword ? (
+            {state.showPassword ? (
               <AiOutlineEye className="EyeVisibleIcon" />
             ) : (
               <AiOutlineEyeInvisible className="EyeInvisibleIcon" />
@@ -109,7 +99,9 @@ const OrgRegisterUserForm = ({
         </InputGroup.Append>
 
         <Form.Control.Feedback type="invalid">
-          {passwordFeedback ? passwordFeedback : "Password is required."}
+          {state.passwordFeedback
+            ? state.passwordFeedback
+            : "Password is required."}
         </Form.Control.Feedback>
       </InputGroup>
 
@@ -117,18 +109,23 @@ const OrgRegisterUserForm = ({
         <Form.Control
           required
           name="confirmPassword"
-          type={showConfirmPassword ? "text" : "password"}
+          type={state.showConfirmPassword ? "text" : "password"}
           placeholder="Confirm Password"
-          value={confirmPassword}
+          value={state.confirmPassword}
           onChange={handleOrgRegisterUserChange}
-          isInvalid={confirmPasswordIsInvalid}
+          isInvalid={state.confirmPasswordIsInvalid}
         />
         <InputGroup.Append className="EyeIconInputGroup">
           <Button
             className="EyeIconButton"
-            onClick={() => setShowConfirmPassword((prevState) => !prevState)}
+            onClick={() =>
+              dispatch({
+                type: "showConfirmPassword",
+                payload: !state.showConfirmPassword,
+              })
+            }
           >
-            {showConfirmPassword ? (
+            {state.showConfirmPassword ? (
               <AiOutlineEye className="EyeVisibleIcon" />
             ) : (
               <AiOutlineEyeInvisible className="EyeInvisibleIcon" />
@@ -136,8 +133,8 @@ const OrgRegisterUserForm = ({
           </Button>
         </InputGroup.Append>
         <Form.Control.Feedback type="invalid">
-          {confirmPasswordFeedback
-            ? confirmPasswordFeedback
+          {state.confirmPasswordFeedback
+            ? state.confirmPasswordFeedback
             : "Confirm password is required."}
         </Form.Control.Feedback>
       </InputGroup>

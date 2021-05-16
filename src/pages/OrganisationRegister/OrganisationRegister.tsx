@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
 import OrgRegisterDetails from "../../components/OrgRegisterDetails/OrgRegisterDetails";
 import OrgRegisterProgress from "../../components/OrgRegisterProgress/OrgRegisterProgress";
@@ -6,12 +6,15 @@ import OrgRegisterUser from "../../components/OrgRegisterUser/OrgRegisterUser";
 import { OrgRegisterData } from "../../types/OrganisationRegister";
 import { useStateWithCallbackLazy } from "use-state-with-callback";
 import "./OrganisationRegister.css";
+import { orgRegisterReducer } from "../../reducers/orgRegisterReducer";
 
 const OrganisationRegister = () => {
-  const [currentOrgRegister, setCurrentOrgRegister] = useState<string>("user");
-  const [loading, setLoading] = useState<boolean>(false);
-  const [emailSent, setEmailSent] = useState<boolean>(false);
-  const [processing, setProcessing] = useState<boolean>(false);
+  const [state, dispatch] = useReducer(orgRegisterReducer, {
+    currentOrgRegister: "user",
+    loading: false,
+    emailSent: false,
+    processing: false,
+  });
 
   const [orgRegisterData, setOrgRegisterData] =
     useStateWithCallbackLazy<OrgRegisterData>({
@@ -38,26 +41,29 @@ const OrganisationRegister = () => {
     <div className="OrgRegisterPage">
       <div className="OrgRegisterProgressContainer">
         <div className="OrgRegistrationText">Registration</div>
-        <OrgRegisterProgress currentOrgRegister={currentOrgRegister} />
+        <OrgRegisterProgress currentOrgRegister={state.currentOrgRegister} />
       </div>
 
-      {processing && <LoadingProgress loading={loading} emailSent={emailSent} loadingMessage="Registering You..."/>}
+      {state.processing && (
+        <LoadingProgress
+          loading={state.loading}
+          emailSent={state.emailSent}
+          loadingMessage="Registering You..."
+        />
+      )}
 
-      {currentOrgRegister === "user" && (
+      {state.currentOrgRegister === "user" && (
         <OrgRegisterUser
           orgRegisterData={orgRegisterData}
           setOrgRegisterData={setOrgRegisterData}
-          setCurrentOrgRegister={setCurrentOrgRegister}
+          orgRegisterDispatch={dispatch}
         />
       )}
-      {currentOrgRegister === "details" && (
+      {state.currentOrgRegister === "details" && (
         <OrgRegisterDetails
           orgRegisterData={orgRegisterData}
           setOrgRegisterData={setOrgRegisterData}
-          setCurrentOrgRegister={setCurrentOrgRegister}
-          setLoading={setLoading}
-          setEmailSent={setEmailSent}
-          setProcessing={setProcessing}
+          orgRegisterDispatch={dispatch}
         />
       )}
     </div>
