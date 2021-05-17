@@ -2,11 +2,13 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "../../pages/Home/Home";
 import Login from "../../pages/Login/Login";
+import OrgProfileBuilder from "../../pages/OrgProfileBuilder/OrgProfileBuilder";
 import OrganisationRegister from "../../pages/OrganisationRegister/OrganisationRegister";
 import StudentMentorRegister from "../../pages/StudentMentorRegister/StudentMentorRegister";
 import {
   HOME,
   LOGIN,
+  ORGANISATION_PROFILE_BUILDER,
   ORGANISATION_REGISTER,
   STUDENT_MENTOR_REGISTER,
 } from "../../routes/Routes";
@@ -25,6 +27,9 @@ function App() {
           </Route>
           <Route path={LOGIN}>
             <Login />
+          </Route>
+          <Route path={ORGANISATION_PROFILE_BUILDER}>
+            <OrgProfileBuilder />
           </Route>
           <Route path={ORGANISATION_REGISTER}>
             <OrganisationRegister />

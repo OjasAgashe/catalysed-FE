@@ -264,7 +264,6 @@ const OrgRegisterDetails = ({
         handleOrgRegisterDetailsChange={handleOrgRegisterDetailsChange}
         handleSocialDropdownSelect={handleSocialDropdownSelect}
         state={state}
-        dispatch={dispatch}
       />
     </div>
   );

@@ -15,7 +15,6 @@ import { FaFacebook } from "react-icons/fa";
 import { GiClick } from "react-icons/gi";
 import {
   OrgRegisterData,
-  OrgRegisterDetailsActionType,
   OrgRegisterDetailsState,
 } from "../../types/OrganisationRegister";
 import Error from "../Error/Error";
@@ -26,7 +25,6 @@ type OrgRegisterDetailsFormProps = {
   handleOrgRegisterDetailsChange: React.ChangeEventHandler<HTMLInputElement>;
   handleSocialDropdownSelect: (selected: string | null) => void;
   state: OrgRegisterDetailsState;
-  dispatch: React.Dispatch<OrgRegisterDetailsActionType>;
 };
 
 const OrgRegisterDetailsForm = ({
@@ -35,7 +33,6 @@ const OrgRegisterDetailsForm = ({
   handleOrgRegisterDetailsChange,
   handleSocialDropdownSelect,
   state,
-  dispatch,
 }: OrgRegisterDetailsFormProps) => {
   return (
     <>
