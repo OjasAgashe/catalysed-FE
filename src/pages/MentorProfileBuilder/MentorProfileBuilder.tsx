@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import OrgProfileBuilderTypeform from "../../components/OrgProfileBuilderTypeform/OrgProfileBuilderTypeform";
 import { AiOutlineDoubleRight } from "react-icons/ai";
-import "./OrgProfileBuilder.css";
+import MentorProfileBuilderTypeform from "../../components/MentorProfileBuilderTypeform/MentorProfileBuilderTypeform";
+import "./MentorProfileBuilder.css";
 
 type GreetProps = {
   setShowGreet: React.Dispatch<React.SetStateAction<boolean>>;
@@ -9,13 +9,15 @@ type GreetProps = {
 
 const Greet = ({ setShowGreet }: GreetProps) => {
   return (
-    <div className="OrgProfileGreetContainer">
-      <div className="OrgProfileGreet">
-        <h2>Welcome User_name</h2>
-        <h4>We are excited to have Organization_name on CatalysEd !!</h4>
+    <div className="MentorProfileGreetContainer">
+      <div className="MentorProfileGreet">
+        <h2>Welcome Mentor_name</h2>
+        <h4>
+          We are glad that you want to be a mentor of Organization_name !!
+        </h4>
         <p>
           <span>Let's create</span> a profile that will help establish your
-          organization on the platform
+          existence on CatalysEd
         </p>
         <button className="StartBtn" onClick={() => setShowGreet(false)}>
           Start &nbsp;
@@ -26,15 +28,15 @@ const Greet = ({ setShowGreet }: GreetProps) => {
   );
 };
 
-const OrgProfileBuilder = () => {
+const MentorProfileBuilder = () => {
   const [showGreet, setShowGreet] = useState<boolean>(true);
 
   return (
-    <div className="OrgProfileBuilder">
+    <div className="MentorProfileBuilder">
       {showGreet && <Greet setShowGreet={setShowGreet} />}
-      {showGreet === false && <OrgProfileBuilderTypeform />}
+      {showGreet === false && <MentorProfileBuilderTypeform />}
     </div>
   );
 };
 
-export default OrgProfileBuilder;
+export default MentorProfileBuilder;

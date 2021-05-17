@@ -29,18 +29,18 @@ const QuestionFive = ({
 
   return (
     <motion.div
-      className="OrgTypeformQuestionFive"
+      className="OrgTypeformQuestion Question"
       initial={{ x: "-100vw" }}
       animate={{ x: "0" }}
       transition={{ delay: 0.5 }}
     >
-      <Form.Group className="QuestionFiveFormGroup">
-        <Form.Text className="QuestionFiveFormText">
+      <Form.Group className="QuestionFormGroup">
+        <Form.Text className="QuestionFormText">
           Primary language the org operates in ...
         </Form.Text>
         <Form.Control
           required
-          className="QuestionFiveFormControl"
+          className="QuestionFormControl"
           type="text"
           placeholder="Type..."
           value={answer.QuestionFive}

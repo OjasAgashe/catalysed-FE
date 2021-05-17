@@ -1,0 +1,66 @@
+.MentorProfileBuilderForm :is(.TypeFormBackBtn, .TypeFormNextBtn) {
+  background-color: var(--blue-gray-300);
+  color: var(--blue-gray-700);
+}
+
+.MentorProfileBuilderForm .TypeFormNextBtn {
+  box-shadow: 1px 1px 2px var(--blue-gray-600);
+}
+
+.MentorProfileBuilderForm :is(.TypeFormNextBtn, .TypeFormBackBtn):hover {
+  box-shadow: 1px 1px 4px var(--blue-gray-500);
+}
+
+.MentorProfileBuilderForm .TypeFormBackBtn {
+  box-shadow: -1px -1px 2px var(--blue-gray-600);
+}
+
+.MentorTypeformQuestion .QuestionFormText {
+  font-size: 2rem;
+  color: var(--blue-gray-700);
+}
+
+.MentorTypeformQuestion .QuestionFormControl {
+  color: var(--common-home-section-four-600);
+}
+
+/* Radio */
+.MentorTypeformQuestion :is(.GenderRadioQuestion, .InternetRadioQuestion) {
+  text-align: left !important;
+  display: flex;
+  justify-content: center !important;
+  align-items: center;
+  flex-direction: column;
+  font-size: 1.2rem;
+}
+
+:is(.GenderRadioQuestion, .InternetRadioQuestion) .form-check {
+  width: 15rem;
+  margin-top: 1rem !important;
+  border: 1px solid var(--blue-gray-500);
+  color: var(--blue-gray-700) !important;
+  font-weight: 600 !important;
+  padding-left: 2.5rem !important;
+  border-radius: 5px;
+}
+
+:is(.GenderRadioQuestion, .InternetRadioQuestion) .form-check-input {
+  border: 2px solid var(--blue-gray-500) !important;
+}
+
+/* Overriding */
+
+.form-check-input:checked {
+  background-color: var(--blue-gray-500) !important;
+}
+
+.form-check-input:focus {
+  box-shadow: none !important;
+}
+
+/*  */
+
+:is(.GenderRadioQuestion, .InternetRadioQuestion)
+  :is(.form-check-input, .form-check-label) {
+  cursor: pointer;
+}

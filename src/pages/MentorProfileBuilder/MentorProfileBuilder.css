@@ -1,0 +1,16 @@
+.MentorProfileGreet h2 {
+  color: var(--linkedIn-code);
+}
+
+.MentorProfileGreet :is(p, h4) {
+  color: var(--common-home-section-four-600);
+}
+
+.MentorProfileGreet .StartBtn {
+  background-color: var(--instagram-code);
+}
+
+.MentorProfileGreet .StartBtn:hover {
+  transform: scale(1.1);
+  box-shadow: 1px 1px 8px var(--instagram-code);
+}

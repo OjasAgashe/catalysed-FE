@@ -8,13 +8,17 @@ import StudentMentorRegister from "../../pages/StudentMentorRegister/StudentMent
 import {
   HOME,
   LOGIN,
+  MENTOR_PROFILE_BUILDER,
   ORGANISATION_PROFILE_BUILDER,
   ORGANISATION_REGISTER,
   STUDENT_MENTOR_REGISTER,
+  STUDENT_PROFILE_BUILDER,
 } from "../../routes/Routes";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import "./App.css";
+import MentorProfileBuilder from "../../pages/MentorProfileBuilder/MentorProfileBuilder";
+import StuProfileBuilder from "../../pages/StuProfileBuilder/StuProfileBuilder";
 
 function App() {
   return (
@@ -28,6 +32,9 @@ function App() {
           <Route path={LOGIN}>
             <Login />
           </Route>
+          <Route path={MENTOR_PROFILE_BUILDER}>
+            <MentorProfileBuilder />
+          </Route>
           <Route path={ORGANISATION_PROFILE_BUILDER}>
             <OrgProfileBuilder />
           </Route>
@@ -36,6 +43,9 @@ function App() {
           </Route>
           <Route path={STUDENT_MENTOR_REGISTER}>
             <StudentMentorRegister />
+          </Route>
+          <Route path={STUDENT_PROFILE_BUILDER}>
+            <StuProfileBuilder />
           </Route>
         </Switch>
         <Footer />

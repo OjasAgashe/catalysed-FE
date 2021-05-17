@@ -1,0 +1,16 @@
+.StuProfileGreet :is(h2, h4) {
+  color: var(--blue-gray-700);
+}
+
+.StuProfileGreet p {
+  color: var(--linkedIn-code);
+}
+
+.StuProfileGreet .StartBtn {
+  background-color: var(--common-home-section-four-600);
+}
+
+.StuProfileGreet .StartBtn:hover {
+  transform: scale(1.1);
+  box-shadow: 1px 1px 8px var(--common-home-section-four-600);
+}

@@ -1,119 +1,21 @@
-.OrgProfileQuestionContainer {
-  text-align: center;
-}
-
-.TypeFormNextBtn,
-.TypeFormBackBtn,
-.TypeFormSubmitBtn {
-  margin-top: -2rem;
-  margin-bottom: 2rem;
-  padding: 0.2rem 2rem;
-  border: none;
-  border-radius: 5px;
-  font-size: 1.2rem;
-}
-
-.TypeFormBackBtn,
-.TypeFormNextBtn {
+.OrgProfileBuilderForm :is(.TypeFormBackBtn, .TypeFormNextBtn) {
   background-color: var(--common-home-section-four);
   color: var(--common-home-section-four-600);
 }
 
-.TypeFormSubmitBtn {
-  background-color: var(--success-code);
-  color: var(--white);
-}
-
-.TypeFormBackBtn {
-  margin-right: 2rem;
-}
-
-.TypeFormNextBtn:hover {
+.OrgProfileBuilderForm .TypeFormNextBtn:hover {
   box-shadow: 1px 1px 2px var(--common-home-section-four-600);
 }
 
-.TypeFormBackBtn:hover {
+.OrgProfileBuilderForm .TypeFormBackBtn:hover {
   box-shadow: -1px -1px 2px var(--common-home-section-four-600);
 }
 
-.TypeFormSubmitBtn:hover {
-  box-shadow: 1px 1px 4px var(--green-400);
-}
-
-:is(.TypeFormBackBtn, .TypeFormNextBtn, .TypeFormSubmitBtn):focus {
-  border: none !important;
-}
-
-:is(.OrgTypeformQuestionOne, .OrgTypeformQuestionTwo, .OrgTypeformQuestionThree, .OrgTypeformQuestionFour, .OrgTypeformQuestionFive) {
-  margin: auto;
-  padding: 4rem;
-  width: fit-content;
-}
-
-.OrgTypeformQuestionOne .QuestionOneFormText,
-.OrgTypeformQuestionTwo .QuestionTwoFormText,
-.OrgTypeformQuestionThree .QuestionThreeFormText,
-.OrgTypeformQuestionFour .QuestionFourFormText,
-.OrgTypeformQuestionFive .QuestionFiveFormText {
+.OrgTypeformQuestion .QuestionFormText {
   font-size: 2rem;
   color: var(--common-home-section-four-600);
 }
 
-.OrgTypeformQuestionOne .QuestionOneFormControl,
-.OrgTypeformQuestionTwo .QuestionTwoFormControl,
-.OrgTypeformQuestionThree .QuestionThreeFormControl,
-.OrgTypeformQuestionFour .QuestionFourFormControl,
-.OrgTypeformQuestionFive .QuestionFiveFormControl {
-  margin: auto !important;
-  margin-top: 3rem !important;
-  max-width: 25rem !important;
-  font-size: 1.5rem;
+.OrgTypeformQuestion .QuestionFormControl {
   color: var(--blue-gray-700);
-  background-color: inherit !important;
-}
-
-.react-tel-input .form-control {
-  font-size: 1.2rem !important;
-  background-color: inherit !important;
-}
-
-/* Overriding */
-
-/* PhoneInput */
-
-.react-tel-input .special-label {
-  display: none !important;
-}
-
-@media screen and (min-width: 525px) {
-  .react-tel-input .form-control {
-    width: 25rem !important;
-    margin: auto;
-  }
-
-  .react-tel-input .flag-dropdown {
-    left: 1.5rem;
-  }
-}
-
-@media screen and (max-width: 440px) {
-  .react-tel-input .form-control {
-    width: inherit !important;
-  }
-}
-
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-input[type="number"] {
-  -moz-appearance: textfield;
-}
-
-.phoneFormControl {
-  display: none !important;
 }

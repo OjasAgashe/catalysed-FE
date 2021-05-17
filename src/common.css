@@ -1,10 +1,13 @@
 /* Pages */
 
-/* OrganisationRegister, Login, StudentMentorRegister */
+/* OrganisationRegister, Login, StudentMentorRegister, OrgProfileBuilder, MentorProfileBuilder, StuProfileBuilder */
 
-:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage) {
+:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage, .OrgProfileBuilder, .MentorProfileBuilder, .StuProfileBuilder) {
   background-color: var(--red-100);
   min-height: 85vh;
+}
+
+:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage) {
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -12,9 +15,74 @@
   align-items: center;
 }
 
+:is(.OrgProfileGreetContainer, .MentorProfileGreetContainer, .StuProfileGreetContainer) {
+  padding: 2rem;
+}
+
+:is(.OrgProfileGreet, .MentorProfileGreet, .StuProfileGreet) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: fit-content;
+  background-color: var(--white);
+  margin: auto;
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px var(--blue-gray-500), -1px -1px 2px var(--white);
+}
+
+@media screen and (max-width: 768px) {
+  :is(.OrgProfileGreet, .MentorProfileGreet, .StuProfileGreet) {
+    padding: 1rem !important;
+  }
+}
+
+:is(.OrgProfileGreet, .MentorProfileGreet, .StuProfileGreet) h2 {
+  font-size: 2.5rem;
+  font-family: "Merienda", cursive;
+}
+
+:is(.OrgProfileGreet, .MentorProfileGreet, .StuProfileGreet) h4 {
+  font-size: 1.6rem;
+}
+
+:is(.OrgProfileGreet, .MentorProfileGreet, .StuProfileGreet) p {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+:is(.OrgProfileGreet, .MentorProfileGreet, .StuProfileGreet) p span {
+  font-size: 1.25rem;
+}
+
+:is(.OrgProfileGreet, .MentorProfileGreet, .StuProfileGreet) :is(h2, h4, p) {
+  margin: 2rem auto;
+  text-align: center;
+}
+
+:is(.OrgProfileGreet, .MentorProfileGreet, .StuProfileGreet) .StartBtn {
+  border-radius: 5px;
+  border: none;
+  padding: 0.4rem 2rem;
+  color: var(--white);
+}
+
+.AiDoubleRightIcon {
+  animation-name: change-position;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+}
+
+@keyframes change-position {
+  50% {
+    padding: 2px;
+  }
+}
+
 /* Components */
 
-/* OrgRegisterUser, OrgRegisterDetails, LoginForm, StudentMentorRegister (page), CommonHome */
+/* OrgRegisterUser, OrgRegisterDetails, LoginForm, StudentMentorRegister (page), CommonHome, OrgProfileBuilderTypeform, MentorProfileBuidlerTypeform */
 
 :is(.OrgRegisterUserForm, .OrgRegisterDetailsForm, .LoginForm, .StudentMentorRegisterBox, .CommonHomeForm) {
   background-color: var(--white);
@@ -96,4 +164,100 @@
   :is(.OrgRegisterUserForm, .OrgRegisterDetailsForm, .LoginForm, .CommonHomeForm) {
     width: 29.25rem;
   }
+}
+
+/* OrgProfileBuilderTypeform, MentorProfileBuilderTypeform */
+
+.OrgProfileQuestionContainer,
+.MentorProfileQuestionContainer {
+  text-align: center;
+}
+
+.TypeFormNextBtn,
+.TypeFormBackBtn,
+.TypeFormSubmitBtn {
+  margin-top: -2rem;
+  margin-bottom: 2rem;
+  padding: 0.2rem 2rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+}
+
+.TypeFormBackBtn {
+  margin-right: 2rem;
+}
+
+:is(.TypeFormBackBtn, .TypeFormNextBtn, .TypeFormSubmitBtn):focus {
+  border: none !important;
+}
+
+:is(.OrgTypeformQuestion, .MentorTypeformQuestion).Question {
+  margin: auto;
+  padding: 4rem;
+  width: fit-content;
+}
+
+.TypeFormSubmitBtn {
+  background-color: var(--success-code);
+  color: var(--white);
+}
+
+.TypeFormSubmitBtn:hover {
+  box-shadow: 1px 1px 4px var(--green-400);
+  transform: scale(1.01);
+}
+
+:is(.OrgTypeformQuestion, .MentorTypeformQuestion) .QuestionFormControl {
+  margin: auto !important;
+  margin-top: 3rem !important;
+  max-width: 25rem !important;
+  font-size: 1.5rem;
+  background-color: inherit !important;
+}
+
+.react-tel-input .form-control {
+  font-size: 1.2rem !important;
+  background-color: inherit !important;
+}
+
+/* Overriding */
+
+/* PhoneInput */
+
+.react-tel-input .special-label {
+  display: none !important;
+}
+
+@media screen and (min-width: 525px) {
+  .react-tel-input .form-control {
+    width: 25rem !important;
+    margin: auto;
+  }
+
+  .react-tel-input .flag-dropdown {
+    left: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .react-tel-input .form-control {
+    width: inherit !important;
+  }
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.phoneFormControl {
+  display: none !important;
 }

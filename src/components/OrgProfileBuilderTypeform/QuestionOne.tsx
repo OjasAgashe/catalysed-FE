@@ -29,17 +29,17 @@ const QuestionOne = ({
 
   return (
     <motion.div
-      className="OrgTypeformQuestionOne"
+      className="OrgTypeformQuestion Question"
       initial={{ x: "100vw" }}
       animate={{ x: "0" }}
     >
-      <Form.Group className="QuestionOneFormGroup">
-        <Form.Text className="QuestionOneFormText">
+      <Form.Group className="QuestionFormGroup">
+        <Form.Text className="QuestionFormText">
           Which area do you work in?
         </Form.Text>
         <Form.Control
           required
-          className="QuestionOneFormControl"
+          className="QuestionFormControl"
           type="text"
           placeholder="Type of Work..."
           value={answer.QuestionOne}

@@ -38,18 +38,18 @@ const QuestionTwo = ({
 
   return (
     <motion.div
-      className="OrgTypeformQuestionTwo"
+      className="OrgTypeformQuestion Question"
       initial={{ x: "-100vw" }}
       animate={{ x: "0" }}
       transition={{ delay: 0.2 }}
     >
-      <Form.Group className="QuestionTwoFormGroup">
-        <Form.Text className="QuestionTwoFormText">
+      <Form.Group className="QuestionFormGroup">
+        <Form.Text className="QuestionFormText">
           How someone can contact you?
         </Form.Text>
         <Form.Control
           required
-          className="QuestionTwoFormControl"
+          className="QuestionFormControl"
           type="email"
           name="email"
           placeholder="name@example.com"

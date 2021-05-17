@@ -28,18 +28,18 @@ const QuestionFour = ({
 
   return (
     <motion.div
-      className="OrgTypeformQuestionFour"
+      className="OrgTypeformQuestion Question"
       initial={{ x: "-100vw" }}
       animate={{ x: "0" }}
       transition={{ delay: 0.4 }}
     >
-      <Form.Group className="QuestionFourFormGroup">
-        <Form.Text className="QuestionFourFormText">
+      <Form.Group className="QuestionFormGroup">
+        <Form.Text className="QuestionFormText">
           Where are you based?
         </Form.Text>
         <Form.Control
           required
-          className="QuestionFourFormControl"
+          className="QuestionFormControl"
           type="text"
           placeholder="Type..."
           value={answer.QuestionFour}

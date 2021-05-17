@@ -32,18 +32,18 @@ const QuestionThree = ({
 
   return (
     <motion.div
-      className="OrgTypeformQuestionThree"
+      className="OrgTypeformQuestion Question"
       initial={{ x: "100vw" }}
       animate={{ x: "0" }}
       transition={{ delay: 0.3 }}
     >
-      <Form.Group className="QuestionThreeFormGroup">
-        <Form.Text className="QuestionThreeFormText">
+      <Form.Group className="QuestionFormGroup">
+        <Form.Text className="QuestionFormText">
           What is your year of inception?
         </Form.Text>
         <Form.Control
           required
-          className="QuestionThreeFormControl"
+          className="QuestionFormControl"
           type="number"
           placeholder="YYYY"
           pattern="[0-9]{4}"
