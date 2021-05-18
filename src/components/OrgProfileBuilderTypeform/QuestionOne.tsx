@@ -1,25 +1,34 @@
 import React from "react";
 import { Form } from "react-bootstrap";
-import { OrgProfileBuilderData } from "../../types/OrganisationProfileBuilder";
+import {
+  OrgProfileBuilderActionType,
+  OrgProfileBuilderData,
+} from "../../types/OrganisationProfileBuilder";
 import { motion } from "framer-motion";
 
 type QuestionOneProps = {
   answer: OrgProfileBuilderData;
   setAnswer: React.Dispatch<React.SetStateAction<OrgProfileBuilderData>>;
   validated: boolean;
-  setValidated: React.Dispatch<React.SetStateAction<boolean>>;
+  dispatch: React.Dispatch<OrgProfileBuilderActionType>;
 };
 
 const QuestionOne = ({
   answer,
   setAnswer,
   validated,
-  setValidated,
+  dispatch,
 }: QuestionOneProps) => {
   const handleQuestionOneChange: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
-    if (validated) setValidated(false);
+    if (validated) dispatch({ type: "validated", payload: false });
+
+    const onlyAlphabets = /^[a-zA-Z]*$/;
+
+    if (onlyAlphabets.test(event.target.value) === false) {
+      return;
+    }
 
     setAnswer((prevState) => ({
       ...prevState,
@@ -46,7 +55,7 @@ const QuestionOne = ({
           onChange={handleQuestionOneChange}
         />
         <Form.Control.Feedback type="invalid">
-          Please fill this field
+          Required field, only Alphabets.
         </Form.Control.Feedback>
       </Form.Group>
     </motion.div>

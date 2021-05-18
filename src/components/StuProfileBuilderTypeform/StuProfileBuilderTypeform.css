@@ -1,0 +1,12 @@
+.StuProfileBuilderForm :is(.TypeFormBackBtn, .TypeFormNextBtn) {
+  background-color: var(--cyan-shade);
+}
+
+.StuProfileBuilderForm :is(.TypeFormNextBtn, .TypeFormBackBtn):hover {
+  box-shadow: 1px 1px var(--facebook-code), -1px -1px var(--facebook-code);
+}
+
+.StuProfileBuilderForm .QuestionFormText {
+  font-size: 2rem;
+  color: var(--blue-gray-700);
+}

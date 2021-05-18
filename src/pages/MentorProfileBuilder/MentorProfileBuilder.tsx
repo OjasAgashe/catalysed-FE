@@ -15,10 +15,10 @@ const Greet = ({ setShowGreet }: GreetProps) => {
         <h4>
           We are glad that you want to be a mentor of Organization_name !!
         </h4>
-        <p>
-          <span>Let's create</span> a profile that will help establish your
+        <h4 className="Leth4">
+          Let's create a profile that will help establish your
           existence on CatalysEd
-        </p>
+        </h4>
         <button className="StartBtn" onClick={() => setShowGreet(false)}>
           Start &nbsp;
           <AiOutlineDoubleRight className="AiDoubleRightIcon" />

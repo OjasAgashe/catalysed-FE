@@ -1,8 +1,8 @@
-.OrgProfileGreet :is(h2, h4) {
+.OrgProfileGreet h2 {
   color: var(--common-home-section-four-600);
 }
 
-.OrgProfileGreet p {
+.OrgProfileGreet h4 {
   color: var(--instagram-code);
 }
 

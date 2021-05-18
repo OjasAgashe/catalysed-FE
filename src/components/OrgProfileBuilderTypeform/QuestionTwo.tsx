@@ -2,36 +2,50 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/material.css";
-import { OrgProfileBuilderData } from "../../types/OrganisationProfileBuilder";
+import {
+  OrgProfileBuilderActionType,
+  OrgProfileBuilderData,
+  OrgProfileBuilderState,
+} from "../../types/OrganisationProfileBuilder";
 import { motion } from "framer-motion";
 
 type QuestionTwoProps = {
   answer: OrgProfileBuilderData;
   setAnswer: React.Dispatch<React.SetStateAction<OrgProfileBuilderData>>;
-  validated: boolean;
-  setValidated: React.Dispatch<React.SetStateAction<boolean>>;
-  isInvalid: boolean;
-  setIsInvalid: React.Dispatch<React.SetStateAction<boolean>>;
+  state: OrgProfileBuilderState;
+  dispatch: React.Dispatch<OrgProfileBuilderActionType>;
 };
 
 const QuestionTwo = ({
   answer,
   setAnswer,
-  validated,
-  setValidated,
-  isInvalid,
-  setIsInvalid,
+  state,
+  dispatch,
 }: QuestionTwoProps) => {
   const handleQuestionTwoChange: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
-    if (validated) setValidated(false);
+    if (state.validated) dispatch({ type: "validated", payload: false });
+    if (state.isInvalid) dispatch({ type: "isInvalid", payload: false });
 
     setAnswer((prevState) => ({
       ...prevState,
       QuestionTwo: {
         ...prevState.QuestionTwo,
         [event.target.name]: event.target.value,
+      },
+    }));
+  };
+
+  const handlePhoneInputChange = (phone: string) => {
+    if (state.validated) dispatch({ type: "validated", payload: false });
+    if (state.isInvalid) dispatch({ type: "isInvalid", payload: false });
+
+    setAnswer((prevState) => ({
+      ...prevState,
+      QuestionTwo: {
+        ...prevState.QuestionTwo,
+        phone,
       },
     }));
   };
@@ -55,7 +69,7 @@ const QuestionTwo = ({
           placeholder="name@example.com"
           value={answer.QuestionTwo.email}
           onChange={handleQuestionTwoChange}
-          isInvalid={isInvalid}
+          isInvalid={state.isInvalid}
         />
 
         <Form.Control className="phoneFormControl" />
@@ -64,18 +78,7 @@ const QuestionTwo = ({
           placeholder=""
           enableSearch={true}
           value={answer.QuestionTwo.phone}
-          onChange={(phone) => {
-            if (validated) setValidated(false);
-            if (isInvalid) setIsInvalid(false);
-
-            setAnswer((prevState) => ({
-              ...prevState,
-              QuestionTwo: {
-                ...prevState.QuestionTwo,
-                phone,
-              },
-            }));
-          }}
+          onChange={handlePhoneInputChange}
           inputProps={{
             name: "phone",
             required: true,
@@ -83,7 +86,7 @@ const QuestionTwo = ({
           }}
         />
         <Form.Control.Feedback type="invalid">
-          Required fields
+          Required fields, enter valid Email and Number.
         </Form.Control.Feedback>
       </Form.Group>
     </motion.div>

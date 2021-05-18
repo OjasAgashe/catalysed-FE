@@ -2,16 +2,16 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import { motion } from "framer-motion";
 import {
-  MentorProfileBuilderActionType,
-  MentorProfileBuilderData,
-  MentorProfileBuilderState,
-} from "../../types/MentorProfileBuilder";
+  StudentProfileBuilderActionType,
+  StudentProfileBuilderData,
+  StudentProfileBuilderState,
+} from "../../types/StudentProfileBuilder";
 
 type QuestionSevenProps = {
-  answer: MentorProfileBuilderData;
-  setAnswer: React.Dispatch<React.SetStateAction<MentorProfileBuilderData>>;
-  state: MentorProfileBuilderState;
-  dispatch: React.Dispatch<MentorProfileBuilderActionType>;
+  answer: StudentProfileBuilderData;
+  setAnswer: React.Dispatch<React.SetStateAction<StudentProfileBuilderData>>;
+  state: StudentProfileBuilderState;
+  dispatch: React.Dispatch<StudentProfileBuilderActionType>;
 };
 
 const QuestionSeven = ({
@@ -32,7 +32,7 @@ const QuestionSeven = ({
 
   return (
     <motion.div
-      className="MentorTypeformQuestion Question"
+      className="StuTypeformQuestion Question"
       initial={{ x: "100vw" }}
       animate={{ x: "0" }}
       transition={{ delay: 0.7 }}
@@ -52,7 +52,7 @@ const QuestionSeven = ({
             />
             <Form.Check.Label>yes</Form.Check.Label>
           </Form.Check>
-          <Form.Check type="radio" checked id="internet-no">
+          <Form.Check type="radio" id="internet-no">
             <Form.Check.Input
               checked={answer.QuestionSeven === "no"}
               onChange={handleQuestionSevenChange}

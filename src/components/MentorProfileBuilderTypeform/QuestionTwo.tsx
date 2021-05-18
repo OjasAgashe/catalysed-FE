@@ -1,8 +1,43 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 import { motion } from "framer-motion";
+import {
+  MentorProfileBuilderActionType,
+  MentorProfileBuilderData,
+  MentorProfileBuilderState,
+} from "../../types/MentorProfileBuilder";
 
-const QuestionTwo = () => {
+type QuestionTwoProps = {
+  answer: MentorProfileBuilderData;
+  setAnswer: React.Dispatch<React.SetStateAction<MentorProfileBuilderData>>;
+  state: MentorProfileBuilderState;
+  dispatch: React.Dispatch<MentorProfileBuilderActionType>;
+};
+
+const QuestionTwo = ({
+  answer,
+  setAnswer,
+  state,
+  dispatch,
+}: QuestionTwoProps) => {
+  const handleQuestionTwoChange: React.ChangeEventHandler<HTMLInputElement> = (
+    event
+  ) => {
+    if (state.validated) dispatch({ type: "validated", payload: false });
+
+    const onlyAlphabets = /^[a-zA-Z]*$/;
+
+    if (onlyAlphabets.test(event.target.value) === false) {
+      return;
+    }
+
+    setAnswer((prevState) => ({
+      ...prevState,
+      QuestionTwo: event.target.value,
+    }));
+  };
+
+  
   return (
     <motion.div
       className="MentorTypeformQuestion Question"
@@ -15,12 +50,15 @@ const QuestionTwo = () => {
           To which school or organisation do you belong?
         </Form.Text>
         <Form.Control
+          required
           className="QuestionFormControl"
           type="text"
           placeholder="Type your organisation/school..."
+          value={answer.QuestionTwo}
+          onChange={handleQuestionTwoChange}
         />
         <Form.Control.Feedback type="invalid">
-          Please fill this field
+          Required field, only Alphabets.
         </Form.Control.Feedback>
       </Form.Group>
     </motion.div>

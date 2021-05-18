@@ -4,16 +4,16 @@ import { Form } from "react-bootstrap";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/material.css";
 import {
-  MentorProfileBuilderActionType,
-  MentorProfileBuilderData,
-  MentorProfileBuilderState,
-} from "../../types/MentorProfileBuilder";
+  StudentProfileBuilderActionType,
+  StudentProfileBuilderData,
+  StudentProfileBuilderState,
+} from "../../types/StudentProfileBuilder";
 
 type QuestionEightProps = {
-  answer: MentorProfileBuilderData;
-  setAnswer: React.Dispatch<React.SetStateAction<MentorProfileBuilderData>>;
-  state: MentorProfileBuilderState;
-  dispatch: React.Dispatch<MentorProfileBuilderActionType>;
+  answer: StudentProfileBuilderData;
+  setAnswer: React.Dispatch<React.SetStateAction<StudentProfileBuilderData>>;
+  state: StudentProfileBuilderState;
+  dispatch: React.Dispatch<StudentProfileBuilderActionType>;
 };
 
 const QuestionEight = ({
@@ -52,7 +52,7 @@ const QuestionEight = ({
   return (
     <div>
       <motion.div
-        className="MentorTypeformQuestion Question"
+        className="StuTypeformQuestion Question"
         initial={{ x: "-100vw" }}
         animate={{ x: "0" }}
         transition={{ delay: 0.8 }}
@@ -81,12 +81,12 @@ const QuestionEight = ({
             onChange={handlePhoneInputChange}
             inputProps={{
               name: "phone",
-              required: true,
+              required:true,
               className: "form-control",
             }}
           />
           <Form.Control.Feedback type="invalid">
-            Required fields, enter valid Email and Number.
+              Required fields, enter valid Email and Number.
           </Form.Control.Feedback>
         </Form.Group>
       </motion.div>

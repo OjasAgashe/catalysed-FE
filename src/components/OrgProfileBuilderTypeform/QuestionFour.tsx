@@ -1,25 +1,35 @@
 import React from "react";
 import { Form } from "react-bootstrap";
-import { OrgProfileBuilderData } from "../../types/OrganisationProfileBuilder";
+import {
+  OrgProfileBuilderActionType,
+  OrgProfileBuilderData,
+} from "../../types/OrganisationProfileBuilder";
 import { motion } from "framer-motion";
 
 type QuestionFourProps = {
   answer: OrgProfileBuilderData;
   setAnswer: React.Dispatch<React.SetStateAction<OrgProfileBuilderData>>;
   validated: boolean;
-  setValidated: React.Dispatch<React.SetStateAction<boolean>>;
+  dispatch: React.Dispatch<OrgProfileBuilderActionType>;
 };
 
 const QuestionFour = ({
   answer,
   setAnswer,
   validated,
-  setValidated,
+  dispatch,
 }: QuestionFourProps) => {
   const handleQuestionFourChange: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
-    if (validated) setValidated(false);
+    if (validated) dispatch({ type: "validated", payload: false });
+
+    const onlyAlphabets = /^[a-zA-Z]*$/;
+
+    if (onlyAlphabets.test(event.target.value) === false) {
+      return;
+    }
+
     setAnswer((prevState) => ({
       ...prevState,
       QuestionFour: event.target.value,
@@ -34,9 +44,7 @@ const QuestionFour = ({
       transition={{ delay: 0.4 }}
     >
       <Form.Group className="QuestionFormGroup">
-        <Form.Text className="QuestionFormText">
-          Where are you based?
-        </Form.Text>
+        <Form.Text className="QuestionFormText">Where are you based?</Form.Text>
         <Form.Control
           required
           className="QuestionFormControl"
@@ -46,7 +54,7 @@ const QuestionFour = ({
           onChange={handleQuestionFourChange}
         />
         <Form.Control.Feedback type="invalid">
-          Required field
+          Required field, only Alphabets.
         </Form.Control.Feedback>
       </Form.Group>
     </motion.div>

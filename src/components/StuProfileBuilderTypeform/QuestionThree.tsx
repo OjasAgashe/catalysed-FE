@@ -2,16 +2,16 @@ import React from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { motion } from "framer-motion";
 import {
-  MentorProfileBuilderActionType,
-  MentorProfileBuilderData,
-  MentorProfileBuilderState,
-} from "../../types/MentorProfileBuilder";
+  StudentProfileBuilderActionType,
+  StudentProfileBuilderData,
+  StudentProfileBuilderState,
+} from "../../types/StudentProfileBuilder";
 
 type QuestionThreeProps = {
-  answer: MentorProfileBuilderData;
-  setAnswer: React.Dispatch<React.SetStateAction<MentorProfileBuilderData>>;
-  state: MentorProfileBuilderState;
-  dispatch: React.Dispatch<MentorProfileBuilderActionType>;
+  answer: StudentProfileBuilderData;
+  setAnswer: React.Dispatch<React.SetStateAction<StudentProfileBuilderData>>;
+  state: StudentProfileBuilderState;
+  dispatch: React.Dispatch<StudentProfileBuilderActionType>;
 };
 
 const QuestionThree = ({
@@ -41,7 +41,7 @@ const QuestionThree = ({
 
   return (
     <motion.div
-      className="MentorTypeformQuestion Question"
+      className="StuTypeformQuestion Question"
       initial={{ x: "100vw" }}
       animate={{ x: "0" }}
       transition={{ delay: 0.3 }}

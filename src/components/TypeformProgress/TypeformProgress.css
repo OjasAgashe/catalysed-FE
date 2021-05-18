@@ -1,0 +1,12 @@
+.TypeformProgressContainer {
+  padding: 2rem 4rem;
+  text-align: center !important;
+  color: var(--blue-gray-700);
+  font-family: "KoHo", sans-serif;
+}
+
+.TypeformProgressContainer .TypeformProgressBar {
+  height: 0.5rem !important;
+  max-width: 22.25rem !important;
+  margin: auto;
+}

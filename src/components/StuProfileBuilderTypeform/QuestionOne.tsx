@@ -2,16 +2,16 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Form } from "react-bootstrap";
 import {
-  MentorProfileBuilderActionType,
-  MentorProfileBuilderData,
-  MentorProfileBuilderState,
-} from "../../types/MentorProfileBuilder";
+  StudentProfileBuilderActionType,
+  StudentProfileBuilderData,
+  StudentProfileBuilderState,
+} from "../../types/StudentProfileBuilder";
 
 type QuestionOneProps = {
-  answer: MentorProfileBuilderData;
-  setAnswer: React.Dispatch<React.SetStateAction<MentorProfileBuilderData>>;
-  state: MentorProfileBuilderState;
-  dispatch: React.Dispatch<MentorProfileBuilderActionType>;
+  answer: StudentProfileBuilderData;
+  setAnswer: React.Dispatch<React.SetStateAction<StudentProfileBuilderData>>;
+  state: StudentProfileBuilderState;
+  dispatch: React.Dispatch<StudentProfileBuilderActionType>;
 };
 
 const QuestionOne = ({
@@ -37,14 +37,14 @@ const QuestionOne = ({
 
   return (
     <motion.div
-      className="MentorTypeformQuestion Question"
+      className="StuTypeformQuestion Question"
       initial={{ x: "100vw" }}
       animate={{ x: "0" }}
     >
       <Form.Group className="QuestionFormGroup">
         <Form.Text className="QuestionFormText">How old are you?</Form.Text>
         <Form.Control
-          required
+        required
           className="QuestionFormControl"
           type="number"
           pattern="[0-9]{2}"

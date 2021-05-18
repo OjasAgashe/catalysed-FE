@@ -1,24 +1,27 @@
 import React from "react";
 import { Form } from "react-bootstrap";
-import { OrgProfileBuilderData } from "../../types/OrganisationProfileBuilder";
+import {
+  OrgProfileBuilderActionType,
+  OrgProfileBuilderData,
+} from "../../types/OrganisationProfileBuilder";
 import { motion } from "framer-motion";
 
 type QuestionThreeProps = {
   answer: OrgProfileBuilderData;
   setAnswer: React.Dispatch<React.SetStateAction<OrgProfileBuilderData>>;
   validated: boolean;
-  setValidated: React.Dispatch<React.SetStateAction<boolean>>;
+  dispatch: React.Dispatch<OrgProfileBuilderActionType>;
 };
 
 const QuestionThree = ({
   answer,
   setAnswer,
   validated,
-  setValidated,
+  dispatch,
 }: QuestionThreeProps) => {
   const handleQuestionThreeChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
-      if (validated) setValidated(false);
+      if (validated) dispatch({ type: "validated", payload: false });
 
       if (event.target.value.length > 4) {
         return;
@@ -52,7 +55,7 @@ const QuestionThree = ({
           onChange={handleQuestionThreeChange}
         />
         <Form.Control.Feedback type="invalid">
-          Required field, enter valid value
+          Required field, only valid YYYY pattern.
         </Form.Control.Feedback>
       </Form.Group>
     </motion.div>

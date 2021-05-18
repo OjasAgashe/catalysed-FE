@@ -1,26 +1,26 @@
 import React from "react";
 import { Form } from "react-bootstrap";
-import {
-  OrgProfileBuilderActionType,
-  OrgProfileBuilderData,
-  OrgProfileBuilderState,
-} from "../../types/OrganisationProfileBuilder";
 import { motion } from "framer-motion";
+import {
+  StudentProfileBuilderActionType,
+  StudentProfileBuilderData,
+  StudentProfileBuilderState,
+} from "../../types/StudentProfileBuilder";
 
-type QuestionFiveProps = {
-  answer: OrgProfileBuilderData;
-  setAnswer: React.Dispatch<React.SetStateAction<OrgProfileBuilderData>>;
-  state: OrgProfileBuilderState;
-  dispatch: React.Dispatch<OrgProfileBuilderActionType>;
+type QuestionTwoProps = {
+  answer: StudentProfileBuilderData;
+  setAnswer: React.Dispatch<React.SetStateAction<StudentProfileBuilderData>>;
+  state: StudentProfileBuilderState;
+  dispatch: React.Dispatch<StudentProfileBuilderActionType>;
 };
 
-const QuestionFive = ({
+const QuestionTwo = ({
   answer,
   setAnswer,
   state,
   dispatch,
-}: QuestionFiveProps) => {
-  const handleQuestionFiveChange: React.ChangeEventHandler<HTMLInputElement> = (
+}: QuestionTwoProps) => {
+  const handleQuestionTwoChange: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
     if (state.validated) dispatch({ type: "validated", payload: false });
@@ -33,28 +33,28 @@ const QuestionFive = ({
 
     setAnswer((prevState) => ({
       ...prevState,
-      QuestionFive: event.target.value,
+      QuestionTwo: event.target.value,
     }));
   };
 
   return (
     <motion.div
-      className="OrgTypeformQuestion Question"
+      className="StuTypeformQuestion Question"
       initial={{ x: "-100vw" }}
       animate={{ x: "0" }}
-      transition={{ delay: 0.5 }}
+      transition={{ delay: 0.2 }}
     >
       <Form.Group className="QuestionFormGroup">
         <Form.Text className="QuestionFormText">
-          Primary language the org operates in ...
+          To which school or organisation do you belong?
         </Form.Text>
         <Form.Control
           required
           className="QuestionFormControl"
           type="text"
-          placeholder="Type..."
-          value={answer.QuestionFive}
-          onChange={handleQuestionFiveChange}
+          placeholder="Type your organisation/school..."
+          value={answer.QuestionTwo}
+          onChange={handleQuestionTwoChange}
         />
         <Form.Control.Feedback type="invalid">
           Required field, only Alphabets.
@@ -64,4 +64,4 @@ const QuestionFive = ({
   );
 };
 
-export default QuestionFive;
+export default QuestionTwo;

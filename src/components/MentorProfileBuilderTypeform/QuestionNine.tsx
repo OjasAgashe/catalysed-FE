@@ -1,8 +1,42 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 import { motion } from "framer-motion";
+import {
+  MentorProfileBuilderActionType,
+  MentorProfileBuilderData,
+  MentorProfileBuilderState,
+} from "../../types/MentorProfileBuilder";
 
-const QuestionNine = () => {
+type QuestionNineProps = {
+  answer: MentorProfileBuilderData;
+  setAnswer: React.Dispatch<React.SetStateAction<MentorProfileBuilderData>>;
+  state: MentorProfileBuilderState;
+  dispatch: React.Dispatch<MentorProfileBuilderActionType>;
+};
+
+const QuestionNine = ({
+  answer,
+  setAnswer,
+  state,
+  dispatch,
+}: QuestionNineProps) => {
+  const handleQuestionNineChange: React.ChangeEventHandler<HTMLInputElement> = (
+    event
+  ) => {
+    if (state.validated) dispatch({ type: "validated", payload: false });
+
+    const onlyAlphabets = /^[a-zA-Z]*$/;
+
+    if (onlyAlphabets.test(event.target.value) === false) {
+      return;
+    }
+
+    setAnswer((prevState) => ({
+      ...prevState,
+      QuestionNine: event.target.value,
+    }));
+  };
+
   return (
     <motion.div
       className="MentorTypeformQuestion Question"
@@ -19,9 +53,11 @@ const QuestionNine = () => {
           className="QuestionFormControl"
           type="text"
           placeholder="Type..."
+          value={answer.QuestionNine}
+          onChange={handleQuestionNineChange}
         />
         <Form.Control.Feedback type="invalid">
-          Please fill this field
+          Required field, only Alphabets.
         </Form.Control.Feedback>
       </Form.Group>
     </motion.div>

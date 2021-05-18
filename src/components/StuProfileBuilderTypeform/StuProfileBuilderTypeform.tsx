@@ -1,8 +1,8 @@
 import React, { useReducer, useRef, useState } from "react";
 // @ts-ignore
 import TypeForm from "react-typeform";
-import QuestionOne from "./QuestionOne";
 import { Form } from "react-bootstrap";
+import QuestionOne from "./QuestionOne";
 import QuestionTwo from "./QuestionTwo";
 import QuestionThree from "./QuestionThree";
 import QuestionFour from "./QuestionFour";
@@ -11,35 +11,32 @@ import QuestionSix from "./QuestionSix";
 import QuestionSeven from "./QuestionSeven";
 import QuestionEight from "./QuestionEight";
 import QuestionNine from "./QuestionNine";
-import QuestionTen from "./QuestionTen";
-import "./MentorProfileBuilderTypeform.css";
-import { mentorProfileBuilderReducer } from "../../reducers/mentorProfileBuilderReducer";
-import { MentorProfileBuilderData } from "../../types/MentorProfileBuilder";
+import "./StuProfileBuilderTypeform.css";
+import { stuProfileBuilderReducer } from "../../reducers/stuProfileBuilderReducer";
+import { StudentProfileBuilderData } from "../../types/StudentProfileBuilder";
 
-const MentorProfileBuilderTypeform = () => {
-  const [state, dispatch] = useReducer(mentorProfileBuilderReducer, {
+const StuProfileBuilderTypeform = () => {
+  const [state, dispatch] = useReducer(stuProfileBuilderReducer, {
     isInvalid: false,
     validated: false,
     showSubmitReviewText: false,
-    isProfMentorYes: false,
   });
 
   const typeformRef = useRef<TypeForm>();
 
-  const [answer, setAnswer] = useState<MentorProfileBuilderData>({
+  const [answer, setAnswer] = useState<StudentProfileBuilderData>({
     QuestionOne: "",
     QuestionTwo: "",
     QuestionThree: { country: "", city: "" },
     QuestionFour: "other",
     QuestionFive: "",
-    QuestionSix: { yes_no: "no", yoe: "" },
+    QuestionSix: "no",
     QuestionSeven: "no",
     QuestionEight: { email: "", phone: "" },
-    QuestionNine: "",
-    QuestionTen: "",
+    QuestionNine: "computer",
   });
 
-  const handleMentorProfileTypeformSubmit: React.FormEventHandler<HTMLFormElement> =
+  const handleStuProfileTypeformSubmit: React.FormEventHandler<HTMLFormElement> =
     (event) => {
       event.preventDefault();
 
@@ -57,24 +54,17 @@ const MentorProfileBuilderTypeform = () => {
         answer.QuestionThree.city !== "" &&
         answer.QuestionFour !== "" &&
         answer.QuestionFive !== "" &&
+        answer.QuestionSix !== "" &&
         answer.QuestionSeven !== "" &&
         answer.QuestionEight.email !== "" &&
         answer.QuestionEight.phone !== "" &&
-        answer.QuestionNine !== "" &&
-        answer.QuestionTen !== ""
-      ) {
-        let canProceed = false;
-        if (state.isProfMentorYes && answer.QuestionSix.yoe !== "")
-          canProceed = true;
-        
-        if (state.isProfMentorYes === false) canProceed = true;
-
-        if (canProceed) console.log(answer);
-      }
+        answer.QuestionNine !== ""
+      )
+        console.log(answer);
     };
 
   const handleNextBtnOnClick = () => {
-    if (typeformRef.current.state.current === 9) {
+    if (typeformRef.current.state.current === 8) {
       dispatch({ type: "showSubmitReviewText", payload: true });
     } else {
       if (state.showSubmitReviewText) {
@@ -90,11 +80,11 @@ const MentorProfileBuilderTypeform = () => {
   };
 
   return (
-    <div className="MentorProfileQuestionContainer">
+    <div className="StuProfileQuestionContainer">
       <Form
         noValidate
         validated={state.validated}
-        className="MentorProfileBuilderForm"
+        className="StuProfileBuilderForm"
         onSubmit={(event) => event.preventDefault()}
       >
         {state.showSubmitReviewText && (
@@ -115,7 +105,7 @@ const MentorProfileBuilderTypeform = () => {
           backBtnText="Previous"
           nextBtnOnClick={handleNextBtnOnClick}
           backBtnOnClick={handleBackBtnOnClick}
-          onSubmit={handleMentorProfileTypeformSubmit}
+          onSubmit={handleStuProfileTypeformSubmit}
         >
           <QuestionOne
             key="QuestionOne"
@@ -180,17 +170,10 @@ const MentorProfileBuilderTypeform = () => {
             state={state}
             dispatch={dispatch}
           />
-          <QuestionTen
-            key="QuestionTen"
-            answer={answer}
-            setAnswer={setAnswer}
-            state={state}
-            dispatch={dispatch}
-          />
         </TypeForm>
       </Form>
     </div>
   );
 };
 
-export default MentorProfileBuilderTypeform;
+export default StuProfileBuilderTypeform;

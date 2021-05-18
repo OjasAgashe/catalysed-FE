@@ -1,17 +1,17 @@
 import React from "react";
 import { Form } from "react-bootstrap";
-import {
-  OrgProfileBuilderActionType,
-  OrgProfileBuilderData,
-  OrgProfileBuilderState,
-} from "../../types/OrganisationProfileBuilder";
 import { motion } from "framer-motion";
+import {
+  StudentProfileBuilderActionType,
+  StudentProfileBuilderData,
+  StudentProfileBuilderState,
+} from "../../types/StudentProfileBuilder";
 
 type QuestionFiveProps = {
-  answer: OrgProfileBuilderData;
-  setAnswer: React.Dispatch<React.SetStateAction<OrgProfileBuilderData>>;
-  state: OrgProfileBuilderState;
-  dispatch: React.Dispatch<OrgProfileBuilderActionType>;
+  answer: StudentProfileBuilderData;
+  setAnswer: React.Dispatch<React.SetStateAction<StudentProfileBuilderData>>;
+  state: StudentProfileBuilderState;
+  dispatch: React.Dispatch<StudentProfileBuilderActionType>;
 };
 
 const QuestionFive = ({
@@ -39,14 +39,14 @@ const QuestionFive = ({
 
   return (
     <motion.div
-      className="OrgTypeformQuestion Question"
-      initial={{ x: "-100vw" }}
+      className="StuTypeformQuestion Question"
+      initial={{ x: "100vw" }}
       animate={{ x: "0" }}
       transition={{ delay: 0.5 }}
     >
       <Form.Group className="QuestionFormGroup">
         <Form.Text className="QuestionFormText">
-          Primary language the org operates in ...
+          What languages do you speak?
         </Form.Text>
         <Form.Control
           required

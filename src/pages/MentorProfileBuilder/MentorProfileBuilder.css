@@ -2,7 +2,7 @@
   color: var(--linkedIn-code);
 }
 
-.MentorProfileGreet :is(p, h4) {
+.MentorProfileGreet h4 {
   color: var(--common-home-section-four-600);
 }
 

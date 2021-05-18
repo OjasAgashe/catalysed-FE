@@ -1,25 +1,22 @@
-export interface MentorProfileBuilderData {
+export interface StudentProfileBuilderData {
   QuestionOne: string;
   QuestionTwo: string;
   QuestionThree: { country: string; city: string };
   QuestionFour: string;
   QuestionFive: string;
-  QuestionSix: { yes_no: string; yoe: string };
+  QuestionSix: string;
   QuestionSeven: string;
   QuestionEight: { email: string; phone: string };
   QuestionNine: string;
-  QuestionTen: string;
 }
 
-export interface MentorProfileBuilderState {
+export interface StudentProfileBuilderState {
   isInvalid: boolean;
   validated: boolean;
   showSubmitReviewText: boolean;
-  isProfMentorYes: boolean;
 }
 
-export type MentorProfileBuilderActionType =
+export type StudentProfileBuilderActionType =
   | { type: "isInvalid"; payload: boolean }
   | { type: "validated"; payload: boolean }
-  | { type: "showSubmitReviewText"; payload: boolean }
-  | { type: "isProfMentorYes"; payload: boolean };
+  | { type: "showSubmitReviewText"; payload: boolean };
