@@ -1,5 +1,7 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { LOGIN } from "../../routes/Routes";
 import "./Error.css";
 
 type ErrorProps = {
@@ -9,7 +11,14 @@ type ErrorProps = {
 const Error = ({ message }: ErrorProps) => {
   return (
     <Alert variant="danger" className="FormError">
-      {message}
+      {message === "User already registered in system - Please Login" ? (
+        <>
+          User already registered in system -{" "}
+          <Link to={LOGIN}>Please Login</Link>
+        </>
+      ) : (
+        message
+      )}
     </Alert>
   );
 };

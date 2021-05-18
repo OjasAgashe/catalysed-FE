@@ -1,4 +1,4 @@
-import React, { useReducer, useRef, useState } from "react";
+import React, { useEffect, useReducer, useRef, useState } from "react";
 // @ts-ignore
 import TypeForm from "react-typeform";
 import { Form } from "react-bootstrap";
@@ -14,12 +14,15 @@ import QuestionNine from "./QuestionNine";
 import "./StuProfileBuilderTypeform.css";
 import { stuProfileBuilderReducer } from "../../reducers/stuProfileBuilderReducer";
 import { StudentProfileBuilderData } from "../../types/StudentProfileBuilder";
+import TypeformProgress from "../TypeformProgress/TypeformProgress";
 
 const StuProfileBuilderTypeform = () => {
   const [state, dispatch] = useReducer(stuProfileBuilderReducer, {
     isInvalid: false,
     validated: false,
     showSubmitReviewText: false,
+    now: 0,
+    radioQuestion: 0,
   });
 
   const typeformRef = useRef<TypeForm>();
@@ -35,6 +38,45 @@ const StuProfileBuilderTypeform = () => {
     QuestionEight: { email: "", phone: "" },
     QuestionNine: "computer",
   });
+
+  useEffect(() => {
+    let count = 0;
+    const totalComparisonValue = 11;
+
+    if (answer.QuestionOne !== "") count++;
+    if (answer.QuestionTwo !== "") count++;
+    if (answer.QuestionThree.country !== "") count++;
+    if (answer.QuestionThree.city !== "") count++;
+    if (answer.QuestionFive !== "") count++;
+    if (answer.QuestionEight.email !== "") count++;
+    if (answer.QuestionEight.phone !== "") count++;
+
+    switch (state.radioQuestion) {
+      case 7:
+        count += 4;
+        break;
+      case 5:
+        count += 3;
+        break;
+      case 4:
+        count += 2;
+        break;
+      case 2:
+        count += 1;
+        break;
+    }
+
+    dispatch({ type: "now", payload: (count * 100) / totalComparisonValue });
+  }, [
+    answer.QuestionEight.email,
+    answer.QuestionEight.phone,
+    answer.QuestionFive,
+    answer.QuestionOne,
+    answer.QuestionThree.city,
+    answer.QuestionThree.country,
+    answer.QuestionTwo,
+    state.radioQuestion,
+  ]);
 
   const handleStuProfileTypeformSubmit: React.FormEventHandler<HTMLFormElement> =
     (event) => {
@@ -64,7 +106,12 @@ const StuProfileBuilderTypeform = () => {
     };
 
   const handleNextBtnOnClick = () => {
-    if (typeformRef.current.state.current === 8) {
+    let value = typeformRef.current.state.current;
+    if ([2, 4, 5, 7].includes(value) && value > state.radioQuestion) {
+      dispatch({ type: "radioQuestion", payload: value });
+    }
+
+    if (value === 8) {
       dispatch({ type: "showSubmitReviewText", payload: true });
     } else {
       if (state.showSubmitReviewText) {
@@ -171,6 +218,8 @@ const StuProfileBuilderTypeform = () => {
             dispatch={dispatch}
           />
         </TypeForm>
+
+        <TypeformProgress now={state.now} />
       </Form>
     </div>
   );

@@ -14,9 +14,13 @@ export interface StudentProfileBuilderState {
   isInvalid: boolean;
   validated: boolean;
   showSubmitReviewText: boolean;
+  now: number;
+  radioQuestion: number;
 }
 
 export type StudentProfileBuilderActionType =
   | { type: "isInvalid"; payload: boolean }
   | { type: "validated"; payload: boolean }
-  | { type: "showSubmitReviewText"; payload: boolean };
+  | { type: "showSubmitReviewText"; payload: boolean }
+  | { type: "now"; payload: number }
+  | { type: "radioQuestion"; payload: number };

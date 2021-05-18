@@ -10,7 +10,7 @@ const TypeformProgress = ({ now }: TypeformProgressProps) => {
   return (
     <div className="TypeformProgressContainer">
       <h5>completed</h5>
-      <ProgressBar className="TypeformProgressBar" animated striped variant="success" now={40} />
+      <ProgressBar className="TypeformProgressBar" animated striped variant="success" now={now} />
     </div>
   );
 };

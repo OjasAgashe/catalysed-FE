@@ -1,4 +1,4 @@
-import React, { useReducer, useRef, useState } from "react";
+import React, { useEffect, useReducer, useRef, useState } from "react";
 // @ts-ignore
 import TypeForm from "react-typeform";
 import QuestionFive from "./QuestionFive";
@@ -29,6 +29,27 @@ const OrgProfileBuilderTypeform = () => {
     QuestionFour: "",
     QuestionFive: "",
   });
+
+  useEffect(() => {
+    let count = 0;
+    const totalComparisonValue = 6;
+
+    if (answer.QuestionOne !== "") count++;
+    if (answer.QuestionTwo.email !== "") count++;
+    if (answer.QuestionTwo.phone !== "") count++;
+    if (answer.QuestionThree !== "") count++;
+    if (answer.QuestionFour !== "") count++;
+    if (answer.QuestionFive !== "") count++;
+
+    dispatch({ type: "now", payload: (count * 100) / totalComparisonValue });
+  }, [
+    answer.QuestionOne,
+    answer.QuestionTwo.email,
+    answer.QuestionTwo.phone,
+    answer.QuestionThree,
+    answer.QuestionFour,
+    answer.QuestionFive,
+  ]);
 
   const handleOrgProfileTypeformSubmit: React.FormEventHandler<HTMLFormElement> =
     (event) => {
