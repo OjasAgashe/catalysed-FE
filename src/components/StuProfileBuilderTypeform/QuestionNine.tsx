@@ -20,15 +20,18 @@ const QuestionNine = ({
   state,
   dispatch,
 }: QuestionNineProps) => {
-  const handleQuestionNineChange: React.ChangeEventHandler<HTMLInputElement> =
-    (event) => {
-      if (state.validated) dispatch({ type: "validated", payload: false });
+  const handleQuestionNineChange: React.ChangeEventHandler<HTMLInputElement> = (
+    event
+  ) => {
+    if (state.validated) dispatch({ type: "validated", payload: false });
+    if (state.submitClicked)
+      dispatch({ type: "submitClicked", payload: false });
 
-      setAnswer((prevState) => ({
-        ...prevState,
-        QuestionNine: event.target.value,
-      }));
-    };
+    setAnswer((prevState) => ({
+      ...prevState,
+      primaryDevice: event.target.value,
+    }));
+  };
 
   return (
     <motion.div
@@ -44,21 +47,21 @@ const QuestionNine = ({
         <Form.Group className="DeviceRadioQuestion">
           <Form.Check type="radio" id="device-mobile">
             <Form.Check.Input
-              checked={answer.QuestionNine === "mobile"}
+              checked={answer.primaryDevice === "MOBILE"}
               onChange={handleQuestionNineChange}
               type="radio"
               name="device"
-              value="mobile"
+              value="MOBILE"
             />
             <Form.Check.Label>Mobile</Form.Check.Label>
           </Form.Check>
           <Form.Check type="radio" id="device-computer">
             <Form.Check.Input
-              checked={answer.QuestionNine === "computer"}
+              checked={answer.primaryDevice === "COMPUTER"}
               onChange={handleQuestionNineChange}
               type="radio"
               name="device"
-              value="computer"
+              value="COMPUTER"
             />
             <Form.Check.Label>Computer</Form.Check.Label>
           </Form.Check>

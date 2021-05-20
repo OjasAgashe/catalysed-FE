@@ -24,6 +24,8 @@ const QuestionOne = ({
     event
   ) => {
     if (state.validated) dispatch({ type: "validated", payload: false });
+    if (state.submitClicked)
+      dispatch({ type: "submitClicked", payload: false });
 
     if (event.target.value.length > 2) {
       return;
@@ -31,7 +33,9 @@ const QuestionOne = ({
 
     setAnswer((prevState) => ({
       ...prevState,
-      QuestionOne: event.target.value.toString(),
+      birthYear: (
+        new Date().getFullYear() - parseInt(event.target.value)
+      ).toString(),
     }));
   };
 
@@ -50,7 +54,7 @@ const QuestionOne = ({
           pattern="[0-9]{2}"
           min={18}
           placeholder="YY"
-          value={answer.QuestionOne}
+          value={new Date().getFullYear() - parseInt(answer.birthYear)}
           onChange={handleQuestionOneChange}
         />
         <Form.Control.Feedback type="invalid">

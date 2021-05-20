@@ -1,13 +1,16 @@
 export interface StudentProfileBuilderData {
-  QuestionOne: string;
-  QuestionTwo: string;
-  QuestionThree: { country: string; city: string };
-  QuestionFour: string;
-  QuestionFive: string;
-  QuestionSix: string;
-  QuestionSeven: string;
-  QuestionEight: { email: string; phone: string };
-  QuestionNine: string;
+  birthYear: string;
+  organization: string;
+  location: { country: string; region: string };
+  gender: string;
+  primaryLanguage: string;
+  previouslyMentored: boolean;
+  stableConnection: boolean;
+  contactDetails: {
+    email: string;
+    phone: { countryName: string; countryCode: string; number: string };
+  };
+  primaryDevice: string;
 }
 
 export interface StudentProfileBuilderState {
@@ -16,6 +19,7 @@ export interface StudentProfileBuilderState {
   showSubmitReviewText: boolean;
   now: number;
   radioQuestion: number;
+  submitClicked: boolean;
 }
 
 export type StudentProfileBuilderActionType =
@@ -23,4 +27,5 @@ export type StudentProfileBuilderActionType =
   | { type: "validated"; payload: boolean }
   | { type: "showSubmitReviewText"; payload: boolean }
   | { type: "now"; payload: number }
-  | { type: "radioQuestion"; payload: number };
+  | { type: "radioQuestion"; payload: number }
+  | { type: "submitClicked"; payload: boolean };

@@ -24,6 +24,8 @@ const QuestionNine = ({
     event
   ) => {
     if (state.validated) dispatch({ type: "validated", payload: false });
+    if (state.submitClicked)
+      dispatch({ type: "submitClicked", payload: false });
 
     const onlyAlphabets = /^[a-zA-Z]*$/;
 
@@ -33,7 +35,7 @@ const QuestionNine = ({
 
     setAnswer((prevState) => ({
       ...prevState,
-      QuestionNine: event.target.value,
+      qualification: event.target.value,
     }));
   };
 
@@ -53,7 +55,7 @@ const QuestionNine = ({
           className="QuestionFormControl"
           type="text"
           placeholder="Type..."
-          value={answer.QuestionNine}
+          value={answer.qualification}
           onChange={handleQuestionNineChange}
         />
         <Form.Control.Feedback type="invalid">

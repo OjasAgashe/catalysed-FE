@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineDoubleRight } from "react-icons/ai";
 import StuProfileBuilderTypeform from "../../components/StuProfileBuilderTypeform/StuProfileBuilderTypeform";
 import "./StuProfileBuilder.css";
@@ -28,6 +28,10 @@ const Greet = ({ setShowGreet }: GreetProps) => {
 
 const StuProfileBuilder = () => {
   const [showGreet, setShowGreet] = useState<boolean>(true);
+
+  useEffect(() => {
+    document.title = "Student Profile Builder | CatalysEd";
+  });
 
   return (
     <div className="StuProfileBuilder">

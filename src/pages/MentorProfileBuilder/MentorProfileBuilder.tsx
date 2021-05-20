@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineDoubleRight } from "react-icons/ai";
 import MentorProfileBuilderTypeform from "../../components/MentorProfileBuilderTypeform/MentorProfileBuilderTypeform";
 import "./MentorProfileBuilder.css";
@@ -30,6 +30,10 @@ const Greet = ({ setShowGreet }: GreetProps) => {
 
 const MentorProfileBuilder = () => {
   const [showGreet, setShowGreet] = useState<boolean>(true);
+
+  useEffect(() => {
+    document.title = "Mentor Profile Builder | CatalysEd";
+  });
 
   return (
     <div className="MentorProfileBuilder">

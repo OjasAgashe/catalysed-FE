@@ -16,6 +16,13 @@ type QuestionEightProps = {
   dispatch: React.Dispatch<StudentProfileBuilderActionType>;
 };
 
+type CountryData = {
+  name: string;
+  countryCode: string;
+  dialCode: string;
+  format: string;
+};
+
 const QuestionEight = ({
   answer,
   setAnswer,
@@ -26,24 +33,40 @@ const QuestionEight = ({
     (event) => {
       if (state.validated) dispatch({ type: "validated", payload: false });
       if (state.isInvalid) dispatch({ type: "isInvalid", payload: false });
+      if (state.submitClicked)
+        dispatch({ type: "submitClicked", payload: false });
 
       setAnswer((prevState) => ({
         ...prevState,
-        QuestionEight: {
-          ...prevState.QuestionEight,
+        contactDetails: {
+          ...prevState.contactDetails,
           [event.target.name]: event.target.value,
         },
       }));
     };
 
-  const handlePhoneInputChange = (phone: string) => {
+  const handlePhoneInputChange = (
+    value: string,
+    country: {} | CountryData,
+    event: React.ChangeEvent<HTMLInputElement>,
+    formattedValue: string
+  ) => {
     if (state.validated) dispatch({ type: "validated", payload: false });
     if (state.isInvalid) dispatch({ type: "isInvalid", payload: false });
+    if (state.submitClicked)
+      dispatch({ type: "submitClicked", payload: false });
+
+    const countryInfo = country as CountryData;
+    const phone = {
+      countryName: countryInfo.name,
+      countryCode: countryInfo.dialCode,
+      number: formattedValue.replace(`+${countryInfo.dialCode} `, ""),
+    };
 
     setAnswer((prevState) => ({
       ...prevState,
-      QuestionEight: {
-        ...prevState.QuestionEight,
+      contactDetails: {
+        ...prevState.contactDetails,
         phone,
       },
     }));
@@ -67,7 +90,7 @@ const QuestionEight = ({
             type="email"
             name="email"
             placeholder="name@example.com"
-            value={answer.QuestionEight.email}
+            value={answer.contactDetails.email}
             onChange={handleQuestionEightChange}
             isInvalid={state.isInvalid}
           />
@@ -76,17 +99,22 @@ const QuestionEight = ({
           <PhoneInput
             country={"in"}
             placeholder=""
-            enableSearch={true}
-            value={answer.QuestionEight.phone}
-            onChange={handlePhoneInputChange}
+            value={
+              answer.contactDetails.phone.countryCode +
+              " " +
+              answer.contactDetails.phone.number
+            }
+            onChange={(value, country, event, formattedValue) =>
+              handlePhoneInputChange(value, country, event, formattedValue)
+            }
             inputProps={{
               name: "phone",
-              required:true,
+              required: true,
               className: "form-control",
             }}
           />
           <Form.Control.Feedback type="invalid">
-              Required fields, enter valid Email and Number.
+            Required fields, enter valid Email and Number.
           </Form.Control.Feedback>
         </Form.Group>
       </motion.div>

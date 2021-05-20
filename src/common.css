@@ -186,6 +186,10 @@
   margin-right: 2rem;
 }
 
+.DisplayNoneBackBtn {
+  display: none;
+}
+
 :is(.TypeFormBackBtn, .TypeFormNextBtn, .TypeFormSubmitBtn):focus {
   border: none !important;
 }
@@ -226,6 +230,10 @@
 
 .react-tel-input .special-label {
   display: none !important;
+}
+
+.react-tel-input .country-list {
+  max-height: 110px !important;
 }
 
 @media screen and (min-width: 525px) {
@@ -325,4 +333,27 @@ input[type="number"] {
 :is(.GenderRadioQuestion, .InternetRadioQuestion, .ProfMentorRadioQuestion, .YOERadioQuestion, .DeviceRadioQuestion)
   :is(.form-check-input, .form-check-label) {
   cursor: pointer;
+}
+
+/* language selector */
+
+.LanguageSelector {
+  cursor: pointer !important;
+}
+
+/* country region selector */
+
+.CountryDropdown,
+.RegionDropdown {
+  display: block !important;
+  cursor: pointer !important;
+}
+
+.RegionDropdown {
+  margin: 0 auto;
+  margin-top: 1.5rem;
+}
+
+.LocationDropdown {
+  color: var(--invalid-feedback) !important;
 }

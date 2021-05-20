@@ -24,6 +24,8 @@ const QuestionTwo = ({
     event
   ) => {
     if (state.validated) dispatch({ type: "validated", payload: false });
+    if (state.submitClicked)
+      dispatch({ type: "submitClicked", payload: false });
 
     const onlyAlphabets = /^[a-zA-Z]*$/;
 
@@ -33,7 +35,7 @@ const QuestionTwo = ({
 
     setAnswer((prevState) => ({
       ...prevState,
-      QuestionTwo: event.target.value,
+      organization: event.target.value,
     }));
   };
 
@@ -53,7 +55,7 @@ const QuestionTwo = ({
           className="QuestionFormControl"
           type="text"
           placeholder="Type your organisation/school..."
-          value={answer.QuestionTwo}
+          value={answer.organization}
           onChange={handleQuestionTwoChange}
         />
         <Form.Control.Feedback type="invalid">

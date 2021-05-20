@@ -24,10 +24,12 @@ const QuestionFour = ({
     event
   ) => {
     if (state.validated) dispatch({ type: "validated", payload: false });
+    if (state.submitClicked)
+      dispatch({ type: "submitClicked", payload: false });
 
     setAnswer((prevState) => ({
       ...prevState,
-      QuestionFour: event.target.value,
+      gender: event.target.value,
     }));
   };
 
@@ -45,31 +47,31 @@ const QuestionFour = ({
         <Form.Group className="GenderRadioQuestion">
           <Form.Check type="radio" id="gender-male">
             <Form.Check.Input
-              checked={answer.QuestionFour === "male"}
+              checked={answer.gender === "MALE"}
               onChange={handleQuestionFourChange}
               type="radio"
               name="gender"
-              value="male"
+              value="MALE"
             />
             <Form.Check.Label>male</Form.Check.Label>
           </Form.Check>
           <Form.Check type="radio" id="gender-female">
             <Form.Check.Input
-              checked={answer.QuestionFour === "female"}
+              checked={answer.gender === "FEMALE"}
               onChange={handleQuestionFourChange}
               type="radio"
               name="gender"
-              value="female"
+              value="FEMALE"
             />
             <Form.Check.Label>female</Form.Check.Label>
           </Form.Check>
           <Form.Check type="radio" id="gender-other">
             <Form.Check.Input
-              checked={answer.QuestionFour === "other"}
+              checked={answer.gender === "OTHER"}
               onChange={handleQuestionFourChange}
               type="radio"
               name="gender"
-              value="other"
+              value="OTHER"
             />
             <Form.Check.Label>other</Form.Check.Label>
           </Form.Check>

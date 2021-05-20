@@ -1,14 +1,17 @@
 export interface MentorProfileBuilderData {
-  QuestionOne: string;
-  QuestionTwo: string;
-  QuestionThree: { country: string; city: string };
-  QuestionFour: string;
-  QuestionFive: string;
+  birthYear: string;
+  organization: string;
+  location: { country: string; region: string };
+  gender: string;
+  primaryLanguage: string;
   QuestionSix: { yes_no: string; yoe: string };
-  QuestionSeven: string;
-  QuestionEight: { email: string; phone: string };
-  QuestionNine: string;
-  QuestionTen: string;
+  stableConnection: boolean;
+  contactDetails: {
+    email: string;
+    phone: { countryName: string; countryCode: string; number: string };
+  };
+  qualification: string;
+  profession: string;
 }
 
 export interface MentorProfileBuilderState {
@@ -18,6 +21,7 @@ export interface MentorProfileBuilderState {
   isProfMentorYes: boolean;
   now: number;
   radioQuestion: number;
+  submitClicked: boolean;
 }
 
 export type MentorProfileBuilderActionType =
@@ -26,4 +30,5 @@ export type MentorProfileBuilderActionType =
   | { type: "showSubmitReviewText"; payload: boolean }
   | { type: "isProfMentorYes"; payload: boolean }
   | { type: "now"; payload: number }
-  | { type: "radioQuestion"; payload: number };
+  | { type: "radioQuestion"; payload: number }
+  | { type: "submitClicked"; payload: boolean };

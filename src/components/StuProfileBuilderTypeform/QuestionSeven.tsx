@@ -23,10 +23,14 @@ const QuestionSeven = ({
   const handleQuestionSevenChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
       if (state.validated) dispatch({ type: "validated", payload: false });
+      if (state.submitClicked)
+        dispatch({ type: "submitClicked", payload: false });
+
+      const value = event.target.value === "true" ? true : false;
 
       setAnswer((prevState) => ({
         ...prevState,
-        QuestionSeven: event.target.value,
+        stableConnection: value,
       }));
     };
 
@@ -44,21 +48,21 @@ const QuestionSeven = ({
         <Form.Group className="InternetRadioQuestion">
           <Form.Check type="radio" id="internet-yes">
             <Form.Check.Input
-              checked={answer.QuestionSeven === "yes"}
+              checked={answer.stableConnection === true}
               onChange={handleQuestionSevenChange}
               type="radio"
               name="internet"
-              value="yes"
+              value="true"
             />
             <Form.Check.Label>yes</Form.Check.Label>
           </Form.Check>
           <Form.Check type="radio" id="internet-no">
             <Form.Check.Input
-              checked={answer.QuestionSeven === "no"}
+              checked={answer.stableConnection === false}
               onChange={handleQuestionSevenChange}
               type="radio"
               name="internet"
-              value="no"
+              value="false"
             />
             <Form.Check.Label>no</Form.Check.Label>
           </Form.Check>

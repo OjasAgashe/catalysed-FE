@@ -3,25 +3,28 @@ import { Form } from "react-bootstrap";
 import {
   OrgProfileBuilderActionType,
   OrgProfileBuilderData,
+  OrgProfileBuilderState,
 } from "../../types/OrganisationProfileBuilder";
 import { motion } from "framer-motion";
 
 type QuestionThreeProps = {
   answer: OrgProfileBuilderData;
   setAnswer: React.Dispatch<React.SetStateAction<OrgProfileBuilderData>>;
-  validated: boolean;
+  state: OrgProfileBuilderState;
   dispatch: React.Dispatch<OrgProfileBuilderActionType>;
 };
 
 const QuestionThree = ({
   answer,
   setAnswer,
-  validated,
+  state,
   dispatch,
 }: QuestionThreeProps) => {
   const handleQuestionThreeChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
-      if (validated) dispatch({ type: "validated", payload: false });
+      if (state.validated) dispatch({ type: "validated", payload: false });
+      if (state.submitClicked)
+        dispatch({ type: "submitClicked", payload: false });
 
       if (event.target.value.length > 4) {
         return;
@@ -29,7 +32,7 @@ const QuestionThree = ({
 
       setAnswer((prevState) => ({
         ...prevState,
-        QuestionThree: event.target.value.toString(),
+        yearOfInception: event.target.value.toString(),
       }));
     };
 
@@ -51,7 +54,7 @@ const QuestionThree = ({
           placeholder="YYYY"
           pattern="[0-9]{4}"
           min={1800}
-          value={answer.QuestionThree}
+          value={answer.yearOfInception}
           onChange={handleQuestionThreeChange}
         />
         <Form.Control.Feedback type="invalid">

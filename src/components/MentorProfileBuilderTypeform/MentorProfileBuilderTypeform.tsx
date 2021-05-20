@@ -25,36 +25,40 @@ const MentorProfileBuilderTypeform = () => {
     isProfMentorYes: false,
     now: 0,
     radioQuestion: 0,
+    submitClicked: false,
   });
 
   const typeformRef = useRef<TypeForm>();
 
   const [answer, setAnswer] = useState<MentorProfileBuilderData>({
-    QuestionOne: "",
-    QuestionTwo: "",
-    QuestionThree: { country: "", city: "" },
-    QuestionFour: "other",
-    QuestionFive: "",
+    birthYear: "",
+    organization: "",
+    location: { country: "", region: "" },
+    gender: "OTHER",
+    primaryLanguage: "",
     QuestionSix: { yes_no: "no", yoe: "" },
-    QuestionSeven: "no",
-    QuestionEight: { email: "", phone: "" },
-    QuestionNine: "",
-    QuestionTen: "",
+    stableConnection: false,
+    contactDetails: {
+      email: "",
+      phone: { countryName: "", countryCode: "", number: "" },
+    },
+    qualification: "",
+    profession: "",
   });
 
   useEffect(() => {
     let count = 0;
     const totalComparisonValue = 12;
 
-    if (answer.QuestionOne !== "") count++;
-    if (answer.QuestionTwo !== "") count++;
-    if (answer.QuestionThree.country !== "") count++;
-    if (answer.QuestionThree.city !== "") count++;
-    if (answer.QuestionFive !== "") count++;
-    if (answer.QuestionEight.email !== "") count++;
-    if (answer.QuestionEight.phone !== "") count++;
-    if (answer.QuestionNine !== "") count++;
-    if (answer.QuestionTen !== "") count++;
+    if (answer.birthYear !== "") count++;
+    if (answer.organization !== "") count++;
+    if (answer.location.country !== "") count++;
+    if (answer.location.region !== "") count++;
+    if (answer.primaryLanguage !== "") count++;
+    if (answer.contactDetails.email !== "") count++;
+    if (answer.contactDetails.phone.number !== "") count++;
+    if (answer.qualification !== "") count++;
+    if (answer.profession !== "") count++;
 
     switch (state.radioQuestion) {
       case 5:
@@ -70,15 +74,15 @@ const MentorProfileBuilderTypeform = () => {
 
     dispatch({ type: "now", payload: (count * 100) / totalComparisonValue });
   }, [
-    answer.QuestionEight.email,
-    answer.QuestionEight.phone,
-    answer.QuestionFive,
-    answer.QuestionNine,
-    answer.QuestionOne,
-    answer.QuestionTen,
-    answer.QuestionThree.city,
-    answer.QuestionThree.country,
-    answer.QuestionTwo,
+    answer.contactDetails.email,
+    answer.contactDetails.phone.number,
+    answer.primaryLanguage,
+    answer.qualification,
+    answer.birthYear,
+    answer.profession,
+    answer.location.region,
+    answer.location.country,
+    answer.organization,
     state.radioQuestion,
   ]);
 
@@ -88,23 +92,24 @@ const MentorProfileBuilderTypeform = () => {
 
       dispatch({ type: "validated", payload: true });
 
-      if (answer.QuestionEight.phone.length <= 4) {
+      if ([answer.location.country, answer.location.region].includes(""))
+        dispatch({ type: "submitClicked", payload: true });
+
+      if (answer.contactDetails.phone.number.length <= 4) {
         dispatch({ type: "isInvalid", payload: true });
         return;
       }
 
       if (
-        answer.QuestionOne !== "" &&
-        answer.QuestionTwo !== "" &&
-        answer.QuestionThree.country !== "" &&
-        answer.QuestionThree.city !== "" &&
-        answer.QuestionFour !== "" &&
-        answer.QuestionFive !== "" &&
-        answer.QuestionSeven !== "" &&
-        answer.QuestionEight.email !== "" &&
-        answer.QuestionEight.phone !== "" &&
-        answer.QuestionNine !== "" &&
-        answer.QuestionTen !== ""
+        answer.birthYear !== "" &&
+        answer.organization !== "" &&
+        answer.location.country !== "" &&
+        answer.location.region !== "" &&
+        answer.primaryLanguage !== "" &&
+        answer.contactDetails.email !== "" &&
+        answer.contactDetails.phone.number !== "" &&
+        answer.qualification !== "" &&
+        answer.profession !== ""
       ) {
         let canProceed = false;
         if (state.isProfMentorYes && answer.QuestionSix.yoe !== "")
@@ -157,7 +162,11 @@ const MentorProfileBuilderTypeform = () => {
         <TypeForm
           ref={typeformRef}
           nextBtnClass="TypeFormNextBtn"
-          backBtnClass="TypeFormBackBtn"
+          backBtnClass={
+            state.showSubmitReviewText
+              ? "DisplayNoneBackBtn"
+              : "TypeFormBackBtn"
+          }
           submitBtnClass="TypeFormSubmitBtn"
           submitBtnText="Submit"
           backBtnText="Previous"

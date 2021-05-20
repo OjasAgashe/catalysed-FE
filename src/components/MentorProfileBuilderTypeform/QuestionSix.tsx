@@ -24,6 +24,8 @@ const QuestionSix = ({
     event
   ) => {
     if (state.validated) dispatch({ type: "validated", payload: false });
+    if (state.submitClicked)
+      dispatch({ type: "submitClicked", payload: false });
 
     if (event.target.name === "yes_no" && event.target.value === "yes") {
       dispatch({ type: "isProfMentorYes", payload: true });

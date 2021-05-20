@@ -3,38 +3,53 @@ import { Form } from "react-bootstrap";
 import {
   OrgProfileBuilderActionType,
   OrgProfileBuilderData,
+  OrgProfileBuilderState,
 } from "../../types/OrganisationProfileBuilder";
 import { motion } from "framer-motion";
+import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 
 type QuestionFourProps = {
   answer: OrgProfileBuilderData;
   setAnswer: React.Dispatch<React.SetStateAction<OrgProfileBuilderData>>;
-  validated: boolean;
+  state: OrgProfileBuilderState;
   dispatch: React.Dispatch<OrgProfileBuilderActionType>;
 };
 
 const QuestionFour = ({
   answer,
   setAnswer,
-  validated,
+  state,
   dispatch,
 }: QuestionFourProps) => {
-  const handleQuestionFourChange: React.ChangeEventHandler<HTMLInputElement> = (
-    event
-  ) => {
-    if (validated) dispatch({ type: "validated", payload: false });
+  const handleQuestionFourCountryChange: React.ChangeEventHandler<HTMLInputElement> =
+    (value) => {
+      if (state.validated) dispatch({ type: "validated", payload: false });
+      if (state.submitClicked)
+        dispatch({ type: "submitClicked", payload: false });
 
-    const onlyAlphabets = /^[a-zA-Z]*$/;
+      setAnswer((prevState) => ({
+        ...prevState,
+        location: {
+          ...prevState.location,
+          country: value as unknown as string,
+        },
+      }));
+    };
 
-    if (onlyAlphabets.test(event.target.value) === false) {
-      return;
-    }
+  const handleQuestionFourRegionChange: React.ChangeEventHandler<HTMLInputElement> =
+    (value) => {
+      if (state.validated) dispatch({ type: "validated", payload: false });
+      if (state.submitClicked)
+        dispatch({ type: "submitClicked", payload: false });
 
-    setAnswer((prevState) => ({
-      ...prevState,
-      QuestionFour: event.target.value,
-    }));
-  };
+      setAnswer((prevState) => ({
+        ...prevState,
+        location: {
+          ...prevState.location,
+          region: value as unknown as string,
+        },
+      }));
+    };
 
   return (
     <motion.div
@@ -46,16 +61,32 @@ const QuestionFour = ({
       <Form.Group className="QuestionFormGroup">
         <Form.Text className="QuestionFormText">Where are you based?</Form.Text>
         <Form.Control
-          required
-          className="QuestionFormControl"
-          type="text"
-          placeholder="Type..."
-          value={answer.QuestionFour}
-          onChange={handleQuestionFourChange}
+          className="QuestionFormControl CountryDropdown"
+          as={CountryDropdown}
+          value={answer.location.country}
+          onChange={handleQuestionFourCountryChange}
         />
-        <Form.Control.Feedback type="invalid">
-          Required field, only Alphabets.
-        </Form.Control.Feedback>
+        {state.submitClicked && answer.location.country === "" && (
+          <Form.Text className="LocationDropdown">
+            Required field, select One Option.
+          </Form.Text>
+        )}
+        {answer.location.country && (
+          <Form.Control
+            className="QuestionFormControl RegionDropdown"
+            country={answer.location.country}
+            value={answer.location.region}
+            onChange={handleQuestionFourRegionChange}
+            as={RegionDropdown}
+          />
+        )}
+        {answer.location.country &&
+          state.submitClicked &&
+          answer.location.region === "" && (
+            <Form.Text className="LocationDropdown">
+              Required field, select One Option.
+            </Form.Text>
+          )}
       </Form.Group>
     </motion.div>
   );

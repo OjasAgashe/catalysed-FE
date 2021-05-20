@@ -16,6 +16,13 @@ type QuestionTwoProps = {
   dispatch: React.Dispatch<OrgProfileBuilderActionType>;
 };
 
+type CountryData = {
+  name: string;
+  countryCode: string;
+  dialCode: string;
+  format: string;
+};
+
 const QuestionTwo = ({
   answer,
   setAnswer,
@@ -27,24 +34,38 @@ const QuestionTwo = ({
   ) => {
     if (state.validated) dispatch({ type: "validated", payload: false });
     if (state.isInvalid) dispatch({ type: "isInvalid", payload: false });
+    if (state.submitClicked)
+      dispatch({ type: "submitClicked", payload: false });
 
     setAnswer((prevState) => ({
       ...prevState,
-      QuestionTwo: {
-        ...prevState.QuestionTwo,
+      contactDetails: {
+        ...prevState.contactDetails,
         [event.target.name]: event.target.value,
       },
     }));
   };
 
-  const handlePhoneInputChange = (phone: string) => {
+  const handlePhoneInputChange = (
+    value: string,
+    country: {} | CountryData,
+    event: React.ChangeEvent<HTMLInputElement>,
+    formattedValue: string
+  ) => {
     if (state.validated) dispatch({ type: "validated", payload: false });
     if (state.isInvalid) dispatch({ type: "isInvalid", payload: false });
 
+    const countryInfo = country as CountryData;
+    const phone = {
+      countryName: countryInfo.name,
+      countryCode: countryInfo.dialCode,
+      number: formattedValue.replace(`+${countryInfo.dialCode} `, ""),
+    };
+
     setAnswer((prevState) => ({
       ...prevState,
-      QuestionTwo: {
-        ...prevState.QuestionTwo,
+      contactDetails: {
+        ...prevState.contactDetails,
         phone,
       },
     }));
@@ -67,7 +88,7 @@ const QuestionTwo = ({
           type="email"
           name="email"
           placeholder="name@example.com"
-          value={answer.QuestionTwo.email}
+          value={answer.contactDetails.email}
           onChange={handleQuestionTwoChange}
           isInvalid={state.isInvalid}
         />
@@ -76,9 +97,14 @@ const QuestionTwo = ({
         <PhoneInput
           country={"in"}
           placeholder=""
-          enableSearch={true}
-          value={answer.QuestionTwo.phone}
-          onChange={handlePhoneInputChange}
+          value={
+            answer.contactDetails.phone.countryCode +
+            " " +
+            answer.contactDetails.phone.number
+          }
+          onChange={(value, country, event, formattedValue) =>
+            handlePhoneInputChange(value, country, event, formattedValue)
+          }
           inputProps={{
             name: "phone",
             required: true,

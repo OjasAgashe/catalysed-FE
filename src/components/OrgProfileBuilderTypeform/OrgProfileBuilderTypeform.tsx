@@ -18,37 +18,43 @@ const OrgProfileBuilderTypeform = () => {
     validated: false,
     showSubmitReviewText: false,
     now: 0,
+    submitClicked: false,
   });
 
   const typeformRef = useRef<TypeForm>();
 
   const [answer, setAnswer] = useState<OrgProfileBuilderData>({
-    QuestionOne: "",
-    QuestionTwo: { email: "", phone: "" },
-    QuestionThree: "",
-    QuestionFour: "",
-    QuestionFive: "",
+    workDescription: "",
+    contactDetails: {
+      email: "",
+      phone: { countryName: "", countryCode: "", number: "" },
+    },
+    yearOfInception: "",
+    location: { country: "", region: "" },
+    primaryLanguage: "",
   });
 
   useEffect(() => {
     let count = 0;
-    const totalComparisonValue = 6;
+    const totalComparisonValue = 7;
 
-    if (answer.QuestionOne !== "") count++;
-    if (answer.QuestionTwo.email !== "") count++;
-    if (answer.QuestionTwo.phone !== "") count++;
-    if (answer.QuestionThree !== "") count++;
-    if (answer.QuestionFour !== "") count++;
-    if (answer.QuestionFive !== "") count++;
+    if (answer.workDescription !== "") count++;
+    if (answer.contactDetails.email !== "") count++;
+    if (answer.contactDetails.phone.number !== "") count++;
+    if (answer.yearOfInception !== "") count++;
+    if (answer.location.country !== "") count++;
+    if (answer.location.region !== "") count++;
+    if (answer.primaryLanguage !== "") count++;
 
     dispatch({ type: "now", payload: (count * 100) / totalComparisonValue });
   }, [
-    answer.QuestionOne,
-    answer.QuestionTwo.email,
-    answer.QuestionTwo.phone,
-    answer.QuestionThree,
-    answer.QuestionFour,
-    answer.QuestionFive,
+    answer.workDescription,
+    answer.contactDetails.email,
+    answer.contactDetails.phone.number,
+    answer.yearOfInception,
+    answer.location.region,
+    answer.location.country,
+    answer.primaryLanguage,
   ]);
 
   const handleOrgProfileTypeformSubmit: React.FormEventHandler<HTMLFormElement> =
@@ -57,18 +63,22 @@ const OrgProfileBuilderTypeform = () => {
 
       dispatch({ type: "validated", payload: true });
 
-      if (answer.QuestionTwo.phone.length <= 4) {
+      if ([answer.location.country, answer.location.region].includes(""))
+        dispatch({ type: "submitClicked", payload: true });
+
+      if (answer.contactDetails.phone.number.length <= 4) {
         dispatch({ type: "isInvalid", payload: true });
         return;
       }
 
       if (
-        answer.QuestionOne !== "" &&
-        answer.QuestionTwo.email !== "" &&
-        answer.QuestionTwo.phone !== "" &&
-        answer.QuestionThree !== "" &&
-        answer.QuestionFour !== "" &&
-        answer.QuestionFive !== ""
+        answer.workDescription !== "" &&
+        answer.contactDetails.email !== "" &&
+        answer.contactDetails.phone.number !== "" &&
+        answer.yearOfInception !== "" &&
+        answer.location.country !== "" &&
+        answer.location.region !== "" &&
+        answer.primaryLanguage !== ""
       )
         console.log(answer);
     };
@@ -111,7 +121,11 @@ const OrgProfileBuilderTypeform = () => {
         <TypeForm
           ref={typeformRef}
           nextBtnClass="TypeFormNextBtn"
-          backBtnClass="TypeFormBackBtn"
+          backBtnClass={
+            state.showSubmitReviewText
+              ? "DisplayNoneBackBtn"
+              : "TypeFormBackBtn"
+          }
           submitBtnClass="TypeFormSubmitBtn"
           submitBtnText="Submit"
           backBtnText="Previous"
@@ -123,7 +137,7 @@ const OrgProfileBuilderTypeform = () => {
             key="QuestionOne"
             answer={answer}
             setAnswer={setAnswer}
-            validated={state.validated}
+            state={state}
             dispatch={dispatch}
           />
           <QuestionTwo
@@ -137,14 +151,14 @@ const OrgProfileBuilderTypeform = () => {
             key="QuestionThree"
             answer={answer}
             setAnswer={setAnswer}
-            validated={state.validated}
+            state={state}
             dispatch={dispatch}
           />
           <QuestionFour
             key="QusetionFour"
             answer={answer}
             setAnswer={setAnswer}
-            validated={state.validated}
+            state={state}
             dispatch={dispatch}
           />
           <QuestionFive

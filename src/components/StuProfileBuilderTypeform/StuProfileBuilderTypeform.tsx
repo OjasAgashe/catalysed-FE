@@ -23,33 +23,37 @@ const StuProfileBuilderTypeform = () => {
     showSubmitReviewText: false,
     now: 0,
     radioQuestion: 0,
+    submitClicked: false,
   });
 
   const typeformRef = useRef<TypeForm>();
 
   const [answer, setAnswer] = useState<StudentProfileBuilderData>({
-    QuestionOne: "",
-    QuestionTwo: "",
-    QuestionThree: { country: "", city: "" },
-    QuestionFour: "other",
-    QuestionFive: "",
-    QuestionSix: "no",
-    QuestionSeven: "no",
-    QuestionEight: { email: "", phone: "" },
-    QuestionNine: "computer",
+    birthYear: "",
+    organization: "",
+    location: { country: "", region: "" },
+    gender: "OTHER",
+    primaryLanguage: "",
+    previouslyMentored: false,
+    stableConnection: false,
+    contactDetails: {
+      email: "",
+      phone: { countryName: "", countryCode: "", number: "" },
+    },
+    primaryDevice: "COMPUTER",
   });
 
   useEffect(() => {
     let count = 0;
     const totalComparisonValue = 11;
 
-    if (answer.QuestionOne !== "") count++;
-    if (answer.QuestionTwo !== "") count++;
-    if (answer.QuestionThree.country !== "") count++;
-    if (answer.QuestionThree.city !== "") count++;
-    if (answer.QuestionFive !== "") count++;
-    if (answer.QuestionEight.email !== "") count++;
-    if (answer.QuestionEight.phone !== "") count++;
+    if (answer.birthYear !== "") count++;
+    if (answer.organization !== "") count++;
+    if (answer.location.country !== "") count++;
+    if (answer.location.region !== "") count++;
+    if (answer.primaryLanguage !== "") count++;
+    if (answer.contactDetails.email !== "") count++;
+    if (answer.contactDetails.phone.number !== "") count++;
 
     switch (state.radioQuestion) {
       case 7:
@@ -68,39 +72,39 @@ const StuProfileBuilderTypeform = () => {
 
     dispatch({ type: "now", payload: (count * 100) / totalComparisonValue });
   }, [
-    answer.QuestionEight.email,
-    answer.QuestionEight.phone,
-    answer.QuestionFive,
-    answer.QuestionOne,
-    answer.QuestionThree.city,
-    answer.QuestionThree.country,
-    answer.QuestionTwo,
+    answer.contactDetails.email,
+    answer.contactDetails.phone.number,
+    answer.primaryLanguage,
+    answer.birthYear,
+    answer.location.region,
+    answer.location.country,
+    answer.organization,
     state.radioQuestion,
   ]);
 
   const handleStuProfileTypeformSubmit: React.FormEventHandler<HTMLFormElement> =
     (event) => {
       event.preventDefault();
-
+      
       dispatch({ type: "validated", payload: true });
 
-      if (answer.QuestionEight.phone.length <= 4) {
+      if ([answer.location.country, answer.location.region].includes(""))
+        dispatch({ type: "submitClicked", payload: true });
+
+      if (answer.contactDetails.phone.number.length <= 4) {
         dispatch({ type: "isInvalid", payload: true });
         return;
       }
 
+
       if (
-        answer.QuestionOne !== "" &&
-        answer.QuestionTwo !== "" &&
-        answer.QuestionThree.country !== "" &&
-        answer.QuestionThree.city !== "" &&
-        answer.QuestionFour !== "" &&
-        answer.QuestionFive !== "" &&
-        answer.QuestionSix !== "" &&
-        answer.QuestionSeven !== "" &&
-        answer.QuestionEight.email !== "" &&
-        answer.QuestionEight.phone !== "" &&
-        answer.QuestionNine !== ""
+        answer.birthYear !== "" &&
+        answer.organization !== "" &&
+        answer.location.country !== "" &&
+        answer.location.region !== "" &&
+        answer.primaryLanguage !== "" &&
+        answer.contactDetails.email !== "" &&
+        answer.contactDetails.phone.number !== ""
       )
         console.log(answer);
     };
@@ -146,7 +150,11 @@ const StuProfileBuilderTypeform = () => {
         <TypeForm
           ref={typeformRef}
           nextBtnClass="TypeFormNextBtn"
-          backBtnClass="TypeFormBackBtn"
+          backBtnClass={
+            state.showSubmitReviewText
+              ? "DisplayNoneBackBtn"
+              : "TypeFormBackBtn"
+          }
           submitBtnClass="TypeFormSubmitBtn"
           submitBtnText="Submit"
           backBtnText="Previous"

@@ -24,6 +24,8 @@ const QuestionTen = ({
     event
   ) => {
     if (state.validated) dispatch({ type: "validated", payload: false });
+    if (state.submitClicked)
+      dispatch({ type: "submitClicked", payload: false });
 
     const onlyAlphabets = /^[a-zA-Z]*$/;
 
@@ -33,7 +35,7 @@ const QuestionTen = ({
 
     setAnswer((prevState) => ({
       ...prevState,
-      QuestionTen: event.target.value,
+      profession: event.target.value,
     }));
   };
 
@@ -53,7 +55,7 @@ const QuestionTen = ({
           className="QuestionFormControl"
           type="text"
           placeholder="Your profession..."
-          value={answer.QuestionTen}
+          value={answer.profession}
           onChange={handleQuestionTenChange}
         />
         <Form.Control.Feedback type="invalid">

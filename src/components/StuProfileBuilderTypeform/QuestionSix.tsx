@@ -24,10 +24,11 @@ const QuestionSix = ({
     event
   ) => {
     if (state.validated) dispatch({ type: "validated", payload: false });
+    const value = event.target.value === "true" ? true : false;
 
     setAnswer((prevState) => ({
       ...prevState,
-      QuestionSix: event.target.value,
+      previouslyMentored: value,
     }));
   };
 
@@ -45,19 +46,19 @@ const QuestionSix = ({
         <Form.Group className="ProfMentorRadioQuestion">
           <Form.Check type="radio" id="prof-mentor-yes">
             <Form.Check.Input
-              checked={answer.QuestionSix === "yes"}
+              checked={answer.previouslyMentored === true}
               onChange={handleQuestionSixChange}
               type="radio"
-              value="yes"
+              value="true"
             />
             <Form.Check.Label>yes</Form.Check.Label>
           </Form.Check>
           <Form.Check type="radio" id="prof-mentor-no">
             <Form.Check.Input
-              checked={answer.QuestionSix === "no"}
+              checked={answer.previouslyMentored === false}
               onChange={handleQuestionSixChange}
               type="radio"
-              value="no"
+              value="false"
             />
             <Form.Check.Label>no</Form.Check.Label>
           </Form.Check>

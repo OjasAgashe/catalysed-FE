@@ -3,26 +3,29 @@ import { Form } from "react-bootstrap";
 import {
   OrgProfileBuilderActionType,
   OrgProfileBuilderData,
+  OrgProfileBuilderState,
 } from "../../types/OrganisationProfileBuilder";
 import { motion } from "framer-motion";
 
 type QuestionOneProps = {
   answer: OrgProfileBuilderData;
   setAnswer: React.Dispatch<React.SetStateAction<OrgProfileBuilderData>>;
-  validated: boolean;
+  state: OrgProfileBuilderState;
   dispatch: React.Dispatch<OrgProfileBuilderActionType>;
 };
 
 const QuestionOne = ({
   answer,
   setAnswer,
-  validated,
+  state,
   dispatch,
 }: QuestionOneProps) => {
   const handleQuestionOneChange: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
-    if (validated) dispatch({ type: "validated", payload: false });
+    if (state.validated) dispatch({ type: "validated", payload: false });
+    if (state.submitClicked)
+      dispatch({ type: "submitClicked", payload: false });
 
     const onlyAlphabets = /^[a-zA-Z]*$/;
 
@@ -32,7 +35,7 @@ const QuestionOne = ({
 
     setAnswer((prevState) => ({
       ...prevState,
-      QuestionOne: event.target.value,
+      workDescription: event.target.value,
     }));
   };
 
@@ -51,7 +54,7 @@ const QuestionOne = ({
           className="QuestionFormControl"
           type="text"
           placeholder="Type of Work..."
-          value={answer.QuestionOne}
+          value={answer.workDescription}
           onChange={handleQuestionOneChange}
         />
         <Form.Control.Feedback type="invalid">

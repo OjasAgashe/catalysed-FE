@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import OrgProfileBuilderTypeform from "../../components/OrgProfileBuilderTypeform/OrgProfileBuilderTypeform";
 import { AiOutlineDoubleRight } from "react-icons/ai";
 import "./OrgProfileBuilder.css";
@@ -14,8 +14,8 @@ const Greet = ({ setShowGreet }: GreetProps) => {
         <h2>Welcome User_name</h2>
         <h4>We are excited to have Organization_name on CatalysEd !!</h4>
         <h4 className="Leth4">
-          Let's create a profile that will help establish your
-          organization on the platform
+          Let's create a profile that will help establish your organization on
+          the platform
         </h4>
         <button className="StartBtn" onClick={() => setShowGreet(false)}>
           Start &nbsp;
@@ -28,6 +28,10 @@ const Greet = ({ setShowGreet }: GreetProps) => {
 
 const OrgProfileBuilder = () => {
   const [showGreet, setShowGreet] = useState<boolean>(true);
+
+  useEffect(() => {
+    document.title = "Org Profile Builder | CatalysEd";
+  });
 
   return (
     <div className="OrgProfileBuilder">
