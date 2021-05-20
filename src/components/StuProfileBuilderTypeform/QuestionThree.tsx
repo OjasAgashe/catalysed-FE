@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Form, Row } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { motion } from "framer-motion";
 import {
   StudentProfileBuilderActionType,

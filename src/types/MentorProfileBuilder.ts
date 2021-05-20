@@ -22,6 +22,7 @@ export interface MentorProfileBuilderState {
   now: number;
   radioQuestion: number;
   submitClicked: boolean;
+  phoneValue: string;
 }
 
 export type MentorProfileBuilderActionType =
@@ -31,4 +32,5 @@ export type MentorProfileBuilderActionType =
   | { type: "isProfMentorYes"; payload: boolean }
   | { type: "now"; payload: number }
   | { type: "radioQuestion"; payload: number }
-  | { type: "submitClicked"; payload: boolean };
+  | { type: "submitClicked"; payload: boolean }
+  | { type: "phoneValue"; payload: string };

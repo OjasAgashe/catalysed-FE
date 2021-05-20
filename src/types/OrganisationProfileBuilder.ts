@@ -15,6 +15,7 @@ export interface OrgProfileBuilderState {
   showSubmitReviewText: boolean;
   now: number;
   submitClicked: boolean;
+  phoneValue: string;
 }
 
 export type OrgProfileBuilderActionType =
@@ -22,4 +23,5 @@ export type OrgProfileBuilderActionType =
   | { type: "validated"; payload: boolean }
   | { type: "showSubmitReviewText"; payload: boolean }
   | { type: "now"; payload: number }
-  | { type: "submitClicked"; payload: boolean };
+  | { type: "submitClicked"; payload: boolean }
+  | { type: "phoneValue"; payload: string };

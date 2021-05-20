@@ -15,6 +15,7 @@ import "./StuProfileBuilderTypeform.css";
 import { stuProfileBuilderReducer } from "../../reducers/stuProfileBuilderReducer";
 import { StudentProfileBuilderData } from "../../types/StudentProfileBuilder";
 import TypeformProgress from "../TypeformProgress/TypeformProgress";
+import { useProfileBuilder } from "../../api_context/ProfileBuilderContext";
 
 const StuProfileBuilderTypeform = () => {
   const [state, dispatch] = useReducer(stuProfileBuilderReducer, {
@@ -24,9 +25,11 @@ const StuProfileBuilderTypeform = () => {
     now: 0,
     radioQuestion: 0,
     submitClicked: false,
+    phoneValue: "",
   });
 
   const typeformRef = useRef<TypeForm>();
+  const { getProfileCall, postProfileCall } = useProfileBuilder();
 
   const [answer, setAnswer] = useState<StudentProfileBuilderData>({
     birthYear: "",
@@ -82,10 +85,28 @@ const StuProfileBuilderTypeform = () => {
     state.radioQuestion,
   ]);
 
+  const sendData = async (data: StudentProfileBuilderData) => {
+    try {
+      const response = await postProfileCall("student", data);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // const getData = async () => {
+  //   try {
+  //     const response = await getProfileCall("student");
+  //     console.log(response);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   const handleStuProfileTypeformSubmit: React.FormEventHandler<HTMLFormElement> =
     (event) => {
       event.preventDefault();
-      
+
       dispatch({ type: "validated", payload: true });
 
       if ([answer.location.country, answer.location.region].includes(""))
@@ -96,7 +117,6 @@ const StuProfileBuilderTypeform = () => {
         return;
       }
 
-
       if (
         answer.birthYear !== "" &&
         answer.organization !== "" &&
@@ -105,8 +125,11 @@ const StuProfileBuilderTypeform = () => {
         answer.primaryLanguage !== "" &&
         answer.contactDetails.email !== "" &&
         answer.contactDetails.phone.number !== ""
-      )
+      ) {
         console.log(answer);
+        sendData(answer);
+        // getData();
+      }
     };
 
   const handleNextBtnOnClick = () => {

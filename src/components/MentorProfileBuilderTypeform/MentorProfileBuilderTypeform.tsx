@@ -26,6 +26,7 @@ const MentorProfileBuilderTypeform = () => {
     now: 0,
     radioQuestion: 0,
     submitClicked: false,
+    phoneValue: "",
   });
 
   const typeformRef = useRef<TypeForm>();

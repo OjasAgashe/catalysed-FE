@@ -19,6 +19,8 @@ import Header from "../Header/Header";
 import "./App.css";
 import MentorProfileBuilder from "../../pages/MentorProfileBuilder/MentorProfileBuilder";
 import StuProfileBuilder from "../../pages/StuProfileBuilder/StuProfileBuilder";
+import { ProfileBuilderProvider } from "../../api_context/ProfileBuilderContext";
+import { AuthProvider } from "../../api_context/AuthContext";
 
 function App() {
   return (
@@ -29,23 +31,32 @@ function App() {
           <Route path={HOME} exact>
             <Home />
           </Route>
-          <Route path={LOGIN}>
-            <Login />
-          </Route>
-          <Route path={MENTOR_PROFILE_BUILDER}>
-            <MentorProfileBuilder />
-          </Route>
-          <Route path={ORGANISATION_PROFILE_BUILDER}>
-            <OrgProfileBuilder />
-          </Route>
+
+          <AuthProvider>
+            <Route path={LOGIN}>
+              <Login />
+            </Route>
+
+            <ProfileBuilderProvider>
+              <Route path={ORGANISATION_PROFILE_BUILDER}>
+                <OrgProfileBuilder />
+              </Route>
+
+              <Route path={STUDENT_PROFILE_BUILDER}>
+                <StuProfileBuilder />
+              </Route>
+
+              <Route path={MENTOR_PROFILE_BUILDER}>
+                <MentorProfileBuilder />
+              </Route>
+            </ProfileBuilderProvider>
+          </AuthProvider>
+
           <Route path={ORGANISATION_REGISTER}>
             <OrganisationRegister />
           </Route>
           <Route path={STUDENT_MENTOR_REGISTER}>
             <StudentMentorRegister />
-          </Route>
-          <Route path={STUDENT_PROFILE_BUILDER}>
-            <StuProfileBuilder />
           </Route>
         </Switch>
         <Footer />

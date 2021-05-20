@@ -11,6 +11,7 @@ import { OrgProfileBuilderData } from "../../types/OrganisationProfileBuilder";
 import { Form } from "react-bootstrap";
 import { orgProfileBuilderReducer } from "../../reducers/orgProfileBuilderReducer";
 import TypeformProgress from "../TypeformProgress/TypeformProgress";
+import { useProfileBuilder } from "../../api_context/ProfileBuilderContext";
 
 const OrgProfileBuilderTypeform = () => {
   const [state, dispatch] = useReducer(orgProfileBuilderReducer, {
@@ -19,9 +20,11 @@ const OrgProfileBuilderTypeform = () => {
     showSubmitReviewText: false,
     now: 0,
     submitClicked: false,
+    phoneValue: "",
   });
 
   const typeformRef = useRef<TypeForm>();
+  const { getProfileCall, postProfileCall } = useProfileBuilder();
 
   const [answer, setAnswer] = useState<OrgProfileBuilderData>({
     workDescription: "",
@@ -57,6 +60,24 @@ const OrgProfileBuilderTypeform = () => {
     answer.primaryLanguage,
   ]);
 
+  const sendData = async (data: OrgProfileBuilderData) => {
+    try {
+      const response = await postProfileCall("organization", data);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // const getData = async () => {
+  //   try {
+  //     const response = await getProfileCall("organization");
+  //     console.log(response);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   const handleOrgProfileTypeformSubmit: React.FormEventHandler<HTMLFormElement> =
     (event) => {
       event.preventDefault();
@@ -79,8 +100,11 @@ const OrgProfileBuilderTypeform = () => {
         answer.location.country !== "" &&
         answer.location.region !== "" &&
         answer.primaryLanguage !== ""
-      )
+      ) {
         console.log(answer);
+        sendData(answer);
+        // getData();
+      }
     };
 
   const handleNextBtnOnClick = () => {

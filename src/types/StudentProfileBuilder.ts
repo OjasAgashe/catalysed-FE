@@ -20,6 +20,7 @@ export interface StudentProfileBuilderState {
   now: number;
   radioQuestion: number;
   submitClicked: boolean;
+  phoneValue: string;
 }
 
 export type StudentProfileBuilderActionType =
@@ -28,4 +29,6 @@ export type StudentProfileBuilderActionType =
   | { type: "showSubmitReviewText"; payload: boolean }
   | { type: "now"; payload: number }
   | { type: "radioQuestion"; payload: number }
-  | { type: "submitClicked"; payload: boolean };
+  | { type: "submitClicked"; payload: boolean }
+  | { type: "phoneValue"; payload: string };
+

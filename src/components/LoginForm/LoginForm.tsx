@@ -7,7 +7,7 @@ import "./LoginForm.css";
 import Error from "../Error/Error";
 import { LoginActionType, LoginData, LoginState } from "../../types/Login";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import axios from "axios";
+import { useAuth } from "../../api_context/AuthContext";
 
 type LoginFormProps = {
   state: LoginState;
@@ -19,6 +19,8 @@ const LoginForm = ({ state, dispatch }: LoginFormProps) => {
     email: "",
     password: "",
   });
+
+  const { postLoginCall } = useAuth();
 
   const handleLoginChange: React.ChangeEventHandler<HTMLInputElement> = (
     event
@@ -43,13 +45,9 @@ const LoginForm = ({ state, dispatch }: LoginFormProps) => {
         dispatch({ type: "loading", payload: true });
         dispatch({ type: "error", payload: "" });
 
-        const response = await axios({
-          method: "post",
-          url: "https://level-abode-312509.el.r.appspot.com/authenticate",
-          data: loginData,
-        });
+        const response = await postLoginCall(loginData);
 
-        console.log(response);
+        document.cookie = `token=${response.data.jwt};secure`;
       } catch (error) {
         dispatch({
           type: "error",

@@ -55,6 +55,8 @@ const QuestionTwo = ({
     if (state.validated) dispatch({ type: "validated", payload: false });
     if (state.isInvalid) dispatch({ type: "isInvalid", payload: false });
 
+    dispatch({ type: "phoneValue", payload: value });
+
     const countryInfo = country as CountryData;
     const phone = {
       countryName: countryInfo.name,
@@ -97,11 +99,7 @@ const QuestionTwo = ({
         <PhoneInput
           country={"in"}
           placeholder=""
-          value={
-            answer.contactDetails.phone.countryCode +
-            " " +
-            answer.contactDetails.phone.number
-          }
+          value={state.phoneValue}
           onChange={(value, country, event, formattedValue) =>
             handlePhoneInputChange(value, country, event, formattedValue)
           }
