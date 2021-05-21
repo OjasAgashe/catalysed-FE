@@ -2,7 +2,7 @@
 
 /* OrganisationRegister, Login, StudentMentorRegister, OrgProfileBuilder, MentorProfileBuilder, StuProfileBuilder */
 
-:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage, .OrgProfileBuilder, .MentorProfileBuilder, .StuProfileBuilder) {
+:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage, .OrgProfileBuilder, .MentorProfileBuilder, .StuProfileBuilder, .OrgCreateProgramPage) {
   background-color: var(--red-100);
   min-height: 85vh;
 }
@@ -15,7 +15,7 @@
   align-items: center;
 }
 
-:is(.OrgProfileGreetContainer, .MentorProfileGreetContainer, .StuProfileGreetContainer) {
+:is(.OrgProfileGreetContainer, .MentorProfileGreetContainer, .StuProfileGreetContainer, .OrgCreateProgramPage) {
   padding: 2rem;
 }
 

@@ -9,6 +9,7 @@ import {
   HOME,
   LOGIN,
   MENTOR_PROFILE_BUILDER,
+  ORGANISATION_PROGRAM_CREATE,
   ORGANISATION_PROFILE_BUILDER,
   ORGANISATION_REGISTER,
   STUDENT_MENTOR_REGISTER,
@@ -21,6 +22,7 @@ import MentorProfileBuilder from "../../pages/MentorProfileBuilder/MentorProfile
 import StuProfileBuilder from "../../pages/StuProfileBuilder/StuProfileBuilder";
 import { ProfileBuilderProvider } from "../../api_context/ProfileBuilderContext";
 import { AuthProvider } from "../../api_context/AuthContext";
+import CreateProgram from "../../pages/CreateProgram/CreateProgram";
 
 function App() {
   return (
@@ -50,6 +52,10 @@ function App() {
                 <MentorProfileBuilder />
               </Route>
             </ProfileBuilderProvider>
+
+            <Route path={ORGANISATION_PROGRAM_CREATE}>
+              <CreateProgram />
+            </Route>
           </AuthProvider>
 
           <Route path={ORGANISATION_REGISTER}>

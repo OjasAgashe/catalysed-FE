@@ -1,0 +1,160 @@
+.CreateProgramFormContainer .CreateProgramFirstSection {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.CreateProgramFirstSubSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.GeneralDetailsForm .ProgramDescriptionTextArea,
+:is(.CreateProgramMentorDetailsForm, .CreateProgramStudentDetailsFormContainer)
+  .GeneralInstructionTextArea {
+  resize: none !important;
+}
+
+.GeneralDetailsFormContainer,
+.CoordinatorDetailsFormContainer,
+.CreateProgramMentorDetailsFormContainer,
+.CreateProgramStudentDetailsFormContainer {
+  background-color: var(--white);
+  padding: 1rem;
+  box-shadow: 1px 1px 5px var(--blue-gray-300), -2px -2px 5px var(--white);
+  border-radius: 5px;
+  border-left: 1px solid var(--blue-gray-300);
+  border-top: 1px solid var(--blue-gray-300);
+  height: fit-content;
+}
+
+.GeneralDetailsFormContainer {
+  width: 550px;
+}
+
+.CoordinatorDetailsFormContainer {
+  width: 400px;
+  margin: 1rem;
+}
+
+.CreateProgramMentorDetailsFormContainer {
+  width: 550px;
+}
+
+.CreateProgramStudentDetailsFormContainer {
+  max-width: 800px;
+  margin: auto;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.FormDetailsText {
+  font-size: 1.5rem !important;
+  padding: 0.5rem !important;
+  color: var(--facebook-code) !important;
+}
+
+.CreateProgramFormContainer .CreateProgramFormControl:valid {
+  background-color: var(--blue-gray-100) !important;
+}
+
+.CreateProgramFormContainer .CreateProgramFormControl {
+  border: none !important;
+  margin: 1.2rem auto;
+  color: var(--blue-gray-700) !important;
+  font-size: 1.05rem !important;
+}
+
+.ModeContainer {
+  margin: 1.2rem auto;
+}
+
+.CreateProgramFormContainer .CreateProgramFormText {
+  font-size: 1.1rem !important;
+  margin-right: 1rem;
+  color: var(--blue-gray-700);
+}
+
+.CreateProgramFormContainer .InlineFormControl {
+  display: inline-block !important;
+  width: 4rem !important;
+}
+
+.CreateProgramFormContainer .FormTextSmallLabel {
+  margin: auto 1rem !important;
+  font-size: 1rem !important;
+  color: var(--blue-gray-500);
+}
+
+.GeneralDetailsForm .LanguagePreviewer {
+  max-height: 100px;
+  overflow-y: scroll;
+}
+
+.GeneralDetailsForm .LanguagePreviewer .LanguageLi {
+  display: inline-block;
+  list-style: none;
+  background-color: var(--common-home-section-four);
+  padding: 0.2rem 0.5rem !important;
+  border-radius: 5px !important;
+  margin: 0.2rem 0.3rem !important;
+}
+
+.LanguageLiButton {
+  background-color: inherit;
+  border: none;
+}
+
+.LanguageLi .LanguageLiCrossIcon {
+  font-size: 0.8rem !important;
+  cursor: pointer;
+  color: var(--invalid-feedback);
+  font-weight: bold;
+}
+
+.CreateProgramFormContainer .react-tel-input .form-control {
+  width: inherit !important;
+}
+
+.CreateProgramFormContainer .react-tel-input .flag-dropdown {
+  left: 1px !important;
+}
+
+.CreateProgramStudentRow {
+  align-items: center !important;
+}
+
+.CreateProgramButtonContainer {
+  width: fit-content;
+  margin: auto;
+}
+
+.CreateProgramDraftBtn,
+.CreateProgramPublishBtn {
+  margin: 1rem;
+  font-size: 1.2rem !important;
+  background-color: var(--common-home-section-four-600) !important;
+  border-color: var(--common-home-section-four-600) !important;
+}
+
+:is(.CreateProgramDraftBtn, .CreateProgramPublishBtn):hover {
+  transform: scale(1.1);
+}
+
+:is(.CreateProgramDraftBtn, .CreateProgramPublishBtn):focus {
+  box-shadow: none !important;
+}
+
+@media screen and (max-width: 600px) {
+  .CoordinatorDetailsFormContainer,
+  .CreateProgramMentorDetailsFormContainer {
+    width: inherit;
+  }
+
+  .CreateProgramStudentDetailsFormContainer {
+    margin: 0 !important;
+    margin-top: 2rem !important;
+  }
+}
