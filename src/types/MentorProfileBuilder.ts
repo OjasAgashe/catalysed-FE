@@ -4,7 +4,7 @@ export interface MentorProfileBuilderData {
   location: { country: string; region: string };
   gender: string;
   primaryLanguage: string;
-  QuestionSix: { yes_no: string; yoe: string };
+  previouslyMentored: { yes_no: boolean; yoe: number };
   stableConnection: boolean;
   contactDetails: {
     email: string;

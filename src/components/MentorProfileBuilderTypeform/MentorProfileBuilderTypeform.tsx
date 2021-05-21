@@ -16,6 +16,7 @@ import "./MentorProfileBuilderTypeform.css";
 import { mentorProfileBuilderReducer } from "../../reducers/mentorProfileBuilderReducer";
 import { MentorProfileBuilderData } from "../../types/MentorProfileBuilder";
 import TypeformProgress from "../TypeformProgress/TypeformProgress";
+import { useProfileBuilder } from "../../api_context/ProfileBuilderContext";
 
 const MentorProfileBuilderTypeform = () => {
   const [state, dispatch] = useReducer(mentorProfileBuilderReducer, {
@@ -30,6 +31,7 @@ const MentorProfileBuilderTypeform = () => {
   });
 
   const typeformRef = useRef<TypeForm>();
+  const { getProfileCall, postProfileCall } = useProfileBuilder();
 
   const [answer, setAnswer] = useState<MentorProfileBuilderData>({
     birthYear: "",
@@ -37,7 +39,7 @@ const MentorProfileBuilderTypeform = () => {
     location: { country: "", region: "" },
     gender: "OTHER",
     primaryLanguage: "",
-    QuestionSix: { yes_no: "no", yoe: "" },
+    previouslyMentored: { yes_no: false, yoe: 0 },
     stableConnection: false,
     contactDetails: {
       email: "",
@@ -87,6 +89,24 @@ const MentorProfileBuilderTypeform = () => {
     state.radioQuestion,
   ]);
 
+  const sendData = async (data: any) => {
+    try {
+      const response = await postProfileCall("mentor", data);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getData = async () => {
+    try {
+      const response = await getProfileCall("mentor");
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleMentorProfileTypeformSubmit: React.FormEventHandler<HTMLFormElement> =
     (event) => {
       event.preventDefault();
@@ -112,13 +132,26 @@ const MentorProfileBuilderTypeform = () => {
         answer.qualification !== "" &&
         answer.profession !== ""
       ) {
-        let canProceed = false;
-        if (state.isProfMentorYes && answer.QuestionSix.yoe !== "")
-          canProceed = true;
+        // let canProceed = false;
+        // if (state.isProfMentorYes && answer.previouslyMentored.yoe !== "")
+        //   canProceed = true;
 
-        if (state.isProfMentorYes === false) canProceed = true;
+        // if (state.isProfMentorYes === false) canProceed = true;
 
-        if (canProceed) console.log(answer);
+        // if (canProceed)
+        // console.log({
+        //   ...answer,
+        //   previouslyMentored: answer.previouslyMentored.yes_no,
+        //   experience: answer.previouslyMentored.yoe,
+        // });
+
+        const object = {
+          ...answer,
+          previouslyMentored: answer.previouslyMentored.yes_no,
+          experience: answer.previouslyMentored.yoe,
+        };
+        sendData(object);
+        getData();
       }
     };
 

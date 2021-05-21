@@ -2,11 +2,15 @@ import React, { useContext } from "react";
 import axios, { AxiosResponse } from "axios";
 import { OrgProfileBuilderData } from "../types/OrganisationProfileBuilder";
 import { StudentProfileBuilderData } from "../types/StudentProfileBuilder";
+// import { MentorProfileBuilderData } from "../types/MentorProfileBuilder";
 
 interface ProfileBuilderProviderReturns {
   postProfileCall: (
     entity: string,
-    data: OrgProfileBuilderData | StudentProfileBuilderData
+    data:
+      | OrgProfileBuilderData
+      | StudentProfileBuilderData
+      | any
   ) => Promise<AxiosResponse<any>>;
   getProfileCall: (entity: string) => Promise<AxiosResponse<any>>;
 }
@@ -26,7 +30,10 @@ export const ProfileBuilderProvider: React.FC<React.ReactNode> = (props) => {
 
   function postProfileCall(
     entity: string,
-    data: OrgProfileBuilderData | StudentProfileBuilderData
+    data:
+      | OrgProfileBuilderData
+      | StudentProfileBuilderData
+      | any
   ) {
     const token = document.cookie.split("=")[1];
     return instance.post(`/profile/${entity}`, data, {

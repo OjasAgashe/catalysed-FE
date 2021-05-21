@@ -27,22 +27,27 @@ const QuestionSix = ({
     if (state.submitClicked)
       dispatch({ type: "submitClicked", payload: false });
 
-    if (event.target.name === "yes_no" && event.target.value === "yes") {
-      dispatch({ type: "isProfMentorYes", payload: true });
-      setAnswer((prevState) => ({
-        ...prevState,
-        QuestionSix: { ...prevState.QuestionSix, yoe: "0-2" },
-      }));
-    } else {
-      if (state.isProfMentorYes)
-        dispatch({ type: "isProfMentorYes", payload: false });
+    // if (event.target.name === "yes_no" && event.target.value === "true") {
+    //   dispatch({ type: "isProfMentorYes", payload: true });
+    //   setAnswer((prevState) => ({
+    //     ...prevState,
+    //     previouslyMentored: { ...prevState.previouslyMentored, yoe: "0-2" },
+    //   }));
+    // } else {
+    //   if (state.isProfMentorYes)
+    //     dispatch({ type: "isProfMentorYes", payload: false });
+    // }
+
+    let value: string | number | boolean = event.target.value;
+    if (event.target.name === "yes_no") {
+      value = value === "true" ? true : false;
     }
 
     setAnswer((prevState) => ({
       ...prevState,
-      QuestionSix: {
-        ...prevState.QuestionSix,
-        [event.target.name]: event.target.value,
+      previouslyMentored: {
+        ...prevState.previouslyMentored,
+        [event.target.name]: value,
       },
     }));
   };
@@ -63,21 +68,21 @@ const QuestionSix = ({
             <Form.Group className="ProfMentorRadioQuestion">
               <Form.Check type="radio" id="prof-mentor-yes">
                 <Form.Check.Input
-                  checked={answer.QuestionSix.yes_no === "yes"}
+                  checked={answer.previouslyMentored.yes_no === true}
                   onChange={handleQuestionSixChange}
                   type="radio"
                   name="yes_no"
-                  value="yes"
+                  value="true"
                 />
                 <Form.Check.Label>yes</Form.Check.Label>
               </Form.Check>
               <Form.Check type="radio" id="prof-mentor-no">
                 <Form.Check.Input
-                  checked={answer.QuestionSix.yes_no === "no"}
+                  checked={answer.previouslyMentored.yes_no === false}
                   onChange={handleQuestionSixChange}
                   type="radio"
                   name="yes_no"
-                  value="no"
+                  value="false"
                 />
                 <Form.Check.Label>no</Form.Check.Label>
               </Form.Check>
@@ -93,33 +98,40 @@ const QuestionSix = ({
               <Form.Check type="radio" id="yoeZero">
                 <Form.Check.Input
                   checked={
-                    answer.QuestionSix.yoe === "" ||
-                    answer.QuestionSix.yoe === "0-2"
+                    answer.previouslyMentored.yoe === 0
+                    // answer.previouslyMentored.yoe === "" ||
+                    // answer.previouslyMentored.yoe === "0-2"
                   }
                   onChange={handleQuestionSixChange}
                   type="radio"
                   name="yoe"
-                  value="0-2"
+                  value={0}
                 />
                 <Form.Check.Label>0 - 2</Form.Check.Label>
               </Form.Check>
               <Form.Check type="radio" id="yoeTwo">
                 <Form.Check.Input
-                  checked={answer.QuestionSix.yoe === "2-5"}
+                  checked={
+                    answer.previouslyMentored.yoe === 2
+                    // answer.previouslyMentored.yoe === "2-5"
+                  }
                   onChange={handleQuestionSixChange}
                   type="radio"
                   name="yoe"
-                  value="2-5"
+                  value={2}
                 />
                 <Form.Check.Label>2 - 5</Form.Check.Label>
               </Form.Check>
               <Form.Check type="radio" id="yoeFive">
                 <Form.Check.Input
-                  checked={answer.QuestionSix.yoe === ">5"}
+                  checked={
+                    answer.previouslyMentored.yoe === 5
+                    // answer.previouslyMentored.yoe === ">5"
+                  }
                   onChange={handleQuestionSixChange}
                   type="radio"
                   name="yoe"
-                  value=">5"
+                  value={5}
                 />
                 <Form.Check.Label>&gt; 5</Form.Check.Label>
               </Form.Check>
