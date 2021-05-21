@@ -29,9 +29,8 @@ export const ProfileBuilderProvider: React.FC<React.ReactNode> = (props) => {
     data: OrgProfileBuilderData | StudentProfileBuilderData
   ) {
     const token = document.cookie.split("=")[1];
-    return instance.post(`/profile/${entity}`, {
+    return instance.post(`/profile/${entity}`, data, {
       headers: { Authorization: `Bearer ${token}` },
-      data,
     });
   }
 

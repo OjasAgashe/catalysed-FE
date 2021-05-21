@@ -94,14 +94,14 @@ const StuProfileBuilderTypeform = () => {
     }
   };
 
-  // const getData = async () => {
-  //   try {
-  //     const response = await getProfileCall("student");
-  //     console.log(response);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const getData = async () => {
+    try {
+      const response = await getProfileCall("student");
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleStuProfileTypeformSubmit: React.FormEventHandler<HTMLFormElement> =
     (event) => {
@@ -126,9 +126,8 @@ const StuProfileBuilderTypeform = () => {
         answer.contactDetails.email !== "" &&
         answer.contactDetails.phone.number !== ""
       ) {
-        console.log(answer);
         sendData(answer);
-        // getData();
+        getData();
       }
     };
 

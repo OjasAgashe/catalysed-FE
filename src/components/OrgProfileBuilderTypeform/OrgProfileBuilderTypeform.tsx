@@ -69,14 +69,14 @@ const OrgProfileBuilderTypeform = () => {
     }
   };
 
-  // const getData = async () => {
-  //   try {
-  //     const response = await getProfileCall("organization");
-  //     console.log(response);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const getData = async () => {
+    try {
+      const response = await getProfileCall("organization");
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleOrgProfileTypeformSubmit: React.FormEventHandler<HTMLFormElement> =
     (event) => {
@@ -101,9 +101,8 @@ const OrgProfileBuilderTypeform = () => {
         answer.location.region !== "" &&
         answer.primaryLanguage !== ""
       ) {
-        console.log(answer);
         sendData(answer);
-        // getData();
+        getData();
       }
     };
 
