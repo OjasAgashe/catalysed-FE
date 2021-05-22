@@ -31,7 +31,7 @@ const OrgRegisterUser = ({
 
   useEffect(() => {
     orgRegisterDispatch({ type: "currentOrgRegister", payload: "user" });
-  });
+  }, [orgRegisterDispatch]);
 
   const handleOrgRegisterUserChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {

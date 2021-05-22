@@ -31,7 +31,7 @@ const StuProfileBuilder = () => {
 
   useEffect(() => {
     document.title = "Student Profile Builder | CatalysEd";
-  });
+  }, []);
 
   return (
     <div className="StuProfileBuilder">

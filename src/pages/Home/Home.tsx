@@ -4,7 +4,7 @@ import CommonHome from "../../components/CommonHome/CommonHome";
 const Home = () => {
   useEffect(() => {
     document.title = "Home | CatalysEd";
-  });
+  }, []);
 
   return (
     <div>

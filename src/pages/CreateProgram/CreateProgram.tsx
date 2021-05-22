@@ -4,7 +4,7 @@ import CreateProgramForm from "../../components/CreateProgramForm/CreateProgramF
 const CreateProgram = () => {
   useEffect(() => {
     document.title = "Create Program Org | CatalysEd";
-  });
+  }, []);
 
   return (
     <div className="OrgCreateProgramPage">

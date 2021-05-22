@@ -33,7 +33,7 @@ const MentorProfileBuilder = () => {
 
   useEffect(() => {
     document.title = "Mentor Profile Builder | CatalysEd";
-  });
+  }, []);
 
   return (
     <div className="MentorProfileBuilder">

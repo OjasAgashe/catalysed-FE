@@ -50,7 +50,7 @@ const OrgRegisterDetails = ({
 
   useEffect(() => {
     orgRegisterDispatch({ type: "currentOrgRegister", payload: "details" });
-  });
+  }, [orgRegisterDispatch]);
 
   const handleOrgRegisterDetailsChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {

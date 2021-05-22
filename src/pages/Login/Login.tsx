@@ -13,7 +13,7 @@ const Login = () => {
 
   useEffect(() => {
     document.title = "Login | CatalysEd";
-  });
+  }, []);
 
   return (
     <div className="LoginPage">

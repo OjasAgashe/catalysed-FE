@@ -35,7 +35,7 @@ const OrganisationRegister = () => {
 
   useEffect(() => {
     document.title = "Organisation Register | CatalysEd";
-  });
+  }, []);
 
   return (
     <div className="OrgRegisterPage">

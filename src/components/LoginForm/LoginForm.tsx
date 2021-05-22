@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 import { GoSignIn } from "react-icons/go";
-import { Link } from "react-router-dom";
-import { ORGANISATION_REGISTER } from "../../routes/Routes";
+import { Link, useHistory } from "react-router-dom";
+import {
+  MENTOR_HOME,
+  MENTOR_PROFILE_BUILDER,
+  ORGANISATION_HOME,
+  ORGANISATION_PROFILE_BUILDER,
+  ORGANISATION_REGISTER,
+  STUDENT_HOME,
+  STUDENT_PROFILE_BUILDER,
+} from "../../routes/Routes";
 import "./LoginForm.css";
 import Error from "../Error/Error";
 import { LoginActionType, LoginData, LoginState } from "../../types/Login";
@@ -20,7 +28,8 @@ const LoginForm = ({ state, dispatch }: LoginFormProps) => {
     password: "",
   });
 
-  const { postLoginCall } = useAuth();
+  const { postLoginCall, setCurrentUser } = useAuth();
+  const history = useHistory();
 
   const handleLoginChange: React.ChangeEventHandler<HTMLInputElement> = (
     event
@@ -48,13 +57,42 @@ const LoginForm = ({ state, dispatch }: LoginFormProps) => {
         const response = await postLoginCall(loginData);
 
         document.cookie = `token=${response.data.jwt};secure`;
+
+        setCurrentUser(response.data.user);
+        dispatch({ type: "loading", payload: false });
+
+        switch (response.data.user.userType) {
+          case "ORGANIZATION_USER":
+            if (response.data.user.profileCreated) {
+              history.push(ORGANISATION_HOME);
+            } else if (response.data.user.profileCreated === false) {
+              history.push(ORGANISATION_PROFILE_BUILDER);
+            }
+
+            break;
+          case "STUDENT":
+            if (response.data.user.profileCreated) {
+              history.push(STUDENT_HOME);
+            } else if (response.data.user.profileCreated === false) {
+              history.push(STUDENT_PROFILE_BUILDER);
+            }
+
+            break;
+          case "MENTOR":
+            if (response.data.user.profileCreated) {
+              history.push(MENTOR_HOME);
+            } else if (response.data.user.profileCreated === false) {
+              history.push(MENTOR_PROFILE_BUILDER);
+            }
+
+            break;
+        }
       } catch (error) {
+        dispatch({ type: "loading", payload: false });
         dispatch({
           type: "error",
           payload: error.response?.data?.message ?? "",
         });
-      } finally {
-        dispatch({ type: "loading", payload: false });
       }
     }
   };

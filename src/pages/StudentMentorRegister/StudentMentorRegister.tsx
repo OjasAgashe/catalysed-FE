@@ -4,7 +4,7 @@ import "./StudentMentorRegister.css";
 const StudentMentorRegister = () => {
   useEffect(() => {
     document.title = "Register | CatalysEd";
-  });
+  }, []);
 
   return (
     <div className="StudentMentorRegisterPage">

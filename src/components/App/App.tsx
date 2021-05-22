@@ -8,12 +8,15 @@ import StudentMentorRegister from "../../pages/StudentMentorRegister/StudentMent
 import {
   HOME,
   LOGIN,
+  MENTOR_HOME,
   MENTOR_PROFILE_BUILDER,
+  ORGANISATION_HOME,
   ORGANISATION_PROGRAM_CREATE,
   ORGANISATION_PROFILE_BUILDER,
   ORGANISATION_REGISTER,
   STUDENT_MENTOR_REGISTER,
   STUDENT_PROFILE_BUILDER,
+  STUDENT_HOME,
 } from "../../routes/Routes";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -23,6 +26,9 @@ import StuProfileBuilder from "../../pages/StuProfileBuilder/StuProfileBuilder";
 import { ProfileBuilderProvider } from "../../api_context/ProfileBuilderContext";
 import { AuthProvider } from "../../api_context/AuthContext";
 import CreateProgram from "../../pages/CreateProgram/CreateProgram";
+import OrgHomePage from "../../pages/OrgHomePage/OrgHomePage";
+import StudentHomePage from "../../pages/StudentHomePage/StudentHomePage";
+import MentorHomePage from "../../pages/MentorHomePage/MentorHomePage";
 
 function App() {
   return (
@@ -32,6 +38,13 @@ function App() {
         <Switch>
           <Route path={HOME} exact>
             <Home />
+          </Route>
+
+          <Route path={ORGANISATION_REGISTER}>
+            <OrganisationRegister />
+          </Route>
+          <Route path={STUDENT_MENTOR_REGISTER}>
+            <StudentMentorRegister />
           </Route>
 
           <AuthProvider>
@@ -56,14 +69,17 @@ function App() {
             <Route path={ORGANISATION_PROGRAM_CREATE}>
               <CreateProgram />
             </Route>
-          </AuthProvider>
 
-          <Route path={ORGANISATION_REGISTER}>
-            <OrganisationRegister />
-          </Route>
-          <Route path={STUDENT_MENTOR_REGISTER}>
-            <StudentMentorRegister />
-          </Route>
+            <Route path={ORGANISATION_HOME}>
+              <OrgHomePage />
+            </Route>
+            <Route path={STUDENT_HOME}>
+              <StudentHomePage />
+            </Route>
+            <Route path={MENTOR_HOME}>
+              <MentorHomePage />
+            </Route>
+          </AuthProvider>
         </Switch>
         <Footer />
       </Router>

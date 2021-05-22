@@ -31,7 +31,7 @@ const OrgProfileBuilder = () => {
 
   useEffect(() => {
     document.title = "Org Profile Builder | CatalysEd";
-  });
+  }, []);
 
   return (
     <div className="OrgProfileBuilder">
