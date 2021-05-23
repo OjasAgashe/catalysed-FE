@@ -12,6 +12,8 @@ import { Form } from "react-bootstrap";
 import { orgProfileBuilderReducer } from "../../reducers/orgProfileBuilderReducer";
 import TypeformProgress from "../TypeformProgress/TypeformProgress";
 import { useProfileBuilder } from "../../api_context/ProfileBuilderContext";
+import { useHistory } from "react-router-dom";
+import { ORGANISATION_HOME } from "../../constants/Routes";
 
 const OrgProfileBuilderTypeform = () => {
   const [state, dispatch] = useReducer(orgProfileBuilderReducer, {
@@ -25,6 +27,7 @@ const OrgProfileBuilderTypeform = () => {
 
   const typeformRef = useRef<TypeForm>();
   const { postProfileCall } = useProfileBuilder();
+  const history = useHistory();
 
   const [answer, setAnswer] = useState<OrgProfileBuilderData>({
     workDescription: "",
@@ -62,8 +65,9 @@ const OrgProfileBuilderTypeform = () => {
 
   const sendData = async (data: OrgProfileBuilderData) => {
     try {
-      const response = await postProfileCall("organization", data);
-      console.log(response);
+      await postProfileCall("organization", data);
+      document.cookie = "catalysedCreated=true;secure";
+      history.push(ORGANISATION_HOME);
     } catch (error) {
       console.log(error);
     }
