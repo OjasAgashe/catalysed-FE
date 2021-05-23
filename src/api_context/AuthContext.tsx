@@ -1,20 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import { LoginData } from "../types/Login";
+import { OrgRegisterData } from "../types/OrganisationRegister";
 
-interface CurrentUserType {
-  accountVerified: boolean;
-  active: boolean;
-  email: string;
-  id: number;
-  profileCreated: boolean;
-  userName: string;
-  userType: string;
-}
+type CurrentUserType = {
+  catalysedCreated: boolean;
+  catalysedToken: string;
+  catalysedType: string;
+};
 
 interface AuthProviderReturns {
   currentUser: CurrentUserType;
   postLoginCall: (data: LoginData) => Promise<AxiosResponse<any>>;
+  postRegisterCall: (data: OrgRegisterData) => Promise<AxiosResponse<any>>;
   setCurrentUser: React.Dispatch<React.SetStateAction<CurrentUserType>>;
 }
 
@@ -26,13 +24,9 @@ export function useAuth() {
 
 export const AuthProvider: React.FC<React.ReactNode> = (props) => {
   const [currentUser, setCurrentUser] = useState<CurrentUserType>({
-    accountVerified: false,
-    active: false,
-    email: "",
-    id: 0,
-    profileCreated: false,
-    userName: "",
-    userType: "",
+    catalysedCreated: false,
+    catalysedToken: "",
+    catalysedType: "",
   });
 
   const instance = axios.create({
@@ -40,13 +34,39 @@ export const AuthProvider: React.FC<React.ReactNode> = (props) => {
       "http://catalyseddev-env.eba-qewmmmrf.us-east-1.elasticbeanstalk.com/",
   });
 
+  useEffect(() => {
+    if (document.cookie) {
+      document.cookie.split(";").forEach((cookie) => {
+        let name: string = "";
+        let value: string | boolean = "";
+
+        [name, value] = cookie.split("=");
+
+        if (name.trim() === "catalysedCreated") {
+          value === "true" ? (value = true) : (value = false);
+        } else {
+          value = value.trim();
+        }
+        setCurrentUser((prevState) => ({
+          ...prevState,
+          [name.trim()]: value,
+        }));
+      });
+    }
+  }, []);
+
   function postLoginCall(data: LoginData) {
     return instance.post(`/authenticate`, data);
+  }
+
+  function postRegisterCall(data: OrgRegisterData) {
+    return instance.post("/register/organization", data);
   }
 
   const values = {
     currentUser,
     postLoginCall,
+    postRegisterCall,
     setCurrentUser,
   };
 

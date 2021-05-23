@@ -8,9 +8,12 @@ import {
   LOGIN,
   ORGANISATION_REGISTER,
   STUDENT_MENTOR_REGISTER,
-} from "../../routes/Routes";
+} from "../../constants/Routes";
+import { useAuth } from "../../api_context/AuthContext";
 
 const Header = () => {
+  const { currentUser } = useAuth();
+
   return (
     <Navbar collapseOnSelect expand="lg" className="Navbar">
       <Navbar.Brand as={Link} to={HOME} className="NavbarBrand">
@@ -30,7 +33,6 @@ const Header = () => {
           >
             Home
           </Nav.Link>
-
           <NavDropdown
             title="Ecosystem"
             id="Ecosystem-NavDropdown"
@@ -40,7 +42,6 @@ const Header = () => {
             <NavDropdown.Item eventKey="2">Organisations</NavDropdown.Item>
             <NavDropdown.Item eventKey="3">Programs</NavDropdown.Item>
           </NavDropdown>
-
           <NavDropdown
             title="Help Center"
             id="HelpCenter-NavDropdown"
@@ -50,45 +51,56 @@ const Header = () => {
             <NavDropdown.Item eventKey="4">How to get started</NavDropdown.Item>
             <NavDropdown.Item eventKey="5">In-depth guide</NavDropdown.Item>
           </NavDropdown>
-
           {/* Change FAQ as Link to FAQ page */}
           <Nav.Link className="NavbarCollapseNavItem" eventKey="6">
             FAQ
           </Nav.Link>
 
-          <NavDropdown
-            title="Register"
-            id="Register-NavDropdown"
-            className="NavbarCollapseNavItem"
-          >
-            <NavDropdown.Item as={Link} to={ORGANISATION_REGISTER} eventKey="7">
-              Organiser
-            </NavDropdown.Item>
-
-            <NavDropdown.Item
-              as={Link}
-              to={STUDENT_MENTOR_REGISTER}
-              eventKey="8"
+          {currentUser.catalysedType ? (
+            ""
+          ) : (
+            <NavDropdown
+              title="Register"
+              id="Register-NavDropdown"
+              className="NavbarCollapseNavItem"
             >
-              Mentor
-            </NavDropdown.Item>
-            <NavDropdown.Item
-              as={Link}
-              to={STUDENT_MENTOR_REGISTER}
-              eventKey="9"
-            >
-              Student
-            </NavDropdown.Item>
-          </NavDropdown>
+              <NavDropdown.Item
+                as={Link}
+                to={ORGANISATION_REGISTER}
+                eventKey="7"
+              >
+                Organiser
+              </NavDropdown.Item>
 
-          <Nav.Link
-            className="NavbarCollapseNavItem"
-            as={Link}
-            to={LOGIN}
-            eventKey="10"
-          >
-            Log In
-          </Nav.Link>
+              <NavDropdown.Item
+                as={Link}
+                to={STUDENT_MENTOR_REGISTER}
+                eventKey="8"
+              >
+                Mentor
+              </NavDropdown.Item>
+              <NavDropdown.Item
+                as={Link}
+                to={STUDENT_MENTOR_REGISTER}
+                eventKey="9"
+              >
+                Student
+              </NavDropdown.Item>
+            </NavDropdown>
+          )}
+
+          {currentUser.catalysedType ? (
+            ""
+          ) : (
+            <Nav.Link
+              className="NavbarCollapseNavItem"
+              as={Link}
+              to={LOGIN}
+              eventKey="10"
+            >
+              Log In
+            </Nav.Link>
+          )}
         </Nav>
       </Navbar.Collapse>
     </Navbar>

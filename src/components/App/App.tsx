@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 import Home from "../../pages/Home/Home";
 import Login from "../../pages/Login/Login";
 import OrgProfileBuilder from "../../pages/OrgProfileBuilder/OrgProfileBuilder";
@@ -17,18 +17,19 @@ import {
   STUDENT_MENTOR_REGISTER,
   STUDENT_PROFILE_BUILDER,
   STUDENT_HOME,
-} from "../../routes/Routes";
+} from "../../constants/Routes";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import "./App.css";
 import MentorProfileBuilder from "../../pages/MentorProfileBuilder/MentorProfileBuilder";
 import StuProfileBuilder from "../../pages/StuProfileBuilder/StuProfileBuilder";
 import { ProfileBuilderProvider } from "../../api_context/ProfileBuilderContext";
-import { AuthProvider } from "../../api_context/AuthContext";
 import CreateProgram from "../../pages/CreateProgram/CreateProgram";
 import OrgHomePage from "../../pages/OrgHomePage/OrgHomePage";
 import StudentHomePage from "../../pages/StudentHomePage/StudentHomePage";
 import MentorHomePage from "../../pages/MentorHomePage/MentorHomePage";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import PublicRoute from "../PublicRoute/PublicRoute";
 
 function App() {
   return (
@@ -36,50 +37,57 @@ function App() {
       <Router>
         <Header />
         <Switch>
-          <Route path={HOME} exact>
+          <PrivateRoute path={ORGANISATION_PROGRAM_CREATE}>
+            <CreateProgram />
+          </PrivateRoute>
+
+          <PublicRoute path={HOME} exact>
             <Home />
-          </Route>
+          </PublicRoute>
 
-          <Route path={ORGANISATION_REGISTER}>
-            <OrganisationRegister />
-          </Route>
-          <Route path={STUDENT_MENTOR_REGISTER}>
-            <StudentMentorRegister />
-          </Route>
+          <PublicRoute path={LOGIN}>
+            <Login />
+          </PublicRoute>
 
-          <AuthProvider>
-            <Route path={LOGIN}>
-              <Login />
-            </Route>
+          <PrivateRoute path={MENTOR_HOME}>
+            <MentorHomePage />
+          </PrivateRoute>
 
+          <PrivateRoute path={MENTOR_PROFILE_BUILDER}>
             <ProfileBuilderProvider>
-              <Route path={ORGANISATION_PROFILE_BUILDER}>
-                <OrgProfileBuilder />
-              </Route>
-
-              <Route path={STUDENT_PROFILE_BUILDER}>
-                <StuProfileBuilder />
-              </Route>
-
-              <Route path={MENTOR_PROFILE_BUILDER}>
-                <MentorProfileBuilder />
-              </Route>
+              <MentorProfileBuilder />
             </ProfileBuilderProvider>
+          </PrivateRoute>
 
-            <Route path={ORGANISATION_PROGRAM_CREATE}>
-              <CreateProgram />
-            </Route>
+          <PublicRoute path={ORGANISATION_REGISTER}>
+            <OrganisationRegister />
+          </PublicRoute>
 
-            <Route path={ORGANISATION_HOME}>
+          <PrivateRoute path={ORGANISATION_HOME}>
+            <ProfileBuilderProvider>
               <OrgHomePage />
-            </Route>
-            <Route path={STUDENT_HOME}>
-              <StudentHomePage />
-            </Route>
-            <Route path={MENTOR_HOME}>
-              <MentorHomePage />
-            </Route>
-          </AuthProvider>
+            </ProfileBuilderProvider>
+          </PrivateRoute>
+
+          <PrivateRoute path={ORGANISATION_PROFILE_BUILDER}>
+            <ProfileBuilderProvider>
+              <OrgProfileBuilder />
+            </ProfileBuilderProvider>
+          </PrivateRoute>
+
+          <PrivateRoute path={STUDENT_HOME}>
+            <StudentHomePage />
+          </PrivateRoute>
+
+          <PublicRoute path={STUDENT_MENTOR_REGISTER}>
+            <StudentMentorRegister />
+          </PublicRoute>
+
+          <PrivateRoute path={STUDENT_PROFILE_BUILDER}>
+            <ProfileBuilderProvider>
+              <StuProfileBuilder />
+            </ProfileBuilderProvider>
+          </PrivateRoute>
         </Switch>
         <Footer />
       </Router>

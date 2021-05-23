@@ -1,7 +1,7 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { LOGIN } from "../../routes/Routes";
+import { LOGIN } from "../../constants/Routes";
 import "./Error.css";
 
 type ErrorProps = {

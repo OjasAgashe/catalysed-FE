@@ -10,12 +10,13 @@ import {
   ORGANISATION_REGISTER,
   STUDENT_HOME,
   STUDENT_PROFILE_BUILDER,
-} from "../../routes/Routes";
+} from "../../constants/Routes";
 import "./LoginForm.css";
 import Error from "../Error/Error";
 import { LoginActionType, LoginData, LoginState } from "../../types/Login";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useAuth } from "../../api_context/AuthContext";
+import { MENTOR, ORGANISER, STUDENT } from "../../constants/Entities";
 
 type LoginFormProps = {
   state: LoginState;
@@ -56,13 +57,20 @@ const LoginForm = ({ state, dispatch }: LoginFormProps) => {
 
         const response = await postLoginCall(loginData);
 
-        document.cookie = `token=${response.data.jwt};secure`;
+        setCurrentUser({
+          catalysedType: response.data.user.userType,
+          catalysedToken: response.data.jwt,
+          catalysedCreated: response.data.user.profileCreated,
+        });
 
-        setCurrentUser(response.data.user);
         dispatch({ type: "loading", payload: false });
 
+        document.cookie = `catalysedCreated=${response.data.user.profileCreated};secure`;
+        document.cookie = `catalysedToken=${response.data.jwt};secure`;
+        document.cookie = `catalysedType=${response.data.user.userType};secure`;
+
         switch (response.data.user.userType) {
-          case "ORGANIZATION_USER":
+          case ORGANISER:
             if (response.data.user.profileCreated) {
               history.push(ORGANISATION_HOME);
             } else if (response.data.user.profileCreated === false) {
@@ -70,7 +78,7 @@ const LoginForm = ({ state, dispatch }: LoginFormProps) => {
             }
 
             break;
-          case "STUDENT":
+          case STUDENT:
             if (response.data.user.profileCreated) {
               history.push(STUDENT_HOME);
             } else if (response.data.user.profileCreated === false) {
@@ -78,7 +86,7 @@ const LoginForm = ({ state, dispatch }: LoginFormProps) => {
             }
 
             break;
-          case "MENTOR":
+          case MENTOR:
             if (response.data.user.profileCreated) {
               history.push(MENTOR_HOME);
             } else if (response.data.user.profileCreated === false) {

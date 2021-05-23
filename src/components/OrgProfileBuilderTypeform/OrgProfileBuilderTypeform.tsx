@@ -24,7 +24,7 @@ const OrgProfileBuilderTypeform = () => {
   });
 
   const typeformRef = useRef<TypeForm>();
-  const { getProfileCall, postProfileCall } = useProfileBuilder();
+  const { postProfileCall } = useProfileBuilder();
 
   const [answer, setAnswer] = useState<OrgProfileBuilderData>({
     workDescription: "",
@@ -69,15 +69,6 @@ const OrgProfileBuilderTypeform = () => {
     }
   };
 
-  const getData = async () => {
-    try {
-      const response = await getProfileCall("organization");
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const handleOrgProfileTypeformSubmit: React.FormEventHandler<HTMLFormElement> =
     (event) => {
       event.preventDefault();
@@ -102,7 +93,6 @@ const OrgProfileBuilderTypeform = () => {
         answer.primaryLanguage !== ""
       ) {
         sendData(answer);
-        getData();
       }
     };
 

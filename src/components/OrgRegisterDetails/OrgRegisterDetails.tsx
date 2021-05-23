@@ -5,8 +5,8 @@ import {
   OrgRegisterData,
 } from "../../types/OrganisationRegister";
 import OrgRegisterDetailsForm from "./OrgRegisterDetailsForm";
-import axios from "axios";
 import { orgRegisterDetailsReducer } from "../../reducers/orgRegisterDetailsReducer";
+import { useAuth } from "../../api_context/AuthContext";
 
 type OrgRegisterDetailsProps = {
   orgRegisterData: OrgRegisterData;
@@ -47,6 +47,8 @@ const OrgRegisterDetails = ({
     "https://facebook.com",
     "https://instagram.com",
   ];
+
+  const { postRegisterCall } = useAuth();
 
   useEffect(() => {
     orgRegisterDispatch({ type: "currentOrgRegister", payload: "details" });
@@ -235,11 +237,7 @@ const OrgRegisterDetails = ({
 
               dispatch({ type: "error", payload: "" });
 
-              await axios({
-                method: "post",
-                url: "https://level-abode-312509.el.r.appspot.com/register/organization",
-                data: orgRegisterData,
-              });
+              await postRegisterCall(orgRegisterData);
 
               orgRegisterDispatch({ type: "loading", payload: false });
               orgRegisterDispatch({ type: "emailSent", payload: true });
