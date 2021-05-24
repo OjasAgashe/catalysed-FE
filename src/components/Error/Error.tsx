@@ -6,11 +6,12 @@ import "./Error.css";
 
 type ErrorProps = {
   message: string;
+  className?: string;
 };
 
-const Error = ({ message }: ErrorProps) => {
+const Error = ({ message, className="" }: ErrorProps) => {
   return (
-    <Alert variant="danger" className="FormError">
+    <Alert variant="danger" className={`FormError ${className}`}>
       {message === "User already registered in system - Please Login" ? (
         <>
           User already registered in system -{" "}

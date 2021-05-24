@@ -9,6 +9,7 @@ import {
   ORGANISATION_HOME,
   ORGANISATION_PROFILE_BUILDER,
   ORGANISATION_PROGRAM_CREATE,
+  ORGANISATION_VIEW_SEARCH_PROGRAM,
   STUDENT_HOME,
   STUDENT_PROFILE_BUILDER,
 } from "../../constants/Routes";
@@ -48,7 +49,11 @@ const PrivateRoute = (props: {
     if (catalysedType === ORGANISER) {
       if (catalysedCreated) {
         if (
-          [ORGANISATION_HOME, ORGANISATION_PROGRAM_CREATE].includes(props.path)
+          [
+            ORGANISATION_HOME,
+            ORGANISATION_PROGRAM_CREATE,
+            ORGANISATION_VIEW_SEARCH_PROGRAM,
+          ].includes(props.path)
         ) {
           return <Route path={props.path}>{props.children}</Route>;
         } else {

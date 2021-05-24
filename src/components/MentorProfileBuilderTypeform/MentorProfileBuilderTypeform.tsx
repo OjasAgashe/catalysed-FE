@@ -17,6 +17,8 @@ import { mentorProfileBuilderReducer } from "../../reducers/mentorProfileBuilder
 import { MentorProfileBuilderData } from "../../types/MentorProfileBuilder";
 import TypeformProgress from "../TypeformProgress/TypeformProgress";
 import { useProfileBuilder } from "../../api_context/ProfileBuilderContext";
+import { useHistory } from "react-router-dom";
+import { MENTOR_HOME } from "../../constants/Routes";
 
 const MentorProfileBuilderTypeform = () => {
   const [state, dispatch] = useReducer(mentorProfileBuilderReducer, {
@@ -31,7 +33,8 @@ const MentorProfileBuilderTypeform = () => {
   });
 
   const typeformRef = useRef<TypeForm>();
-  const { getProfileCall, postProfileCall } = useProfileBuilder();
+  const { postProfileCall } = useProfileBuilder();
+    const history = useHistory();
 
   const [answer, setAnswer] = useState<MentorProfileBuilderData>({
     birthYear: "",
@@ -91,17 +94,9 @@ const MentorProfileBuilderTypeform = () => {
 
   const sendData = async (data: any) => {
     try {
-      const response = await postProfileCall("mentor", data);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const getData = async () => {
-    try {
-      const response = await getProfileCall("mentor");
-      console.log(response);
+      await postProfileCall("mentor", data);
+      document.cookie = "catalysedCreated=true;secure";
+      history.push(MENTOR_HOME);
     } catch (error) {
       console.log(error);
     }
@@ -151,7 +146,6 @@ const MentorProfileBuilderTypeform = () => {
           experience: answer.previouslyMentored.yoe,
         };
         sendData(object);
-        getData();
       }
     };
 

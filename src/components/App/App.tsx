@@ -17,6 +17,7 @@ import {
   STUDENT_MENTOR_REGISTER,
   STUDENT_PROFILE_BUILDER,
   STUDENT_HOME,
+  ORGANISATION_VIEW_SEARCH_PROGRAM,
 } from "../../constants/Routes";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -30,6 +31,8 @@ import StudentHomePage from "../../pages/StudentHomePage/StudentHomePage";
 import MentorHomePage from "../../pages/MentorHomePage/MentorHomePage";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import PublicRoute from "../PublicRoute/PublicRoute";
+import OrgViewSearchProgramPage from "../../pages/OrgViewSearchProgram/OrgViewSearchProgramPage";
+import { OrgCreateProgramProvider } from "../../api_context/OrgCreateProgramContext";
 
 function App() {
   return (
@@ -38,7 +41,9 @@ function App() {
         <Header />
         <Switch>
           <PrivateRoute path={ORGANISATION_PROGRAM_CREATE}>
-            <CreateProgram />
+            <OrgCreateProgramProvider>
+              <CreateProgram />
+            </OrgCreateProgramProvider>
           </PrivateRoute>
 
           <PublicRoute path={HOME} exact>
@@ -87,6 +92,10 @@ function App() {
             <ProfileBuilderProvider>
               <StuProfileBuilder />
             </ProfileBuilderProvider>
+          </PrivateRoute>
+
+          <PrivateRoute path={ORGANISATION_VIEW_SEARCH_PROGRAM}>
+            <OrgViewSearchProgramPage />
           </PrivateRoute>
         </Switch>
         <Footer />

@@ -9,7 +9,11 @@ type LoadingProgressProps = {
   loadingMessage: string;
 };
 
-const LoadingProgress = ({ loading, emailSent, loadingMessage }: LoadingProgressProps) => {
+const LoadingProgress = ({
+  loading,
+  emailSent,
+  loadingMessage,
+}: LoadingProgressProps) => {
   return (
     <div className="LoadingProgressModal">
       <div className="LoadingProgressContainer">

@@ -16,6 +16,8 @@ import { stuProfileBuilderReducer } from "../../reducers/stuProfileBuilderReduce
 import { StudentProfileBuilderData } from "../../types/StudentProfileBuilder";
 import TypeformProgress from "../TypeformProgress/TypeformProgress";
 import { useProfileBuilder } from "../../api_context/ProfileBuilderContext";
+import { useHistory } from "react-router-dom";
+import { STUDENT_HOME } from "../../constants/Routes";
 
 const StuProfileBuilderTypeform = () => {
   const [state, dispatch] = useReducer(stuProfileBuilderReducer, {
@@ -29,7 +31,8 @@ const StuProfileBuilderTypeform = () => {
   });
 
   const typeformRef = useRef<TypeForm>();
-  const { getProfileCall, postProfileCall } = useProfileBuilder();
+  const { postProfileCall } = useProfileBuilder();
+  const history = useHistory();
 
   const [answer, setAnswer] = useState<StudentProfileBuilderData>({
     birthYear: "",
@@ -87,17 +90,9 @@ const StuProfileBuilderTypeform = () => {
 
   const sendData = async (data: StudentProfileBuilderData) => {
     try {
-      const response = await postProfileCall("student", data);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const getData = async () => {
-    try {
-      const response = await getProfileCall("student");
-      console.log(response);
+      await postProfileCall("student", data);
+      document.cookie = "catalysedCreated=true;secure";
+      history.push(STUDENT_HOME);
     } catch (error) {
       console.log(error);
     }
@@ -127,7 +122,6 @@ const StuProfileBuilderTypeform = () => {
         answer.contactDetails.phone.number !== ""
       ) {
         sendData(answer);
-        getData();
       }
     };
 

@@ -1,39 +1,189 @@
-import React, { useReducer } from "react";
+import React, { useState } from "react";
 import GeneralDetailsForm from "./GeneralDetailsForm";
 import "./CreateProgramForm.css";
-import { orgCreateProgramReducer } from "../../reducers/orgCreateProgramReducer";
 import CoordinatorDetailsForm from "./CoordinatorDetailsForm";
 import MentorDetailsForm from "./MentorDetailsForm";
 import StudentDetailsForm from "./StudentDetailsForm";
 import { Button } from "react-bootstrap";
 import { GiStamper } from "react-icons/gi";
 import { RiDraftLine } from "react-icons/ri";
+import { CreateProgramIllustration } from "../../assets/Illustrations/Illustrations";
+import {
+  CreateProgramActionType,
+  CreateProgramData,
+  CreateProgramState,
+} from "../../types/CreateProgram";
+import { useOrgCreateProgram } from "../../api_context/OrgCreateProgramContext";
+import { useHistory } from "react-router-dom";
+import { ORGANISATION_VIEW_SEARCH_PROGRAM } from "../../constants/Routes";
+import Error from "../Error/Error";
 
-const CreateProgramForm = () => {
-  const [state, dispatch] = useReducer(orgCreateProgramReducer, {
-    selectedDate: null,
-    selectedLanguages: [],
+type CreateProgramFormProps = {
+  state: CreateProgramState;
+  dispatch: React.Dispatch<CreateProgramActionType>;
+};
+
+const CreateProgramForm = ({ state, dispatch }: CreateProgramFormProps) => {
+  const [answer, setAnswer] = useState<CreateProgramData>({
+    title: "",
+    description: "",
+    tentativeStartDate: "",
+    durationInMonths: "",
+    mode: "Virtual",
+    languageRequirements: "",
+    ageLimit: { from: "", to: "" },
+    programLink: "",
+    coordinator: {
+      name: "",
+      email: "",
+      contact: { countryName: "", countryCode: "", number: "" },
+    },
+    studentFields: {
+      subjectRequirements: "",
+      openings: "",
+      applyBy: "",
+      isPaid: false,
+      programFees: "0",
+      generalInstructions: "",
+    },
+    mentorFields: {
+      subjectRequirements: "",
+      openings: "",
+      applyBy: "",
+      generalInstructions: "",
+    },
   });
+
+  const { postCreateProgramCall } = useOrgCreateProgram();
+  const history = useHistory();
+
+  const canMakeAPICall = () => {
+    return (
+      [
+        answer.title,
+        answer.description,
+        answer.tentativeStartDate,
+        answer.durationInMonths,
+        answer.languageRequirements,
+        answer.ageLimit.from,
+        answer.ageLimit.to,
+        answer.programLink,
+        answer.coordinator.name,
+        answer.coordinator.email,
+        answer.coordinator.contact.number,
+        answer.mentorFields.applyBy,
+        answer.mentorFields.generalInstructions,
+        answer.mentorFields.openings,
+        answer.mentorFields.subjectRequirements,
+        answer.studentFields.applyBy,
+        answer.studentFields.generalInstructions,
+        answer.studentFields.openings,
+        answer.studentFields.subjectRequirements,
+      ].includes("") === false
+    );
+  };
+
+  const makeAPICall = async (status: string, message: string) => {
+    try {
+      document.documentElement.scrollTop = 0;
+
+      dispatch({ type: "loadingMessage", payload: message });
+      dispatch({ type: "error", payload: "" });
+
+      await postCreateProgramCall({
+        id: "",
+        status,
+        ...answer,
+      });
+
+      dispatch({ type: "loadingMessage", payload: "" });
+      history.push(ORGANISATION_VIEW_SEARCH_PROGRAM);
+    } catch (error) {
+      document.documentElement.scrollTop =
+        document.documentElement.scrollHeight;
+
+      dispatch({ type: "loadingMessage", payload: "" });
+      dispatch({ type: "error", payload: error.response?.data?.message ?? "" });
+    }
+  };
+
+  const handlePublishBtnClick = () => {
+    dispatch({ type: "validated", payload: true });
+
+    if (Boolean(state.selectedLanguages.length) === false) {
+      dispatch({ type: "isLanguageSelected", payload: true });
+      return;
+    }
+
+    if (answer.coordinator.contact.number.length <= 4) {
+      dispatch({ type: "isInvalid", payload: true });
+      return;
+    }
+
+    if (canMakeAPICall()) {
+      makeAPICall("PUBLISHED", "Publishing program...");
+    }
+  };
+
+  const handleDraftBtnClick = () => {
+    makeAPICall("SAVED_TO_DRAFT", "Saving to draft...");
+  };
 
   return (
     <section className="CreateProgramFormContainer">
+      <div className="CreateProgramWelcomeText">
+        Fill Details for Create Program
+      </div>
       <div className="CreateProgramFirstSection">
-        <GeneralDetailsForm state={state} dispatch={dispatch} />
+        <GeneralDetailsForm
+          answer={answer}
+          setAnswer={setAnswer}
+          state={state}
+          dispatch={dispatch}
+        />
         <div className="CreateProgramFirstSubSection">
-          <CoordinatorDetailsForm />
-          <MentorDetailsForm state={state} dispatch={dispatch} />
+          <img
+            src={CreateProgramIllustration}
+            alt="create program illustration"
+            className="CreateProgramIllustration"
+          />
+          <CoordinatorDetailsForm
+            answer={answer}
+            setAnswer={setAnswer}
+            state={state}
+            dispatch={dispatch}
+          />
         </div>
       </div>
-      <StudentDetailsForm state={state} dispatch={dispatch} />
+      <div className="CreateProgramSecondSection">
+        <MentorDetailsForm
+          answer={answer}
+          setAnswer={setAnswer}
+          state={state}
+          dispatch={dispatch}
+        />
+        <StudentDetailsForm
+          answer={answer}
+          setAnswer={setAnswer}
+          state={state}
+          dispatch={dispatch}
+        />
+      </div>
       <div className="CreateProgramButtonContainer">
-        <Button className="CreateProgramDraftBtn">
+        <Button className="CreateProgramDraftBtn" onClick={handleDraftBtnClick}>
           Save to Draft&nbsp;
           <RiDraftLine />
         </Button>
-        <Button className="CreateProgramPublishBtn">
+        <Button
+          className="CreateProgramPublishBtn"
+          onClick={handlePublishBtnClick}
+        >
           Publish <GiStamper />
         </Button>
       </div>
+      {state.error && (
+        <Error message={state.error} className="CreateProgramErrorMessage" />
+      )}
     </section>
   );
 };
