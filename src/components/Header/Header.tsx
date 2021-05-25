@@ -1,22 +1,47 @@
 import React from "react";
-import { Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Nav, Navbar } from "react-bootstrap";
 import "./Header.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Logo } from "../../assets/Illustrations/Illustrations";
-import {
-  HOME,
-  LOGIN,
-  ORGANISATION_REGISTER,
-  STUDENT_MENTOR_REGISTER,
-} from "../../constants/Routes";
+import { HOME, LOGIN, ORGANISATION_HOME } from "../../constants/Routes";
 import { useAuth } from "../../api_context/AuthContext";
+import { ORGANISER } from "../../constants/Entities";
+import OrgHomeHeader from "./OrgHomeHeader";
+import CommonHomeHeader from "./CommonHomeHeader";
 
 const Header = () => {
-  const { currentUser } = useAuth();
+  const { currentUser, setCurrentUser } = useAuth();
+  const history = useHistory();
+
+  const handleSignOut = () => {
+    const date = new Date(0).toUTCString();
+    document.cookie = `catalysedCreated=;${date}`;
+    document.cookie = `catalysedToken=;${date}`;
+    document.cookie = `catalysedType=;${date}`;
+
+    setCurrentUser({
+      catalysedCreated: false,
+      catalysedToken: "",
+      catalysedType: "",
+    });
+
+    history.push(HOME);
+  };
 
   return (
     <Navbar collapseOnSelect expand="lg" className="Navbar">
-      <Navbar.Brand as={Link} to={HOME} className="NavbarBrand">
+      <Navbar.Brand
+        as={Link}
+        to={
+          currentUser.catalysedToken === "" ||
+          currentUser.catalysedCreated === false
+            ? HOME
+            : currentUser.catalysedType === ORGANISER
+            ? ORGANISATION_HOME
+            : "#"
+        }
+        className="NavbarBrand"
+      >
         <img src={Logo} className="NavbarBrandLogo" alt="brand logo" />
         &nbsp;<span className="NavbarBrandText">CatalysEd</span>
       </Navbar.Brand>
@@ -25,72 +50,20 @@ const Header = () => {
 
       <Navbar.Collapse className="NavbarCollapse" id="navbar-nav">
         <Nav>
-          <Nav.Link
-            as={Link}
-            to={HOME}
-            className="NavbarCollapseNavItem"
-            eventKey="1"
-          >
-            Home
-          </Nav.Link>
-          <NavDropdown
-            title="Ecosystem"
-            id="Ecosystem-NavDropdown"
-            className="NavbarCollapseNavItem"
-          >
-            {/* Change NavDropdown.Item as Link to respective pages */}
-            <NavDropdown.Item eventKey="2">Organisations</NavDropdown.Item>
-            <NavDropdown.Item eventKey="3">Programs</NavDropdown.Item>
-          </NavDropdown>
-          <NavDropdown
-            title="Help Center"
-            id="HelpCenter-NavDropdown"
-            className="NavbarCollapseNavItem"
-          >
-            {/* Change NavDropdown.Item as Link to respective pages */}
-            <NavDropdown.Item eventKey="4">How to get started</NavDropdown.Item>
-            <NavDropdown.Item eventKey="5">In-depth guide</NavDropdown.Item>
-          </NavDropdown>
-          {/* Change FAQ as Link to FAQ page */}
-          <Nav.Link className="NavbarCollapseNavItem" eventKey="6">
-            FAQ
-          </Nav.Link>
+          {currentUser.catalysedToken === "" && <CommonHomeHeader />}
 
-          {currentUser.catalysedType ? (
-            ""
-          ) : (
-            <NavDropdown
-              title="Register"
-              id="Register-NavDropdown"
-              className="NavbarCollapseNavItem"
+          {currentUser.catalysedCreated &&
+            currentUser.catalysedType === ORGANISER && <OrgHomeHeader />}
+
+          {currentUser.catalysedToken ? (
+            <Nav.Link
+              className="NavbarCollapseNavItem SignOutBtn"
+              as="button"
+              onClick={handleSignOut}
+              eventKey="10"
             >
-              <NavDropdown.Item
-                as={Link}
-                to={ORGANISATION_REGISTER}
-                eventKey="7"
-              >
-                Organiser
-              </NavDropdown.Item>
-
-              <NavDropdown.Item
-                as={Link}
-                to={STUDENT_MENTOR_REGISTER}
-                eventKey="8"
-              >
-                Mentor
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to={STUDENT_MENTOR_REGISTER}
-                eventKey="9"
-              >
-                Student
-              </NavDropdown.Item>
-            </NavDropdown>
-          )}
-
-          {currentUser.catalysedType ? (
-            ""
+              Sign Out
+            </Nav.Link>
           ) : (
             <Nav.Link
               className="NavbarCollapseNavItem"
