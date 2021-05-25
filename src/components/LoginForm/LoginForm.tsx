@@ -29,7 +29,7 @@ const LoginForm = ({ state, dispatch }: LoginFormProps) => {
     password: "",
   });
 
-  const { postLoginCall, setCurrentUser } = useAuth();
+  const { postLoginCall, dispatchCurrentUser } = useAuth();
   const history = useHistory();
 
   const handleLoginChange: React.ChangeEventHandler<HTMLInputElement> = (
@@ -57,15 +57,27 @@ const LoginForm = ({ state, dispatch }: LoginFormProps) => {
 
         const response = await postLoginCall(loginData);
 
-        setCurrentUser({
-          catalysedType: response.data.user.userType,
-          catalysedToken: response.data.jwt,
-          catalysedCreated: response.data.user.profileCreated,
+        dispatchCurrentUser({
+          type: "catalysedCreated",
+          payload: response.data.user.profileCreated,
+        });
+        dispatchCurrentUser({
+          type: "catalysedId",
+          payload: response.data.user.id,
+        });
+        dispatchCurrentUser({
+          type: "catalysedToken",
+          payload: response.data.jwt,
+        });
+        dispatchCurrentUser({
+          type: "catalysedType",
+          payload: response.data.user.userType,
         });
 
         dispatch({ type: "loading", payload: false });
 
         document.cookie = `catalysedCreated=${response.data.user.profileCreated};secure`;
+        document.cookie = `catalysedId=${response.data.user.id};secure`;
         document.cookie = `catalysedToken=${response.data.jwt};secure`;
         document.cookie = `catalysedType=${response.data.user.userType};secure`;
 

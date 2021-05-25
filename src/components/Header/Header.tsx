@@ -10,20 +10,34 @@ import OrgHomeHeader from "./OrgHomeHeader";
 import CommonHomeHeader from "./CommonHomeHeader";
 
 const Header = () => {
-  const { currentUser, setCurrentUser } = useAuth();
+  const { currentUser, dispatchCurrentUser } = useAuth();
   const history = useHistory();
 
   const handleSignOut = () => {
-    const date = new Date(0).toUTCString();
-    document.cookie = `catalysedCreated=;${date}`;
-    document.cookie = `catalysedToken=;${date}`;
-    document.cookie = `catalysedType=;${date}`;
-
-    setCurrentUser({
-      catalysedCreated: false,
-      catalysedToken: "",
-      catalysedType: "",
+    dispatchCurrentUser({
+      type: "catalysedCreated",
+      payload: false,
     });
+    dispatchCurrentUser({
+      type: "catalysedId",
+      payload: null,
+    });
+    dispatchCurrentUser({
+      type: "catalysedToken",
+      payload: "",
+    });
+    dispatchCurrentUser({
+      type: "catalysedType",
+      payload: "",
+    });
+
+    if (document.cookie) {
+      const date = new Date(0).toUTCString();
+      document.cookie.split(";").forEach((cookie) => {
+        const name = cookie.split("=")[0];
+        document.cookie = `${name}=;expires=${date}`;
+      });
+    }
 
     history.push(HOME);
   };

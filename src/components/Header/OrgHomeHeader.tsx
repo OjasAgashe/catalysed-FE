@@ -1,5 +1,5 @@
 import React from "react";
-import { Nav } from "react-bootstrap";
+import { Nav, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import {
   ORGANISATION_HOME,
@@ -18,14 +18,19 @@ const OrgHomeHeader = () => {
         Home
       </Nav.Link>
 
-      <Nav.Link
-        as={Link}
-        to={ORGANISATION_PROGRAM_CREATE}
+      <NavDropdown
+        title="Program"
+        id="Program-NavDropdown"
         className="NavbarCollapseNavItem"
-        eventKey="2"
       >
-        Program
-      </Nav.Link>
+        <NavDropdown.Item
+          as={Link}
+          to={ORGANISATION_PROGRAM_CREATE}
+          eventKey="2"
+        >
+          Create Program
+        </NavDropdown.Item>
+      </NavDropdown>
     </>
   );
 };
