@@ -16,7 +16,7 @@ import "./MentorProfileBuilderTypeform.css";
 import { mentorProfileBuilderReducer } from "../../reducers/mentorProfileBuilderReducer";
 import { MentorProfileBuilderData } from "../../types/MentorProfileBuilder";
 import TypeformProgress from "../TypeformProgress/TypeformProgress";
-import { useProfileBuilder } from "../../api_context/ProfileBuilderContext";
+import { useProfileBuilder } from "../../context/api_context/ProfileBuilderContext";
 import { useHistory } from "react-router-dom";
 import { MENTOR_HOME } from "../../constants/Routes";
 

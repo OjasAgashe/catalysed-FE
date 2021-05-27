@@ -15,8 +15,9 @@ import "./LoginForm.css";
 import Error from "../Error/Error";
 import { LoginActionType, LoginData, LoginState } from "../../types/Login";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { useAuth } from "../../api_context/AuthContext";
+import { useAuth } from "../../context/api_context/AuthContext";
 import { MENTOR, ORGANISER, STUDENT } from "../../constants/Entities";
+import { useCookie } from "../../context/cookie_context/CookieContext";
 
 type LoginFormProps = {
   state: LoginState;
@@ -29,7 +30,8 @@ const LoginForm = ({ state, dispatch }: LoginFormProps) => {
     password: "",
   });
 
-  const { postLoginCall, dispatchCurrentUser } = useAuth();
+  const { postLoginCall } = useAuth();
+  const { setAllCookies } = useCookie();
   const history = useHistory();
 
   const handleLoginChange: React.ChangeEventHandler<HTMLInputElement> = (
@@ -56,30 +58,14 @@ const LoginForm = ({ state, dispatch }: LoginFormProps) => {
         dispatch({ type: "error", payload: "" });
 
         const response = await postLoginCall(loginData);
-
-        dispatchCurrentUser({
-          type: "catalysedCreated",
-          payload: response.data.user.profileCreated,
-        });
-        dispatchCurrentUser({
-          type: "catalysedId",
-          payload: response.data.user.id,
-        });
-        dispatchCurrentUser({
-          type: "catalysedToken",
-          payload: response.data.jwt,
-        });
-        dispatchCurrentUser({
-          type: "catalysedType",
-          payload: response.data.user.userType,
-        });
-
         dispatch({ type: "loading", payload: false });
 
-        document.cookie = `catalysedCreated=${response.data.user.profileCreated};secure`;
-        document.cookie = `catalysedId=${response.data.user.id};secure`;
-        document.cookie = `catalysedToken=${response.data.jwt};secure`;
-        document.cookie = `catalysedType=${response.data.user.userType};secure`;
+        setAllCookies(
+          response.data.user.profileCreated,
+          response.data.user.id,
+          response.data.jwt,
+          response.data.user.userType
+        );
 
         switch (response.data.user.userType) {
           case ORGANISER:

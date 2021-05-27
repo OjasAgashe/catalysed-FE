@@ -15,7 +15,7 @@ import "./StuProfileBuilderTypeform.css";
 import { stuProfileBuilderReducer } from "../../reducers/stuProfileBuilderReducer";
 import { StudentProfileBuilderData } from "../../types/StudentProfileBuilder";
 import TypeformProgress from "../TypeformProgress/TypeformProgress";
-import { useProfileBuilder } from "../../api_context/ProfileBuilderContext";
+import { useProfileBuilder } from "../../context/api_context/ProfileBuilderContext";
 import { useHistory } from "react-router-dom";
 import { STUDENT_HOME } from "../../constants/Routes";
 

@@ -48,13 +48,14 @@
 .ProgramCard
   :is(.ProgramCardTSDate, .ProgramCardDIMonths, .ProgramCardMode, .ProgramCardStatus, .ProgramCardLanguage)
   .Data {
-  background-color: var(--blue-gray-100);
+  /* background-color: var(--blue-gray-100); */
   padding: 0.3rem 0.5rem;
   border-radius: 5px;
-  border: 1px solid var(--blue-gray-300);
+  border: 1px solid var(--blue-gray-700);
   box-shadow: 0.5px 0.5px var(--blue-gray-300),
     inset 1.5px 1.5px var(--blue-gray-300);
   color: var(--blue-gray-700);
+  font-weight: 600;
 }
 
 .ProgramCard .CardLanguageRequirementsDiv .Data {

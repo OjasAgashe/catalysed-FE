@@ -13,9 +13,9 @@ import {
   CreateProgramData,
   CreateProgramState,
 } from "../../types/CreateProgram";
-import { useOrgCreateProgram } from "../../api_context/OrgCreateProgramContext";
+import { useOrgCreateProgram } from "../../context/api_context/OrgCreateProgramContext";
 import { useHistory } from "react-router-dom";
-import { ORGANISATION_VIEW_SEARCH_PROGRAM } from "../../constants/Routes";
+import { ORGANISATION_PROGRAM_VIEW_SEARCH } from "../../constants/Routes";
 import Error from "../Error/Error";
 
 type CreateProgramFormProps = {
@@ -97,7 +97,7 @@ const CreateProgramForm = ({ state, dispatch }: CreateProgramFormProps) => {
       });
 
       dispatch({ type: "loadingMessage", payload: "" });
-      history.push(ORGANISATION_VIEW_SEARCH_PROGRAM);
+      history.push(ORGANISATION_PROGRAM_VIEW_SEARCH);
     } catch (error) {
       document.documentElement.scrollTop =
         document.documentElement.scrollHeight;

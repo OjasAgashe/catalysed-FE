@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import {
   ORGANISATION_HOME,
   ORGANISATION_PROGRAM_CREATE,
-  ORGANISATION_VIEW_SEARCH_PROGRAM,
+  ORGANISATION_PROGRAM_VIEW_SEARCH,
 } from "../../constants/Routes";
 
 const OrgHomeHeader = () => {
@@ -34,7 +34,7 @@ const OrgHomeHeader = () => {
 
         <NavDropdown.Item
           as={Link}
-          to={ORGANISATION_VIEW_SEARCH_PROGRAM}
+          to={ORGANISATION_PROGRAM_VIEW_SEARCH}
           eventKey="3"
         >
           View/Search

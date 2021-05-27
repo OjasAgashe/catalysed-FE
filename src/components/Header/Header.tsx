@@ -1,43 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import "./Header.css";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { Logo } from "../../assets/Illustrations/Illustrations";
 import { HOME, LOGIN, ORGANISATION_HOME } from "../../constants/Routes";
-import { useAuth } from "../../api_context/AuthContext";
+import { useCookie } from "../../context/cookie_context/CookieContext";
 import { ORGANISER } from "../../constants/Entities";
 import OrgHomeHeader from "./OrgHomeHeader";
 import CommonHomeHeader from "./CommonHomeHeader";
 
 const Header = () => {
-  const { currentUser, dispatchCurrentUser } = useAuth();
+  const location = useLocation();
+
+  useEffect(() => {}, [location.pathname]);
+
+  const {
+    setAllCookies,
+    getCatalysedTokenCookie,
+    getCatalysedCreatedCookie,
+    getCatalysedTypeCookie,
+  } = useCookie();
   const history = useHistory();
 
   const handleSignOut = () => {
-    dispatchCurrentUser({
-      type: "catalysedCreated",
-      payload: false,
-    });
-    dispatchCurrentUser({
-      type: "catalysedId",
-      payload: null,
-    });
-    dispatchCurrentUser({
-      type: "catalysedToken",
-      payload: "",
-    });
-    dispatchCurrentUser({
-      type: "catalysedType",
-      payload: "",
-    });
-
-    if (document.cookie) {
-      const date = new Date(0).toUTCString();
-      document.cookie.split(";").forEach((cookie) => {
-        const name = cookie.split("=")[0];
-        document.cookie = `${name}=;expires=${date}`;
-      });
-    }
+    setAllCookies(false, null, "", "");
 
     history.push(HOME);
   };
@@ -47,10 +33,10 @@ const Header = () => {
       <Navbar.Brand
         as={Link}
         to={
-          currentUser.catalysedToken === "" ||
-          currentUser.catalysedCreated === false
+          getCatalysedTokenCookie() === "" ||
+          getCatalysedCreatedCookie() === false
             ? HOME
-            : currentUser.catalysedType === ORGANISER
+            : getCatalysedTypeCookie() === ORGANISER
             ? ORGANISATION_HOME
             : "#"
         }
@@ -64,12 +50,12 @@ const Header = () => {
 
       <Navbar.Collapse className="NavbarCollapse" id="navbar-nav">
         <Nav>
-          {currentUser.catalysedToken === "" && <CommonHomeHeader />}
+          {getCatalysedTokenCookie() === "" && <CommonHomeHeader />}
 
-          {currentUser.catalysedCreated &&
-            currentUser.catalysedType === ORGANISER && <OrgHomeHeader />}
+          {getCatalysedCreatedCookie() &&
+            getCatalysedTypeCookie() === ORGANISER && <OrgHomeHeader />}
 
-          {currentUser.catalysedToken ? (
+          {getCatalysedTokenCookie() ? (
             <Nav.Link
               className="NavbarCollapseNavItem SignOutBtn"
               as="button"

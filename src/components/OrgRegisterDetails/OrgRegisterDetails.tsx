@@ -6,7 +6,7 @@ import {
 } from "../../types/OrganisationRegister";
 import OrgRegisterDetailsForm from "./OrgRegisterDetailsForm";
 import { orgRegisterDetailsReducer } from "../../reducers/orgRegisterDetailsReducer";
-import { useAuth } from "../../api_context/AuthContext";
+import { useAuth } from "../../context/api_context/AuthContext";
 
 type OrgRegisterDetailsProps = {
   orgRegisterData: OrgRegisterData;

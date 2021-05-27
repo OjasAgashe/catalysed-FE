@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useAuth } from "../../api_context/AuthContext";
 import { Route, useHistory } from "react-router-dom";
 import {
   MENTOR_HOME,
@@ -10,43 +9,44 @@ import {
   STUDENT_PROFILE_BUILDER,
 } from "../../constants/Routes";
 import { MENTOR, ORGANISER, STUDENT } from "../../constants/Entities";
+import { useCookie } from "../../context/cookie_context/CookieContext";
 
 const PublicRoute = (props: {
   children: React.ReactNode;
   path: string;
   exact?: boolean;
 }) => {
-  const { currentUser } = useAuth();
+  const { getCatalysedTypeCookie, getCatalysedCreatedCookie } = useCookie();
   const history = useHistory();
 
   useEffect(() => {
-    switch (currentUser.catalysedType) {
+    switch (getCatalysedTypeCookie()) {
       case ORGANISER:
-        if (currentUser.catalysedCreated) {
+        if (getCatalysedCreatedCookie()) {
           history.push(ORGANISATION_HOME);
-        } else if (currentUser.catalysedCreated === false) {
+        } else if (getCatalysedCreatedCookie() === false) {
           history.push(ORGANISATION_PROFILE_BUILDER);
         }
 
         break;
       case STUDENT:
-        if (currentUser.catalysedCreated) {
+        if (getCatalysedCreatedCookie()) {
           history.push(STUDENT_HOME);
-        } else if (currentUser.catalysedCreated === false) {
+        } else if (getCatalysedCreatedCookie() === false) {
           history.push(STUDENT_PROFILE_BUILDER);
         }
 
         break;
       case MENTOR:
-        if (currentUser.catalysedCreated) {
+        if (getCatalysedCreatedCookie()) {
           history.push(MENTOR_HOME);
-        } else if (currentUser.catalysedCreated === false) {
+        } else if (getCatalysedCreatedCookie() === false) {
           history.push(MENTOR_PROFILE_BUILDER);
         }
 
         break;
     }
-  }, [currentUser.catalysedCreated, currentUser.catalysedType, history]);
+  }, [getCatalysedCreatedCookie, getCatalysedTypeCookie, history]);
 
   return (
     <Route path={props.path} exact={props.exact ?? false}>

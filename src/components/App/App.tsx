@@ -17,14 +17,14 @@ import {
   STUDENT_MENTOR_REGISTER,
   STUDENT_PROFILE_BUILDER,
   STUDENT_HOME,
-  ORGANISATION_VIEW_SEARCH_PROGRAM,
+  ORGANISATION_PROGRAM_VIEW_SEARCH,
 } from "../../constants/Routes";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import "./App.css";
 import MentorProfileBuilder from "../../pages/MentorProfileBuilder/MentorProfileBuilder";
 import StuProfileBuilder from "../../pages/StuProfileBuilder/StuProfileBuilder";
-import { ProfileBuilderProvider } from "../../api_context/ProfileBuilderContext";
+import { ProfileBuilderProvider } from "../../context/api_context/ProfileBuilderContext";
 import CreateProgram from "../../pages/CreateProgram/CreateProgram";
 import OrgHomePage from "../../pages/OrgHomePage/OrgHomePage";
 import StudentHomePage from "../../pages/StudentHomePage/StudentHomePage";
@@ -32,7 +32,7 @@ import MentorHomePage from "../../pages/MentorHomePage/MentorHomePage";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import PublicRoute from "../PublicRoute/PublicRoute";
 import OrgViewSearchProgramPage from "../../pages/OrgViewSearchProgram/OrgViewSearchProgramPage";
-import { OrgCreateProgramProvider } from "../../api_context/OrgCreateProgramContext";
+import { OrgCreateProgramProvider } from "../../context/api_context/OrgCreateProgramContext";
 
 function App() {
   return (
@@ -80,7 +80,7 @@ function App() {
             </ProfileBuilderProvider>
           </PrivateRoute>
 
-          <PrivateRoute path={ORGANISATION_VIEW_SEARCH_PROGRAM}>
+          <PrivateRoute path={ORGANISATION_PROGRAM_VIEW_SEARCH}>
             <OrgCreateProgramProvider>
               <OrgViewSearchProgramPage />
             </OrgCreateProgramProvider>

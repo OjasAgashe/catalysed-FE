@@ -11,7 +11,7 @@ import { OrgProfileBuilderData } from "../../types/OrganisationProfileBuilder";
 import { Form } from "react-bootstrap";
 import { orgProfileBuilderReducer } from "../../reducers/orgProfileBuilderReducer";
 import TypeformProgress from "../TypeformProgress/TypeformProgress";
-import { useProfileBuilder } from "../../api_context/ProfileBuilderContext";
+import { useProfileBuilder } from "../../context/api_context/ProfileBuilderContext";
 import { useHistory } from "react-router-dom";
 import { ORGANISATION_HOME } from "../../constants/Routes";
 

@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import axios, { AxiosResponse } from "axios";
-import { OrgProfileBuilderData } from "../types/OrganisationProfileBuilder";
-import { StudentProfileBuilderData } from "../types/StudentProfileBuilder";
-import { useAuth } from "./AuthContext";
+import { OrgProfileBuilderData } from "../../types/OrganisationProfileBuilder";
+import { StudentProfileBuilderData } from "../../types/StudentProfileBuilder";
+import { useCookie } from "../cookie_context/CookieContext";
 // import { MentorProfileBuilderData } from "../types/MentorProfileBuilder";
 
 interface ProfileBuilderProviderReturns {
@@ -26,20 +26,24 @@ export const ProfileBuilderProvider: React.FC<React.ReactNode> = (props) => {
       "http://catalyseddev-env.eba-qewmmmrf.us-east-1.elasticbeanstalk.com/",
   });
 
-  const { currentUser } = useAuth();
+  const { getCatalysedTokenCookie } = useCookie();
 
   function postProfileCall(
     entity: string,
     data: OrgProfileBuilderData | StudentProfileBuilderData | any
   ) {
+    const catalysedToken = getCatalysedTokenCookie();
+
     return instance.post(`/profile/${entity}`, data, {
-      headers: { Authorization: `Bearer ${currentUser.catalysedToken}` },
+      headers: { Authorization: `Bearer ${catalysedToken}` },
     });
   }
 
   function getProfileCall(entity: string) {
+    const catalysedToken = getCatalysedTokenCookie();
+
     return instance.get(`/profile/${entity}`, {
-      headers: { Authorization: `Bearer ${currentUser.catalysedToken}` },
+      headers: { Authorization: `Bearer ${catalysedToken}` },
     });
   }
 

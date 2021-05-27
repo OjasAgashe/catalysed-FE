@@ -1,6 +1,6 @@
 import React from "react";
 import { Redirect, Route, useLocation } from "react-router-dom";
-import { useAuth } from "../../api_context/AuthContext";
+import { ProfileBuilderProvider } from "../../context/api_context/ProfileBuilderContext";
 import { MENTOR, ORGANISER, STUDENT } from "../../constants/Entities";
 import {
   LOGIN,
@@ -9,38 +9,25 @@ import {
   ORGANISATION_HOME,
   ORGANISATION_PROFILE_BUILDER,
   ORGANISATION_PROGRAM_CREATE,
-  ORGANISATION_VIEW_SEARCH_PROGRAM,
+  ORGANISATION_PROGRAM_VIEW_SEARCH,
   STUDENT_HOME,
   STUDENT_PROFILE_BUILDER,
 } from "../../constants/Routes";
 import MentorProfileBuilder from "../../pages/MentorProfileBuilder/MentorProfileBuilder";
 import OrgProfileBuilder from "../../pages/OrgProfileBuilder/OrgProfileBuilder";
 import StuProfileBuilder from "../../pages/StuProfileBuilder/StuProfileBuilder";
+import { useCookie } from "../../context/cookie_context/CookieContext";
 
 const PrivateRoute = (props: {
   children: React.ReactNode;
   path: string;
 }): JSX.Element => {
-  const { currentUser } = useAuth();
+  const {
+    getCatalysedTokenCookie,
+    getCatalysedTypeCookie,
+    getCatalysedCreatedCookie,
+  } = useCookie();
   const location = useLocation();
-
-  const getTypeCreatedFromCookie = () => {
-    let catalysedType: string = "";
-    let catalysedCreated: boolean = false;
-
-    document.cookie.split(";").forEach((cookie) => {
-      const [name, value] = cookie.split("=");
-
-      if (name.trim() === "catalysedType") {
-        catalysedType = value;
-      } else if (name.trim() === "catalysedCreated") {
-        value === "true"
-          ? (catalysedCreated = true)
-          : (catalysedCreated = false);
-      }
-    });
-    return validatedRender(catalysedType, catalysedCreated);
-  };
 
   const validatedRender = (
     catalysedType: string,
@@ -52,23 +39,25 @@ const PrivateRoute = (props: {
           [
             ORGANISATION_HOME,
             ORGANISATION_PROGRAM_CREATE,
-            ORGANISATION_VIEW_SEARCH_PROGRAM,
+            ORGANISATION_PROGRAM_VIEW_SEARCH,
           ].includes(props.path)
         ) {
           return <Route path={props.path}>{props.children}</Route>;
         } else {
           return <Redirect to={ORGANISATION_HOME} />;
         }
-      }
-
-      if (location.pathname !== ORGANISATION_PROFILE_BUILDER) {
-        return <Redirect to={ORGANISATION_PROFILE_BUILDER} />;
       } else {
-        return (
-          <Route path={ORGANISATION_PROFILE_BUILDER}>
-            <OrgProfileBuilder />
-          </Route>
-        );
+        if (location.pathname !== ORGANISATION_PROFILE_BUILDER) {
+          return <Redirect to={ORGANISATION_PROFILE_BUILDER} />;
+        } else {
+          return (
+            <ProfileBuilderProvider>
+              <Route path={ORGANISATION_PROFILE_BUILDER}>
+                <OrgProfileBuilder />
+              </Route>
+            </ProfileBuilderProvider>
+          );
+        }
       }
     }
 
@@ -79,16 +68,18 @@ const PrivateRoute = (props: {
         } else {
           return <Redirect to={STUDENT_HOME} />;
         }
-      }
-
-      if (location.pathname !== STUDENT_PROFILE_BUILDER) {
-        return <Redirect to={STUDENT_PROFILE_BUILDER} />;
       } else {
-        return (
-          <Route path={STUDENT_PROFILE_BUILDER}>
-            <StuProfileBuilder />
-          </Route>
-        );
+        if (location.pathname !== STUDENT_PROFILE_BUILDER) {
+          return <Redirect to={STUDENT_PROFILE_BUILDER} />;
+        } else {
+          return (
+            <ProfileBuilderProvider>
+              <Route path={STUDENT_PROFILE_BUILDER}>
+                <StuProfileBuilder />
+              </Route>
+            </ProfileBuilderProvider>
+          );
+        }
       }
     }
 
@@ -99,26 +90,26 @@ const PrivateRoute = (props: {
         } else {
           return <Redirect to={MENTOR_HOME} />;
         }
-      }
-
-      if (location.pathname !== MENTOR_PROFILE_BUILDER) {
-        return <Redirect to={MENTOR_PROFILE_BUILDER} />;
       } else {
-        return (
-          <Route path={MENTOR_PROFILE_BUILDER}>
-            <MentorProfileBuilder />
-          </Route>
-        );
+        if (location.pathname !== MENTOR_PROFILE_BUILDER) {
+          return <Redirect to={MENTOR_PROFILE_BUILDER} />;
+        } else {
+          return (
+            <ProfileBuilderProvider>
+              <Route path={MENTOR_PROFILE_BUILDER}>
+                <MentorProfileBuilder />
+              </Route>
+            </ProfileBuilderProvider>
+          );
+        }
       }
     }
 
     return <Redirect to={LOGIN} />;
   };
 
-  return currentUser.catalysedToken ? (
-    validatedRender(currentUser.catalysedType, currentUser.catalysedCreated)
-  ) : document.cookie ? (
-    getTypeCreatedFromCookie()
+  return getCatalysedTokenCookie() ? (
+    validatedRender(getCatalysedTypeCookie(), getCatalysedCreatedCookie())
   ) : (
     <Redirect to={LOGIN} />
   );

@@ -3,7 +3,8 @@
 }
 
 .OrgProfileGreet h4 {
-  color: var(--instagram-code);
+  color: var(--cyan-700);
+  text-shadow: 0.3px 0.3px 0.4px var(--blue-gray-500);
 }
 
 .OrgProfileGreet .StartBtn {

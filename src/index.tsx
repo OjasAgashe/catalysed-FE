@@ -4,12 +4,15 @@ import App from "./components/App/App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./common.css";
-import { AuthProvider } from "./api_context/AuthContext";
+import { AuthProvider } from "./context/api_context/AuthContext";
+import { CookieProvider } from "./context/cookie_context/CookieContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <AuthProvider>
-      <App />
+      <CookieProvider>
+        <App />
+      </CookieProvider>
     </AuthProvider>
   </React.StrictMode>,
   document.getElementById("root")

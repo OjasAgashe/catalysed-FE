@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import axios, { AxiosResponse } from "axios";
-import { useAuth } from "./AuthContext";
+import { useCookie } from "../cookie_context/CookieContext";
 
 interface OrgCreateProgramProviderReturns {
   postCreateProgramCall: (data: any) => Promise<AxiosResponse<any>>;
@@ -20,17 +20,22 @@ export const OrgCreateProgramProvider: React.FC<React.ReactNode> = (props) => {
       "http://catalyseddev-env.eba-qewmmmrf.us-east-1.elasticbeanstalk.com/",
   });
 
-  const { currentUser } = useAuth();
+  const { getCatalysedTokenCookie, getCatalysedIdCookie } = useCookie();
 
   function postCreateProgramCall(data: any) {
+    const catalysedToken = getCatalysedTokenCookie();
+
     return instance.post(`/program`, data, {
-      headers: { Authorization: `Bearer ${currentUser.catalysedToken}` },
+      headers: { Authorization: `Bearer ${catalysedToken}` },
     });
   }
 
   function getProgramsMetaList() {
-    return instance.get(`/organization/${currentUser.catalysedId}/programs`, {
-      headers: { Authorization: `Bearer ${currentUser.catalysedToken}` },
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.get(`/organization/${catalysedId}/programs`, {
+      headers: { Authorization: `Bearer ${catalysedToken}` },
     });
   }
 
