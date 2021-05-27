@@ -1,8 +1,8 @@
 /* Pages */
 
-/* OrganisationRegister, Login, StudentMentorRegister, OrgProfileBuilder, MentorProfileBuilder, StuProfileBuilder */
+/* OrganisationRegister, Login, StudentMentorRegister, OrgProfileBuilder, MentorProfileBuilder, StuProfileBuilder, OrgCreateProgramPage, OrgViewSearchProgramPage */
 
-:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage, .OrgProfileBuilder, .MentorProfileBuilder, .StuProfileBuilder, .OrgCreateProgramPage) {
+:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage, .OrgProfileBuilder, .MentorProfileBuilder, .StuProfileBuilder, .OrgCreateProgramPage, .OrgViewSearchProgramPage) {
   background-color: var(--red-100);
   min-height: 85vh;
 }

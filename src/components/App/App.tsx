@@ -80,6 +80,12 @@ function App() {
             </ProfileBuilderProvider>
           </PrivateRoute>
 
+          <PrivateRoute path={ORGANISATION_VIEW_SEARCH_PROGRAM}>
+            <OrgCreateProgramProvider>
+              <OrgViewSearchProgramPage />
+            </OrgCreateProgramProvider>
+          </PrivateRoute>
+
           <PrivateRoute path={STUDENT_HOME}>
             <StudentHomePage />
           </PrivateRoute>
@@ -92,10 +98,6 @@ function App() {
             <ProfileBuilderProvider>
               <StuProfileBuilder />
             </ProfileBuilderProvider>
-          </PrivateRoute>
-
-          <PrivateRoute path={ORGANISATION_VIEW_SEARCH_PROGRAM}>
-            <OrgViewSearchProgramPage />
           </PrivateRoute>
         </Switch>
         <Footer />

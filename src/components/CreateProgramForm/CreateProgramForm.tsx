@@ -126,6 +126,16 @@ const CreateProgramForm = ({ state, dispatch }: CreateProgramFormProps) => {
   };
 
   const handleDraftBtnClick = () => {
+    dispatch({ type: "error", payload: "" });
+
+    if (answer.title === "") {
+      dispatch({
+        type: "error",
+        payload: 'To "save to draft", atleast fill the title.',
+      });
+      return;
+    }
+
     makeAPICall("SAVED_TO_DRAFT", "Saving to draft...");
   };
 

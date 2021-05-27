@@ -1,0 +1,110 @@
+.OrgViewSearchProgram {
+  padding: 2rem !important;
+}
+
+.FilterBarFormNImgContainer {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.ViewAndSearchProgramIllustration {
+  max-width: 300px;
+  padding: 2rem 1rem 1rem;
+}
+
+.OrgFilterBarText {
+  padding: 0 2rem 3rem !important;
+  font-family: "KoHo", sans-serif;
+  font-size: 2.5rem !important;
+  color: var(--facebook-code) !important;
+  font-weight: 600 !important;
+}
+
+.OrgSearchFormInputGroup {
+  max-width: 30rem !important;
+  margin: 2rem auto;
+}
+
+.OrgSearchIconInput {
+  border-bottom: 1px solid var(--blue-gray-700);
+  border-bottom-left-radius: 3px;
+  padding-left: 1rem;
+}
+
+.OrgSearchIcon {
+  margin-top: 1.5rem;
+  font-size: 1.35rem;
+  color: var(--blue-gray-700);
+}
+
+.SearchInputFormControl {
+  font-size: 1.5rem !important;
+  color: var(--blue-gray-700) !important;
+}
+
+.FilterCategoryRadioGroup {
+  text-align: center;
+}
+
+.FilterCategoryRadioBtn {
+  font-size: 1.2rem;
+  margin: 0 1rem;
+  font-weight: 550;
+  color: var(--blue-gray-700);
+}
+
+/* Over riding */
+.form-check-input[type="radio"] {
+  cursor: pointer !important;
+}
+/*  */
+
+.OrgViewSearchProgram .CreateProgramTextContainer {
+  width: fit-content;
+  margin: 1.5rem auto;
+  border-radius: 5px;
+}
+
+.CreateProgramTextContainer .CreateProgramText {
+  padding: 0.3rem 1.4rem;
+  border-radius: 5px;
+  font-size: 1.3rem;
+}
+
+.CreateProgramText .CRClickHereLink {
+  text-decoration: none;
+  color: var(--blue-gray-700);
+  font-weight: 600;
+}
+
+.CreateProgramText .CRClickHereLink:hover {
+  text-decoration: underline;
+}
+
+.OrgViewSearchProgram .CreateProgramText {
+  animation-name: box-shadow-animation;
+  animation-iteration-count: infinite;
+  animation-duration: 1.5s;
+}
+
+@keyframes box-shadow-animation {
+  50% {
+    box-shadow: 1px 1px 5px var(--blue-gray-500);
+  }
+}
+
+.OrgViewSearchProgram .ProgramCardContainer {
+  display: flex;
+  max-width: 1200px;
+  margin: auto;
+  padding-bottom: 2rem;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.SearchNotFoundText {
+  font-size: 2rem;
+  color: var(--blue-gray-700);
+}

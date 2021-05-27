@@ -4,6 +4,7 @@ import { useAuth } from "./AuthContext";
 
 interface OrgCreateProgramProviderReturns {
   postCreateProgramCall: (data: any) => Promise<AxiosResponse<any>>;
+  getProgramsMetaList: () => Promise<AxiosResponse<any>>;
 }
 
 const OrgCreateProgramContext =
@@ -27,8 +28,15 @@ export const OrgCreateProgramProvider: React.FC<React.ReactNode> = (props) => {
     });
   }
 
+  function getProgramsMetaList() {
+    return instance.get(`/organization/${currentUser.catalysedId}/programs`, {
+      headers: { Authorization: `Bearer ${currentUser.catalysedToken}` },
+    });
+  }
+
   const values = {
     postCreateProgramCall,
+    getProgramsMetaList,
   };
 
   return (

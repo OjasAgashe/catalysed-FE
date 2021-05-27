@@ -1,0 +1,104 @@
+.ProgramCardContainer .ProgramCard {
+  border-left: 1px solid var(--blue-gray-300);
+  border-top: 1px solid var(--blue-gray-300);
+  width: 20rem;
+  margin: 1rem;
+  background-color: var(--drover-code);
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px var(--blue-gray-300),
+    -6px -6px 5px var(--blue-gray-100);
+
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ProgramCardContainer .ProgramCard:hover {
+  box-shadow: 2px 2px 4px var(--blue-gray-300), -3px -3px 2px var(--white);
+}
+
+.ProgramCard
+  :is(.ProgramCardTSDate, .ProgramCardDIMonths, .ProgramCardMode, .ProgramCardLanguage, .ProgramCardStatus) {
+  margin: 0.8rem auto;
+}
+
+.ProgramCard .ProgramCardTitle {
+  font-size: 2rem;
+  color: var(--blue-gray-700);
+  height: 6rem;
+  overflow: hidden;
+  padding: 1rem;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.ProgramCard .ProgramCardDetails {
+  padding: 1rem;
+  padding-bottom: 0;
+}
+
+.ProgramCard
+  :is(.ProgramCardTSDate, .ProgramCardDIMonths, .ProgramCardMode, .ProgramCardStatus, .ProgramCardLanguage)
+  .Text {
+  font-size: 1.2rem;
+  color: var(--common-home-section-four-600);
+}
+
+.ProgramCard
+  :is(.ProgramCardTSDate, .ProgramCardDIMonths, .ProgramCardMode, .ProgramCardStatus, .ProgramCardLanguage)
+  .Data {
+  background-color: var(--blue-gray-100);
+  padding: 0.3rem 0.5rem;
+  border-radius: 5px;
+  border: 1px solid var(--blue-gray-300);
+  box-shadow: 0.5px 0.5px var(--blue-gray-300),
+    inset 1.5px 1.5px var(--blue-gray-300);
+  color: var(--blue-gray-700);
+}
+
+.ProgramCard .CardLanguageRequirementsDiv .Data {
+  display: inline-block;
+  margin: 0.2rem 0.3rem;
+}
+
+.ProgramCardLanguage .NoLangData {
+  display: block !important;
+  margin: 0.2rem 0.3rem !important;
+  width: max-content !important;
+}
+
+.ProgramCard .ProgramCardButton {
+  padding: 1rem;
+  padding-top: 0;
+}
+
+.ViewDetailsBtn {
+  border: none;
+  border-radius: 50%;
+  background-color: var(--invalid-feedback);
+  color: var(--white);
+  cursor: pointer;
+  padding-bottom: 0.3rem;
+  float: right;
+  width: 3rem;
+  height: 3rem;
+  border: 4px solid var(--blue-gray-300);
+}
+
+.ViewDetailsBtn:hover {
+  transform: scale(1.1);
+}
+
+.ExpandCardBtnIcon {
+  font-size: 1.1rem;
+  animation-name: scale-size;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+}
+
+@keyframes scale-size {
+  50% {
+    padding: 1px;
+  }
+}

@@ -5,7 +5,10 @@ import CommonHomeGirl from "./common_home_girl.webp";
 import CommonHomeMouse from "./common_home_mouse.webp";
 import CommonHomeSearch from "./common_home_search.webp";
 import CreateProgramIllustration from "./create_program_illustration.svg";
+import FooterBackground from "./footer-background.webp";
+import HeaderBackground from "./header-background.webp";
 import Logo from "./logo.png";
+import OrgViewAndSearchProgram from "./org_view_and_search_program.svg";
 
 export {
   CommonHomeBoy,
@@ -15,5 +18,8 @@ export {
   CommonHomeMouse,
   CommonHomeSearch,
   CreateProgramIllustration,
+  FooterBackground,
+  HeaderBackground,
   Logo,
+  OrgViewAndSearchProgram,
 };
