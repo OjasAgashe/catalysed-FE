@@ -18,6 +18,9 @@ import {
   STUDENT_PROFILE_BUILDER,
   STUDENT_HOME,
   ORGANISATION_PROGRAM_VIEW_SEARCH,
+  ORGANISATION_PROGRAM_DETAILS,
+  ORGANISATION_PROGRAM_INVITATIONS,
+  ORGANISATION_PROGRAM_PARTICIPANTS,
 } from "../../constants/Routes";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -33,6 +36,9 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import PublicRoute from "../PublicRoute/PublicRoute";
 import OrgViewSearchProgramPage from "../../pages/OrgViewSearchProgram/OrgViewSearchProgramPage";
 import { OrgCreateProgramProvider } from "../../context/api_context/OrgCreateProgramContext";
+import OrgProgramDetailsPage from "../../pages/OrgProgramDetails/OrgProgramDetailsPage";
+import OrgProgramInvitationsPage from "../../pages/OrgProgramDetails/OrgProgramInvitationsPage";
+import OrgProgramParticipantsPage from "../../pages/OrgProgramDetails/OrgProgramParticipantsPage";
 
 function App() {
   return (
@@ -78,6 +84,26 @@ function App() {
             <ProfileBuilderProvider>
               <OrgProfileBuilder />
             </ProfileBuilderProvider>
+          </PrivateRoute>
+
+          <PrivateRoute path={`${ORGANISATION_PROGRAM_DETAILS}/:programId`}>
+            <OrgCreateProgramProvider>
+              <OrgProgramDetailsPage />
+            </OrgCreateProgramProvider>
+          </PrivateRoute>
+
+          <PrivateRoute path={`${ORGANISATION_PROGRAM_INVITATIONS}/:programId`}>
+            <OrgCreateProgramProvider>
+              <OrgProgramInvitationsPage />
+            </OrgCreateProgramProvider>
+          </PrivateRoute>
+
+          <PrivateRoute
+            path={`${ORGANISATION_PROGRAM_PARTICIPANTS}/:programId`}
+          >
+            <OrgCreateProgramProvider>
+              <OrgProgramParticipantsPage />
+            </OrgCreateProgramProvider>
           </PrivateRoute>
 
           <PrivateRoute path={ORGANISATION_PROGRAM_VIEW_SEARCH}>

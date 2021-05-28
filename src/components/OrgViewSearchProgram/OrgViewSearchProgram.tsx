@@ -11,6 +11,7 @@ import {
 import ProgramCard from "../ProgramCard/ProgramCard";
 import FilterBar from "./FilterBar";
 import "./OrgViewSearchProgram.css";
+import Error from "../Error/Error";
 
 type OrgViewSearchProgramProps = {
   state: OrgViewSearchProgramState;
@@ -63,7 +64,6 @@ const OrgViewSearchProgram = ({
       <div className="ProgramCardContainer">
         {programsList.length ? (
           <>
-            {" "}
             {(state.searchedTitle ||
               ["Published", "In Draft"].includes(
                 state.selectedRadioForFilter
@@ -76,12 +76,11 @@ const OrgViewSearchProgram = ({
                 ))
             ) : (
               <div
-                className="SearchNotFoundText"
                 style={
                   state.searchedNotPresentText === "" ? { display: "none" } : {}
                 }
               >
-                {state.searchedNotPresentText}
+                <Error message={state.searchedNotPresentText} />
               </div>
             )}
             {state.searchedTitle === "" &&
@@ -95,8 +94,8 @@ const OrgViewSearchProgram = ({
               : ""}
           </>
         ) : (
-          <div className="SearchNotFoundText">
-            You do not have any programs !!
+          <div>
+            <Error message="You do not have any programs !!" />
           </div>
         )}
       </div>

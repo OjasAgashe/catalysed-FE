@@ -1,0 +1,83 @@
+.OrgDetailsNotFound {
+  text-align: center;
+  margin: 3rem auto;
+}
+
+.ProgramDetailsContainer {
+  padding: 1rem !important;
+}
+
+.GeneralProgramDetailsDataContainer,
+.CoordinatorProgramDetailsDataContainer,
+.MentorProgramDetailsDataContainer,
+.StudentProgramDetailsDataContainer {
+  text-align: justify !important;
+}
+
+.GeneralProgramDetailsDataContainer
+  :is(.TitleDataContainer, .DescriptionDataContainer, .TSDateDataContainer, .DurationDataContainer, .ModeDataContainer, .AgeLimitDataContainer, .ProgramLinkDataContainer),
+.CoordinatorProgramDetailsDataContainer
+  :is(.CNameDataContainer, .CEmailDataContainer, .CContactDataContainer),
+.MentorProgramDetailsDataContainer
+  :is(.MNoOfOpeningsDataContainer, .MApplyByDateDataContainer, .MGeneralInstDataContainer),
+.StudentProgramDetailsDataContainer
+  :is(.SNoOfOpeningsDataContainer, .SApplyByDateDataContainer, .SGeneralInstDataContainer) {
+  margin: 0.5rem auto !important;
+}
+
+:is(.GeneralProgramDetailsDataContainer, .CoordinatorProgramDetailsDataContainer, .MentorProgramDetailsDataContainer, .StudentProgramDetailsDataContainer)
+  .CreateProgramFormText {
+  font-weight: 600;
+  padding: 0 0.5rem !important;
+}
+
+.GeneralProgramDetailsDataContainer
+  :is(.TitleDataContainer, .DescriptionDataContainer)
+  .Data,
+.MentorProgramDetailsDataContainer :is(.MGeneralInstDataContainer) .Data,
+.StudentProgramDetailsDataContainer :is(.SGeneralInstDataContainer) .Data {
+  padding: 0.2rem 1.5rem !important;
+}
+
+.GeneralProgramDetailsDataContainer
+  :is(.TitleDataContainer, .DescriptionDataContainer, .TSDateDataContainer, .DurationDataContainer, .ModeDataContainer, .AgeLimitDataContainer, .ProgramLinkDataConatiner)
+  .Data,
+.CoordinatorProgramDetailsDataContainer
+  :is(.CNameDataContainer, .CEmailDataContainer, .CContactDataContainer)
+  .Data,
+.MentorProgramDetailsDataContainer
+  :is(.MNoOfOpeningsDataContainer, .MApplyByDateDataContainer, .MGeneralInstDataContainer)
+  .Data,
+.StudentProgramDetailsDataContainer
+  :is(.SNoOfOpeningsDataContainer, .SApplyByDateDataContainer, .SGeneralInstDataContainer)
+  .Data {
+  font-size: 1.1rem !important;
+}
+
+.AgeLimitDataContainer :is(.From, .To) {
+  margin-right: 0 !important;
+  padding-right: 0 !important;
+}
+
+.AgeLimitDataContainer .Data {
+  margin-right: 1rem !important;
+}
+
+.GeneralProgramDetailsContainer {
+  max-width: 650px;
+  padding-right: 0.5rem !important;
+  margin: 1rem;
+  margin-left: 0 !important;
+}
+
+.CoordinatorProgramDetailsContainer {
+  max-width: 400px;
+  margin: 1rem;
+}
+
+.MentorProgramDetailsContainer,
+.StudentProgramDetailsContainer {
+  max-width: 550px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}

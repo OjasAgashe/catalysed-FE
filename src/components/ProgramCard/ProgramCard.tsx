@@ -7,14 +7,22 @@ import {
   FooterBackground,
   HeaderBackground,
 } from "../../assets/Illustrations/Illustrations";
+import { useHistory } from "react-router";
+import { ORGANISATION_PROGRAM_DETAILS } from "../../constants/Routes";
 
 type ProgramCardProps = {
   program: GetProgramMetaListData;
 };
 
 const ProgramCard = ({ program }: ProgramCardProps) => {
+  const history = useHistory();
+
+  const handleCardProgramDetailsBtn = () => {
+    history.push(`${ORGANISATION_PROGRAM_DETAILS}/${program.id}`);
+  };
+
   return (
-    <div className="ProgramCard">
+    <div className="ProgramCard" onClick={handleCardProgramDetailsBtn}>
       <div
         className="ProgramCardTitle"
         style={{
@@ -78,7 +86,11 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
       </div>
 
       <div className="ProgramCardButton">
-        <button type="button" className="ViewDetailsBtn">
+        <button
+          type="button"
+          className="ViewDetailsBtn"
+          onClick={handleCardProgramDetailsBtn}
+        >
           <BiExpand className="ExpandCardBtnIcon" />
           <span></span>
         </button>

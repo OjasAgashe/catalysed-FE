@@ -103,8 +103,3 @@
   flex-wrap: wrap;
   justify-content: space-around;
 }
-
-.SearchNotFoundText {
-  font-size: 2rem;
-  color: var(--blue-gray-700);
-}

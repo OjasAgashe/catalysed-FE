@@ -1,8 +1,17 @@
 /* Pages */
 
-/* OrganisationRegister, Login, StudentMentorRegister, OrgProfileBuilder, MentorProfileBuilder, StuProfileBuilder, OrgCreateProgramPage, OrgViewSearchProgramPage */
+/* 
+    OrganisationRegister, 
+    Login, 
+    StudentMentorRegister, 
+    OrgProfileBuilder, 
+    MentorProfileBuilder, 
+    StuProfileBuilder, 
+    OrgCreateProgramPage, 
+    OrgViewSearchProgramPage 
+*/
 
-:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage, .OrgProfileBuilder, .MentorProfileBuilder, .StuProfileBuilder, .OrgCreateProgramPage, .OrgViewSearchProgramPage) {
+:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage, .OrgProfileBuilder, .MentorProfileBuilder, .StuProfileBuilder, .OrgCreateProgramPage, .OrgViewSearchProgramPage, .OrgProgramDetailsPage, .OrgProgramInvitationsPage, .OrgProgramParticipantsPage) {
   background-color: var(--red-100);
   min-height: 85vh;
 }
@@ -79,7 +88,17 @@
 
 /* Components */
 
-/* OrgRegisterUser, OrgRegisterDetails, LoginForm, StudentMentorRegister (page), CommonHome, OrgProfileBuilderTypeform, MentorProfileBuidlerTypeform */
+/*
+    OrgRegisterUser, 
+    OrgRegisterDetails, 
+    LoginForm, 
+    StudentMentorRegister (page), 
+    CommonHome, 
+    OrgProfileBuilderTypeform, 
+    MentorProfileBuidlerTypeform, 
+    CreateProgramForm, 
+    OrgProgramDetails 
+*/
 
 :is(.OrgRegisterUserForm, .OrgRegisterDetailsForm, .LoginForm, .StudentMentorRegisterBox, .CommonHomeForm) {
   background-color: var(--white);
@@ -107,7 +126,11 @@
 
 /* End Overriding */
 
-/* Form Button of LoginForm, OrgRegisterDetails, OrgRegisterUser */
+/* 
+    Form Button of LoginForm, 
+    OrgRegisterDetails, 
+    OrgRegisterUser 
+*/
 
 .FormButtonContainer {
   text-align: center;
@@ -163,7 +186,11 @@
   }
 }
 
-/* OrgProfileBuilderTypeform, MentorProfileBuilderTypeform, StuProfileBuilderTypeform */
+/* 
+    OrgProfileBuilderTypeform, 
+    MentorProfileBuilderTypeform, 
+    StuProfileBuilderTypeform 
+*/
 
 .OrgProfileQuestionContainer,
 .MentorProfileQuestionContainer,
@@ -190,11 +217,12 @@
   display: none;
 }
 
-:is(.TypeFormBackBtn, .TypeFormNextBtn, .TypeFormSubmitBtn):focus {
+:is(.TypeFormBackBtn, .TypeFormNextBtn, .TypeFormSubmitBtn) :focus {
   border: none !important;
 }
 
-:is(.OrgTypeformQuestion, .MentorTypeformQuestion, .StuTypeformQuestion).Question {
+:is(.OrgTypeformQuestion, .MentorTypeformQuestion, .StuTypeformQuestion)
+  .Question {
   margin: auto;
   padding: 4rem;
   width: fit-content;
@@ -288,7 +316,10 @@ input[type="number"] {
   color: var(--linkedIn-code);
 }
 
-/* MentorProfileBuilderTypeform, StuProfileBuilderTypeform */
+/* 
+    MentorProfileBuilderTypeform, 
+    StuProfileBuilderTypeform 
+*/
 
 /* Radio */
 
@@ -357,3 +388,68 @@ input[type="number"] {
 .LocationDropdown {
   color: var(--invalid-feedback) !important;
 }
+
+/* 
+    Org Create Program Form, 
+    Org Program Details 
+*/
+
+.GeneralDetailsFormContainer,
+.CoordinatorDetailsFormContainer,
+.CreateProgramMentorDetailsFormContainer,
+.CreateProgramStudentDetailsFormContainer,
+.GeneralProgramDetailsContainer,
+.CoordinatorProgramDetailsContainer,
+.MentorProgramDetailsContainer,
+.StudentProgramDetailsContainer {
+  background-color: var(--white);
+  padding: 1rem;
+  box-shadow: 1px 1px 5px var(--blue-gray-300), -2px -2px 5px var(--white);
+  border-radius: 5px;
+  border-left: 1px solid var(--blue-gray-300);
+  border-top: 1px solid var(--blue-gray-300);
+  height: fit-content;
+}
+
+.FormDetailsText {
+  font-size: 1.5rem !important;
+  padding: 0.5rem !important;
+  color: var(--facebook-code) !important;
+}
+
+:is(.CreateProgramFormContainer, .GeneralProgramDetailsContainer, .CoordinatorProgramDetailsContainer, .MentorProgramDetailsContainer, .StudentProgramDetailsContainer)
+  .CreateProgramFormText {
+  font-size: 1.1rem !important;
+  margin-right: 1rem;
+  color: var(--blue-gray-700);
+}
+
+.CreateProgramFormContainer
+  :is(.CreateProgramFirstSection, .CreateProgramSecondSection),
+.ProgramDetailsContainer
+  :is(.ProgramDetailsFirstSection, .ProgramDetailsSecondSection) {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.CreateProgramFirstSubSection,
+.ProgramDetailsFirstSubSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+:is(.GeneralDetailsForm, .GeneralProgramDetailsDataContainer, .MentorProgramDetailsDataContainer, .StudentProgramDetailsDataContainer)
+  .LanguagePreviewer
+  .LanguageLi {
+  display: inline-block;
+  list-style: none;
+  background-color: var(--common-home-section-four);
+  padding: 0.2rem 0.5rem !important;
+  border-radius: 5px !important;
+  margin: 0.2rem 0.3rem !important;
+}
+
+/*  */

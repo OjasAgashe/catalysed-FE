@@ -1,0 +1,122 @@
+.CommonProgramDetailsDiv {
+  background-size: cover;
+  background-position: top;
+  /* height: 300px; */
+}
+
+.CommonProgramDetailsHeroText {
+  padding: 2rem 0 3rem 5rem !important;
+  font-family: "KoHo", sans-serif;
+  font-size: 2.5rem !important;
+  color: var(--facebook-code) !important;
+  font-weight: 600 !important;
+}
+
+/*
+.CommonProgramDetailsHeroText
+  :is(.ProgramDetailsText, .InvitationText, .ParticipantText) {
+  text-align: end;
+} */
+
+.PDViewAndRouteLinksContainer {
+  width: fit-content;
+  margin: auto;
+  text-align: center;
+  padding: 2rem 0;
+  border-radius: 5px;
+}
+
+/* .PDViewAndRouteLinksContainer .Text {
+  font-size: 2.4rem !important;
+  color: var(--common-home-section-four-600);
+  
+  color: var(--facebook-code) !important;
+  margin: 2rem auto;
+
+  font-weight: 600;
+  font-family: "KoHo", sans-serif;
+  text-shadow: 1px 1px var(--yellow-700);
+  animation-name: transform-view-size;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes transform-view-size {
+  50% {
+    transform: scale(1.1);
+  }
+} */
+
+.ProgramDetailsRouteLinks {
+  padding: 0.3rem 1.4rem !important;
+  font-size: 1.3rem !important;
+  width: fit-content;
+  box-shadow: 1px 1px 5px var(--barley-corn);
+}
+
+.ProgramDetailsRouteLinks
+  :is(.ProgramDetailsLink, .InvitationsLink, .ParticipantsLink).Link {
+  color: var(--yellow-700);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ProgramDetailsRouteLinks
+  :is(.ProgramDetailsLink, .InvitationsLink, .ParticipantsLink).Link:hover {
+  text-decoration: underline;
+}
+
+.ProgramDetailsRouteLinks :is(.ProgramDetailsLink, .InvitationsLink) {
+  text-decoration: none;
+  margin-right: 1rem;
+  padding-right: 1rem;
+  border-right: 2px solid var(--yellow-700);
+}
+
+.ProgramDetailsRouteLinks .ParticipantsLink {
+  text-decoration: none;
+}
+
+.ProgramDetailsRouteLinks {
+  animation-name: box-shadow-animation;
+  animation-iteration-count: infinite;
+  animation-duration: 1.5s;
+}
+
+@keyframes box-shadow-animation {
+  50% {
+    box-shadow: 2px 2px 10px var(--barley-corn);
+  }
+}
+
+@media screen and (max-width: 466px) {
+  .CommonProgramDetailsHeroText {
+    background-color: var(--floral-white);
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .ProgramDetailsRouteLinks {
+    padding: 0.2rem !important;
+    margin: auto 0.4rem !important;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .CommonProgramDetailsDiv {
+    background-size: auto;
+  }
+
+  /* .InvitationText,
+  .ParticipantText {
+    background-color: var(--floral-white);
+  } */
+
+  .CommonProgramDetailsHeroText {
+    padding: 1rem 2rem 3rem !important;
+  }
+
+  /* .ParticipantText {
+    margin-top: 0.5rem;
+  } */
+}

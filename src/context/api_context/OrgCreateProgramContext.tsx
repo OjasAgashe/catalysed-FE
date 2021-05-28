@@ -5,6 +5,7 @@ import { useCookie } from "../cookie_context/CookieContext";
 interface OrgCreateProgramProviderReturns {
   postCreateProgramCall: (data: any) => Promise<AxiosResponse<any>>;
   getProgramsMetaList: () => Promise<AxiosResponse<any>>;
+  getProgramDetails: (programId: number) => Promise<AxiosResponse<any>>;
 }
 
 const OrgCreateProgramContext =
@@ -39,9 +40,18 @@ export const OrgCreateProgramProvider: React.FC<React.ReactNode> = (props) => {
     });
   }
 
+  function getProgramDetails(programId: number) {
+    const catalysedToken = getCatalysedTokenCookie();
+
+    return instance.get(`/program/${programId}`, {
+      headers: { Authorization: `Bearer ${catalysedToken}` },
+    });
+  }
+
   const values = {
     postCreateProgramCall,
     getProgramsMetaList,
+    getProgramDetails,
   };
 
   return (

@@ -25,6 +25,8 @@ type CreateProgramFormProps = {
 
 const CreateProgramForm = ({ state, dispatch }: CreateProgramFormProps) => {
   const [answer, setAnswer] = useState<CreateProgramData>({
+    id: "",
+    status: "",
     title: "",
     description: "",
     tentativeStartDate: "",
@@ -91,9 +93,9 @@ const CreateProgramForm = ({ state, dispatch }: CreateProgramFormProps) => {
       dispatch({ type: "error", payload: "" });
 
       await postCreateProgramCall({
+        ...answer,
         id: "",
         status,
-        ...answer,
       });
 
       dispatch({ type: "loadingMessage", payload: "" });

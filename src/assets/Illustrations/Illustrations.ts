@@ -8,6 +8,7 @@ import CreateProgramIllustration from "./create_program_illustration.svg";
 import FooterBackground from "./footer-background.webp";
 import HeaderBackground from "./header-background.webp";
 import Logo from "./logo.png";
+import OrgProgramDetails from "./org_program_details.jpg";
 import OrgViewAndSearchProgram from "./org_view_and_search_program.svg";
 
 export {
@@ -21,5 +22,6 @@ export {
   FooterBackground,
   HeaderBackground,
   Logo,
+  OrgProgramDetails,
   OrgViewAndSearchProgram,
 };

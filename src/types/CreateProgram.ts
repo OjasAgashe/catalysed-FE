@@ -1,4 +1,6 @@
 export interface CreateProgramData {
+  id: string;
+  status: string;
   title: string;
   description: string;
   tentativeStartDate: string;
