@@ -221,8 +221,7 @@
   border: none !important;
 }
 
-:is(.OrgTypeformQuestion, .MentorTypeformQuestion, .StuTypeformQuestion)
-  .Question {
+:is(.OrgTypeformQuestion, .MentorTypeformQuestion, .StuTypeformQuestion).Question {
   margin: auto;
   padding: 4rem;
   width: fit-content;

@@ -1,4 +1,5 @@
 import React from "react";
+import { OrgProgramDetailsDataIllustration } from "../../assets/Illustrations/Illustrations";
 import { OrgProgramDetailsState } from "../../types/OrgProgramDetails";
 import Error from "../Error/Error";
 import CoordinatorDetails from "./CoordinatorDetails";
@@ -23,6 +24,11 @@ const OrgProgramDetails = ({ state }: OrgProgramDetailsProps) => {
           <div className="ProgramDetailsFirstSection">
             <GeneralProgramDetails state={state} />
             <div className="ProgramDetailsFirstSubSection">
+              <img
+                src={OrgProgramDetailsDataIllustration}
+                alt="org program details data illustration"
+                className="OrgProgramDetailsDataIllustration"
+              />
               <CoordinatorDetails state={state} />
             </div>
           </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Col, Form, FormControl, Row } from "react-bootstrap";
 import ReactDatePicker from "react-datepicker";
 import {
@@ -23,6 +23,13 @@ const GeneralDetailsForm = ({
   state,
   dispatch,
 }: GeneralDetailsFormProps) => {
+  useEffect(() => {
+    setAnswer((prevState: CreateProgramData) => ({
+      ...prevState,
+      languageRequirements: [...state.selectedLanguages].join(),
+    }));
+  }, [setAnswer, state.selectedLanguages]);
+
   const handleGeneralDetailsFormChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
       if (state.validated) dispatch({ type: "validated", payload: false });
@@ -77,19 +84,11 @@ const GeneralDetailsForm = ({
     if (state.isLanguageSelected)
       dispatch({ type: "isLanguageSelected", payload: false });
 
-    const value = [...state.selectedLanguages, event.target.value].join();
-
     if (state.selectedLanguages.includes(event.target.value) === false) {
       dispatch({
         type: "selectedLanguages",
         payload: [...state.selectedLanguages, event.target.value],
       });
-    }
-    if (state.selectedLanguages.length !== 0) {
-      setAnswer((prevState: CreateProgramData) => ({
-        ...prevState,
-        languageRequirements: value,
-      }));
     }
   };
 
