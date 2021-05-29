@@ -44,22 +44,40 @@
   color: var(--blue-gray-700) !important;
 }
 
-.FilterCategoryRadioGroup {
-  text-align: center;
+.FilterByVSGroup,
+.SortByVSGroup {
+  margin: 1rem auto !important;
 }
 
-.FilterCategoryRadioBtn {
-  font-size: 1.2rem;
-  margin: 0 1rem;
-  font-weight: 550;
+.FilterByText,
+.SortByText {
+  font-size: 1.2rem !important;
+  color: var(--blue-gray-700);
+  margin: 0 1rem !important;
+  font-weight: 600;
+}
+
+.FilterCategorySelectGroup,
+.SortCategorySelectGroup {
+  font-size: 1.2rem !important;
+  border-radius: 5px !important;
+  border: 1px solid var(--blue-gray-700) !important;
+  color: var(--blue-gray-700) !important;
+  padding: 0.2rem 0.5rem !important;
+}
+
+:is(.FilterCategorySelectGroup, .SortCategorySelectGroup):focus {
+  outline: none !important;
+}
+
+:is(.FilterCategorySelectGroup, .SortCategorySelectGroup):hover {
+  cursor: pointer;
+}
+
+.FilterCategorySelectOption,
+.SortCategorySelectGroup {
   color: var(--blue-gray-700);
 }
-
-/* Over riding */
-.form-check-input[type="radio"] {
-  cursor: pointer !important;
-}
-/*  */
 
 .OrgViewSearchProgram .CreateProgramTextContainer {
   width: fit-content;
@@ -102,4 +120,11 @@
   padding-bottom: 2rem;
   flex-wrap: wrap;
   justify-content: space-around;
+}
+
+@media screen and (max-width: 415px) {
+  .FilterCategorySelectGroup,
+  .SortCategorySelectGroup {
+    padding: 0 !important;
+  }
 }

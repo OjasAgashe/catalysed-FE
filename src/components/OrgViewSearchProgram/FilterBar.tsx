@@ -23,6 +23,58 @@ const FilterBar = ({
   programsList,
   setFilteredProgramsList,
 }: FilterBarProps) => {
+  const filterPublishedProgramList = programsList.filter(
+    (program) => program.status === "PUBLISHED"
+  );
+
+  const filterInDraftProgramList = programsList.filter(
+    (program) => program.status === "SAVED_TO_DRAFT"
+  );
+
+  const filterVirtualProgramList = programsList.filter(
+    (program) => program.mode === "Virtual"
+  );
+
+  const filterInPersonProgramList = programsList.filter(
+    (program) => program.mode === "InPerson"
+  );
+
+  const sortDurationInIncreasingByUsing = (
+    obj1: GetProgramMetaListData,
+    obj2: GetProgramMetaListData
+  ) => -(obj1.durationInMonths - obj2.durationInMonths);
+
+  const sortDurationInDecreasingByUsing = (
+    obj1: GetProgramMetaListData,
+    obj2: GetProgramMetaListData
+  ) => obj1.durationInMonths - obj2.durationInMonths;
+
+  const sortDateFromNewToOldByUsing = (
+    obj1: GetProgramMetaListData,
+    obj2: GetProgramMetaListData
+  ) => {
+    const [day1, month1, year1] = obj1.tentativeStartDate.split("/");
+    const [day2, month2, year2] = obj2.tentativeStartDate.split("/");
+
+    return new Date(parseInt(year1), parseInt(month1) - 1, parseInt(day1)) >
+      new Date(parseInt(year2), parseInt(month2) - 1, parseInt(day2))
+      ? 1
+      : -1;
+  };
+
+  const sortDateFromOldToNewByUsing = (
+    obj1: GetProgramMetaListData,
+    obj2: GetProgramMetaListData
+  ) => {
+    const [day1, month1, year1] = obj1.tentativeStartDate.split("/");
+    const [day2, month2, year2] = obj2.tentativeStartDate.split("/");
+
+    return new Date(parseInt(year1), parseInt(month1) - 1, parseInt(day1)) >
+      new Date(parseInt(year2), parseInt(month2) - 1, parseInt(day2))
+      ? -1
+      : 1;
+  };
+
   const handleSearchedTitleChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
       dispatch({ type: "searchedTitle", payload: event.target.value });
@@ -45,18 +97,42 @@ const FilterBar = ({
         );
       }
 
-      if (event.target.value === "" && tempFilteredList.length === 0) {
-        if (state.selectedRadioForFilter === "Published") {
-          tempFilteredList = programsList.filter(
-            (program) => program.status === "PUBLISHED"
-          );
-        }
+      if (state.selectedRadioForFilter === "Virtual") {
+        tempFilteredList = tempFilteredList.filter(
+          (program) => program.mode === "Virtual"
+        );
+      }
 
-        if (state.selectedRadioForFilter === "In Draft") {
-          tempFilteredList = programsList.filter(
-            (program) => program.status === "SAVED_TO_DRAFT"
-          );
-        }
+      if (state.selectedRadioForFilter === "In Person") {
+        tempFilteredList = tempFilteredList.filter(
+          (program) => program.mode === "InPerson"
+        );
+      }
+
+      if (event.target.value === "" && tempFilteredList.length === 0) {
+        if (state.selectedRadioForFilter === "Published")
+          tempFilteredList = filterPublishedProgramList;
+
+        if (state.selectedRadioForFilter === "In Draft")
+          tempFilteredList = filterInDraftProgramList;
+
+        if (state.selectedRadioForFilter === "Virtual")
+          tempFilteredList = filterVirtualProgramList;
+
+        if (state.selectedRadioForFilter === "In Person")
+          tempFilteredList = filterInPersonProgramList;
+
+        if (state.selectedRadioForSort === "Increasing Duration")
+          tempFilteredList.sort(sortDurationInIncreasingByUsing);
+
+        if (state.selectedRadioForSort === "Decreasing Duration")
+          tempFilteredList.sort(sortDurationInDecreasingByUsing);
+
+        if (state.selectedRadioForSort === "Newest to Oldest Date")
+          tempFilteredList.sort(sortDateFromNewToOldByUsing);
+
+        if (state.selectedRadioForSort === "Oldest to Newest Date")
+          tempFilteredList.sort(sortDateFromOldToNewByUsing);
       }
 
       setFilteredProgramsList(tempFilteredList);
@@ -64,36 +140,81 @@ const FilterBar = ({
       if (event.target.value && tempFilteredList.length === 0) {
         dispatch({
           type: "searchedNotPresentText",
-          payload: "Sorry!! Program With This Title Not Found",
+          payload: "Sorry!! Programs With This Title Not Found",
         });
       }
     };
 
-  const handleRadioSelectedForFilterChange: React.ChangeEventHandler<HTMLInputElement> =
+  const handleSelectChangeForFilter: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
       dispatch({ type: "selectedRadioForFilter", payload: event.target.value });
+      dispatch({ type: "selectedRadioForSort", payload: "All" });
       dispatch({ type: "searchedNotPresentText", payload: "" });
+      dispatch({ type: "searchedTitle", payload: "" });
 
       if (event.target.value !== "All") {
         let tempFilteredList: GetProgramMetaListData[] = [];
 
-        if (event.target.value === "Published") {
-          tempFilteredList = programsList.filter(
-            (program) => program.status === "PUBLISHED"
-          );
-        }
+        if (event.target.value === "Published")
+          tempFilteredList = filterPublishedProgramList;
 
-        if (event.target.value === "In Draft") {
-          tempFilteredList = programsList.filter(
-            (program) => program.status === "SAVED_TO_DRAFT"
-          );
-        }
+        if (event.target.value === "In Draft")
+          tempFilteredList = filterInDraftProgramList;
+
+        if (event.target.value === "Virtual")
+          tempFilteredList = filterVirtualProgramList;
+
+        if (event.target.value === "In Person")
+          tempFilteredList = filterInPersonProgramList;
 
         setFilteredProgramsList(tempFilteredList);
         if (event.target.value && tempFilteredList.length === 0) {
           dispatch({
             type: "searchedNotPresentText",
-            payload: "Sorry!! Program For This Option Not Found",
+            payload: "Sorry!! Programs For This Option Not Found",
+          });
+        }
+      }
+    };
+
+  const handleSelectChangeForSort: React.ChangeEventHandler<HTMLInputElement> =
+    (event) => {
+      dispatch({ type: "selectedRadioForSort", payload: event.target.value });
+      dispatch({ type: "searchedNotPresentText", payload: "" });
+      dispatch({ type: "searchedTitle", payload: "" });
+
+      if (event.target.value !== "All") {
+        let tempFilteredList: GetProgramMetaListData[] = [...programsList];
+
+        if (state.selectedRadioForFilter === "Published")
+          tempFilteredList = filterPublishedProgramList;
+
+        if (state.selectedRadioForFilter === "In Draft")
+          tempFilteredList = filterInDraftProgramList;
+
+        if (state.selectedRadioForFilter === "Virtual")
+          tempFilteredList = filterVirtualProgramList;
+
+        if (state.selectedRadioForFilter === "In Person")
+          tempFilteredList = filterInPersonProgramList;
+
+        if (event.target.value === "Increasing Duration")
+          tempFilteredList.sort(sortDurationInIncreasingByUsing);
+
+        if (event.target.value === "Decreasing Duration")
+          tempFilteredList.sort(sortDurationInDecreasingByUsing);
+
+        if (event.target.value === "Newest to Oldest Date")
+          tempFilteredList.sort(sortDateFromNewToOldByUsing);
+
+        if (event.target.value === "Oldest to Newest Date")
+          tempFilteredList.sort(sortDateFromOldToNewByUsing);
+
+        setFilteredProgramsList(tempFilteredList);
+        if (event.target.value && tempFilteredList.length === 0) {
+          dispatch({
+            type: "searchedNotPresentText",
+            payload: "Sorry!! Programs For This Option Not Found",
           });
         }
       }
@@ -117,39 +238,73 @@ const FilterBar = ({
             />
           </InputGroup>
 
-          <Form.Group className="FilterCategoryRadioGroup">
-            <Form.Check
-              className="FilterCategoryRadioBtn"
-              type="radio"
-              name="filter-category"
-              inline
-              label="All"
-              checked={state.selectedRadioForFilter === "All"}
-              value="All"
-              onChange={handleRadioSelectedForFilterChange}
-            />
+          <Form.Group className="FilterByVSGroup">
+            <Form.Text className="FilterByText">filter By</Form.Text>
+            <Form.Control
+              className="FilterCategorySelectGroup"
+              custom
+              as="select"
+              onChange={handleSelectChangeForFilter}
+            >
+              <option className="FilterCategorySelectOption" value="All">
+                None
+              </option>
+              <option className="FilterCategorySelectOption" value="Published">
+                Published Status
+              </option>
+              <option className="FilterCategorySelectOption" value="In Draft">
+                In Draft Status
+              </option>
+              <option className="FilterCategorySelectOption" value="Virtual">
+                Virtual Mode
+              </option>
+              <option className="FilterCategorySelectOption" value="In Person">
+                In Person Mode
+              </option>
+            </Form.Control>
+          </Form.Group>
 
-            <Form.Check
-              className="FilterCategoryRadioBtn"
-              type="radio"
-              name="filter-category"
-              inline
-              label="Published"
-              checked={state.selectedRadioForFilter === "Published"}
-              value="Published"
-              onChange={handleRadioSelectedForFilterChange}
-            />
-
-            <Form.Check
-              className="FilterCategoryRadioBtn"
-              type="radio"
-              name="filter-category"
-              inline
-              label="In Draft"
-              checked={state.selectedRadioForFilter === "In Draft"}
-              value="In Draft"
-              onChange={handleRadioSelectedForFilterChange}
-            />
+          <Form.Group className="SortByVSGroup">
+            <Form.Text className="SortByText">sort By&nbsp;</Form.Text>
+            <Form.Control
+              className="SortCategorySelectGroup"
+              custom
+              as="select"
+              value={
+                state.selectedRadioForSort === "All"
+                  ? "None"
+                  : state.selectedRadioForSort
+              }
+              onChange={handleSelectChangeForSort}
+            >
+              <option className="SortCategorySelectOption" value="All">
+                None
+              </option>
+              <option
+                className="SortCategorySelectOption"
+                value="Increasing Duration"
+              >
+                Increasing Duration
+              </option>
+              <option
+                className="SortCategorySelectOption"
+                value="Decreasing Duration"
+              >
+                Decreasing Duration
+              </option>
+              <option
+                className="SortCategorySelectOption"
+                value="Newest to Oldest Date"
+              >
+                Newest to Oldest Date
+              </option>
+              <option
+                className="SortCategorySelectOption"
+                value="Oldest to Newest Date"
+              >
+                Oldest to Newest Date
+              </option>
+            </Form.Control>
           </Form.Group>
         </Form>
 

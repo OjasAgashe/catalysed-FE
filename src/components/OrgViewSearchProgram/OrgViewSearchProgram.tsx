@@ -65,9 +65,15 @@ const OrgViewSearchProgram = ({
         {programsList.length ? (
           <>
             {(state.searchedTitle ||
-              ["Published", "In Draft"].includes(
+              ["Published", "In Draft", "Virtual", "In Person"].includes(
                 state.selectedRadioForFilter
-              )) &&
+              ) ||
+              [
+                "Increasing Duration",
+                "Decreasing Duration",
+                "Newest to Oldest Date",
+                "Oldest to Newest Date",
+              ].includes(state.selectedRadioForSort)) &&
             filteredProgramsList.length ? (
               [...filteredProgramsList]
                 .reverse()
@@ -84,7 +90,15 @@ const OrgViewSearchProgram = ({
               </div>
             )}
             {state.searchedTitle === "" &&
-            !["Published", "In Draft"].includes(state.selectedRadioForFilter) &&
+            !["Published", "In Draft", "Virtual", "In Person"].includes(
+              state.selectedRadioForFilter
+            ) &&
+            ![
+              "Increasing Duration",
+              "Decreasing Duration",
+              "Newest to Oldest Date",
+              "Oldest to Newest Date",
+            ].includes(state.selectedRadioForSort) &&
             programsList.length
               ? [...programsList]
                   .reverse()
