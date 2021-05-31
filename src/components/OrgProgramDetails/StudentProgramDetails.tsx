@@ -34,14 +34,12 @@ const StudentProgramDetails = ({ state }: StudentProgramDetailsProps) => {
             {state.responseData?.studentFields.openings}
           </span>
 
-          {state.responseData?.studentFields.isPaid && (
-            <span className="SProgramFeesDataContainer">
-              <span className="CreateProgramFormText">Fees&nbsp;:&nbsp;</span>
-              <span className="Data">
-                {state.responseData?.studentFields.programFees}
-              </span>
+          <span className="SProgramFeesDataContainer">
+            <span className="CreateProgramFormText FeesText">Fees&nbsp;:&nbsp;</span>
+            <span className="Data">
+              {state.responseData?.studentFields.programFees}
             </span>
-          )}
+          </span>
         </div>
 
         <div className="SApplyByDateDataContainer">

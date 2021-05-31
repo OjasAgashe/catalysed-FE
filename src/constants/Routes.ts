@@ -6,6 +6,7 @@ export const ORGANISATION_HOME = "/organiser/home";
 export const ORGANISATION_PROFILE_BUILDER = "/organiser/profile/builder";
 export const ORGANISATION_PROGRAM_CREATE = "/organiser/program/create";
 export const ORGANISATION_PROGRAM_DETAILS = "/organiser/program/details";
+export const ORGANISATION_PROGRAM_EDIT = "/organiser/program/edit";
 export const ORGANISATION_PROGRAM_INVITATIONS =
   "/organiser/program/invitations";
 export const ORGANISATION_PROGRAM_PARTICIPANTS =

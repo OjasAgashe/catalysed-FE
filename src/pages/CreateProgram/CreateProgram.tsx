@@ -2,6 +2,7 @@ import React, { useEffect, useReducer } from "react";
 import CreateProgramForm from "../../components/CreateProgramForm/CreateProgramForm";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
 import { orgCreateProgramReducer } from "../../reducers/orgCreateProgramReducer";
+import "./CreateProgram.css";
 
 const CreateProgram = () => {
   const [state, dispatch] = useReducer(orgCreateProgramReducer, {
@@ -31,6 +32,10 @@ const CreateProgram = () => {
           loadingMessage={state.loadingMessage}
         />
       )}
+
+      <div className="OrgCreateProgramDetailsHeader">
+        <span>Fill Details for Create Program</span>
+      </div>
 
       <CreateProgramForm state={state} dispatch={dispatch} />
     </div>

@@ -49,36 +49,39 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
 
       <div className="ProgramCardDetails">
         <div className="ProgramCardTSDate">
-          <span className="Text">Tentative Start Date</span>&nbsp;:&nbsp;
+          <span className="Text">Tentative Start Date&nbsp;:&nbsp;</span>
           <span className="Data">{program.tentativeStartDate}</span>
         </div>
         <div className="ProgramCardDIMonths">
-          <span className="Text">Duration</span>&nbsp;:&nbsp;
-          <span className="Data">{program.durationInMonths}</span>
+          <span className="Text">Duration&nbsp;:&nbsp;</span>
+          <span className="Data">{program.durationInMonths} months</span>
         </div>
         <div className="ProgramCardMode">
-          <span className="Text">Mode</span>&nbsp;:&nbsp;
+          <span className="Text">Mode&nbsp;:&nbsp;</span>
           <span className="Data">{program.mode}</span>
         </div>
         <div className="ProgramCardLanguage">
-          <span className="Text">Language Requirements</span>&nbsp;:&nbsp;
+          <div>
+            <div className="Text">Language</div>
+            <div className="Text">Requirements&nbsp;:&nbsp;</div>
+          </div>
           {program.languageRequirements.length ? (
             <div className="CardLanguageRequirementsDiv">
               {program.languageRequirements.split(",").map(
                 (language, id) =>
                   id < 2 && (
-                    <span key={id} className="Data">
+                    <div key={id} className="Data">
                       {language.trim()}
-                    </span>
+                    </div>
                   )
               )}
             </div>
           ) : (
-            <span className="Data NoLangData">&nbsp;</span>
+            <div className="Data NoLangData">&nbsp;</div>
           )}
         </div>
         <div className="ProgramCardStatus">
-          <span className="Text">Status</span>&nbsp;:&nbsp;
+          <span className="Text">Status&nbsp;:&nbsp;</span>
           <span className="Data">
             {program.status === "SAVED_TO_DRAFT" ? "IN DRAFT" : program.status}
           </span>

@@ -1,0 +1,21 @@
+.OrgCreateProgramDetailsHeader {
+  font-size: 2.5rem;
+  font-family: "KoHo", sans-serif;
+  padding: 2rem 0 3rem 5rem !important;
+  color: var(--blue-gray-700);
+  font-weight: 600 !important;
+  background-size: cover;
+  background-position: center;
+  background-image: url("../../assets/Illustrations/org_edit_program_header.jpg");
+}
+
+.OrgCreateProgramDetailsHeader span {
+  background-color: var(--floral-white);
+}
+
+@media screen and (max-width: 750px) {
+  .OrgCreateProgramDetailsHeader {
+    background-size: auto;
+    padding: 1rem 2rem 3rem !important;
+  }
+}

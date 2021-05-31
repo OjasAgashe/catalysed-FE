@@ -1,9 +1,9 @@
 .ProgramCardContainer .ProgramCard {
   border-left: 1px solid var(--blue-gray-300);
   border-top: 1px solid var(--blue-gray-300);
-  width: 20rem;
+  width: 22rem;
   margin: 1rem;
-  background-color: var(--drover-code);
+  background-color: var(--white);
   border-radius: 5px;
   box-shadow: 5px 5px 5px var(--blue-gray-300),
     -6px -6px 5px var(--blue-gray-100);
@@ -39,37 +39,39 @@
 }
 
 .ProgramCard
+  :is(.ProgramCardTSDate, .ProgramCardDIMonths, .ProgramCardMode, .ProgramCardStatus, .ProgramCardLanguage) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--blue-gray-300);
+}
+
+.ProgramCard
   :is(.ProgramCardTSDate, .ProgramCardDIMonths, .ProgramCardMode, .ProgramCardStatus, .ProgramCardLanguage)
   .Text {
   font-size: 1.2rem;
   color: var(--common-home-section-four-600);
+  font-weight: 600;
 }
 
 .ProgramCard
   :is(.ProgramCardTSDate, .ProgramCardDIMonths, .ProgramCardMode, .ProgramCardStatus, .ProgramCardLanguage)
   .Data {
-  /* background-color: var(--blue-gray-100); */
-  padding: 0.3rem 0.5rem;
-  border-radius: 5px;
-  border: 1px solid var(--blue-gray-700);
-  box-shadow: 0.5px 0.5px var(--blue-gray-300),
-    inset 1.5px 1.5px var(--blue-gray-300);
-  color: var(--blue-gray-700);
-  font-weight: 600;
-}
-
-.ProgramCard .CardLanguageRequirementsDiv .Data {
-  display: inline-block;
-  margin: 0.2rem 0.3rem;
+  font-size: 1.1rem;
+  padding: 0 0.5rem;
+  color: var(--yellow-700);
+  font-weight: 500;
+  width: 8rem;
 }
 
 .ProgramCardLanguage .NoLangData {
   display: block !important;
-  margin: 0.2rem 0.3rem !important;
   width: max-content !important;
 }
 
 .ProgramCard .ProgramCardButton {
+  margin-top: 0.5rem;
   padding: 1rem;
   padding-top: 0;
 }

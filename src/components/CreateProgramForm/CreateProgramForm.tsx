@@ -143,9 +143,6 @@ const CreateProgramForm = ({ state, dispatch }: CreateProgramFormProps) => {
 
   return (
     <section className="CreateProgramFormContainer">
-      <div className="CreateProgramWelcomeText">
-        Fill Details for Create Program
-      </div>
       <div className="CreateProgramFirstSection">
         <GeneralDetailsForm
           answer={answer}

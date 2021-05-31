@@ -1,8 +1,9 @@
 import React, { useEffect, useReducer } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
 import OrgProgramDetails from "../../components/OrgProgramDetails/OrgProgramDetails";
 import OrgProgramDetailsCommon from "../../components/OrgProgramDetailsCommon/OrgProgramDetailsCommon";
+import { ORGANISATION_PROGRAM_EDIT } from "../../constants/Routes";
 import { useOrgCreateProgram } from "../../context/api_context/OrgCreateProgramContext";
 import { orgProgramDetailsReducer } from "../../reducers/orgProgramDetailsReducer";
 import "./OrgProgramDetailsPage.css";
@@ -52,6 +53,20 @@ const OrgProgramDetailsPage = () => {
       />
 
       <OrgProgramDetails state={state} />
+
+      {state.responseData && (
+        <div className="EditLinkProgramDetails">
+          <span>
+            Want to Edit? Then&nbsp;
+            <Link
+              to={`${ORGANISATION_PROGRAM_EDIT}/${programId}`}
+              className="EditLinkClickHere"
+            >
+              click here
+            </Link>
+          </span>
+        </div>
+      )}
     </div>
   );
 };

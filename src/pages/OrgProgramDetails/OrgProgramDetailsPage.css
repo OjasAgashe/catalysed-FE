@@ -1,0 +1,25 @@
+.EditLinkProgramDetails {
+  background-image: url("../../assets/Illustrations/org_program_details.jpg");
+  background-size: cover;
+  background-position: bottom;
+  padding: 1rem !important;
+  font-size: 1.5rem !important;
+  color: var(--facebook-code);
+  text-align: center;
+  font-weight: 600;
+}
+
+.EditLinkClickHere {
+  text-decoration: none;
+  color: var(--blue-gray-700) !important;
+}
+
+.EditLinkClickHere:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 750px) {
+  .EditLinkProgramDetails span {
+    background-color: var(--floral-white);
+  }
+}

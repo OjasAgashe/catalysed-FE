@@ -92,6 +92,10 @@
   animation-iteration-count: infinite;
 }
 
+.SProgramFeesDataContainer .FeesText {
+  margin-left: 1rem;
+}
+
 @keyframes top-bottom {
   50% {
     transform: translateY(-10px);

@@ -9,26 +9,26 @@ import {
 } from "react-bootstrap";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {
-  CreateProgramActionType,
-  CreateProgramData,
-  CreateProgramState,
-} from "../../types/CreateProgram";
 import { GoInfo } from "react-icons/go";
+import {
+  OrgEditProgramDetailsActionType,
+  OrgEditProgramDetailsState,
+} from "../../types/OrgEditProgramDetails";
+import { CreateProgramData } from "../../types/CreateProgram";
 
-type StudentDetailsFormProps = {
-  answer: CreateProgramData;
-  setAnswer: React.Dispatch<React.SetStateAction<CreateProgramData>>;
-  state: CreateProgramState;
-  dispatch: React.Dispatch<CreateProgramActionType>;
+type EditStudentDetailsFormProps = {
+  state: OrgEditProgramDetailsState;
+  dispatch: React.Dispatch<OrgEditProgramDetailsActionType>;
+  editedData: CreateProgramData | null;
+  setEditedData: React.Dispatch<React.SetStateAction<CreateProgramData | null>>;
 };
 
-const StudentDetailsForm = ({
-  answer,
-  setAnswer,
+const EditStudentDetailsForm = ({
   state,
   dispatch,
-}: StudentDetailsFormProps) => {
+  editedData,
+  setEditedData,
+}: EditStudentDetailsFormProps) => {
   const handleStudentDetailsFormChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
       if (state.validated) dispatch({ type: "validated", payload: false });
@@ -36,16 +36,19 @@ const StudentDetailsForm = ({
 
       let value: string | boolean = event.target.value;
       if (event.target.name === "isPaid") {
-        value = answer.studentFields.isPaid ? false : true;
+        value = editedData?.studentFields.isPaid ? false : true;
       }
 
-      setAnswer((prevState) => ({
-        ...prevState,
-        studentFields: {
-          ...prevState.studentFields,
-          [event.target.name]: value,
-        },
-      }));
+      setEditedData(
+        (prevState): CreateProgramData =>
+          ({
+            ...prevState,
+            studentFields: {
+              ...prevState?.studentFields,
+              [event.target.name]: value,
+            },
+          } as CreateProgramData)
+      );
     };
 
   const handleDatePickerChange: (
@@ -62,16 +65,17 @@ const StudentDetailsForm = ({
     let month = selected_date?.getMonth();
 
     if (month) {
-      setAnswer(
-        (prevState): CreateProgramData => ({
-          ...prevState,
-          studentFields: {
-            ...prevState.studentFields,
-            applyBy: `${selected_date?.getDate()}/${
-              (month as number) + 1
-            }/${selected_date?.getFullYear()}`,
-          },
-        })
+      setEditedData(
+        (prevState): CreateProgramData =>
+          ({
+            ...prevState,
+            studentFields: {
+              ...prevState?.studentFields,
+              applyBy: `${selected_date?.getDate()}/${
+                (month as number) + 1
+              }/${selected_date?.getFullYear()}`,
+            },
+          } as CreateProgramData)
       );
     }
   };
@@ -100,10 +104,14 @@ const StudentDetailsForm = ({
         <Form.Group>
           <Form.Control
             required
-            className="CreateProgramFormControl"
+            disabled={state.originalData?.status === "PUBLISHED" ? true : false}
+            className={`CreateProgramFormControl ${
+              state.originalData?.status === "PUBLISHED" &&
+              "EditProgramDetailsDisabledField"
+            } `}
             name="subjectRequirements"
             placeholder="Subjects Required"
-            value={answer.studentFields.subjectRequirements}
+            value={editedData?.studentFields?.subjectRequirements ?? ""}
             onChange={handleStudentDetailsFormChange}
           />
           <Form.Control.Feedback type="invalid">
@@ -113,18 +121,29 @@ const StudentDetailsForm = ({
 
         <Row className="CreateProgramStudentRow">
           <Col className="CreateProgramStudentCol">
-            <Form.Text className="CreateProgramFormText">
+            <Form.Text
+              className={`CreateProgramFormText ${
+                state.originalData?.status === "PUBLISHED" &&
+                "EditProgramDetailsDisabledField"
+              } `}
+            >
               Seats:&nbsp;
             </Form.Text>
             <Form.Control
               required
+              disabled={
+                state.originalData?.status === "PUBLISHED" ? true : false
+              }
               type="number"
               name="openings"
               pattern="[0-9]"
               placeholder="0"
               min={0}
-              className="CreateProgramFormControl InlineFormControl"
-              value={answer.studentFields.openings}
+              className={`CreateProgramFormControl InlineFormControl ${
+                state.originalData?.status === "PUBLISHED" &&
+                "EditProgramDetailsDisabledField"
+              } `}
+              value={editedData?.studentFields?.openings ?? ""}
               onChange={handleStudentDetailsFormChange}
             />
             <Form.Control.Feedback type="invalid">
@@ -135,27 +154,45 @@ const StudentDetailsForm = ({
             <Form.Check
               id="IsPaidCheckbox"
               inline
+              disabled={
+                state.originalData?.status === "PUBLISHED" ? true : false
+              }
+              className={`${
+                state.originalData?.status === "PUBLISHED" &&
+                "EditProgramDetailsDisabledField"
+              } `}
               label="is Paid ?"
               type="checkbox"
               name="isPaid"
-              checked={answer.studentFields.isPaid}
+              checked={editedData?.studentFields?.isPaid ?? false}
               onChange={handleStudentDetailsFormChange}
             />
           </Col>
 
-          {answer.studentFields.isPaid && (
+          {editedData?.studentFields?.isPaid && (
             <Col className="CreateProgramStudentCol">
-              <Form.Text className="CreateProgramFormText">
+              <Form.Text
+                className={`CreateProgramFormText ${
+                  state.originalData?.status === "PUBLISHED" &&
+                  "EditProgramDetailsDisabledField"
+                } `}
+              >
                 Fees:&nbsp;
               </Form.Text>
               <Form.Control
                 type="number"
+                disabled={
+                  state.originalData?.status === "PUBLISHED" ? true : false
+                }
                 name="programFees"
                 pattern="[0-9]"
                 placeholder="0"
                 min={0}
-                className="CreateProgramFormControl InlineFormControl"
-                value={answer.studentFields.programFees}
+                className={`CreateProgramFormControl InlineFormControl ${
+                  state.originalData?.status === "PUBLISHED" &&
+                  "EditProgramDetailsDisabledField"
+                } `}
+                value={editedData?.studentFields?.programFees ?? ""}
                 onChange={handleStudentDetailsFormChange}
               />
             </Col>
@@ -163,20 +200,29 @@ const StudentDetailsForm = ({
         </Row>
 
         <Form.Group>
-          <Form.Text className="CreateProgramFormText">
+          <Form.Text
+            className={`CreateProgramFormText ${
+              state.originalData?.status === "PUBLISHED" &&
+              "EditProgramDetailsDisabledField"
+            } `}
+          >
             Apply by Date:
           </Form.Text>
 
           <ReactDatePicker
             required
             name="applyBy"
+            disabled={state.originalData?.status === "PUBLISHED" ? true : false}
             selected={state.studentApplyDate}
             onChange={handleDatePickerChange}
             dateFormat="dd/MM/yyyy"
             placeholderText="dd/mm/yyyy"
-            className="form-control CreateProgramFormControl"
+            className={`form-control CreateProgramFormControl ${
+              state.originalData?.status === "PUBLISHED" &&
+              "EditProgramDetailsDisabledField"
+            } `}
           />
-          {state.validated && answer.studentFields.applyBy === "" && (
+          {state.validated && editedData?.studentFields?.applyBy === "" && (
             <FormControl.Feedback type="invalid" style={{ display: "block" }}>
               Required field.
             </FormControl.Feedback>
@@ -192,7 +238,7 @@ const StudentDetailsForm = ({
             name="generalInstructions"
             placeholder="General Instruction"
             className="GeneralInstructionTextArea CreateProgramFormControl"
-            value={answer.studentFields.generalInstructions}
+            value={editedData?.studentFields?.generalInstructions ?? ""}
             onChange={handleStudentDetailsFormChange}
           />
           <Form.Control.Feedback type="invalid">
@@ -204,4 +250,4 @@ const StudentDetailsForm = ({
   );
 };
 
-export default StudentDetailsForm;
+export default EditStudentDetailsForm;

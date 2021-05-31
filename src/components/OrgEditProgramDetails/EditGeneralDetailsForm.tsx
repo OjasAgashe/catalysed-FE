@@ -1,36 +1,37 @@
 import React, { useEffect } from "react";
 import { Col, Form, FormControl, Row } from "react-bootstrap";
 import ReactDatePicker from "react-datepicker";
-import {
-  CreateProgramActionType,
-  CreateProgramData,
-  CreateProgramState,
-} from "../../types/CreateProgram";
 import "react-datepicker/dist/react-datepicker.css";
 import { Languages } from "../../data/Languages";
 import { GiCrossMark } from "react-icons/gi";
+import {
+  OrgEditProgramDetailsActionType,
+  OrgEditProgramDetailsState,
+} from "../../types/OrgEditProgramDetails";
+import { CreateProgramData } from "../../types/CreateProgram";
 
-type GeneralDetailsFormProps = {
-  answer: CreateProgramData;
-  setAnswer: React.Dispatch<React.SetStateAction<CreateProgramData>>;
-  state: CreateProgramState;
-  dispatch: React.Dispatch<CreateProgramActionType>;
+type EditGeneralDetailsFormProps = {
+  state: OrgEditProgramDetailsState;
+  dispatch: React.Dispatch<OrgEditProgramDetailsActionType>;
+  editedData: CreateProgramData | null;
+  setEditedData: React.Dispatch<React.SetStateAction<CreateProgramData | null>>;
 };
 
-const GeneralDetailsForm = ({
-  answer,
-  setAnswer,
+const EditGeneralDetailsForm = ({
   state,
   dispatch,
-}: GeneralDetailsFormProps) => {
+  editedData,
+  setEditedData,
+}: EditGeneralDetailsFormProps) => {
   useEffect(() => {
-    setAnswer(
-      (prevState): CreateProgramData => ({
-        ...prevState,
-        languageRequirements: [...state.selectedLanguages].join(),
-      })
+    setEditedData(
+      (prevState): CreateProgramData =>
+        ({
+          ...prevState,
+          languageRequirements: [...state.selectedLanguages].join(),
+        } as CreateProgramData)
     );
-  }, [setAnswer, state.selectedLanguages]);
+  }, [setEditedData, state.selectedLanguages]);
 
   const handleGeneralDetailsFormChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
@@ -38,14 +39,15 @@ const GeneralDetailsForm = ({
       if (state.error) dispatch({ type: "error", payload: "" });
 
       if (["from", "to"].includes(event.target.name)) {
-        setAnswer(
-          (prevState): CreateProgramData => ({
-            ...prevState,
-            ageLimit: {
-              ...prevState.ageLimit,
-              [event.target.name]: event.target.value,
-            },
-          })
+        setEditedData(
+          (prevState): CreateProgramData =>
+            ({
+              ...prevState,
+              ageLimit: {
+                ...prevState?.ageLimit,
+                [event.target.name]: event.target.value,
+              },
+            } as CreateProgramData)
         );
       } else if (
         event.target.name === "programLink" &&
@@ -53,11 +55,12 @@ const GeneralDetailsForm = ({
       ) {
         dispatch({ type: "urlInput", payload: event.target.value });
       } else {
-        setAnswer(
-          (prevState): CreateProgramData => ({
-            ...prevState,
-            [event.target.name]: event.target.value,
-          })
+        setEditedData(
+          (prevState): CreateProgramData =>
+            ({
+              ...prevState,
+              [event.target.name]: event.target.value,
+            } as CreateProgramData)
         );
       }
     };
@@ -73,13 +76,14 @@ const GeneralDetailsForm = ({
     let month = selected_date?.getMonth();
 
     if (month) {
-      setAnswer(
-        (prevState): CreateProgramData => ({
-          ...prevState,
-          tentativeStartDate: `${selected_date?.getDate()}/${
-            (month as number) + 1
-          }/${selected_date?.getFullYear()}`,
-        })
+      setEditedData(
+        (prevState): CreateProgramData =>
+          ({
+            ...prevState,
+            tentativeStartDate: `${selected_date?.getDate()}/${
+              (month as number) + 1
+            }/${selected_date?.getFullYear()}`,
+          } as CreateProgramData)
       );
     }
   };
@@ -121,10 +125,14 @@ const GeneralDetailsForm = ({
         <Form.Group>
           <Form.Control
             required
-            className="CreateProgramFormControl"
+            disabled={state.originalData?.status === "PUBLISHED" ? true : false}
+            className={`CreateProgramFormControl ${
+              state.originalData?.status === "PUBLISHED" &&
+              "EditProgramDetailsDisabledField"
+            } `}
             name="title"
             placeholder="Program Title"
-            value={answer.title}
+            value={editedData?.title ?? ""}
             onChange={handleGeneralDetailsFormChange}
           />
           <Form.Control.Feedback type="invalid">
@@ -141,7 +149,7 @@ const GeneralDetailsForm = ({
             name="description"
             placeholder="Program Description"
             className="ProgramDescriptionTextArea CreateProgramFormControl"
-            value={answer.description}
+            value={editedData?.description ?? ""}
             onChange={handleGeneralDetailsFormChange}
           />
           <Form.Control.Feedback type="invalid">
@@ -150,20 +158,29 @@ const GeneralDetailsForm = ({
         </Form.Group>
 
         <Form.Group>
-          <Form.Text className="CreateProgramFormText">
+          <Form.Text
+            className={`CreateProgramFormText ${
+              state.originalData?.status === "PUBLISHED" &&
+              "EditProgramDetailsDisabledField"
+            } `}
+          >
             Tentative Start Date:
           </Form.Text>
 
           <ReactDatePicker
             required
+            disabled={state.originalData?.status === "PUBLISHED" ? true : false}
             name="tentativeStartDate"
             selected={state.selectedTSDate}
             onChange={handleDatePickerChange}
             dateFormat="dd/MM/yyyy"
             placeholderText="dd/mm/yyyy"
-            className="form-control CreateProgramFormControl"
+            className={`form-control CreateProgramFormControl ${
+              state.originalData?.status === "PUBLISHED" &&
+              "EditProgramDetailsDisabledField"
+            } `}
           />
-          {state.validated && answer.tentativeStartDate === "" && (
+          {state.validated && editedData?.tentativeStartDate === "" && (
             <FormControl.Feedback type="invalid" style={{ display: "block" }}>
               Required field.
             </FormControl.Feedback>
@@ -171,60 +188,100 @@ const GeneralDetailsForm = ({
         </Form.Group>
 
         <Form.Group>
-          <Form.Text className="CreateProgramFormText">
+          <Form.Text
+            className={`CreateProgramFormText ${
+              state.originalData?.status === "PUBLISHED" &&
+              "EditProgramDetailsDisabledField"
+            } `}
+          >
             Program Duration:&nbsp;
           </Form.Text>
           <Form.Control
             required
+            disabled={state.originalData?.status === "PUBLISHED" ? true : false}
             type="number"
             name="durationInMonths"
             pattern="[0-9]"
             placeholder="0"
             min={0}
-            className="CreateProgramFormControl InlineFormControl"
-            value={answer.durationInMonths}
+            className={`CreateProgramFormControl InlineFormControl ${
+              state.originalData?.status === "PUBLISHED" &&
+              "EditProgramDetailsDisabledField"
+            } `}
+            value={editedData?.durationInMonths ?? ""}
             onChange={handleGeneralDetailsFormChange}
           />
-          <Form.Text className="FormTextSmallLabel">months</Form.Text>
+          <Form.Text
+            className={`FormTextSmallLabel ${
+              state.originalData?.status === "PUBLISHED" &&
+              "EditProgramDetailsDisabledField"
+            } `}
+          >
+            months
+          </Form.Text>
           <Form.Control.Feedback type="invalid">
             Required field.
           </Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group className="ModeContainer">
-          <Form.Text className="CreateProgramFormText">
+          <Form.Text
+            className={`CreateProgramFormText ${
+              state.originalData?.status === "PUBLISHED" &&
+              "EditProgramDetailsDisabledField"
+            } `}
+          >
             Mode of the Program:&nbsp;&nbsp;
           </Form.Text>
           <Form.Check
             inline
+            disabled={state.originalData?.status === "PUBLISHED" ? true : false}
             label="virtual"
             type="radio"
             name="mode"
             value="Virtual"
-            checked={answer.mode === "Virtual"}
+            className={`${
+              state.originalData?.status === "PUBLISHED" &&
+              "EditProgramDetailsDisabledField"
+            } `}
+            checked={editedData?.mode === "Virtual"}
             onChange={handleGeneralDetailsFormChange}
           />
           <Form.Check
             inline
+            disabled={state.originalData?.status === "PUBLISHED" ? true : false}
             label="in person"
             type="radio"
             name="mode"
             value="InPerson"
-            checked={answer.mode === "InPerson"}
+            className={`${
+              state.originalData?.status === "PUBLISHED" &&
+              "EditProgramDetailsDisabledField"
+            } `}
+            checked={editedData?.mode === "InPerson"}
             onChange={handleGeneralDetailsFormChange}
           />
         </Form.Group>
 
         <Form.Group>
-          <Form.Text className="CreateProgramFormText">
+          <Form.Text
+            className={`CreateProgramFormText ${
+              state.originalData?.status === "PUBLISHED" &&
+              "EditProgramDetailsDisabledField"
+            } `}
+          >
             Language Requirements:&nbsp;
           </Form.Text>
 
           <FormControl
             isInvalid={state.isLanguageSelected}
+            disabled={state.originalData?.status === "PUBLISHED" ? true : false}
             as="select"
             value=""
-            className="CreateProgramFormControl LanguageSelector"
+            className={`CreateProgramFormControl LanguageSelector ${
+              state.originalData?.status === "PUBLISHED" &&
+              "EditProgramDetailsDisabledField"
+            } `}
             onChange={handleLanguageChange}
           >
             {Languages.map((language: { value: string; code: string }) => {
@@ -250,7 +307,12 @@ const GeneralDetailsForm = ({
           <Form.Control.Feedback type="invalid">
             Required field, select atleast One Language.
           </Form.Control.Feedback>
-          <ul className="LanguagePreviewer">
+          <ul
+            className={`LanguagePreviewer ${
+              state.originalData?.status === "PUBLISHED" &&
+              "EditProgramDetailsDisabledField"
+            } `}
+          >
             {state.selectedLanguages.map((language, index) => (
               <li key={index} className="LanguageLi">
                 {language}{" "}
@@ -267,19 +329,39 @@ const GeneralDetailsForm = ({
         </Form.Group>
 
         <Form.Group>
-          <Form.Text className="CreateProgramFormText">Age Limit:</Form.Text>
+          <Form.Text
+            className={`CreateProgramFormText ${
+              state.originalData?.status === "PUBLISHED" &&
+              "EditProgramDetailsDisabledField"
+            } `}
+          >
+            Age Limit:
+          </Form.Text>
           <Row>
             <Col>
-              <Form.Text className="FormTextSmallLabel">From</Form.Text>
+              <Form.Text
+                className={`FormTextSmallLabel ${
+                  state.originalData?.status === "PUBLISHED" &&
+                  "EditProgramDetailsDisabledField"
+                } `}
+              >
+                From
+              </Form.Text>
               <Form.Control
                 required
+                disabled={
+                  state.originalData?.status === "PUBLISHED" ? true : false
+                }
                 type="number"
                 name="from"
                 pattern="[0-9]"
                 placeholder="0"
                 min={0}
-                className="CreateProgramFormControl InlineFormControl"
-                value={answer.ageLimit.from}
+                className={`CreateProgramFormControl InlineFormControl ${
+                  state.originalData?.status === "PUBLISHED" &&
+                  "EditProgramDetailsDisabledField"
+                } `}
+                value={editedData?.ageLimit?.from ?? ""}
                 onChange={handleGeneralDetailsFormChange}
               />
               <Form.Control.Feedback type="invalid">
@@ -288,16 +370,29 @@ const GeneralDetailsForm = ({
             </Col>
 
             <Col>
-              <Form.Text className="FormTextSmallLabel">To</Form.Text>
+              <Form.Text
+                className={`FormTextSmallLabel ${
+                  state.originalData?.status === "PUBLISHED" &&
+                  "EditProgramDetailsDisabledField"
+                } `}
+              >
+                To
+              </Form.Text>
               <Form.Control
                 required
+                disabled={
+                  state.originalData?.status === "PUBLISHED" ? true : false
+                }
                 type="number"
                 name="to"
                 pattern="[0-9]"
                 placeholder="0"
                 min={0}
-                className="CreateProgramFormControl InlineFormControl"
-                value={answer.ageLimit.to}
+                className={`CreateProgramFormControl InlineFormControl ${
+                  state.originalData?.status === "PUBLISHED" &&
+                  "EditProgramDetailsDisabledField"
+                } `}
+                value={editedData?.ageLimit?.to ?? ""}
                 onChange={handleGeneralDetailsFormChange}
               />
 
@@ -314,7 +409,9 @@ const GeneralDetailsForm = ({
           name="programLink"
           placeholder="Program Url"
           className="CreateProgramFormControl"
-          value={answer.programLink ? answer.programLink : state.urlInput}
+          value={
+            editedData?.programLink ? editedData?.programLink : state.urlInput
+          }
           onChange={handleGeneralDetailsFormChange}
         />
         <Form.Control.Feedback type="invalid">
@@ -325,4 +422,4 @@ const GeneralDetailsForm = ({
   );
 };
 
-export default GeneralDetailsForm;
+export default EditGeneralDetailsForm;

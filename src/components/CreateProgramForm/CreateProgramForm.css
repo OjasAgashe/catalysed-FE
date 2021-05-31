@@ -1,9 +1,5 @@
-.CreateProgramWelcomeText {
-  font-size: 2.5rem;
-  padding: 0 2rem 3rem;
-  font-family: "KoHo", sans-serif;
-  color: var(--blue-gray-700);
-  font-weight: 600 !important;
+.CreateProgramFormContainer {
+  padding: 2rem;
 }
 
 .GeneralDetailsForm .ProgramDescriptionTextArea,

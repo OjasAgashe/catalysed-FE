@@ -21,6 +21,7 @@ import {
   ORGANISATION_PROGRAM_DETAILS,
   ORGANISATION_PROGRAM_INVITATIONS,
   ORGANISATION_PROGRAM_PARTICIPANTS,
+  ORGANISATION_PROGRAM_EDIT,
 } from "../../constants/Routes";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -39,6 +40,7 @@ import { OrgCreateProgramProvider } from "../../context/api_context/OrgCreatePro
 import OrgProgramDetailsPage from "../../pages/OrgProgramDetails/OrgProgramDetailsPage";
 import OrgProgramInvitationsPage from "../../pages/OrgProgramDetails/OrgProgramInvitationsPage";
 import OrgProgramParticipantsPage from "../../pages/OrgProgramDetails/OrgProgramParticipantsPage";
+import OrgEditProgramDetailsPage from "../../pages/OrgEditProgramDetailsPage/OrgEditProgramDetailsPage";
 
 function App() {
   return (
@@ -89,6 +91,12 @@ function App() {
           <PrivateRoute path={`${ORGANISATION_PROGRAM_DETAILS}/:programId`}>
             <OrgCreateProgramProvider>
               <OrgProgramDetailsPage />
+            </OrgCreateProgramProvider>
+          </PrivateRoute>
+
+          <PrivateRoute path={`${ORGANISATION_PROGRAM_EDIT}/:programId`}>
+            <OrgCreateProgramProvider>
+              <OrgEditProgramDetailsPage />
             </OrgCreateProgramProvider>
           </PrivateRoute>
 

@@ -1,7 +1,6 @@
 .CommonProgramDetailsDiv {
   background-size: cover;
   background-position: top;
-  /* height: 300px; */
 }
 
 .CommonProgramDetailsHeroText {
@@ -12,12 +11,6 @@
   font-weight: 600 !important;
 }
 
-/*
-.CommonProgramDetailsHeroText
-  :is(.ProgramDetailsText, .InvitationText, .ParticipantText) {
-  text-align: end;
-} */
-
 .PDViewAndRouteLinksContainer {
   width: fit-content;
   margin: auto;
@@ -25,27 +18,6 @@
   padding: 2rem 0;
   border-radius: 5px;
 }
-
-/* .PDViewAndRouteLinksContainer .Text {
-  font-size: 2.4rem !important;
-  color: var(--common-home-section-four-600);
-  
-  color: var(--facebook-code) !important;
-  margin: 2rem auto;
-
-  font-weight: 600;
-  font-family: "KoHo", sans-serif;
-  text-shadow: 1px 1px var(--yellow-700);
-  animation-name: transform-view-size;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-}
-
-@keyframes transform-view-size {
-  50% {
-    transform: scale(1.1);
-  }
-} */
 
 .ProgramDetailsRouteLinks {
   padding: 0.3rem 1.4rem !important;
@@ -90,7 +62,7 @@
 }
 
 @media screen and (max-width: 466px) {
-  .CommonProgramDetailsHeroText {
+  .CommonProgramDetailsHeroText span {
     background-color: var(--floral-white);
   }
 }
@@ -107,16 +79,7 @@
     background-size: auto;
   }
 
-  /* .InvitationText,
-  .ParticipantText {
-    background-color: var(--floral-white);
-  } */
-
   .CommonProgramDetailsHeroText {
     padding: 1rem 2rem 3rem !important;
   }
-
-  /* .ParticipantText {
-    margin-top: 0.5rem;
-  } */
 }

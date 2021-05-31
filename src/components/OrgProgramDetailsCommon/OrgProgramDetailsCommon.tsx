@@ -24,14 +24,10 @@ const OrgProgramDetailsCommon = ({
       style={{ backgroundImage: `url(${OrgProgramDetails})` }}
     >
       <div className="CommonProgramDetailsHeroText">
-        {/* <div className="ProgramDetailsText">Program Details,</div>
-        <div className="InvitationText">Invitations</div>
-        <div className="ParticipantText">&amp; Participants</div> */}
-        <div>{programTitle}</div>
+        <span>{programTitle}</span>
       </div>
 
       <div className="PDViewAndRouteLinksContainer">
-        {/* <div className="Text">View</div> */}
         <Alert variant="warning" className="ProgramDetailsRouteLinks">
           <Link
             to={`${ORGANISATION_PROGRAM_DETAILS}/${programId}`}

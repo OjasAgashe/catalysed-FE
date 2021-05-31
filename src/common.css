@@ -11,7 +11,7 @@
     OrgViewSearchProgramPage 
 */
 
-:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage, .OrgProfileBuilder, .MentorProfileBuilder, .StuProfileBuilder, .OrgCreateProgramPage, .OrgViewSearchProgramPage, .OrgProgramDetailsPage, .OrgProgramInvitationsPage, .OrgProgramParticipantsPage) {
+:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage, .OrgProfileBuilder, .MentorProfileBuilder, .StuProfileBuilder, .OrgCreateProgramPage, .OrgViewSearchProgramPage, .OrgProgramDetailsPage, .OrgProgramInvitationsPage, .OrgProgramParticipantsPage, .OrgEditProgramDetailsPage) {
   background-color: var(--red-100);
   min-height: 85vh;
 }
@@ -24,7 +24,7 @@
   align-items: center;
 }
 
-:is(.OrgProfileGreetContainer, .MentorProfileGreetContainer, .StuProfileGreetContainer, .OrgCreateProgramPage) {
+:is(.OrgProfileGreetContainer, .MentorProfileGreetContainer, .StuProfileGreetContainer) {
   padding: 2rem;
 }
 
@@ -368,7 +368,7 @@ input[type="number"] {
 /* language selector */
 
 .LanguageSelector {
-  cursor: pointer !important;
+  cursor: pointer;
 }
 
 /* country region selector */

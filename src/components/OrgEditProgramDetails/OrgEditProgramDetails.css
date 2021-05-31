@@ -1,0 +1,20 @@
+.OrgDetailsNotFound {
+  text-align: center;
+  margin: 3rem auto;
+}
+
+.EditProgramDetailsDisabledField {
+  opacity: 0.6 !important;
+  cursor: unset !important;
+}
+
+.EditProgramDetails :is(.CreateProgramDraftBtn, .CreateProgramPublishBtn) {
+  background-color: var(--common-home-section-four-600) !important;
+  border-color: var(--common-home-section-four-600) !important;
+}
+
+.EditProgramDetails
+  :is(.CreateProgramDraftBtn, .CreateProgramPublishBtn):hover {
+  transform: unset;
+  box-shadow: 2px 2px 10px var(--barley-corn);
+}
