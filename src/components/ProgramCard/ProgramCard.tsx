@@ -1,7 +1,6 @@
 import React from "react";
 import { GetProgramMetaListData } from "../../types/OrgViewSearchProgram";
 import "./ProgramCard.css";
-import { BiExpand } from "react-icons/bi";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import {
   FooterBackground,
@@ -9,6 +8,7 @@ import {
 } from "../../assets/Illustrations/Illustrations";
 import { useHistory } from "react-router";
 import { ORGANISATION_PROGRAM_DETAILS } from "../../constants/Routes";
+import { FiChevronsRight } from "react-icons/fi";
 
 type ProgramCardProps = {
   program: GetProgramMetaListData;
@@ -61,10 +61,7 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
           <span className="Data">{program.mode}</span>
         </div>
         <div className="ProgramCardLanguage">
-          <div>
-            <div className="Text">Language</div>
-            <div className="Text">Requirements&nbsp;:&nbsp;</div>
-          </div>
+          <span className="Text">Language Requirements&nbsp;:&nbsp;</span>
           {program.languageRequirements.length ? (
             <div className="CardLanguageRequirementsDiv">
               {program.languageRequirements.split(",").map(
@@ -94,8 +91,11 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
           className="ViewDetailsBtn"
           onClick={handleCardProgramDetailsBtn}
         >
-          <BiExpand className="ExpandCardBtnIcon" />
-          <span></span>
+          Show more
+          <span>      
+            &nbsp;
+            <FiChevronsRight className="DoubleRightArrowShowDetails" />
+          </span>
         </button>
       </div>
     </div>

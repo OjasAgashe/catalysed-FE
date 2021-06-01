@@ -1,11 +1,22 @@
 import React, { useContext } from "react";
 import axios, { AxiosResponse } from "axios";
 import { useCookie } from "../cookie_context/CookieContext";
+import { CreateProgramData } from "../../types/CreateProgram";
 
 interface OrgCreateProgramProviderReturns {
-  postCreateProgramCall: (data: any) => Promise<AxiosResponse<any>>;
+  postCreateProgramCall: (
+    data: CreateProgramData
+  ) => Promise<AxiosResponse<any>>;
   getProgramsMetaList: () => Promise<AxiosResponse<any>>;
   getProgramDetails: (programId: number) => Promise<AxiosResponse<any>>;
+  putUpdatedProgramDetails: (
+    programId: number,
+    data: CreateProgramData
+  ) => Promise<AxiosResponse<any>>;
+  putUpdatedProgramStatusToPublish: (
+    programId: number,
+    data: CreateProgramData
+  ) => Promise<AxiosResponse<any>>;
 }
 
 const OrgCreateProgramContext =
@@ -23,7 +34,7 @@ export const OrgCreateProgramProvider: React.FC<React.ReactNode> = (props) => {
 
   const { getCatalysedTokenCookie, getCatalysedIdCookie } = useCookie();
 
-  function postCreateProgramCall(data: any) {
+  function postCreateProgramCall(data: CreateProgramData) {
     const catalysedToken = getCatalysedTokenCookie();
 
     return instance.post(`/program`, data, {
@@ -48,10 +59,34 @@ export const OrgCreateProgramProvider: React.FC<React.ReactNode> = (props) => {
     });
   }
 
+  function putUpdatedProgramDetails(
+    programId: number,
+    data: CreateProgramData
+  ) {
+    const catalysedToken = getCatalysedTokenCookie();
+
+    return instance.put(`/program/${programId}`, data, {
+      headers: { Authorization: `Bearer ${catalysedToken}` },
+    });
+  }
+
+  function putUpdatedProgramStatusToPublish(
+    programId: number,
+    data: CreateProgramData
+  ) {
+    const catalysedToken = getCatalysedTokenCookie();
+
+    return instance.put(`/program/${programId}/publish`, data, {
+      headers: { Authorization: `Bearer ${catalysedToken}` },
+    });
+  }
+
   const values = {
     postCreateProgramCall,
     getProgramsMetaList,
     getProgramDetails,
+    putUpdatedProgramDetails,
+    putUpdatedProgramStatusToPublish,
   };
 
   return (

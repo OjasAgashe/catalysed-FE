@@ -60,8 +60,8 @@ const EditCoordinatorDetailsForm = ({
     const countryInfo = country as CountryData;
     const contact = {
       countryName: countryInfo.name,
-      countryCode: countryInfo.dialCode,
-      number: formattedValue.replace(`+${countryInfo.dialCode} `, ""),
+      countryCode: "+" + countryInfo.dialCode,
+      number: value.replace(`${countryInfo.dialCode}`, ""),
     };
 
     setEditedData(

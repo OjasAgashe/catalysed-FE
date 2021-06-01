@@ -53,6 +53,10 @@ const EditGeneralDetailsForm = ({
         event.target.name === "programLink" &&
         event.target.validity.valid === false
       ) {
+        setEditedData(
+          (prevState): CreateProgramData =>
+            ({ ...prevState, programLink: "" } as CreateProgramData)
+        );
         dispatch({ type: "urlInput", payload: event.target.value });
       } else {
         setEditedData(

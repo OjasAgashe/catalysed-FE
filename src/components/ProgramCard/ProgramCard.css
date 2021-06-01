@@ -53,6 +53,7 @@
   font-size: 1.2rem;
   color: var(--common-home-section-four-600);
   font-weight: 600;
+  width: 10rem;
 }
 
 .ProgramCard
@@ -74,34 +75,35 @@
   margin-top: 0.5rem;
   padding: 1rem;
   padding-top: 0;
+  text-align: center;
 }
 
 .ViewDetailsBtn {
-  border: none;
-  border-radius: 50%;
-  background-color: var(--invalid-feedback);
-  color: var(--white);
   cursor: pointer;
-  padding-bottom: 0.3rem;
-  float: right;
-  width: 3rem;
-  height: 3rem;
-  border: 4px solid var(--blue-gray-300);
+  border-radius: 5px;
+  padding: 0.2rem 1rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  border: 1px solid var(--blue-gray-300);
+  color: var(--blue-gray-700);
+  box-shadow: 1px 1px 4px var(--blue-gray-300), -1px -1px 4px var(--blue-gray-100);
 }
 
 .ViewDetailsBtn:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
-.ExpandCardBtnIcon {
-  font-size: 1.1rem;
-  animation-name: scale-size;
+.DoubleRightArrowShowDetails {
+  font-size: 1.3rem;
+  color: var(--blue-gray-700);
+  font-weight: 600;
+  animation-name: right-move;
   animation-iteration-count: infinite;
-  animation-duration: 1s;
+  animation-duration: 2s;
 }
 
-@keyframes scale-size {
+@keyframes right-move {
   50% {
-    padding: 1px;
+    transform: translateX(-4px);
   }
 }

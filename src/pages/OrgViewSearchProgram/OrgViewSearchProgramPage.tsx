@@ -10,6 +10,7 @@ const OrgViewSearchProgramPage = () => {
     searchedNotPresentText: "",
     selectedRadioForFilter: "All",
     selectedRadioForSort: "All",
+    selectedRadioForFilterMode: "All",
   });
 
   useEffect(() => {

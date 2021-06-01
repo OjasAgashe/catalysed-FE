@@ -65,8 +65,11 @@ const OrgViewSearchProgram = ({
         {programsList.length ? (
           <>
             {(state.searchedTitle ||
-              ["Published", "In Draft", "Virtual", "In Person"].includes(
+              ["Published", "In Draft"].includes(
                 state.selectedRadioForFilter
+              ) ||
+              ["Virtual", "In Person"].includes(
+                state.selectedRadioForFilterMode
               ) ||
               [
                 "Increasing Duration",
@@ -90,8 +93,9 @@ const OrgViewSearchProgram = ({
               </div>
             )}
             {state.searchedTitle === "" &&
-            !["Published", "In Draft", "Virtual", "In Person"].includes(
-              state.selectedRadioForFilter
+            !["Published", "In Draft"].includes(state.selectedRadioForFilter) &&
+            !["Virtual", "In Person"].includes(
+              state.selectedRadioForFilterMode
             ) &&
             ![
               "Increasing Duration",

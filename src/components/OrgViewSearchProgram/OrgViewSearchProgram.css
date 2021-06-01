@@ -3,19 +3,21 @@
 }
 
 .FilterBarFormNImgContainer {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  align-items: center;
 }
 
 .ViewAndSearchProgramIllustration {
   max-width: 300px;
   padding: 2rem 1rem 1rem;
+  align-self: flex-end;
 }
 
 .OrgFilterBarText {
-  padding: 0 2rem 3rem !important;
+  padding: 0 2rem 1rem !important;
   font-family: "KoHo", sans-serif;
   font-size: 2.5rem !important;
   color: var(--facebook-code) !important;
@@ -47,6 +49,9 @@
 .FilterByVSGroup,
 .SortByVSGroup {
   margin: 1rem auto !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .FilterByText,
@@ -64,6 +69,7 @@
   border: 1px solid var(--blue-gray-700) !important;
   color: var(--blue-gray-700) !important;
   padding: 0.2rem 0.5rem !important;
+  width: 8rem;
 }
 
 :is(.FilterCategorySelectGroup, .SortCategorySelectGroup):focus {
@@ -83,6 +89,7 @@
   width: fit-content;
   margin: 1.5rem auto;
   border-radius: 5px;
+  text-align: center;
 }
 
 .CreateProgramTextContainer .CreateProgramText {
