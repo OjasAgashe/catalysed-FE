@@ -23,3 +23,12 @@
     background-color: var(--floral-white);
   }
 }
+
+.SendNewInvitationTextContainer {
+  padding: 0 2rem !important;
+}
+
+.SendNewInvitationClickHere {
+  background: inherit;
+  border: none;
+}

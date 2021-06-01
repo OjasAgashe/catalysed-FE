@@ -85,41 +85,6 @@
   color: var(--blue-gray-700);
 }
 
-.OrgViewSearchProgram .CreateProgramTextContainer {
-  width: fit-content;
-  margin: 1.5rem auto;
-  border-radius: 5px;
-  text-align: center;
-}
-
-.CreateProgramTextContainer .CreateProgramText {
-  padding: 0.3rem 1.4rem;
-  border-radius: 5px;
-  font-size: 1.3rem;
-}
-
-.CreateProgramText .CRClickHereLink {
-  text-decoration: none;
-  color: var(--blue-gray-700);
-  font-weight: 600;
-}
-
-.CreateProgramText .CRClickHereLink:hover {
-  text-decoration: underline;
-}
-
-.OrgViewSearchProgram .CreateProgramText {
-  animation-name: box-shadow-animation;
-  animation-iteration-count: infinite;
-  animation-duration: 1.5s;
-}
-
-@keyframes box-shadow-animation {
-  50% {
-    box-shadow: 1px 1px 5px var(--blue-gray-500);
-  }
-}
-
 .OrgViewSearchProgram .ProgramCardContainer {
   display: flex;
   max-width: 1200px;

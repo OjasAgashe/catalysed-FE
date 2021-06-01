@@ -14,6 +14,8 @@ const OrgViewSearchProgramPage = () => {
   });
 
   useEffect(() => {
+    document.documentElement.scrollTop = 0;
+
     document.title = "Org View/Search | CatalysEd";
   }, []);
 

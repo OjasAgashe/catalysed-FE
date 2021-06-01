@@ -20,6 +20,8 @@ const OrgProgramDetailsPage = () => {
   const { getProgramDetails } = useOrgCreateProgram();
 
   useEffect(() => {
+    document.documentElement.scrollTop = 0;
+
     document.title = "Program Details | CatalysEd";
 
     const getDetails = async () => {

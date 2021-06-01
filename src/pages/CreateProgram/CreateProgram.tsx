@@ -20,6 +20,8 @@ const CreateProgram = () => {
   });
 
   useEffect(() => {
+    document.documentElement.scrollTop = 0;
+
     document.title = "Create Program Org | CatalysEd";
   }, []);
 

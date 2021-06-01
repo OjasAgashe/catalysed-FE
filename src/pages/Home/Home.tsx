@@ -3,6 +3,8 @@ import CommonHome from "../../components/CommonHome/CommonHome";
 
 const Home = () => {
   useEffect(() => {
+    document.documentElement.scrollTop = 0;
+
     document.title = "Home | CatalysEd";
   }, []);
 

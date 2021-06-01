@@ -6,6 +6,8 @@ const OrgProgramParticipantsPage = () => {
   const { programId } = useParams<{ programId: string }>();
 
   useEffect(() => {
+    document.documentElement.scrollTop = 0;
+
     document.title = "Program Participants | CatalysEd";
   }, []);
 

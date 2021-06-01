@@ -30,6 +30,8 @@ const StuProfileBuilder = () => {
   const [showGreet, setShowGreet] = useState<boolean>(true);
 
   useEffect(() => {
+    document.documentElement.scrollTop = 0;
+
     document.title = "Student Profile Builder | CatalysEd";
   }, []);
 

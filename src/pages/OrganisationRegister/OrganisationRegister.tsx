@@ -34,6 +34,8 @@ const OrganisationRegister = () => {
     });
 
   useEffect(() => {
+    document.documentElement.scrollTop = 0;
+
     document.title = "Organisation Register | CatalysEd";
   }, []);
 

@@ -3,6 +3,8 @@ import OrgHome from "../../components/OrgHome/OrgHome";
 
 const OrgHomePage = () => {
   useEffect(() => {
+    document.documentElement.scrollTop = 0;
+
     document.title = "Org Home | CatalysEd";
   }, []);
 

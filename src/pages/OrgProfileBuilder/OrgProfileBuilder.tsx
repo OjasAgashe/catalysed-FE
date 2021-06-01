@@ -30,6 +30,8 @@ const OrgProfileBuilder = () => {
   const [showGreet, setShowGreet] = useState<boolean>(true);
 
   useEffect(() => {
+    document.documentElement.scrollTop = 0;
+
     document.title = "Org Profile Builder | CatalysEd";
   }, []);
 

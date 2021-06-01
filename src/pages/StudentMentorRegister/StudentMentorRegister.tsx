@@ -3,6 +3,8 @@ import "./StudentMentorRegister.css";
 
 const StudentMentorRegister = () => {
   useEffect(() => {
+    document.documentElement.scrollTop = 0;
+
     document.title = "Register | CatalysEd";
   }, []);
 

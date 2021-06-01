@@ -12,6 +12,8 @@ const Login = () => {
   });
 
   useEffect(() => {
+    document.documentElement.scrollTop = 0;
+
     document.title = "Login | CatalysEd";
   }, []);
 

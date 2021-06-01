@@ -3,6 +3,8 @@ import StudentHome from "../../components/StudentHome/StudentHome";
 
 const StudentHomePage = () => {
   useEffect(() => {
+    document.documentElement.scrollTop = 0;
+
     document.title = "Student Home | CatalysEd";
   }, []);
 

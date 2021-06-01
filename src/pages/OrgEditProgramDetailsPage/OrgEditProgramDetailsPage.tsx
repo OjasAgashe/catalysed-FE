@@ -31,6 +31,8 @@ const OrgEditProgramDetailsPage = () => {
   const { getProgramDetails } = useOrgCreateProgram();
 
   useEffect(() => {
+    document.documentElement.scrollTop = 0;
+
     document.title = "Edit Program | CatalysEd";
 
     const getDayMonthYear = (date: string) => {

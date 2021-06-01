@@ -16,8 +16,8 @@ const Greet = ({ setShowGreet }: GreetProps) => {
           We are glad that you want to be a mentor of Organization_name !!
         </h4>
         <h4 className="Leth4">
-          Let's create a profile that will help establish your
-          existence on CatalysEd
+          Let's create a profile that will help establish your existence on
+          CatalysEd
         </h4>
         <button className="StartBtn" onClick={() => setShowGreet(false)}>
           Start &nbsp;
@@ -32,6 +32,8 @@ const MentorProfileBuilder = () => {
   const [showGreet, setShowGreet] = useState<boolean>(true);
 
   useEffect(() => {
+    document.documentElement.scrollTop = 0;
+
     document.title = "Mentor Profile Builder | CatalysEd";
   }, []);
 
