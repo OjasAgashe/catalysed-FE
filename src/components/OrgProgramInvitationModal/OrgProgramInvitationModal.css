@@ -1,0 +1,82 @@
+.OrgProgramInvitationModal .ModalHeader {
+  border: none !important;
+  justify-content: flex-end !important;
+  height: fit-content;
+  padding: 0.2rem !important;
+}
+
+.OrgProgramInvitationModal .ModalHeader .Button {
+  background-color: inherit !important;
+  border: none !important;
+  color: var(--blue-gray-700) !important;
+}
+
+.OrgProgramInvitationModal .ModalHeader .Button:focus {
+  box-shadow: none !important;
+}
+
+.OrgProgramInvitationModal .ModalHeader .Button .Icon {
+  font-size: 1.5rem !important;
+}
+
+.OrgProgramInvitationModal .ModalHeader .Button .Icon:hover {
+  transform: scale(1.1);
+}
+
+.OrgProgramInvitationModal .ModalBody {
+  border: 1px solid var(--blue-gray-700);
+  border-radius: 5px;
+  box-shadow: inset 1px 1px 4px var(--blue-gray-300),
+    inset -1px -1px 4px var(--blue-gray-300);
+  margin: 0.5rem;
+}
+
+.OrgProgramInvitationModal .ModalFormGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.OrgProgramInvitationModal .ModalFormText {
+  font-size: 1.1rem !important;
+  color: var(--blue-gray-700);
+  font-weight: 550;
+}
+
+.OrgProgramInvitationModal .ModalFormControl {
+  color: var(--blue-gray-700);
+  font-size: 1.1rem !important;
+}
+
+.OrgProgramInvitationModal .InlineFormControl {
+  display: inline-block !important;
+  width: 17rem !important;
+}
+
+.OrgProgramInvitationModal .CustomMessageTextArea {
+  resize: none !important;
+}
+
+.OrgProgramInvitationModal .ModalFormButtonContainer {
+  margin: 1rem auto 0;
+  width: fit-content;
+}
+
+.OrgProgramInvitationModal .ModalFormButtonContainer .ModalFormButton {
+  background-color: var(--blue-gray-600);
+  border-color: var(--blue-gray-600);
+}
+
+.OrgProgramInvitationModal .ModalFormButton:hover {
+  background-color: var(--blue-gray-500);
+}
+
+.OrgProgramInvitationModal .ModalFormButton:focus {
+  box-shadow: none !important;
+}
+
+@media screen and (max-width: 450px) {
+  .OrgProgramInvitationModal .InlineFormControl {
+    width: inherit !important;
+  }
+}
