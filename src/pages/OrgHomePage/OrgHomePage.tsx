@@ -9,7 +9,7 @@ const OrgHomePage = () => {
   }, []);
 
   return (
-    <div>
+    <div className="OrgHomePage">
       <OrgHome />
     </div>
   );

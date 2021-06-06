@@ -11,7 +11,7 @@
     OrgViewSearchProgramPage 
 */
 
-:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage, .OrgProfileBuilder, .MentorProfileBuilder, .StuProfileBuilder, .OrgCreateProgramPage, .OrgViewSearchProgramPage, .OrgProgramDetailsPage, .OrgProgramInvitationsPage, .OrgProgramParticipantsPage, .OrgEditProgramDetailsPage) {
+:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage, .OrgProfileBuilder, .MentorProfileBuilder, .StuProfileBuilder, .OrgCreateProgramPage, .OrgViewSearchProgramPage, .OrgProgramDetailsPage, .OrgProgramInvitationsPage, .OrgProgramParticipantsPage, .OrgEditProgramDetailsPage, .OrgHomePage) {
   background-color: var(--red-100);
   min-height: 85vh;
 }
@@ -455,10 +455,15 @@ input[type="number"] {
 
 /* page & component */
 
-/* OrgProgramInvitaionsPage, OrgViewSearchProgram component */
+/* 
+  OrgProgramInvitaionsPage, 
+  OrgViewSearchProgram component, 
+  OrgHome component 
+*/
 
 .OrgViewSearchProgram .CreateProgramTextContainer,
-.OrgProgramInvitationsPage .SendNewInvitationTextContainer {
+.OrgProgramInvitationsPage .SendNewInvitationTextContainer,
+.OrgHomeSectionContainer .OrgHomeSectionTwo .CreateProgramTextContainer {
   width: fit-content;
   margin: 1.5rem auto;
   border-radius: 5px;
@@ -485,7 +490,8 @@ input[type="number"] {
 }
 
 .OrgViewSearchProgram .CreateProgramText,
-.OrgProgramInvitationsPage .SendNewInvitationText {
+.OrgProgramInvitationsPage .SendNewInvitationText,
+.OrgHomeSectionContainer .OrgHomeSectionTwo .CreateProgramText {
   animation-name: box-shadow-animation;
   animation-iteration-count: infinite;
   animation-duration: 1.5s;

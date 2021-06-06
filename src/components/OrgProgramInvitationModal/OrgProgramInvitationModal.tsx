@@ -20,6 +20,7 @@ const OrgProgramInvitationModal = ({
   dispatch,
 }: OrgProgramInvitationModalProps) => {
   const [formData, setFormData] = useState<OrgInvitationCardData>({
+    type: "Mentor",
     name: "",
     email: "",
     custom_message: "",
@@ -71,6 +72,28 @@ const OrgProgramInvitationModal = ({
           onSubmit={handleInvitationFormBtn}
         >
           <Form.Group className="ModalFormGroup">
+            <Form.Text className="ModalFormText">Participant Type</Form.Text>
+            <Form.Check
+              inline
+              label="mentor"
+              type="radio"
+              name="type"
+              value="Mentor"
+              checked={formData.type === "Mentor"}
+              onChange={handleOrgInvitationCardChange}
+            />
+            <Form.Check
+              inline
+              label="student"
+              type="radio"
+              name="type"
+              value="Student"
+              checked={formData.type === "Student"}
+              onChange={handleOrgInvitationCardChange}
+            />
+          </Form.Group>
+
+          <Form.Group className="ModalFormGroup">
             <Form.Text className="ModalFormText">Participant Name</Form.Text>
             <div>
               <Form.Control
@@ -119,7 +142,7 @@ const OrgProgramInvitationModal = ({
               className="CustomMessageTextArea ModalFormControl"
             />
             <Form.Control.Feedback type="invalid">
-              Required Field.
+              Required field, minimum 10 Characters.
             </Form.Control.Feedback>
           </Form.Group>
 

@@ -1,0 +1,85 @@
+.OrgHomeSectionOneContainer {
+  background-size: cover;
+  background-position: center;
+  border-bottom-left-radius: 5rem;
+  border-bottom-right-radius: 5rem;
+  padding: 6rem 0;
+  padding-left: 7rem;
+  padding-right: 1rem;
+  box-shadow: 0 1px 20px var(--blue-gray-300);
+  border-bottom: 1px solid var(--blue-gray-300);
+}
+
+.OrgHomeSectionOneContainer .TextContainer {
+  border-left: 5px solid var(--instagram-code);
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+  border-radius: 5px;
+  font-size: 1.8rem;
+  font-weight: 500;
+  word-break: break-all;
+  box-shadow: -2px 0 var(--bs-white);
+}
+
+.TextContainer span {
+  display: block;
+  background-color: var(--white);
+  padding: 0.2rem 0.3rem;
+  width: fit-content;
+  border-radius: 5px;
+  border: 1px solid var(--blue-gray-300);
+  margin: 0.5rem 0;
+  box-shadow: 2px 2px 6px var(--blue-gray-300);
+}
+
+@media screen and (max-width: 785px) {
+  .OrgHomeSectionOneContainer .TextContainer {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 833px) {
+  .OrgHomeSectionOneContainer {
+    padding: 3rem 0;
+    padding-left: 4rem;
+    padding-right: 1rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .OrgHomeSectionOneContainer {
+    padding-left: 1rem;
+  }
+}
+
+.OrgHomeSectionTwo {
+  padding: 0.2rem 0.4rem;
+}
+
+.SectionThreeAndFourContainer {
+  background-color: var(--white);
+  border-radius: 10px;
+}
+
+.OrgHomeSectionThreeContainer {
+  padding: 1rem 0.5rem;
+}
+
+/* SectionHeadingDiv */
+
+.OrgHomeSectionContainer .SectionHeadingDiv {
+  background-color: var(--section-heading-div);
+  color: var(--yellow-700);
+  width: fit-content;
+  margin: auto;
+  padding: 0.2rem 1.3rem;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+  box-shadow: 1px 1px 4px var(--barley-corn);
+  border-left: 1px solid var(--barley-corn);
+  border-top: 1px solid var(--barley-corn);
+}
+
+/*  */

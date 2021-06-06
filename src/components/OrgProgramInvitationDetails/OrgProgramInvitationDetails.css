@@ -22,6 +22,10 @@
   box-shadow: none !important;
 }
 
+.ProgramFilterSortDropdown .dropdown-menu {
+  min-width: fit-content;
+}
+
 .ProgramInvitationTableRow {
   text-align: center !important;
 }
@@ -44,4 +48,22 @@
 .OrgProgramInvitationDataContainer .table {
   --bs-table-striped-bg: var(--blue-gray-100) !important;
   border-color: var(--blue-gray-100) !important;
+}
+
+.OrgInvitationSearchBar .OrgInvitationSearchFromControl:valid {
+  background-color: var(--blue-gray-100) !important;
+}
+
+.OrgInvitationSearchBar .OrgInvitationSearchFromControl {
+  border: 1px solid var(--blue-gray-300) !important;
+  max-width: 22rem;
+  margin: 1rem 0;
+  color: var(--blue-gray-700) !important;
+  font-size: 1.05rem !important;
+  background-color: var(--blue-gray-100) !important;
+}
+
+.OrgProgramInvitationDetails .ErrorCompContainer {
+  width: fit-content;
+  margin: auto;
 }

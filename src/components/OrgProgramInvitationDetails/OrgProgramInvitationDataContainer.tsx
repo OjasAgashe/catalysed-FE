@@ -1,37 +1,168 @@
 import React from "react";
+import { Dropdown, DropdownButton, Table } from "react-bootstrap";
 import {
-  Dropdown,
-  DropdownButton,
-  OverlayTrigger,
-  Table,
-  Tooltip,
-} from "react-bootstrap";
+  OrgInvitationDetailsData,
+  OrgProgramInvitationActionType,
+  OrgProgramInvitationState,
+} from "../../types/OrgProgramDetails";
+import Error from "../Error/Error";
+import InvitationTableRow from "./InvitationTableRow";
 
-const OrgProgramInvitationDataContainer = () => {
-  const fakeData = [
-    {
-      id: 1,
-      name: "oj",
-      email: "oj@gmail.com",
-      sent_on: "02/06/2021",
-      status: "Pending",
-    },
-    {
-      id: 2,
-      name: "Peter Parker",
-      email: "Peter.Parker@gmail.com",
-      sent_on: "01/06/2021",
-      status: "Accepted",
-    },
-    {
-      id: 3,
-      name: "Wolfeschlegelsteinhausenbergerdorffwel",
-      email:
-        "contact-admin-hello-abcd@please-try-to.send-me-this-coz.this-is-but-to-be-honest.this-is-on-forever.pacraig.com",
-      sent_on: "31/06/2021",
-      status: "Pending",
-    },
-  ];
+type OrgProgramInvitationDataContainerProps = {
+  fakeData: OrgInvitationDetailsData[];
+  filteredFakeData: OrgInvitationDetailsData[];
+  state: OrgProgramInvitationState;
+  dispatch: React.Dispatch<OrgProgramInvitationActionType>;
+  setFilteredFakeData: React.Dispatch<
+    React.SetStateAction<OrgInvitationDetailsData[]>
+  >;
+  filterAcceptedFakeData: OrgInvitationDetailsData[];
+  filterPendingFakeData: OrgInvitationDetailsData[];
+  filterMentorFakeData: OrgInvitationDetailsData[];
+  filterStudentFakeData: OrgInvitationDetailsData[];
+  filterAcceptedTempFilteredData: (
+    tempFilteredData: OrgInvitationDetailsData[]
+  ) => OrgInvitationDetailsData[];
+  filterPendingTempFilteredData: (
+    tempFilteredData: OrgInvitationDetailsData[]
+  ) => OrgInvitationDetailsData[];
+  filterMentorTempFilteredData: (
+    tempFilteredData: OrgInvitationDetailsData[]
+  ) => OrgInvitationDetailsData[];
+  filterStudentTempFilteredData: (
+    tempFilteredData: OrgInvitationDetailsData[]
+  ) => OrgInvitationDetailsData[];
+  sortDateByLatestUsing: (
+    obj1: OrgInvitationDetailsData,
+    obj2: OrgInvitationDetailsData
+  ) => 1 | -1;
+  sortDateByOldestUsing: (
+    obj1: OrgInvitationDetailsData,
+    obj2: OrgInvitationDetailsData
+  ) => 1 | -1;
+};
+
+const OrgProgramInvitationDataContainer = ({
+  fakeData,
+  filteredFakeData,
+  state,
+  dispatch,
+  setFilteredFakeData,
+  filterAcceptedFakeData,
+  filterPendingFakeData,
+  filterMentorFakeData,
+  filterStudentFakeData,
+  filterAcceptedTempFilteredData,
+  filterPendingTempFilteredData,
+  filterMentorTempFilteredData,
+  filterStudentTempFilteredData,
+  sortDateByLatestUsing,
+  sortDateByOldestUsing,
+}: OrgProgramInvitationDataContainerProps) => {
+  const handleProgramInvitationSentDropdownSelect = (
+    eventKey: string | null
+  ) => {
+    if (eventKey) {
+      dispatch({ type: "selectedRadioForSort", payload: eventKey });
+      dispatch({ type: "searchedNotPresentText", payload: "" });
+      dispatch({ type: "searchedName", payload: "" });
+      let tempFilteredData: OrgInvitationDetailsData[] = [...fakeData];
+
+      if (state.selectedRadioForFilter === "Accepted")
+        tempFilteredData = filterAcceptedTempFilteredData(tempFilteredData);
+
+      if (state.selectedRadioForFilter === "Pending")
+        tempFilteredData = filterPendingTempFilteredData(tempFilteredData);
+
+      if (state.selectedRadioForFilterType === "Mentor")
+        tempFilteredData = filterMentorTempFilteredData(tempFilteredData);
+
+      if (state.selectedRadioForFilterType === "Student")
+        tempFilteredData = filterStudentTempFilteredData(tempFilteredData);
+
+      if (eventKey === "Latest") tempFilteredData.sort(sortDateByLatestUsing);
+
+      if (eventKey === "Oldest") tempFilteredData.sort(sortDateByOldestUsing);
+
+      setFilteredFakeData(tempFilteredData);
+      if (eventKey && tempFilteredData.length === 0) {
+        dispatch({
+          type: "searchedNotPresentText",
+          payload: "Sorry!! No Invitations Found",
+        });
+      }
+    }
+  };
+
+  const handleProgramInvitationStatusDropdownSelect = (
+    eventKey: string | null
+  ) => {
+    if (eventKey) {
+      dispatch({ type: "selectedRadioForFilter", payload: eventKey });
+      dispatch({ type: "searchedNotPresentText", payload: "" });
+      dispatch({ type: "searchedName", payload: "" });
+      let tempFilteredData: OrgInvitationDetailsData[] = [...fakeData];
+
+      if (eventKey === "Accepted") tempFilteredData = filterAcceptedFakeData;
+
+      if (eventKey === "Pending") tempFilteredData = filterPendingFakeData;
+
+      if (state.selectedRadioForFilterType === "Mentor")
+        tempFilteredData = filterMentorTempFilteredData(tempFilteredData);
+
+      if (state.selectedRadioForFilterType === "Student")
+        tempFilteredData = filterStudentTempFilteredData(tempFilteredData);
+
+      if (state.selectedRadioForSort === "Latest")
+        tempFilteredData.sort(sortDateByLatestUsing);
+
+      if (state.selectedRadioForSort === "Oldest")
+        tempFilteredData.sort(sortDateByOldestUsing);
+
+      setFilteredFakeData(tempFilteredData);
+      if (eventKey && tempFilteredData.length === 0) {
+        dispatch({
+          type: "searchedNotPresentText",
+          payload: "Sorry!! No Invitations Found",
+        });
+      }
+    }
+  };
+
+  const handleProgramInvitationTypeDropdownSelect = (
+    eventKey: string | null
+  ) => {
+    if (eventKey) {
+      dispatch({ type: "selectedRadioForFilterType", payload: eventKey });
+      dispatch({ type: "searchedNotPresentText", payload: "" });
+      dispatch({ type: "searchedName", payload: "" });
+      let tempFilteredData: OrgInvitationDetailsData[] = [...fakeData];
+
+      if (eventKey === "Mentor") tempFilteredData = filterMentorFakeData;
+
+      if (eventKey === "Student") tempFilteredData = filterStudentFakeData;
+
+      if (state.selectedRadioForFilter === "Accepted")
+        tempFilteredData = filterAcceptedTempFilteredData(tempFilteredData);
+
+      if (state.selectedRadioForFilter === "Pending")
+        tempFilteredData = filterPendingTempFilteredData(tempFilteredData);
+
+      if (state.selectedRadioForSort === "Latest")
+        tempFilteredData.sort(sortDateByLatestUsing);
+
+      if (state.selectedRadioForSort === "Oldest")
+        tempFilteredData.sort(sortDateByOldestUsing);
+
+      setFilteredFakeData(tempFilteredData);
+      if (eventKey && tempFilteredData.length === 0) {
+        dispatch({
+          type: "searchedNotPresentText",
+          payload: "Sorry!! No Invitations Found",
+        });
+      }
+    }
+  };
 
   return (
     <div className="OrgProgramInvitationDataContainer">
@@ -42,55 +173,123 @@ const OrgProgramInvitationDataContainer = () => {
             <th className="ProgramInvitationHeader">Email</th>
             <th className="ProgramInvitationHeader">
               <DropdownButton
-                title="Sent On"
+                title={`Type${
+                  state.selectedRadioForFilterType !== "All"
+                    ? `:${state.selectedRadioForFilterType}`
+                    : ""
+                }`}
                 className="ProgramFilterSortDropdown"
               >
-                <Dropdown.Item>Latest</Dropdown.Item>
-                <Dropdown.Item>Oldest</Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="All"
+                  onSelect={handleProgramInvitationTypeDropdownSelect}
+                >
+                  None
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="Mentor"
+                  onSelect={handleProgramInvitationTypeDropdownSelect}
+                >
+                  Mentor
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="Student"
+                  onSelect={handleProgramInvitationTypeDropdownSelect}
+                >
+                  Student
+                </Dropdown.Item>
+              </DropdownButton>
+            </th>
+
+            <th className="ProgramInvitationHeader">
+              <DropdownButton
+                title={`Sent On${
+                  state.selectedRadioForSort !== "All"
+                    ? `:${state.selectedRadioForSort}`
+                    : ""
+                }`}
+                className="ProgramFilterSortDropdown"
+              >
+                <Dropdown.Item
+                  eventKey="All"
+                  onSelect={handleProgramInvitationSentDropdownSelect}
+                >
+                  None
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="Latest"
+                  onSelect={handleProgramInvitationSentDropdownSelect}
+                >
+                  Latest
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="Oldest"
+                  onSelect={handleProgramInvitationSentDropdownSelect}
+                >
+                  Oldest
+                </Dropdown.Item>
               </DropdownButton>
             </th>
             <th className="ProgramInvitationHeader">
               <DropdownButton
-                title="Status"
+                title={`Status${
+                  state.selectedRadioForFilter !== "All"
+                    ? `:${state.selectedRadioForFilter}`
+                    : ""
+                }`}
                 className="ProgramFilterSortDropdown"
               >
-                <Dropdown.Item>Accepted</Dropdown.Item>
-                <Dropdown.Item>Pending</Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="All"
+                  onSelect={handleProgramInvitationStatusDropdownSelect}
+                >
+                  None
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="Accepted"
+                  onSelect={handleProgramInvitationStatusDropdownSelect}
+                >
+                  Accepted
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="Pending"
+                  onSelect={handleProgramInvitationStatusDropdownSelect}
+                >
+                  Pending
+                </Dropdown.Item>
               </DropdownButton>
             </th>
           </tr>
         </thead>
         <tbody>
-          {fakeData.map((data) => (
-            <tr className="ProgramInvitationTableRow" key={data.id}>
-              <td className="ProgramInvitationTableData">
-                <OverlayTrigger
-                  placement="bottom"
-                  overlay={<Tooltip id="name-tooltip">{data.name}</Tooltip>}
-                >
-                  <span>
-                    {data.name.length > 20
-                      ? `${data.name.substring(0, 20)}...`
-                      : data.name}
-                  </span>
-                </OverlayTrigger>
+          {(state.searchedName ||
+            ["Latest", "Oldest"].includes(state.selectedRadioForSort) ||
+            ["Accepted", "Pending"].includes(state.selectedRadioForFilter) ||
+            ["Mentor", "Student"].includes(state.selectedRadioForFilterType)) &&
+          filteredFakeData.length ? (
+            [...filteredFakeData]
+              .reverse()
+              .map((data) => <InvitationTableRow data={data} key={data.id} />)
+          ) : (
+            <tr
+              style={
+                state.searchedNotPresentText === "" ? { display: "none" } : {}
+              }
+            >
+              <td colSpan={5}>
+                <div className="ErrorCompContainer">
+                  <Error message={state.searchedNotPresentText} />
+                </div>
               </td>
-              <td className="ProgramInvitationTableData">
-                <OverlayTrigger
-                  placement="bottom"
-                  overlay={<Tooltip id="email-tooltip">{data.email}</Tooltip>}
-                >
-                  <span>
-                    {data.email.length > 25
-                      ? `${data.email.substring(0, 25)}...`
-                      : data.email}
-                  </span>
-                </OverlayTrigger>
-              </td>
-              <td className="ProgramInvitationTableData">{data.sent_on}</td>
-              <td className="ProgramInvitationTableData">{data.status}</td>
             </tr>
-          ))}
+          )}
+          {state.searchedName === "" &&
+            !["Latest", "Oldest"].includes(state.selectedRadioForSort) &&
+            !["Accepted", "Pending"].includes(state.selectedRadioForFilter) &&
+            !["Mentor", "Student"].includes(state.selectedRadioForFilterType) &&
+            [...fakeData]
+              .reverse()
+              .map((data) => <InvitationTableRow data={data} key={data.id} />)}
         </tbody>
       </Table>
     </div>

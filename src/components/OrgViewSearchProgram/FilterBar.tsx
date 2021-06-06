@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import {
   GetProgramMetaListData,
   OrgViewSearchProgramState,
@@ -21,83 +21,87 @@ const FilterBar = ({
   programsList,
   setFilteredProgramsList,
 }: FilterBarProps) => {
-  const filterPublishedProgramList = programsList.filter(
-    (program) => program.status === "PUBLISHED"
+  const filterPublishedProgramList = useMemo(
+    () => programsList.filter((program) => program.status === "PUBLISHED"),
+    [programsList]
   );
 
-  const filterPublishedTempFilteredList = (
-    tempFilteredList: GetProgramMetaListData[]
-  ) => {
-    return tempFilteredList.filter((program) => program.status === "PUBLISHED");
-  };
-
-  const filterInDraftProgramList = programsList.filter(
-    (program) => program.status === "SAVED_TO_DRAFT"
+  const filterPublishedTempFilteredList = useCallback(
+    (tempFilteredList: GetProgramMetaListData[]) =>
+      tempFilteredList.filter((program) => program.status === "PUBLISHED"),
+    []
   );
 
-  const filterInDraftTempFilteredList = (
-    tempFilteredList: GetProgramMetaListData[]
-  ) => {
-    return tempFilteredList.filter(
-      (program) => program.status === "SAVED_TO_DRAFT"
-    );
-  };
-
-  const filterVirtualProgramList = programsList.filter(
-    (program) => program.mode === "Virtual"
+  const filterInDraftProgramList = useMemo(
+    () => programsList.filter((program) => program.status === "SAVED_TO_DRAFT"),
+    [programsList]
   );
 
-  const filterVirtualTempFilteredList = (
-    tempFilteredList: GetProgramMetaListData[]
-  ) => {
-    return tempFilteredList.filter((program) => program.mode === "Virtual");
-  };
-
-  const filterInPersonProgramList = programsList.filter(
-    (program) => program.mode === "InPerson"
+  const filterInDraftTempFilteredList = useCallback(
+    (tempFilteredList: GetProgramMetaListData[]) =>
+      tempFilteredList.filter((program) => program.status === "SAVED_TO_DRAFT"),
+    []
   );
 
-  const filterInPersonTempFilteredList = (
-    tempFilteredList: GetProgramMetaListData[]
-  ) => {
-    return tempFilteredList.filter((program) => program.mode === "InPerson");
-  };
+  const filterVirtualProgramList = useMemo(
+    () => programsList.filter((program) => program.mode === "Virtual"),
+    [programsList]
+  );
 
-  const sortDurationInIncreasingByUsing = (
-    obj1: GetProgramMetaListData,
-    obj2: GetProgramMetaListData
-  ) => -(obj1.durationInMonths - obj2.durationInMonths);
+  const filterVirtualTempFilteredList = useCallback(
+    (tempFilteredList: GetProgramMetaListData[]) =>
+      tempFilteredList.filter((program) => program.mode === "Virtual"),
+    []
+  );
 
-  const sortDurationInDecreasingByUsing = (
-    obj1: GetProgramMetaListData,
-    obj2: GetProgramMetaListData
-  ) => obj1.durationInMonths - obj2.durationInMonths;
+  const filterInPersonProgramList = useMemo(
+    () => programsList.filter((program) => program.mode === "InPerson"),
+    [programsList]
+  );
 
-  const sortDateFromNewToOldByUsing = (
-    obj1: GetProgramMetaListData,
-    obj2: GetProgramMetaListData
-  ) => {
-    const [day1, month1, year1] = obj1.tentativeStartDate.split("/");
-    const [day2, month2, year2] = obj2.tentativeStartDate.split("/");
+  const filterInPersonTempFilteredList = useCallback(
+    (tempFilteredList: GetProgramMetaListData[]) =>
+      tempFilteredList.filter((program) => program.mode === "InPerson"),
+    []
+  );
 
-    return new Date(parseInt(year1), parseInt(month1) - 1, parseInt(day1)) >
-      new Date(parseInt(year2), parseInt(month2) - 1, parseInt(day2))
-      ? 1
-      : -1;
-  };
+  const sortDurationInIncreasingByUsing = useCallback(
+    (obj1: GetProgramMetaListData, obj2: GetProgramMetaListData) =>
+      -(obj1.durationInMonths - obj2.durationInMonths),
+    []
+  );
 
-  const sortDateFromOldToNewByUsing = (
-    obj1: GetProgramMetaListData,
-    obj2: GetProgramMetaListData
-  ) => {
-    const [day1, month1, year1] = obj1.tentativeStartDate.split("/");
-    const [day2, month2, year2] = obj2.tentativeStartDate.split("/");
+  const sortDurationInDecreasingByUsing = useCallback(
+    (obj1: GetProgramMetaListData, obj2: GetProgramMetaListData) =>
+      obj1.durationInMonths - obj2.durationInMonths,
+    []
+  );
 
-    return new Date(parseInt(year1), parseInt(month1) - 1, parseInt(day1)) >
-      new Date(parseInt(year2), parseInt(month2) - 1, parseInt(day2))
-      ? -1
-      : 1;
-  };
+  const sortDateFromNewToOldByUsing = useCallback(
+    (obj1: GetProgramMetaListData, obj2: GetProgramMetaListData) => {
+      const [day1, month1, year1] = obj1.tentativeStartDate.split("/");
+      const [day2, month2, year2] = obj2.tentativeStartDate.split("/");
+
+      return new Date(parseInt(year1), parseInt(month1) - 1, parseInt(day1)) >
+        new Date(parseInt(year2), parseInt(month2) - 1, parseInt(day2))
+        ? 1
+        : -1;
+    },
+    []
+  );
+
+  const sortDateFromOldToNewByUsing = useCallback(
+    (obj1: GetProgramMetaListData, obj2: GetProgramMetaListData) => {
+      const [day1, month1, year1] = obj1.tentativeStartDate.split("/");
+      const [day2, month2, year2] = obj2.tentativeStartDate.split("/");
+
+      return new Date(parseInt(year1), parseInt(month1) - 1, parseInt(day1)) >
+        new Date(parseInt(year2), parseInt(month2) - 1, parseInt(day2))
+        ? -1
+        : 1;
+    },
+    []
+  );
 
   const handleSearchedTitleChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {

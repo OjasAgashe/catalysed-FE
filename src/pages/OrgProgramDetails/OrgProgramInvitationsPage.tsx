@@ -14,6 +14,11 @@ const OrgProgramInvitationsPage = () => {
     loading: false,
     error: "",
     validated: false,
+    searchedName: "",
+    searchedNotPresentText: "",
+    selectedRadioForFilter: "All",
+    selectedRadioForFilterType: "All",
+    selectedRadioForSort: "All",
   });
 
   useEffect(() => {
@@ -45,7 +50,7 @@ const OrgProgramInvitationsPage = () => {
 
       <OrgProgramInvitationModal state={state} dispatch={dispatch} />
 
-      <OrgProgramInvitationDetails />
+      <OrgProgramInvitationDetails state={state} dispatch={dispatch} />
     </div>
   );
 };

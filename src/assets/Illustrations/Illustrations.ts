@@ -9,6 +9,7 @@ import FooterBackground from "./footer-background.webp";
 import HeaderBackground from "./header-background.webp";
 import Logo from "./logo.png";
 import OrgEditProgramDetailsIllustration from "./org_edit_program_details_illustration.svg";
+import OrgHomeSectionOne from "./org_home_section_one.jpg";
 import OrgProgramDetails from "./org_program_details.jpg";
 import OrgProgramDetailsDataIllustration from "./org_program_details_data_illustration.svg";
 import OrgViewAndSearchProgram from "./org_view_and_search_program.svg";
@@ -25,6 +26,7 @@ export {
   HeaderBackground,
   Logo,
   OrgEditProgramDetailsIllustration,
+  OrgHomeSectionOne,
   OrgProgramDetails,
   OrgProgramDetailsDataIllustration,
   OrgViewAndSearchProgram,
