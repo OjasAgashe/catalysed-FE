@@ -3,6 +3,8 @@ import { Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { ORGANISATION_PROGRAM_CREATE } from "../../constants/Routes";
 import "./OrgHome.css";
+import SectionFive from "./SectionFive";
+import SectionFour from "./SectionFour";
 import SectionOne from "./SectionOne";
 import SectionThree from "./SectionThree";
 
@@ -22,7 +24,9 @@ const OrgHome = () => {
       </section>
       <div className="SectionThreeAndFourContainer">
         <SectionThree />
+        <SectionFour />
       </div>
+      <SectionFive />
     </div>
   );
 };

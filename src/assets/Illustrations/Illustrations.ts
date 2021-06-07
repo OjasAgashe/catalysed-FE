@@ -10,6 +10,9 @@ import HeaderBackground from "./header-background.webp";
 import Logo from "./logo.png";
 import OrgEditProgramDetailsIllustration from "./org_edit_program_details_illustration.svg";
 import OrgHomeSectionOne from "./org_home_section_one.jpg";
+import OrgHomeInvitationsInfoCard from "./org_home_invitations_info_card.svg";
+import OrgHomeMentorInfoCard from "./org_home_mentor_info_card.svg";
+import OrgHomeStudentInfoCard from "./org_home_student_info_card.svg";
 import OrgProgramDetails from "./org_program_details.jpg";
 import OrgProgramDetailsDataIllustration from "./org_program_details_data_illustration.svg";
 import OrgViewAndSearchProgram from "./org_view_and_search_program.svg";
@@ -27,6 +30,9 @@ export {
   Logo,
   OrgEditProgramDetailsIllustration,
   OrgHomeSectionOne,
+  OrgHomeInvitationsInfoCard,
+  OrgHomeMentorInfoCard,
+  OrgHomeStudentInfoCard,
   OrgProgramDetails,
   OrgProgramDetailsDataIllustration,
   OrgViewAndSearchProgram,

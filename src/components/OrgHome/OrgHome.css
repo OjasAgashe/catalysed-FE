@@ -30,6 +30,36 @@
   border: 1px solid var(--blue-gray-300);
   margin: 0.5rem 0;
   box-shadow: 2px 2px 6px var(--blue-gray-300);
+  animation-name: span-width-animate;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+}
+
+@keyframes span-width-animate {
+  0% {
+    width: 0;
+  }
+
+  15% {
+    width: 15%;
+  }
+
+  25% {
+    width: 25%;
+  }
+
+  35% {
+    width: 35%;
+  }
+
+  45% {
+    width: 45%;
+  }
+
+  50% {
+    width: fit-content;
+  }
 }
 
 @media screen and (max-width: 785px) {
@@ -54,15 +84,35 @@
 
 .OrgHomeSectionTwo {
   padding: 0.2rem 0.4rem;
+  margin: 1.5rem auto;
 }
 
 .SectionThreeAndFourContainer {
   background-color: var(--white);
-  border-radius: 10px;
+  margin: auto 1rem;
+}
+
+.OrgHomeSectionThreeContainer,
+.OrgHomeSectionFourContainer {
+  padding: 2rem 0.5rem;
+  margin: auto 1rem;
 }
 
 .OrgHomeSectionThreeContainer {
-  padding: 1rem 0.5rem;
+  border-bottom: 2px solid var(--blue-gray-300);
+}
+
+.OrgHomeSectionFiveContainer {
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.OrgHomeSectionFiveContainer .OrgHomeSectionFiveSubsection {
+  display: flex;
+  flex-direction: column;
 }
 
 /* SectionHeadingDiv */
@@ -80,6 +130,161 @@
   box-shadow: 1px 1px 4px var(--barley-corn);
   border-left: 1px solid var(--barley-corn);
   border-top: 1px solid var(--barley-corn);
+}
+
+/*  */
+
+/* ErrorNoProgramsDiv */
+
+.OrgHomeSectionContainer .ErrorNoProgramsDiv {
+  width: fit-content;
+  font-size: 1.1rem;
+  margin: 2rem auto;
+}
+
+/*  */
+
+/* MentorInfoCard, StudentInfoCard, InvitationsInfoCard */
+
+.OrgHomeSectionFiveContainer
+  :is(.MentorInfoCard, .StudentInfoCard, .InvitationsInfoCard) {
+  background-color: var(--white);
+  max-width: 25rem;
+  padding: 1.5rem;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px var(--blue-gray-400);
+}
+
+:is(.MentorInfoCard, .StudentInfoCard, .InvitationsInfoCard)
+  .StatNImgContainer {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem auto;
+  flex-wrap: wrap;
+}
+
+.MentorInfoCard,
+.InvitationsInfoCard {
+  margin: 1rem 0;
+}
+
+.InvitationsInfoCard .StatNImgContainer {
+  align-items: center;
+}
+
+@media screen and (max-width: 448px) {
+  :is(.MentorInfoCard, .StudentInfoCard, .InvitationsInfoCard)
+    .StatNImgContainer {
+    justify-content: center;
+  }
+}
+
+:is(.MentorInfoCard, .StudentInfoCard) .StatDivContainer {
+  display: flex;
+  flex-direction: column;
+  width: 10rem;
+}
+
+:is(.MentorInfoCard, .StudentInfoCard)
+  .StatDivContainer
+  :is(.TotalStatDiv, .NewThisMonthDiv) {
+  margin: 0.5rem 0;
+  width: fit-content;
+}
+
+.MentorInfoCard .NewThisMonthDiv {
+  align-self: flex-end;
+}
+
+.StudentInfoCard .TotalStatDiv {
+  align-self: flex-end;
+}
+
+@media screen and (max-width: 880px) {
+  .StudentInfoCard {
+    margin: 1rem 0;
+  }
+}
+
+.MentorInfoCard .MentorInfoCardImgContainer,
+.StudentInfoCard .StudentInfoCardImgContainer {
+  height: fit-content;
+  align-self: flex-end;
+}
+
+.OrgHomeMentorInfoCardImg,
+.OrgHomeStudentInfoCardImg,
+.OrgHomeInvitationsInfoCardImg {
+  max-width: 10rem;
+  margin: 1rem;
+  margin-bottom: 0;
+}
+
+.InvitationsInfoCard .AcceptedNPendingContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/*  */
+
+/* CurrentStatDiv */
+
+.OrgHomeSectionContainer .CurrentStatDiv {
+  text-align: center;
+  width: 8rem;
+  background-color: var(--blue-gray-100);
+  box-shadow: 1px 3.5px 3.5px var(--blue-gray-400);
+  border-radius: 5px;
+  padding: 0.2rem 0.3rem;
+  font-size: 1.2rem;
+  color: var(--blue-gray-700);
+  font-weight: 500;
+}
+
+/*  */
+
+/* NextBtnDiv */
+
+.OrgHomeSectionContainer .NextBtnDiv {
+  padding-top: 1rem;
+  text-align: center;
+  font-weight: 600;
+  color: var(--blue-gray-700);
+}
+
+.OrgHomeSectionContainer .NextBtnIconContainer {
+  margin: auto;
+  display: block;
+  border: 1px solid var(--blue-gray-300);
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  box-shadow: 2px 2px 3px var(--blue-gray-400),
+    -1px -1px 3px var(--blue-gray-400);
+  background-color: var(--white);
+}
+
+.OrgHomeSectionContainer .NextBtnIconContainer:hover {
+  border-color: var(--blue-gray-400);
+}
+
+.OrgHomeSectionContainer .NextBtnIcon {
+  margin-bottom: 0.2rem;
+  font-size: 1.2rem;
+  color: var(--blue-gray-700);
+  stroke-width: 0.8;
+  animation-name: right-move-next-btn;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+}
+
+@keyframes right-move-next-btn {
+  50% {
+    transform: translateX(2px);
+  }
 }
 
 /*  */

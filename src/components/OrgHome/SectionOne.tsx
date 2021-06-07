@@ -14,7 +14,9 @@ const SectionOne = () => {
         <span className="HelpTextSpanOne">
           You know that you can help and save
         </span>
-        <span className="HelpTextSpanTwo">time for both, student and mentor, by connecting</span>
+        <span className="HelpTextSpanTwo">
+          time for both, student and mentor, by connecting
+        </span>
         <span className="HelpTextSpanThree">them through your programs</span>
       </div>
     </section>
