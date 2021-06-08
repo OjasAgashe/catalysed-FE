@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { ORGANISATION_PROGRAM_CREATE } from "../../constants/Routes";
@@ -7,8 +7,41 @@ import SectionFive from "./SectionFive";
 import SectionFour from "./SectionFour";
 import SectionOne from "./SectionOne";
 import SectionThree from "./SectionThree";
+import { useOrgCreateProgram } from "../../context/api_context/OrgCreateProgramContext";
+import { OrgHomeActionType, OrgHomeState } from "../../types/OrgHome";
 
-const OrgHome = () => {
+type OrgHomeProps = {
+  state: OrgHomeState;
+  dispatch: React.Dispatch<OrgHomeActionType>;
+};
+
+const OrgHome = ({ state, dispatch }: OrgHomeProps) => {
+  const { getProgramsStartingThisMonth, getOngoingPrograms } =
+    useOrgCreateProgram();
+
+  useEffect(() => {
+    const getPrograms = async () => {
+      try {
+        const programsStartingThisMonth = await getProgramsStartingThisMonth();
+        const ongoingPrograms = await getOngoingPrograms();
+
+        dispatch({
+          type: "programsStartingThisMonth",
+          payload: programsStartingThisMonth.slice(0, 3),
+        });
+        dispatch({
+          type: "ongoingPrograms",
+          payload: ongoingPrograms.slice(0, 3),
+        });
+      } catch (error) {
+      } finally {
+        dispatch({ type: "loading", payload: false });
+      }
+    };
+
+    getPrograms();
+  }, [dispatch, getOngoingPrograms, getProgramsStartingThisMonth]);
+
   return (
     <div className="OrgHomeSectionContainer">
       <SectionOne />
@@ -23,8 +56,8 @@ const OrgHome = () => {
         </div>
       </section>
       <div className="SectionThreeAndFourContainer">
-        <SectionThree />
-        <SectionFour />
+        <SectionThree state={state} />
+        <SectionFour state={state} />
       </div>
       <SectionFive />
     </div>

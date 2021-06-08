@@ -34,10 +34,10 @@ const OrgHomeHeader = () => {
 
         <NavDropdown.Item
           as={Link}
-          to={ORGANISATION_PROGRAM_VIEW_SEARCH}
+          to={`${ORGANISATION_PROGRAM_VIEW_SEARCH}/all`}
           eventKey="3"
         >
-          View/Search
+          View/Search All
         </NavDropdown.Item>
       </NavDropdown>
     </>

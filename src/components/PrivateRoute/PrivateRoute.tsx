@@ -47,7 +47,7 @@ const PrivateRoute = (props: {
             `${ORGANISATION_PROGRAM_EDIT}/:programId`,
             `${ORGANISATION_PROGRAM_INVITATIONS}/:programId`,
             `${ORGANISATION_PROGRAM_PARTICIPANTS}/:programId`,
-            ORGANISATION_PROGRAM_VIEW_SEARCH,
+            `${ORGANISATION_PROGRAM_VIEW_SEARCH}/:filterBy`,
           ].includes(props.path)
         ) {
           return <Route path={props.path}>{props.children}</Route>;

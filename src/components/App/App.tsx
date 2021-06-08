@@ -78,7 +78,9 @@ function App() {
 
           <PrivateRoute path={ORGANISATION_HOME}>
             <ProfileBuilderProvider>
-              <OrgHomePage />
+              <OrgCreateProgramProvider>
+                <OrgHomePage />
+              </OrgCreateProgramProvider>
             </ProfileBuilderProvider>
           </PrivateRoute>
 
@@ -114,7 +116,7 @@ function App() {
             </OrgCreateProgramProvider>
           </PrivateRoute>
 
-          <PrivateRoute path={ORGANISATION_PROGRAM_VIEW_SEARCH}>
+          <PrivateRoute path={`${ORGANISATION_PROGRAM_VIEW_SEARCH}/:filterBy`}>
             <OrgCreateProgramProvider>
               <OrgViewSearchProgramPage />
             </OrgCreateProgramProvider>

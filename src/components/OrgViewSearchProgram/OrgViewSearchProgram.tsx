@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Alert } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useOrgCreateProgram } from "../../context/api_context/OrgCreateProgramContext";
 import { ORGANISATION_PROGRAM_CREATE } from "../../constants/Routes";
 import {
@@ -22,7 +22,11 @@ const OrgViewSearchProgram = ({
   state,
   dispatch,
 }: OrgViewSearchProgramProps) => {
-  const { getProgramsMetaList } = useOrgCreateProgram();
+  const {
+    getProgramsMetaList,
+    getOngoingPrograms,
+    getProgramsStartingThisMonth,
+  } = useOrgCreateProgram();
   const [programsList, setProgramsList] = useState<GetProgramMetaListData[]>(
     []
   );
@@ -31,11 +35,26 @@ const OrgViewSearchProgram = ({
     GetProgramMetaListData[]
   >([]);
 
+  const { filterBy } = useParams<{ filterBy: string }>();
+
   useEffect(() => {
     const getPrograms = async () => {
       try {
-        const response = await getProgramsMetaList();
-        setProgramsList([...response.data]);
+        if (filterBy === "all") {
+          const response = await getProgramsMetaList();
+          setProgramsList([...response.data]);
+        }
+
+        if (filterBy === "in_progress") {
+          const ongoingPrograms = await getOngoingPrograms();
+          setProgramsList([...ongoingPrograms]);
+        }
+
+        if (filterBy === "this_month") {
+          const programsStartingThisMonth =
+            await getProgramsStartingThisMonth();
+          setProgramsList([...programsStartingThisMonth]);
+        }
       } catch (error) {
       } finally {
         dispatch({ type: "loading", payload: false });
@@ -43,7 +62,13 @@ const OrgViewSearchProgram = ({
     };
 
     getPrograms();
-  }, [dispatch, getProgramsMetaList]);
+  }, [
+    dispatch,
+    filterBy,
+    getOngoingPrograms,
+    getProgramsMetaList,
+    getProgramsStartingThisMonth,
+  ]);
 
   return (
     <div className="OrgViewSearchProgram">

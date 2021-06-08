@@ -3,11 +3,12 @@ import { BsChevronDoubleRight } from "react-icons/bs";
 
 type NextBtnDivProps = {
   onClick: () => void;
-}
+  classNames?: string;
+};
 
-const NextBtnDiv = ({ onClick }: NextBtnDivProps) => {
+const NextBtnDiv = ({ onClick, classNames = "" }: NextBtnDivProps) => {
   return (
-    <div className="NextBtnDiv" onClick={onClick}>
+    <div className={`NextBtnDiv ${classNames}`} onClick={onClick}>
       <button className="NextBtnIconContainer">
         <BsChevronDoubleRight className="NextBtnIcon" />
       </button>

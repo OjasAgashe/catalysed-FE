@@ -90,6 +90,8 @@
 .SectionThreeAndFourContainer {
   background-color: var(--white);
   margin: auto 1rem;
+  border: 1px solid var(--blue-gray-300);
+  box-shadow: 1px 1px 10px var(--blue-gray-300);
 }
 
 .OrgHomeSectionThreeContainer,
@@ -149,10 +151,11 @@
 .OrgHomeSectionFiveContainer
   :is(.MentorInfoCard, .StudentInfoCard, .InvitationsInfoCard) {
   background-color: var(--white);
-  max-width: 25rem;
+  max-width: 26rem;
   padding: 1.5rem;
   border-radius: 5px;
-  box-shadow: 1px 1px 5px var(--blue-gray-400);
+  border: 1px solid var(--blue-gray-300);
+  box-shadow: 1px 1px 10px var(--blue-gray-300);
 }
 
 :is(.MentorInfoCard, .StudentInfoCard, .InvitationsInfoCard)
@@ -284,6 +287,83 @@
 @keyframes right-move-next-btn {
   50% {
     transform: translateX(2px);
+  }
+}
+
+/*  */
+
+/* ProgramCard */
+
+:is(.OrgHomeSectionThreeContainer, .OrgHomeSectionFourContainer)
+  .ProgramCardContainer {
+  display: flex;
+  max-width: 1200px;
+  margin: auto;
+  margin-top: 2rem;
+  padding-bottom: 2rem;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.ProgramCardBackgroundColor {
+  background: linear-gradient(34deg, #ccffff, #ffcccc);
+}
+
+@media screen and (max-width: 412px) {
+  .ProgramCardBackgroundColor {
+    box-shadow: none !important;
+  }
+}
+
+/*  */
+
+/* NextBtnDivContainer SectionThree */
+
+.NextBtnDivContainer {
+  background-color: var(--blue-gray-300);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  width: 11rem;
+  height: 37rem;
+  position: absolute;
+  top: inherit;
+  margin-right: -15rem;
+  opacity: 0.7;
+  z-index: 10;
+}
+
+.NextBtnDivItem {
+  margin-top: 14rem !important;
+  font-weight: bold !important;
+  z-index: 20;
+  position: relative;
+  stroke-width: 1;
+}
+
+@media screen and (max-width: 488px) {
+  .NextBtnDivContainer {
+    margin-right: -13rem;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .NextBtnDivContainer {
+    width: 10rem;
+    margin-right: -11rem;
+  }
+}
+
+@media screen and (min-width: 867px) {
+  .NextBtnDivContainerWithRight {
+    right: 3rem;
+    margin-right: 0;
+  }
+}
+
+@media screen and (min-width: 1050px) {
+  .NextBtnDivContainerWithRight {
+    right: 6rem;
+    margin-right: 0;
   }
 }
 

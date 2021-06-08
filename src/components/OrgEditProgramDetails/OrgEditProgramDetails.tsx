@@ -175,7 +175,7 @@ const OrgEditProgramDetails = ({
       }
 
       dispatch({ type: "loadingMessage", payload: "" });
-      // history.push(ORGANISATION_PROGRAM_VIEW_SEARCH);
+      // history.push(`${ORGANISATION_PROGRAM_VIEW_SEARCH}/all`);
     } catch (error) {
       document.documentElement.scrollTop =
         document.documentElement.scrollHeight;

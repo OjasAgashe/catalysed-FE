@@ -12,9 +12,10 @@ import { FiChevronsRight } from "react-icons/fi";
 
 type ProgramCardProps = {
   program: GetProgramMetaListData;
+  classNames?: string;
 };
 
-const ProgramCard = ({ program }: ProgramCardProps) => {
+const ProgramCard = ({ program, classNames = "" }: ProgramCardProps) => {
   const history = useHistory();
 
   const handleCardProgramDetailsBtn = () => {
@@ -22,7 +23,10 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
   };
 
   return (
-    <div className="ProgramCard" onClick={handleCardProgramDetailsBtn}>
+    <div
+      className={`ProgramCard ${classNames}`}
+      onClick={handleCardProgramDetailsBtn}
+    >
       <div
         className="ProgramCardTitle"
         style={{
@@ -92,7 +96,7 @@ const ProgramCard = ({ program }: ProgramCardProps) => {
           onClick={handleCardProgramDetailsBtn}
         >
           Show more
-          <span>      
+          <span>
             &nbsp;
             <FiChevronsRight className="DoubleRightArrowShowDetails" />
           </span>
