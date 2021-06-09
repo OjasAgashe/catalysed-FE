@@ -1,9 +1,9 @@
 import React from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import { OrgInvitationDetailsData } from "../../types/OrgProgramDetails";
+import { OrgInvitationResponseData } from "../../types/OrgProgramDetails";
 
 type InvitationTableRowProps = {
-  data: OrgInvitationDetailsData;
+  data: OrgInvitationResponseData;
 };
 
 const InvitationTableRow = ({ data }: InvitationTableRowProps) => {
@@ -25,18 +25,26 @@ const InvitationTableRow = ({ data }: InvitationTableRowProps) => {
         <td className="ProgramInvitationTableData">
           <OverlayTrigger
             placement="bottom"
-            overlay={<Tooltip id="email-tooltip">{data.email}</Tooltip>}
+            overlay={<Tooltip id="email-tooltip">{data.emailId}</Tooltip>}
           >
             <span>
-              {data.email.length > 25
-                ? `${data.email.substring(0, 25)}...`
-                : data.email}
+              {data.emailId.length > 25
+                ? `${data.emailId.substring(0, 25)}...`
+                : data.emailId}
             </span>
           </OverlayTrigger>
         </td>
-        <td className="ProgramInvitationTableData">{data.type}</td>
-        <td className="ProgramInvitationTableData">{data.sent_on}</td>
-        <td className="ProgramInvitationTableData">{data.status}</td>
+        <td className="ProgramInvitationTableData">
+          {data.userType === "MENTOR" ? "Mentor" : "Student"}
+        </td>
+        <td className="ProgramInvitationTableData">{`${new Date(
+          data.sentAt
+        ).getDate()}/${new Date(data.sentAt).getMonth() + 1}/${new Date(
+          data.sentAt
+        ).getFullYear()}`}</td>
+        <td className="ProgramInvitationTableData">
+          {data.responseStatus === "PENDING" ? "Pending" : "Accepted"}
+        </td>
       </tr>
     </>
   );

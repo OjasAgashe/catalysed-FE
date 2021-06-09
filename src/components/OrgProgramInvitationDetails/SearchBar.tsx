@@ -1,45 +1,43 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 import {
-  OrgInvitationDetailsData,
+  OrgInvitationResponseData,
   OrgProgramInvitationActionType,
   OrgProgramInvitationState,
 } from "../../types/OrgProgramDetails";
 
 type SearchBarProps = {
-  fakeData: OrgInvitationDetailsData[];
   state: OrgProgramInvitationState;
   dispatch: React.Dispatch<OrgProgramInvitationActionType>;
-  setFilteredFakeData: React.Dispatch<
-    React.SetStateAction<OrgInvitationDetailsData[]>
+  setFilteredResponseData: React.Dispatch<
+    React.SetStateAction<OrgInvitationResponseData[]>
   >;
   filterAcceptedTempFilteredData: (
-    tempFilteredData: OrgInvitationDetailsData[]
-  ) => OrgInvitationDetailsData[];
+    tempFilteredData: OrgInvitationResponseData[]
+  ) => OrgInvitationResponseData[];
   filterPendingTempFilteredData: (
-    tempFilteredData: OrgInvitationDetailsData[]
-  ) => OrgInvitationDetailsData[];
+    tempFilteredData: OrgInvitationResponseData[]
+  ) => OrgInvitationResponseData[];
   filterMentorTempFilteredData: (
-    tempFilteredData: OrgInvitationDetailsData[]
-  ) => OrgInvitationDetailsData[];
+    tempFilteredData: OrgInvitationResponseData[]
+  ) => OrgInvitationResponseData[];
   filterStudentTempFilteredData: (
-    tempFilteredData: OrgInvitationDetailsData[]
-  ) => OrgInvitationDetailsData[];
+    tempFilteredData: OrgInvitationResponseData[]
+  ) => OrgInvitationResponseData[];
   sortDateByLatestUsing: (
-    obj1: OrgInvitationDetailsData,
-    obj2: OrgInvitationDetailsData
+    obj1: OrgInvitationResponseData,
+    obj2: OrgInvitationResponseData
   ) => 1 | -1;
   sortDateByOldestUsing: (
-    obj1: OrgInvitationDetailsData,
-    obj2: OrgInvitationDetailsData
+    obj1: OrgInvitationResponseData,
+    obj2: OrgInvitationResponseData
   ) => 1 | -1;
 };
 
 const SearchBar = ({
-  fakeData,
   state,
   dispatch,
-  setFilteredFakeData,
+  setFilteredResponseData,
   filterAcceptedTempFilteredData,
   filterPendingTempFilteredData,
   filterMentorTempFilteredData,
@@ -52,7 +50,9 @@ const SearchBar = ({
       dispatch({ type: "searchedName", payload: event.target.value });
       dispatch({ type: "searchedNotPresentText", payload: "" });
 
-      let tempFilteredData = fakeData.filter(
+      const responseData = state.responseData as OrgInvitationResponseData[];
+
+      let tempFilteredData = responseData.filter(
         (data) => data.name.toLowerCase() === event.target.value
       );
 
@@ -75,7 +75,7 @@ const SearchBar = ({
         tempFilteredData.sort(sortDateByOldestUsing);
 
       if (event.target.value === "" && tempFilteredData.length === 0) {
-        tempFilteredData = [...fakeData];
+        tempFilteredData = [...responseData];
 
         if (state.selectedRadioForFilter === "Accepted")
           tempFilteredData = filterAcceptedTempFilteredData(tempFilteredData);
@@ -96,7 +96,7 @@ const SearchBar = ({
           tempFilteredData.sort(sortDateByOldestUsing);
       }
 
-      setFilteredFakeData(tempFilteredData);
+      setFilteredResponseData(tempFilteredData);
 
       if (event.target.value && tempFilteredData.length === 0) {
         dispatch({

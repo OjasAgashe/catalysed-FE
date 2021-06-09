@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useState } from "react";
 import {
-  OrgInvitationDetailsData,
+  OrgInvitationResponseData,
   OrgProgramInvitationActionType,
   OrgProgramInvitationState,
 } from "../../types/OrgProgramDetails";
@@ -18,92 +18,79 @@ const OrgProgramInvitationDetails = ({
   state,
   dispatch,
 }: OrgProgramInvitationDetailsProps) => {
-  const fakeData = useMemo(
-    () => [
-      {
-        id: 1,
-        name: "oj",
-        email: "oj@gmail.com",
-        type: "Mentor",
-        sent_on: "02/06/2021",
-        status: "Pending",
-      },
-      {
-        id: 2,
-        name: "Peter Parker",
-        email: "Peter.Parker@gmail.com",
-        type: "Student",
-        sent_on: "01/06/2021",
-        status: "Accepted",
-      },
-      {
-        id: 3,
-        name: "Wolfeschlegelsteinhausenbergerdorffwel",
-        email:
-          "contact-admin-hello-abcd@please-try-to.send-me-this-coz.this-is-but-to-be-honest.this-is-on-forever.pacraig.com",
-        type: "Student",
-        sent_on: "31/06/2021",
-        status: "Pending",
-      },
-    ],
-    []
-  );
-
-  const [filteredFakeData, setFilteredFakeData] = useState<
-    OrgInvitationDetailsData[]
+  const [filteredResponseData, setFilteredResponseData] = useState<
+    OrgInvitationResponseData[]
   >([]);
 
-  const filterAcceptedFakeData = useMemo(
-    () => fakeData.filter((data) => data.status === "Accepted"),
-    [fakeData]
+  const filterAcceptedResponseData = useMemo(
+    () =>
+      state.responseData !== null &&
+      state.responseData.filter((data) => data.responseStatus === "ACCEPTED"),
+    [state.responseData]
   );
 
   const filterAcceptedTempFilteredData = useCallback(
-    (tempFilteredData: OrgInvitationDetailsData[]) =>
-      tempFilteredData.filter((data) => data.status === "Accepted"),
+    (tempFilteredData: OrgInvitationResponseData[]) =>
+      tempFilteredData.filter((data) => data.responseStatus === "ACCEPTED"),
     []
   );
 
-  const filterPendingFakeData = useMemo(
-    () => fakeData.filter((data) => data.status === "Pending"),
-    [fakeData]
+  const filterPendingResponseData = useMemo(
+    () =>
+      state.responseData !== null &&
+      state.responseData.filter((data) => data.responseStatus === "PENDING"),
+    [state.responseData]
   );
 
   const filterPendingTempFilteredData = useCallback(
-    (tempFilteredData: OrgInvitationDetailsData[]) =>
-      tempFilteredData.filter((data) => data.status === "Pending"),
+    (tempFilteredData: OrgInvitationResponseData[]) =>
+      tempFilteredData.filter((data) => data.responseStatus === "PENDING"),
     []
   );
 
-  const filterMentorFakeData = useMemo(
-    () => fakeData.filter((data) => data.type === "Mentor"),
-    [fakeData]
+  const filterMentorResponseData = useMemo(
+    () =>
+      state.responseData !== null &&
+      state.responseData.filter((data) => data.userType === "MENTOR"),
+    [state.responseData]
   );
 
   const filterMentorTempFilteredData = useCallback(
-    (tempFilteredData: OrgInvitationDetailsData[]) =>
-      tempFilteredData.filter((data) => data.type === "Mentor"),
+    (tempFilteredData: OrgInvitationResponseData[]) =>
+      tempFilteredData.filter((data) => data.userType === "MENTOR"),
     []
   );
 
-  const filterStudentFakeData = useMemo(
-    () => fakeData.filter((data) => data.type === "Student"),
-    [fakeData]
+  const filterStudentResponseData = useMemo(
+    () =>
+      state.responseData !== null &&
+      state.responseData.filter((data) => data.userType === "STUDENT"),
+    [state.responseData]
   );
 
   const filterStudentTempFilteredData = useCallback(
-    (tempFilteredData: OrgInvitationDetailsData[]) =>
-      tempFilteredData.filter((data) => data.type === "Student"),
+    (tempFilteredData: OrgInvitationResponseData[]) =>
+      tempFilteredData.filter((data) => data.userType === "STUDENT"),
     []
   );
 
   const sortDateByLatestUsing = useCallback(
-    (obj1: OrgInvitationDetailsData, obj2: OrgInvitationDetailsData) => {
-      const [day1, month1, year1] = obj1.sent_on.split("/");
-      const [day2, month2, year2] = obj2.sent_on.split("/");
+    (obj1: OrgInvitationResponseData, obj2: OrgInvitationResponseData) => {
+      const DateOne = new Date(obj1.sentAt);
+      const DateTwo = new Date(obj2.sentAt);
 
-      return new Date(parseInt(year1), parseInt(month1) - 1, parseInt(day1)) >
-        new Date(parseInt(year2), parseInt(month2) - 1, parseInt(day2))
+      const [day1, month1, year1] = [
+        DateOne.getDate(),
+        DateOne.getMonth(),
+        DateOne.getFullYear(),
+      ];
+      const [day2, month2, year2] = [
+        DateTwo.getDate(),
+        DateTwo.getMonth(),
+        DateOne.getFullYear(),
+      ];
+
+      return new Date(year1, month1, day1) > new Date(year2, month2, day2)
         ? 1
         : -1;
     },
@@ -111,12 +98,22 @@ const OrgProgramInvitationDetails = ({
   );
 
   const sortDateByOldestUsing = useCallback(
-    (obj1: OrgInvitationDetailsData, obj2: OrgInvitationDetailsData) => {
-      const [day1, month1, year1] = obj1.sent_on.split("/");
-      const [day2, month2, year2] = obj2.sent_on.split("/");
+    (obj1: OrgInvitationResponseData, obj2: OrgInvitationResponseData) => {
+      const DateOne = new Date(obj1.sentAt);
+      const DateTwo = new Date(obj2.sentAt);
 
-      return new Date(parseInt(year1), parseInt(month1) - 1, parseInt(day1)) >
-        new Date(parseInt(year2), parseInt(month2) - 1, parseInt(day2))
+      const [day1, month1, year1] = [
+        DateOne.getDate(),
+        DateOne.getMonth(),
+        DateOne.getFullYear(),
+      ];
+      const [day2, month2, year2] = [
+        DateTwo.getDate(),
+        DateTwo.getMonth(),
+        DateOne.getFullYear(),
+      ];
+
+      return new Date(year1, month1, day1) > new Date(year2, month2, day2)
         ? -1
         : 1;
     },
@@ -126,13 +123,12 @@ const OrgProgramInvitationDetails = ({
   return (
     <div className="OrgProgramInvitationDetails">
       <div className="OrgProgramInvitationDetailsContainer">
-        {fakeData.length ? (
+        {state.responseData !== null && state.responseData.length ? (
           <>
             <SearchBar
-              fakeData={fakeData}
               state={state}
               dispatch={dispatch}
-              setFilteredFakeData={setFilteredFakeData}
+              setFilteredResponseData={setFilteredResponseData}
               filterAcceptedTempFilteredData={filterAcceptedTempFilteredData}
               filterPendingTempFilteredData={filterPendingTempFilteredData}
               filterMentorTempFilteredData={filterMentorTempFilteredData}
@@ -142,15 +138,14 @@ const OrgProgramInvitationDetails = ({
             />
 
             <OrgProgramInvitationDataContainer
-              fakeData={fakeData}
-              filteredFakeData={filteredFakeData}
+              filteredResponseData={filteredResponseData}
               state={state}
               dispatch={dispatch}
-              setFilteredFakeData={setFilteredFakeData}
-              filterAcceptedFakeData={filterAcceptedFakeData}
-              filterPendingFakeData={filterPendingFakeData}
-              filterMentorFakeData={filterMentorFakeData}
-              filterStudentFakeData={filterStudentFakeData}
+              setFilteredResponseData={setFilteredResponseData}
+              filterAcceptedResponseData={filterAcceptedResponseData}
+              filterPendingResponseData={filterPendingResponseData}
+              filterMentorResponseData={filterMentorResponseData}
+              filterStudentResponseData={filterStudentResponseData}
               filterAcceptedTempFilteredData={filterAcceptedTempFilteredData}
               filterPendingTempFilteredData={filterPendingTempFilteredData}
               filterMentorTempFilteredData={filterMentorTempFilteredData}

@@ -2,7 +2,7 @@ import React, { useEffect, useReducer, useState } from "react";
 import { useParams } from "react-router-dom";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
 import OrgEditProgramDetails from "../../components/OrgEditProgramDetails/OrgEditProgramDetails";
-import { useOrgCreateProgram } from "../../context/api_context/OrgCreateProgramContext";
+import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
 import { orgEditProgramDetailsReducer } from "../../reducers/orgEditProgramDetailsReducer";
 import { CreateProgramData } from "../../types/CreateProgram";
 import "./OrgEditProgramDetailsPage.css";
@@ -28,7 +28,7 @@ const OrgEditProgramDetailsPage = () => {
   const [editedData, setEditedData] = useState<CreateProgramData | null>(null);
 
   const { programId } = useParams<{ programId: string }>();
-  const { getProgramDetails } = useOrgCreateProgram();
+  const { getProgramDetails } = useOrgAPI();
 
   useEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -59,40 +59,48 @@ const OrgEditProgramDetailsPage = () => {
             response.data.coordinator.contact.number,
         });
 
-        const {
-          day: mDay,
-          month: mMonth,
-          year: mYear,
-        } = getDayMonthYear(response.data.mentorFields.applyBy);
-        dispatch({
-          type: "mentorApplyDate",
-          payload: new Date(mYear, mMonth, mDay),
-        });
+        if (response.data.mentorFields.applyBy) {
+          const {
+            day: mDay,
+            month: mMonth,
+            year: mYear,
+          } = getDayMonthYear(response.data.mentorFields.applyBy);
+          dispatch({
+            type: "mentorApplyDate",
+            payload: new Date(mYear, mMonth, mDay),
+          });
+        }
 
-        const {
-          day: sDay,
-          month: sMonth,
-          year: sYear,
-        } = getDayMonthYear(response.data.studentFields.applyBy);
-        dispatch({
-          type: "studentApplyDate",
-          payload: new Date(sYear, sMonth, sDay),
-        });
+        if (response.data.studentFields.applyBy) {
+          const {
+            day: sDay,
+            month: sMonth,
+            year: sYear,
+          } = getDayMonthYear(response.data.studentFields.applyBy);
+          dispatch({
+            type: "studentApplyDate",
+            payload: new Date(sYear, sMonth, sDay),
+          });
+        }
 
-        const {
-          day: tsDay,
-          month: tsMonth,
-          year: tsYear,
-        } = getDayMonthYear(response.data.tentativeStartDate);
-        dispatch({
-          type: "selectedTSDate",
-          payload: new Date(tsYear, tsMonth, tsDay),
-        });
+        if (response.data.tentativeStartDate) {
+          const {
+            day: tsDay,
+            month: tsMonth,
+            year: tsYear,
+          } = getDayMonthYear(response.data.tentativeStartDate);
+          dispatch({
+            type: "selectedTSDate",
+            payload: new Date(tsYear, tsMonth, tsDay),
+          });
+        }
 
-        dispatch({
-          type: "selectedLanguages",
-          payload: [...response.data.languageRequirements.split(",")],
-        });
+        if (response.data.languageRequirements.length) {
+          dispatch({
+            type: "selectedLanguages",
+            payload: [...response.data.languageRequirements.split(",")],
+          });
+        }
 
         setEditedData(response.data);
       } catch (error) {

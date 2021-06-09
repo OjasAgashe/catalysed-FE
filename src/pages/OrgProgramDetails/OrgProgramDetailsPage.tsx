@@ -4,7 +4,7 @@ import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
 import OrgProgramDetails from "../../components/OrgProgramDetails/OrgProgramDetails";
 import OrgProgramDetailsCommon from "../../components/OrgProgramDetailsCommon/OrgProgramDetailsCommon";
 import { ORGANISATION_PROGRAM_EDIT } from "../../constants/Routes";
-import { useOrgCreateProgram } from "../../context/api_context/OrgCreateProgramContext";
+import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
 import { orgProgramDetailsReducer } from "../../reducers/orgProgramDetailsReducer";
 import "./OrgProgramDetailsPage.css";
 
@@ -17,7 +17,7 @@ const OrgProgramDetailsPage = () => {
 
   const { programId } = useParams<{ programId: string }>();
 
-  const { getProgramDetails } = useOrgCreateProgram();
+  const { getProgramDetails } = useOrgAPI();
 
   useEffect(() => {
     document.documentElement.scrollTop = 0;

@@ -17,7 +17,7 @@ import { Button } from "react-bootstrap";
 import { GiStamper } from "react-icons/gi";
 import { RiDraftLine } from "react-icons/ri";
 import { useHistory } from "react-router-dom";
-import { useOrgCreateProgram } from "../../context/api_context/OrgCreateProgramContext";
+import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
 import { ORGANISATION_PROGRAM_VIEW_SEARCH } from "../../constants/Routes";
 
 type OrgEditProgramDetailsProps = {
@@ -34,7 +34,7 @@ const OrgEditProgramDetails = ({
   setEditedData,
 }: OrgEditProgramDetailsProps) => {
   const { putUpdatedProgramDetails, putUpdatedProgramStatusToPublish } =
-    useOrgCreateProgram();
+    useOrgAPI();
   const history = useHistory();
 
   const canMakeAPICall = () => {

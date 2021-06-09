@@ -7,7 +7,7 @@ import SectionFive from "./SectionFive";
 import SectionFour from "./SectionFour";
 import SectionOne from "./SectionOne";
 import SectionThree from "./SectionThree";
-import { useOrgCreateProgram } from "../../context/api_context/OrgCreateProgramContext";
+import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
 import { OrgHomeActionType, OrgHomeState } from "../../types/OrgHome";
 
 type OrgHomeProps = {
@@ -16,8 +16,7 @@ type OrgHomeProps = {
 };
 
 const OrgHome = ({ state, dispatch }: OrgHomeProps) => {
-  const { getProgramsStartingThisMonth, getOngoingPrograms } =
-    useOrgCreateProgram();
+  const { getProgramsStartingThisMonth, getOngoingPrograms } = useOrgAPI();
 
   useEffect(() => {
     const getPrograms = async () => {

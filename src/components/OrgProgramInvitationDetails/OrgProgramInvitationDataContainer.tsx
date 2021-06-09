@@ -1,7 +1,7 @@
 import React from "react";
 import { Dropdown, DropdownButton, Table } from "react-bootstrap";
 import {
-  OrgInvitationDetailsData,
+  OrgInvitationResponseData,
   OrgProgramInvitationActionType,
   OrgProgramInvitationState,
 } from "../../types/OrgProgramDetails";
@@ -9,49 +9,47 @@ import Error from "../Error/Error";
 import InvitationTableRow from "./InvitationTableRow";
 
 type OrgProgramInvitationDataContainerProps = {
-  fakeData: OrgInvitationDetailsData[];
-  filteredFakeData: OrgInvitationDetailsData[];
+  filteredResponseData: OrgInvitationResponseData[];
   state: OrgProgramInvitationState;
   dispatch: React.Dispatch<OrgProgramInvitationActionType>;
-  setFilteredFakeData: React.Dispatch<
-    React.SetStateAction<OrgInvitationDetailsData[]>
+  setFilteredResponseData: React.Dispatch<
+    React.SetStateAction<OrgInvitationResponseData[]>
   >;
-  filterAcceptedFakeData: OrgInvitationDetailsData[];
-  filterPendingFakeData: OrgInvitationDetailsData[];
-  filterMentorFakeData: OrgInvitationDetailsData[];
-  filterStudentFakeData: OrgInvitationDetailsData[];
+  filterAcceptedResponseData: false | OrgInvitationResponseData[];
+  filterPendingResponseData: false | OrgInvitationResponseData[];
+  filterMentorResponseData: false | OrgInvitationResponseData[];
+  filterStudentResponseData: false | OrgInvitationResponseData[];
   filterAcceptedTempFilteredData: (
-    tempFilteredData: OrgInvitationDetailsData[]
-  ) => OrgInvitationDetailsData[];
+    tempFilteredData: OrgInvitationResponseData[]
+  ) => OrgInvitationResponseData[];
   filterPendingTempFilteredData: (
-    tempFilteredData: OrgInvitationDetailsData[]
-  ) => OrgInvitationDetailsData[];
+    tempFilteredData: OrgInvitationResponseData[]
+  ) => OrgInvitationResponseData[];
   filterMentorTempFilteredData: (
-    tempFilteredData: OrgInvitationDetailsData[]
-  ) => OrgInvitationDetailsData[];
+    tempFilteredData: OrgInvitationResponseData[]
+  ) => OrgInvitationResponseData[];
   filterStudentTempFilteredData: (
-    tempFilteredData: OrgInvitationDetailsData[]
-  ) => OrgInvitationDetailsData[];
+    tempFilteredData: OrgInvitationResponseData[]
+  ) => OrgInvitationResponseData[];
   sortDateByLatestUsing: (
-    obj1: OrgInvitationDetailsData,
-    obj2: OrgInvitationDetailsData
+    obj1: OrgInvitationResponseData,
+    obj2: OrgInvitationResponseData
   ) => 1 | -1;
   sortDateByOldestUsing: (
-    obj1: OrgInvitationDetailsData,
-    obj2: OrgInvitationDetailsData
+    obj1: OrgInvitationResponseData,
+    obj2: OrgInvitationResponseData
   ) => 1 | -1;
 };
 
 const OrgProgramInvitationDataContainer = ({
-  fakeData,
-  filteredFakeData,
+  filteredResponseData,
   state,
   dispatch,
-  setFilteredFakeData,
-  filterAcceptedFakeData,
-  filterPendingFakeData,
-  filterMentorFakeData,
-  filterStudentFakeData,
+  setFilteredResponseData,
+  filterAcceptedResponseData,
+  filterPendingResponseData,
+  filterMentorResponseData,
+  filterStudentResponseData,
   filterAcceptedTempFilteredData,
   filterPendingTempFilteredData,
   filterMentorTempFilteredData,
@@ -66,7 +64,9 @@ const OrgProgramInvitationDataContainer = ({
       dispatch({ type: "selectedRadioForSort", payload: eventKey });
       dispatch({ type: "searchedNotPresentText", payload: "" });
       dispatch({ type: "searchedName", payload: "" });
-      let tempFilteredData: OrgInvitationDetailsData[] = [...fakeData];
+
+      const responseData = state.responseData as OrgInvitationResponseData[];
+      let tempFilteredData: OrgInvitationResponseData[] = [...responseData];
 
       if (state.selectedRadioForFilter === "Accepted")
         tempFilteredData = filterAcceptedTempFilteredData(tempFilteredData);
@@ -84,7 +84,7 @@ const OrgProgramInvitationDataContainer = ({
 
       if (eventKey === "Oldest") tempFilteredData.sort(sortDateByOldestUsing);
 
-      setFilteredFakeData(tempFilteredData);
+      setFilteredResponseData(tempFilteredData);
       if (eventKey && tempFilteredData.length === 0) {
         dispatch({
           type: "searchedNotPresentText",
@@ -101,11 +101,17 @@ const OrgProgramInvitationDataContainer = ({
       dispatch({ type: "selectedRadioForFilter", payload: eventKey });
       dispatch({ type: "searchedNotPresentText", payload: "" });
       dispatch({ type: "searchedName", payload: "" });
-      let tempFilteredData: OrgInvitationDetailsData[] = [...fakeData];
 
-      if (eventKey === "Accepted") tempFilteredData = filterAcceptedFakeData;
+      const responseData = state.responseData as OrgInvitationResponseData[];
+      let tempFilteredData: OrgInvitationResponseData[] = [...responseData];
 
-      if (eventKey === "Pending") tempFilteredData = filterPendingFakeData;
+      if (eventKey === "Accepted")
+        tempFilteredData =
+          filterAcceptedResponseData as OrgInvitationResponseData[];
+
+      if (eventKey === "Pending")
+        tempFilteredData =
+          filterPendingResponseData as OrgInvitationResponseData[];
 
       if (state.selectedRadioForFilterType === "Mentor")
         tempFilteredData = filterMentorTempFilteredData(tempFilteredData);
@@ -119,7 +125,7 @@ const OrgProgramInvitationDataContainer = ({
       if (state.selectedRadioForSort === "Oldest")
         tempFilteredData.sort(sortDateByOldestUsing);
 
-      setFilteredFakeData(tempFilteredData);
+      setFilteredResponseData(tempFilteredData);
       if (eventKey && tempFilteredData.length === 0) {
         dispatch({
           type: "searchedNotPresentText",
@@ -136,11 +142,17 @@ const OrgProgramInvitationDataContainer = ({
       dispatch({ type: "selectedRadioForFilterType", payload: eventKey });
       dispatch({ type: "searchedNotPresentText", payload: "" });
       dispatch({ type: "searchedName", payload: "" });
-      let tempFilteredData: OrgInvitationDetailsData[] = [...fakeData];
 
-      if (eventKey === "Mentor") tempFilteredData = filterMentorFakeData;
+      const responseData = state.responseData as OrgInvitationResponseData[];
+      let tempFilteredData: OrgInvitationResponseData[] = [...responseData];
 
-      if (eventKey === "Student") tempFilteredData = filterStudentFakeData;
+      if (eventKey === "Mentor")
+        tempFilteredData =
+          filterMentorResponseData as OrgInvitationResponseData[];
+
+      if (eventKey === "Student")
+        tempFilteredData =
+          filterStudentResponseData as OrgInvitationResponseData[];
 
       if (state.selectedRadioForFilter === "Accepted")
         tempFilteredData = filterAcceptedTempFilteredData(tempFilteredData);
@@ -154,7 +166,7 @@ const OrgProgramInvitationDataContainer = ({
       if (state.selectedRadioForSort === "Oldest")
         tempFilteredData.sort(sortDateByOldestUsing);
 
-      setFilteredFakeData(tempFilteredData);
+      setFilteredResponseData(tempFilteredData);
       if (eventKey && tempFilteredData.length === 0) {
         dispatch({
           type: "searchedNotPresentText",
@@ -266,8 +278,8 @@ const OrgProgramInvitationDataContainer = ({
             ["Latest", "Oldest"].includes(state.selectedRadioForSort) ||
             ["Accepted", "Pending"].includes(state.selectedRadioForFilter) ||
             ["Mentor", "Student"].includes(state.selectedRadioForFilterType)) &&
-          filteredFakeData.length ? (
-            [...filteredFakeData]
+          filteredResponseData.length ? (
+            [...filteredResponseData]
               .reverse()
               .map((data) => <InvitationTableRow data={data} key={data.id} />)
           ) : (
@@ -287,7 +299,8 @@ const OrgProgramInvitationDataContainer = ({
             !["Latest", "Oldest"].includes(state.selectedRadioForSort) &&
             !["Accepted", "Pending"].includes(state.selectedRadioForFilter) &&
             !["Mentor", "Student"].includes(state.selectedRadioForFilterType) &&
-            [...fakeData]
+            state.responseData !== null &&
+            [...state.responseData]
               .reverse()
               .map((data) => <InvitationTableRow data={data} key={data.id} />)}
         </tbody>

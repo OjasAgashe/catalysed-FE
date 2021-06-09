@@ -13,7 +13,7 @@ import {
   CreateProgramData,
   CreateProgramState,
 } from "../../types/CreateProgram";
-import { useOrgCreateProgram } from "../../context/api_context/OrgCreateProgramContext";
+import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
 import { useHistory } from "react-router-dom";
 import { ORGANISATION_PROGRAM_VIEW_SEARCH } from "../../constants/Routes";
 import Error from "../Error/Error";
@@ -56,7 +56,7 @@ const CreateProgramForm = ({ state, dispatch }: CreateProgramFormProps) => {
     },
   });
 
-  const { postCreateProgramCall } = useOrgCreateProgram();
+  const { postCreateProgramCall } = useOrgAPI();
   const history = useHistory();
 
   const canMakeAPICall = () => {

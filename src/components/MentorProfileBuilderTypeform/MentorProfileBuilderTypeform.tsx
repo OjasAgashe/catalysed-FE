@@ -34,7 +34,7 @@ const MentorProfileBuilderTypeform = () => {
 
   const typeformRef = useRef<TypeForm>();
   const { postProfileCall } = useProfileBuilder();
-    const history = useHistory();
+  const history = useHistory();
 
   const [answer, setAnswer] = useState<MentorProfileBuilderData>({
     birthYear: "",

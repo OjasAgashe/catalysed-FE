@@ -36,7 +36,7 @@ import MentorHomePage from "../../pages/MentorHomePage/MentorHomePage";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import PublicRoute from "../PublicRoute/PublicRoute";
 import OrgViewSearchProgramPage from "../../pages/OrgViewSearchProgram/OrgViewSearchProgramPage";
-import { OrgCreateProgramProvider } from "../../context/api_context/OrgCreateProgramContext";
+import { OrgAPIProvider } from "../../context/api_context/OrgAPIContext";
 import OrgProgramDetailsPage from "../../pages/OrgProgramDetails/OrgProgramDetailsPage";
 import OrgProgramInvitationsPage from "../../pages/OrgProgramDetails/OrgProgramInvitationsPage";
 import OrgProgramParticipantsPage from "../../pages/OrgProgramDetails/OrgProgramParticipantsPage";
@@ -49,9 +49,9 @@ function App() {
         <Header />
         <Switch>
           <PrivateRoute path={ORGANISATION_PROGRAM_CREATE}>
-            <OrgCreateProgramProvider>
+            <OrgAPIProvider>
               <CreateProgram />
-            </OrgCreateProgramProvider>
+            </OrgAPIProvider>
           </PrivateRoute>
 
           <PublicRoute path={HOME} exact>
@@ -78,9 +78,9 @@ function App() {
 
           <PrivateRoute path={ORGANISATION_HOME}>
             <ProfileBuilderProvider>
-              <OrgCreateProgramProvider>
+              <OrgAPIProvider>
                 <OrgHomePage />
-              </OrgCreateProgramProvider>
+              </OrgAPIProvider>
             </ProfileBuilderProvider>
           </PrivateRoute>
 
@@ -91,35 +91,35 @@ function App() {
           </PrivateRoute>
 
           <PrivateRoute path={`${ORGANISATION_PROGRAM_DETAILS}/:programId`}>
-            <OrgCreateProgramProvider>
+            <OrgAPIProvider>
               <OrgProgramDetailsPage />
-            </OrgCreateProgramProvider>
+            </OrgAPIProvider>
           </PrivateRoute>
 
           <PrivateRoute path={`${ORGANISATION_PROGRAM_EDIT}/:programId`}>
-            <OrgCreateProgramProvider>
+            <OrgAPIProvider>
               <OrgEditProgramDetailsPage />
-            </OrgCreateProgramProvider>
+            </OrgAPIProvider>
           </PrivateRoute>
 
           <PrivateRoute path={`${ORGANISATION_PROGRAM_INVITATIONS}/:programId`}>
-            <OrgCreateProgramProvider>
+            <OrgAPIProvider>
               <OrgProgramInvitationsPage />
-            </OrgCreateProgramProvider>
+            </OrgAPIProvider>
           </PrivateRoute>
 
           <PrivateRoute
             path={`${ORGANISATION_PROGRAM_PARTICIPANTS}/:programId`}
           >
-            <OrgCreateProgramProvider>
+            <OrgAPIProvider>
               <OrgProgramParticipantsPage />
-            </OrgCreateProgramProvider>
+            </OrgAPIProvider>
           </PrivateRoute>
 
           <PrivateRoute path={`${ORGANISATION_PROGRAM_VIEW_SEARCH}/:filterBy`}>
-            <OrgCreateProgramProvider>
+            <OrgAPIProvider>
               <OrgViewSearchProgramPage />
-            </OrgCreateProgramProvider>
+            </OrgAPIProvider>
           </PrivateRoute>
 
           <PrivateRoute path={STUDENT_HOME}>

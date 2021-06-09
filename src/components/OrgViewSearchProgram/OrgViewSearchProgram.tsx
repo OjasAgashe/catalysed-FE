@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Alert } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
-import { useOrgCreateProgram } from "../../context/api_context/OrgCreateProgramContext";
+import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
 import { ORGANISATION_PROGRAM_CREATE } from "../../constants/Routes";
 import {
   GetProgramMetaListData,
@@ -26,7 +26,7 @@ const OrgViewSearchProgram = ({
     getProgramsMetaList,
     getOngoingPrograms,
     getProgramsStartingThisMonth,
-  } = useOrgCreateProgram();
+  } = useOrgAPI();
   const [programsList, setProgramsList] = useState<GetProgramMetaListData[]>(
     []
   );

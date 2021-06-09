@@ -3,8 +3,9 @@ import axios, { AxiosResponse } from "axios";
 import { useCookie } from "../cookie_context/CookieContext";
 import { CreateProgramData } from "../../types/CreateProgram";
 import { GetProgramMetaListData } from "../../types/OrgViewSearchProgram";
+import { OrgInvitationPostData } from "../../types/OrgProgramDetails";
 
-interface OrgCreateProgramProviderReturns {
+interface OrgAPIProviderReturns {
   postCreateProgramCall: (
     data: CreateProgramData
   ) => Promise<AxiosResponse<any>>;
@@ -20,16 +21,20 @@ interface OrgCreateProgramProviderReturns {
   ) => Promise<AxiosResponse<any>>;
   getProgramsStartingThisMonth: () => Promise<any[]>;
   getOngoingPrograms: () => Promise<any[]>;
+  getProgramInvitations: (programId: number) => Promise<AxiosResponse<any>>;
+  postProgramInvitations: (
+    programId: number,
+    data: OrgInvitationPostData
+  ) => Promise<AxiosResponse<any>>;
 }
 
-const OrgCreateProgramContext =
-  React.createContext<OrgCreateProgramProviderReturns | null>(null);
+const OrgAPIContext = React.createContext<OrgAPIProviderReturns | null>(null);
 
-export function useOrgCreateProgram() {
-  return useContext(OrgCreateProgramContext) as OrgCreateProgramProviderReturns;
+export function useOrgAPI() {
+  return useContext(OrgAPIContext) as OrgAPIProviderReturns;
 }
 
-export const OrgCreateProgramProvider: React.FC<React.ReactNode> = (props) => {
+export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
   const instance = axios.create({
     baseURL:
       "http://catalyseddev-env.eba-qewmmmrf.us-east-1.elasticbeanstalk.com/",
@@ -156,6 +161,29 @@ export const OrgCreateProgramProvider: React.FC<React.ReactNode> = (props) => {
     todaysFullDate.todaysYear,
   ]);
 
+  function getProgramInvitations(programId: number) {
+    const catalysedToken = getCatalysedTokenCookie();
+
+    return instance.get(`/organization/programs/${programId}/invitations`, {
+      headers: { Authorization: `Bearer ${catalysedToken}` },
+    });
+  }
+
+  function postProgramInvitations(
+    programId: number,
+    data: OrgInvitationPostData
+  ) {
+    const catalysedToken = getCatalysedTokenCookie();
+
+    return instance.post(
+      `/organization/programs/${programId}/invitations`,
+      data,
+      {
+        headers: { Authorization: `Bearer ${catalysedToken}` },
+      }
+    );
+  }
+
   const values = {
     postCreateProgramCall,
     getProgramsMetaList,
@@ -164,11 +192,13 @@ export const OrgCreateProgramProvider: React.FC<React.ReactNode> = (props) => {
     putUpdatedProgramStatusToPublish,
     getProgramsStartingThisMonth,
     getOngoingPrograms,
+    getProgramInvitations,
+    postProgramInvitations,
   };
 
   return (
-    <OrgCreateProgramContext.Provider value={values}>
+    <OrgAPIContext.Provider value={values}>
       {props.children}
-    </OrgCreateProgramContext.Provider>
+    </OrgAPIContext.Provider>
   );
 };
