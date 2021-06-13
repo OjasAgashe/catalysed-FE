@@ -26,6 +26,7 @@ interface OrgAPIProviderReturns {
     programId: number,
     data: OrgInvitationPostData
   ) => Promise<AxiosResponse<any>>;
+  getProgramParticipants: (programId: number) => Promise<AxiosResponse<any>>;
 }
 
 const OrgAPIContext = React.createContext<OrgAPIProviderReturns | null>(null);
@@ -184,6 +185,14 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     );
   }
 
+  function getProgramParticipants(programId: number) {
+    const catalysedToken = getCatalysedTokenCookie();
+
+    return instance.get(`/organization/programs/${programId}/participants`, {
+      headers: { Authorization: `Bearer ${catalysedToken}` },
+    });
+  }
+
   const values = {
     postCreateProgramCall,
     getProgramsMetaList,
@@ -194,6 +203,7 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     getOngoingPrograms,
     getProgramInvitations,
     postProgramInvitations,
+    getProgramParticipants,
   };
 
   return (

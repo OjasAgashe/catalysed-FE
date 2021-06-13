@@ -69,3 +69,45 @@ export type OrgProgramInvitationActionType =
   | { type: "programTitle"; payload: string }
   | { type: "programStatus"; payload: string }
   | { type: "responseData"; payload: OrgInvitationResponseData[] | null };
+
+export interface OrgProgramParticipantData {
+  id: number;
+  email: string;
+  firstName: string | null;
+  lastName: string | null;
+  userName: string;
+  subscriptionType: string | null;
+  password: string | null;
+  roles: string | null;
+  userType: string;
+  active: boolean;
+}
+
+export interface OrgProgramParticipantState {
+  showError: boolean;
+  loading: boolean;
+  programTitle: string;
+  showMentorDetails: boolean;
+  showStudentDetails: boolean;
+  studentParticipantResponseData: OrgProgramParticipantData[] | null;
+  mentorParticipantResponseData: OrgProgramParticipantData[] | null;
+  selectedRadioForFilterState: string;
+  searchedNotPresentText: string;
+}
+
+export type OrgProgramParticipantActionType =
+  | { type: "showError"; payload: boolean }
+  | { type: "loading"; payload: boolean }
+  | { type: "programTitle"; payload: string }
+  | {
+      type: "studentParticipantResponseData";
+      payload: OrgProgramParticipantData[] | null;
+    }
+  | {
+      type: "mentorParticipantResponseData";
+      payload: OrgProgramParticipantData[] | null;
+    }
+  | { type: "showMentorDetails"; payload: boolean }
+  | { type: "showStudentDetails"; payload: boolean }
+  | { type: "selectedRadioForFilterState"; payload: string }
+  | { type: "searchedNotPresentText"; payload: string };

@@ -1,0 +1,81 @@
+.ParticipantCard {
+  border-left: 1px solid var(--blue-gray-300);
+  border-top: 1px solid var(--blue-gray-300);
+  width: 22rem;
+  margin: 1rem;
+  background: linear-gradient(34deg, #ccffff, #ffcccc);
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px var(--blue-gray-300),
+    -6px -6px 5px var(--blue-gray-100);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ParticipantCard .ParticipantCardNameUsernameContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem;
+  color: var(--blue-gray-700);
+}
+
+.ParticipantCardNameUsernameContainer .ParticipantCardName {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+}
+
+.ParticipantCardNameUsernameContainer .ParticipantCardUsername {
+  font-size: 1.1rem;
+}
+
+.ParticipantCard .ParticipantCardDetails {
+  padding: 1rem;
+  padding-bottom: 0;
+  background-color: var(--white);
+  margin: 1rem;
+  margin-bottom: 2rem;
+  box-shadow: 2px 2px 6px var(--blue-gray-300),
+    -2px -2px 6px var(--blue-gray-300);
+}
+
+.ParticipantCard
+  :is(.ParticipantCardEmail, .ParticipantCardRole, .ParticipantCardST, .ParticipantCardState) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--blue-gray-300);
+}
+
+.ParticipantCard
+  :is(.ParticipantCardEmail, .ParticipantCardRole, .ParticipantCardST, .ParticipantCardState)
+  .Text {
+  font-size: 1.2rem;
+  color: var(--common-home-section-four-600);
+  font-weight: 600;
+  width: 10rem;
+}
+
+.ParticipantCard
+  :is(.ParticipantCardEmail, .ParticipantCardRole, .ParticipantCardST, .ParticipantCardState)
+  .Data {
+  font-size: 1.1rem;
+  color: var(--yellow-700);
+  font-weight: 500;
+  width: 8rem;
+  text-align: center;
+}
+
+.ParticipantCard .ParticipantCardState {
+  border-bottom: none;
+  margin-bottom: 0.5rem;
+}
+
+@media screen and (max-width: 460px) {
+  .ParticipantCard {
+    width: 18rem !important;
+  }
+}

@@ -1,0 +1,7 @@
+.OrgProgramStudentCardContainer {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
