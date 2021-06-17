@@ -41,9 +41,17 @@ const OrgProgramInvitationModal = ({
     (event) => {
       if (state.validated) dispatch({ type: "validated", payload: false });
 
+      if (event.target.name === "name") {
+        const onlyAlphabets = /^[a-zA-Z ]*$/;
+
+        if (onlyAlphabets.test(event.target.value) === false) {
+          return;
+        }
+      }
+
       setFormData((prevState: OrgInvitationPostData) => ({
         ...prevState,
-        [event.target.name]: event.target.value,
+        [event.target.name]: event.target.value.replace(/^\s+/, ""),
       }));
     };
 
@@ -160,7 +168,7 @@ const OrgProgramInvitationModal = ({
                     className="InlineFormControl ModalFormControl"
                   />
                   <Form.Control.Feedback type="invalid">
-                    Required Field.
+                    Required Field, only Alphabets.
                   </Form.Control.Feedback>
                 </div>
               </Form.Group>
@@ -180,7 +188,7 @@ const OrgProgramInvitationModal = ({
                     className="InlineFormControl ModalFormControl"
                   />
                   <Form.Control.Feedback type="invalid">
-                    Required Field.
+                    Required Field, enter Valid Email.
                   </Form.Control.Feedback>
                 </div>
               </Form.Group>

@@ -22,6 +22,7 @@ import {
   ORGANISATION_PROGRAM_INVITATIONS,
   ORGANISATION_PROGRAM_PARTICIPANTS,
   ORGANISATION_PROGRAM_EDIT,
+  ORGANISATION_DIRECTORY,
 } from "../../constants/Routes";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -41,6 +42,7 @@ import OrgProgramDetailsPage from "../../pages/OrgProgramDetails/OrgProgramDetai
 import OrgProgramInvitationsPage from "../../pages/OrgProgramDetails/OrgProgramInvitationsPage";
 import OrgProgramParticipantsPage from "../../pages/OrgProgramDetails/OrgProgramParticipantsPage";
 import OrgEditProgramDetailsPage from "../../pages/OrgEditProgramDetailsPage/OrgEditProgramDetailsPage";
+import OrgDirectoryPage from "../../pages/OrgDirectoryPage/OrgDirectoryPage";
 
 function App() {
   return (
@@ -75,6 +77,10 @@ function App() {
           <PublicRoute path={ORGANISATION_REGISTER}>
             <OrganisationRegister />
           </PublicRoute>
+
+          <PrivateRoute path={ORGANISATION_DIRECTORY}>
+            <OrgDirectoryPage />
+          </PrivateRoute>
 
           <PrivateRoute path={ORGANISATION_HOME}>
             <ProfileBuilderProvider>

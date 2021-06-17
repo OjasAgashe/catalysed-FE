@@ -2,6 +2,7 @@ import React from "react";
 import { Nav, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import {
+  ORGANISATION_DIRECTORY,
   ORGANISATION_HOME,
   ORGANISATION_PROGRAM_CREATE,
   ORGANISATION_PROGRAM_VIEW_SEARCH,
@@ -38,6 +39,14 @@ const OrgHomeHeader = () => {
           eventKey="3"
         >
           View/Search All
+        </NavDropdown.Item>
+
+        <NavDropdown.Item
+          as={Link}
+          to={`${ORGANISATION_DIRECTORY}`}
+          eventKey="4"
+        >
+          Directory
         </NavDropdown.Item>
       </NavDropdown>
     </>

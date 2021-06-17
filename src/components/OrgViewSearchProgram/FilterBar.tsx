@@ -21,6 +21,96 @@ const FilterBar = ({
   programsList,
   setFilteredProgramsList,
 }: FilterBarProps) => {
+  const todaysFullDate = useMemo(() => {
+    const currDate = new Date(Date.now());
+    return {
+      todaysDay: currDate.getDate(),
+      todaysMonth: currDate.getMonth(),
+      todaysYear: currDate.getFullYear(),
+    };
+  }, []);
+
+  const filterStartingThisMonthByUsing = useCallback(
+    (program: GetProgramMetaListData) => {
+      const [progDay, progMonth, progYear] =
+        program.tentativeStartDate.split("/");
+
+      if (
+        program.status === "PUBLISHED" &&
+        parseInt(progMonth) - 1 === todaysFullDate.todaysMonth
+      )
+        return (
+          new Date(
+            parseInt(progYear),
+            parseInt(progMonth) - 1,
+            parseInt(progDay)
+          ) >
+          new Date(
+            todaysFullDate.todaysYear,
+            todaysFullDate.todaysMonth,
+            todaysFullDate.todaysDay
+          )
+        );
+
+      return false;
+    },
+    [
+      todaysFullDate.todaysDay,
+      todaysFullDate.todaysMonth,
+      todaysFullDate.todaysYear,
+    ]
+  );
+
+  const filterOnGoingByUsing = useCallback(
+    (program: GetProgramMetaListData) => {
+      const [progDay, progMonth, progYear] =
+        program.tentativeStartDate.split("/");
+
+      if (program.status === "PUBLISHED")
+        return (
+          new Date(
+            parseInt(progYear),
+            parseInt(progMonth) - 1,
+            parseInt(progDay)
+          ) <
+          new Date(
+            todaysFullDate.todaysYear,
+            todaysFullDate.todaysMonth,
+            todaysFullDate.todaysDay
+          )
+        );
+
+      return false;
+    },
+    [
+      todaysFullDate.todaysDay,
+      todaysFullDate.todaysMonth,
+      todaysFullDate.todaysYear,
+    ]
+  );
+
+  const filterStartingThisMonthProgramList = useMemo(
+    () => programsList.filter(filterStartingThisMonthByUsing),
+    [filterStartingThisMonthByUsing, programsList]
+  );
+
+  const filterStartingThisMonthTempFilteredList = useCallback(
+    (tempFilteredList: GetProgramMetaListData[]) =>
+      tempFilteredList.filter(filterStartingThisMonthByUsing),
+    [filterStartingThisMonthByUsing]
+  );
+
+  const filterOnGoingProgramList = useMemo(
+    () => programsList.filter(filterOnGoingByUsing),
+    [filterOnGoingByUsing, programsList]
+  );
+
+  const filterOnGoingTempFilteredList = useCallback(
+    (tempFilteredList: GetProgramMetaListData[]) =>
+      tempFilteredList.filter(filterOnGoingByUsing),
+    [filterOnGoingByUsing]
+  );
+
   const filterPublishedProgramList = useMemo(
     () => programsList.filter((program) => program.status === "PUBLISHED"),
     [programsList]
@@ -108,9 +198,8 @@ const FilterBar = ({
       dispatch({ type: "searchedTitle", payload: event.target.value });
       dispatch({ type: "searchedNotPresentText", payload: "" });
 
-      let tempFilteredList = programsList.filter(
-        (program) =>
-          program.title.toLowerCase() === event.target.value.toLowerCase()
+      let tempFilteredList = programsList.filter((program) =>
+        program.title.toLowerCase().startsWith(event.target.value.toLowerCase())
       );
 
       if (state.selectedRadioForFilter === "Published")
@@ -124,6 +213,13 @@ const FilterBar = ({
 
       if (state.selectedRadioForFilterMode === "In Person")
         tempFilteredList = filterInPersonTempFilteredList(tempFilteredList);
+
+      if (state.selectedRadioForFilterCategory === "Starting this Month")
+        tempFilteredList =
+          filterStartingThisMonthTempFilteredList(tempFilteredList);
+
+      if (state.selectedRadioForFilterCategory === "On Going")
+        tempFilteredList = filterOnGoingTempFilteredList(tempFilteredList);
 
       if (event.target.value === "" && tempFilteredList.length === 0) {
         tempFilteredList = [...programsList];
@@ -139,6 +235,13 @@ const FilterBar = ({
 
         if (state.selectedRadioForFilterMode === "In Person")
           tempFilteredList = filterInPersonTempFilteredList(tempFilteredList);
+
+        if (state.selectedRadioForFilterCategory === "Starting this Month")
+          tempFilteredList =
+            filterStartingThisMonthTempFilteredList(tempFilteredList);
+
+        if (state.selectedRadioForFilterCategory === "On Going")
+          tempFilteredList = filterOnGoingTempFilteredList(tempFilteredList);
 
         if (state.selectedRadioForSort === "Increasing Duration")
           tempFilteredList.sort(sortDurationInIncreasingByUsing);
@@ -178,6 +281,13 @@ const FilterBar = ({
       if (event.target.value === "In Draft")
         tempFilteredList = filterInDraftProgramList;
 
+      if (state.selectedRadioForFilterCategory === "Starting this Month")
+        tempFilteredList =
+          filterStartingThisMonthTempFilteredList(tempFilteredList);
+
+      if (state.selectedRadioForFilterCategory === "On Going")
+        tempFilteredList = filterOnGoingTempFilteredList(tempFilteredList);
+
       if (state.selectedRadioForFilterMode === "Virtual")
         tempFilteredList = filterVirtualTempFilteredList(tempFilteredList);
 
@@ -211,6 +321,13 @@ const FilterBar = ({
       if (event.target.value === "In Person")
         tempFilteredList = filterInPersonProgramList;
 
+      if (state.selectedRadioForFilterCategory === "Starting this Month")
+        tempFilteredList =
+          filterStartingThisMonthTempFilteredList(tempFilteredList);
+
+      if (state.selectedRadioForFilterCategory === "On Going")
+        tempFilteredList = filterOnGoingTempFilteredList(tempFilteredList);
+
       if (state.selectedRadioForFilter === "Published")
         tempFilteredList = filterPublishedTempFilteredList(tempFilteredList);
 
@@ -226,11 +343,57 @@ const FilterBar = ({
       }
     };
 
-  const handleSelectChangeForSort: React.ChangeEventHandler<HTMLInputElement> =
+  const handleSelectChangeForFilterCategory: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
-      dispatch({ type: "selectedRadioForSort", payload: event.target.value });
+      dispatch({
+        type: "selectedRadioForFilterCategory",
+        payload: event.target.value,
+      });
+      dispatch({ type: "selectedRadioForSort", payload: "All" });
       dispatch({ type: "searchedNotPresentText", payload: "" });
       dispatch({ type: "searchedTitle", payload: "" });
+
+      let tempFilteredList: GetProgramMetaListData[] = [...programsList];
+
+      if (event.target.value === "Starting this Month")
+        tempFilteredList = filterStartingThisMonthProgramList;
+
+      if (event.target.value === "On Going")
+        tempFilteredList = filterOnGoingProgramList;
+
+      if (state.selectedRadioForFilter === "Published")
+        tempFilteredList = filterPublishedTempFilteredList(tempFilteredList);
+
+      if (state.selectedRadioForFilter === "In Draft")
+        tempFilteredList = filterInDraftTempFilteredList(tempFilteredList);
+
+      if (state.selectedRadioForFilterMode === "Virtual")
+        tempFilteredList = filterVirtualTempFilteredList(tempFilteredList);
+
+      if (state.selectedRadioForFilterMode === "In Person")
+        tempFilteredList = filterInPersonTempFilteredList(tempFilteredList);
+
+      setFilteredProgramsList(tempFilteredList);
+      if (event.target.value && tempFilteredList.length === 0) {
+        dispatch({
+          type: "searchedNotPresentText",
+          payload: "Sorry!! Programs For This Option Not Found",
+        });
+      }
+    };
+
+  const handleSelectChangeForSort: React.ChangeEventHandler<HTMLInputElement> =
+    (event) => {
+      dispatch({ type: "searchedNotPresentText", payload: "" });
+      dispatch({ type: "searchedTitle", payload: "" });
+
+      if (event.target.value === "All") {
+        dispatch({ type: "selectedRadioForSort", payload: event.target.value });
+        dispatch({
+          type: "selectedRadioForDateSort",
+          payload: event.target.value,
+        });
+      }
 
       let tempFilteredList: GetProgramMetaListData[] = [...programsList];
 
@@ -246,17 +409,48 @@ const FilterBar = ({
       if (state.selectedRadioForFilterMode === "In Person")
         tempFilteredList = filterInPersonTempFilteredList(tempFilteredList);
 
-      if (event.target.value === "Increasing Duration")
+      if (state.selectedRadioForFilterCategory === "Starting this Month")
+        tempFilteredList =
+          filterStartingThisMonthTempFilteredList(tempFilteredList);
+
+      if (state.selectedRadioForFilterCategory === "On Going")
+        tempFilteredList = filterOnGoingTempFilteredList(tempFilteredList);
+
+      if (event.target.value === "Increasing Duration") {
+        dispatch({
+          type: "selectedRadioForDateSort",
+          payload: "All",
+        });
+        dispatch({ type: "selectedRadioForSort", payload: event.target.value });
         tempFilteredList.sort(sortDurationInIncreasingByUsing);
+      }
 
-      if (event.target.value === "Decreasing Duration")
+      if (event.target.value === "Decreasing Duration") {
+        dispatch({
+          type: "selectedRadioForDateSort",
+          payload: "All",
+        });
+        dispatch({ type: "selectedRadioForSort", payload: event.target.value });
         tempFilteredList.sort(sortDurationInDecreasingByUsing);
+      }
 
-      if (event.target.value === "Newest to Oldest Date")
+      if (event.target.value === "Newest to Oldest Date") {
+        dispatch({ type: "selectedRadioForSort", payload: "All" });
+        dispatch({
+          type: "selectedRadioForDateSort",
+          payload: event.target.value,
+        });
         tempFilteredList.sort(sortDateFromNewToOldByUsing);
+      }
 
-      if (event.target.value === "Oldest to Newest Date")
+      if (event.target.value === "Oldest to Newest Date") {
+        dispatch({ type: "selectedRadioForSort", payload: "All" });
+        dispatch({
+          type: "selectedRadioForDateSort",
+          payload: event.target.value,
+        });
         tempFilteredList.sort(sortDateFromOldToNewByUsing);
+      }
 
       setFilteredProgramsList(tempFilteredList);
       if (event.target.value && tempFilteredList.length === 0) {
@@ -275,6 +469,9 @@ const FilterBar = ({
         handleSearchedTitleChange={handleSearchedTitleChange}
         handleSelectChangeForFilter={handleSelectChangeForFilter}
         handleSelectChangeForFilterMode={handleSelectChangeForFilterMode}
+        handleSelectChangeForFilterCategory={
+          handleSelectChangeForFilterCategory
+        }
         handleSelectChangeForSort={handleSelectChangeForSort}
       />
     </div>

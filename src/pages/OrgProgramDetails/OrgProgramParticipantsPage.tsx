@@ -22,6 +22,7 @@ const OrgProgramParticipantsPage = () => {
     mentorParticipantResponseData: null,
     selectedRadioForFilterState: "All",
     searchedNotPresentText: "",
+    searchedName: "",
   });
 
   const [filteredParticipantData, setFilteredParticipantData] = useState<
@@ -90,7 +91,12 @@ const OrgProgramParticipantsPage = () => {
             className="MentorOptionText Btn"
             onClick={() => {
               dispatch({ type: "showMentorDetails", payload: true });
+
+              dispatch({ type: "searchedName", payload: "" });
+              dispatch({ type: "searchedNotPresentText", payload: "" });
+
               dispatch({ type: "selectedRadioForFilterState", payload: "All" });
+
               if (state.showStudentDetails)
                 dispatch({ type: "showStudentDetails", payload: false });
             }}
@@ -104,8 +110,13 @@ const OrgProgramParticipantsPage = () => {
                 type: "selectedRadioForFilterState",
                 payload: "All",
               });
+
+              dispatch({ type: "searchedName", payload: "" });
+              dispatch({ type: "searchedNotPresentText", payload: "" });
+
               if (state.showMentorDetails)
                 dispatch({ type: "showMentorDetails", payload: false });
+
               dispatch({ type: "showStudentDetails", payload: true });
             }}
           >

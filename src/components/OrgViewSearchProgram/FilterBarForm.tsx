@@ -9,6 +9,7 @@ type FilterBarFormProps = {
   handleSearchedTitleChange: React.ChangeEventHandler<HTMLInputElement>;
   handleSelectChangeForFilter: React.ChangeEventHandler<HTMLInputElement>;
   handleSelectChangeForFilterMode: React.ChangeEventHandler<HTMLInputElement>;
+  handleSelectChangeForFilterCategory: React.ChangeEventHandler<HTMLInputElement>;
   handleSelectChangeForSort: React.ChangeEventHandler<HTMLInputElement>;
 };
 
@@ -17,6 +18,7 @@ const FilterBarForm = ({
   handleSearchedTitleChange,
   handleSelectChangeForFilter,
   handleSelectChangeForFilterMode,
+  handleSelectChangeForFilterCategory,
   handleSelectChangeForSort,
 }: FilterBarFormProps) => {
   return (
@@ -36,9 +38,63 @@ const FilterBarForm = ({
         </InputGroup>
 
         <Form.Group className="FilterByVSGroup">
+          <Form.Text className="FilterByText">filter by Category</Form.Text>
+          <Form.Control
+            className={`FilterCategorySelectGroup ${
+              state.selectedRadioForFilterCategory !== "All"
+                ? "FilterCategorySelectGroupBG"
+                : ""
+            }`}
+            custom
+            as="select"
+            value={
+              state.selectedRadioForFilterCategory === "All"
+                ? "None"
+                : state.selectedRadioForFilterCategory
+            }
+            onChange={handleSelectChangeForFilterCategory}
+          >
+            <option
+              className={`FilterCategorySelectOption ${
+                state.selectedRadioForFilterCategory !== "All"
+                  ? "FilterCategorySelectOptionBG"
+                  : ""
+              }`}
+              value="All"
+            >
+              None
+            </option>
+            <option
+              className={`FilterCategorySelectOption ${
+                state.selectedRadioForFilterCategory !== "All"
+                  ? "FilterCategorySelectOptionBG"
+                  : ""
+              }`}
+              value="Starting this Month"
+            >
+              Starting this Month
+            </option>
+            <option
+              className={`FilterCategorySelectOption ${
+                state.selectedRadioForFilterCategory !== "All"
+                  ? "FilterCategorySelectOptionBG"
+                  : ""
+              }`}
+              value="On Going"
+            >
+              On Going
+            </option>
+          </Form.Control>
+        </Form.Group>
+
+        <Form.Group className="FilterByVSGroup">
           <Form.Text className="FilterByText">filter by Status</Form.Text>
           <Form.Control
-            className="FilterCategorySelectGroup"
+            className={`FilterCategorySelectGroup ${
+              state.selectedRadioForFilter !== "All"
+                ? "FilterCategorySelectGroupBG"
+                : ""
+            }`}
             custom
             as="select"
             value={
@@ -48,13 +104,34 @@ const FilterBarForm = ({
             }
             onChange={handleSelectChangeForFilter}
           >
-            <option className="FilterCategorySelectOption" value="All">
+            <option
+              className={`FilterCategorySelectOption ${
+                state.selectedRadioForFilter !== "All"
+                  ? "FilterCategorySelectOptionBG"
+                  : ""
+              }`}
+              value="All"
+            >
               None
             </option>
-            <option className="FilterCategorySelectOption" value="Published">
+            <option
+              className={`FilterCategorySelectOption ${
+                state.selectedRadioForFilter !== "All"
+                  ? "FilterCategorySelectOptionBG"
+                  : ""
+              }`}
+              value="Published"
+            >
               Published
             </option>
-            <option className="FilterCategorySelectOption" value="In Draft">
+            <option
+              className={`FilterCategorySelectOption ${
+                state.selectedRadioForFilter !== "All"
+                  ? "FilterCategorySelectOptionBG"
+                  : ""
+              }`}
+              value="In Draft"
+            >
               In Draft
             </option>
           </Form.Control>
@@ -63,7 +140,11 @@ const FilterBarForm = ({
         <Form.Group className="FilterByVSGroup">
           <Form.Text className="FilterByText">filter by Mode</Form.Text>
           <Form.Control
-            className="FilterCategorySelectGroup"
+            className={`FilterCategorySelectGroup ${
+              state.selectedRadioForFilterMode !== "All"
+                ? "FilterCategorySelectGroupBG"
+                : ""
+            }`}
             custom
             as="select"
             value={
@@ -73,13 +154,34 @@ const FilterBarForm = ({
             }
             onChange={handleSelectChangeForFilterMode}
           >
-            <option className="FilterCategorySelectOption" value="All">
+            <option
+              className={`FilterCategorySelectOption ${
+                state.selectedRadioForFilterMode !== "All"
+                  ? "FilterCategorySelectOptionBG"
+                  : ""
+              }`}
+              value="All"
+            >
               None
             </option>
-            <option className="FilterCategorySelectOption" value="Virtual">
+            <option
+              className={`FilterCategorySelectOption ${
+                state.selectedRadioForFilterMode !== "All"
+                  ? "FilterCategorySelectOptionBG"
+                  : ""
+              }`}
+              value="Virtual"
+            >
               Virtual
             </option>
-            <option className="FilterCategorySelectOption" value="In Person">
+            <option
+              className={`FilterCategorySelectOption ${
+                state.selectedRadioForFilterMode !== "All"
+                  ? "FilterCategorySelectOptionBG"
+                  : ""
+              }`}
+              value="In Person"
+            >
               In Person
             </option>
           </Form.Control>
@@ -88,7 +190,11 @@ const FilterBarForm = ({
         <Form.Group className="SortByVSGroup">
           <Form.Text className="SortByText">sort by Duration</Form.Text>
           <Form.Control
-            className="SortCategorySelectGroup"
+            className={`SortCategorySelectGroup ${
+              state.selectedRadioForSort !== "All"
+                ? "SortCategorySelectGroupBG"
+                : ""
+            }`}
             custom
             as="select"
             value={
@@ -98,17 +204,32 @@ const FilterBarForm = ({
             }
             onChange={handleSelectChangeForSort}
           >
-            <option className="SortCategorySelectOption" value="All">
+            <option
+              className={`SortCategorySelectOption ${
+                state.selectedRadioForSort !== "All"
+                  ? "SortCategorySelectOptionBG"
+                  : ""
+              }`}
+              value="All"
+            >
               None
             </option>
             <option
-              className="SortCategorySelectOption"
+              className={`SortCategorySelectOption ${
+                state.selectedRadioForSort !== "All"
+                  ? "SortCategorySelectOptionBG"
+                  : ""
+              }`}
               value="Increasing Duration"
             >
               Increasing
             </option>
             <option
-              className="SortCategorySelectOption"
+              className={`SortCategorySelectOption ${
+                state.selectedRadioForSort !== "All"
+                  ? "SortCategorySelectOptionBG"
+                  : ""
+              }`}
               value="Decreasing Duration"
             >
               Decreasing
@@ -119,27 +240,46 @@ const FilterBarForm = ({
         <Form.Group className="SortByVSGroup">
           <Form.Text className="SortByText">sort by Date</Form.Text>
           <Form.Control
-            className="SortCategorySelectGroup"
+            className={`SortCategorySelectGroup ${
+              state.selectedRadioForDateSort !== "All"
+                ? "SortCategorySelectGroupBG"
+                : ""
+            }`}
             custom
             as="select"
             value={
-              state.selectedRadioForSort === "All"
+              state.selectedRadioForDateSort === "All"
                 ? "None"
-                : state.selectedRadioForSort
+                : state.selectedRadioForDateSort
             }
             onChange={handleSelectChangeForSort}
           >
-            <option className="SortCategorySelectOption" value="All">
+            <option
+              className={`SortCategorySelectOption ${
+                state.selectedRadioForDateSort !== "All"
+                  ? "SortCategorySelectOptionBG"
+                  : ""
+              }`}
+              value="All"
+            >
               None
             </option>
             <option
-              className="SortCategorySelectOption"
+              className={`SortCategorySelectOption ${
+                state.selectedRadioForDateSort !== "All"
+                  ? "SortCategorySelectOptionBG"
+                  : ""
+              }`}
               value="Newest to Oldest Date"
             >
               Newest to Oldest
             </option>
             <option
-              className="SortCategorySelectOption"
+              className={`SortCategorySelectOption ${
+                state.selectedRadioForDateSort !== "All"
+                  ? "SortCategorySelectOptionBG"
+                  : ""
+              }`}
               value="Oldest to Newest Date"
             >
               Oldest to Newest

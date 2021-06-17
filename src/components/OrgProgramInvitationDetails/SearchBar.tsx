@@ -52,8 +52,8 @@ const SearchBar = ({
 
       const responseData = state.responseData as OrgInvitationResponseData[];
 
-      let tempFilteredData = responseData.filter(
-        (data) => data.name.toLowerCase() === event.target.value
+      let tempFilteredData = responseData.filter((data) =>
+        data.name.toLowerCase().startsWith(event.target.value.toLowerCase())
       );
 
       if (state.selectedRadioForFilter === "Accepted")

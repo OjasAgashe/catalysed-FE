@@ -1,0 +1,49 @@
+.FilterBarContainer {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.FilterBarContainer .FilterByText {
+  color: var(--common-home-section-four-600);
+}
+
+.FilterBarStateDropdown {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.FilterBarStateDropdown .btn {
+  background-color: var(--cyan-info-background) !important;
+  color: var(--cyan-info-text) !important;
+  border-color: var(--cyan-info-border) !important;
+  font-weight: 500;
+}
+
+.FilterBarStateDropdown .btn:focus {
+  box-shadow: none !important;
+}
+
+.FilterBarStateDropdown .dropdown-menu {
+  min-width: fit-content;
+  background-color: var(--cyan-info-background) !important;
+}
+
+.FilterBarStateDropdown .dropdown-menu a {
+  color: var(--cyan-info-text) !important;
+}
+
+.FilterBarContainer .OrgParticipantSearchFromControl:valid {
+  background-color: var(--blue-gray-100) !important;
+}
+
+.FilterBarContainer .OrgParticipantSearchFromControl {
+  border: 1px solid var(--blue-gray-300) !important;
+  max-width: 22rem;
+  margin: 1rem 0;
+  color: var(--blue-gray-700) !important;
+  font-size: 1.05rem !important;
+  background-color: var(--blue-gray-100) !important;
+}

@@ -9,6 +9,7 @@ import SectionOne from "./SectionOne";
 import SectionThree from "./SectionThree";
 import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
 import { OrgHomeActionType, OrgHomeState } from "../../types/OrgHome";
+import { GetProgramMetaListData } from "../../types/OrgViewSearchProgram";
 
 type OrgHomeProps = {
   state: OrgHomeState;
@@ -19,6 +20,32 @@ const OrgHome = ({ state, dispatch }: OrgHomeProps) => {
   const { getProgramsStartingThisMonth, getOngoingPrograms } = useOrgAPI();
 
   useEffect(() => {
+    const sortDateFromNewToOldByUsing = (
+      obj1: GetProgramMetaListData,
+      obj2: GetProgramMetaListData
+    ) => {
+      const [day1, month1, year1] = obj1.tentativeStartDate.split("/");
+      const [day2, month2, year2] = obj2.tentativeStartDate.split("/");
+
+      return new Date(parseInt(year1), parseInt(month1) - 1, parseInt(day1)) >
+        new Date(parseInt(year2), parseInt(month2) - 1, parseInt(day2))
+        ? -1
+        : 1;
+    };
+
+    const sortDateFromOldToNewByUsing = (
+      obj1: GetProgramMetaListData,
+      obj2: GetProgramMetaListData
+    ) => {
+      const [day1, month1, year1] = obj1.tentativeStartDate.split("/");
+      const [day2, month2, year2] = obj2.tentativeStartDate.split("/");
+
+      return new Date(parseInt(year1), parseInt(month1) - 1, parseInt(day1)) >
+        new Date(parseInt(year2), parseInt(month2) - 1, parseInt(day2))
+        ? 1
+        : -1;
+    };
+
     const getPrograms = async () => {
       try {
         const programsStartingThisMonth = await getProgramsStartingThisMonth();
@@ -26,11 +53,16 @@ const OrgHome = ({ state, dispatch }: OrgHomeProps) => {
 
         dispatch({
           type: "programsStartingThisMonth",
-          payload: programsStartingThisMonth.slice(0, 3),
+          payload: programsStartingThisMonth
+            .sort(sortDateFromOldToNewByUsing)
+            .slice(0, 3),
         });
+
         dispatch({
           type: "ongoingPrograms",
-          payload: ongoingPrograms.slice(0, 3),
+          payload: ongoingPrograms
+            .sort(sortDateFromNewToOldByUsing)
+            .slice(0, 3),
         });
       } catch (error) {
       } finally {

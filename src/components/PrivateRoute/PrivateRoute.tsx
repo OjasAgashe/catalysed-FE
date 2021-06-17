@@ -6,6 +6,7 @@ import {
   LOGIN,
   MENTOR_HOME,
   MENTOR_PROFILE_BUILDER,
+  ORGANISATION_DIRECTORY,
   ORGANISATION_HOME,
   ORGANISATION_PROFILE_BUILDER,
   ORGANISATION_PROGRAM_CREATE,
@@ -41,6 +42,7 @@ const PrivateRoute = (props: {
       if (catalysedCreated) {
         if (
           [
+            ORGANISATION_DIRECTORY,
             ORGANISATION_HOME,
             ORGANISATION_PROGRAM_CREATE,
             `${ORGANISATION_PROGRAM_DETAILS}/:programId`,

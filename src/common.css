@@ -9,9 +9,14 @@
     StuProfileBuilder, 
     OrgCreateProgramPage, 
     OrgViewSearchProgramPage 
+    OrgHomePage,
+    OrgDirectoryPage,
+    OrgProgramInvitationsPage, 
+    OrgProgramParticipantsPage, 
+    OrgEditProgramDetailsPage,
 */
 
-:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage, .OrgProfileBuilder, .MentorProfileBuilder, .StuProfileBuilder, .OrgCreateProgramPage, .OrgViewSearchProgramPage, .OrgProgramDetailsPage, .OrgProgramInvitationsPage, .OrgProgramParticipantsPage, .OrgEditProgramDetailsPage, .OrgHomePage) {
+:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage, .OrgProfileBuilder, .MentorProfileBuilder, .StuProfileBuilder, .OrgCreateProgramPage, .OrgViewSearchProgramPage, .OrgProgramDetailsPage, .OrgProgramInvitationsPage, .OrgProgramParticipantsPage, .OrgEditProgramDetailsPage, .OrgHomePage, .OrgDirectoryPage) {
   background-color: var(--red-100);
   min-height: 85vh;
 }
@@ -97,7 +102,9 @@
     OrgProfileBuilderTypeform, 
     MentorProfileBuidlerTypeform, 
     CreateProgramForm, 
-    OrgProgramDetails 
+    OrgProgramDetails,
+    OrgProgramDetailsCommon,
+    OrgDirectoryPageHeader
 */
 
 :is(.OrgRegisterUserForm, .OrgRegisterDetailsForm, .LoginForm, .StudentMentorRegisterBox, .CommonHomeForm) {
@@ -500,5 +507,65 @@ input[type="number"] {
 @keyframes box-shadow-animation {
   50% {
     box-shadow: 1px 1px 5px var(--blue-gray-500);
+  }
+}
+
+/* 
+  OrgProgramDetailsCommon,
+  OrgDirectoryPageHeader 
+*/
+
+.CommonProgramDetailsHeroText,
+.OrgDirectoryPageHeaderHeroText {
+  padding: 2rem 0 3rem 5rem !important;
+  font-family: "KoHo", sans-serif;
+  font-size: 2.5rem !important;
+  color: var(--facebook-code) !important;
+  font-weight: 600 !important;
+}
+
+.PDViewAndRouteLinksContainer,
+.OrgDirectoryMentorOrStudentOptContainer {
+  width: fit-content;
+  margin: auto;
+  text-align: center;
+  padding: 2rem 0;
+  border-radius: 5px;
+}
+
+.ProgramDetailsRouteLinks,
+.OrgDirectoryMentorOrStudentOpt {
+  padding: 0.3rem 1.4rem !important;
+  font-size: 1.3rem !important;
+  width: fit-content;
+  box-shadow: 1px 1px 5px var(--barley-corn);
+}
+
+@media screen and (max-width: 466px) {
+  .CommonProgramDetailsHeroText span {
+    background-color: var(--floral-white);
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .ProgramDetailsRouteLinks,
+  .OrgDirectoryMentorOrStudentOpt {
+    padding: 0.2rem !important;
+    margin: auto 0.4rem !important;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .CommonProgramDetailsDiv {
+    background-size: auto;
+  }
+
+  .OrgDirectoryPageHeaderHeroText span {
+    background-color: var(--floral-white);
+  }
+
+  .CommonProgramDetailsHeroText,
+  .OrgDirectoryPageHeaderHeroText {
+    padding: 1rem 2rem 3rem !important;
   }
 }

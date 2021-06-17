@@ -195,30 +195,17 @@
   width: fit-content;
 }
 
-.MentorInfoCard .NewThisMonthDiv {
-  align-self: flex-end;
-}
-
-.StudentInfoCard .TotalStatDiv {
-  align-self: flex-end;
-}
-
 @media screen and (max-width: 880px) {
   .StudentInfoCard {
     margin: 1rem 0;
   }
 }
 
-.MentorInfoCard .MentorInfoCardImgContainer,
-.StudentInfoCard .StudentInfoCardImgContainer {
-  height: fit-content;
-  align-self: flex-end;
-}
-
 .OrgHomeMentorInfoCardImg,
 .OrgHomeStudentInfoCardImg,
 .OrgHomeInvitationsInfoCardImg {
   max-width: 10rem;
+  height: 10rem;
   margin: 1rem;
   margin-bottom: 0;
 }

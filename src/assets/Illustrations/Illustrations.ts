@@ -8,6 +8,7 @@ import CreateProgramIllustration from "./create_program_illustration.svg";
 import FooterBackground from "./footer-background.webp";
 import HeaderBackground from "./header-background.webp";
 import Logo from "./logo.png";
+import OrgDirectoryPage from "./org_directory_page.jpg";
 import OrgEditProgramDetailsIllustration from "./org_edit_program_details_illustration.svg";
 import OrgHomeSectionOne from "./org_home_section_one.jpg";
 import OrgHomeInvitationsInfoCard from "./org_home_invitations_info_card.svg";
@@ -28,6 +29,7 @@ export {
   FooterBackground,
   HeaderBackground,
   Logo,
+  OrgDirectoryPage,
   OrgEditProgramDetailsIllustration,
   OrgHomeSectionOne,
   OrgHomeInvitationsInfoCard,

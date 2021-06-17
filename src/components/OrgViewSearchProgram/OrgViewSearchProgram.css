@@ -11,7 +11,7 @@
 }
 
 .ViewAndSearchProgramIllustration {
-  max-width: 300px;
+  max-width: 400px;
   padding: 2rem 1rem 1rem;
   align-self: flex-end;
 }
@@ -70,6 +70,16 @@
   color: var(--blue-gray-700) !important;
   padding: 0.2rem 0.5rem !important;
   width: 8rem;
+}
+
+.FilterCategorySelectGroupBG,
+.SortCategorySelectGroupBG {
+  background-color: var(--drover-code-100);
+}
+
+.FilterCategorySelectOptionBG,
+.SortCategorySelectOptionBG {
+  background-color: var(--white);
 }
 
 :is(.FilterCategorySelectGroup, .SortCategorySelectGroup):focus {

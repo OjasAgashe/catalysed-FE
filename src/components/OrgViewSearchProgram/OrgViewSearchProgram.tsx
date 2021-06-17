@@ -43,17 +43,48 @@ const OrgViewSearchProgram = ({
         if (filterBy === "all") {
           const response = await getProgramsMetaList();
           setProgramsList([...response.data]);
+
+          dispatch({
+            type: "selectedRadioForFilter",
+            payload: "All",
+          });
+
+          dispatch({
+            type: "selectedRadioForFilterCategory",
+            payload: "All",
+          });
         }
 
         if (filterBy === "in_progress") {
           const ongoingPrograms = await getOngoingPrograms();
+
           setProgramsList([...ongoingPrograms]);
+          setFilteredProgramsList([...ongoingPrograms]);
+
+          dispatch({
+            type: "selectedRadioForFilterCategory",
+            payload: "On Going",
+          });
+
+          dispatch({
+            type: "selectedRadioForFilter",
+            payload: "Published",
+          });
         }
 
         if (filterBy === "this_month") {
           const programsStartingThisMonth =
             await getProgramsStartingThisMonth();
+
           setProgramsList([...programsStartingThisMonth]);
+          setFilteredProgramsList([...programsStartingThisMonth]);
+
+          dispatch({
+            type: "selectedRadioForFilterCategory",
+            payload: "Starting this Month",
+          });
+
+          dispatch({ type: "selectedRadioForFilter", payload: "Published" });
         }
       } catch (error) {
       } finally {
@@ -96,6 +127,9 @@ const OrgViewSearchProgram = ({
               ["Virtual", "In Person"].includes(
                 state.selectedRadioForFilterMode
               ) ||
+              ["Starting this Month", "On Going"].includes(
+                state.selectedRadioForFilterCategory
+              ) ||
               [
                 "Increasing Duration",
                 "Decreasing Duration",
@@ -121,6 +155,9 @@ const OrgViewSearchProgram = ({
             !["Published", "In Draft"].includes(state.selectedRadioForFilter) &&
             !["Virtual", "In Person"].includes(
               state.selectedRadioForFilterMode
+            ) &&
+            !["Starting this Month", "On Going"].includes(
+              state.selectedRadioForFilterCategory
             ) &&
             ![
               "Increasing Duration",

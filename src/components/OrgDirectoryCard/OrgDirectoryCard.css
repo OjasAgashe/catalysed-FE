@@ -1,0 +1,101 @@
+.OrgDirectoryCardContainer {
+  display: flex;
+  max-width: 25rem;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem;
+  background-color: var(--white);
+  border-radius: 5px;
+  box-shadow: 1px 1px 4px var(--blue-gray-400);
+}
+
+@media screen and (max-width: 420px) {
+  .OrgDirectoryCardContainer {
+    max-width: 23rem;
+  }
+}
+
+.OrgDirectoryCardContainer .DataContainerDiv {
+  font-size: 1.2rem;
+  width: 19rem;
+}
+
+.OrgDirectoryCardContainer
+  .DataContainerDiv
+  :is(.CardNameDiv, .CardEmailDiv, .CardActiveProgramDiv) {
+  margin: 0.2rem 0;
+  padding: 0 1rem;
+  display: flex;
+}
+
+.OrgDirectoryCardContainer .DataContainerDiv .CardNameDiv {
+  padding-top: 0.5rem;
+}
+
+.OrgDirectoryCardContainer .DataContainerDiv .CardActiveProgramDiv {
+  padding-bottom: 0.5rem;
+}
+
+.OrgDirectoryCardContainer
+  .DataContainerDiv
+  :is(.CardNameDiv, .CardEmailDiv, .CardActiveProgramDiv)
+  .Text {
+  color: var(--blue-gray-700);
+  font-weight: 600;
+  width: 7rem;
+}
+
+.OrgDirectoryCardContainer
+  .DataContainerDiv
+  :is(.CardNameDiv, .CardEmailDiv, .CardActiveProgramDiv)
+  .Data {
+  color: var(--yellow-700);
+}
+
+.CardActiveProgramDiv small {
+  float: right;
+  color: var(--blue-gray-700);
+  font-size: 0.8rem;
+}
+
+.OrgDirectoryCardContainer .NextBtnDiv {
+  padding: 2.8rem 0.5rem;
+  text-align: center;
+  font-weight: 600;
+  color: var(--white);
+  background-color: var(--cyan-shade);
+  border-radius: inherit;
+  width: 6rem;
+}
+
+.NextBtnIconContainer {
+  margin: auto;
+  display: block;
+  border: 1px solid var(--blue-gray-300);
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  box-shadow: 2px 2px 3px var(--blue-gray-400),
+    -1px -1px 3px var(--blue-gray-400);
+  background-color: var(--white);
+}
+
+.NextBtnIconContainer:hover {
+  border-color: var(--blue-gray-400);
+}
+
+.NextBtnIcon {
+  margin-bottom: 0.2rem;
+  font-size: 1.2rem;
+  color: var(--blue-gray-700);
+  stroke-width: 0.8;
+  animation-name: right-move-next-btn;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+}
+
+@keyframes right-move-next-btn {
+  50% {
+    transform: translateX(2px);
+  }
+}

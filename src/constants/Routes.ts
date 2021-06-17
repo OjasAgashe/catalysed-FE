@@ -2,6 +2,7 @@ export const HOME = "/";
 export const LOGIN = "/login";
 export const MENTOR_HOME = "/mentor/home";
 export const MENTOR_PROFILE_BUILDER = "/mentor/profile/builder";
+export const ORGANISATION_DIRECTORY = "/organiser/directory";
 export const ORGANISATION_HOME = "/organiser/home";
 export const ORGANISATION_PROFILE_BUILDER = "/organiser/profile/builder";
 export const ORGANISATION_PROGRAM_CREATE = "/organiser/program/create";

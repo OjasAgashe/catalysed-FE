@@ -14,7 +14,9 @@ export interface OrgViewSearchProgramState {
   searchedNotPresentText: string;
   selectedRadioForFilter: string;
   selectedRadioForFilterMode: string;
+  selectedRadioForFilterCategory: string;
   selectedRadioForSort: string;
+  selectedRadioForDateSort: string;
 }
 
 export type OrgViewSearchProgramActionType =
@@ -22,5 +24,7 @@ export type OrgViewSearchProgramActionType =
   | { type: "searchedTitle"; payload: string }
   | { type: "searchedNotPresentText"; payload: string }
   | { type: "selectedRadioForFilter"; payload: string }
+  | { type: "selectedRadioForFilterMode"; payload: string }
+  | { type: "selectedRadioForFilterCategory"; payload: string }
   | { type: "selectedRadioForSort"; payload: string }
-  | { type: "selectedRadioForFilterMode"; payload: string };
+  | { type: "selectedRadioForDateSort"; payload: string };

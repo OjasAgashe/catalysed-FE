@@ -93,6 +93,7 @@ export interface OrgProgramParticipantState {
   mentorParticipantResponseData: OrgProgramParticipantData[] | null;
   selectedRadioForFilterState: string;
   searchedNotPresentText: string;
+  searchedName: string;
 }
 
 export type OrgProgramParticipantActionType =
@@ -110,4 +111,5 @@ export type OrgProgramParticipantActionType =
   | { type: "showMentorDetails"; payload: boolean }
   | { type: "showStudentDetails"; payload: boolean }
   | { type: "selectedRadioForFilterState"; payload: string }
-  | { type: "searchedNotPresentText"; payload: string };
+  | { type: "searchedNotPresentText"; payload: string }
+  | { type: "searchedName"; payload: string };
