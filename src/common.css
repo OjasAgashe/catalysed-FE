@@ -11,12 +11,13 @@
     OrgViewSearchProgramPage 
     OrgHomePage,
     OrgDirectoryPage,
+    OrgDirectoryMentorPage,
     OrgProgramInvitationsPage, 
     OrgProgramParticipantsPage, 
     OrgEditProgramDetailsPage,
 */
 
-:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage, .OrgProfileBuilder, .MentorProfileBuilder, .StuProfileBuilder, .OrgCreateProgramPage, .OrgViewSearchProgramPage, .OrgProgramDetailsPage, .OrgProgramInvitationsPage, .OrgProgramParticipantsPage, .OrgEditProgramDetailsPage, .OrgHomePage, .OrgDirectoryPage) {
+:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage, .OrgProfileBuilder, .MentorProfileBuilder, .StuProfileBuilder, .OrgCreateProgramPage, .OrgViewSearchProgramPage, .OrgProgramDetailsPage, .OrgProgramInvitationsPage, .OrgProgramParticipantsPage, .OrgEditProgramDetailsPage, .OrgHomePage, .OrgDirectoryPage, .OrgDirectoryMentorPage) {
   background-color: var(--red-100);
   min-height: 85vh;
 }
@@ -397,7 +398,8 @@ input[type="number"] {
 
 /* 
     Org Create Program Form, 
-    Org Program Details 
+    Org Program Details,
+    OrgDirectoryDetailsPersonalInfo
 */
 
 .GeneralDetailsFormContainer,
@@ -407,7 +409,15 @@ input[type="number"] {
 .GeneralProgramDetailsContainer,
 .CoordinatorProgramDetailsContainer,
 .MentorProgramDetailsContainer,
-.StudentProgramDetailsContainer {
+.StudentProgramDetailsContainer,
+.OrgDirectoryDetailsPersonalContainer
+  .SectionOne
+  .SectionOneSecondHalf
+  .DataCard,
+.OrgDirectoryDetailsPersonalContainer
+  .SectionTwo
+  .SectionTwoFirstHalf
+  .DataCard {
   background-color: var(--white);
   padding: 1rem;
   box-shadow: 1px 1px 5px var(--blue-gray-300), -2px -2px 5px var(--white);
@@ -424,7 +434,9 @@ input[type="number"] {
 }
 
 :is(.CreateProgramFormContainer, .GeneralProgramDetailsContainer, .CoordinatorProgramDetailsContainer, .MentorProgramDetailsContainer, .StudentProgramDetailsContainer)
-  .CreateProgramFormText {
+  .CreateProgramFormText,
+.OrgDirectoryDetailsPersonalContainer .SectionOne .CreateProgramFormText,
+.OrgDirectoryDetailsPersonalContainer .SectionTwo .CreateProgramFormText {
   font-size: 1.1rem !important;
   margin-right: 1rem;
   color: var(--blue-gray-700);
@@ -433,7 +445,9 @@ input[type="number"] {
 .CreateProgramFormContainer
   :is(.CreateProgramFirstSection, .CreateProgramSecondSection),
 .ProgramDetailsContainer
-  :is(.ProgramDetailsFirstSection, .ProgramDetailsSecondSection) {
+  :is(.ProgramDetailsFirstSection, .ProgramDetailsSecondSection),
+.OrgDirectoryDetailsPersonalContainer .SectionOne,
+.OrgDirectoryDetailsPersonalContainer .SectionTwo {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -448,6 +462,10 @@ input[type="number"] {
 }
 
 :is(.GeneralDetailsForm, .GeneralProgramDetailsDataContainer, .MentorProgramDetailsDataContainer, .StudentProgramDetailsDataContainer)
+  .LanguagePreviewer
+  .LanguageLi,
+.OrgDirectoryDetailsPersonalContainer
+  .SectionTwo
   .LanguagePreviewer
   .LanguageLi {
   display: inline-block;
@@ -512,11 +530,13 @@ input[type="number"] {
 
 /* 
   OrgProgramDetailsCommon,
-  OrgDirectoryPageHeader 
+  OrgDirectoryPageHeader,
+  OrgDirectoryDetailsCommonHeader
 */
 
 .CommonProgramDetailsHeroText,
-.OrgDirectoryPageHeaderHeroText {
+.OrgDirectoryPageHeaderHeroText,
+.OrgDirectoryDetailsCommonHeaderHeroText {
   padding: 2rem 0 3rem 5rem !important;
   font-family: "KoHo", sans-serif;
   font-size: 2.5rem !important;
@@ -525,7 +545,8 @@ input[type="number"] {
 }
 
 .PDViewAndRouteLinksContainer,
-.OrgDirectoryMentorOrStudentOptContainer {
+.OrgDirectoryMentorOrStudentOptContainer,
+.OrgDirectoryDetailsPIOrCtPOptContainer {
   width: fit-content;
   margin: auto;
   text-align: center;
@@ -534,7 +555,8 @@ input[type="number"] {
 }
 
 .ProgramDetailsRouteLinks,
-.OrgDirectoryMentorOrStudentOpt {
+.OrgDirectoryMentorOrStudentOpt,
+.OrgDirectoryDetailsPIOrCtPOpt {
   padding: 0.3rem 1.4rem !important;
   font-size: 1.3rem !important;
   width: fit-content;
@@ -549,7 +571,8 @@ input[type="number"] {
 
 @media screen and (max-width: 500px) {
   .ProgramDetailsRouteLinks,
-  .OrgDirectoryMentorOrStudentOpt {
+  .OrgDirectoryMentorOrStudentOpt,
+  .OrgDirectoryDetailsPIOrCtPOpt {
     padding: 0.2rem !important;
     margin: auto 0.4rem !important;
   }
@@ -565,7 +588,47 @@ input[type="number"] {
   }
 
   .CommonProgramDetailsHeroText,
-  .OrgDirectoryPageHeaderHeroText {
+  .OrgDirectoryPageHeaderHeroText,
+  .OrgDirectoryDetailsCommonHeaderHeroText {
     padding: 1rem 2rem 3rem !important;
   }
 }
+
+/* 
+  OrgDirectoryPageHeader,
+  OrgDirectoryDetailsCommonHeader 
+*/
+
+:is(.OrgDirectoryMentorOrStudentOpt, .OrgDirectoryDetailsPIOrCtPOpt) button {
+  color: var(--yellow-700);
+  font-weight: 600;
+  cursor: pointer;
+  background: inherit;
+  border: none;
+}
+
+:is(.OrgDirectoryMentorOrStudentOpt, .OrgDirectoryDetailsPIOrCtPOpt)
+  button:hover {
+  text-decoration: underline;
+}
+
+.OrgDirectoryMentorOrStudentOpt .MentorBtnOpt,
+.OrgDirectoryDetailsPIOrCtPOpt .PersonalInfoBtnOpt {
+  border-right: 2px solid var(--yellow-700);
+}
+
+.OrgDirectoryMentorOrStudentOpt,
+.OrgDirectoryDetailsPIOrCtPOpt {
+  box-shadow: 2px 2px 4px var(--yellow-700), -2px -2px 4px var(--yellow-700) !important;
+  animation-name: directory-box-shadow-animation;
+  animation-iteration-count: infinite;
+  animation-duration: 1.5s;
+}
+
+@keyframes directory-box-shadow-animation {
+  50% {
+    box-shadow: 6px 6px 20px var(--yellow-700), -6px -6px 20px var(--yellow-700);
+  }
+}
+
+/*  */

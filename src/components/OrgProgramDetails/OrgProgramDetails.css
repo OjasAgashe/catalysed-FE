@@ -71,6 +71,11 @@
   margin-left: 0 !important;
 }
 
+.GeneralProgramDetailsContainer .LanguagePreviewer {
+  max-height: 100px;
+  overflow-y: scroll;
+}
+
 .CoordinatorProgramDetailsContainer {
   width: 400px;
   margin: 0 1rem 1rem;

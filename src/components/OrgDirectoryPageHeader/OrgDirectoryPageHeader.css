@@ -4,35 +4,6 @@
   box-shadow: 0 1px 10px var(--blue-gray-400);
 }
 
-.OrgDirectoryMentorOrStudentOpt button {
-  color: var(--yellow-700);
-  font-weight: 600;
-  cursor: pointer;
-  background: inherit;
-  border: none;
-}
-
-.OrgDirectoryMentorOrStudentOpt button:hover {
-  text-decoration: underline;
-}
-
-.OrgDirectoryMentorOrStudentOpt .MentorBtnOpt {
-  border-right: 2px solid var(--yellow-700);
-}
-
-.OrgDirectoryMentorOrStudentOpt {
-  box-shadow: 2px 2px 4px var(--yellow-700), -2px -2px 4px var(--yellow-700) !important;
-  animation-name: directory-box-shadow-animation;
-  animation-iteration-count: infinite;
-  animation-duration: 1.5s;
-}
-
-@keyframes directory-box-shadow-animation {
-  50% {
-    box-shadow: 6px 6px 20px var(--yellow-700), -6px -6px 20px var(--yellow-700);
-  }
-}
-
 .SearchBarContainer {
   max-width: 30rem;
   margin: 1rem auto;

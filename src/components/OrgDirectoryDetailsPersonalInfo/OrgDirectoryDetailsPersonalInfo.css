@@ -1,0 +1,96 @@
+.OrgDirectoryDetailsPersonalContainer {
+  padding: 2rem 1rem;
+}
+
+.OrgDirectoryDetailsPersonalContainer :is(.SectionOne, .SectionTwo) {
+  align-items: center;
+}
+
+@media screen and (min-width: 634px) {
+  .OrgDirectoryDetailsPersonalContainer .SectionTwo .DataCard {
+    max-width: 550px;
+  }
+}
+
+.OrgDirectoryDetailsPersonalContainer
+  :is(.SectionOne, .SectionTwo)
+  :is(.SectionOneFirstHalf, .SectionOneSecondHalf, .SectionTwoFirstHalf, .SectionTwoSecondHalf) {
+  margin: 1rem auto;
+}
+
+.OrgDirectoryDetailsPersonalContainer :is(.SectionOne, .SectionTwo) img {
+  max-width: 400px;
+  padding: 0.5rem;
+}
+
+@media screen and (max-width: 455px) {
+  .OrgDirectoryDetailsPersonalContainer :is(.SectionOne, .SectionTwo) img {
+    max-width: 350px;
+  }
+}
+
+.OrgDirectoryDetailsPersonalContainer
+  .SectionOne
+  :is(.DataCardFullName, .DataCardAge, .DataCardGender, .DataCardContact) {
+  margin: 0.5rem auto !important;
+}
+
+.OrgDirectoryDetailsPersonalContainer
+  .SectionTwo
+  :is(.DataCardSoO, .DataCardAddress, .DataCardProfessionallyMentor, .DataCardExperience, .DataCardStableConnectionm, .DataCardAcademicQualification, .DataCardProfession, .DataCardKnownLanguage) {
+  margin: 1rem auto !important;
+}
+
+.OrgDirectoryDetailsPersonalContainer
+  :is(.SectionOne, .SectionTwo)
+  .CreateProgramFormText {
+  font-weight: 600;
+  padding: 0 0.5rem !important;
+  display: inline-block;
+}
+
+.OrgDirectoryDetailsPersonalContainer :is(.SectionOne, .SectionTwo) .Data {
+  font-size: 1.1rem;
+  display: inline-block;
+}
+
+.OrgDirectoryDetailsPersonalContainer
+  :is(.SectionOne, .SectionTwo)
+  :is(.DataCardContactPnE, .DataCardAddressCnC),
+.SectionTwo .DataCardAcademicQualification .Data {
+  padding: 0 1rem;
+}
+
+.SectionTwo .DataCardAcademicQualification .Data {
+  display: block !important;
+}
+
+.OrgDirectoryDetailsPersonalContainer
+  :is(.SectionOne, .SectionTwo)
+  :is(.DataCardContactPhone, .DataCardContactEmail, .DataCardAddressCity, .DataCardAddressCountry) {
+  display: inline-block;
+}
+
+.OrgDirectoryDetailsPersonalContainer
+  .SectionOne
+  .DataCardContactPnE
+  .PhoneComma,
+.OrgDirectoryDetailsPersonalContainer
+  .SectionTwo
+  .DataCardAddressCnC
+  .AddressComma {
+  font-size: 1.1rem !important;
+  color: var(--blue-gray-700);
+  font-weight: 600;
+}
+
+@media screen and (max-width: 1040px) {
+  .OrgDirectoryDetailsPersonalContainer .SectionTwo {
+    flex-direction: column-reverse !important;
+  }
+}
+
+.DataCardKnownLanguage .LanguagePreviewer {
+  max-height: 100px;
+  overflow-y: scroll;
+}

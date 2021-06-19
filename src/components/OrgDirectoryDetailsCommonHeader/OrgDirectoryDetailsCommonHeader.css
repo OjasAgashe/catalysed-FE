@@ -1,0 +1,9 @@
+.OrgDirectoryDetailsCommonHeaderContainer {
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 1px 10px var(--blue-gray-400);
+}
+
+.OrgDirectoryDetailsCommonHeaderHeroText span {
+  background-color: var(--floral-white);
+}

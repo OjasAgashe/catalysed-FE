@@ -1,6 +1,8 @@
 import React from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { BsChevronDoubleRight } from "react-icons/bs";
+import { useHistory } from "react-router-dom";
+import { ORGANISATION_DIRECTORY_DETAILS_MENTOR } from "../../constants/Routes";
 import "./OrgDirectoryCard.css";
 
 type OrgDirectoryCardProps = {
@@ -13,6 +15,12 @@ type OrgDirectoryCardProps = {
 };
 
 const OrgDirectoryCard = ({ data }: OrgDirectoryCardProps) => {
+  const history = useHistory();
+
+  const handleDirectoryCardViewAllBtnClick = () => {
+    history.push(`${ORGANISATION_DIRECTORY_DETAILS_MENTOR}/${data.id}`);
+  };
+
   return (
     <div className="OrgDirectoryCardContainer">
       <div className="DataContainerDiv">
@@ -69,7 +77,10 @@ const OrgDirectoryCard = ({ data }: OrgDirectoryCardProps) => {
         </div>
       </div>
       <div className="NextBtnDiv">
-        <button className="NextBtnIconContainer">
+        <button
+          className="NextBtnIconContainer"
+          onClick={handleDirectoryCardViewAllBtnClick}
+        >
           <BsChevronDoubleRight className="NextBtnIcon" />
         </button>
         View all

@@ -7,6 +7,8 @@ import {
   MENTOR_HOME,
   MENTOR_PROFILE_BUILDER,
   ORGANISATION_DIRECTORY,
+  ORGANISATION_DIRECTORY_DETAILS_MENTOR,
+  ORGANISATION_DIRECTORY_DETAILS_STUDENT,
   ORGANISATION_HOME,
   ORGANISATION_PROFILE_BUILDER,
   ORGANISATION_PROGRAM_CREATE,
@@ -26,6 +28,7 @@ import { useCookie } from "../../context/cookie_context/CookieContext";
 const PrivateRoute = (props: {
   children: React.ReactNode;
   path: string;
+  exact?: boolean;
 }): JSX.Element => {
   const {
     getCatalysedTokenCookie,
@@ -43,6 +46,8 @@ const PrivateRoute = (props: {
         if (
           [
             ORGANISATION_DIRECTORY,
+            `${ORGANISATION_DIRECTORY_DETAILS_MENTOR}/:mentorId`,
+            `${ORGANISATION_DIRECTORY_DETAILS_STUDENT}/:studentId`,
             ORGANISATION_HOME,
             ORGANISATION_PROGRAM_CREATE,
             `${ORGANISATION_PROGRAM_DETAILS}/:programId`,
@@ -52,7 +57,11 @@ const PrivateRoute = (props: {
             `${ORGANISATION_PROGRAM_VIEW_SEARCH}/:filterBy`,
           ].includes(props.path)
         ) {
-          return <Route path={props.path}>{props.children}</Route>;
+          return (
+            <Route path={props.path} exact={props.exact ?? false}>
+              {props.children}
+            </Route>
+          );
         } else {
           return <Redirect to={ORGANISATION_HOME} />;
         }
@@ -74,7 +83,11 @@ const PrivateRoute = (props: {
     if (catalysedType === STUDENT) {
       if (catalysedCreated) {
         if ([STUDENT_HOME].includes(props.path)) {
-          return <Route path={props.path}>{props.children}</Route>;
+          return (
+            <Route path={props.path} exact={props.exact ?? false}>
+              {props.children}
+            </Route>
+          );
         } else {
           return <Redirect to={STUDENT_HOME} />;
         }
@@ -96,7 +109,11 @@ const PrivateRoute = (props: {
     if (catalysedType === MENTOR) {
       if (catalysedCreated) {
         if ([MENTOR_HOME].includes(props.path)) {
-          return <Route path={props.path}>{props.children}</Route>;
+          return (
+            <Route path={props.path} exact={props.exact ?? false}>
+              {props.children}
+            </Route>
+          );
         } else {
           return <Redirect to={MENTOR_HOME} />;
         }
