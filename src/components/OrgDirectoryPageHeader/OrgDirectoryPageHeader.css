@@ -21,7 +21,7 @@
 }
 
 .OrgDirectoryMentorOrStudentOpt {
-  box-shadow: 2px 2px 4px var(--blue-gray-700) !important;
+  box-shadow: 2px 2px 4px var(--yellow-700), -2px -2px 4px var(--yellow-700) !important;
   animation-name: directory-box-shadow-animation;
   animation-iteration-count: infinite;
   animation-duration: 1.5s;
@@ -29,8 +29,7 @@
 
 @keyframes directory-box-shadow-animation {
   50% {
-    box-shadow: 6px 6px 20px var(--blue-gray-700),
-      -6px -6px 20px var(--blue-gray-700);
+    box-shadow: 6px 6px 20px var(--yellow-700), -6px -6px 20px var(--yellow-700);
   }
 }
 

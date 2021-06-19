@@ -50,6 +50,7 @@
   :is(.CardNameDiv, .CardEmailDiv, .CardActiveProgramDiv)
   .Data {
   color: var(--yellow-700);
+  font-size: 1.15rem !important;
 }
 
 .CardActiveProgramDiv small {

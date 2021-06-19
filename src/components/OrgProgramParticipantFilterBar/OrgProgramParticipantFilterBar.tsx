@@ -55,7 +55,7 @@ const OrgProgramParticipantFilterBar = ({
           firstName.toLowerCase() +
           " " +
           lastName.toLowerCase()
-        ).startsWith(event.target.value.toLowerCase().trim());
+        ).startsWith(event.target.value.toLowerCase());
       });
 
       if (state.selectedRadioForFilterState === "Active")

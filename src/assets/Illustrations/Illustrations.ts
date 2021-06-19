@@ -9,6 +9,9 @@ import FooterBackground from "./footer-background.webp";
 import HeaderBackground from "./header-background.webp";
 import Logo from "./logo.png";
 import OrgDirectoryPage from "./org_directory_page.jpg";
+import OrgDirectoryDetailsBoy from "./org_directory_details_boy.svg";
+import OrgDirectoryDetailsGirl from "./org_directory_details_girl.svg";
+import OrgDirectoryDetailsHeader from "./org_directory_details_header.jpg";
 import OrgEditProgramDetailsIllustration from "./org_edit_program_details_illustration.svg";
 import OrgHomeSectionOne from "./org_home_section_one.jpg";
 import OrgHomeInvitationsInfoCard from "./org_home_invitations_info_card.svg";
@@ -30,6 +33,9 @@ export {
   HeaderBackground,
   Logo,
   OrgDirectoryPage,
+  OrgDirectoryDetailsBoy,
+  OrgDirectoryDetailsGirl,
+  OrgDirectoryDetailsHeader,
   OrgEditProgramDetailsIllustration,
   OrgHomeSectionOne,
   OrgHomeInvitationsInfoCard,
