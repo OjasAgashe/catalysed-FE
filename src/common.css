@@ -12,12 +12,13 @@
     OrgHomePage,
     OrgDirectoryPage,
     OrgDirectoryMentorPage,
+    OrgDirectoryStudentPage,
     OrgProgramInvitationsPage, 
     OrgProgramParticipantsPage, 
     OrgEditProgramDetailsPage,
 */
 
-:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage, .OrgProfileBuilder, .MentorProfileBuilder, .StuProfileBuilder, .OrgCreateProgramPage, .OrgViewSearchProgramPage, .OrgProgramDetailsPage, .OrgProgramInvitationsPage, .OrgProgramParticipantsPage, .OrgEditProgramDetailsPage, .OrgHomePage, .OrgDirectoryPage, .OrgDirectoryMentorPage) {
+:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage, .OrgProfileBuilder, .MentorProfileBuilder, .StuProfileBuilder, .OrgCreateProgramPage, .OrgViewSearchProgramPage, .OrgProgramDetailsPage, .OrgProgramInvitationsPage, .OrgProgramParticipantsPage, .OrgEditProgramDetailsPage, .OrgHomePage, .OrgDirectoryPage, .OrgDirectoryMentorPage, .OrgDirectoryStudentPage) {
   background-color: var(--red-100);
   min-height: 85vh;
 }
