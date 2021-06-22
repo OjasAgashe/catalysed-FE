@@ -17,6 +17,10 @@ import OrgHomeSectionOne from "./org_home_section_one.jpg";
 import OrgHomeInvitationsInfoCard from "./org_home_invitations_info_card.svg";
 import OrgHomeMentorInfoCard from "./org_home_mentor_info_card.svg";
 import OrgHomeStudentInfoCard from "./org_home_student_info_card.svg";
+import OrgProfileCommonHeaderImg from "./org_profile_common_header.jpg";
+import OrgProfileManageContactUs from "./org_profile_manage_contact_us.svg";
+import OrgProfileManageFillIn from "./org_profile_manage_fill_in.svg";
+import OrgProfileManagePersonalInfo from "./org_profile_manage_personal_info.svg";
 import OrgProgramDetails from "./org_program_details.jpg";
 import OrgProgramDetailsDataIllustration from "./org_program_details_data_illustration.svg";
 import OrgViewAndSearchProgram from "./org_view_and_search_program.svg";
@@ -41,6 +45,10 @@ export {
   OrgHomeInvitationsInfoCard,
   OrgHomeMentorInfoCard,
   OrgHomeStudentInfoCard,
+  OrgProfileCommonHeaderImg,
+  OrgProfileManageContactUs,
+  OrgProfileManageFillIn,
+  OrgProfileManagePersonalInfo,
   OrgProgramDetails,
   OrgProgramDetailsDataIllustration,
   OrgViewAndSearchProgram,

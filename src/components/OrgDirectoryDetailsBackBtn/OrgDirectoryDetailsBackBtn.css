@@ -5,7 +5,7 @@
 .OrgDirectoryDetailsBackBtn {
   border: 1px solid var(--blue-gray-300);
   border-radius: 10px;
-  background-color: white;
+  background-color: var(--white);
   color: var(--blue-gray-700);
   font-size: 1.2rem;
   font-weight: 600;

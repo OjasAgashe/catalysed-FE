@@ -25,6 +25,7 @@ import {
   ORGANISATION_DIRECTORY,
   ORGANISATION_DIRECTORY_DETAILS_MENTOR,
   ORGANISATION_DIRECTORY_DETAILS_STUDENT,
+  ORGANISATION_PROFILE_MANAGE,
 } from "../../constants/Routes";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -47,6 +48,7 @@ import OrgEditProgramDetailsPage from "../../pages/OrgEditProgramDetailsPage/Org
 import OrgDirectoryPage from "../../pages/OrgDirectoryPage/OrgDirectoryPage";
 import OrgDirectoryMentorPage from "../../pages/OrgDirectoryPage/OrgDirectoryMentorPage";
 import OrgDirectoryStudentPage from "../../pages/OrgDirectoryPage/OrgDirectoryStudentPage";
+import OrgProfileManage from "../../pages/OrgProfileManage/OrgProfileManage";
 
 function App() {
   return (
@@ -54,7 +56,7 @@ function App() {
       <Router>
         <Header />
         <Switch>
-          <PrivateRoute path={ORGANISATION_PROGRAM_CREATE}>
+          <PrivateRoute path={ORGANISATION_PROGRAM_CREATE} exact>
             <OrgAPIProvider>
               <CreateProgram />
             </OrgAPIProvider>
@@ -64,21 +66,21 @@ function App() {
             <Home />
           </PublicRoute>
 
-          <PublicRoute path={LOGIN}>
+          <PublicRoute path={LOGIN} exact>
             <Login />
           </PublicRoute>
 
-          <PrivateRoute path={MENTOR_HOME}>
+          <PrivateRoute path={MENTOR_HOME} exact>
             <MentorHomePage />
           </PrivateRoute>
 
-          <PrivateRoute path={MENTOR_PROFILE_BUILDER}>
+          <PrivateRoute path={MENTOR_PROFILE_BUILDER} exact>
             <ProfileBuilderProvider>
               <MentorProfileBuilder />
             </ProfileBuilderProvider>
           </PrivateRoute>
 
-          <PublicRoute path={ORGANISATION_REGISTER}>
+          <PublicRoute path={ORGANISATION_REGISTER} exact>
             <OrganisationRegister />
           </PublicRoute>
 
@@ -100,7 +102,7 @@ function App() {
             <OrgDirectoryStudentPage />
           </PrivateRoute>
 
-          <PrivateRoute path={ORGANISATION_HOME}>
+          <PrivateRoute path={ORGANISATION_HOME} exact>
             <ProfileBuilderProvider>
               <OrgAPIProvider>
                 <OrgHomePage />
@@ -108,25 +110,35 @@ function App() {
             </ProfileBuilderProvider>
           </PrivateRoute>
 
-          <PrivateRoute path={ORGANISATION_PROFILE_BUILDER}>
+          <PrivateRoute path={ORGANISATION_PROFILE_BUILDER} exact>
             <ProfileBuilderProvider>
               <OrgProfileBuilder />
             </ProfileBuilderProvider>
           </PrivateRoute>
 
-          <PrivateRoute path={`${ORGANISATION_PROGRAM_DETAILS}/:programId`}>
+          <PrivateRoute path={ORGANISATION_PROFILE_MANAGE} exact>
+            <OrgProfileManage />
+          </PrivateRoute>
+
+          <PrivateRoute
+            path={`${ORGANISATION_PROGRAM_DETAILS}/:programId`}
+            exact
+          >
             <OrgAPIProvider>
               <OrgProgramDetailsPage />
             </OrgAPIProvider>
           </PrivateRoute>
 
-          <PrivateRoute path={`${ORGANISATION_PROGRAM_EDIT}/:programId`}>
+          <PrivateRoute path={`${ORGANISATION_PROGRAM_EDIT}/:programId`} exact>
             <OrgAPIProvider>
               <OrgEditProgramDetailsPage />
             </OrgAPIProvider>
           </PrivateRoute>
 
-          <PrivateRoute path={`${ORGANISATION_PROGRAM_INVITATIONS}/:programId`}>
+          <PrivateRoute
+            path={`${ORGANISATION_PROGRAM_INVITATIONS}/:programId`}
+            exact
+          >
             <OrgAPIProvider>
               <OrgProgramInvitationsPage />
             </OrgAPIProvider>
@@ -134,27 +146,31 @@ function App() {
 
           <PrivateRoute
             path={`${ORGANISATION_PROGRAM_PARTICIPANTS}/:programId`}
+            exact
           >
             <OrgAPIProvider>
               <OrgProgramParticipantsPage />
             </OrgAPIProvider>
           </PrivateRoute>
 
-          <PrivateRoute path={`${ORGANISATION_PROGRAM_VIEW_SEARCH}/:filterBy`}>
+          <PrivateRoute
+            path={`${ORGANISATION_PROGRAM_VIEW_SEARCH}/:filterBy`}
+            exact
+          >
             <OrgAPIProvider>
               <OrgViewSearchProgramPage />
             </OrgAPIProvider>
           </PrivateRoute>
 
-          <PrivateRoute path={STUDENT_HOME}>
+          <PrivateRoute path={STUDENT_HOME} exact>
             <StudentHomePage />
           </PrivateRoute>
 
-          <PublicRoute path={STUDENT_MENTOR_REGISTER}>
+          <PublicRoute path={STUDENT_MENTOR_REGISTER} exact>
             <StudentMentorRegister />
           </PublicRoute>
 
-          <PrivateRoute path={STUDENT_PROFILE_BUILDER}>
+          <PrivateRoute path={STUDENT_PROFILE_BUILDER} exact>
             <ProfileBuilderProvider>
               <StuProfileBuilder />
             </ProfileBuilderProvider>

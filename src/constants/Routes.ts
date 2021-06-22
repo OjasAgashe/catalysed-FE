@@ -9,6 +9,7 @@ export const ORGANISATION_DIRECTORY_DETAILS_STUDENT =
   "/organiser/directory/details/student";
 export const ORGANISATION_HOME = "/organiser/home";
 export const ORGANISATION_PROFILE_BUILDER = "/organiser/profile/builder";
+export const ORGANISATION_PROFILE_MANAGE = "/organiser/profile/manage";
 export const ORGANISATION_PROGRAM_CREATE = "/organiser/program/create";
 export const ORGANISATION_PROGRAM_DETAILS = "/organiser/program/details";
 export const ORGANISATION_PROGRAM_EDIT = "/organiser/program/edit";
