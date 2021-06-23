@@ -1,0 +1,46 @@
+.EditOrgProfileDetailsDisabledField {
+  opacity: 0.6 !important;
+  cursor: unset !important;
+}
+
+.InvalidFeedback {
+  font-size: 0.875rem !important;
+}
+
+.OrgProfileEditBtnContainer {
+  padding-top: 2rem;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.OrgProfileEditBtnContainer .Btn {
+  border-radius: 10px;
+  color: var(--blue-gray-700);
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding: 0.3rem 1rem;
+  box-shadow: 1px 1px 4px var(--blue-gray-400);
+  margin: 1rem 1.5rem;
+  display: inline-block;
+  outline: none !important;
+}
+
+.OrgProfileEditBtnContainer .Btn:hover {
+  transform: scale(1.05);
+}
+
+.OrgProfileEditSaveBtn {
+  background-color: var(--green-400);
+  border: 1px solid var(--green-400);
+}
+
+.OrgProfileEditCancelBtn {
+  background-color: var(--red-300);
+  border: 1px solid var(--red-300);
+}
+
+.OrgProfileEditSaveBtnIcon,
+.OrgProfileEditCancelBtnIcon {
+  margin: 0.31rem;
+  margin-top: 0;
+}

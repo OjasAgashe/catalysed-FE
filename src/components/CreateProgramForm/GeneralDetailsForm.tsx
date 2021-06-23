@@ -53,6 +53,10 @@ const GeneralDetailsForm = ({
       ) {
         dispatch({ type: "urlInput", payload: event.target.value });
       } else {
+        if (event.target.name === "programLink") {
+          dispatch({ type: "urlInput", payload: event.target.value });
+        }
+
         setAnswer(
           (prevState): CreateProgramData => ({
             ...prevState,
@@ -314,7 +318,7 @@ const GeneralDetailsForm = ({
           name="programLink"
           placeholder="Program Url"
           className="CreateProgramFormControl"
-          value={answer.programLink ? answer.programLink : state.urlInput}
+          value={state.urlInput}
           onChange={handleGeneralDetailsFormChange}
         />
         <Form.Control.Feedback type="invalid">

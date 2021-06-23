@@ -26,6 +26,7 @@ import {
   ORGANISATION_DIRECTORY_DETAILS_MENTOR,
   ORGANISATION_DIRECTORY_DETAILS_STUDENT,
   ORGANISATION_PROFILE_MANAGE,
+  ORGANISATION_PROFILE_EDIT,
 } from "../../constants/Routes";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -49,6 +50,7 @@ import OrgDirectoryPage from "../../pages/OrgDirectoryPage/OrgDirectoryPage";
 import OrgDirectoryMentorPage from "../../pages/OrgDirectoryPage/OrgDirectoryMentorPage";
 import OrgDirectoryStudentPage from "../../pages/OrgDirectoryPage/OrgDirectoryStudentPage";
 import OrgProfileManage from "../../pages/OrgProfileManage/OrgProfileManage";
+import OrgProfileEdit from "../../pages/OrgProfileEdit/OrgProfileEdit";
 
 function App() {
   return (
@@ -114,6 +116,10 @@ function App() {
             <ProfileBuilderProvider>
               <OrgProfileBuilder />
             </ProfileBuilderProvider>
+          </PrivateRoute>
+
+          <PrivateRoute path={ORGANISATION_PROFILE_EDIT} exact>
+            <OrgProfileEdit />
           </PrivateRoute>
 
           <PrivateRoute path={ORGANISATION_PROFILE_MANAGE} exact>

@@ -6,6 +6,8 @@ import SectionTwo from "./SectionTwo";
 import SectionThree from "./SectionThree";
 
 import { FaUserEdit } from "react-icons/fa";
+import { useHistory } from "react-router-dom";
+import { ORGANISATION_PROFILE_EDIT } from "../../constants/Routes";
 
 const OrgProfileManageSectionContainer = () => {
   const fakeData = {
@@ -31,6 +33,12 @@ const OrgProfileManageSectionContainer = () => {
     },
   };
 
+  const history = useHistory();
+
+  const handleEditProfileBtn = () => {
+    history.push(ORGANISATION_PROFILE_EDIT);
+  };
+
   return (
     <div className="OrgProfileManageSectionContainer">
       <SectionOne fakeData={fakeData} />
@@ -40,7 +48,7 @@ const OrgProfileManageSectionContainer = () => {
       <SectionThree fakeData={fakeData} />
 
       <div className="OrgProfileManageBtnContainer">
-        <button className="OrgProfileManageBtn">
+        <button className="OrgProfileManageBtn" onClick={handleEditProfileBtn}>
           Edit Profile <FaUserEdit className="OrgProfileManageBtnIcon" />
         </button>
       </div>
