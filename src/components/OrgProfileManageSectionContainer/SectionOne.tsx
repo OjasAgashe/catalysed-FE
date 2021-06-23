@@ -61,11 +61,14 @@ const SectionOne = ({ fakeData }: SectionOneProps) => {
             </Col>
           </Row>
 
-          <Form.Control
-            className="SectionOneFormControl"
-            disabled
-            value={fakeData.email}
-          />
+          <Form.Group>
+            <Form.Text className="SectionOneFormTextLabel">email-id</Form.Text>
+            <Form.Control
+              className="SectionOneFormControl"
+              disabled
+              value={fakeData.email}
+            />
+          </Form.Group>
         </Form>
       </div>
     </section>

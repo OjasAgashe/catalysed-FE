@@ -36,11 +36,17 @@ const SectionThree = ({ fakeData }: SectionThreeProps) => {
 
       <div className="SectionThreeSecondHalf">
         <Form>
-          <Form.Control
-            disabled
-            className="SectionThreeFormControl"
-            value={fakeData.organisation.area_of_work}
-          />
+          <Form.Group>
+            <Form.Text className="SectionThreeFormTextLabel">
+              area of work
+            </Form.Text>
+
+            <Form.Control
+              disabled
+              className="SectionThreeFormControl"
+              value={fakeData.organisation.area_of_work}
+            />
+          </Form.Group>
 
           <Form.Group>
             <Form.Text className="SectionThreeFormTextLabel">

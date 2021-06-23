@@ -68,7 +68,7 @@ const SectionTwo = ({
   socialLinkIsInvalid,
   setSocialLinkIsInvalid,
   websiteLinkIsInvalid,
-  setWebsiteLinkIsInvalid
+  setWebsiteLinkIsInvalid,
 }: SectionTwoProps) => {
   const handleOrgEditProfileChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
@@ -91,12 +91,22 @@ const SectionTwo = ({
         <Form noValidate validated={validated}>
           <Form.Text className="FormDetailsText">
             Organization Details
-            <Form.Control
-              className="SectionTwoFormControl EditOrgProfileDetailsDisabledField"
-              disabled
-              value={fakeData.organisation.name}
-            />
             <Form.Group>
+              <Form.Text className="SectionTwoFormTextLabel EditOrgProfileDetailsDisabledField">
+                name
+              </Form.Text>
+
+              <Form.Control
+                className="SectionTwoFormControl EditOrgProfileDetailsDisabledField"
+                disabled
+                value={fakeData.organisation.name}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Text className="SectionTwoFormTextLabel">
+                description
+              </Form.Text>
+
               <Form.Control
                 required
                 name="description"

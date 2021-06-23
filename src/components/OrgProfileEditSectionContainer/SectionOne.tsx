@@ -118,11 +118,17 @@ const SectionOne = ({
             </Col>
           </Row>
 
-          <Form.Control
-            className="SectionOneFormControl EditOrgProfileDetailsDisabledField"
-            disabled
-            value={fakeData.email}
-          />
+          <Form.Group>
+            <Form.Text className="SectionOneFormTextLabel EditOrgProfileDetailsDisabledField">
+              email-id
+            </Form.Text>
+
+            <Form.Control
+              className="SectionOneFormControl EditOrgProfileDetailsDisabledField"
+              disabled
+              value={fakeData.email}
+            />
+          </Form.Group>
         </Form>
       </div>
     </section>

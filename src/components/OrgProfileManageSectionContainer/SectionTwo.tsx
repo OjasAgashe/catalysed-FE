@@ -34,18 +34,28 @@ const SectionTwo = ({ fakeData }: SectionTwoProps) => {
         <Form>
           <Form.Text className="FormDetailsText">
             Organization Details
-            <Form.Control
-              className="SectionTwoFormControl"
-              disabled
-              value={fakeData.organisation.name}
-            />
-            <Form.Control
-              as="textarea"
-              rows={3}
-              disabled
-              className="SectionTwoFormControl SectionTwoTextArea"
-              value={fakeData.organisation.description}
-            />
+            <Form.Group>
+              <Form.Text className="SectionTwoFormTextLabel">name</Form.Text>
+
+              <Form.Control
+                className="SectionTwoFormControl"
+                disabled
+                value={fakeData.organisation.name}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Text className="SectionTwoFormTextLabel">
+                description
+              </Form.Text>
+
+              <Form.Control
+                as="textarea"
+                rows={3}
+                disabled
+                className="SectionTwoFormControl SectionTwoTextArea"
+                value={fakeData.organisation.description}
+              />
+            </Form.Group>
             <Form.Group>
               <Form.Text className="SectionTwoFormTextLabel">
                 social link

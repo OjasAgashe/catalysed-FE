@@ -121,11 +121,17 @@ const SectionThree = ({
 
       <div className="SectionThreeSecondHalf">
         <Form noValidate validated={validated}>
-          <Form.Control
-            disabled
-            className="SectionThreeFormControl EditOrgProfileDetailsDisabledField"
-            value={fakeData.organisation.area_of_work}
-          />
+          <Form.Group>
+            <Form.Text className="SectionThreeFormTextLabel EditOrgProfileDetailsDisabledField">
+              area of work
+            </Form.Text>
+
+            <Form.Control
+              disabled
+              className="SectionThreeFormControl EditOrgProfileDetailsDisabledField"
+              value={fakeData.organisation.area_of_work}
+            />
+          </Form.Group>
 
           <Form.Group>
             <Form.Text className="SectionThreeFormTextLabel">
