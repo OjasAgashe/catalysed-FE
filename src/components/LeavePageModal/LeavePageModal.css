@@ -1,0 +1,53 @@
+.LeavePageModalBrand {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+}
+
+.LeavePageModalBrandLogo {
+  width: 51px;
+  height: 41px;
+  border-radius: 5px;
+}
+
+.LeavePageModalBrandText {
+  color: var(--blue-gray-600);
+  font-family: "Lato", sans-serif;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.LeavePageModalInfoText {
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.LeavePageModalFooter {
+  border: none !important;
+}
+
+.LeavePageModalFooter .BtnLeave {
+  background-color: inherit !important;
+  border: 2px solid var(--red-300) !important;
+  color: var(--red-300) !important;
+  font-weight: 600;
+}
+
+.LeavePageModalFooter .BtnStay {
+  background-color: var(--red-300) !important;
+  border: 2px solid var(--red-300) !important;
+  color: var(--white) !important;
+  font-weight: 600;
+}
+
+.LeavePageModalFooter .Button:focus {
+  box-shadow: none !important;
+}
+
+/* override */
+
+.modal-open .modal {
+  overflow-y: scroll !important;
+}
+
+/*  */

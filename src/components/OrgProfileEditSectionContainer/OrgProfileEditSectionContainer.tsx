@@ -6,6 +6,8 @@ import SectionTwo from "./SectionTwo";
 
 import { MdCancel } from "react-icons/md";
 import { FaSave } from "react-icons/fa";
+import LeavePageModal from "../LeavePageModal/LeavePageModal";
+import { useHistory, useLocation } from "react-router-dom";
 
 const OrgProfileEditSectionContainer = () => {
   const [validated, setValidated] = useState<boolean>(false);
@@ -15,6 +17,12 @@ const OrgProfileEditSectionContainer = () => {
     useState<boolean>(false);
 
   const [dataHasChanged, setDataHasChanged] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [leave, setLeave] = useState<boolean>(false);
+  const [stay, setStay] = useState<boolean>(false);
+  const [navigateToPath, setNavigateToPath] = useState<string>("");
+  const history = useHistory();
+  const location = useLocation();
 
   const responseData = {
     firstName: "Stefan",
@@ -115,7 +123,35 @@ const OrgProfileEditSectionContainer = () => {
     };
 
     setDataHasChanged(hasDataChange);
+
+    // @ts-ignore
+    const unblock = history.block((tx) => {
+      if (dataHasChanged === false) return true;
+
+      if (leave) return true;
+
+      setNavigateToPath(tx.pathname);
+
+      if (dataHasChanged) setShowModal(true);
+
+      return false;
+    });
+
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      if (dataHasChanged) {
+        event.preventDefault();
+        event.returnValue = "";
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      unblock();
+    };
   }, [
+    dataHasChanged,
     fakeData.email,
     fakeData.firstName,
     fakeData.lastName,
@@ -128,6 +164,9 @@ const OrgProfileEditSectionContainer = () => {
     fakeData.organisation.social_link,
     fakeData.organisation.website_link,
     fakeData.organisation.year_of_inception,
+    history,
+    leave,
+    location.pathname,
     responseData.email,
     responseData.firstName,
     responseData.lastName,
@@ -140,6 +179,7 @@ const OrgProfileEditSectionContainer = () => {
     responseData.organisation.social_link,
     responseData.organisation.website_link,
     responseData.organisation.year_of_inception,
+    stay,
   ]);
 
   const canMakeAPICall = () => {
@@ -208,8 +248,27 @@ const OrgProfileEditSectionContainer = () => {
     setFakeData(responseData);
   };
 
+  const handleLeavePageModalLeaveBtn = () => {
+    setLeave(true);
+    history.push(navigateToPath);
+  };
+
+  const handleLeavePageModalStayBtn = () => {
+    setStay(true);
+    setLeave(false);
+    setShowModal(false);
+    setNavigateToPath("");
+  };
+
   return (
     <div className="OrgProfileEditSectionContainer">
+      {showModal && (
+        <LeavePageModal
+          handleLeavePageModalLeaveBtn={handleLeavePageModalLeaveBtn}
+          handleLeavePageModalStayBtn={handleLeavePageModalStayBtn}
+        />
+      )}
+
       <SectionOne
         fakeData={fakeData}
         setFakeData={setFakeData}
