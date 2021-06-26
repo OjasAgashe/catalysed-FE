@@ -10,10 +10,11 @@ const OrgProfileCommonHeader = ({
   textToShow,
 }: OrgProfileCommonHeaderProps) => {
   return (
-    <div className="OrgProfileCommonHeaderContainer" style={{ backgroundImage: `url(${OrgProfileCommonHeaderImg})` }}>
-      <div className="TextToShowDivContainer">
-        <span className="TextToShowSpan">{textToShow}</span>
-      </div>
+    <div
+      className="OrgProfileCommonHeaderContainer"
+      style={{ backgroundImage: `url(${OrgProfileCommonHeaderImg})` }}
+    >
+      <span className="TextToShowSpan">{textToShow}</span>
     </div>
   );
 };

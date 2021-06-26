@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import {
   ORGANISATION_DIRECTORY,
   ORGANISATION_HOME,
-  ORGANISATION_PROFILE_MANAGE,
+  ORGANISATION_PROFILE_EDIT,
   ORGANISATION_PROGRAM_CREATE,
   ORGANISATION_PROGRAM_VIEW_SEARCH,
 } from "../../constants/Routes";
@@ -52,7 +52,7 @@ const OrgHomeHeader = () => {
 
         <NavDropdown.Item
           as={Link}
-          to={`${ORGANISATION_PROFILE_MANAGE}`}
+          to={`${ORGANISATION_PROFILE_EDIT}`}
           eventKey="5"
         >
           Manage Profile

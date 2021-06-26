@@ -11,7 +11,7 @@ const OrgProfileEdit = () => {
 
   return (
     <div className="OrgProfileEditPage">
-      <OrgProfileCommonHeader textToShow="Edit Your Profile" />
+      <OrgProfileCommonHeader textToShow="Manage Your Profile" />
 
       <OrgProfileEditSectionContainer />
     </div>

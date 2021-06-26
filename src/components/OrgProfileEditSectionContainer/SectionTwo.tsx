@@ -1,6 +1,5 @@
 import React from "react";
-import { Form } from "react-bootstrap";
-import { OrgProfileManageFillIn } from "../../assets/Illustrations/Illustrations";
+import { Col, Form, Row } from "react-bootstrap";
 
 type SectionTwoProps = {
   fakeData: {
@@ -76,6 +75,13 @@ const SectionTwo = ({
       if (socialLinkIsInvalid) setSocialLinkIsInvalid(false);
       if (websiteLinkIsInvalid) setWebsiteLinkIsInvalid(false);
 
+      if (
+        event.target.name === "year_of_inception" &&
+        event.target.value.length > 4
+      ) {
+        return;
+      }
+
       setFakeData((prevState) => ({
         ...prevState,
         organisation: {
@@ -85,8 +91,40 @@ const SectionTwo = ({
       }));
     };
 
+  const handleOrgEditProfileContactChange: React.ChangeEventHandler<HTMLInputElement> =
+    (event) => {
+      if (validated) setValidated(false);
+
+      setFakeData((prevState) => ({
+        ...prevState,
+        organisation: {
+          ...prevState.organisation,
+          contact: {
+            ...prevState.organisation.contact,
+            [event.target.name]: event.target.value,
+          },
+        },
+      }));
+    };
+
+  const handleOrgEditProfileAddressChange: React.ChangeEventHandler<HTMLInputElement> =
+    (event) => {
+      if (validated) setValidated(false);
+
+      setFakeData((prevState) => ({
+        ...prevState,
+        organisation: {
+          ...prevState.organisation,
+          address: {
+            ...prevState.organisation.address,
+            [event.target.name]: event.target.value,
+          },
+        },
+      }));
+    };
+
   return (
-    <section className="OrgProfileManageSectionTwo">
+    <section className="OrgProfileEditSectionTwo">
       <div className="SectionTwoFirstHalf">
         <Form noValidate validated={validated}>
           <Form.Text className="FormDetailsText">
@@ -166,7 +204,149 @@ const SectionTwo = ({
       </div>
 
       <div className="SectionTwoSecondHalf">
-        <img src={OrgProfileManageFillIn} alt="fill in svg" />
+        <Form noValidate validated={validated}>
+          <Form.Group>
+            <Form.Text className="SectionTwoFormTextLabel EditOrgProfileDetailsDisabledField">
+              area of work
+            </Form.Text>
+
+            <Form.Control
+              disabled
+              className="SectionTwoFormControl EditOrgProfileDetailsDisabledField"
+              value={fakeData.organisation.area_of_work}
+            />
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Text className="SectionTwoFormTextLabel">
+              contact&nbsp;:&nbsp;
+            </Form.Text>
+            <Row>
+              <Col>
+                <Form.Group>
+                  <Form.Text className="SectionTwoFormTextLabel">
+                    phone
+                  </Form.Text>
+                  <Form.Control
+                    required
+                    type="tel"
+                    name="phone"
+                    placeholder="Type..."
+                    className="SectionTwoFormControl"
+                    value={fakeData.organisation.contact.phone}
+                    onChange={handleOrgEditProfileContactChange}
+                  />
+                </Form.Group>
+                <Form.Control.Feedback type="invalid">
+                  Required field, please Enter Correct Value.
+                </Form.Control.Feedback>
+              </Col>
+              <Col>
+                <Form.Group>
+                  <Form.Text className="SectionTwoFormTextLabel">
+                    email
+                  </Form.Text>
+                  <Form.Control
+                    required
+                    type="email"
+                    name="email"
+                    placeholder="Type.."
+                    className="SectionTwoFormControl"
+                    value={fakeData.organisation.contact.email}
+                    onChange={handleOrgEditProfileContactChange}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    Required field, please Enter Correct Value.
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Col>
+            </Row>
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Text className="SectionTwoFormTextLabel">
+              year of Inception
+            </Form.Text>
+            <Form.Control
+              required
+              type="number"
+              placeholder="YYYY"
+              pattern="[0-9]{4}"
+              min={1800}
+              name="year_of_inception"
+              className="SectionTwoFormControl"
+              value={fakeData.organisation.year_of_inception}
+              onChange={handleOrgEditProfileChange}
+            />
+            <Form.Control.Feedback type="invalid">
+              Required field, please Enter Correct Value (&gt;1800).
+            </Form.Control.Feedback>
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Text className="SectionTwoFormTextLabel">
+              address&nbsp;:&nbsp;
+            </Form.Text>
+            <Row>
+              <Col>
+                <Form.Group>
+                  <Form.Text className="SectionTwoFormTextLabel">
+                    country
+                  </Form.Text>
+                  <Form.Control
+                    required
+                    name="country"
+                    type="text"
+                    placeholder="Type..."
+                    className="SectionTwoFormControl"
+                    value={fakeData.organisation.address.country}
+                    onChange={handleOrgEditProfileAddressChange}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    Required field, please Enter.
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group>
+                  <Form.Text className="SectionTwoFormTextLabel">
+                    region
+                  </Form.Text>
+                  <Form.Control
+                    required
+                    name="region"
+                    type="text"
+                    placeholder="Type..."
+                    className="SectionTwoFormControl"
+                    value={fakeData.organisation.address.region}
+                    onChange={handleOrgEditProfileAddressChange}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    Required field, please Enter.
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Col>
+            </Row>
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Text className="SectionTwoFormTextLabel">
+              primary language
+            </Form.Text>
+            <Form.Control
+              required
+              name="primary_language"
+              type="text"
+              placeholder="Type..."
+              className="SectionTwoFormControl"
+              value={fakeData.organisation.primary_language}
+              onChange={handleOrgEditProfileChange}
+            />
+            <Form.Control.Feedback type="invalid">
+              Required field, please Enter.
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Form>
       </div>
     </section>
   );

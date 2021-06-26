@@ -1,3 +1,80 @@
+.OrgProfileEditSectionContainer {
+  padding: 2rem;
+}
+
+.OrgProfileEditSectionOne,
+.OrgProfileEditSectionTwo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.OrgProfileEditSectionTwo :is(.SectionTwoFirstHalf, .SectionTwoSecondHalf),
+.OrgProfileEditSectionOne .SectionOneSecondHalf {
+  width: 500px;
+  margin: 1rem;
+}
+
+@media screen and (min-width: 1000px) {
+  .OrgProfileEditSectionOne .SectionOneFirstHalf {
+    width: 500px;
+    margin: 1rem;
+  }
+}
+
+.OrgProfileEditSectionTwo .SectionTwoFirstHalf {
+  padding-bottom: 0 !important;
+}
+
+.OrgProfileEditSectionTwo .SectionTwoSecondHalf {
+  padding-bottom: 1.3rem !important;
+}
+
+.SectionTwoTextArea {
+  resize: none;
+}
+
+.OrgProfileEditSectionContainer .SectionOneFirstHalf img {
+  max-width: 450px;
+  margin: 1.5rem;
+}
+
+@media screen and (max-width: 515px) {
+  .OrgProfileEditSectionContainer .SectionOneFirstHalf img {
+    max-width: 350px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.OrgProfileEditSectionOne .SectionOneFormControl,
+.OrgProfileEditSectionTwo .SectionTwoFormControl {
+  border: none !important;
+  margin: 1.2rem auto;
+  color: var(--blue-gray-700) !important;
+  font-size: 1.05rem !important;
+  background-color: var(--blue-gray-100) !important;
+  padding: 0.5rem !important;
+}
+
+.OrgProfileEditSectionOne .SectionOneFormControl:valid,
+.OrgProfileEditSectionTwo .SectionTwoFormControl:valid {
+  background-color: var(--blue-gray-100) !important;
+}
+
+.OrgProfileEditSectionOne .SectionOneFormTextLabel,
+.OrgProfileEditSectionTwo .SectionTwoFormTextLabel {
+  font-size: 1.1rem !important;
+  color: var(--blue-gray-700);
+  font-weight: 600;
+  padding: 0.5rem !important;
+}
+
+.OrgProfileEditSectionOne .SectionOneRow {
+  margin-top: 1rem;
+}
+
 .EditOrgProfileDetailsDisabledField {
   opacity: 0.6 !important;
   cursor: unset !important;
@@ -34,13 +111,13 @@
   border: 1px solid var(--green-400);
 }
 
-.OrgProfileEditCancelBtn {
+.OrgProfileEditDiscardChangesBtn {
   background-color: var(--red-300);
   border: 1px solid var(--red-300);
 }
 
 .OrgProfileEditSaveBtnIcon,
-.OrgProfileEditCancelBtnIcon {
+.OrgProfileEditDiscardChangesBtnIcon {
   margin: 0.31rem;
   margin-top: 0;
 }

@@ -7,6 +7,7 @@ import SectionFive from "./SectionFive";
 import SectionFour from "./SectionFour";
 import SectionOne from "./SectionOne";
 import SectionThree from "./SectionThree";
+import SectionSix from "./SectionSix";
 import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
 import { OrgHomeActionType, OrgHomeState } from "../../types/OrgHome";
 import { GetProgramMetaListData } from "../../types/OrgViewSearchProgram";
@@ -91,6 +92,7 @@ const OrgHome = ({ state, dispatch }: OrgHomeProps) => {
         <SectionFour state={state} />
       </div>
       <SectionFive />
+      <SectionSix />
     </div>
   );
 };

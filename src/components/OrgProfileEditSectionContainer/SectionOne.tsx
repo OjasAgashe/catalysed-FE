@@ -72,7 +72,7 @@ const SectionOne = ({
     };
 
   return (
-    <section className="OrgProfileManageSectionOne">
+    <section className="OrgProfileEditSectionOne">
       <div className="SectionOneFirstHalf">
         <img src={OrgProfileManagePersonalInfo} alt="personal info svg" />
       </div>

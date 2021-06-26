@@ -403,8 +403,8 @@ input[type="number"] {
     Org Create Program Form, 
     Org Program Details,
     OrgDirectoryDetailsPersonalInfo,
-    OrgProfileManageSectionOne,
-    OrgProfileManageSectionTwo
+    OrgProfileEditSectionOne,
+    OrgProfileEditSectionTwo
 */
 
 .GeneralDetailsFormContainer,
@@ -423,9 +423,8 @@ input[type="number"] {
   .SectionTwo
   .SectionTwoFirstHalf
   .DataCard,
-.OrgProfileManageSectionOne .SectionOneSecondHalf,
-.OrgProfileManageSectionTwo .SectionTwoFirstHalf,
-.OrgProfileManageSectionThree .SectionThreeSecondHalf {
+.OrgProfileEditSectionOne .SectionOneSecondHalf,
+.OrgProfileEditSectionTwo :is(.SectionTwoFirstHalf, .SectionTwoSecondHalf) {
   background-color: var(--white);
   padding: 1rem;
   box-shadow: 1px 1px 5px var(--blue-gray-300), -2px -2px 5px var(--white);
@@ -613,16 +612,35 @@ input[type="number"] {
   cursor: pointer;
   background: inherit;
   border: none;
+  border-radius: 5px;
+}
+
+:is(.OrgDirectoryMentorOrStudentOpt, .OrgDirectoryDetailsPIOrCtPOpt) div {
+  display: inline-block;
+}
+
+:is(.OrgDirectoryMentorOrStudentOpt, .OrgDirectoryDetailsPIOrCtPOpt) .BlankDiv {
+  height: 2.15rem;
+  width: 0.8rem;
+  border-bottom: 2px solid var(--yellow-700) !important;
 }
 
 :is(.OrgDirectoryMentorOrStudentOpt, .OrgDirectoryDetailsPIOrCtPOpt)
-  button:hover {
-  text-decoration: underline;
+  .NoBlankDiv {
+  display: none;
 }
 
-.OrgDirectoryMentorOrStudentOpt .MentorBtnOpt,
-.OrgDirectoryDetailsPIOrCtPOpt .PersonalInfoBtnOpt {
-  border-right: 2px solid var(--yellow-700);
+.CurrentSelectedTab {
+  border: 2px solid var(--yellow-700) !important;
+  border-bottom: none !important;
+  background-color: var(--current-tab-background) !important;
+  border-top-left-radius: 5px !important;
+  border-top-right-radius: 5px !important;
+  height: 2.3rem;
+}
+
+.NotCurrentSelectedTab {
+  border-bottom: 2px solid var(--yellow-700) !important;
 }
 
 .OrgDirectoryMentorOrStudentOpt,

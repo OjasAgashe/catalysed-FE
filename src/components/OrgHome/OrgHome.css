@@ -104,7 +104,8 @@
   border-bottom: 2px solid var(--blue-gray-300);
 }
 
-.OrgHomeSectionFiveContainer {
+.OrgHomeSectionFiveContainer,
+.OrgHomeSectionSixContainer {
   padding: 2rem;
   display: flex;
   flex-wrap: wrap;
@@ -112,26 +113,29 @@
   justify-content: space-around;
 }
 
-.OrgHomeSectionFiveContainer .OrgHomeSectionFiveSubsection {
-  display: flex;
-  flex-direction: column;
-}
-
 /* SectionHeadingDiv */
 
-.OrgHomeSectionContainer .SectionHeadingDiv {
-  background-color: var(--section-heading-div);
-  color: var(--yellow-700);
+.OrgHomeSectionContainer :is(.SectionHeadingDiv, .ApplicantsSubHeading) {
   width: fit-content;
-  margin: auto;
   padding: 0.2rem 1.3rem;
   border-radius: 10px;
   text-align: center;
   font-size: 1.2rem;
   font-weight: 500;
+  margin: auto;
+}
+
+.OrgHomeSectionContainer .SectionHeadingDiv {
+  background-color: var(--section-heading-div);
+  color: var(--yellow-700);
   box-shadow: 1px 1px 4px var(--barley-corn);
   border-left: 1px solid var(--barley-corn);
   border-top: 1px solid var(--barley-corn);
+}
+
+.OrgHomeSectionContainer .ApplicantsSubHeading {
+  margin-top: 1rem;
+  background-color: var(--light-blue-300);
 }
 
 /*  */
@@ -148,14 +152,15 @@
 
 /* MentorInfoCard, StudentInfoCard, InvitationsInfoCard */
 
-.OrgHomeSectionFiveContainer
-  :is(.MentorInfoCard, .StudentInfoCard, .InvitationsInfoCard) {
+.OrgHomeSectionFiveContainer :is(.MentorInfoCard, .StudentInfoCard),
+.OrgHomeSectionSixContainer :is(.InvitationsInfoCard, .ApplicantsInfoCard) {
   background-color: var(--white);
-  max-width: 26rem;
+  width: 26rem;
   padding: 1.5rem;
   border-radius: 5px;
   border: 1px solid var(--blue-gray-300);
   box-shadow: 1px 1px 10px var(--blue-gray-300);
+  margin: 1rem auto;
 }
 
 :is(.MentorInfoCard, .StudentInfoCard, .InvitationsInfoCard)
@@ -166,9 +171,8 @@
   flex-wrap: wrap;
 }
 
-.MentorInfoCard,
-.InvitationsInfoCard {
-  margin: 1rem 0;
+.InvitationsInfoCard .StatNImgContainer {
+  margin-bottom: 2.2rem;
 }
 
 .InvitationsInfoCard .StatNImgContainer {
@@ -210,12 +214,18 @@
   margin-bottom: 0;
 }
 
-.InvitationsInfoCard .AcceptedNPendingContainer {
+.InvitationsInfoCard .AcceptedNPendingContainer,
+.ApplicantsInfoCard :is(.MentorApplicants, .StudentApplicants) {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 1.5rem;
   margin-bottom: 0.5rem;
+}
+
+.ApplicantsInfoCard .MentorApplicants {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--blue-gray-300);
 }
 
 /*  */

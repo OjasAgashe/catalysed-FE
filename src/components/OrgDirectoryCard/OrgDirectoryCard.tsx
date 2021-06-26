@@ -65,7 +65,6 @@ const OrgDirectoryCard = ({
                     </div>
                   </OverlayTrigger>
                 ))}
-                <small>view all 👉🏽</small>
               </>
             ) : (
               ""

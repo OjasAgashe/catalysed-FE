@@ -107,28 +107,50 @@ const OrgDirectoryPageHeader = ({
 
       <div className="OrgDirectoryMentorOrStudentOptContainer">
         <Alert variant="warning" className="OrgDirectoryMentorOrStudentOpt">
-          <button
-            className="MentorBtnOpt"
-            type="button"
-            onClick={() => {
-              setSearchedNameNotFound(false);
-              setSearchedName("");
-              setTitle("Mentors");
-            }}
+          <div className={`${title === "Mentors" ? "BlankDiv" : "NoBlankDiv"}`}>
+            &nbsp;
+          </div>
+          <div
+            className={`${
+              title === "Mentors"
+                ? "CurrentSelectedTab"
+                : "NotCurrentSelectedTab"
+            }`}
           >
-            Mentors
-          </button>
-          <button
-            className="StudentBtnOpt"
-            type="button"
-            onClick={() => {
-              setSearchedNameNotFound(false);
-              setSearchedName("");
-              setTitle("Students");
-            }}
+            <button
+              className="MentorBtnOpt"
+              type="button"
+              onClick={() => {
+                setSearchedNameNotFound(false);
+                setSearchedName("");
+                setTitle("Mentors");
+              }}
+            >
+              Mentors
+            </button>
+          </div>
+          <div
+            className={`${
+              title === "Mentors"
+                ? "NotCurrentSelectedTab"
+                : "CurrentSelectedTab"
+            }`}
           >
-            Students
-          </button>
+            <button
+              className="StudentBtnOpt"
+              type="button"
+              onClick={() => {
+                setSearchedNameNotFound(false);
+                setSearchedName("");
+                setTitle("Students");
+              }}
+            >
+              Students
+            </button>
+          </div>
+          <div className={`${title !== "Mentors" ? "BlankDiv" : "NoBlankDiv"}`}>
+            &nbsp;
+          </div>
         </Alert>
       </div>
     </div>

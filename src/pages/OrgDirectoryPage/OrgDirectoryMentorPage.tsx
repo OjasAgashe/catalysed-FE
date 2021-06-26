@@ -65,6 +65,7 @@ const OrgDirectoryMentorPage = () => {
     <div className="OrgDirectoryMentorPage">
       <OrgDirectoryDetailsCommonHeader
         full_name={fakeData.full_name}
+        choosedOption={choosedOption}
         setChoosedOption={setChoosedOption}
       />
 

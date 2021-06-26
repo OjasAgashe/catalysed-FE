@@ -63,6 +63,7 @@ const OrgDirectoryStudentPage = () => {
     <div className="OrgDirectoryStudentPage">
       <OrgDirectoryDetailsCommonHeader
         full_name={fakeData.full_name}
+        choosedOption={choosedOption}
         setChoosedOption={setChoosedOption}
       />
 

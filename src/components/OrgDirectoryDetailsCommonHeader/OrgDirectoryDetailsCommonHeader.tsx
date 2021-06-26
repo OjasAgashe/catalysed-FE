@@ -6,11 +6,13 @@ import "./OrgDirectoryDetailsCommonHeader.css";
 
 type OrgDirectoryDetailsCommonHeaderProps = {
   full_name: string;
+  choosedOption: string;
   setChoosedOption: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const OrgDirectoryDetailsCommonHeader = ({
   full_name,
+  choosedOption,
   setChoosedOption,
 }: OrgDirectoryDetailsCommonHeaderProps) => {
   return (
@@ -24,24 +26,54 @@ const OrgDirectoryDetailsCommonHeader = ({
 
       <div className="OrgDirectoryDetailsPIOrCtPOptContainer">
         <Alert variant="warning" className="OrgDirectoryDetailsPIOrCtPOpt">
-          <button
-            className="PersonalInfoBtnOpt"
-            type="button"
-            onClick={() => {
-              setChoosedOption("PersonalInfo");
-            }}
+          <div
+            className={`${
+              choosedOption === "PersonalInfo" ? "BlankDiv" : "NoBlankDiv"
+            }`}
           >
-            Personal Info
-          </button>
-          <button
-            className="CtPBtnOpt"
-            type="button"
-            onClick={() => {
-              setChoosedOption("ConnectedToPrograms");
-            }}
+            &nbsp;
+          </div>
+          <div
+            className={`${
+              choosedOption === "PersonalInfo"
+                ? "CurrentSelectedTab"
+                : "NotCurrentSelectedTab"
+            }`}
           >
-            Connected to Programs
-          </button>
+            <button
+              className="PersonalInfoBtnOpt"
+              type="button"
+              onClick={() => {
+                setChoosedOption("PersonalInfo");
+              }}
+            >
+              Personal Info
+            </button>
+          </div>
+          <div
+            className={`${
+              choosedOption === "PersonalInfo"
+                ? "NotCurrentSelectedTab"
+                : "CurrentSelectedTab"
+            }`}
+          >
+            <button
+              className="CtPBtnOpt"
+              type="button"
+              onClick={() => {
+                setChoosedOption("ConnectedToPrograms");
+              }}
+            >
+              Connected to Programs
+            </button>
+          </div>
+          <div
+            className={`${
+              choosedOption !== "PersonalInfo" ? "BlankDiv" : "NoBlankDiv"
+            }`}
+          >
+            &nbsp;
+          </div>
         </Alert>
       </div>
     </div>

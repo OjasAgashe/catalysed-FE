@@ -1,13 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./OrgProfileEditSectionContainer.css";
-
-import "../OrgProfileManageSectionContainer/OrgProfileManageSectionContainer.css";
 
 import SectionOne from "./SectionOne";
 import SectionTwo from "./SectionTwo";
-import SectionThree from "./SectionThree";
-import { useHistory } from "react-router-dom";
-import { ORGANISATION_PROFILE_MANAGE } from "../../constants/Routes";
 
 import { MdCancel } from "react-icons/md";
 import { FaSave } from "react-icons/fa";
@@ -18,6 +13,31 @@ const OrgProfileEditSectionContainer = () => {
     useState<boolean>(false);
   const [websiteLinkIsInvalid, setWebsiteLinkIsInvalid] =
     useState<boolean>(false);
+
+  const [dataHasChanged, setDataHasChanged] = useState<boolean>(false);
+
+  const responseData = {
+    firstName: "Stefan",
+    lastName: "le",
+    email: "stefan.le@gmail.com",
+    organisation: {
+      name: "catalysed",
+      description: "our aim is to help student",
+      social_link: "https://twitter.com/foo",
+      website_link: "https://catalysed.org",
+      area_of_work: "Education",
+      contact: {
+        phone: "111111111",
+        email: "example@gmail.com",
+      },
+      year_of_inception: "1985",
+      address: {
+        country: "India",
+        region: "Delhi",
+      },
+      primary_language: "English",
+    },
+  };
 
   const [fakeData, setFakeData] = useState<{
     firstName: string;
@@ -63,7 +83,64 @@ const OrgProfileEditSectionContainer = () => {
     },
   });
 
-  const history = useHistory();
+  useEffect(() => {
+    const hasDataChange = () => {
+      if (
+        fakeData.firstName !== responseData.firstName ||
+        fakeData.lastName !== responseData.lastName ||
+        fakeData.email !== responseData.email ||
+        fakeData.organisation.description !==
+          responseData.organisation.description ||
+        fakeData.organisation.social_link !==
+          responseData.organisation.social_link ||
+        fakeData.organisation.website_link !==
+          responseData.organisation.website_link ||
+        fakeData.organisation.year_of_inception !==
+          responseData.organisation.year_of_inception ||
+        fakeData.organisation.primary_language !==
+          responseData.organisation.primary_language ||
+        fakeData.organisation.contact.phone !==
+          responseData.organisation.contact.phone ||
+        fakeData.organisation.contact.email !==
+          responseData.organisation.contact.email ||
+        fakeData.organisation.address.country !==
+          responseData.organisation.address.country ||
+        fakeData.organisation.address.region !==
+          responseData.organisation.address.region
+      ) {
+        return true;
+      }
+
+      return false;
+    };
+
+    setDataHasChanged(hasDataChange);
+  }, [
+    fakeData.email,
+    fakeData.firstName,
+    fakeData.lastName,
+    fakeData.organisation.address.country,
+    fakeData.organisation.address.region,
+    fakeData.organisation.contact.email,
+    fakeData.organisation.contact.phone,
+    fakeData.organisation.description,
+    fakeData.organisation.primary_language,
+    fakeData.organisation.social_link,
+    fakeData.organisation.website_link,
+    fakeData.organisation.year_of_inception,
+    responseData.email,
+    responseData.firstName,
+    responseData.lastName,
+    responseData.organisation.address.country,
+    responseData.organisation.address.region,
+    responseData.organisation.contact.email,
+    responseData.organisation.contact.phone,
+    responseData.organisation.description,
+    responseData.organisation.primary_language,
+    responseData.organisation.social_link,
+    responseData.organisation.website_link,
+    responseData.organisation.year_of_inception,
+  ]);
 
   const canMakeAPICall = () => {
     return (
@@ -127,12 +204,12 @@ const OrgProfileEditSectionContainer = () => {
     }
   };
 
-  const handleOrgProfileEditCancelBtn = () => {
-    history.push(ORGANISATION_PROFILE_MANAGE);
+  const handleOrgProfileEditDiscardChangesBtn = () => {
+    setFakeData(responseData);
   };
 
   return (
-    <div className="OrgProfileManageSectionContainer">
+    <div className="OrgProfileEditSectionContainer">
       <SectionOne
         fakeData={fakeData}
         setFakeData={setFakeData}
@@ -151,27 +228,26 @@ const OrgProfileEditSectionContainer = () => {
         setWebsiteLinkIsInvalid={setWebsiteLinkIsInvalid}
       />
 
-      <SectionThree
-        fakeData={fakeData}
-        setFakeData={setFakeData}
-        validated={validated}
-        setValidated={setValidated}
-      />
-
       <div className="OrgProfileEditBtnContainer">
         <button
-          className="OrgProfileEditSaveBtn Btn"
+          disabled={!dataHasChanged}
+          className={`OrgProfileEditSaveBtn Btn ${
+            dataHasChanged ? "" : "EditOrgProfileDetailsDisabledField"
+          }`}
           onClick={handleOrgProfileEditSaveBtn}
         >
           Save
           <FaSave className="OrgProfileEditSaveBtnIcon" />
         </button>
         <button
-          className="OrgProfileEditCancelBtn Btn"
-          onClick={handleOrgProfileEditCancelBtn}
+          disabled={!dataHasChanged}
+          className={`OrgProfileEditDiscardChangesBtn Btn ${
+            dataHasChanged ? "" : "EditOrgProfileDetailsDisabledField"
+          }`}
+          onClick={handleOrgProfileEditDiscardChangesBtn}
         >
-          Cancel
-          <MdCancel className="OrgProfileEditCancelBtnIcon" />
+          Discard Changes
+          <MdCancel className="OrgProfileEditDiscardChangesBtnIcon" />
         </button>
       </div>
     </div>
