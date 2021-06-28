@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer, useState } from "react";
-import { Alert } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
+import MentorOrStudentTab from "../../components/MentorOrStudentTab/MentorOrStudentTab";
 import OrgProgramDetailsCommon from "../../components/OrgProgramDetailsCommon/OrgProgramDetailsCommon";
 import OrgProgramMentorParticipant from "../../components/OrgProgramMentorParticipant/OrgProgramMentorParticipant";
 import OrgProgramParticipantFilterBar from "../../components/OrgProgramParticipantFilterBar/OrgProgramParticipantFilterBar";
@@ -85,53 +85,25 @@ const OrgProgramParticipantsPage = () => {
         programId={parseInt(programId)}
       />
 
-      <div className="ChooseMentorOrStudentDiv">
-        <Alert variant="info" className="MentorOrStudentText">
-          <button
-            className="MentorOptionText Btn"
-            onClick={() => {
-              dispatch({ type: "showMentorDetails", payload: true });
-
-              dispatch({ type: "searchedName", payload: "" });
-              dispatch({ type: "searchedNotPresentText", payload: "" });
-
-              dispatch({ type: "selectedRadioForFilterState", payload: "All" });
-
-              if (state.showStudentDetails)
-                dispatch({ type: "showStudentDetails", payload: false });
-            }}
-          >
-            Mentor
-          </button>
-          <button
-            className="StudentOptionText Btn"
-            onClick={() => {
-              dispatch({
-                type: "selectedRadioForFilterState",
-                payload: "All",
-              });
-
-              dispatch({ type: "searchedName", payload: "" });
-              dispatch({ type: "searchedNotPresentText", payload: "" });
-
-              if (state.showMentorDetails)
-                dispatch({ type: "showMentorDetails", payload: false });
-
-              dispatch({ type: "showStudentDetails", payload: true });
-            }}
-          >
-            Student
-          </button>
-        </Alert>
-      </div>
+      <MentorOrStudentTab
+        programParticipantState={state}
+        programParticipantDispatch={dispatch}
+      />
 
       <div className="OrgProgramParticipantsDetails">
         <div className="OrgProgramParticipantsDetailsContainer">
-          <OrgProgramParticipantFilterBar
-            state={state}
-            dispatch={dispatch}
-            setFilteredParticipantData={setFilteredParticipantData}
-          />
+          {((state.showMentorDetails &&
+            state.mentorParticipantResponseData !== null &&
+            state.mentorParticipantResponseData.length) ||
+            (state.showStudentDetails &&
+              state.studentParticipantResponseData !== null &&
+              state.studentParticipantResponseData.length)) && (
+            <OrgProgramParticipantFilterBar
+              state={state}
+              dispatch={dispatch}
+              setFilteredParticipantData={setFilteredParticipantData}
+            />
+          )}
           {state.showMentorDetails && (
             <OrgProgramMentorParticipant
               filteredParticipantData={filteredParticipantData}

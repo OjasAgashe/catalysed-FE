@@ -4,26 +4,24 @@
 }
 
 .ProgramDetailsRouteLinks
-  :is(.ProgramDetailsLink, .InvitationsLink, .ParticipantsLink).Link {
+  :is(.ProgramDetailsLink, .InvitationsLink, .ParticipantsLink, .ApplicantsLink).Link {
   color: var(--yellow-700);
   font-weight: 600;
   cursor: pointer;
-}
-
-.ProgramDetailsRouteLinks
-  :is(.ProgramDetailsLink, .InvitationsLink, .ParticipantsLink).Link:hover {
-  text-decoration: underline;
-}
-
-.ProgramDetailsRouteLinks :is(.ProgramDetailsLink, .InvitationsLink) {
   text-decoration: none;
-  margin-right: 1rem;
-  padding-right: 1rem;
-  border-right: 2px solid var(--yellow-700);
+  padding: 0.1rem 0.5rem;
 }
 
-.ProgramDetailsRouteLinks .ParticipantsLink {
-  text-decoration: none;
+.ProgramDetailsRouteLinks div {
+  margin: 0.3rem auto;
+}
+
+.ProgramDetailsRouteLinks .CurrentSelectedTab {
+  height: 2.2rem !important;
+}
+
+.ProgramDetailsRouteLinks .BlankDiv {
+  height: 2.1rem !important;
 }
 
 .ProgramDetailsRouteLinks {

@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "../../pages/Home/Home";
 import Login from "../../pages/Login/Login";
 import OrgProfileBuilder from "../../pages/OrgProfileBuilder/OrgProfileBuilder";
@@ -26,6 +26,7 @@ import {
   ORGANISATION_DIRECTORY_DETAILS_MENTOR,
   ORGANISATION_DIRECTORY_DETAILS_STUDENT,
   ORGANISATION_PROFILE_EDIT,
+  ORGANISATION_PROGRAM_APPLICANTS,
 } from "../../constants/Routes";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -49,6 +50,7 @@ import OrgDirectoryPage from "../../pages/OrgDirectoryPage/OrgDirectoryPage";
 import OrgDirectoryMentorPage from "../../pages/OrgDirectoryPage/OrgDirectoryMentorPage";
 import OrgDirectoryStudentPage from "../../pages/OrgDirectoryPage/OrgDirectoryStudentPage";
 import OrgProfileEdit from "../../pages/OrgProfileEdit/OrgProfileEdit";
+import OrgProgramApplicantsPage from "../../pages/OrgProgramDetails/OrgProgramApplicantsPage";
 
 function App() {
   return (
@@ -120,14 +122,32 @@ function App() {
             <OrgProfileEdit />
           </PrivateRoute>
 
-          <PrivateRoute
+          {/* <PrivateRoute path={`${ORGANISATION_PROGRAM_APPLICANTS}/:programId`} exact>
+            <OrgAPIProvider>
+              <OrgProgramApplicantsPage />
+            </OrgAPIProvider>
+          </PrivateRoute> */}
+
+          <Route path={`${ORGANISATION_PROGRAM_APPLICANTS}/:programId`} exact>
+            <OrgAPIProvider>
+              <OrgProgramApplicantsPage />
+            </OrgAPIProvider>
+          </Route>
+
+          {/* <PrivateRoute
             path={`${ORGANISATION_PROGRAM_DETAILS}/:programId`}
             exact
           >
             <OrgAPIProvider>
               <OrgProgramDetailsPage />
             </OrgAPIProvider>
-          </PrivateRoute>
+          </PrivateRoute> */}
+
+          <Route path={`${ORGANISATION_PROGRAM_DETAILS}/:programId`} exact>
+            <OrgAPIProvider>
+              <OrgProgramDetailsPage />
+            </OrgAPIProvider>
+          </Route>
 
           <PrivateRoute path={`${ORGANISATION_PROGRAM_EDIT}/:programId`} exact>
             <OrgAPIProvider>
@@ -135,23 +155,35 @@ function App() {
             </OrgAPIProvider>
           </PrivateRoute>
 
-          <PrivateRoute
+          {/* <PrivateRoute
             path={`${ORGANISATION_PROGRAM_INVITATIONS}/:programId`}
             exact
           >
             <OrgAPIProvider>
               <OrgProgramInvitationsPage />
             </OrgAPIProvider>
-          </PrivateRoute>
+          </PrivateRoute> */}
 
-          <PrivateRoute
+          <Route path={`${ORGANISATION_PROGRAM_INVITATIONS}/:programId`} exact>
+            <OrgAPIProvider>
+              <OrgProgramInvitationsPage />
+            </OrgAPIProvider>
+          </Route>
+
+          {/* <PrivateRoute
             path={`${ORGANISATION_PROGRAM_PARTICIPANTS}/:programId`}
             exact
           >
             <OrgAPIProvider>
               <OrgProgramParticipantsPage />
             </OrgAPIProvider>
-          </PrivateRoute>
+          </PrivateRoute> */}
+
+          <Route path={`${ORGANISATION_PROGRAM_PARTICIPANTS}/:programId`} exact>
+            <OrgAPIProvider>
+              <OrgProgramParticipantsPage />
+            </OrgAPIProvider>
+          </Route>
 
           <PrivateRoute
             path={`${ORGANISATION_PROGRAM_VIEW_SEARCH}/:filterBy`}

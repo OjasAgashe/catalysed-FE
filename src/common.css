@@ -17,10 +17,11 @@
     OrgProgramParticipantsPage, 
     OrgEditProgramDetailsPage,
     OrgProfileManage,
-    OrgProfileEdit
+    OrgProfileEdit,
+    OrgProgramApplicantsPage
 */
 
-:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage, .OrgProfileBuilder, .MentorProfileBuilder, .StuProfileBuilder, .OrgCreateProgramPage, .OrgViewSearchProgramPage, .OrgProgramDetailsPage, .OrgProgramInvitationsPage, .OrgProgramParticipantsPage, .OrgEditProgramDetailsPage, .OrgHomePage, .OrgDirectoryPage, .OrgDirectoryMentorPage, .OrgDirectoryStudentPage, .OrgProfileManagePage, .OrgProfileEditPage) {
+:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage, .OrgProfileBuilder, .MentorProfileBuilder, .StuProfileBuilder, .OrgCreateProgramPage, .OrgViewSearchProgramPage, .OrgProgramDetailsPage, .OrgProgramInvitationsPage, .OrgProgramParticipantsPage, .OrgEditProgramDetailsPage, .OrgHomePage, .OrgDirectoryPage, .OrgDirectoryMentorPage, .OrgDirectoryStudentPage, .OrgProfileManagePage, .OrgProfileEditPage, .OrgProgramApplicantsPage) {
   background-color: var(--red-100);
   min-height: 85vh;
 }
@@ -104,11 +105,18 @@
     StudentMentorRegister (page), 
     CommonHome, 
     OrgProfileBuilderTypeform, 
-    MentorProfileBuidlerTypeform, 
-    CreateProgramForm, 
-    OrgProgramDetails,
+    MentorProfileBuidlerTypeform,  
+    StuProfileBuilderTypeform, 
+    Org Create Program Form, 
+    Org Program Details,
     OrgProgramDetailsCommon,
     OrgDirectoryPageHeader
+    OrgProgramInvitationDetails,
+    OrgProgramApplicantDetails 
+    OrgDirectoryDetailsPersonalInfo,
+    OrgProfileEditSectionOne,
+    OrgProfileEditSectionTwo
+
 */
 
 :is(.OrgRegisterUserForm, .OrgRegisterDetailsForm, .LoginForm, .StudentMentorRegisterBox, .CommonHomeForm) {
@@ -483,58 +491,6 @@ input[type="number"] {
   margin: 0.2rem 0.3rem !important;
 }
 
-/*  */
-
-/* page & component */
-
-/* 
-  OrgProgramInvitaionsPage, 
-  OrgViewSearchProgram component, 
-  OrgHome component 
-*/
-
-.OrgViewSearchProgram .CreateProgramTextContainer,
-.OrgProgramInvitationsPage .SendNewInvitationTextContainer,
-.OrgHomeSectionContainer .OrgHomeSectionTwo .CreateProgramTextContainer {
-  width: fit-content;
-  margin: 1.5rem auto;
-  border-radius: 5px;
-  text-align: center;
-}
-
-.CreateProgramTextContainer .CreateProgramText,
-.SendNewInvitationTextContainer .SendNewInvitationText {
-  padding: 0.3rem 1.4rem;
-  border-radius: 5px;
-  font-size: 1.3rem;
-}
-
-.CreateProgramText .CRClickHereLink,
-.SendNewInvitationText .SendNewInvitationClickHere {
-  text-decoration: none;
-  color: var(--blue-gray-700);
-  font-weight: 600;
-}
-
-.CreateProgramText .CRClickHereLink:hover,
-.SendNewInvitationText .SendNewInvitationClickHere:hover {
-  text-decoration: underline;
-}
-
-.OrgViewSearchProgram .CreateProgramText,
-.OrgProgramInvitationsPage .SendNewInvitationText,
-.OrgHomeSectionContainer .OrgHomeSectionTwo .CreateProgramText {
-  animation-name: box-shadow-animation;
-  animation-iteration-count: infinite;
-  animation-duration: 1.5s;
-}
-
-@keyframes box-shadow-animation {
-  50% {
-    box-shadow: 1px 1px 5px var(--blue-gray-500);
-  }
-}
-
 /* 
   OrgProgramDetailsCommon,
   OrgDirectoryPageHeader,
@@ -603,7 +559,8 @@ input[type="number"] {
 
 /* 
   OrgDirectoryPageHeader,
-  OrgDirectoryDetailsCommonHeader 
+  OrgDirectoryDetailsCommonHeader,
+  OrgProgramDetailsCommon 
 */
 
 :is(.OrgDirectoryMentorOrStudentOpt, .OrgDirectoryDetailsPIOrCtPOpt) button {
@@ -615,17 +572,19 @@ input[type="number"] {
   border-radius: 5px;
 }
 
-:is(.OrgDirectoryMentorOrStudentOpt, .OrgDirectoryDetailsPIOrCtPOpt) div {
+:is(.OrgDirectoryMentorOrStudentOpt, .OrgDirectoryDetailsPIOrCtPOpt, .ProgramDetailsRouteLinks)
+  div {
   display: inline-block;
 }
 
-:is(.OrgDirectoryMentorOrStudentOpt, .OrgDirectoryDetailsPIOrCtPOpt) .BlankDiv {
+:is(.OrgDirectoryMentorOrStudentOpt, .OrgDirectoryDetailsPIOrCtPOpt, .ProgramDetailsRouteLinks)
+  .BlankDiv {
   height: 2.15rem;
   width: 0.8rem;
   border-bottom: 2px solid var(--yellow-700) !important;
 }
 
-:is(.OrgDirectoryMentorOrStudentOpt, .OrgDirectoryDetailsPIOrCtPOpt)
+:is(.OrgDirectoryMentorOrStudentOpt, .OrgDirectoryDetailsPIOrCtPOpt, .ProgramDetailsRouteLinks)
   .NoBlankDiv {
   display: none;
 }
@@ -657,4 +616,121 @@ input[type="number"] {
   }
 }
 
-/*  */
+/* 
+  OrgProgramInvitationDetails,
+  OrgProgramApplicantDetails 
+*/
+
+.OrgProgramInvitationDetails,
+.OrgProgramApplicantDetails {
+  max-width: 1200px;
+  margin: auto;
+  padding: 2rem;
+}
+
+.OrgProgramInvitationDetailsContainer,
+.OrgProgramApplicantDetailsContainer {
+  background-color: var(--white);
+  padding: 1rem;
+}
+
+.ProgramFilterSortDropdown .btn {
+  background-color: inherit !important;
+  border: none;
+  color: var(--blue-gray-700) !important;
+  font-weight: bold;
+  font-size: 1.1rem !important;
+  padding: 0 !important;
+}
+
+.ProgramFilterSortDropdown .btn:focus {
+  box-shadow: none !important;
+}
+
+.ProgramFilterSortDropdown .dropdown-menu {
+  min-width: fit-content;
+}
+
+.ProgramInvitationTableRow,
+.ProgramApplicantTableRow {
+  text-align: center !important;
+}
+
+.ProgramInvitationHeader,
+.ProgramApplicantHeader {
+  text-align: center !important;
+  font-size: 1.1rem !important;
+  color: var(--blue-gray-700) !important;
+  border-top: 2px solid var(--blue-gray-500) !important;
+  border-bottom: 2px solid var(--blue-gray-500) !important;
+}
+
+:is(.OrgProgramInvitationDataContainer, .OrgProgramApplicantDataContainer)
+  .table {
+  --bs-table-striped-bg: var(--blue-gray-100) !important;
+  border-color: var(--blue-gray-100) !important;
+}
+
+.ProgramInvitationTableData,
+.ProgramApplicantTableData {
+  font-size: 1.1rem !important;
+  padding: 0.5rem !important;
+  max-width: 8rem !important;
+  word-wrap: break-word;
+}
+
+:is(.OrgProgramInvitationDetails, .OrgProgramApplicantDetails)
+  .ErrorCompContainer {
+  width: fit-content;
+  margin: auto;
+}
+
+/* page & component */
+
+/* 
+  OrgProgramInvitaionsPage, 
+  OrgViewSearchProgram component, 
+  OrgHome component 
+*/
+
+.OrgViewSearchProgram .CreateProgramTextContainer,
+.OrgProgramInvitationsPage .SendNewInvitationTextContainer,
+.OrgHomeSectionContainer .OrgHomeSectionTwo .CreateProgramTextContainer {
+  width: fit-content;
+  margin: 1.5rem auto;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.CreateProgramTextContainer .CreateProgramText,
+.SendNewInvitationTextContainer .SendNewInvitationText {
+  padding: 0.3rem 1.4rem;
+  border-radius: 5px;
+  font-size: 1.3rem;
+}
+
+.CreateProgramText .CRClickHereLink,
+.SendNewInvitationText .SendNewInvitationClickHere {
+  text-decoration: none;
+  color: var(--blue-gray-700);
+  font-weight: 600;
+}
+
+.CreateProgramText .CRClickHereLink:hover,
+.SendNewInvitationText .SendNewInvitationClickHere:hover {
+  text-decoration: underline;
+}
+
+.OrgViewSearchProgram .CreateProgramText,
+.OrgProgramInvitationsPage .SendNewInvitationText,
+.OrgHomeSectionContainer .OrgHomeSectionTwo .CreateProgramText {
+  animation-name: box-shadow-animation;
+  animation-iteration-count: infinite;
+  animation-duration: 1.5s;
+}
+
+@keyframes box-shadow-animation {
+  50% {
+    box-shadow: 1px 1px 5px var(--blue-gray-500);
+  }
+}

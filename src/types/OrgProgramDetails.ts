@@ -113,3 +113,57 @@ export type OrgProgramParticipantActionType =
   | { type: "selectedRadioForFilterState"; payload: string }
   | { type: "searchedNotPresentText"; payload: string }
   | { type: "searchedName"; payload: string };
+
+export interface OrgProgramApplicantData {
+  id: number;
+  date_of_application: string;
+  email: string;
+  name: string;
+  status: string;
+  viewed: string;
+}
+
+export interface OrgProgramApplicantState {
+  showMentorDetails: boolean;
+  showStudentDetails: boolean;
+  searchedNotPresentText: string;
+  selectedDropdownForSortDoA: string;
+  selectedDropdownForFilterStatus: string;
+  selectedDropdownForFilterViewed: string;
+}
+
+export type OrgProgramApplicantActionType =
+  | { type: "showMentorDetails"; payload: boolean }
+  | { type: "showStudentDetails"; payload: boolean }
+  | { type: "searchedNotPresentText"; payload: string }
+  | { type: "selectedDropdownForSortDoA"; payload: string }
+  | { type: "selectedDropdownForFilterStatus"; payload: string }
+  | { type: "selectedDropdownForFilterViewed"; payload: string };
+
+export type OrgProgramApplicantValues = {
+  filteredResponseData: OrgProgramApplicantData[];
+  filterAcceptedResponseData: OrgProgramApplicantData[];
+  filterPendingResponseData: OrgProgramApplicantData[];
+  filterRejectedResponseData: OrgProgramApplicantData[];
+  filterViewedResponseData: OrgProgramApplicantData[];
+  filterNotViewedResponseData: OrgProgramApplicantData[];
+
+  setFilteredResponseData: React.Dispatch<
+    React.SetStateAction<OrgProgramApplicantData[]>
+  >;
+  filterAcceptedTempFilteredData: (
+    tempFilteredData: OrgProgramApplicantData[]
+  ) => OrgProgramApplicantData[];
+  filterPendingTempFilteredData: (
+    tempFilteredData: OrgProgramApplicantData[]
+  ) => OrgProgramApplicantData[];
+  filterRejectedTempFilteredData: (
+    tempFilteredData: OrgProgramApplicantData[]
+  ) => OrgProgramApplicantData[];
+  filterViewedTempFilteredData: (
+    tempFilteredData: OrgProgramApplicantData[]
+  ) => OrgProgramApplicantData[];
+  filterNotViewedTempFilteredData: (
+    tempFilteredData: OrgProgramApplicantData[]
+  ) => OrgProgramApplicantData[];
+};
