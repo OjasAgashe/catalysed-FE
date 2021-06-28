@@ -2,7 +2,6 @@ import React from "react";
 import { Dropdown, DropdownButton, Table } from "react-bootstrap";
 import {
   OrgProgramApplicantActionType,
-  OrgProgramApplicantData,
   OrgProgramApplicantState,
   OrgProgramApplicantValues,
 } from "../../types/OrgProgramDetails";
@@ -10,14 +9,12 @@ import ApplicantTableRow from "./ApplicantTableRow";
 import Error from "../Error/Error";
 
 type OrgProgramApplicantDataContainerProps = {
-  fakeData: OrgProgramApplicantData[];
   state: OrgProgramApplicantState;
   dispatch: React.Dispatch<OrgProgramApplicantActionType>;
   values: OrgProgramApplicantValues;
 };
 
 const OrgProgramApplicantDataContainer = ({
-  fakeData,
   state,
   dispatch,
   values,
@@ -32,8 +29,9 @@ const OrgProgramApplicantDataContainer = ({
     if (eventKey) {
       dispatch({ type: "selectedDropdownForFilterStatus", payload: eventKey });
       dispatch({ type: "searchedNotPresentText", payload: "" });
+      dispatch({ type: "searchedName", payload: "" });
 
-      let tempFilteredData = [...fakeData];
+      let tempFilteredData = [...state.fakeData];
 
       if (eventKey === "Accepted")
         tempFilteredData = values.filterAcceptedResponseData;
@@ -68,8 +66,9 @@ const OrgProgramApplicantDataContainer = ({
     if (eventKey) {
       dispatch({ type: "selectedDropdownForFilterViewed", payload: eventKey });
       dispatch({ type: "searchedNotPresentText", payload: "" });
+      dispatch({ type: "searchedName", payload: "" });
 
-      let tempFilteredData = [...fakeData];
+      let tempFilteredData = [...state.fakeData];
 
       if (eventKey === "Yes")
         tempFilteredData = values.filterViewedResponseData;
@@ -204,7 +203,8 @@ const OrgProgramApplicantDataContainer = ({
           </tr>
         </thead>
         <tbody>
-          {(["Latest", "Oldest"].includes(state.selectedDropdownForSortDoA) ||
+          {(state.searchedName ||
+            ["Latest", "Oldest"].includes(state.selectedDropdownForSortDoA) ||
             ["Accepted", "Pending", "Rejected"].includes(
               state.selectedDropdownForFilterStatus
             ) ||
@@ -226,12 +226,13 @@ const OrgProgramApplicantDataContainer = ({
               </td>
             </tr>
           )}
-          {!["Latest", "Oldest"].includes(state.selectedDropdownForSortDoA) &&
+          {state.searchedName === "" &&
+            !["Latest", "Oldest"].includes(state.selectedDropdownForSortDoA) &&
             !["Accepted", "Pending", "Rejected"].includes(
               state.selectedDropdownForFilterStatus
             ) &&
             !["Yes", "No"].includes(state.selectedDropdownForFilterViewed) &&
-            fakeData.map((data) => (
+            state.fakeData.map((data) => (
               <ApplicantTableRow data={data} key={data.id} />
             ))}
         </tbody>

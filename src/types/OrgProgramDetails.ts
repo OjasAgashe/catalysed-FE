@@ -124,8 +124,11 @@ export interface OrgProgramApplicantData {
 }
 
 export interface OrgProgramApplicantState {
+  fakeData: OrgProgramApplicantData[];
+  programTitle: string;
   showMentorDetails: boolean;
   showStudentDetails: boolean;
+  searchedName: string;
   searchedNotPresentText: string;
   selectedDropdownForSortDoA: string;
   selectedDropdownForFilterStatus: string;
@@ -133,8 +136,11 @@ export interface OrgProgramApplicantState {
 }
 
 export type OrgProgramApplicantActionType =
+  | { type: "fakeData"; payload: OrgProgramApplicantData[] }
+  | { type: "programTitle"; payload: string }
   | { type: "showMentorDetails"; payload: boolean }
   | { type: "showStudentDetails"; payload: boolean }
+  | { type: "searchedName"; payload: string }
   | { type: "searchedNotPresentText"; payload: string }
   | { type: "selectedDropdownForSortDoA"; payload: string }
   | { type: "selectedDropdownForFilterStatus"; payload: string }

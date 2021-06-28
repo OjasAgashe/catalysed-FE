@@ -1,7 +1,6 @@
 import React from "react";
 import OrgDirectoryDetailsBackBtn from "../OrgDirectoryDetailsBackBtn/OrgDirectoryDetailsBackBtn";
 
-import "../OrgProgramInvitationDetails/OrgProgramInvitationDetails.css";
 import "./OrgDirectoryDetailsConnectedToPrograms.css";
 import Section from "./Section";
 

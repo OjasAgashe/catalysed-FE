@@ -5,7 +5,6 @@ import {
   OrgProgramInvitationState,
 } from "../../types/OrgProgramDetails";
 import OrgProgramInvitationDataContainer from "./OrgProgramInvitationDataContainer";
-import "./OrgProgramInvitationDetails.css";
 import SearchBar from "./SearchBar";
 import Error from "../Error/Error";
 

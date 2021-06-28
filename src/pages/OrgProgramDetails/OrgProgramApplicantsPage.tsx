@@ -7,48 +7,49 @@ import { orgProgramApplicantReducer } from "../../reducers/orgProgramApplicantRe
 
 const OrgProgramApplicantsPage = () => {
   const [state, dispatch] = useReducer(orgProgramApplicantReducer, {
+    fakeData: [
+      {
+        id: 1,
+        date_of_application: "28/06/2021",
+        email: "foo@gmail.com",
+        name: "Stefan",
+        status: "pending",
+        viewed: "no",
+      },
+      {
+        id: 2,
+        date_of_application: "28/06/2021",
+        email: "foo@gmail.com",
+        name: "Damon",
+        status: "accepted",
+        viewed: "no",
+      },
+      {
+        id: 3,
+        date_of_application: "28/06/2021",
+        email: "foo@gmail.com",
+        name: "Howard Wolvowitiz",
+        status: "pending",
+        viewed: "yes",
+      },
+      {
+        id: 4,
+        date_of_application: "28/06/2021",
+        email: "foo@gmail.com",
+        name: "Paul Wisely",
+        status: "rejected",
+        viewed: "no",
+      },
+    ],
+    programTitle: "",
     showMentorDetails: true,
     showStudentDetails: false,
+    searchedName: "",
     searchedNotPresentText: "",
     selectedDropdownForSortDoA: "All",
     selectedDropdownForFilterStatus: "All",
     selectedDropdownForFilterViewed: "All",
   });
-
-  const fakeData = [
-    {
-      id: 1,
-      date_of_application: "28/06/2021",
-      email: "foo@gmail.com",
-      name: "Stefan",
-      status: "pending",
-      viewed: "no",
-    },
-    {
-      id: 2,
-      date_of_application: "28/06/2021",
-      email: "foo@gmail.com",
-      name: "Damon",
-      status: "accepted",
-      viewed: "no",
-    },
-    {
-      id: 3,
-      date_of_application: "28/06/2021",
-      email: "foo@gmail.com",
-      name: "Howard Wolvowitiz",
-      status: "pending",
-      viewed: "yes",
-    },
-    {
-      id: 4,
-      date_of_application: "28/06/2021",
-      email: "foo@gmail.com",
-      name: "Paul Wisely",
-      status: "rejected",
-      viewed: "no",
-    },
-  ];
 
   const { programId } = useParams<{ programId: string }>();
 
@@ -56,12 +57,65 @@ const OrgProgramApplicantsPage = () => {
     document.documentElement.scrollTop = 0;
 
     document.title = "Program Applicants | CatalysEd";
-  });
+
+    const sortInOrder = () => {
+      let tempData = [...state.fakeData];
+
+      // status: pending && viewed: no
+      tempData = state.fakeData.filter(
+        (data) => data.status === "pending" && data.viewed === "no"
+      );
+
+      // status: pending && viewed: yes
+      tempData.push.apply(
+        tempData,
+        state.fakeData.filter(
+          (data) => data.status === "pending" && data.viewed === "yes"
+        )
+      );
+
+      // status: accepted && viewed: no
+      tempData.push.apply(
+        tempData,
+        state.fakeData.filter(
+          (data) => data.status === "accepted" && data.viewed === "no"
+        )
+      );
+
+      // status: accepted && viewed: yes
+      tempData.push.apply(
+        tempData,
+        state.fakeData.filter(
+          (data) => data.status === "accepted" && data.viewed === "yes"
+        )
+      );
+
+      // status: rejected && viewed: no
+      tempData.push.apply(
+        tempData,
+        state.fakeData.filter(
+          (data) => data.status === "rejected" && data.viewed === "no"
+        )
+      );
+
+      // status: rejected && viewed: yes
+      tempData.push.apply(
+        tempData,
+        state.fakeData.filter(
+          (data) => data.status === "rejected" && data.viewed === "yes"
+        )
+      );
+
+      dispatch({ type: "fakeData", payload: tempData });
+    };
+
+    sortInOrder();
+  }, []);
 
   return (
     <div className="OrgProgramApplicantsPage">
       <OrgProgramDetailsCommon
-        programTitle=""
+        programTitle={state.programTitle}
         programId={parseInt(programId)}
       />
 
@@ -73,7 +127,6 @@ const OrgProgramApplicantsPage = () => {
       <OrgProgramApplicantDetails
         state={state}
         dispatch={dispatch}
-        fakeData={fakeData}
       />
     </div>
   );

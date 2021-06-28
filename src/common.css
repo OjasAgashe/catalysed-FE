@@ -617,6 +617,7 @@ input[type="number"] {
 }
 
 /* 
+  OrgDirectoryDetailsConnectedToProgram,
   OrgProgramInvitationDetails,
   OrgProgramApplicantDetails 
 */
@@ -677,6 +678,21 @@ input[type="number"] {
   padding: 0.5rem !important;
   max-width: 8rem !important;
   word-wrap: break-word;
+}
+
+:is(.OrgInvitationSearchBar, .OrgProgramApplicantSearchBar)
+  :is(.OrgInvitationSearchFromControl, .OrgProgramApplicantSearchFormControl):valid {
+  background-color: var(--blue-gray-100) !important;
+}
+
+:is(.OrgInvitationSearchBar, .OrgProgramApplicantSearchBar)
+  :is(.OrgInvitationSearchFromControl, .OrgProgramApplicantSearchFormControl) {
+  border: 1px solid var(--blue-gray-300) !important;
+  max-width: 22rem;
+  margin: 1rem 0;
+  color: var(--blue-gray-700) !important;
+  font-size: 1.05rem !important;
+  background-color: var(--blue-gray-100) !important;
 }
 
 :is(.OrgProgramInvitationDetails, .OrgProgramApplicantDetails)

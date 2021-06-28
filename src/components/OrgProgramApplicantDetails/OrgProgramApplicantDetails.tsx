@@ -6,26 +6,25 @@ import {
   OrgProgramApplicantValues,
 } from "../../types/OrgProgramDetails";
 import OrgProgramApplicantDataContainer from "./OrgProgramApplicantDataContainer";
-import "./OrgProgramApplicantDetails.css";
+import Error from "../Error/Error";
+import SearchBar from "./SearchBar";
 
 type OrgProgramApplicantDetailsProps = {
   state: OrgProgramApplicantState;
   dispatch: React.Dispatch<OrgProgramApplicantActionType>;
-  fakeData: OrgProgramApplicantData[];
 };
 
 const OrgProgramApplicantDetails = ({
   state,
   dispatch,
-  fakeData,
 }: OrgProgramApplicantDetailsProps) => {
   const [filteredResponseData, setFilteredResponseData] = useState<
     OrgProgramApplicantData[]
   >([]);
 
   const filterAcceptedResponseData = useMemo(
-    () => fakeData.filter((data) => data.status === "accepted"),
-    [fakeData]
+    () => state.fakeData.filter((data) => data.status === "accepted"),
+    [state.fakeData]
   );
 
   const filterAcceptedTempFilteredData = useCallback(
@@ -35,8 +34,8 @@ const OrgProgramApplicantDetails = ({
   );
 
   const filterPendingResponseData = useMemo(
-    () => fakeData.filter((data) => data.status === "pending"),
-    [fakeData]
+    () => state.fakeData.filter((data) => data.status === "pending"),
+    [state.fakeData]
   );
 
   const filterPendingTempFilteredData = useCallback(
@@ -46,8 +45,8 @@ const OrgProgramApplicantDetails = ({
   );
 
   const filterRejectedResponseData = useMemo(
-    () => fakeData.filter((data) => data.status === "rejected"),
-    [fakeData]
+    () => state.fakeData.filter((data) => data.status === "rejected"),
+    [state.fakeData]
   );
 
   const filterRejectedTempFilteredData = useCallback(
@@ -57,8 +56,8 @@ const OrgProgramApplicantDetails = ({
   );
 
   const filterViewedResponseData = useMemo(
-    () => fakeData.filter((data) => data.viewed === "yes"),
-    [fakeData]
+    () => state.fakeData.filter((data) => data.viewed === "yes"),
+    [state.fakeData]
   );
 
   const filterViewedTempFilteredData = useCallback(
@@ -68,8 +67,8 @@ const OrgProgramApplicantDetails = ({
   );
 
   const filterNotViewedResponseData = useMemo(
-    () => fakeData.filter((data) => data.viewed === "no"),
-    [fakeData]
+    () => state.fakeData.filter((data) => data.viewed === "no"),
+    [state.fakeData]
   );
 
   const filterNotViewedTempFilteredData = useCallback(
@@ -97,12 +96,21 @@ const OrgProgramApplicantDetails = ({
   return (
     <div className="OrgProgramApplicantDetails">
       <div className="OrgProgramApplicantDetailsContainer">
-        <OrgProgramApplicantDataContainer
-          fakeData={fakeData}
-          state={state}
-          dispatch={dispatch}
-          values={values}
-        />
+        {state.fakeData !== null && state.fakeData.length ? (
+          <>
+            <SearchBar state={state} dispatch={dispatch} values={values} />
+
+            <OrgProgramApplicantDataContainer
+              state={state}
+              dispatch={dispatch}
+              values={values}
+            />
+          </>
+        ) : (
+          <div className="ErrorCompContainer">
+            <Error message="No Applicants found for this Program !!" />
+          </div>
+        )}
       </div>
     </div>
   );
