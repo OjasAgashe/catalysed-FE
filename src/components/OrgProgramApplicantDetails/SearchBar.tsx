@@ -19,8 +19,10 @@ const SearchBar = ({ state, dispatch, values }: SearchBarProps) => {
       dispatch({ type: "searchedName", payload: event.target.value });
       dispatch({ type: "searchedNotPresentText", payload: "" });
 
-      let tempFilteredData = state.fakeData.filter((data) =>
-        data.name.toLowerCase().startsWith(event.target.value.toLowerCase())
+      let tempFilteredData = state.fakeData.filter(
+        (data) =>
+          data.name.toLowerCase().includes(event.target.value.toLowerCase()) ||
+          data.email.toLowerCase().includes(event.target.value.toLowerCase())
       );
 
       if (state.selectedDropdownForFilterStatus === "Accepted")
@@ -82,7 +84,7 @@ const SearchBar = ({ state, dispatch, values }: SearchBarProps) => {
       <Form>
         <Form.Control
           type="search"
-          placeholder="Search By Name..."
+          placeholder="Search By Name or Email..."
           className="OrgProgramApplicantSearchFormControl"
           value={state.searchedName}
           onChange={handleSearchBarFormChange}

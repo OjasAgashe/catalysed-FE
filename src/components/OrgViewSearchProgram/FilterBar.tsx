@@ -199,7 +199,7 @@ const FilterBar = ({
       dispatch({ type: "searchedNotPresentText", payload: "" });
 
       let tempFilteredList = programsList.filter((program) =>
-        program.title.toLowerCase().startsWith(event.target.value.toLowerCase())
+        program.title.toLowerCase().includes(event.target.value.toLowerCase())
       );
 
       if (state.selectedRadioForFilter === "Published")

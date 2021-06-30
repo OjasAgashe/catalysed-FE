@@ -1,0 +1,23 @@
+.TableHeaderFirstRow .ProgramHeading {
+  vertical-align: middle;
+}
+
+.TableHeaderFirstRow :is(.MentorHeading, .StudentHeading) {
+  border-bottom: 1px solid var(--blue-gray-400) !important;
+}
+
+.OrgApplicantsTableData {
+  vertical-align: middle;
+  font-size: 1.1rem !important;
+  padding: 0.5rem !important;
+  word-wrap: break-word;
+}
+
+.OrgApplicantsTableHeader {
+  background-color: var(--cyan-info-background);
+}
+
+.OrgApplicantsTableDataRow:hover {
+  cursor: pointer;
+  box-shadow: 1px 0 10px var(--blue-gray-300);
+}

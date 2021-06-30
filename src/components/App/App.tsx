@@ -27,6 +27,7 @@ import {
   ORGANISATION_DIRECTORY_DETAILS_STUDENT,
   ORGANISATION_PROFILE_EDIT,
   ORGANISATION_PROGRAM_APPLICANTS,
+  ORGANISATION_APPLICANTS,
 } from "../../constants/Routes";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -51,6 +52,7 @@ import OrgDirectoryMentorPage from "../../pages/OrgDirectoryPage/OrgDirectoryMen
 import OrgDirectoryStudentPage from "../../pages/OrgDirectoryPage/OrgDirectoryStudentPage";
 import OrgProfileEdit from "../../pages/OrgProfileEdit/OrgProfileEdit";
 import OrgProgramApplicantsPage from "../../pages/OrgProgramDetails/OrgProgramApplicantsPage";
+import OrgApplicantsPage from "../../pages/OrgApplicantsPage/OrgApplicantsPage";
 
 function App() {
   return (
@@ -86,9 +88,21 @@ function App() {
             <OrganisationRegister />
           </PublicRoute>
 
-          <PrivateRoute path={ORGANISATION_DIRECTORY} exact>
+          {/* <PrivateRoute path={ORGANISATION_APPLICANTS} exact>
+            <OrgApplicantsPage />
+          </PrivateRoute> */}
+
+          <Route path={ORGANISATION_APPLICANTS} exact>
+            <OrgApplicantsPage />
+          </Route>
+
+          {/* <PrivateRoute path={ORGANISATION_DIRECTORY} exact>
             <OrgDirectoryPage />
-          </PrivateRoute>
+          </PrivateRoute> */}
+
+          <Route path={ORGANISATION_DIRECTORY} exact>
+            <OrgDirectoryPage />
+          </Route>
 
           <PrivateRoute
             path={`${ORGANISATION_DIRECTORY_DETAILS_MENTOR}/:mentorId`}

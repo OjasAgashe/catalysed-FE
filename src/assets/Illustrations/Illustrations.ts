@@ -22,6 +22,7 @@ import OrgProfileManagePersonalInfo from "./org_profile_manage_personal_info.svg
 import OrgProgramDetails from "./org_program_details.jpg";
 import OrgProgramDetailsDataIllustration from "./org_program_details_data_illustration.svg";
 import OrgViewAndSearchProgram from "./org_view_and_search_program.svg";
+import ProgramsApplicantsSummaryHeader from "./programs_applicants_summary_header.jpg";
 
 export {
   CommonHomeBoy,
@@ -48,4 +49,5 @@ export {
   OrgProgramDetails,
   OrgProgramDetailsDataIllustration,
   OrgViewAndSearchProgram,
+  ProgramsApplicantsSummaryHeader,
 };

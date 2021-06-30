@@ -62,7 +62,8 @@ const OrgDirectoryPageHeader = ({
 
     if (title === "Mentors") {
       tempFilteredData = fakeMentorData.filter((data) =>
-        data.name.toLowerCase().startsWith(event.target.value.toLowerCase())
+        data.name.toLowerCase().includes(event.target.value.toLowerCase()) ||
+        data.email.toLowerCase().includes(event.target.value.toLowerCase())
       );
     }
 
@@ -97,7 +98,7 @@ const OrgDirectoryPageHeader = ({
             <Form.Control
               className="DirectorySearchFormControl"
               type="search"
-              placeholder="Search by Name"
+              placeholder="Search by Name or Email..."
               value={searchedName}
               onChange={handleOrgDirectorySearch}
             />

@@ -52,8 +52,10 @@ const SearchBar = ({
 
       const responseData = state.responseData as OrgInvitationResponseData[];
 
-      let tempFilteredData = responseData.filter((data) =>
-        data.name.toLowerCase().startsWith(event.target.value.toLowerCase())
+      let tempFilteredData = responseData.filter(
+        (data) =>
+          data.name.toLowerCase().includes(event.target.value.toLowerCase()) ||
+          data.emailId.toLowerCase().includes(event.target.value.toLowerCase())
       );
 
       if (state.selectedRadioForFilter === "Accepted")
@@ -111,7 +113,7 @@ const SearchBar = ({
       <Form>
         <Form.Control
           type="search"
-          placeholder="Search By Name..."
+          placeholder="Search By Name or Email..."
           className="OrgInvitationSearchFromControl"
           value={state.searchedName}
           onChange={handleSearchBarFormChange}
