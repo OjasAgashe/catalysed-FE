@@ -55,6 +55,12 @@ const Header = () => {
           {getCatalysedCreatedCookie() &&
             getCatalysedTypeCookie() === ORGANISER && <OrgHomeHeader />}
 
+          {/* {location.pathname.includes("/organiser") ? (
+            <OrgHomeHeader />
+          ) : (
+            <CommonHomeHeader />
+          )} */}
+
           {getCatalysedTokenCookie() ? (
             <Nav.Link
               className="NavbarCollapseNavItem SignOutBtn"

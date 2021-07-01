@@ -132,21 +132,9 @@ const MentorOrStudentTab = ({
               programParticipantState.showMentorDetails) ||
             (programApplicantState !== null &&
               programApplicantState.showMentorDetails)
-              ? "BlankDiv"
-              : "NoBlankDiv"
-          }`}
-        >
-          &nbsp;
-        </div>
-        <div
-          className={`${
-            (programParticipantState !== null &&
-              programParticipantState.showMentorDetails) ||
-            (programApplicantState !== null &&
-              programApplicantState.showMentorDetails)
               ? "CurrentSelectedTab"
               : "NotCurrentSelectedTab"
-          }`}
+          } MentorOptDiv`}
         >
           <button className="MentorOptionText Btn" onClick={handleMentorClick}>
             Mentor
@@ -168,18 +156,6 @@ const MentorOrStudentTab = ({
           >
             Student
           </button>
-        </div>
-        <div
-          className={`${
-            (programParticipantState !== null &&
-              programParticipantState.showStudentDetails) ||
-            (programApplicantState !== null &&
-              programApplicantState.showStudentDetails)
-              ? "BlankDiv"
-              : "NoBlankDiv"
-          }`}
-        >
-          &nbsp;
         </div>
       </Alert>
     </div>

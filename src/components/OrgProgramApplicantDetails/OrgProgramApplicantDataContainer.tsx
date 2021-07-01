@@ -105,7 +105,7 @@ const OrgProgramApplicantDataContainer = ({
           <tr className="ProgramApplicantTableRow">
             <th className="ProgramApplicantHeader">Name</th>
             <th className="ProgramApplicantHeader">Email</th>
-            <th className="ProgramApplicantHeader">
+            <th className="ProgramApplicantHeader NumericalHeaderColumn">
               <DropdownButton
                 title={`Date of application${
                   state.selectedDropdownForSortDoA !== "All"

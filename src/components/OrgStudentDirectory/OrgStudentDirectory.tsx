@@ -33,7 +33,7 @@ const OrgStudentDirectory = ({
   const history = useHistory();
 
   const handleDirectoryCardViewAllBtnClick = (id: number) => {
-    history.push(`${ORGANISATION_DIRECTORY_DETAILS_STUDENT}/${id}`);
+    history.push(`${ORGANISATION_DIRECTORY_DETAILS_STUDENT}/${id}/details`);
   };
 
   return (

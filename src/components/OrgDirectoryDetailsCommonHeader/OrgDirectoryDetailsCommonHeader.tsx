@@ -28,17 +28,10 @@ const OrgDirectoryDetailsCommonHeader = ({
         <Alert variant="warning" className="OrgDirectoryDetailsPIOrCtPOpt">
           <div
             className={`${
-              choosedOption === "PersonalInfo" ? "BlankDiv" : "NoBlankDiv"
-            }`}
-          >
-            &nbsp;
-          </div>
-          <div
-            className={`${
               choosedOption === "PersonalInfo"
                 ? "CurrentSelectedTab"
                 : "NotCurrentSelectedTab"
-            }`}
+            } OrgDirectoryDetailsPIOpt`}
           >
             <button
               className="PersonalInfoBtnOpt"
@@ -66,13 +59,6 @@ const OrgDirectoryDetailsCommonHeader = ({
             >
               Connected to Programs
             </button>
-          </div>
-          <div
-            className={`${
-              choosedOption !== "PersonalInfo" ? "BlankDiv" : "NoBlankDiv"
-            }`}
-          >
-            &nbsp;
           </div>
         </Alert>
       </div>

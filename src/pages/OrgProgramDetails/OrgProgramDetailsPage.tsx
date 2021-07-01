@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
 import OrgProgramDetails from "../../components/OrgProgramDetails/OrgProgramDetails";
 import OrgProgramDetailsCommon from "../../components/OrgProgramDetailsCommon/OrgProgramDetailsCommon";
-import { ORGANISATION_PROGRAM_EDIT } from "../../constants/Routes";
+import { ORGANISATION_PROGRAM_DETAILS } from "../../constants/Routes";
 import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
 import { orgProgramDetailsReducer } from "../../reducers/orgProgramDetailsReducer";
 import "./OrgProgramDetailsPage.css";
@@ -61,7 +61,7 @@ const OrgProgramDetailsPage = () => {
           <span>
             Want to Edit? Then&nbsp;
             <Link
-              to={`${ORGANISATION_PROGRAM_EDIT}/${programId}`}
+              to={`${ORGANISATION_PROGRAM_DETAILS}/${programId}/edit`}
               className="EditLinkClickHere"
             >
               click here

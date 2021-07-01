@@ -2,12 +2,7 @@ import React from "react";
 import { Alert } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import { OrgProgramDetails } from "../../assets/Illustrations/Illustrations";
-import {
-  ORGANISATION_PROGRAM_APPLICANTS,
-  ORGANISATION_PROGRAM_DETAILS,
-  ORGANISATION_PROGRAM_INVITATIONS,
-  ORGANISATION_PROGRAM_PARTICIPANTS,
-} from "../../constants/Routes";
+import { ORGANISATION_PROGRAM_DETAILS } from "../../constants/Routes";
 import "./OrgProgramDetailsCommon.css";
 
 type OrgProgramDetailsCommonProps = {
@@ -34,23 +29,14 @@ const OrgProgramDetailsCommon = ({
         <Alert variant="warning" className="ProgramDetailsRouteLinks">
           <div
             className={`${
-              location.pathname.includes(ORGANISATION_PROGRAM_DETAILS)
-                ? "BlankDiv"
-                : "NoBlankDiv"
-            }`}
-          >
-            &nbsp;
-          </div>
-
-          <div
-            className={`${
-              location.pathname.includes(ORGANISATION_PROGRAM_DETAILS)
+              location.pathname.includes(ORGANISATION_PROGRAM_DETAILS) &&
+              location.pathname.includes("details")
                 ? "CurrentSelectedTab"
                 : "NotCurrentSelectedTab"
-            }`}
+            } ProgramDetailsLinkDiv`}
           >
             <Link
-              to={`${ORGANISATION_PROGRAM_DETAILS}/${programId}`}
+              to={`${ORGANISATION_PROGRAM_DETAILS}/${programId}/details`}
               className="ProgramDetailsLink Link"
             >
               Program Details
@@ -59,13 +45,14 @@ const OrgProgramDetailsCommon = ({
 
           <div
             className={`${
-              location.pathname.includes(ORGANISATION_PROGRAM_INVITATIONS)
+              location.pathname.includes(ORGANISATION_PROGRAM_DETAILS) &&
+              location.pathname.includes("invitations")
                 ? "CurrentSelectedTab"
                 : "NotCurrentSelectedTab"
-            }`}
+            } InvitationsLinkDiv`}
           >
             <Link
-              to={`${ORGANISATION_PROGRAM_INVITATIONS}/${programId}`}
+              to={`${ORGANISATION_PROGRAM_DETAILS}/${programId}/invitations`}
               className="InvitationsLink Link"
             >
               Invitations
@@ -74,13 +61,14 @@ const OrgProgramDetailsCommon = ({
 
           <div
             className={`${
-              location.pathname.includes(ORGANISATION_PROGRAM_PARTICIPANTS)
+              location.pathname.includes(ORGANISATION_PROGRAM_DETAILS) &&
+              location.pathname.includes("participants")
                 ? "CurrentSelectedTab"
                 : "NotCurrentSelectedTab"
-            }`}
+            } ParticipantsLinkDiv`}
           >
             <Link
-              to={`${ORGANISATION_PROGRAM_PARTICIPANTS}/${programId}`}
+              to={`${ORGANISATION_PROGRAM_DETAILS}/${programId}/participants`}
               className="ParticipantsLink Link"
             >
               Participants
@@ -88,26 +76,18 @@ const OrgProgramDetailsCommon = ({
           </div>
           <div
             className={`${
-              location.pathname.includes(ORGANISATION_PROGRAM_APPLICANTS)
+              location.pathname.includes(ORGANISATION_PROGRAM_DETAILS) &&
+              location.pathname.includes("applicants")
                 ? "CurrentSelectedTab"
                 : "NotCurrentSelectedTab"
             }`}
           >
             <Link
-              to={`${ORGANISATION_PROGRAM_APPLICANTS}/${programId}`}
+              to={`${ORGANISATION_PROGRAM_DETAILS}/${programId}/applicants`}
               className="ApplicantsLink Link"
             >
               Applicants
             </Link>
-          </div>
-          <div
-            className={`${
-              location.pathname.includes(ORGANISATION_PROGRAM_APPLICANTS)
-                ? "BlankDiv"
-                : "NoBlankDiv"
-            }`}
-          >
-            &nbsp;
           </div>
         </Alert>
       </div>

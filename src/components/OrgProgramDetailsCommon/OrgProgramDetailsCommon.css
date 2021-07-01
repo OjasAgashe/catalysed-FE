@@ -12,18 +12,6 @@
   padding: 0.1rem 0.5rem;
 }
 
-.ProgramDetailsRouteLinks div {
-  margin: 0.3rem auto;
-}
-
-.ProgramDetailsRouteLinks .CurrentSelectedTab {
-  height: 2.2rem !important;
-}
-
-.ProgramDetailsRouteLinks .BlankDiv {
-  height: 2.1rem !important;
-}
-
 .ProgramDetailsRouteLinks {
   animation-name: box-shadow-animation;
   animation-iteration-count: infinite;

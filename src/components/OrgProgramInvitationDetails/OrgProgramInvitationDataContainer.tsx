@@ -213,7 +213,7 @@ const OrgProgramInvitationDataContainer = ({
               </DropdownButton>
             </th>
 
-            <th className="ProgramInvitationHeader">
+            <th className="ProgramInvitationHeader NumericalHeaderColumn">
               <DropdownButton
                 title={`Sent On${
                   state.selectedRadioForSort !== "All"

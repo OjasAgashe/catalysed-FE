@@ -34,7 +34,7 @@ const ApplicantTableRow = ({ data }: ApplicantTableRowProps) => {
             </span>
           </OverlayTrigger>
         </td>
-        <td className="ProgramApplicantTableData">
+        <td className="ProgramApplicantTableData NumericalColumn">
           {data.date_of_application}
         </td>
         <td className="ProgramApplicantTableData">{data.status}</td>

@@ -4,6 +4,7 @@
 
 .TableHeaderFirstRow :is(.MentorHeading, .StudentHeading) {
   border-bottom: 1px solid var(--blue-gray-400) !important;
+  text-align: center !important;
 }
 
 .OrgApplicantsTableData {
@@ -20,4 +21,17 @@
 .OrgApplicantsTableDataRow:hover {
   cursor: pointer;
   box-shadow: 1px 0 10px var(--blue-gray-300);
+}
+
+.OrgApplicantsTableHeader .TableHeaderSecondRow th,
+.OrgApplicantsTableData {
+  text-align: right !important;
+  padding-right: 1.5rem !important;
+}
+
+.OrgApplicantsTableRow .ProgramHeading,
+.OrgApplicantsTableDataProgramName {
+  text-align: left !important;
+  padding-left: 1.5rem !important;
+  padding-right: 0 !important;
 }

@@ -21,7 +21,7 @@ const OrgApplicantsPageTableRow = ({
         className="OrgApplicantsTableRow OrgApplicantsTableDataRow"
         onClick={() => console.log("Row id: ", data.id)}
       >
-        <td className="OrgApplicantsTableData">
+        <td className="OrgApplicantsTableData OrgApplicantsTableDataProgramName">
           <OverlayTrigger
             placement="bottom"
             overlay={
@@ -29,8 +29,8 @@ const OrgApplicantsPageTableRow = ({
             }
           >
             <span>
-              {data.program_name.length > 50
-                ? `${data.program_name.substring(0, 50)}...`
+              {data.program_name.length > 60
+                ? `${data.program_name.substring(0, 60)}...`
                 : data.program_name}
             </span>
           </OverlayTrigger>

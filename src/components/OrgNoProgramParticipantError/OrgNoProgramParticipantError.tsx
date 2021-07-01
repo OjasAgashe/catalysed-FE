@@ -1,7 +1,7 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { ORGANISATION_PROGRAM_INVITATIONS } from "../../constants/Routes";
+import { ORGANISATION_PROGRAM_DETAILS } from "../../constants/Routes";
 import "./OrgNoProgramParticipantError.css";
 
 type OrgNoProgramParticipantErrorProps = {
@@ -14,7 +14,7 @@ const OrgNoProgramParticipantError = ({
   return (
     <Alert variant="danger" className="OrgNoProgramParticipantErrorProps">
       Sorry !! You have no Participants,&nbsp; Send new invitation from{" "}
-      <Link to={`${ORGANISATION_PROGRAM_INVITATIONS}/${programId}`}>
+      <Link to={`${ORGANISATION_PROGRAM_DETAILS}/${programId}/invitations`}>
         Invitation Page
       </Link>
     </Alert>

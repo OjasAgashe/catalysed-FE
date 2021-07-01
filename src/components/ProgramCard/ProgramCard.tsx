@@ -19,7 +19,7 @@ const ProgramCard = ({ program, classNames = "" }: ProgramCardProps) => {
   const history = useHistory();
 
   const handleCardProgramDetailsBtn = () => {
-    history.push(`${ORGANISATION_PROGRAM_DETAILS}/${program.id}`);
+    history.push(`${ORGANISATION_PROGRAM_DETAILS}/${program.id}/details`);
   };
 
   return (

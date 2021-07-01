@@ -5,8 +5,8 @@
 }
 
 .ChooseMentorOrStudentDiv .MentorOrStudentText {
-  padding: 0.3rem 0.5rem !important;
   font-size: 1.2rem !important;
+  padding: 0 !important;
   box-shadow: 1px 1px 3px var(--cyan-700);
   animation-name: box-shadow-animation;
   animation-iteration-count: infinite;
@@ -19,37 +19,8 @@
   }
 }
 
-.MentorOrStudentText div {
-  display: inline-block;
-}
-
-.MentorOrStudentText .BlankDiv {
-  height: 1.9rem;
-  width: 0.8rem;
-  border-bottom: 2px solid !important;
-}
-
-@media screen and (max-width: 500px) {
-  .MentorOrStudentText .BlankDiv {
-    height: 1.99rem;
-  }
-}
-
-.MentorOrStudentText .NoBlankDiv {
-  display: none;
-}
-
 .MentorOrStudentText .CurrentSelectedTab {
-  border: 2px solid !important;
-  border-bottom: none !important;
-  background-color: var(--cyan-info-border) !important;
-  border-top-left-radius: 5px !important;
-  border-top-right-radius: 5px !important;
-  height: 2.1rem;
-}
-
-.MentorOrStudentText .NotCurrentSelectedTab {
-  border-bottom: 2px solid !important;
+  background-color: var(--cyan-shade) !important;
 }
 
 .MentorOrStudentText .Btn {

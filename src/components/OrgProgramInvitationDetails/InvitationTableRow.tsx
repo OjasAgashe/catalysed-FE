@@ -37,7 +37,7 @@ const InvitationTableRow = ({ data }: InvitationTableRowProps) => {
         <td className="ProgramInvitationTableData">
           {data.userType === "MENTOR" ? "Mentor" : "Student"}
         </td>
-        <td className="ProgramInvitationTableData">{`${new Date(
+        <td className="ProgramInvitationTableData NumericalColumn">{`${new Date(
           data.sentAt
         ).getDate()}/${new Date(data.sentAt).getMonth() + 1}/${new Date(
           data.sentAt

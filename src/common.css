@@ -521,7 +521,7 @@ input[type="number"] {
 .ProgramDetailsRouteLinks,
 .OrgDirectoryMentorOrStudentOpt,
 .OrgDirectoryDetailsPIOrCtPOpt {
-  padding: 0.3rem 1.4rem !important;
+  padding: 0 !important;
   font-size: 1.3rem !important;
   width: fit-content;
   box-shadow: 1px 1px 5px var(--barley-corn);
@@ -537,7 +537,6 @@ input[type="number"] {
   .ProgramDetailsRouteLinks,
   .OrgDirectoryMentorOrStudentOpt,
   .OrgDirectoryDetailsPIOrCtPOpt {
-    padding: 0.2rem !important;
     margin: auto 0.4rem !important;
   }
 }
@@ -561,7 +560,8 @@ input[type="number"] {
 /* 
   OrgDirectoryPageHeader,
   OrgDirectoryDetailsCommonHeader,
-  OrgProgramDetailsCommon 
+  OrgProgramDetailsCommon,
+  MentorOrStudentTab
 */
 
 :is(.OrgDirectoryMentorOrStudentOpt, .OrgDirectoryDetailsPIOrCtPOpt) button {
@@ -573,34 +573,31 @@ input[type="number"] {
   border-radius: 5px;
 }
 
-:is(.OrgDirectoryMentorOrStudentOpt, .OrgDirectoryDetailsPIOrCtPOpt, .ProgramDetailsRouteLinks)
+:is(.OrgDirectoryMentorOrStudentOpt, .OrgDirectoryDetailsPIOrCtPOpt, .ProgramDetailsRouteLinks, .MentorOrStudentText)
   div {
   display: inline-block;
-}
-
-:is(.OrgDirectoryMentorOrStudentOpt, .OrgDirectoryDetailsPIOrCtPOpt, .ProgramDetailsRouteLinks)
-  .BlankDiv {
-  height: 2.15rem;
-  width: 0.8rem;
-  border-bottom: 2px solid var(--yellow-700) !important;
-}
-
-:is(.OrgDirectoryMentorOrStudentOpt, .OrgDirectoryDetailsPIOrCtPOpt, .ProgramDetailsRouteLinks)
-  .NoBlankDiv {
-  display: none;
+  margin: 0 !important;
+  padding: 0.3rem 0.5rem !important;
 }
 
 .CurrentSelectedTab {
-  border: 2px solid var(--yellow-700) !important;
+  border: none !important;
   border-bottom: none !important;
-  background-color: var(--current-tab-background) !important;
-  border-top-left-radius: 5px !important;
-  border-top-right-radius: 5px !important;
-  height: 2.3rem;
+  background-color: var(--yellow-background-tab) !important;
+  border-radius: 5px !important;
+  height: unset !important;
 }
 
 .NotCurrentSelectedTab {
-  border-bottom: 2px solid var(--yellow-700) !important;
+  border: none !important;
+}
+
+.ProgramDetailsRouteLinks
+  :is(.ProgramDetailsLinkDiv, .InvitationsLinkDiv, .ParticipantsLinkDiv),
+.OrgDirectoryMentorOrStudentOpt .OrgDirectoryMentorOpt,
+.OrgDirectoryDetailsPIOrCtPOpt .OrgDirectoryDetailsPIOpt,
+.MentorOrStudentText .MentorOptDiv {
+  border-right: 2px solid !important;
 }
 
 .OrgDirectoryMentorOrStudentOpt,
@@ -657,19 +654,19 @@ input[type="number"] {
 }
 
 .ProgramInvitationTableRow,
-.ProgramApplicantTableRow,
-.OrgApplicantsTableRow {
-  text-align: center !important;
+.ProgramApplicantTableRow {
+  text-align: left !important;
+  padding-left: 1.5rem !important;
 }
 
 .ProgramInvitationHeader,
 .ProgramApplicantHeader,
 .OrgApplicantsTableHeader {
-  text-align: center !important;
   font-size: 1.1rem !important;
   color: var(--blue-gray-700) !important;
   border-top: 2px solid var(--blue-gray-500) !important;
   border-bottom: 2px solid var(--blue-gray-500) !important;
+  padding-left: 1.5rem !important;
 }
 
 :is(.OrgProgramInvitationDataContainer, .OrgProgramApplicantDataContainer)
@@ -684,6 +681,14 @@ input[type="number"] {
   padding: 0.5rem !important;
   max-width: 8rem !important;
   word-wrap: break-word;
+  padding-left: 1.5rem !important;
+}
+
+:is(.ProgramInvitationHeader, .ProgramApplicantHeader).NumericalHeaderColumn,
+:is(.ProgramInvitationTableData, .ProgramApplicantTableData).NumericalColumn {
+  text-align: center !important;
+  padding-right: 0 !important;
+  padding-left: 0.5rem !important;
 }
 
 :is(.OrgInvitationSearchBar, .OrgProgramApplicantSearchBar)

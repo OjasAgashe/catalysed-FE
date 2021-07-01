@@ -33,7 +33,7 @@ const OrgMentorDirectory = ({
   const history = useHistory();
 
   const handleDirectoryCardViewAllBtnClick = (id: number) => {
-    history.push(`${ORGANISATION_DIRECTORY_DETAILS_MENTOR}/${id}`);
+    history.push(`${ORGANISATION_DIRECTORY_DETAILS_MENTOR}/${id}/details`);
   };
 
   return (

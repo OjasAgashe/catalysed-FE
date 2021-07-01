@@ -108,15 +108,12 @@ const OrgDirectoryPageHeader = ({
 
       <div className="OrgDirectoryMentorOrStudentOptContainer">
         <Alert variant="warning" className="OrgDirectoryMentorOrStudentOpt">
-          <div className={`${title === "Mentors" ? "BlankDiv" : "NoBlankDiv"}`}>
-            &nbsp;
-          </div>
           <div
             className={`${
               title === "Mentors"
                 ? "CurrentSelectedTab"
                 : "NotCurrentSelectedTab"
-            }`}
+            } OrgDirectoryMentorOpt`}
           >
             <button
               className="MentorBtnOpt"
@@ -148,9 +145,6 @@ const OrgDirectoryPageHeader = ({
             >
               Students
             </button>
-          </div>
-          <div className={`${title !== "Mentors" ? "BlankDiv" : "NoBlankDiv"}`}>
-            &nbsp;
           </div>
         </Alert>
       </div>
