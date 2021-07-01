@@ -1,24 +1,20 @@
 /* eslint-disable eqeqeq */
-import React from "react";
-import { OrgEditProgramDetailsIllustration } from "../../assets/Illustrations/Illustrations";
+import React, { useCallback, useEffect } from "react";
 import {
   OrgEditProgramDetailsActionType,
   OrgEditProgramDetailsState,
 } from "../../types/OrgEditProgramDetails";
+
 import Error from "../Error/Error";
-import EditGeneralDetailsForm from "./EditGeneralDetailsForm";
+
 import "./OrgEditProgramDetails.css";
 import "../CreateProgramForm/CreateProgramForm.css";
-import EditCoordinatorDetailsForm from "./EditCoordinatorDetailsForm";
-import EditMentorDetailsForm from "./EditMentorDetailsForm";
-import EditStudentDetailsForm from "./EditStudentDetailsForm";
+
 import { CreateProgramData } from "../../types/CreateProgram";
-import { Button } from "react-bootstrap";
-import { GiStamper } from "react-icons/gi";
-import { RiDraftLine } from "react-icons/ri";
 import { useHistory } from "react-router-dom";
 import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
-import { ORGANISATION_PROGRAM_VIEW_SEARCH } from "../../constants/Routes";
+import { ORGANISATION_PROGRAM_DETAILS } from "../../constants/Routes";
+import OrgEditProgramDetailsFragment from "./OrgEditProgramDetailsFragment";
 
 type OrgEditProgramDetailsProps = {
   state: OrgEditProgramDetailsState;
@@ -36,6 +32,122 @@ const OrgEditProgramDetails = ({
   const { putUpdatedProgramDetails, putUpdatedProgramStatusToPublish } =
     useOrgAPI();
   const history = useHistory();
+
+  const hasDataChange = useCallback(() => {
+    const originalDataTemp = { ...state.originalData } as CreateProgramData;
+    const editedDataTemp = { ...editedData } as CreateProgramData;
+
+    let key: keyof CreateProgramData;
+    for (key in originalDataTemp) {
+      if (key != "id" && key != "status") {
+        switch (key) {
+          case "ageLimit":
+            if (
+              originalDataTemp.ageLimit.from != editedDataTemp.ageLimit.from ||
+              originalDataTemp.ageLimit.to != editedDataTemp.ageLimit.to
+            )
+              return true;
+            break;
+
+          case "coordinator":
+            let ckey: keyof CreateProgramData["coordinator"];
+
+            for (ckey in originalDataTemp.coordinator) {
+              switch (ckey) {
+                case "contact":
+                  let cckey: keyof CreateProgramData["coordinator"]["contact"];
+                  for (cckey in originalDataTemp.coordinator.contact) {
+                    if (
+                      originalDataTemp.coordinator.contact[cckey] !=
+                      editedDataTemp.coordinator.contact[cckey]
+                    )
+                      return true;
+                  }
+                  break;
+
+                default:
+                  if (
+                    originalDataTemp.coordinator[ckey] !=
+                    editedDataTemp.coordinator[ckey]
+                  )
+                    return true;
+                  break;
+              }
+            }
+            break;
+
+          case "mentorFields":
+            let mkey: keyof CreateProgramData["mentorFields"];
+
+            for (mkey in originalDataTemp.mentorFields) {
+              if (
+                originalDataTemp.mentorFields[mkey] !=
+                editedDataTemp.mentorFields[mkey]
+              )
+                return true;
+            }
+            break;
+
+          case "studentFields":
+            let skey: keyof CreateProgramData["studentFields"];
+
+            for (skey in originalDataTemp.studentFields) {
+              if (
+                originalDataTemp.studentFields[skey] !=
+                editedDataTemp.studentFields[skey]
+              )
+                return true;
+            }
+            break;
+
+          default:
+            if (originalDataTemp[key] != editedDataTemp[key]) return true;
+            break;
+        }
+      }
+    }
+
+    return false;
+  }, [editedData, state.originalData]);
+
+  useEffect(() => {
+    dispatch({ type: "dataHasChanged", payload: hasDataChange() });
+
+    // @ts-ignore
+    const unblock = history.block((tx) => {
+      if (state.dataHasChanged === false) return true;
+
+      if (state.leave) return true;
+
+      dispatch({ type: "navigateToPath", payload: tx.pathname });
+
+      if (state.dataHasChanged) dispatch({ type: "showModal", payload: true });
+
+      return false;
+    });
+
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      if (state.dataHasChanged) {
+        event.preventDefault();
+        event.returnValue = "";
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      unblock();
+    };
+  }, [
+    dispatch,
+    editedData,
+    hasDataChange,
+    history,
+    state.dataHasChanged,
+    state.leave,
+    state.originalData,
+  ]);
 
   const canMakeAPICall = () => {
     return (
@@ -63,83 +175,6 @@ const OrgEditProgramDetails = ({
     );
   };
 
-  const areTwoObjectContainsSameData = () => {
-    const originalDataTemp = { ...state.originalData } as CreateProgramData;
-    const editedDataTemp = { ...editedData } as CreateProgramData;
-
-    let key: keyof CreateProgramData;
-    for (key in originalDataTemp) {
-      if (key != "id" && key != "status") {
-        switch (key) {
-          case "ageLimit":
-            if (
-              originalDataTemp.ageLimit.from != editedDataTemp.ageLimit.from ||
-              originalDataTemp.ageLimit.to != editedDataTemp.ageLimit.to
-            )
-              return false;
-            break;
-
-          case "coordinator":
-            let ckey: keyof CreateProgramData["coordinator"];
-
-            for (ckey in originalDataTemp.coordinator) {
-              switch (ckey) {
-                case "contact":
-                  let cckey: keyof CreateProgramData["coordinator"]["contact"];
-                  for (cckey in originalDataTemp.coordinator.contact) {
-                    if (
-                      originalDataTemp.coordinator.contact[cckey] !=
-                      editedDataTemp.coordinator.contact[cckey]
-                    )
-                      return false;
-                  }
-                  break;
-
-                default:
-                  if (
-                    originalDataTemp.coordinator[ckey] !=
-                    editedDataTemp.coordinator[ckey]
-                  )
-                    return false;
-                  break;
-              }
-            }
-            break;
-
-          case "mentorFields":
-            let mkey: keyof CreateProgramData["mentorFields"];
-
-            for (mkey in originalDataTemp.mentorFields) {
-              if (
-                originalDataTemp.mentorFields[mkey] !=
-                editedDataTemp.mentorFields[mkey]
-              )
-                return false;
-            }
-            break;
-
-          case "studentFields":
-            let skey: keyof CreateProgramData["studentFields"];
-
-            for (skey in originalDataTemp.studentFields) {
-              if (
-                originalDataTemp.studentFields[skey] !=
-                editedDataTemp.studentFields[skey]
-              )
-                return false;
-            }
-            break;
-
-          default:
-            if (originalDataTemp[key] != editedDataTemp[key]) return false;
-            break;
-        }
-      }
-    }
-
-    return true;
-  };
-
   const makeAPICall = async (status: string, message: string) => {
     try {
       document.documentElement.scrollTop = 0;
@@ -150,32 +185,33 @@ const OrgEditProgramDetails = ({
       const id = state.originalData?.id as CreateProgramData["id"];
 
       if (
-        areTwoObjectContainsSameData() &&
+        state.dataHasChanged === false &&
         status === "PUBLISHED" &&
         state.originalData?.status === "SAVED_TO_DRAFT"
       ) {
-        const response = await putUpdatedProgramStatusToPublish(
+        await putUpdatedProgramStatusToPublish(
           parseInt(id),
           editedData as CreateProgramData
         );
-
-        console.log(response);
       } else if (
         !(
-          areTwoObjectContainsSameData() &&
+          state.dataHasChanged === false &&
           status === "PUBLISHED" &&
           state.originalData?.status === "PUBLISHED"
         )
       ) {
-        const response = await putUpdatedProgramDetails(
+        await putUpdatedProgramDetails(
           parseInt(id),
           editedData as CreateProgramData
         );
-        console.log(response);
       }
 
       dispatch({ type: "loadingMessage", payload: "" });
-      // history.push(`${ORGANISATION_PROGRAM_VIEW_SEARCH}/all`);
+      dispatch({ type: "dataHasChanged", payload: false });
+      dispatch({ type: "originalData", payload: editedData });
+      history.push(
+        `${ORGANISATION_PROGRAM_DETAILS}/${state.originalData?.id}/details`
+      );
     } catch (error) {
       document.documentElement.scrollTop =
         document.documentElement.scrollHeight;
@@ -220,71 +256,33 @@ const OrgEditProgramDetails = ({
     makeAPICall("SAVED_TO_DRAFT", "Saving to draft...");
   };
 
+  const handleLeavePageModalLeaveBtn = () => {
+    dispatch({ type: "leave", payload: true });
+    history.push(state.navigateToPath);
+  };
+
+  const handleLeavePageModalStayBtn = () => {
+    dispatch({ type: "stay", payload: true });
+    dispatch({ type: "leave", payload: false });
+    dispatch({ type: "showModal", payload: false });
+    dispatch({ type: "navigateToPath", payload: "" });
+  };
+
   return (
     <section className="CreateProgramFormContainer">
       {state.error ? (
         <Error message={state.error} className="OrgDetailsNotFound" />
       ) : (
-        <>
-          <div className="CreateProgramFirstSection">
-            <EditGeneralDetailsForm
-              state={state}
-              dispatch={dispatch}
-              editedData={editedData}
-              setEditedData={setEditedData}
-            />
-            <div className="CreateProgramFirstSubSection">
-              <img
-                src={OrgEditProgramDetailsIllustration}
-                alt="edit program details illustration"
-                className="CreateProgramIllustration"
-              />
-              <EditCoordinatorDetailsForm
-                state={state}
-                dispatch={dispatch}
-                editedData={editedData}
-                setEditedData={setEditedData}
-              />
-            </div>
-          </div>
-          <div className="CreateProgramSecondSection">
-            <EditMentorDetailsForm
-              state={state}
-              dispatch={dispatch}
-              editedData={editedData}
-              setEditedData={setEditedData}
-            />
-            <EditStudentDetailsForm
-              state={state}
-              dispatch={dispatch}
-              editedData={editedData}
-              setEditedData={setEditedData}
-            />
-          </div>
-          <div className="EditProgramDetails CreateProgramButtonContainer">
-            {state.originalData?.status !== "PUBLISHED" && (
-              <Button
-                className="CreateProgramDraftBtn"
-                onClick={handleDraftBtnClick}
-              >
-                Save to Draft&nbsp;
-                <RiDraftLine />
-              </Button>
-            )}
-            <Button
-              className="CreateProgramPublishBtn"
-              onClick={handlePublishBtnClick}
-            >
-              Publish <GiStamper />
-            </Button>
-          </div>
-          {state.validationError && (
-            <Error
-              message={state.validationError}
-              className="CreateProgramErrorMessage"
-            />
-          )}
-        </>
+        <OrgEditProgramDetailsFragment
+          handleLeavePageModalLeaveBtn={handleLeavePageModalLeaveBtn}
+          handleLeavePageModalStayBtn={handleLeavePageModalStayBtn}
+          state={state}
+          dispatch={dispatch}
+          editedData={editedData}
+          setEditedData={setEditedData}
+          handleDraftBtnClick={handleDraftBtnClick}
+          handlePublishBtnClick={handlePublishBtnClick}
+        />
       )}
     </section>
   );

@@ -23,6 +23,11 @@ const OrgEditProgramDetailsPage = () => {
     studentApplyDate: null,
     validated: false,
     urlInput: "",
+    showModal: false,
+    leave: false,
+    stay: false,
+    navigateToPath: "",
+    dataHasChanged: false,
   });
 
   const [editedData, setEditedData] = useState<CreateProgramData | null>(null);
@@ -117,7 +122,7 @@ const OrgEditProgramDetailsPage = () => {
     <div className="OrgEditProgramDetailsPage">
       {(state.loading || state.loadingMessage) && (
         <LoadingProgress
-          loading={state.loading}
+          loading={state.loading || (state.loadingMessage ? true : false)}
           emailSent={false}
           loadingMessage={
             state.loading ? "Getting Details..." : state.loadingMessage
