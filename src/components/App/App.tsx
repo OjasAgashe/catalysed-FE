@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "../../pages/Home/Home";
 import Login from "../../pages/Login/Login";
 import OrgProfileBuilder from "../../pages/OrgProfileBuilder/OrgProfileBuilder";
@@ -49,6 +49,7 @@ import OrgDirectoryStudentPage from "../../pages/OrgDirectoryPage/OrgDirectorySt
 import OrgProfileEdit from "../../pages/OrgProfileEdit/OrgProfileEdit";
 import OrgProgramApplicantsPage from "../../pages/OrgProgramDetails/OrgProgramApplicantsPage";
 import OrgApplicantsPage from "../../pages/OrgApplicantsPage/OrgApplicantsPage";
+import PageNotFound from "../../pages/PageNotFound/PageNotFound";
 
 function App() {
   return (
@@ -191,6 +192,10 @@ function App() {
               <StuProfileBuilder />
             </ProfileBuilderProvider>
           </PrivateRoute>
+
+          <Route path="*">
+            <PageNotFound />
+          </Route>
         </Switch>
         <Footer />
       </Router>

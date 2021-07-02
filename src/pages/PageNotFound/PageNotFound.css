@@ -1,0 +1,49 @@
+.PageNotFoundContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.PageNotFoundSectionOne,
+.PageNotFoundSectionTwo,
+.PageNotFoundSectionThree {
+  padding: 1rem;
+  text-align: center;
+}
+
+.PageNotFoundSectionOne img {
+  max-width: 400px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px var(--blue-gray-400);
+}
+
+.PageNotFoundSectionTwo {
+  color: var(--blue-gray-600);
+}
+
+.PageNotFoundSectionTwo span {
+  font-size: 2.5rem;
+  font-family: "KoHo", sans-serif;
+  font-weight: bold;
+}
+
+.PageNotFoundSectionTwo small {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.PageNotFoundSectionThree .BackToHomeBtn {
+  font-size: 1.25rem;
+  color: var(--blue-gray-700);
+  border: none;
+  border-radius: 10px;
+  padding: 0.2rem 1rem;
+  box-shadow: 1px 1px 5px var(--linkedIn-code);
+  background-color: var(--light-blue-300);
+}
+
+.PageNotFoundSectionThree .BackToHomeBtnIcon {
+  margin-bottom: 0.2rem;
+}
