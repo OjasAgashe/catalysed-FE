@@ -1,19 +1,21 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
 import { OrgDirectoryDetailsHeader } from "../../assets/Illustrations/Illustrations";
+import {
+  OrgDirectoryDetailsCommonActionType,
+  OrgDirectoryDetailsCommonState,
+} from "../../types/OrganisationDirectory";
 
 import "./OrgDirectoryDetailsCommonHeader.css";
 
 type OrgDirectoryDetailsCommonHeaderProps = {
-  full_name: string;
-  choosedOption: string;
-  setChoosedOption: React.Dispatch<React.SetStateAction<string>>;
+  state: OrgDirectoryDetailsCommonState;
+  dispatch: React.Dispatch<OrgDirectoryDetailsCommonActionType>;
 };
 
 const OrgDirectoryDetailsCommonHeader = ({
-  full_name,
-  choosedOption,
-  setChoosedOption,
+  state,
+  dispatch,
 }: OrgDirectoryDetailsCommonHeaderProps) => {
   return (
     <div
@@ -21,14 +23,17 @@ const OrgDirectoryDetailsCommonHeader = ({
       style={{ backgroundImage: `url(${OrgDirectoryDetailsHeader})` }}
     >
       <div className="OrgDirectoryDetailsCommonHeaderHeroText">
-        <span>{full_name}&nbsp;:&nbsp;Details</span>
+        <span>
+          {`${state.responseData?.firstName} ${state.responseData?.lastName}`}
+          &nbsp;:&nbsp;Details
+        </span>
       </div>
 
       <div className="OrgDirectoryDetailsPIOrCtPOptContainer">
         <Alert variant="warning" className="OrgDirectoryDetailsPIOrCtPOpt">
           <div
             className={`${
-              choosedOption === "PersonalInfo"
+              state.choosedOption === "PersonalInfo"
                 ? "CurrentSelectedTab"
                 : "NotCurrentSelectedTab"
             } OrgDirectoryDetailsPIOpt`}
@@ -37,7 +42,7 @@ const OrgDirectoryDetailsCommonHeader = ({
               className="PersonalInfoBtnOpt"
               type="button"
               onClick={() => {
-                setChoosedOption("PersonalInfo");
+                dispatch({ type: "choosedOption", payload: "PersonalInfo" });
               }}
             >
               Personal Info
@@ -45,7 +50,7 @@ const OrgDirectoryDetailsCommonHeader = ({
           </div>
           <div
             className={`${
-              choosedOption === "PersonalInfo"
+              state.choosedOption === "PersonalInfo"
                 ? "NotCurrentSelectedTab"
                 : "CurrentSelectedTab"
             }`}
@@ -54,7 +59,10 @@ const OrgDirectoryDetailsCommonHeader = ({
               className="CtPBtnOpt"
               type="button"
               onClick={() => {
-                setChoosedOption("ConnectedToPrograms");
+                dispatch({
+                  type: "choosedOption",
+                  payload: "ConnectedToPrograms",
+                });
               }}
             >
               Connected to Programs

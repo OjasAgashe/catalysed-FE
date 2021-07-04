@@ -3,11 +3,11 @@ export const LOGIN = "/app/login";
 export const MENTOR_HOME = "/app/mentor/home";
 export const MENTOR_PROFILE_BUILDER = "/app/mentor/profile/builder";
 export const ORGANISATION_APPLICANTS = "/app/organiser/applicants";
-export const ORGANISATION_DIRECTORY = "/app/organiser/directory";
 export const ORGANISATION_DIRECTORY_DETAILS_MENTOR =
   "/app/organiser/directory/mentor";
 export const ORGANISATION_DIRECTORY_DETAILS_STUDENT =
   "/app/organiser/directory/student";
+export const ORGANISATION_DIRECTORY = "/app/organiser/directory";
 export const ORGANISATION_HOME = "/app/organiser/home";
 export const ORGANISATION_PROFILE_BUILDER = "/app/organiser/profile/builder";
 export const ORGANISATION_PROFILE_EDIT = "/app/organiser/profile/edit";

@@ -1,39 +1,21 @@
 import React from "react";
+import { OrgDirectoryDetailsCommonState } from "../../types/OrganisationDirectory";
 import OrgDirectoryDetailsBackBtn from "../OrgDirectoryDetailsBackBtn/OrgDirectoryDetailsBackBtn";
 import "./OrgDirectoryDetailsPersonalInfo.css";
 import SectionOne from "./SectionOne";
 import SectionTwo from "./SectionTwo";
 
 type OrgDirectoryDetailsPersonalInfoProps = {
-  fakeData: {
-    full_name: string;
-    age: number;
-    gender: string;
-    contact: {
-      phone: string;
-      email: string;
-    };
-    school_or_organisation: string;
-    address: {
-      city: string;
-      country: string;
-    };
-    known_languages: string[];
-    professionally_mentored_ever: string;
-    experience: number;
-    stable_connection: string;
-    academic_qualification: string;
-    profession: string;
-  };
+  state: OrgDirectoryDetailsCommonState;
 };
 
 const OrgDirectoryDetailsPersonalInfo = ({
-  fakeData,
+  state,
 }: OrgDirectoryDetailsPersonalInfoProps) => {
   return (
     <div className="OrgDirectoryDetailsPersonalContainer">
-      <SectionOne fakeData={fakeData} />
-      <SectionTwo fakeData={fakeData} />
+      <SectionOne state={state} />
+      <SectionTwo state={state} />
       <OrgDirectoryDetailsBackBtn />
     </div>
   );

@@ -3,80 +3,43 @@ import { Alert, Form, InputGroup } from "react-bootstrap";
 import { OrgDirectoryPage } from "../../assets/Illustrations/Illustrations";
 import { FcSearch } from "react-icons/fc";
 import "./OrgDirectoryPageHeader.css";
+import {
+  OrganisationDirectoryCommonActionType,
+  OrganisationDirectoryCommonResponse,
+  OrganisationDirectoryCommonState,
+} from "../../types/OrganisationDirectory";
+import { useHistory } from "react-router-dom";
+import { ORGANISATION_DIRECTORY } from "../../constants/Routes";
 
 type OrgDirectoryPageHeaderProps = {
-  setTitle: React.Dispatch<React.SetStateAction<string>>;
-  title: string;
-  searchedName: string;
-  setSearchedName: React.Dispatch<React.SetStateAction<string>>;
-  setFilteredResponseData: React.Dispatch<
-    React.SetStateAction<
-      | []
-      | {
-          id: number;
-          name: string;
-          email: string;
-          active_programs: string[];
-        }[]
-    >
-  >;
-  fakeMentorData: {
-    id: number;
-    name: string;
-    email: string;
-    active_programs: string[];
-  }[];
-  fakeStudentData: {
-    id: number;
-    name: string;
-    email: string;
-    active_programs: string[];
-  }[];
-  setSearchedNameNotFound: React.Dispatch<React.SetStateAction<boolean>>;
+  state: OrganisationDirectoryCommonState;
+  dispatch: React.Dispatch<OrganisationDirectoryCommonActionType>;
 };
 
 const OrgDirectoryPageHeader = ({
-  setTitle,
-  title,
-  searchedName,
-  setSearchedName,
-  setFilteredResponseData,
-  fakeMentorData,
-  fakeStudentData,
-  setSearchedNameNotFound,
+  state,
+  dispatch,
 }: OrgDirectoryPageHeaderProps) => {
+  const history = useHistory();
+
   const handleOrgDirectorySearch: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
-    setSearchedName(event.target.value);
-    setSearchedNameNotFound(false);
+    dispatch({ type: "searchedName", payload: event.target.value });
+    dispatch({ type: "searchedNameNotFound", payload: false });
 
-    let tempFilteredData:
-      | {
-          id: number;
-          name: string;
-          email: string;
-          active_programs: string[];
-        }[]
-      | [] = [];
-
-    if (title === "Mentors") {
-      tempFilteredData = fakeMentorData.filter((data) =>
+    const responseData =
+      state.responseData as OrganisationDirectoryCommonResponse[];
+    const tempFilteredData = responseData.filter(
+      (data: OrganisationDirectoryCommonResponse) =>
         data.name.toLowerCase().includes(event.target.value.toLowerCase()) ||
         data.email.toLowerCase().includes(event.target.value.toLowerCase())
-      );
-    }
+    );
 
-    if (title === "Students") {
-      tempFilteredData = fakeStudentData.filter((data) =>
-        data.name.toLowerCase().startsWith(event.target.value.toLowerCase())
-      );
-    }
-
-    setFilteredResponseData(tempFilteredData);
+    dispatch({ type: "filteredResponseData", payload: tempFilteredData });
 
     if (event.target.value !== "" && tempFilteredData.length === 0) {
-      setSearchedNameNotFound(true);
+      dispatch({ type: "searchedNameNotFound", payload: true });
     }
   };
 
@@ -86,7 +49,7 @@ const OrgDirectoryPageHeader = ({
       style={{ backgroundImage: `url(${OrgDirectoryPage})` }}
     >
       <div className="OrgDirectoryPageHeaderHeroText">
-        <span>{title} Directory</span>
+        <span>{state.title} Directory</span>
       </div>
 
       <div className="SearchBarContainer">
@@ -99,7 +62,7 @@ const OrgDirectoryPageHeader = ({
               className="DirectorySearchFormControl"
               type="search"
               placeholder="Search by Name or Email..."
-              value={searchedName}
+              value={state.searchedName}
               onChange={handleOrgDirectorySearch}
             />
           </InputGroup>
@@ -110,7 +73,7 @@ const OrgDirectoryPageHeader = ({
         <Alert variant="warning" className="OrgDirectoryMentorOrStudentOpt">
           <div
             className={`${
-              title === "Mentors"
+              state.title === "Mentors"
                 ? "CurrentSelectedTab"
                 : "NotCurrentSelectedTab"
             } OrgDirectoryMentorOpt`}
@@ -119,9 +82,8 @@ const OrgDirectoryPageHeader = ({
               className="MentorBtnOpt"
               type="button"
               onClick={() => {
-                setSearchedNameNotFound(false);
-                setSearchedName("");
-                setTitle("Mentors");
+                dispatch({ type: "title", payload: "Mentors" });
+                history.push(`${ORGANISATION_DIRECTORY}?type=MENTOR`);
               }}
             >
               Mentors
@@ -129,7 +91,7 @@ const OrgDirectoryPageHeader = ({
           </div>
           <div
             className={`${
-              title === "Mentors"
+              state.title === "Mentors"
                 ? "NotCurrentSelectedTab"
                 : "CurrentSelectedTab"
             }`}
@@ -138,9 +100,8 @@ const OrgDirectoryPageHeader = ({
               className="StudentBtnOpt"
               type="button"
               onClick={() => {
-                setSearchedNameNotFound(false);
-                setSearchedName("");
-                setTitle("Students");
+                dispatch({ type: "title", payload: "Students" });
+                history.push(`${ORGANISATION_DIRECTORY}?type=STUDENT`);
               }}
             >
               Students

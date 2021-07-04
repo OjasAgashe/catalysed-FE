@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer } from "react";
 import { Alert } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
 import OrgProgramDetailsCommon from "../../components/OrgProgramDetailsCommon/OrgProgramDetailsCommon";
 import OrgProgramInvitationDetails from "../../components/OrgProgramInvitationDetails/OrgProgramInvitationDetails";
@@ -29,7 +29,7 @@ const OrgProgramInvitationsPage = () => {
   });
 
   const { programId } = useParams<{ programId: string }>();
-
+  const history = useHistory();
   const { getProgramDetails, getProgramInvitations } = useOrgAPI();
 
   useEffect(() => {
@@ -62,10 +62,15 @@ const OrgProgramInvitationsPage = () => {
           type: "responseData",
           payload: programInvitationsResponse.data,
         });
-      } catch (error) {
-        dispatch({ type: "error", payload: "Sorry!! No Invitations Found" });
-      } finally {
+
         dispatch({ type: "loading", payload: false });
+      } catch (error) {
+        if (error.response.status === 404) {
+          history.push("*");
+        } else {
+          dispatch({ type: "loading", payload: false });
+          dispatch({ type: "error", payload: "Sorry!! No Invitations Found" });
+        }
       }
     };
 
@@ -73,6 +78,7 @@ const OrgProgramInvitationsPage = () => {
   }, [
     getProgramDetails,
     getProgramInvitations,
+    history,
     programId,
     state.reRenderComponent,
   ]);

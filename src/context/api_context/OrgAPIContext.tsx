@@ -27,6 +27,10 @@ interface OrgAPIProviderReturns {
     data: OrgInvitationPostData
   ) => Promise<AxiosResponse<any>>;
   getProgramParticipants: (programId: number) => Promise<AxiosResponse<any>>;
+  getConnectedMentors: () => Promise<AxiosResponse<any>>;
+  getConnectedStudents: () => Promise<AxiosResponse<any>>;
+  getSpecificConnectedMentor(mentorId: number): Promise<AxiosResponse<any>>;
+  getSpecificConnectedStudent(studentId: number): Promise<AxiosResponse<any>>;
 }
 
 const OrgAPIContext = React.createContext<OrgAPIProviderReturns | null>(null);
@@ -193,6 +197,51 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     });
   }
 
+  function getConnectedMentors() {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.get(`organization/${catalysedId}/connections?type=MENTOR`, {
+      headers: { Authorization: `Bearer ${catalysedToken}` },
+    });
+  }
+
+  function getConnectedStudents() {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.get(
+      `organization/${catalysedId}/connections?type=STUDENT`,
+      {
+        headers: { Authorization: `Bearer ${catalysedToken}` },
+      }
+    );
+  }
+
+  function getSpecificConnectedMentor(mentorId: number) {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.get(
+      `organization/${catalysedId}/connections/mentors/${mentorId}`,
+      {
+        headers: { Authorization: `Bearer ${catalysedToken}` },
+      }
+    );
+  }
+
+  function getSpecificConnectedStudent(studentId: number) {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.get(
+      `organization/${catalysedId}/connections/students/${studentId}`,
+      {
+        headers: { Authorization: `Bearer ${catalysedToken}` },
+      }
+    );
+  }
+
   const values = {
     postCreateProgramCall,
     getProgramsMetaList,
@@ -204,6 +253,10 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     getProgramInvitations,
     postProgramInvitations,
     getProgramParticipants,
+    getConnectedMentors,
+    getConnectedStudents,
+    getSpecificConnectedMentor,
+    getSpecificConnectedStudent,
   };
 
   return (

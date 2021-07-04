@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
 import OrgEditProgramDetails from "../../components/OrgEditProgramDetails/OrgEditProgramDetails";
 import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
@@ -34,6 +34,8 @@ const OrgEditProgramDetailsPage = () => {
 
   const { programId } = useParams<{ programId: string }>();
   const { getProgramDetails } = useOrgAPI();
+
+  const history = useHistory();
 
   useEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -108,15 +110,19 @@ const OrgEditProgramDetailsPage = () => {
         }
 
         setEditedData(response.data);
-      } catch (error) {
-        dispatch({ type: "error", payload: "Sorry!! No Details Found" });
-      } finally {
         dispatch({ type: "loading", payload: false });
+      } catch (error) {
+        if (error.response.status === 404) {
+          history.push("*");
+        } else {
+          dispatch({ type: "loading", payload: false });
+          dispatch({ type: "error", payload: "Sorry!! No Details Found" });
+        }
       }
     };
 
     getDetails();
-  }, [dispatch, getProgramDetails, programId]);
+  }, [dispatch, getProgramDetails, history, programId]);
 
   return (
     <div className="OrgEditProgramDetailsPage">

@@ -1,155 +1,79 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer } from "react";
+import { Redirect } from "react-router-dom";
+import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
 import OrgDirectoryPageHeader from "../../components/OrgDirectoryPageHeader/OrgDirectoryPageHeader";
 import OrgMentorDirectory from "../../components/OrgMentorDirectory/OrgMentorDirectory";
+import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
+import { useQuery } from "../../custom_hooks/useQuery";
+import { orgDirectoryReducer } from "../../reducers/orgDirectoryReducer";
 import OrgStudentDirectory from "../../components/OrgStudentDirectory/OrgStudentDirectory";
 
 const OrgDirectoryPage = () => {
-  const [title, setTitle] = useState("Mentors");
-  const [searchedName, setSearchedName] = useState("");
-  const [filteredResponseData, setFilteredResponseData] = useState<
-    | {
-        id: number;
-        name: string;
-        email: string;
-        active_programs: string[];
-      }[]
-    | []
-  >([]);
-  const [searchedNameNotFound, setSearchedNameNotFound] = useState(false);
+  const { getConnectedMentors, getConnectedStudents } = useOrgAPI();
+  const query = useQuery();
 
-  const fakeMentorData = [
-    {
-      id: 1,
-      name: "Peter Parker",
-      email: "Peter.Parker@gmail.com",
-      active_programs: [
-        "Get familiar with Web Development using Reactjs",
-        "Learn HTML",
-      ],
-    },
-    {
-      id: 2,
-      name: "Peter Parker",
-      email: "Peter.Parker@gmail.com",
-      active_programs: [
-        "Learn HTML",
-        "Get familiar with Web Development using Reactjs",
-      ],
-    },
-    {
-      id: 3,
-      name: "Peter Parker",
-      email: "Peter.Parker@gmail.com",
-      active_programs: [
-        "Get familiar with Web Development using Reactjs",
-        "Learn HTML",
-      ],
-    },
-    {
-      id: 4,
-      name: "Peter Parker",
-      email: "Peter.Parker@gmail.com",
-      active_programs: [
-        "Get familiar with Web Development using Reactjs",
-        "Learn HTML",
-      ],
-    },
-    {
-      id: 5,
-      name: "Peter Parker",
-      email: "Peter.Parker@gmail.com",
-      active_programs: [
-        "Get familiar with Web Development using Reactjs",
-        "Learn HTML",
-      ],
-    },
-  ];
-
-  const fakeStudentData = [
-    {
-      id: 1,
-      name: "Harry Potter",
-      email: "Harry.Potter@gmail.com",
-      active_programs: [
-        "Get familiar with Web Development using Reactjs",
-        "Learn HTML",
-      ],
-    },
-    {
-      id: 2,
-      name: "Harry Potter",
-      email: "Harry.Potter@gmail.com",
-      active_programs: [
-        "Get familiar with Web Development using Reactjs",
-        "Learn HTML",
-      ],
-    },
-    {
-      id: 3,
-      name: "Harry Potter",
-      email: "Harry.Potter@gmail.com",
-      active_programs: [
-        "Get familiar with Web Development using Reactjs",
-        "Learn HTML",
-      ],
-    },
-    {
-      id: 4,
-      name: "Harry Potter",
-      email: "Harry.Potter@gmail.com",
-      active_programs: [
-        "Get familiar with Web Development using Reactjs",
-        "Learn HTML",
-      ],
-    },
-    {
-      id: 5,
-      name: "Harry Potter",
-      email: "Harry.Potter@gmail.com",
-      active_programs: [
-        "Get familiar with Web Development using Reactjs",
-        "Learn HTML",
-      ],
-    },
-  ];
+  const [state, dispatch] = useReducer(orgDirectoryReducer, {
+    title:
+      query.get("type") === "MENTOR"
+        ? "Mentors"
+        : query.get("type") === "STUDENT"
+        ? "Students"
+        : "",
+    loading: true,
+    searchedName: "",
+    searchedNameNotFound: false,
+    error: "",
+    responseData: null,
+    filteredResponseData: null,
+  });
 
   useEffect(() => {
     document.documentElement.scrollTop = 0;
+    document.title = `Org ${state.title} Directory | CatalysEd`;
 
-    document.title = "Org Directory | CatalysEd";
-  });
+    const getDetails = async () => {
+      try {
+        dispatch({ type: "loading", payload: true });
+        dispatch({ type: "error", payload: "" });
 
-  return (
+        let response;
+
+        if (state.title === "Mentors") {
+          response = await getConnectedMentors();
+        } else if (state.title === "Students") {
+          response = await getConnectedStudents();
+        }
+
+        dispatch({ type: "responseData", payload: response?.data });
+      } catch (error) {
+        console.log(error);
+        dispatch({ type: "error", payload: "Sorry!! No Data Found" });
+      } finally {
+        dispatch({ type: "loading", payload: false });
+      }
+    };
+
+    getDetails();
+  }, [getConnectedMentors, getConnectedStudents, state.title]);
+
+  return state.title ? (
     <div className="OrgDirectoryPage">
-      <OrgDirectoryPageHeader
-        setTitle={setTitle}
-        title={title}
-        searchedName={searchedName}
-        setSearchedName={setSearchedName}
-        setFilteredResponseData={setFilteredResponseData}
-        fakeMentorData={fakeMentorData}
-        fakeStudentData={fakeStudentData}
-        setSearchedNameNotFound={setSearchedNameNotFound}
-      />
-
-      {title === "Mentors" && (
-        <OrgMentorDirectory
-          fakeMentorData={fakeMentorData}
-          filteredResponseData={filteredResponseData}
-          searchedNameNotFound={searchedNameNotFound}
-          searchedName={searchedName}
+      {state.loading && (
+        <LoadingProgress
+          loading={state.loading}
+          emailSent={false}
+          loadingMessage={`Getting ${state.title} Data...`}
         />
       )}
 
-      {title === "Students" && (
-        <OrgStudentDirectory
-          fakeStudentData={fakeStudentData}
-          filteredResponseData={filteredResponseData}
-          searchedNameNotFound={searchedNameNotFound}
-          searchedName={searchedName}
-        />
-      )}
+      <OrgDirectoryPageHeader state={state} dispatch={dispatch} />
+
+      {state.title === "Mentors" && <OrgMentorDirectory state={state} />}
+
+      {state.title === "Students" && <OrgStudentDirectory state={state} />}
     </div>
+  ) : (
+    <Redirect to="*" />
   );
 };
 

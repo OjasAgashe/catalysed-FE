@@ -4,32 +4,13 @@ import OrgDirectoryCard from "../OrgDirectoryCard/OrgDirectoryCard";
 import "./OrgMentorDirectory.css";
 import { useHistory } from "react-router-dom";
 import { ORGANISATION_DIRECTORY_DETAILS_MENTOR } from "../../constants/Routes";
+import { OrganisationDirectoryCommonState } from "../../types/OrganisationDirectory";
 
 type OrgMentorDirectoryProps = {
-  fakeMentorData: {
-    id: number;
-    name: string;
-    email: string;
-    active_programs: string[];
-  }[];
-  filteredResponseData:
-    | []
-    | {
-        id: number;
-        name: string;
-        email: string;
-        active_programs: string[];
-      }[];
-  searchedNameNotFound: boolean;
-  searchedName: string;
+  state: OrganisationDirectoryCommonState;
 };
 
-const OrgMentorDirectory = ({
-  fakeMentorData,
-  searchedNameNotFound,
-  filteredResponseData,
-  searchedName,
-}: OrgMentorDirectoryProps) => {
+const OrgMentorDirectory = ({ state }: OrgMentorDirectoryProps) => {
   const history = useHistory();
 
   const handleDirectoryCardViewAllBtnClick = (id: number) => {
@@ -38,33 +19,40 @@ const OrgMentorDirectory = ({
 
   return (
     <div className="OrgMentorDirectoryContainer">
-      {searchedName !== "" && filteredResponseData.length ? (
-        filteredResponseData.map((data: any) => (
-          <OrgDirectoryCard
-            key={data.id}
-            data={data}
-            handleDirectoryCardViewAllBtnClick={
-              handleDirectoryCardViewAllBtnClick
-            }
-          />
-        ))
-      ) : searchedNameNotFound ? (
-        <Error message="Sorry !!! No mentor exists with this name" />
-      ) : (
-        ""
-      )}
+      {state.responseData && state.responseData.length ? (
+        <>
+          {state.searchedName !== "" &&
+          state.filteredResponseData &&
+          state.filteredResponseData.length ? (
+            state.filteredResponseData.map((data) => (
+              <OrgDirectoryCard
+                key={data.name}
+                data={data}
+                handleDirectoryCardViewAllBtnClick={
+                  handleDirectoryCardViewAllBtnClick
+                }
+              />
+            ))
+          ) : state.searchedNameNotFound ? (
+            <Error message="Sorry !!! No mentor exists with this name" />
+          ) : (
+            ""
+          )}
 
-      {searchedName === "" && fakeMentorData.length
-        ? fakeMentorData.map((data) => (
-            <OrgDirectoryCard
-              key={data.id}
-              data={data}
-              handleDirectoryCardViewAllBtnClick={
-                handleDirectoryCardViewAllBtnClick
-              }
-            />
-          ))
-        : ""}
+          {state.searchedName === "" &&
+            state.responseData.map((data) => (
+              <OrgDirectoryCard
+                key={data.name}
+                data={data}
+                handleDirectoryCardViewAllBtnClick={
+                  handleDirectoryCardViewAllBtnClick
+                }
+              />
+            ))}
+        </>
+      ) : (
+        <Error message="Sorry !!! No Data Found" />
+      )}
     </div>
   );
 };

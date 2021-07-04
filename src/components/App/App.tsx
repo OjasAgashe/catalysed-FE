@@ -19,11 +19,11 @@ import {
   STUDENT_HOME,
   ORGANISATION_PROGRAM_VIEW_SEARCH,
   ORGANISATION_PROGRAM_DETAILS,
-  ORGANISATION_DIRECTORY,
   ORGANISATION_DIRECTORY_DETAILS_MENTOR,
   ORGANISATION_DIRECTORY_DETAILS_STUDENT,
   ORGANISATION_PROFILE_EDIT,
   ORGANISATION_APPLICANTS,
+  ORGANISATION_DIRECTORY,
 } from "../../constants/Routes";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -43,13 +43,13 @@ import OrgProgramDetailsPage from "../../pages/OrgProgramDetails/OrgProgramDetai
 import OrgProgramInvitationsPage from "../../pages/OrgProgramDetails/OrgProgramInvitationsPage";
 import OrgProgramParticipantsPage from "../../pages/OrgProgramDetails/OrgProgramParticipantsPage";
 import OrgEditProgramDetailsPage from "../../pages/OrgEditProgramDetailsPage/OrgEditProgramDetailsPage";
-import OrgDirectoryPage from "../../pages/OrgDirectoryPage/OrgDirectoryPage";
-import OrgDirectoryMentorPage from "../../pages/OrgDirectoryPage/OrgDirectoryMentorPage";
-import OrgDirectoryStudentPage from "../../pages/OrgDirectoryPage/OrgDirectoryStudentPage";
 import OrgProfileEdit from "../../pages/OrgProfileEdit/OrgProfileEdit";
 import OrgProgramApplicantsPage from "../../pages/OrgProgramDetails/OrgProgramApplicantsPage";
 import OrgApplicantsPage from "../../pages/OrgApplicantsPage/OrgApplicantsPage";
 import PageNotFound from "../../pages/PageNotFound/PageNotFound";
+import OrgDirectoryPage from "../../pages/OrgDirectoryPage/OrgDirectoryPage";
+import OrgDirectoryMentorDetailsPage from "../../pages/OrgDirectoryPage/OrgDirectoryMentorDetailsPage";
+import OrgDirectoryStudentDetailsPage from "../../pages/OrgDirectoryPage/OrgDirectoryStudentDetailsPage";
 
 function App() {
   return (
@@ -90,21 +90,27 @@ function App() {
           </PrivateRoute>
 
           <PrivateRoute path={ORGANISATION_DIRECTORY} exact>
-            <OrgDirectoryPage />
+            <OrgAPIProvider>
+              <OrgDirectoryPage />
+            </OrgAPIProvider>
           </PrivateRoute>
 
           <PrivateRoute
             path={`${ORGANISATION_DIRECTORY_DETAILS_MENTOR}/:mentorId/details`}
             exact
           >
-            <OrgDirectoryMentorPage />
+            <OrgAPIProvider>
+              <OrgDirectoryMentorDetailsPage />
+            </OrgAPIProvider>
           </PrivateRoute>
 
           <PrivateRoute
             path={`${ORGANISATION_DIRECTORY_DETAILS_STUDENT}/:studentId/details`}
             exact
           >
-            <OrgDirectoryStudentPage />
+            <OrgAPIProvider>
+              <OrgDirectoryStudentDetailsPage />
+            </OrgAPIProvider>
           </PrivateRoute>
 
           <PrivateRoute path={ORGANISATION_HOME} exact>

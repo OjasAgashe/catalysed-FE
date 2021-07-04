@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
 import OrgProgramDetails from "../../components/OrgProgramDetails/OrgProgramDetails";
 import OrgProgramDetailsCommon from "../../components/OrgProgramDetailsCommon/OrgProgramDetailsCommon";
@@ -16,7 +16,7 @@ const OrgProgramDetailsPage = () => {
   });
 
   const { programId } = useParams<{ programId: string }>();
-
+  const history = useHistory();
   const { getProgramDetails } = useOrgAPI();
 
   useEffect(() => {
@@ -27,17 +27,23 @@ const OrgProgramDetailsPage = () => {
     const getDetails = async () => {
       try {
         dispatch({ type: "error", payload: "" });
+
         const response = await getProgramDetails(parseInt(programId));
+
         dispatch({ type: "responseData", payload: response.data });
-      } catch (error) {
-        dispatch({ type: "error", payload: "Sorry!! No Details Found" });
-      } finally {
         dispatch({ type: "loading", payload: false });
+      } catch (error) {
+        if (error.response.status === 404) {
+          history.push("*");
+        } else {
+          dispatch({ type: "loading", payload: false });
+          dispatch({ type: "error", payload: "Sorry!! No Details Found" });
+        }
       }
     };
 
     getDetails();
-  }, [dispatch, getProgramDetails, programId]);
+  }, [dispatch, getProgramDetails, history, programId]);
 
   return (
     <div className="OrgProgramDetailsPage">

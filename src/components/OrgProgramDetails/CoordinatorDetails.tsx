@@ -38,7 +38,6 @@ const CoordinatorDetails = ({ state }: CoordinatorDetailsProps) => {
                 verticalAlign: "bottom",
                 boxShadow: "2px 2px 8px var(--blue-gray-300)",
               }}
-              title="US"
             />
             &nbsp;&nbsp; +
             <span className="Data">

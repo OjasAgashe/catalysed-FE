@@ -1,16 +1,11 @@
 import React from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { BsChevronDoubleRight } from "react-icons/bs";
+import { OrganisationDirectoryCommonResponse } from "../../types/OrganisationDirectory";
 import "./OrgDirectoryCard.css";
 
 type OrgDirectoryCardProps = {
-  data: {
-    id: number;
-    name: string;
-    email: string;
-    active_programs: string[];
-  };
-
+  data: OrganisationDirectoryCommonResponse;
   handleDirectoryCardViewAllBtnClick: (id: number) => void;
 };
 
@@ -41,8 +36,8 @@ const OrgDirectoryCard = ({
             overlay={<Tooltip id="data-email-tooltip">{data.email}</Tooltip>}
           >
             <span className="Data">
-              {data.email.length > 18
-                ? `${data.email.substring(0, 18)}...`
+              {data.email.length > 10
+                ? `${data.email.substring(0, 10)}...`
                 : data.email}
             </span>
           </OverlayTrigger>
@@ -50,9 +45,9 @@ const OrgDirectoryCard = ({
         <div className="CardActiveProgramDiv">
           <span className="Text">Active Programs&nbsp;:&nbsp;</span>
           <div>
-            {data.active_programs.length ? (
+            {data.topPrograms.length ? (
               <>
-                {data.active_programs.map((program) => (
+                {data.topPrograms.slice(0, 2).map((program) => (
                   <OverlayTrigger
                     placement="bottom"
                     overlay={<Tooltip id="program-tooltip">{program}</Tooltip>}

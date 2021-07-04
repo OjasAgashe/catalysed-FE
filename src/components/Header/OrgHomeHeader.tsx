@@ -45,7 +45,7 @@ const OrgHomeHeader = () => {
 
         <NavDropdown.Item
           as={Link}
-          to={`${ORGANISATION_DIRECTORY}`}
+          to={`${ORGANISATION_DIRECTORY}?type=MENTOR`}
           eventKey="4"
         >
           Directory

@@ -1,55 +1,72 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useReducer } from "react";
 import { Dropdown, DropdownButton, Table } from "react-bootstrap";
 import Error from "../Error/Error";
 import ConnectedToProgramTableRow from "./ConnectedToProgramTableRow";
+import { OrgDirectoryDetailsCommonState } from "../../types/OrganisationDirectory";
+import { orgDirectoryDetailsCTPSectionReducer } from "../../reducers/orgDirectoryDetailsCTPSectionReducer";
 
 type SectionProps = {
-  fakePrograms: {
-    name: string;
-    state: string;
-  }[];
+  state: OrgDirectoryDetailsCommonState;
 };
 
-const Section = ({ fakePrograms }: SectionProps) => {
-  const [filteredResponseData, setFilteredResponseData] = useState<
+const Section = ({ state }: SectionProps) => {
+  const [sectionState, sectionDispatch] = useReducer(
+    orgDirectoryDetailsCTPSectionReducer,
     {
-      name: string;
-      state: string;
-    }[]
-  >([]);
-  const [selectedRadioForFilterState, setSelectedRadioForFilterState] =
-    useState("All");
-  const [noFilteredData, setNoFilteredData] = useState("");
-
-  const filterActiveResponseData = useMemo(
-    () => fakePrograms.filter((data) => data.state === "Active"),
-    [fakePrograms]
+      filteredResponseData: null,
+      selectedRadioForFilterState: "All",
+      noFilteredData: "",
+    }
   );
 
-  const filterInactiveResponseData = useMemo(
-    () => fakePrograms.filter((data) => data.state === "In-active"),
-    [fakePrograms]
-  );
+  const filterActiveResponseData = useMemo(() => {
+    return state.responseData?.connectPrograms
+      ? state.responseData?.connectPrograms.filter(
+          (data) => data.status === "PUBLISHED"
+        )
+      : null;
+  }, [state.responseData?.connectPrograms]);
+
+  const filterInactiveResponseData = useMemo(() => {
+    return state.responseData?.connectPrograms
+      ? state.responseData?.connectPrograms.filter(
+          (data) => data.status === "SAVED_TO_DRAFT"
+        )
+      : null;
+  }, [state.responseData?.connectPrograms]);
 
   const handleDirectoryDetailsStateDropdownSelect = (
     eventKey: string | null
   ) => {
     if (eventKey) {
-      setSelectedRadioForFilterState(eventKey);
+      sectionDispatch({
+        type: "selectedRadioForFilterState",
+        payload: eventKey,
+      });
+      sectionDispatch({ type: "noFilteredData", payload: "" });
 
-      let tempFilteredData: {
-        name: string;
-        state: string;
-      }[] = [...fakePrograms];
+      if (state.responseData?.connectPrograms) {
+        let tempFilteredData:
+          | { programId: number; status: string; title: string }[]
+          | null = [...state.responseData?.connectPrograms];
 
-      if (eventKey === "Active") tempFilteredData = filterActiveResponseData;
+        if (eventKey === "Published")
+          tempFilteredData = filterActiveResponseData;
 
-      if (eventKey === "In-active")
-        tempFilteredData = filterInactiveResponseData;
+        if (eventKey === "In Draft")
+          tempFilteredData = filterInactiveResponseData;
 
-      setFilteredResponseData(tempFilteredData);
-      if(eventKey && tempFilteredData.length === 0) {
-        setNoFilteredData("Sorry!! No Programs Found for This Option")
+        sectionDispatch({
+          type: "filteredResponseData",
+          payload: tempFilteredData,
+        });
+
+        if (eventKey && tempFilteredData && tempFilteredData.length === 0) {
+          sectionDispatch({
+            type: "noFilteredData",
+            payload: "Sorry!! No Programs Found for This Option",
+          });
+        }
       }
     }
   };
@@ -62,9 +79,9 @@ const Section = ({ fakePrograms }: SectionProps) => {
             <th className="ProgramInvitationHeader">Program Name</th>
             <th className="ProgramInvitationHeader">
               <DropdownButton
-                title={`State${
-                  selectedRadioForFilterState !== "All"
-                    ? `:${selectedRadioForFilterState}`
+                title={`Program Status${
+                  sectionState.selectedRadioForFilterState !== "All"
+                    ? `:${sectionState.selectedRadioForFilterState}`
                     : ""
                 }`}
                 className="ProgramFilterSortDropdown"
@@ -76,44 +93,53 @@ const Section = ({ fakePrograms }: SectionProps) => {
                   None
                 </Dropdown.Item>
                 <Dropdown.Item
-                  eventKey="Active"
+                  eventKey="Published"
                   onSelect={handleDirectoryDetailsStateDropdownSelect}
                 >
-                  Active
+                  Published
                 </Dropdown.Item>
                 <Dropdown.Item
-                  eventKey="In-active"
+                  eventKey="In Draft"
                   onSelect={handleDirectoryDetailsStateDropdownSelect}
                 >
-                  In-active
+                  In Draft
                 </Dropdown.Item>
               </DropdownButton>
             </th>
           </tr>
         </thead>
         <tbody>
-          {["Active", "In-active"].includes(selectedRadioForFilterState) &&
-          filteredResponseData.length ? (
-            [...filteredResponseData]
+          {["Published", "In Draft"].includes(
+            sectionState.selectedRadioForFilterState
+          ) &&
+          sectionState.filteredResponseData &&
+          sectionState.filteredResponseData.length ? (
+            [...sectionState.filteredResponseData]
               .reverse()
               .map((data) => (
-                <ConnectedToProgramTableRow data={data} key={data.name} />
+                <ConnectedToProgramTableRow data={data} key={data.programId} />
               ))
           ) : (
-            <tr style={noFilteredData === "" ? { display: "none" } : {}}>
+            <tr
+              style={
+                sectionState.noFilteredData === "" ? { display: "none" } : {}
+              }
+            >
               <td colSpan={2}>
                 <div className="ErrorCompContainer">
-                  <Error message={noFilteredData} />
+                  <Error message={sectionState.noFilteredData} />
                 </div>
               </td>
             </tr>
           )}
 
-          {!["Active", "In-active"].includes(selectedRadioForFilterState) &&
-            [...fakePrograms]
+          {!["Published", "In Draft"].includes(
+            sectionState.selectedRadioForFilterState
+          ) && state.responseData?.connectPrograms &&
+            [...state.responseData?.connectPrograms]
               .reverse()
               .map((data) => (
-                <ConnectedToProgramTableRow data={data} key={data.name} />
+                <ConnectedToProgramTableRow data={data} key={data.programId} />
               ))}
         </tbody>
       </Table>

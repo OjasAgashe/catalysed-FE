@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
 import MentorOrStudentTab from "../../components/MentorOrStudentTab/MentorOrStudentTab";
 import OrgProgramDetailsCommon from "../../components/OrgProgramDetailsCommon/OrgProgramDetailsCommon";
@@ -30,7 +30,7 @@ const OrgProgramParticipantsPage = () => {
   >([]);
 
   const { programId } = useParams<{ programId: string }>();
-
+  const history = useHistory();
   const { getProgramDetails, getProgramParticipants } = useOrgAPI();
 
   useEffect(() => {
@@ -61,15 +61,20 @@ const OrgProgramParticipantsPage = () => {
           type: "mentorParticipantResponseData",
           payload: programParticipantsResponse.data.mentorParticipants,
         });
-      } catch (error) {
-        dispatch({ type: "showError", payload: true });
-      } finally {
+
         dispatch({ type: "loading", payload: false });
+      } catch (error) {
+        if (error.response.status === 404) {
+          history.push("*");
+        } else {
+          dispatch({ type: "loading", payload: false });
+          dispatch({ type: "showError", payload: true });
+        }
       }
     };
 
     getTitleParticipantDetails();
-  }, [getProgramDetails, getProgramParticipants, programId]);
+  }, [getProgramDetails, getProgramParticipants, history, programId]);
 
   return (
     <div className="OrgProgramParticipantsPage">

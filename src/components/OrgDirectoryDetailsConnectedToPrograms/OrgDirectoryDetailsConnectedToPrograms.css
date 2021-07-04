@@ -1,3 +1,13 @@
 .OrgDirectoryDetailsConnectedProgramsContainer {
   padding: 2rem 1rem;
 }
+
+.OrgConnectedToProgramTableDataRow:hover {
+  cursor: pointer;
+  box-shadow: 1px 0 10px var(--blue-gray-300);
+}
+
+.OrgDirectoryDetailsConnectedProgramsContainer .ErrorContainer {
+  width: fit-content;
+  margin: auto;
+}

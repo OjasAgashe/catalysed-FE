@@ -1,31 +1,16 @@
 import React from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { OrgDirectoryDetailsBoy } from "../../assets/Illustrations/Illustrations";
+import { OrgDirectoryDetailsCommonState } from "../../types/OrganisationDirectory";
+// @ts-ignore
+import ReactCountryFlag from "react-country-flag";
+import { getCode } from "country-list";
 
 type SectionOneProps = {
-  fakeData: {
-    full_name: string;
-    age: number;
-    gender: string;
-    contact: {
-      phone: string;
-      email: string;
-    };
-    school_or_organisation: string;
-    address: {
-      city: string;
-      country: string;
-    };
-    known_languages: string[];
-    professionally_mentored_ever: string;
-    experience: number;
-    stable_connection: string;
-    academic_qualification: string;
-    profession: string;
-  };
+  state: OrgDirectoryDetailsCommonState;
 };
 
-const SectionOne = ({ fakeData }: SectionOneProps) => {
+const SectionOne = ({ state }: SectionOneProps) => {
   return (
     <div className="SectionOne">
       <div className="SectionOneFirstHalf">
@@ -40,17 +25,22 @@ const SectionOne = ({ fakeData }: SectionOneProps) => {
             <span className="CreateProgramFormText">
               Full Name&nbsp;:&nbsp;
             </span>
-            <span className="Data">{fakeData.full_name}</span>
+            <span className="Data">{`${state.responseData?.firstName} ${state.responseData?.lastName}`}</span>
           </div>
 
           <div className="DataCardAge">
             <span className="CreateProgramFormText">Age&nbsp;:&nbsp;</span>
-            <span className="Data">{fakeData.age}</span>
+            <span className="Data">
+              {state.responseData?.birthYear
+                ? new Date().getFullYear() -
+                  parseInt(state.responseData?.birthYear)
+                : ""}
+            </span>
           </div>
 
           <div className="DataCardGender">
             <span className="CreateProgramFormText">Gender&nbsp;:&nbsp;</span>
-            <span className="Data">{fakeData.gender}</span>
+            <span className="Data">{state.responseData?.gender}</span>
           </div>
 
           <div className="DataCardContact">
@@ -61,7 +51,28 @@ const SectionOne = ({ fakeData }: SectionOneProps) => {
                 <span className="CreateProgramFormText">
                   phone&nbsp;:&nbsp;
                 </span>
-                <span className="Data">{fakeData.contact.phone}</span>
+                <span>
+                  <ReactCountryFlag
+                    countryCode={getCode(
+                      state.responseData?.phone.countryName ?? ""
+                    )}
+                    svg
+                    style={{
+                      width: "1.5em",
+                      height: "1.35em",
+                      boxShadow: "2px 2px 8px var(--blue-gray-300)",
+                      padding: "0",
+                    }}
+                  />
+                  &nbsp;&nbsp; +
+                  <span className="Data">
+                    {state.responseData?.phone.countryCode}
+                  </span>
+                  &nbsp;
+                  <span className="Data">
+                    {state.responseData?.phone.number}
+                  </span>
+                </span>
                 <span className="PhoneComma">&nbsp;,</span>
               </div>
 
@@ -73,14 +84,16 @@ const SectionOne = ({ fakeData }: SectionOneProps) => {
                   placement="bottom"
                   overlay={
                     <Tooltip id="datacard-email-tooltip">
-                      {fakeData.contact.email}
+                      {state.responseData?.email}
                     </Tooltip>
                   }
                 >
                   <span className="Data">
-                    {fakeData.contact.email.length > 18
-                      ? `${fakeData.contact.email.substring(0, 18)}...`
-                      : fakeData.contact.email}
+                    {state.responseData?.email
+                      ? state.responseData?.email.length > 18
+                        ? `${state.responseData?.email.substring(0, 18)}...`
+                        : state.responseData?.email
+                      : ""}
                   </span>
                 </OverlayTrigger>
               </div>

@@ -1,15 +1,23 @@
 import React from "react";
 import { FiChevronsLeft } from "react-icons/fi";
-import { useHistory } from "react-router-dom";
-import { ORGANISATION_DIRECTORY } from "../../constants/Routes";
+import { useHistory, useLocation } from "react-router-dom";
+import {
+  ORGANISATION_DIRECTORY,
+  ORGANISATION_DIRECTORY_DETAILS_MENTOR,
+} from "../../constants/Routes";
 
 import "./OrgDirectoryDetailsBackBtn.css";
 
 const OrgDirectoryDetailsBackBtn = () => {
   const history = useHistory();
+  const location = useLocation();
 
   const handleOrgDirectoryDetailsBackBtnClick = () => {
-    history.push(ORGANISATION_DIRECTORY);
+    history.push(
+      location.pathname.includes(ORGANISATION_DIRECTORY_DETAILS_MENTOR)
+        ? `${ORGANISATION_DIRECTORY}?type=MENTOR`
+        : `${ORGANISATION_DIRECTORY}?type=STUDENT`
+    );
   };
 
   return (

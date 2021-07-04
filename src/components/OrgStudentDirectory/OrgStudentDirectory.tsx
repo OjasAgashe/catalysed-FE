@@ -4,32 +4,13 @@ import OrgDirectoryCard from "../OrgDirectoryCard/OrgDirectoryCard";
 import "./OrgStudentDirectory.css";
 import { useHistory } from "react-router-dom";
 import { ORGANISATION_DIRECTORY_DETAILS_STUDENT } from "../../constants/Routes";
+import { OrganisationDirectoryCommonState } from "../../types/OrganisationDirectory";
 
 type OrgStudentDirectoryProps = {
-  fakeStudentData: {
-    id: number;
-    name: string;
-    email: string;
-    active_programs: string[];
-  }[];
-  filteredResponseData:
-    | []
-    | {
-        id: number;
-        name: string;
-        email: string;
-        active_programs: string[];
-      }[];
-  searchedNameNotFound: boolean;
-  searchedName: string;
+  state: OrganisationDirectoryCommonState;
 };
 
-const OrgStudentDirectory = ({
-  fakeStudentData,
-  searchedNameNotFound,
-  filteredResponseData,
-  searchedName,
-}: OrgStudentDirectoryProps) => {
+const OrgStudentDirectory = ({ state }: OrgStudentDirectoryProps) => {
   const history = useHistory();
 
   const handleDirectoryCardViewAllBtnClick = (id: number) => {
@@ -38,32 +19,39 @@ const OrgStudentDirectory = ({
 
   return (
     <div className="OrgStudentDirectoryContainer">
-      {searchedName !== "" && filteredResponseData.length ? (
-        filteredResponseData.map((data: any) => (
-          <OrgDirectoryCard
-            key={data.id}
-            data={data}
-            handleDirectoryCardViewAllBtnClick={
-              handleDirectoryCardViewAllBtnClick
-            }
-          />
-        ))
-      ) : searchedNameNotFound ? (
-        <Error message="Sorry !!! No mentor exists with this name" />
+      {state.responseData && state.responseData.length ? (
+        <>
+          {state.searchedName !== "" &&
+          state.filteredResponseData &&
+          state.filteredResponseData.length ? (
+            state.filteredResponseData.map((data: any) => (
+              <OrgDirectoryCard
+                key={data.name}
+                data={data}
+                handleDirectoryCardViewAllBtnClick={
+                  handleDirectoryCardViewAllBtnClick
+                }
+              />
+            ))
+          ) : state.searchedNameNotFound ? (
+            <Error message="Sorry !!! No student exists with this name" />
+          ) : (
+            ""
+          )}
+          {state.searchedName === "" &&
+            state.responseData.map((data) => (
+              <OrgDirectoryCard
+                key={data.name}
+                data={data}
+                handleDirectoryCardViewAllBtnClick={
+                  handleDirectoryCardViewAllBtnClick
+                }
+              />
+            ))}
+        </>
       ) : (
-        ""
+        <Error message="Sorry !!! No Data Found" />
       )}
-      {searchedName === "" && fakeStudentData.length
-        ? fakeStudentData.map((data) => (
-            <OrgDirectoryCard
-              key={data.id}
-              data={data}
-              handleDirectoryCardViewAllBtnClick={
-                handleDirectoryCardViewAllBtnClick
-              }
-            />
-          ))
-        : ""}
     </div>
   );
 };

@@ -7,8 +7,8 @@
 }
 
 @media screen and (min-width: 634px) {
-  .OrgDirectoryDetailsPersonalContainer .SectionTwo .DataCard {
-    max-width: 550px;
+  .OrgDirectoryDetailsPersonalContainer :is(.SectionTwo, .SectionOne) .DataCard {
+    width: 550px;
   }
 }
 
@@ -66,8 +66,8 @@
 }
 
 .OrgDirectoryDetailsPersonalContainer
-  :is(.SectionOne, .SectionTwo)
-  :is(.DataCardContactPhone, .DataCardContactEmail, .DataCardAddressCity, .DataCardAddressCountry) {
+  .SectionTwo
+  :is(.DataCardAddressCity, .DataCardAddressCountry) {
   display: inline-block;
 }
 
@@ -88,9 +88,4 @@
   .OrgDirectoryDetailsPersonalContainer .SectionTwo {
     flex-direction: column-reverse !important;
   }
-}
-
-.DataCardKnownLanguage .LanguagePreviewer {
-  max-height: 100px;
-  overflow-y: scroll;
 }

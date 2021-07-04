@@ -1,30 +1,12 @@
 import React from "react";
 import { OrgDirectoryDetailsGirl } from "../../assets/Illustrations/Illustrations";
+import { OrgDirectoryDetailsCommonState } from "../../types/OrganisationDirectory";
 
 type SectionTwoProps = {
-  fakeData: {
-    full_name: string;
-    age: number;
-    gender: string;
-    contact: {
-      phone: string;
-      email: string;
-    };
-    school_or_organisation: string;
-    address: {
-      city: string;
-      country: string;
-    };
-    known_languages: string[];
-    professionally_mentored_ever: string;
-    experience: number;
-    stable_connection: string;
-    academic_qualification: string;
-    profession: string;
-  };
+  state: OrgDirectoryDetailsCommonState;
 };
 
-const SectionTwo = ({ fakeData }: SectionTwoProps) => {
+const SectionTwo = ({ state }: SectionTwoProps) => {
   return (
     <div className="SectionTwo">
       <div className="SectionTwoFirstHalf">
@@ -33,16 +15,20 @@ const SectionTwo = ({ fakeData }: SectionTwoProps) => {
             <div className="CreateProgramFormText">
               School / Organisation&nbsp;:&nbsp;
             </div>
-            <div className="Data">{fakeData.school_or_organisation}</div>
+            <div className="Data">{state.responseData?.organization}</div>
           </div>
 
           <div className="DataCardAddress">
-            <div className="CreateProgramFormText">Address&nbsp;:&nbsp;</div>
+            <div className="CreateProgramFormText">Location&nbsp;:&nbsp;</div>
 
             <div className="DataCardAddressCnC">
               <div className="DataCardAddressCity">
-                <span className="CreateProgramFormText">city&nbsp;:&nbsp;</span>
-                <span className="Data">{fakeData.address.city}</span>
+                <span className="CreateProgramFormText">
+                  region&nbsp;:&nbsp;
+                </span>
+                <span className="Data">
+                  {state.responseData?.location.region}
+                </span>
                 <span className="AddressComma">&nbsp;,</span>
               </div>
 
@@ -50,23 +36,21 @@ const SectionTwo = ({ fakeData }: SectionTwoProps) => {
                 <span className="CreateProgramFormText">
                   country&nbsp;:&nbsp;
                 </span>
-                <span className="Data">{fakeData.address.country}</span>
+                <span className="Data">
+                  {state.responseData?.location.country}
+                </span>
               </div>
             </div>
           </div>
 
           <div className="DataCardKnownLanguage">
-            <div className="CreateProgramFormText">
-              Language Requirements&nbsp;:&nbsp;
-            </div>
+            <span className="CreateProgramFormText">
+              Primary Language&nbsp;:&nbsp;
+            </span>
 
-            <ul className="LanguagePreviewer">
-              {fakeData.known_languages.map((language, index) => (
-                <li key={index} className="LanguageLi">
-                  {language}{" "}
-                </li>
-              ))}
-            </ul>
+            <span className="LanguageLi">
+              {state.responseData?.primaryLanguage}
+            </span>
           </div>
 
           <div className="DataCardProfessionallyMentor">
@@ -74,7 +58,7 @@ const SectionTwo = ({ fakeData }: SectionTwoProps) => {
               Professionally Mentored Ever&nbsp;:&nbsp;
             </span>
             <span className="Data">
-              {fakeData.professionally_mentored_ever}
+              {state.responseData?.previouslyMentored ? "Yes" : "No"}
             </span>
           </div>
 
@@ -82,28 +66,32 @@ const SectionTwo = ({ fakeData }: SectionTwoProps) => {
             <span className="CreateProgramFormText">
               Experience&nbsp;:&nbsp;
             </span>
-            <span className="Data">{fakeData.experience}&nbsp;years</span>
+            <span className="Data">
+              {state.responseData?.experience}&nbsp;years
+            </span>
           </div>
 
           <div className="DataCardStableConnection">
             <span className="CreateProgramFormText">
               Has Stable Internet Connection&nbsp;:&nbsp;
             </span>
-            <span className="Data">{fakeData.stable_connection}</span>
+            <span className="Data">
+              {state.responseData?.stableConnection ? "Yes" : "No"}
+            </span>
           </div>
 
           <div className="DataCardAcademicQualification">
             <div className="CreateProgramFormText">
               Academic Qualification&nbsp;:&nbsp;
             </div>
-            <div className="Data">{fakeData.academic_qualification}</div>
+            <div className="Data">{state.responseData?.qualification}</div>
           </div>
 
           <div className="DataCardProfession">
             <span className="CreateProgramFormText">
               Profession&nbsp;:&nbsp;
             </span>
-            <span className="Data">{fakeData.profession}</span>
+            <span className="Data">{state.responseData?.profession}</span>
           </div>
         </div>
       </div>
