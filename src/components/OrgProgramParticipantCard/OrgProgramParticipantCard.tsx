@@ -1,23 +1,48 @@
 import React from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import { OrgProgramParticipantData } from "../../types/OrgProgramDetails";
+import {
+  OrgProgramParticipantData,
+  OrgProgramParticipantState,
+} from "../../types/OrgProgramDetails";
 import "./OrgProgramParticipantCard.css";
+// @ts-ignore
+import ReactCountryFlag from "react-country-flag";
+import { getCode } from "country-list";
+import {
+  ORGANISATION_DIRECTORY_DETAILS_MENTOR,
+  ORGANISATION_DIRECTORY_DETAILS_STUDENT,
+} from "../../constants/Routes";
+import { useHistory } from "react-router-dom";
 
 type OrgProgramParticipantCardProps = {
   details: OrgProgramParticipantData;
+  state: OrgProgramParticipantState;
 };
 
 const OrgProgramParticipantCard = ({
   details,
+  state,
 }: OrgProgramParticipantCardProps) => {
+  const history = useHistory();
+
+  const handleParticipantCardClick = () => {
+    if (state.showMentorDetails) {
+      history.push(
+        `${ORGANISATION_DIRECTORY_DETAILS_MENTOR}/${details.id}/details`
+      );
+    } else if (state.showStudentDetails) {
+      history.push(
+        `${ORGANISATION_DIRECTORY_DETAILS_STUDENT}/${details.id}/details`
+      );
+    }
+  };
+
   return (
-    <div className="ParticipantCard">
-      <div className="ParticipantCardNameUsernameContainer">
+    <div className="ParticipantCard" onClick={handleParticipantCardClick}>
+      <div className="ParticipantCardNameContainer">
         <div className="ParticipantCardName">
-          {/* {details.firstName}&nbsp;{details.lastName} */}
-          firstName&nbsp;lastName
+          {details.firstName}&nbsp;{details.lastName}
         </div>
-        <div className="ParticipantCardUsername">{details.userName}</div>
       </div>
       <div className="ParticipantCardDetails">
         <div className="ParticipantCardEmail">
@@ -33,19 +58,33 @@ const OrgProgramParticipantCard = ({
             </span>
           </OverlayTrigger>
         </div>
-        <div className="ParticipantCardRole">
-          <span className="Text">Role&nbsp;:&nbsp;</span>
-          <span className="Data">{details.roles}</span>
-        </div>
-        <div className="ParticipantCardST">
-          <span className="Text">Subscription Type&nbsp;:&nbsp;</span>
-          <span className="Data">{details.subscriptionType}</span>
-        </div>
-        <div className="ParticipantCardState">
-          <span className="Text">State&nbsp;:&nbsp;</span>
-          <span className="Data">
-            {details.active ? "active" : "in-active"}
+        <div className="ParticipantCardPhone">
+          <span className="Text">Phone&nbsp;:&nbsp;</span>
+          <span className="PhoneData">
+            <ReactCountryFlag
+              countryCode={getCode(details.phone.countryName ?? "")}
+              svg
+              style={{
+                width: "1.5em",
+                height: "1.35em",
+                boxShadow: "2px 2px 8px var(--blue-gray-300)",
+                padding: "0",
+                verticalAlign: "sub",
+              }}
+            />
+            &nbsp;&nbsp;
+            <span className="Data">{details.phone.countryCode}</span>
+            &nbsp;
+            <span className="Data">{details.phone.number}</span>
           </span>
+        </div>
+        <div className="ParticipantCardRegion">
+          <span className="Text">Region&nbsp;:&nbsp;</span>
+          <span className="Data">{details.location.region}</span>
+        </div>
+        <div className="ParticipantCardCountry">
+          <span className="Text">Country&nbsp;:&nbsp;</span>
+          <span className="Data">{details.location.country}</span>
         </div>
       </div>
     </div>

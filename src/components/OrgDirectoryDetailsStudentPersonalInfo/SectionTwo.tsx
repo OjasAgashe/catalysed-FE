@@ -77,7 +77,7 @@ const SectionTwo = ({ state }: SectionTwoProps) => {
             </span>
             <span className="Data">
               {state.responseData?.primaryDevice === "MOBILE"
-                ? "Mobil"
+                ? "Mobile"
                 : "Computer"}
             </span>
           </div>

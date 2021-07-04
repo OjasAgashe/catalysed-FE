@@ -13,7 +13,11 @@
   justify-content: space-between;
 }
 
-.ParticipantCard .ParticipantCardNameUsernameContainer {
+.ParticipantCard:hover {
+  cursor: pointer;
+}
+
+.ParticipantCard .ParticipantCardNameContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -22,13 +26,9 @@
   color: var(--blue-gray-700);
 }
 
-.ParticipantCardNameUsernameContainer .ParticipantCardName {
+.ParticipantCardNameContainer .ParticipantCardName {
   font-size: 1.5rem;
   padding: 0.5rem;
-}
-
-.ParticipantCardNameUsernameContainer .ParticipantCardUsername {
-  font-size: 1.1rem;
 }
 
 .ParticipantCard .ParticipantCardDetails {
@@ -42,7 +42,7 @@
 }
 
 .ParticipantCard
-  :is(.ParticipantCardEmail, .ParticipantCardRole, .ParticipantCardST, .ParticipantCardState) {
+  :is(.ParticipantCardEmail, .ParticipantCardPhone, .ParticipantCardRegion, .ParticipantCardCountry) {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -51,7 +51,7 @@
 }
 
 .ParticipantCard
-  :is(.ParticipantCardEmail, .ParticipantCardRole, .ParticipantCardST, .ParticipantCardState)
+  :is(.ParticipantCardEmail, .ParticipantCardPhone, .ParticipantCardRegion, .ParticipantCardCountry)
   .Text {
   font-size: 1.2rem;
   color: var(--common-home-section-four-600);
@@ -60,16 +60,21 @@
 }
 
 .ParticipantCard
-  :is(.ParticipantCardEmail, .ParticipantCardRole, .ParticipantCardST, .ParticipantCardState)
+  :is(.ParticipantCardEmail, .ParticipantCardPhone, .ParticipantCardRegion, .ParticipantCardCountry)
   .Data {
   font-size: 1.1rem;
   color: var(--yellow-700);
   font-weight: 500;
   width: 8rem;
-  text-align: center;
+  text-align: right;
 }
 
-.ParticipantCard .ParticipantCardState {
+.ParticipantCard .ParticipantCardPhone .PhoneData {
+  width: 20rem !important;
+  text-align: right !important;
+}
+
+.ParticipantCard .ParticipantCardCountry {
   border-bottom: none;
   margin-bottom: 0.5rem;
 }

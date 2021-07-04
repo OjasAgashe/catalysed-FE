@@ -20,7 +20,6 @@ const OrgProgramParticipantsPage = () => {
     showStudentDetails: false,
     studentParticipantResponseData: null,
     mentorParticipantResponseData: null,
-    selectedRadioForFilterState: "All",
     searchedNotPresentText: "",
     searchedName: "",
   });

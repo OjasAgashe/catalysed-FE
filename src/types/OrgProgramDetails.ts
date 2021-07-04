@@ -73,14 +73,17 @@ export type OrgProgramInvitationActionType =
 export interface OrgProgramParticipantData {
   id: number;
   email: string;
-  firstName: string | null;
-  lastName: string | null;
-  userName: string;
-  subscriptionType: string | null;
-  password: string | null;
-  roles: string | null;
-  userType: string;
-  active: boolean;
+  firstName: string;
+  lastName: string;
+  phone: {
+    countryCode: string;
+    countryName: string;
+    number: string;
+  };
+  location: {
+    country: string;
+    region: string;
+  };
 }
 
 export interface OrgProgramParticipantState {
@@ -91,7 +94,6 @@ export interface OrgProgramParticipantState {
   showStudentDetails: boolean;
   studentParticipantResponseData: OrgProgramParticipantData[] | null;
   mentorParticipantResponseData: OrgProgramParticipantData[] | null;
-  selectedRadioForFilterState: string;
   searchedNotPresentText: string;
   searchedName: string;
 }
@@ -110,7 +112,6 @@ export type OrgProgramParticipantActionType =
     }
   | { type: "showMentorDetails"; payload: boolean }
   | { type: "showStudentDetails"; payload: boolean }
-  | { type: "selectedRadioForFilterState"; payload: string }
   | { type: "searchedNotPresentText"; payload: string }
   | { type: "searchedName"; payload: string };
 

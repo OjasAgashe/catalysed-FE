@@ -40,11 +40,6 @@ const MentorOrStudentTab = ({
         payload: "",
       });
 
-      programParticipantDispatch({
-        type: "selectedRadioForFilterState",
-        payload: "All",
-      });
-
       if (
         programParticipantState !== null &&
         programParticipantState.showStudentDetails
@@ -76,11 +71,6 @@ const MentorOrStudentTab = ({
 
   const handleStudentClick = () => {
     if (programParticipantDispatch !== null) {
-      programParticipantDispatch({
-        type: "selectedRadioForFilterState",
-        payload: "All",
-      });
-
       programParticipantDispatch({
         type: "searchedName",
         payload: "",

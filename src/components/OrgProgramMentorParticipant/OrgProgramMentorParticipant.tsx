@@ -24,13 +24,9 @@ const OrgProgramMentorParticipant = ({
       {state.mentorParticipantResponseData !== null &&
       state.mentorParticipantResponseData.length ? (
         <>
-          {(state.searchedName ||
-            ["Active", "Inactive"].includes(
-              state.selectedRadioForFilterState
-            )) &&
-          filteredParticipantData.length ? (
+          {state.searchedName && filteredParticipantData.length ? (
             filteredParticipantData.map((details) => (
-              <OrgProgramParticipantCard details={details} key={details.id} />
+              <OrgProgramParticipantCard details={details} key={details.id} state={state} />
             ))
           ) : (
             <div
@@ -42,11 +38,8 @@ const OrgProgramMentorParticipant = ({
             </div>
           )}
           {state.searchedName === "" &&
-            !["Active", "Inactive"].includes(
-              state.selectedRadioForFilterState
-            ) &&
             state.mentorParticipantResponseData.map((details) => (
-              <OrgProgramParticipantCard details={details} key={details.id} />
+              <OrgProgramParticipantCard details={details} key={details.id} state={state} />
             ))}
         </>
       ) : (
