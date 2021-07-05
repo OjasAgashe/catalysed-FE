@@ -9,7 +9,7 @@ type ApplicantTableRowProps = {
 const ApplicantTableRow = ({ data }: ApplicantTableRowProps) => {
   return (
     <>
-      <tr className="ProgramApplicantTableRow">
+      <tr className="ProgramApplicantTableRow ProgramApplicantDataTableRow">
         <td className="ProgramApplicantTableData">
           <OverlayTrigger
             placement="bottom"
@@ -35,10 +35,20 @@ const ApplicantTableRow = ({ data }: ApplicantTableRowProps) => {
           </OverlayTrigger>
         </td>
         <td className="ProgramApplicantTableData NumericalColumn">
-          {data.date_of_application}
+          {`${new Date(data.appliedOn).getDate()}/${
+            new Date(data.appliedOn).getMonth() + 1
+          }/${new Date(data.appliedOn).getFullYear()}`}
         </td>
-        <td className="ProgramApplicantTableData">{data.status}</td>
-        <td className="ProgramApplicantTableData">{data.viewed}</td>
+        <td className="ProgramApplicantTableData">
+          {data.status === "PENDING"
+            ? "Pending"
+            : data.status === "APPROVED"
+            ? "Approved"
+            : "Rejected"}
+        </td>
+        <td className="ProgramApplicantTableData">
+          {data.viewedByOrg ? "Viewed" : "Not Viewed"}
+        </td>
       </tr>
     </>
   );

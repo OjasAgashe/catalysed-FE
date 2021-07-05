@@ -31,6 +31,12 @@ interface OrgAPIProviderReturns {
   getConnectedStudents: () => Promise<AxiosResponse<any>>;
   getSpecificConnectedMentor(mentorId: number): Promise<AxiosResponse<any>>;
   getSpecificConnectedStudent(studentId: number): Promise<AxiosResponse<any>>;
+  getStudentApplicationForProgram: (
+    programId: number
+  ) => Promise<AxiosResponse<any>>;
+  getMentorApplicationForProgram: (
+    programId: number
+  ) => Promise<AxiosResponse<any>>;
 }
 
 const OrgAPIContext = React.createContext<OrgAPIProviderReturns | null>(null);
@@ -242,6 +248,30 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     );
   }
 
+  function getStudentApplicationForProgram(programId: number) {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.get(
+      `organizations/${catalysedId}/programs/${programId}/applications?applicantType=STUDENT`,
+      {
+        headers: { Authorization: `Bearer ${catalysedToken}` },
+      }
+    );
+  }
+
+  function getMentorApplicationForProgram(programId: number) {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.get(
+      `organizations/${catalysedId}/programs/${programId}/applications?applicantType=MENTOR`,
+      {
+        headers: { Authorization: `Bearer ${catalysedToken}` },
+      }
+    );
+  }
+
   const values = {
     postCreateProgramCall,
     getProgramsMetaList,
@@ -257,6 +287,8 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     getConnectedStudents,
     getSpecificConnectedMentor,
     getSpecificConnectedStudent,
+    getStudentApplicationForProgram,
+    getMentorApplicationForProgram,
   };
 
   return (

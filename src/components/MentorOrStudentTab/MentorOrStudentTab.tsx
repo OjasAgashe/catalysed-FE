@@ -57,6 +57,27 @@ const MentorOrStudentTab = ({
         payload: true,
       });
 
+      programApplicantDispatch({
+        type: "searchedName",
+        payload: "",
+      });
+      programApplicantDispatch({
+        type: "searchedNotPresentText",
+        payload: "",
+      });
+      programApplicantDispatch({
+        type: "selectedDropdownForSortDoA",
+        payload: "All",
+      });
+      programApplicantDispatch({
+        type: "selectedDropdownForFilterStatus",
+        payload: "All",
+      });
+      programApplicantDispatch({
+        type: "selectedDropdownForFilterViewed",
+        payload: "All",
+      });
+
       if (
         programApplicantState !== null &&
         programApplicantState.showStudentDetails
@@ -99,6 +120,27 @@ const MentorOrStudentTab = ({
       programApplicantDispatch({
         type: "showStudentDetails",
         payload: true,
+      });
+
+      programApplicantDispatch({
+        type: "searchedName",
+        payload: "",
+      });
+      programApplicantDispatch({
+        type: "searchedNotPresentText",
+        payload: "",
+      });
+      programApplicantDispatch({
+        type: "selectedDropdownForSortDoA",
+        payload: "All",
+      });
+      programApplicantDispatch({
+        type: "selectedDropdownForFilterStatus",
+        payload: "All",
+      });
+      programApplicantDispatch({
+        type: "selectedDropdownForFilterViewed",
+        payload: "All",
       });
 
       if (

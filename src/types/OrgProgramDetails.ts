@@ -117,15 +117,21 @@ export type OrgProgramParticipantActionType =
 
 export interface OrgProgramApplicantData {
   id: number;
-  date_of_application: string;
-  email: string;
+  userId: number;
+  programId: number;
+  applicantType: string;
   name: string;
+  email: string;
   status: string;
-  viewed: string;
+  reapplied: boolean;
+  appliedOn: string;
+  viewedByOrg: boolean;
+  applicationResponses: [];
 }
 
 export interface OrgProgramApplicantState {
-  fakeData: OrgProgramApplicantData[];
+  responseData: OrgProgramApplicantData[] | null;
+  loading: boolean;
   programTitle: string;
   showMentorDetails: boolean;
   showStudentDetails: boolean;
@@ -137,7 +143,8 @@ export interface OrgProgramApplicantState {
 }
 
 export type OrgProgramApplicantActionType =
-  | { type: "fakeData"; payload: OrgProgramApplicantData[] }
+  | { type: "responseData"; payload: OrgProgramApplicantData[] | null }
+  | { type: "loading"; payload: boolean }
   | { type: "programTitle"; payload: string }
   | { type: "showMentorDetails"; payload: boolean }
   | { type: "showStudentDetails"; payload: boolean }
@@ -149,11 +156,11 @@ export type OrgProgramApplicantActionType =
 
 export type OrgProgramApplicantValues = {
   filteredResponseData: OrgProgramApplicantData[];
-  filterAcceptedResponseData: OrgProgramApplicantData[];
-  filterPendingResponseData: OrgProgramApplicantData[];
-  filterRejectedResponseData: OrgProgramApplicantData[];
-  filterViewedResponseData: OrgProgramApplicantData[];
-  filterNotViewedResponseData: OrgProgramApplicantData[];
+  filterAcceptedResponseData: false | OrgProgramApplicantData[];
+  filterPendingResponseData: false | OrgProgramApplicantData[];
+  filterRejectedResponseData: false | OrgProgramApplicantData[];
+  filterViewedResponseData: false | OrgProgramApplicantData[];
+  filterNotViewedResponseData: false | OrgProgramApplicantData[];
 
   setFilteredResponseData: React.Dispatch<
     React.SetStateAction<OrgProgramApplicantData[]>
@@ -173,4 +180,13 @@ export type OrgProgramApplicantValues = {
   filterNotViewedTempFilteredData: (
     tempFilteredData: OrgProgramApplicantData[]
   ) => OrgProgramApplicantData[];
+
+  sortDateByLatestUsing: (
+    obj1: OrgProgramApplicantData,
+    obj2: OrgProgramApplicantData
+  ) => 1 | -1;
+  sortDateByOldestUsing: (
+    obj1: OrgProgramApplicantData,
+    obj2: OrgProgramApplicantData
+  ) => 1 | -1;
 };

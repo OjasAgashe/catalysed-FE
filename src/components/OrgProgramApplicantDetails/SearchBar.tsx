@@ -3,6 +3,7 @@ import { Form } from "react-bootstrap";
 
 import {
   OrgProgramApplicantActionType,
+  OrgProgramApplicantData,
   OrgProgramApplicantState,
   OrgProgramApplicantValues,
 } from "../../types/OrgProgramDetails";
@@ -19,13 +20,14 @@ const SearchBar = ({ state, dispatch, values }: SearchBarProps) => {
       dispatch({ type: "searchedName", payload: event.target.value });
       dispatch({ type: "searchedNotPresentText", payload: "" });
 
-      let tempFilteredData = state.fakeData.filter(
+      const response = state.responseData as OrgProgramApplicantData[];
+      let tempFilteredData = response.filter(
         (data) =>
           data.name.toLowerCase().includes(event.target.value.toLowerCase()) ||
           data.email.toLowerCase().includes(event.target.value.toLowerCase())
       );
 
-      if (state.selectedDropdownForFilterStatus === "Accepted")
+      if (state.selectedDropdownForFilterStatus === "Approved")
         tempFilteredData =
           values.filterAcceptedTempFilteredData(tempFilteredData);
 
@@ -37,18 +39,24 @@ const SearchBar = ({ state, dispatch, values }: SearchBarProps) => {
         tempFilteredData =
           values.filterRejectedTempFilteredData(tempFilteredData);
 
-      if (state.selectedDropdownForFilterViewed === "Yes")
+      if (state.selectedDropdownForFilterViewed === "Viewed")
         tempFilteredData =
           values.filterViewedTempFilteredData(tempFilteredData);
 
-      if (state.selectedDropdownForFilterViewed === "No")
+      if (state.selectedDropdownForFilterViewed === "Not Viewed")
         tempFilteredData =
           values.filterNotViewedTempFilteredData(tempFilteredData);
 
-      if (event.target.value === "" && tempFilteredData.length === 0) {
-        tempFilteredData = [...state.fakeData];
+      if (state.selectedDropdownForSortDoA === "Latest")
+        tempFilteredData.sort(values.sortDateByLatestUsing);
 
-        if (state.selectedDropdownForFilterStatus === "Accepted")
+      if (state.selectedDropdownForSortDoA === "Oldest")
+        tempFilteredData.sort(values.sortDateByOldestUsing);
+
+      if (event.target.value === "" && tempFilteredData.length === 0) {
+        tempFilteredData = [...response];
+
+        if (state.selectedDropdownForFilterStatus === "Approved")
           tempFilteredData =
             values.filterAcceptedTempFilteredData(tempFilteredData);
 
@@ -60,13 +68,19 @@ const SearchBar = ({ state, dispatch, values }: SearchBarProps) => {
           tempFilteredData =
             values.filterRejectedTempFilteredData(tempFilteredData);
 
-        if (state.selectedDropdownForFilterViewed === "Yes")
+        if (state.selectedDropdownForFilterViewed === "Viewed")
           tempFilteredData =
             values.filterViewedTempFilteredData(tempFilteredData);
 
-        if (state.selectedDropdownForFilterViewed === "No")
+        if (state.selectedDropdownForFilterViewed === "Not Viewed")
           tempFilteredData =
             values.filterNotViewedTempFilteredData(tempFilteredData);
+
+        if (state.selectedDropdownForSortDoA === "Latest")
+          tempFilteredData.sort(values.sortDateByLatestUsing);
+
+        if (state.selectedDropdownForSortDoA === "Oldest")
+          tempFilteredData.sort(values.sortDateByOldestUsing);
       }
 
       values.setFilteredResponseData(tempFilteredData);
