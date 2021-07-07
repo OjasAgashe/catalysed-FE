@@ -1,0 +1,10 @@
+.OrgSpecificApplicantDetailsHeaderContainer {
+  background-size: cover;
+  background-position: top;
+  box-shadow: 0 1px 10px var(--blue-gray-400);
+}
+
+.OrgSpecificApplicantDetailsHeaderHeroText span {
+  background-color: var(--floral-white);
+  box-shadow: 2px 2px 10px var(--blue-gray-400);
+}

@@ -234,7 +234,7 @@ const OrgProgramApplicantDataContainer = ({
 
             <th className="ProgramApplicantHeader">
               <DropdownButton
-                title={`Viewed${
+                title={`Application${
                   state.selectedDropdownForFilterViewed !== "All"
                     ? `:${state.selectedDropdownForFilterViewed}`
                     : ""
@@ -274,7 +274,7 @@ const OrgProgramApplicantDataContainer = ({
             )) &&
           values.filteredResponseData.length ? (
             values.filteredResponseData.map((data) => (
-              <ApplicantTableRow data={data} key={data.id} />
+              <ApplicantTableRow data={data} key={data.id} state={state}/>
             ))
           ) : (
             <tr
@@ -300,7 +300,7 @@ const OrgProgramApplicantDataContainer = ({
             state.responseData &&
             state.responseData.length &&
             state.responseData.map((data) => (
-              <ApplicantTableRow data={data} key={data.id} />
+              <ApplicantTableRow data={data} key={data.id} state={state} />
             ))}
         </tbody>
       </Table>

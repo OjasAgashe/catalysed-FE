@@ -5,12 +5,17 @@ import { OrgDirectoryDetailsCommonState } from "../../types/OrganisationDirector
 // @ts-ignore
 import ReactCountryFlag from "react-country-flag";
 import { getCode } from "country-list";
+import { OrgSpecificApplicantDetailsState } from "../../types/OrgSpecificApplicantDetails";
 
 type SectionOneProps = {
-  state: OrgDirectoryDetailsCommonState;
+  state?: OrgDirectoryDetailsCommonState | null;
+  applicantState?: OrgSpecificApplicantDetailsState | null;
 };
 
-const SectionOne = ({ state }: SectionOneProps) => {
+const SectionOne = ({
+  state = null,
+  applicantState = null,
+}: SectionOneProps) => {
   return (
     <div className="SectionOne">
       <div className="SectionOneFirstHalf">
@@ -25,22 +30,50 @@ const SectionOne = ({ state }: SectionOneProps) => {
             <span className="CreateProgramFormText">
               Full Name&nbsp;:&nbsp;
             </span>
-            <span className="Data">{`${state.responseData?.firstName} ${state.responseData?.lastName}`}</span>
+            <span className="Data">{`${
+              state
+                ? state?.responseData?.firstName
+                : applicantState?.responseData?.mentorDetails?.firstName
+            } ${
+              state
+                ? state?.responseData?.lastName
+                : applicantState?.responseData?.mentorDetails?.lastName
+            }`}</span>
           </div>
 
           <div className="DataCardAge">
             <span className="CreateProgramFormText">Age&nbsp;:&nbsp;</span>
             <span className="Data">
-              {state.responseData?.birthYear
+              {state
+                ? state?.responseData?.birthYear
+                  ? new Date().getFullYear() -
+                    parseInt(state?.responseData?.birthYear)
+                  : ""
+                : applicantState?.responseData?.mentorDetails?.birthYear
                 ? new Date().getFullYear() -
-                  parseInt(state.responseData?.birthYear)
+                  parseInt(
+                    applicantState?.responseData?.mentorDetails?.birthYear
+                  )
                 : ""}
             </span>
           </div>
 
           <div className="DataCardGender">
             <span className="CreateProgramFormText">Gender&nbsp;:&nbsp;</span>
-            <span className="Data">{state.responseData?.gender}</span>
+            <span className="Data">
+              {state
+                ? state?.responseData?.gender === "MALE"
+                  ? "Male"
+                  : state?.responseData?.gender === "FEMALE"
+                  ? "Female"
+                  : state?.responseData?.gender
+                : applicantState?.responseData?.mentorDetails?.gender === "MALE"
+                ? "Male"
+                : applicantState?.responseData?.mentorDetails?.gender ===
+                  "FEMALE"
+                ? "Female"
+                : applicantState?.responseData?.mentorDetails?.gender}
+            </span>
           </div>
 
           <div className="DataCardContact">
@@ -54,7 +87,10 @@ const SectionOne = ({ state }: SectionOneProps) => {
                 <span>
                   <ReactCountryFlag
                     countryCode={getCode(
-                      state.responseData?.phone.countryName ?? ""
+                      state
+                        ? state?.responseData?.phone.countryName ?? ""
+                        : applicantState?.responseData?.mentorDetails?.phone
+                            .countryName ?? ""
                     )}
                     svg
                     style={{
@@ -64,13 +100,19 @@ const SectionOne = ({ state }: SectionOneProps) => {
                       padding: "0",
                     }}
                   />
-                  &nbsp;&nbsp; +
+                  &nbsp;&nbsp;
                   <span className="Data">
-                    {state.responseData?.phone.countryCode}
+                    {state
+                      ? state?.responseData?.phone.countryCode
+                      : applicantState?.responseData?.mentorDetails?.phone
+                          .countryCode}
                   </span>
                   &nbsp;
                   <span className="Data">
-                    {state.responseData?.phone.number}
+                    {state
+                      ? state?.responseData?.phone.number
+                      : applicantState?.responseData?.mentorDetails?.phone
+                          .number}
                   </span>
                 </span>
                 <span className="PhoneComma">&nbsp;,</span>
@@ -84,15 +126,27 @@ const SectionOne = ({ state }: SectionOneProps) => {
                   placement="bottom"
                   overlay={
                     <Tooltip id="datacard-email-tooltip">
-                      {state.responseData?.email}
+                      {state
+                        ? state?.responseData?.email
+                        : applicantState?.responseData?.mentorDetails?.email}
                     </Tooltip>
                   }
                 >
                   <span className="Data">
-                    {state.responseData?.email
-                      ? state.responseData?.email.length > 18
-                        ? `${state.responseData?.email.substring(0, 18)}...`
-                        : state.responseData?.email
+                    {state
+                      ? state?.responseData?.email
+                        ? state?.responseData?.email.length > 18
+                          ? `${state?.responseData?.email.substring(0, 18)}...`
+                          : state?.responseData?.email
+                        : ""
+                      : applicantState?.responseData?.mentorDetails?.email
+                      ? applicantState?.responseData?.mentorDetails?.email
+                          .length > 18
+                        ? `${applicantState?.responseData?.mentorDetails?.email.substring(
+                            0,
+                            18
+                          )}...`
+                        : applicantState?.responseData?.mentorDetails?.email
                       : ""}
                   </span>
                 </OverlayTrigger>

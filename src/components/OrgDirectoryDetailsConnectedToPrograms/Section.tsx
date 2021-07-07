@@ -4,12 +4,14 @@ import Error from "../Error/Error";
 import ConnectedToProgramTableRow from "./ConnectedToProgramTableRow";
 import { OrgDirectoryDetailsCommonState } from "../../types/OrganisationDirectory";
 import { orgDirectoryDetailsCTPSectionReducer } from "../../reducers/orgDirectoryDetailsCTPSectionReducer";
+import { OrgSpecificApplicantDetailsState } from "../../types/OrgSpecificApplicantDetails";
 
 type SectionProps = {
-  state: OrgDirectoryDetailsCommonState;
+  state?: OrgDirectoryDetailsCommonState | null;
+  applicantState?: OrgSpecificApplicantDetailsState | null;
 };
 
-const Section = ({ state }: SectionProps) => {
+const Section = ({ state = null, applicantState = null }: SectionProps) => {
   const [sectionState, sectionDispatch] = useReducer(
     orgDirectoryDetailsCTPSectionReducer,
     {
@@ -20,20 +22,54 @@ const Section = ({ state }: SectionProps) => {
   );
 
   const filterActiveResponseData = useMemo(() => {
-    return state.responseData?.connectPrograms
-      ? state.responseData?.connectPrograms.filter(
-          (data) => data.status === "PUBLISHED"
-        )
-      : null;
-  }, [state.responseData?.connectPrograms]);
+    if (state?.responseData?.connectPrograms.length)
+      return state?.responseData?.connectPrograms.filter(
+        (data) => data.status === "PUBLISHED"
+      );
+
+    if (
+      applicantState?.responseData?.applicationDetails.applicantType ===
+      "MENTOR"
+    ) {
+      return applicantState?.responseData?.mentorDetails?.connectPrograms.filter(
+        (data) => data.status === "PUBLISHED"
+      );
+    } else {
+      return applicantState?.responseData?.studentDetails?.connectPrograms.filter(
+        (data) => data.status === "PUBLISHED"
+      );
+    }
+  }, [
+    applicantState?.responseData?.applicationDetails.applicantType,
+    applicantState?.responseData?.mentorDetails?.connectPrograms,
+    applicantState?.responseData?.studentDetails?.connectPrograms,
+    state?.responseData?.connectPrograms,
+  ]);
 
   const filterInactiveResponseData = useMemo(() => {
-    return state.responseData?.connectPrograms
-      ? state.responseData?.connectPrograms.filter(
-          (data) => data.status === "SAVED_TO_DRAFT"
-        )
-      : null;
-  }, [state.responseData?.connectPrograms]);
+    if (state?.responseData?.connectPrograms.length)
+      return state?.responseData?.connectPrograms.filter(
+        (data) => data.status === "SAVED_TO_DRAFT"
+      );
+
+    if (
+      applicantState?.responseData?.applicationDetails.applicantType ===
+      "MENTOR"
+    ) {
+      return applicantState?.responseData?.mentorDetails?.connectPrograms.filter(
+        (data) => data.status === "SAVED_TO_DRAFT"
+      );
+    } else {
+      return applicantState?.responseData?.studentDetails?.connectPrograms.filter(
+        (data) => data.status === "SAVED_TO_DRAFT"
+      );
+    }
+  }, [
+    applicantState?.responseData?.applicationDetails.applicantType,
+    applicantState?.responseData?.mentorDetails?.connectPrograms,
+    applicantState?.responseData?.studentDetails?.connectPrograms,
+    state?.responseData?.connectPrograms,
+  ]);
 
   const handleDirectoryDetailsStateDropdownSelect = (
     eventKey: string | null
@@ -45,28 +81,53 @@ const Section = ({ state }: SectionProps) => {
       });
       sectionDispatch({ type: "noFilteredData", payload: "" });
 
-      if (state.responseData?.connectPrograms) {
-        let tempFilteredData:
-          | { programId: number; status: string; title: string }[]
-          | null = [...state.responseData?.connectPrograms];
+      let tempFilteredData:
+        | { programId: number; status: string; title: string }[] = [];
 
-        if (eventKey === "Published")
-          tempFilteredData = filterActiveResponseData;
+      if (state?.responseData?.connectPrograms.length)
+        tempFilteredData = [...state?.responseData?.connectPrograms];
 
-        if (eventKey === "In Draft")
-          tempFilteredData = filterInactiveResponseData;
+      if (
+        applicantState?.responseData?.applicationDetails.applicantType ===
+        "MENTOR"
+      ) {
+        if (applicantState?.responseData?.mentorDetails?.connectPrograms.length)
+          tempFilteredData = [
+            ...applicantState?.responseData?.mentorDetails?.connectPrograms,
+          ];
+      } else {
+        if (
+          applicantState?.responseData?.studentDetails?.connectPrograms.length
+        )
+          tempFilteredData = [
+            ...applicantState?.responseData?.studentDetails?.connectPrograms,
+          ];
+      }
 
+      if (eventKey === "Published")
+        tempFilteredData = filterActiveResponseData as {
+          programId: number;
+          status: string;
+          title: string;
+        }[];
+
+      if (eventKey === "In Draft")
+        tempFilteredData = filterInactiveResponseData as {
+          programId: number;
+          status: string;
+          title: string;
+        }[];
+
+      sectionDispatch({
+        type: "filteredResponseData",
+        payload: tempFilteredData,
+      });
+
+      if (eventKey && tempFilteredData && tempFilteredData.length === 0) {
         sectionDispatch({
-          type: "filteredResponseData",
-          payload: tempFilteredData,
+          type: "noFilteredData",
+          payload: "Sorry!! No Programs Found for This Option",
         });
-
-        if (eventKey && tempFilteredData && tempFilteredData.length === 0) {
-          sectionDispatch({
-            type: "noFilteredData",
-            payload: "Sorry!! No Programs Found for This Option",
-          });
-        }
       }
     }
   };
@@ -135,12 +196,36 @@ const Section = ({ state }: SectionProps) => {
 
           {!["Published", "In Draft"].includes(
             sectionState.selectedRadioForFilterState
-          ) && state.responseData?.connectPrograms &&
-            [...state.responseData?.connectPrograms]
-              .reverse()
-              .map((data) => (
-                <ConnectedToProgramTableRow data={data} key={data.programId} />
-              ))}
+          ) && state
+            ? state?.responseData?.connectPrograms &&
+              [...state?.responseData?.connectPrograms]
+                .reverse()
+                .map((data) => (
+                  <ConnectedToProgramTableRow
+                    data={data}
+                    key={data.programId}
+                  />
+                ))
+            : applicantState?.responseData?.applicationDetails.applicantType ===
+              "MENTOR"
+            ? applicantState?.responseData?.mentorDetails?.connectPrograms &&
+              [...applicantState?.responseData?.mentorDetails?.connectPrograms]
+                .reverse()
+                .map((data) => (
+                  <ConnectedToProgramTableRow
+                    data={data}
+                    key={data.programId}
+                  />
+                ))
+            : applicantState?.responseData?.studentDetails?.connectPrograms &&
+              [...applicantState?.responseData?.studentDetails?.connectPrograms]
+                .reverse()
+                .map((data) => (
+                  <ConnectedToProgramTableRow
+                    data={data}
+                    key={data.programId}
+                  />
+                ))}
         </tbody>
       </Table>
     </div>

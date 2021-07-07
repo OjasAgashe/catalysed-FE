@@ -1,34 +1,38 @@
 import React, { useEffect, useReducer } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
-import OrgDirectoryDetailsCommonHeader from "../../components/OrgDirectoryDetailsCommonHeader/OrgDirectoryDetailsCommonHeader";
 import OrgDirectoryDetailsConnectedToPrograms from "../../components/OrgDirectoryDetailsConnectedToPrograms/OrgDirectoryDetailsConnectedToPrograms";
 import OrgDirectoryDetailsPersonalInfo from "../../components/OrgDirectoryDetailsPersonalInfo/OrgDirectoryDetailsPersonalInfo";
+import OrgSpecificApplicantDetailsHeader from "../../components/OrgSpecificApplicantDetailsHeader/OrgSpecificApplicantDetailsHeader";
 import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
-import { orgDirectoryDetailsReducer } from "../../reducers/orgDirectoryDetailsReducer";
+import { orgSpecificApplicantDetailsReducer } from "../../reducers/orgSpecificApplicantDetailsReducer";
 
-const OrgDirectoryMentorDetailsPage = () => {
-  const [state, dispatch] = useReducer(orgDirectoryDetailsReducer, {
-    choosedOption: "PersonalInfo",
+const OrgSpecificMentorApplicantDetailsPage = () => {
+  const [state, dispatch] = useReducer(orgSpecificApplicantDetailsReducer, {
+    choosedOption: "Application",
     responseData: null,
     loading: true,
     error: "",
   });
 
-  const { mentorId } = useParams<{ mentorId: string }>();
+  const { mentorId, programId } =
+    useParams<{ mentorId: string; programId: string }>();
   const history = useHistory();
-  const { getSpecificConnectedMentor } = useOrgAPI();
+  const { getSpecificMentorApplicantDetails } = useOrgAPI();
 
   useEffect(() => {
     document.documentElement.scrollTop = 0;
 
-    document.title = "Mentor Details | CatalysEd";
+    document.title = "Mentor Applicant Details | CatalysEd";
 
     const getDetails = async () => {
       try {
         dispatch({ type: "error", payload: "" });
 
-        const response = await getSpecificConnectedMentor(parseInt(mentorId));
+        const response = await getSpecificMentorApplicantDetails(
+          parseInt(programId),
+          parseInt(mentorId)
+        );
 
         dispatch({ type: "responseData", payload: response.data });
         dispatch({ type: "loading", payload: false });
@@ -43,10 +47,10 @@ const OrgDirectoryMentorDetailsPage = () => {
     };
 
     getDetails();
-  }, [getSpecificConnectedMentor, history, mentorId]);
+  }, [getSpecificMentorApplicantDetails, history, mentorId, programId]);
 
   return (
-    <div className="OrgDirectoryMentorPage">
+    <div className="OrgSpecificMentorApplicantDetailsPage">
       {state.loading && (
         <LoadingProgress
           loading={state.loading}
@@ -55,17 +59,17 @@ const OrgDirectoryMentorDetailsPage = () => {
         />
       )}
 
-      <OrgDirectoryDetailsCommonHeader state={state} dispatch={dispatch} />
+      <OrgSpecificApplicantDetailsHeader state={state} dispatch={dispatch} />
 
       {state.choosedOption === "PersonalInfo" && (
-        <OrgDirectoryDetailsPersonalInfo state={state} />
+        <OrgDirectoryDetailsPersonalInfo applicantState={state} />
       )}
 
       {state.choosedOption === "ConnectedToPrograms" && (
-        <OrgDirectoryDetailsConnectedToPrograms state={state} />
+        <OrgDirectoryDetailsConnectedToPrograms applicantState={state} />
       )}
     </div>
   );
 };
 
-export default OrgDirectoryMentorDetailsPage;
+export default OrgSpecificMentorApplicantDetailsPage;

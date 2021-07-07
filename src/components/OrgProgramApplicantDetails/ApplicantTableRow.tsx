@@ -1,15 +1,38 @@
 import React from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import { OrgProgramApplicantData } from "../../types/OrgProgramDetails";
+import { useHistory } from "react-router-dom";
+import { ORGANISATION_PROGRAM_DETAILS } from "../../constants/Routes";
+import {
+  OrgProgramApplicantData,
+  OrgProgramApplicantState,
+} from "../../types/OrgProgramDetails";
 
 type ApplicantTableRowProps = {
   data: OrgProgramApplicantData;
+  state: OrgProgramApplicantState;
 };
 
-const ApplicantTableRow = ({ data }: ApplicantTableRowProps) => {
+const ApplicantTableRow = ({ data, state }: ApplicantTableRowProps) => {
+  const history = useHistory();
+
+  const handleApplicantDataTableRowClick = () => {
+    if (state.showMentorDetails) {
+      history.push(
+        `${ORGANISATION_PROGRAM_DETAILS}/${data.programId}/applicants/mentor/${data.id}/details`
+      );
+    } else if (state.showStudentDetails) {
+      history.push(
+        `${ORGANISATION_PROGRAM_DETAILS}/${data.programId}/applicants/student/${data.id}/details`
+      );
+    }
+  };
+
   return (
     <>
-      <tr className="ProgramApplicantTableRow ProgramApplicantDataTableRow">
+      <tr
+        className="ProgramApplicantTableRow ProgramApplicantDataTableRow"
+        onClick={handleApplicantDataTableRowClick}
+      >
         <td className="ProgramApplicantTableData">
           <OverlayTrigger
             placement="bottom"

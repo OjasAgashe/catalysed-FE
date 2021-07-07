@@ -26,7 +26,7 @@ const OrgMentorDirectory = ({ state }: OrgMentorDirectoryProps) => {
           state.filteredResponseData.length ? (
             state.filteredResponseData.map((data) => (
               <OrgDirectoryCard
-                key={data.name}
+                key={data.id}
                 data={data}
                 handleDirectoryCardViewAllBtnClick={
                   handleDirectoryCardViewAllBtnClick
@@ -42,7 +42,7 @@ const OrgMentorDirectory = ({ state }: OrgMentorDirectoryProps) => {
           {state.searchedName === "" &&
             state.responseData.map((data) => (
               <OrgDirectoryCard
-                key={data.name}
+                key={data.id}
                 data={data}
                 handleDirectoryCardViewAllBtnClick={
                   handleDirectoryCardViewAllBtnClick

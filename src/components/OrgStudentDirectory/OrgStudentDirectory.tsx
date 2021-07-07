@@ -26,7 +26,7 @@ const OrgStudentDirectory = ({ state }: OrgStudentDirectoryProps) => {
           state.filteredResponseData.length ? (
             state.filteredResponseData.map((data: any) => (
               <OrgDirectoryCard
-                key={data.name}
+                key={data.id}
                 data={data}
                 handleDirectoryCardViewAllBtnClick={
                   handleDirectoryCardViewAllBtnClick
@@ -41,7 +41,7 @@ const OrgStudentDirectory = ({ state }: OrgStudentDirectoryProps) => {
           {state.searchedName === "" &&
             state.responseData.map((data) => (
               <OrgDirectoryCard
-                key={data.name}
+                key={data.id}
                 data={data}
                 handleDirectoryCardViewAllBtnClick={
                   handleDirectoryCardViewAllBtnClick

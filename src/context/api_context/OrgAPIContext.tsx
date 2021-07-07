@@ -1,43 +1,10 @@
 import React, { useCallback, useContext, useMemo } from "react";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { useCookie } from "../cookie_context/CookieContext";
 import { CreateProgramData } from "../../types/CreateProgram";
 import { GetProgramMetaListData } from "../../types/OrgViewSearchProgram";
 import { OrgInvitationPostData } from "../../types/OrgProgramDetails";
-
-interface OrgAPIProviderReturns {
-  postCreateProgramCall: (
-    data: CreateProgramData
-  ) => Promise<AxiosResponse<any>>;
-  getProgramsMetaList: () => Promise<AxiosResponse<any>>;
-  getProgramDetails: (programId: number) => Promise<AxiosResponse<any>>;
-  putUpdatedProgramDetails: (
-    programId: number,
-    data: CreateProgramData
-  ) => Promise<AxiosResponse<any>>;
-  putUpdatedProgramStatusToPublish: (
-    programId: number,
-    data: CreateProgramData
-  ) => Promise<AxiosResponse<any>>;
-  getProgramsStartingThisMonth: () => Promise<any[]>;
-  getOngoingPrograms: () => Promise<any[]>;
-  getProgramInvitations: (programId: number) => Promise<AxiosResponse<any>>;
-  postProgramInvitations: (
-    programId: number,
-    data: OrgInvitationPostData
-  ) => Promise<AxiosResponse<any>>;
-  getProgramParticipants: (programId: number) => Promise<AxiosResponse<any>>;
-  getConnectedMentors: () => Promise<AxiosResponse<any>>;
-  getConnectedStudents: () => Promise<AxiosResponse<any>>;
-  getSpecificConnectedMentor(mentorId: number): Promise<AxiosResponse<any>>;
-  getSpecificConnectedStudent(studentId: number): Promise<AxiosResponse<any>>;
-  getStudentApplicationForProgram: (
-    programId: number
-  ) => Promise<AxiosResponse<any>>;
-  getMentorApplicationForProgram: (
-    programId: number
-  ) => Promise<AxiosResponse<any>>;
-}
+import { OrgAPIProviderReturns } from "../../types/OrgAPI";
 
 const OrgAPIContext = React.createContext<OrgAPIProviderReturns | null>(null);
 
@@ -272,6 +239,36 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     );
   }
 
+  function getSpecificStudentApplicantDetails(
+    programId: number,
+    studentId: number
+  ) {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.get(
+      `organizations/${catalysedId}/programs/${programId}/student/applications/${studentId}`,
+      {
+        headers: { Authorization: `Bearer ${catalysedToken}` },
+      }
+    );
+  }
+
+  function getSpecificMentorApplicantDetails(
+    programId: number,
+    mentorId: number
+  ) {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.get(
+      `organizations/${catalysedId}/programs/${programId}/mentor/applications/${mentorId}`,
+      {
+        headers: { Authorization: `Bearer ${catalysedToken}` },
+      }
+    );
+  }
+
   const values = {
     postCreateProgramCall,
     getProgramsMetaList,
@@ -289,6 +286,8 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     getSpecificConnectedStudent,
     getStudentApplicationForProgram,
     getMentorApplicationForProgram,
+    getSpecificStudentApplicantDetails,
+    getSpecificMentorApplicantDetails,
   };
 
   return (

@@ -50,6 +50,7 @@ import PageNotFound from "../../pages/PageNotFound/PageNotFound";
 import OrgDirectoryPage from "../../pages/OrgDirectoryPage/OrgDirectoryPage";
 import OrgDirectoryMentorDetailsPage from "../../pages/OrgDirectoryPage/OrgDirectoryMentorDetailsPage";
 import OrgDirectoryStudentDetailsPage from "../../pages/OrgDirectoryPage/OrgDirectoryStudentDetailsPage";
+import OrgSpecificMentorApplicantDetailsPage from "../../pages/OrgSpecificApplicantDetailsPage/OrgSpecificMentorApplicantDetailsPage";
 
 function App() {
   return (
@@ -137,6 +138,15 @@ function App() {
           >
             <OrgAPIProvider>
               <OrgProgramApplicantsPage />
+            </OrgAPIProvider>
+          </PrivateRoute>
+
+          <PrivateRoute
+            path={`${ORGANISATION_PROGRAM_DETAILS}/:programId/applicants/mentor/:mentorId/details`}
+            exact
+          >
+            <OrgAPIProvider>
+              <OrgSpecificMentorApplicantDetailsPage />
             </OrgAPIProvider>
           </PrivateRoute>
 

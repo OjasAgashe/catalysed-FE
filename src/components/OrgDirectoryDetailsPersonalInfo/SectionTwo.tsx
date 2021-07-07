@@ -1,12 +1,17 @@
 import React from "react";
 import { OrgDirectoryDetailsGirl } from "../../assets/Illustrations/Illustrations";
 import { OrgDirectoryDetailsCommonState } from "../../types/OrganisationDirectory";
+import { OrgSpecificApplicantDetailsState } from "../../types/OrgSpecificApplicantDetails";
 
 type SectionTwoProps = {
-  state: OrgDirectoryDetailsCommonState;
+  state?: OrgDirectoryDetailsCommonState | null;
+  applicantState?: OrgSpecificApplicantDetailsState | null;
 };
 
-const SectionTwo = ({ state }: SectionTwoProps) => {
+const SectionTwo = ({
+  state = null,
+  applicantState = null,
+}: SectionTwoProps) => {
   return (
     <div className="SectionTwo">
       <div className="SectionTwoFirstHalf">
@@ -15,7 +20,11 @@ const SectionTwo = ({ state }: SectionTwoProps) => {
             <div className="CreateProgramFormText">
               School / Organisation&nbsp;:&nbsp;
             </div>
-            <div className="Data">{state.responseData?.organization}</div>
+            <div className="Data">
+              {state
+                ? state?.responseData?.organization
+                : applicantState?.responseData?.mentorDetails?.organization}
+            </div>
           </div>
 
           <div className="DataCardAddress">
@@ -27,7 +36,10 @@ const SectionTwo = ({ state }: SectionTwoProps) => {
                   region&nbsp;:&nbsp;
                 </span>
                 <span className="Data">
-                  {state.responseData?.location.region}
+                  {state
+                    ? state?.responseData?.location.region
+                    : applicantState?.responseData?.mentorDetails?.location
+                        .region}
                 </span>
                 <span className="AddressComma">&nbsp;,</span>
               </div>
@@ -37,7 +49,10 @@ const SectionTwo = ({ state }: SectionTwoProps) => {
                   country&nbsp;:&nbsp;
                 </span>
                 <span className="Data">
-                  {state.responseData?.location.country}
+                  {state
+                    ? state?.responseData?.location.country
+                    : applicantState?.responseData?.mentorDetails?.location
+                        .country}
                 </span>
               </div>
             </div>
@@ -49,7 +64,9 @@ const SectionTwo = ({ state }: SectionTwoProps) => {
             </span>
 
             <span className="LanguageLi">
-              {state.responseData?.primaryLanguage}
+              {state
+                ? state.responseData?.primaryLanguage
+                : applicantState?.responseData?.mentorDetails?.primaryLanguage}
             </span>
           </div>
 
@@ -58,7 +75,14 @@ const SectionTwo = ({ state }: SectionTwoProps) => {
               Professionally Mentored Ever&nbsp;:&nbsp;
             </span>
             <span className="Data">
-              {state.responseData?.previouslyMentored ? "Yes" : "No"}
+              {state
+                ? state?.responseData?.previouslyMentored
+                  ? "Yes"
+                  : "No"
+                : applicantState?.responseData?.mentorDetails
+                    ?.previouslyMentored
+                ? "Yes"
+                : "No"}
             </span>
           </div>
 
@@ -67,7 +91,10 @@ const SectionTwo = ({ state }: SectionTwoProps) => {
               Experience&nbsp;:&nbsp;
             </span>
             <span className="Data">
-              {state.responseData?.experience}&nbsp;years
+              {state
+                ? state.responseData?.experience
+                : applicantState?.responseData?.mentorDetails?.experience}
+              &nbsp;years
             </span>
           </div>
 
@@ -76,7 +103,13 @@ const SectionTwo = ({ state }: SectionTwoProps) => {
               Has Stable Internet Connection&nbsp;:&nbsp;
             </span>
             <span className="Data">
-              {state.responseData?.stableConnection ? "Yes" : "No"}
+              {state
+                ? state?.responseData?.stableConnection
+                  ? "Yes"
+                  : "No"
+                : applicantState?.responseData?.mentorDetails?.stableConnection
+                ? "Yes"
+                : "No"}
             </span>
           </div>
 
@@ -84,14 +117,22 @@ const SectionTwo = ({ state }: SectionTwoProps) => {
             <div className="CreateProgramFormText">
               Academic Qualification&nbsp;:&nbsp;
             </div>
-            <div className="Data">{state.responseData?.qualification}</div>
+            <div className="Data">
+              {state
+                ? state?.responseData?.qualification
+                : applicantState?.responseData?.mentorDetails?.qualification}
+            </div>
           </div>
 
           <div className="DataCardProfession">
             <span className="CreateProgramFormText">
               Profession&nbsp;:&nbsp;
             </span>
-            <span className="Data">{state.responseData?.profession}</span>
+            <span className="Data">
+              {state
+                ? state?.responseData?.profession
+                : applicantState?.responseData?.mentorDetails?.profession}
+            </span>
           </div>
         </div>
       </div>

@@ -20,10 +20,11 @@
     OrgProfileEdit,
     OrgProgramApplicantsPage,
     OrgApplicantsPage,
-    PageNotFound
+    PageNotFound,
+    OrgSpecificMentorApplicantDetailsPage
 */
 
-:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage, .OrgProfileBuilder, .MentorProfileBuilder, .StuProfileBuilder, .OrgCreateProgramPage, .OrgViewSearchProgramPage, .OrgProgramDetailsPage, .OrgProgramInvitationsPage, .OrgProgramParticipantsPage, .OrgEditProgramDetailsPage, .OrgHomePage, .OrgDirectoryPage, .OrgDirectoryMentorPage, .OrgDirectoryStudentPage, .OrgProfileManagePage, .OrgProfileEditPage, .OrgProgramApplicantsPage, .OrgApplicantsPage, .PageNotFoundContainer) {
+:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage, .OrgProfileBuilder, .MentorProfileBuilder, .StuProfileBuilder, .OrgCreateProgramPage, .OrgViewSearchProgramPage, .OrgProgramDetailsPage, .OrgProgramInvitationsPage, .OrgProgramParticipantsPage, .OrgEditProgramDetailsPage, .OrgHomePage, .OrgDirectoryPage, .OrgDirectoryMentorPage, .OrgDirectoryStudentPage, .OrgProfileManagePage, .OrgProfileEditPage, .OrgProgramApplicantsPage, .OrgApplicantsPage, .PageNotFoundContainer, .OrgSpecificMentorApplicantDetailsPage) {
   background-color: var(--red-100);
   min-height: 85vh;
 }
@@ -481,9 +482,7 @@ input[type="number"] {
 :is(.GeneralDetailsForm, .GeneralProgramDetailsDataContainer, .MentorProgramDetailsDataContainer, .StudentProgramDetailsDataContainer)
   .LanguagePreviewer
   .LanguageLi,
-.OrgDirectoryDetailsPersonalContainer
-  .SectionTwo
-  .LanguageLi {
+.OrgDirectoryDetailsPersonalContainer .SectionTwo .LanguageLi {
   display: inline-block;
   list-style: none;
   background-color: var(--common-home-section-four);
@@ -495,12 +494,14 @@ input[type="number"] {
 /* 
   OrgProgramDetailsCommon,
   OrgDirectoryPageHeader,
-  OrgDirectoryDetailsCommonHeader
+  OrgDirectoryDetailsCommonHeader,
+  OrgSpecificApplicantDetailsHeader,
 */
 
 .CommonProgramDetailsHeroText,
 .OrgDirectoryPageHeaderHeroText,
-.OrgDirectoryDetailsCommonHeaderHeroText {
+.OrgDirectoryDetailsCommonHeaderHeroText,
+.OrgSpecificApplicantDetailsHeaderHeroText {
   padding: 2rem 0 3rem 5rem !important;
   font-family: "KoHo", sans-serif;
   font-size: 2.5rem !important;
@@ -510,7 +511,8 @@ input[type="number"] {
 
 .PDViewAndRouteLinksContainer,
 .OrgDirectoryMentorOrStudentOptContainer,
-.OrgDirectoryDetailsPIOrCtPOptContainer {
+.OrgDirectoryDetailsPIOrCtPOptContainer,
+.OrgSpecificApplicantDetailsOptionContainer {
   width: fit-content;
   margin: auto;
   text-align: center;
@@ -520,7 +522,8 @@ input[type="number"] {
 
 .ProgramDetailsRouteLinks,
 .OrgDirectoryMentorOrStudentOpt,
-.OrgDirectoryDetailsPIOrCtPOpt {
+.OrgDirectoryDetailsPIOrCtPOpt,
+.OrgSpecificApplicantDetailsOption {
   padding: 0 !important;
   font-size: 1.3rem !important;
   width: fit-content;
@@ -536,7 +539,8 @@ input[type="number"] {
 @media screen and (max-width: 500px) {
   .ProgramDetailsRouteLinks,
   .OrgDirectoryMentorOrStudentOpt,
-  .OrgDirectoryDetailsPIOrCtPOpt {
+  .OrgDirectoryDetailsPIOrCtPOpt,
+  .OrgSpecificApplicantDetailsOption {
     margin: auto 0.4rem !important;
   }
 }
@@ -552,7 +556,8 @@ input[type="number"] {
 
   .CommonProgramDetailsHeroText,
   .OrgDirectoryPageHeaderHeroText,
-  .OrgDirectoryDetailsCommonHeaderHeroText {
+  .OrgDirectoryDetailsCommonHeaderHeroText,
+  .OrgSpecificApplicantDetailsHeaderHeroText {
     padding: 1rem 2rem 3rem !important;
   }
 }
@@ -561,10 +566,12 @@ input[type="number"] {
   OrgDirectoryPageHeader,
   OrgDirectoryDetailsCommonHeader,
   OrgProgramDetailsCommon,
-  MentorOrStudentTab
+  MentorOrStudentTab,
+  OrgSpecificApplicantDetailsHeader
 */
 
-:is(.OrgDirectoryMentorOrStudentOpt, .OrgDirectoryDetailsPIOrCtPOpt) button {
+:is(.OrgDirectoryMentorOrStudentOpt, .OrgDirectoryDetailsPIOrCtPOpt, .OrgSpecificApplicantDetailsOption)
+  button {
   color: var(--yellow-700);
   font-weight: 600;
   cursor: pointer;
@@ -573,7 +580,7 @@ input[type="number"] {
   border-radius: 5px;
 }
 
-:is(.OrgDirectoryMentorOrStudentOpt, .OrgDirectoryDetailsPIOrCtPOpt, .ProgramDetailsRouteLinks, .MentorOrStudentText)
+:is(.OrgDirectoryMentorOrStudentOpt, .OrgDirectoryDetailsPIOrCtPOpt, .ProgramDetailsRouteLinks, .MentorOrStudentText, .OrgSpecificApplicantDetailsOption)
   div {
   display: inline-block;
   margin: 0 !important;
@@ -596,12 +603,15 @@ input[type="number"] {
   :is(.ProgramDetailsLinkDiv, .InvitationsLinkDiv, .ParticipantsLinkDiv),
 .OrgDirectoryMentorOrStudentOpt .OrgDirectoryMentorOpt,
 .OrgDirectoryDetailsPIOrCtPOpt .OrgDirectoryDetailsPIOpt,
-.MentorOrStudentText .MentorOptDiv {
+.MentorOrStudentText .MentorOptDiv,
+.OrgSpecificApplicantDetailsOption
+  :is(.OrgSpecificApplicantApplicationOpt, .OrgSpecificApplicantPIOpt) {
   border-right: 2px solid !important;
 }
 
 .OrgDirectoryMentorOrStudentOpt,
-.OrgDirectoryDetailsPIOrCtPOpt {
+.OrgDirectoryDetailsPIOrCtPOpt,
+.OrgSpecificApplicantDetailsOption {
   box-shadow: 2px 2px 4px var(--yellow-700), -2px -2px 4px var(--yellow-700) !important;
   animation-name: directory-box-shadow-animation;
   animation-iteration-count: infinite;

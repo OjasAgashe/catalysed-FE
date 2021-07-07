@@ -51,6 +51,8 @@ const PrivateRoute = (props: {
             ORGANISATION_HOME,
             ORGANISATION_PROFILE_EDIT,
             `${ORGANISATION_PROGRAM_DETAILS}/:programId/applicants`,
+            `${ORGANISATION_PROGRAM_DETAILS}/:programId/applicants/mentor/:mentorId/details`,
+            `${ORGANISATION_PROGRAM_DETAILS}/:programId/applicants/student/:studentId/details`,
             ORGANISATION_PROGRAM_CREATE,
             `${ORGANISATION_PROGRAM_DETAILS}/:programId/details`,
             `${ORGANISATION_PROGRAM_DETAILS}/:programId/edit`,
