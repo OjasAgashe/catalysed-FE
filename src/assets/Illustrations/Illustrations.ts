@@ -8,6 +8,9 @@ import CreateProgramIllustration from "./create_program_illustration.svg";
 import FooterBackground from "./footer-background.webp";
 import HeaderBackground from "./header-background.webp";
 import Logo from "./logo.png";
+import OrgApplicationStatusApproved from "./org_application_status_approved.png";
+import OrgApplicationStatusPending from "./org_application_status_pending.png";
+import OrgApplicationStatusRejected from "./org_application_status_rejected.png";
 import OrgDirectoryPage from "./org_directory_page.jpg";
 import OrgDirectoryDetailsBoy from "./org_directory_details_boy.svg";
 import OrgDirectoryDetailsGirl from "./org_directory_details_girl.svg";
@@ -35,6 +38,9 @@ export {
   FooterBackground,
   HeaderBackground,
   Logo,
+  OrgApplicationStatusApproved,
+  OrgApplicationStatusPending,
+  OrgApplicationStatusRejected,
   OrgDirectoryPage,
   OrgDirectoryDetailsBoy,
   OrgDirectoryDetailsGirl,

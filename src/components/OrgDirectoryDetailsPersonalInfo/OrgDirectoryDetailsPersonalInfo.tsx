@@ -7,13 +7,13 @@ import SectionOne from "./SectionOne";
 import SectionTwo from "./SectionTwo";
 
 type OrgDirectoryDetailsPersonalInfoProps = {
-  state?: OrgDirectoryDetailsCommonState | null;
-  applicantState?: OrgSpecificApplicantDetailsState | null;
+  state?: OrgDirectoryDetailsCommonState;
+  applicantState?: OrgSpecificApplicantDetailsState;
 };
 
 const OrgDirectoryDetailsPersonalInfo = ({
-  state = null,
-  applicantState = null,
+  state,
+  applicantState,
 }: OrgDirectoryDetailsPersonalInfoProps) => {
   return (
     <div className="OrgDirectoryDetailsPersonalContainer">

@@ -5,6 +5,7 @@ import { CreateProgramData } from "../../types/CreateProgram";
 import { GetProgramMetaListData } from "../../types/OrgViewSearchProgram";
 import { OrgInvitationPostData } from "../../types/OrgProgramDetails";
 import { OrgAPIProviderReturns } from "../../types/OrgAPI";
+import { OrgSpecificApplicantDetailsResponse } from "../../types/OrgSpecificApplicantDetails";
 
 const OrgAPIContext = React.createContext<OrgAPIProviderReturns | null>(null);
 
@@ -241,13 +242,13 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
 
   function getSpecificStudentApplicantDetails(
     programId: number,
-    studentId: number
+    applicationId: number
   ) {
     const catalysedToken = getCatalysedTokenCookie();
     const catalysedId = getCatalysedIdCookie();
 
     return instance.get(
-      `organizations/${catalysedId}/programs/${programId}/student/applications/${studentId}`,
+      `organizations/${catalysedId}/programs/${programId}/student/applications/${applicationId}`,
       {
         headers: { Authorization: `Bearer ${catalysedToken}` },
       }
@@ -256,13 +257,48 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
 
   function getSpecificMentorApplicantDetails(
     programId: number,
-    mentorId: number
+    applicationId: number
   ) {
     const catalysedToken = getCatalysedTokenCookie();
     const catalysedId = getCatalysedIdCookie();
 
     return instance.get(
-      `organizations/${catalysedId}/programs/${programId}/mentor/applications/${mentorId}`,
+      `organizations/${catalysedId}/programs/${programId}/mentor/applications/${applicationId}`,
+      {
+        headers: { Authorization: `Bearer ${catalysedToken}` },
+      }
+    );
+  }
+
+  function putSpecificApplicantDetailsAsViewed(
+    programId: number,
+    applicationId: number,
+    data: OrgSpecificApplicantDetailsResponse
+  ) {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.put(
+      `organizations/${catalysedId}/programs/${programId}/applications/${applicationId}/viewed`,
+      data,
+      {
+        headers: { Authorization: `Bearer ${catalysedToken}` },
+      }
+    );
+  }
+
+  function putStatusOfSpecificApplicantDetails(
+    programId: number,
+    applicationId: number,
+    data: OrgSpecificApplicantDetailsResponse,
+    status: string
+  ) {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.put(
+      `organizations/${catalysedId}/programs/${programId}/applications/${applicationId}/update?status=${status}`,
+      data,
       {
         headers: { Authorization: `Bearer ${catalysedToken}` },
       }
@@ -288,6 +324,8 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     getMentorApplicationForProgram,
     getSpecificStudentApplicantDetails,
     getSpecificMentorApplicantDetails,
+    putSpecificApplicantDetailsAsViewed,
+    putStatusOfSpecificApplicantDetails,
   };
 
   return (

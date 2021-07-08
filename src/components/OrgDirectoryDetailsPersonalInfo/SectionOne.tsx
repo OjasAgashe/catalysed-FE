@@ -8,13 +8,13 @@ import { getCode } from "country-list";
 import { OrgSpecificApplicantDetailsState } from "../../types/OrgSpecificApplicantDetails";
 
 type SectionOneProps = {
-  state?: OrgDirectoryDetailsCommonState | null;
-  applicantState?: OrgSpecificApplicantDetailsState | null;
+  state?: OrgDirectoryDetailsCommonState;
+  applicantState?: OrgSpecificApplicantDetailsState;
 };
 
 const SectionOne = ({
-  state = null,
-  applicantState = null,
+  state,
+  applicantState,
 }: SectionOneProps) => {
   return (
     <div className="SectionOne">

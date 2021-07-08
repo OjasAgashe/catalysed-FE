@@ -18,11 +18,11 @@ const ApplicantTableRow = ({ data, state }: ApplicantTableRowProps) => {
   const handleApplicantDataTableRowClick = () => {
     if (state.showMentorDetails) {
       history.push(
-        `${ORGANISATION_PROGRAM_DETAILS}/${data.programId}/applicants/mentor/${data.id}/details`
+        `${ORGANISATION_PROGRAM_DETAILS}/${data.programId}/applicants/mentor/application/${data.id}/details`
       );
     } else if (state.showStudentDetails) {
       history.push(
-        `${ORGANISATION_PROGRAM_DETAILS}/${data.programId}/applicants/student/${data.id}/details`
+        `${ORGANISATION_PROGRAM_DETAILS}/${data.programId}/applicants/student/application/${data.id}/details`
       );
     }
   };

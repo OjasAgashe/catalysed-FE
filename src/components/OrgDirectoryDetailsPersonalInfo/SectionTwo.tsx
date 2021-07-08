@@ -4,14 +4,11 @@ import { OrgDirectoryDetailsCommonState } from "../../types/OrganisationDirector
 import { OrgSpecificApplicantDetailsState } from "../../types/OrgSpecificApplicantDetails";
 
 type SectionTwoProps = {
-  state?: OrgDirectoryDetailsCommonState | null;
-  applicantState?: OrgSpecificApplicantDetailsState | null;
+  state?: OrgDirectoryDetailsCommonState;
+  applicantState?: OrgSpecificApplicantDetailsState;
 };
 
-const SectionTwo = ({
-  state = null,
-  applicantState = null,
-}: SectionTwoProps) => {
+const SectionTwo = ({ state, applicantState }: SectionTwoProps) => {
   return (
     <div className="SectionTwo">
       <div className="SectionTwoFirstHalf">

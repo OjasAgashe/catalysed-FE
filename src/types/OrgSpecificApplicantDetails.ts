@@ -29,6 +29,8 @@ export interface OrgSpecificApplicantDetailsState {
   responseData: OrgSpecificApplicantDetailsResponse | null;
   loading: boolean;
   error: string;
+  loadingMessage: string;
+  reRenderComponent: boolean;
 }
 
 export type OrgSpecificApplicantDetailsActionType =
@@ -38,4 +40,6 @@ export type OrgSpecificApplicantDetailsActionType =
       payload: OrgSpecificApplicantDetailsResponse | null;
     }
   | { type: "loading"; payload: boolean }
-  | { type: "error"; payload: string };
+  | { type: "error"; payload: string }
+  | { type: "loadingMessage"; payload: string }
+  | { type: "reRenderComponent"; payload: boolean };

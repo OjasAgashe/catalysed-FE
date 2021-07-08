@@ -1,12 +1,14 @@
 import React from "react";
 import { OrgDirectoryDetailsGirl } from "../../assets/Illustrations/Illustrations";
 import { OrgDirectoryDetailsCommonState } from "../../types/OrganisationDirectory";
+import { OrgSpecificApplicantDetailsState } from "../../types/OrgSpecificApplicantDetails";
 
 type SectionTwoProps = {
-  state: OrgDirectoryDetailsCommonState;
+  state?: OrgDirectoryDetailsCommonState;
+  applicantState?: OrgSpecificApplicantDetailsState;
 };
 
-const SectionTwo = ({ state }: SectionTwoProps) => {
+const SectionTwo = ({ state, applicantState }: SectionTwoProps) => {
   return (
     <div className="SectionTwo">
       <div className="SectionTwoFirstHalf">
@@ -15,7 +17,11 @@ const SectionTwo = ({ state }: SectionTwoProps) => {
             <div className="CreateProgramFormText">
               School / Organisation&nbsp;:&nbsp;
             </div>
-            <div className="Data">{state.responseData?.organization}</div>
+            <div className="Data">
+              {state
+                ? state?.responseData?.organization
+                : applicantState?.responseData?.studentDetails?.organization}
+            </div>
           </div>
 
           <div className="DataCardAddress">
@@ -27,7 +33,10 @@ const SectionTwo = ({ state }: SectionTwoProps) => {
                   regions&nbsp;:&nbsp;
                 </span>
                 <span className="Data">
-                  {state.responseData?.location.region}
+                  {state
+                    ? state?.responseData?.location.region
+                    : applicantState?.responseData?.studentDetails?.location
+                        .region}
                 </span>
                 <span className="AddressComma">&nbsp;,</span>
               </div>
@@ -37,7 +46,10 @@ const SectionTwo = ({ state }: SectionTwoProps) => {
                   country&nbsp;:&nbsp;
                 </span>
                 <span className="Data">
-                  {state.responseData?.location.country}
+                  {state
+                    ? state?.responseData?.location.country
+                    : applicantState?.responseData?.studentDetails?.location
+                        .country}
                 </span>
               </div>
             </div>
@@ -49,7 +61,9 @@ const SectionTwo = ({ state }: SectionTwoProps) => {
             </span>
 
             <span className="LanguageLi">
-              {state.responseData?.primaryLanguage}
+              {state
+                ? state.responseData?.primaryLanguage
+                : applicantState?.responseData?.studentDetails?.primaryLanguage}
             </span>
           </div>
 
@@ -58,7 +72,14 @@ const SectionTwo = ({ state }: SectionTwoProps) => {
               Professionally Got Mentored&nbsp;:&nbsp;
             </span>
             <span className="Data">
-              {state.responseData?.previouslyMentored ? "Yes" : "No"}
+              {state
+                ? state?.responseData?.previouslyMentored
+                  ? "Yes"
+                  : "No"
+                : applicantState?.responseData?.studentDetails
+                    ?.previouslyMentored
+                ? "Yes"
+                : "No"}
             </span>
           </div>
 
@@ -67,7 +88,13 @@ const SectionTwo = ({ state }: SectionTwoProps) => {
               Has Stable Internet Connection&nbsp;:&nbsp;
             </span>
             <span className="Data">
-              {state.responseData?.stableConnection ? "Yes" : "No"}
+              {state
+                ? state?.responseData?.stableConnection
+                  ? "Yes"
+                  : "No"
+                : applicantState?.responseData?.studentDetails?.stableConnection
+                ? "Yes"
+                : "No"}
             </span>
           </div>
 
@@ -76,7 +103,12 @@ const SectionTwo = ({ state }: SectionTwoProps) => {
               Device Most Prefer&nbsp;:&nbsp;
             </span>
             <span className="Data">
-              {state.responseData?.primaryDevice === "MOBILE"
+              {state
+                ? state?.responseData?.primaryDevice === "MOBILE"
+                  ? "Mobile"
+                  : "Computer"
+                : applicantState?.responseData?.studentDetails
+                    ?.primaryDevice === "MOBILE"
                 ? "Mobile"
                 : "Computer"}
             </span>

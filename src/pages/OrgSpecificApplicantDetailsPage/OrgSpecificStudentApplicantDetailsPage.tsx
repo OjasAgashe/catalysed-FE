@@ -3,14 +3,14 @@ import { useHistory, useParams } from "react-router-dom";
 import Error from "../../components/Error/Error";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
 import OrgDirectoryDetailsConnectedToPrograms from "../../components/OrgDirectoryDetailsConnectedToPrograms/OrgDirectoryDetailsConnectedToPrograms";
-import OrgDirectoryDetailsPersonalInfo from "../../components/OrgDirectoryDetailsPersonalInfo/OrgDirectoryDetailsPersonalInfo";
+import OrgDirectoryDetailsStudentPersonalInfo from "../../components/OrgDirectoryDetailsStudentPersonalInfo/OrgDirectoryDetailsStudentPersonalInfo";
 import OrgSpecificApplicantApplicationDetails from "../../components/OrgSpecificApplicantApplicationDetails/OrgSpecificApplicantApplicationDetails";
 import OrgSpecificApplicantDetailsHeader from "../../components/OrgSpecificApplicantDetailsHeader/OrgSpecificApplicantDetailsHeader";
 import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
 import { orgSpecificApplicantDetailsReducer } from "../../reducers/orgSpecificApplicantDetailsReducer";
 import "./OrgSpecificApplicantDetailsPage.css";
 
-const OrgSpecificMentorApplicantDetailsPage = () => {
+const OrgSpecificStudentApplicantDetailsPage = () => {
   const [state, dispatch] = useReducer(orgSpecificApplicantDetailsReducer, {
     choosedOption: "Application",
     responseData: null,
@@ -23,12 +23,12 @@ const OrgSpecificMentorApplicantDetailsPage = () => {
   const { applicationId, programId } =
     useParams<{ applicationId: string; programId: string }>();
   const history = useHistory();
-  const { getSpecificMentorApplicantDetails } = useOrgAPI();
+  const { getSpecificStudentApplicantDetails } = useOrgAPI();
 
   useEffect(() => {
     document.documentElement.scrollTop = 0;
 
-    document.title = "Mentor Applicant Details | CatalysEd";
+    document.title = "Student Applicant Details | CatalysEd";
 
     if (state.reRenderComponent)
       dispatch({ type: "reRenderComponent", payload: false });
@@ -38,7 +38,7 @@ const OrgSpecificMentorApplicantDetailsPage = () => {
         dispatch({ type: "error", payload: "" });
         dispatch({ type: "loadingMessage", payload: "Getting Details..." });
 
-        const response = await getSpecificMentorApplicantDetails(
+        const response = await getSpecificStudentApplicantDetails(
           parseInt(programId),
           parseInt(applicationId)
         );
@@ -58,14 +58,14 @@ const OrgSpecificMentorApplicantDetailsPage = () => {
     getDetails();
   }, [
     applicationId,
-    getSpecificMentorApplicantDetails,
+    getSpecificStudentApplicantDetails,
     history,
     programId,
     state.reRenderComponent,
   ]);
 
   return (
-    <div className="OrgSpecificMentorApplicantDetailsPage">
+    <div className="OrgSpecificStudentApplicantDetailsPage">
       {state.loading && (
         <LoadingProgress
           loading={state.loading}
@@ -86,7 +86,7 @@ const OrgSpecificMentorApplicantDetailsPage = () => {
           )}
 
           {state.choosedOption === "PersonalInfo" && (
-            <OrgDirectoryDetailsPersonalInfo applicantState={state} />
+            <OrgDirectoryDetailsStudentPersonalInfo applicantState={state} />
           )}
 
           {state.choosedOption === "ConnectedToPrograms" && (
@@ -102,4 +102,4 @@ const OrgSpecificMentorApplicantDetailsPage = () => {
   );
 };
 
-export default OrgSpecificMentorApplicantDetailsPage;
+export default OrgSpecificStudentApplicantDetailsPage;

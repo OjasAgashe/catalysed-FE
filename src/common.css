@@ -21,10 +21,11 @@
     OrgProgramApplicantsPage,
     OrgApplicantsPage,
     PageNotFound,
-    OrgSpecificMentorApplicantDetailsPage
+    OrgSpecificMentorApplicantDetailsPage,
+    OrgSpecificStudentApplicantDetailsPage,
 */
 
-:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage, .OrgProfileBuilder, .MentorProfileBuilder, .StuProfileBuilder, .OrgCreateProgramPage, .OrgViewSearchProgramPage, .OrgProgramDetailsPage, .OrgProgramInvitationsPage, .OrgProgramParticipantsPage, .OrgEditProgramDetailsPage, .OrgHomePage, .OrgDirectoryPage, .OrgDirectoryMentorPage, .OrgDirectoryStudentPage, .OrgProfileManagePage, .OrgProfileEditPage, .OrgProgramApplicantsPage, .OrgApplicantsPage, .PageNotFoundContainer, .OrgSpecificMentorApplicantDetailsPage) {
+:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage, .OrgProfileBuilder, .MentorProfileBuilder, .StuProfileBuilder, .OrgCreateProgramPage, .OrgViewSearchProgramPage, .OrgProgramDetailsPage, .OrgProgramInvitationsPage, .OrgProgramParticipantsPage, .OrgEditProgramDetailsPage, .OrgHomePage, .OrgDirectoryPage, .OrgDirectoryMentorPage, .OrgDirectoryStudentPage, .OrgProfileManagePage, .OrgProfileEditPage, .OrgProgramApplicantsPage, .OrgApplicantsPage, .PageNotFoundContainer, .OrgSpecificMentorApplicantDetailsPage, .OrgSpecificStudentApplicantDetailsPage) {
   background-color: var(--red-100);
   min-height: 85vh;
 }
@@ -628,12 +629,14 @@ input[type="number"] {
   OrgDirectoryDetailsConnectedToProgram,
   OrgProgramInvitationDetails,
   OrgProgramApplicantDetails,
-  OrgApplicantsPageDetails
+  OrgApplicantsPageDetails,
+  OrgSpecificApplicantApplicationDetails
 */
 
 .OrgProgramInvitationDetails,
 .OrgProgramApplicantDetails,
-.OrgApplicantsPageDetails {
+.OrgApplicantsPageDetails,
+.OrgSpecificApplicantApplicationDetailsContainer {
   max-width: 1200px;
   margin: auto;
   padding: 2rem;
