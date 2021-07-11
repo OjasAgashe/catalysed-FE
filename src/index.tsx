@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App/App";
 import reportWebVitals from "./reportWebVitals";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./common.css";
 import { AuthProvider } from "./context/api_context/AuthContext";
 import { CookieProvider } from "./context/cookie_context/CookieContext";

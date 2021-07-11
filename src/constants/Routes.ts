@@ -18,5 +18,6 @@ export const ORGANISATION_PROGRAM_VIEW_SEARCH =
   "/app/organiser/program/view-search";
 export const ORGANISATION_REGISTER = "/app/organiser/register";
 export const STUDENT_HOME = "/app/student/home";
+export const STUDENT_DASHBOARD = "/app/student/dashboard";
 export const STUDENT_MENTOR_REGISTER = "/app/student-mentor/register";
 export const STUDENT_PROFILE_BUILDER = "/app/student/profile/builder";

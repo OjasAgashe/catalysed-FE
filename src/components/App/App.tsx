@@ -24,6 +24,7 @@ import {
   ORGANISATION_PROFILE_EDIT,
   ORGANISATION_APPLICANTS,
   ORGANISATION_DIRECTORY,
+  STUDENT_DASHBOARD,
 } from "../../constants/Routes";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -52,6 +53,7 @@ import OrgDirectoryMentorDetailsPage from "../../pages/OrgDirectoryPage/OrgDirec
 import OrgDirectoryStudentDetailsPage from "../../pages/OrgDirectoryPage/OrgDirectoryStudentDetailsPage";
 import OrgSpecificMentorApplicantDetailsPage from "../../pages/OrgSpecificApplicantDetailsPage/OrgSpecificMentorApplicantDetailsPage";
 import OrgSpecificStudentApplicantDetailsPage from "../../pages/OrgSpecificApplicantDetailsPage/OrgSpecificStudentApplicantDetailsPage";
+import StudentDashboard from "../../pages/StudentDashboard/StudentDashboard";
 
 function App() {
   return (
@@ -207,6 +209,10 @@ function App() {
 
           <PrivateRoute path={STUDENT_HOME} exact>
             <StudentHomePage />
+          </PrivateRoute>
+
+          <PrivateRoute path={STUDENT_DASHBOARD} exact>
+            <StudentDashboard />
           </PrivateRoute>
 
           <PublicRoute path={STUDENT_MENTOR_REGISTER} exact>

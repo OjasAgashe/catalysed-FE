@@ -5,9 +5,10 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 import { Logo } from "../../assets/Illustrations/Illustrations";
 import { HOME, LOGIN, ORGANISATION_HOME } from "../../constants/Routes";
 import { useCookie } from "../../context/cookie_context/CookieContext";
-import { ORGANISER } from "../../constants/Entities";
+import { ORGANISER, STUDENT } from "../../constants/Entities";
 import OrgHomeHeader from "./OrgHomeHeader";
 import CommonHomeHeader from "./CommonHomeHeader";
+import StudentHomeHeader from "./StudentHomeHeader";
 
 const Header = () => {
   const location = useLocation();
@@ -55,11 +56,8 @@ const Header = () => {
           {getCatalysedCreatedCookie() &&
             getCatalysedTypeCookie() === ORGANISER && <OrgHomeHeader />}
 
-          {/* {location.pathname.includes("/organiser") ? (
-            <OrgHomeHeader />
-          ) : (
-            <CommonHomeHeader />
-          )} */}
+          {getCatalysedCreatedCookie() &&
+            getCatalysedTypeCookie() === STUDENT && <StudentHomeHeader />}
 
           {getCatalysedTokenCookie() ? (
             <Nav.Link

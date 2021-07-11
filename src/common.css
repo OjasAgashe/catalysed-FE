@@ -23,9 +23,10 @@
     PageNotFound,
     OrgSpecificMentorApplicantDetailsPage,
     OrgSpecificStudentApplicantDetailsPage,
+    StudentDashboard
 */
 
-:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage, .OrgProfileBuilder, .MentorProfileBuilder, .StuProfileBuilder, .OrgCreateProgramPage, .OrgViewSearchProgramPage, .OrgProgramDetailsPage, .OrgProgramInvitationsPage, .OrgProgramParticipantsPage, .OrgEditProgramDetailsPage, .OrgHomePage, .OrgDirectoryPage, .OrgDirectoryMentorPage, .OrgDirectoryStudentPage, .OrgProfileManagePage, .OrgProfileEditPage, .OrgProgramApplicantsPage, .OrgApplicantsPage, .PageNotFoundContainer, .OrgSpecificMentorApplicantDetailsPage, .OrgSpecificStudentApplicantDetailsPage) {
+:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage, .OrgProfileBuilder, .MentorProfileBuilder, .StuProfileBuilder, .OrgCreateProgramPage, .OrgViewSearchProgramPage, .OrgProgramDetailsPage, .OrgProgramInvitationsPage, .OrgProgramParticipantsPage, .OrgEditProgramDetailsPage, .OrgHomePage, .OrgDirectoryPage, .OrgDirectoryMentorPage, .OrgDirectoryStudentPage, .OrgProfileManagePage, .OrgProfileEditPage, .OrgProgramApplicantsPage, .OrgApplicantsPage, .PageNotFoundContainer, .OrgSpecificMentorApplicantDetailsPage, .OrgSpecificStudentApplicantDetailsPage, .StudentDashboardPage) {
   background-color: var(--red-100);
   min-height: 85vh;
 }
