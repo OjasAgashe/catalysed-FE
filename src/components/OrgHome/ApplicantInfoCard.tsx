@@ -2,10 +2,14 @@ import React from "react";
 import CurrentStatDiv from "./CurrentStatDiv";
 import SectionHeadingDiv from "./SectionHeadingDiv";
 import NextBtnDiv from "./NextBtnDiv";
+import { ORGANISATION_APPLICANTS } from "../../constants/Routes";
+import { useHistory } from "react-router-dom";
 
 const ApplicantInfoCard = () => {
+  const history = useHistory();
+
   const handleApplicantInfoNextBtnClick = () => {
-    console.log("Applicant Info Next Btn Click");
+    history.push(ORGANISATION_APPLICANTS);
   };
 
   return (

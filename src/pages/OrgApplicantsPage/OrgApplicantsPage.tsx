@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import OrgApplicantsPageDetails from "../../components/OrgApplicantsPageDetails/OrgApplicantsPageDetails";
 import OrgApplicantsPageHeader from "../../components/OrgApplicantsPageHeader/OrgApplicantsPageHeader";
+import {
+  ORGANISATION_APPLICANTS,
+  ORGANISATION_INVITATIONS,
+} from "../../constants/Routes";
 
 const OrgApplicantsPage = () => {
   const [searchedName, setSearchedName] = useState("");
@@ -15,6 +20,7 @@ const OrgApplicantsPage = () => {
     }[]
   >([]);
   const [searchedNameNotFound, setSearchedNameNotFound] = useState(false);
+  const [pageHeaderText, setPageHeaderText] = useState("");
 
   const fakeData = [
     {
@@ -53,11 +59,19 @@ const OrgApplicantsPage = () => {
     },
   ];
 
+  const location = useLocation();
+
   useEffect(() => {
     document.documentElement.scrollTop = 0;
 
-    document.title = "Org Applicants | CatalysEd";
-  });
+    if (location.pathname === ORGANISATION_APPLICANTS) {
+      document.title = "Org Applicants | CatalysEd";
+      setPageHeaderText("Applicants");
+    } else if (location.pathname === ORGANISATION_INVITATIONS) {
+      document.title = "Org Invitations | CatalysEd";
+      setPageHeaderText("Invitations");
+    }
+  }, [location.pathname]);
 
   return (
     <div className="OrgApplicantsPage">
@@ -67,6 +81,7 @@ const OrgApplicantsPage = () => {
         setFilteredResponseData={setFilteredResponseData}
         fakeData={fakeData}
         setSearchedNameNotFound={setSearchedNameNotFound}
+        pageHeaderText={pageHeaderText}
       />
 
       <OrgApplicantsPageDetails

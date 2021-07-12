@@ -27,7 +27,9 @@ type OrgApplicantsPageHeaderProps = {
     student_pending: number;
     student_not_viewed: number;
   }[];
+
   setSearchedNameNotFound: React.Dispatch<React.SetStateAction<boolean>>;
+  pageHeaderText: string;
 };
 
 const OrgApplicantsPageHeader = ({
@@ -36,6 +38,7 @@ const OrgApplicantsPageHeader = ({
   setFilteredResponseData,
   fakeData,
   setSearchedNameNotFound,
+  pageHeaderText,
 }: OrgApplicantsPageHeaderProps) => {
   const handleOrgApplicantsSearch: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
@@ -61,7 +64,7 @@ const OrgApplicantsPageHeader = ({
       style={{ backgroundImage: `url(${ProgramsApplicantsSummaryHeader})` }}
     >
       <div className="OrgApplicantsPageHeaderHeroText">
-        <span className="TextToSpan">Programs Applicants Summary</span>
+        <span className="TextToSpan">Programs {pageHeaderText} Summary</span>
       </div>
 
       <div className="SearchBarOuterDiv">

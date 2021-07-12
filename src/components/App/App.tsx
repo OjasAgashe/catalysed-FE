@@ -25,6 +25,7 @@ import {
   ORGANISATION_APPLICANTS,
   ORGANISATION_DIRECTORY,
   STUDENT_DASHBOARD,
+  ORGANISATION_INVITATIONS,
 } from "../../constants/Routes";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -125,6 +126,10 @@ function App() {
             </ProfileBuilderProvider>
           </PrivateRoute>
 
+          <PrivateRoute path={ORGANISATION_INVITATIONS} exact>
+            <OrgApplicantsPage />
+          </PrivateRoute>
+          
           <PrivateRoute path={ORGANISATION_PROFILE_BUILDER} exact>
             <ProfileBuilderProvider>
               <OrgProfileBuilder />

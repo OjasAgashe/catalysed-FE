@@ -370,6 +370,7 @@ input[type="number"] {
 :is(.GenderRadioQuestion, .InternetRadioQuestion, .ProfMentorRadioQuestion, .YOERadioQuestion, .DeviceRadioQuestion)
   .form-check-input {
   border: 2px solid var(--blue-gray-500) !important;
+  margin-top: 0.54rem;
 }
 
 /* Overriding */
@@ -460,6 +461,7 @@ input[type="number"] {
   font-size: 1.1rem !important;
   margin-right: 1rem;
   color: var(--blue-gray-700);
+  display: inline-block;
 }
 
 .CreateProgramFormContainer

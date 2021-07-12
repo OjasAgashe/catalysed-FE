@@ -3,10 +3,14 @@ import { OrgHomeMentorInfoCard } from "../../assets/Illustrations/Illustrations"
 import CurrentStatDiv from "./CurrentStatDiv";
 import SectionHeadingDiv from "./SectionHeadingDiv";
 import NextBtnDiv from "./NextBtnDiv";
+import { ORGANISATION_DIRECTORY } from "../../constants/Routes";
+import { useHistory } from "react-router-dom";
 
 const MentorInfoCard = () => {
+  const history = useHistory();
+
   const handleMentorInfoNextBtnClick = () => {
-    console.log("Mentor Info Next Btn Click");
+    history.push(`${ORGANISATION_DIRECTORY}?type=MENTOR`);
   };
 
   return (

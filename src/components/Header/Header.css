@@ -3,7 +3,6 @@
 .Navbar {
   background-image: url("../../assets/Illustrations/header-background.webp");
   box-shadow: 0 2px 5px var(--blue-gray-300);
-  padding: 0 1rem;
 }
 
 .NavbarBrand {
@@ -57,5 +56,10 @@
 
   .SignOutBtn {
     padding-left: 1rem !important;
+  }
+
+  /* overriding */
+  .navbar-nav {
+    align-items: center !important;
   }
 }

@@ -3,10 +3,14 @@ import { OrgHomeStudentInfoCard } from "../../assets/Illustrations/Illustrations
 import CurrentStatDiv from "./CurrentStatDiv";
 import SectionHeadingDiv from "./SectionHeadingDiv";
 import NextBtnDiv from "./NextBtnDiv";
+import { ORGANISATION_DIRECTORY } from "../../constants/Routes";
+import { useHistory } from "react-router-dom";
 
 const StudentInfoCard = () => {
+  const history = useHistory();
+
   const handleStudentInfoNextBtnClick = () => {
-    console.log("Student Info Next Btn Click");
+    history.push(`${ORGANISATION_DIRECTORY}?type=STUDENT`);
   };
 
   return (

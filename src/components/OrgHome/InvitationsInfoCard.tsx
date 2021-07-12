@@ -3,10 +3,14 @@ import { OrgHomeInvitationsInfoCard } from "../../assets/Illustrations/Illustrat
 import CurrentStatDiv from "./CurrentStatDiv";
 import SectionHeadingDiv from "./SectionHeadingDiv";
 import NextBtnDiv from "./NextBtnDiv";
+import { useHistory } from "react-router-dom";
+import { ORGANISATION_INVITATIONS } from "../../constants/Routes";
 
 const InvitationsInfoCard = () => {
+  const history = useHistory();
+
   const handleInvitationsInfoNextBtnClick = () => {
-    console.log("Invitations Info Next Btn Click");
+    history.push(ORGANISATION_INVITATIONS);
   };
 
   return (

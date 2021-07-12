@@ -5,6 +5,7 @@ import {
   ORGANISATION_APPLICANTS,
   ORGANISATION_DIRECTORY,
   ORGANISATION_HOME,
+  ORGANISATION_INVITATIONS,
   ORGANISATION_PROFILE_EDIT,
   ORGANISATION_PROGRAM_CREATE,
   ORGANISATION_PROGRAM_VIEW_SEARCH,
@@ -61,8 +62,16 @@ const OrgHomeHeader = () => {
 
         <NavDropdown.Item
           as={Link}
-          to={`${ORGANISATION_APPLICANTS}`}
+          to={`${ORGANISATION_INVITATIONS}`}
           eventKey="6"
+        >
+          Invitations
+        </NavDropdown.Item>
+
+        <NavDropdown.Item
+          as={Link}
+          to={`${ORGANISATION_APPLICANTS}`}
+          eventKey="7"
         >
           Applicants
         </NavDropdown.Item>

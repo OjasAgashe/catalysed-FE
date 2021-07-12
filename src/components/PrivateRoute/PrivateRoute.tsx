@@ -19,6 +19,7 @@ import {
   STUDENT_HOME,
   STUDENT_PROFILE_BUILDER,
   STUDENT_DASHBOARD,
+  ORGANISATION_INVITATIONS,
 } from "../../constants/Routes";
 import MentorProfileBuilder from "../../pages/MentorProfileBuilder/MentorProfileBuilder";
 import OrgProfileBuilder from "../../pages/OrgProfileBuilder/OrgProfileBuilder";
@@ -50,6 +51,7 @@ const PrivateRoute = (props: {
             `${ORGANISATION_DIRECTORY_DETAILS_MENTOR}/:mentorId/details`,
             `${ORGANISATION_DIRECTORY_DETAILS_STUDENT}/:studentId/details`,
             ORGANISATION_HOME,
+            ORGANISATION_INVITATIONS,
             ORGANISATION_PROFILE_EDIT,
             `${ORGANISATION_PROGRAM_DETAILS}/:programId/applicants`,
             `${ORGANISATION_PROGRAM_DETAILS}/:programId/applicants/mentor/application/:applicationId/details`,
