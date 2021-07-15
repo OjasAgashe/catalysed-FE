@@ -685,10 +685,8 @@ input[type="number"] {
   padding-left: 1.5rem !important;
 }
 
-:is(.OrgProgramInvitationDataContainer, .OrgProgramApplicantDataContainer)
-  .table {
-  --bs-table-striped-bg: var(--blue-gray-100) !important;
-  border-color: var(--blue-gray-100) !important;
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: var(--blue-gray-100);
 }
 
 .ProgramInvitationTableData,

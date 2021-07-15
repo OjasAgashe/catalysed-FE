@@ -121,3 +121,16 @@
   margin: 0.31rem;
   margin-top: 0;
 }
+
+.SectionTwoSecondHalf
+  :is(.ContactLabel, .PhoneLabel, .EmailLabel, .AddressLabel, .CountryLabel, .RegionLabel) {
+  display: inline;
+}
+
+.SectionTwoSecondHalf .form-group {
+  margin: 0;
+}
+
+.SectionTwoSecondHalf .SectionTwoFormControl {
+  margin-bottom: 0.57rem;
+}

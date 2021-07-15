@@ -96,7 +96,7 @@ const MentorDetailsForm = ({
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group>
+        <Form.Group className="NoOfOpeningsFormGroup">
           <Form.Text className="CreateProgramFormText">
             Number of Openings:&nbsp;
           </Form.Text>

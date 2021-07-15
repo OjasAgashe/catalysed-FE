@@ -218,13 +218,13 @@ const SectionTwo = ({
           </Form.Group>
 
           <Form.Group>
-            <Form.Text className="SectionTwoFormTextLabel">
+            <Form.Text className="SectionTwoFormTextLabel ContactLabel">
               contact&nbsp;:&nbsp;
             </Form.Text>
             <Row>
               <Col>
                 <Form.Group>
-                  <Form.Text className="SectionTwoFormTextLabel">
+                  <Form.Text className="SectionTwoFormTextLabel PhoneLabel">
                     phone
                   </Form.Text>
                   <Form.Control
@@ -243,7 +243,7 @@ const SectionTwo = ({
               </Col>
               <Col>
                 <Form.Group>
-                  <Form.Text className="SectionTwoFormTextLabel">
+                  <Form.Text className="SectionTwoFormTextLabel EmailLabel">
                     email
                   </Form.Text>
                   <Form.Control
@@ -284,13 +284,13 @@ const SectionTwo = ({
           </Form.Group>
 
           <Form.Group>
-            <Form.Text className="SectionTwoFormTextLabel">
-              address&nbsp;:&nbsp;
+            <Form.Text className="SectionTwoFormTextLabel AddressLabel">
+              location&nbsp;:&nbsp;
             </Form.Text>
             <Row>
               <Col>
                 <Form.Group>
-                  <Form.Text className="SectionTwoFormTextLabel">
+                  <Form.Text className="SectionTwoFormTextLabel CountryLabel">
                     country
                   </Form.Text>
                   <Form.Control
@@ -309,7 +309,7 @@ const SectionTwo = ({
               </Col>
               <Col>
                 <Form.Group>
-                  <Form.Text className="SectionTwoFormTextLabel">
+                  <Form.Text className="SectionTwoFormTextLabel RegionLabel">
                     region
                   </Form.Text>
                   <Form.Control

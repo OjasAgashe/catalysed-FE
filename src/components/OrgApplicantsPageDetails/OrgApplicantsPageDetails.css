@@ -18,6 +18,15 @@
   background-color: var(--cyan-info-background);
 }
 
+.OrgApplicantsTableHeader .TableHeaderFirstRow .OrgApplicantsHeader {
+  border-top: 2px solid var(--blue-gray-500) !important;
+}
+
+.OrgApplicantsTableHeader .TableHeaderSecondRow .OrgApplicantsHeader,
+.TableHeaderFirstRow .ProgramHeading {
+  border-bottom: 2px solid var(--blue-gray-500) !important;
+}
+
 .OrgApplicantsTableDataRow:hover {
   cursor: pointer;
   box-shadow: 1px 0 10px var(--blue-gray-300);

@@ -22,6 +22,7 @@ type OrgApplicantsPageDataContainerProps = {
     student_not_viewed: number;
   }[];
   searchedNameNotFound: boolean;
+  pageHeaderText: string;
 };
 
 const OrgApplicantsPageDataContainer = ({
@@ -29,27 +30,32 @@ const OrgApplicantsPageDataContainer = ({
   fakeData,
   filteredResponseData,
   searchedNameNotFound,
+  pageHeaderText,
 }: OrgApplicantsPageDataContainerProps) => {
   return (
     <div className="OrgApplicantsPageDataContainer">
       <Table striped responsive="md">
         <thead className="OrgApplicantsTableHeader">
           <tr className="TableHeaderFirstRow OrgApplicantsTableRow">
-            <th rowSpan={2} className="ProgramHeading">
+            <th rowSpan={2} className="ProgramHeading OrgApplicantsHeader">
               Program name
             </th>
-            <th colSpan={2} className="MentorHeading">
+            <th colSpan={2} className="MentorHeading OrgApplicantsHeader">
               Mentor
             </th>
-            <th colSpan={2} className="StudentHeading">
+            <th colSpan={2} className="StudentHeading OrgApplicantsHeader">
               Student
             </th>
           </tr>
           <tr className="TableHeaderSecondRow OrgApplicantsTableRow">
-            <th>Pending</th>
-            <th>Not Viewed</th>
-            <th>Pending</th>
-            <th>Not Viewed</th>
+            <th className="OrgApplicantsHeader">Pending</th>
+            <th className="OrgApplicantsHeader">
+              {pageHeaderText === "Invitations" ? "Accepted" : "Not Viewed"}
+            </th>
+            <th className="OrgApplicantsHeader">Pending</th>
+            <th className="OrgApplicantsHeader">
+              {pageHeaderText === "Invitations" ? "Accepted" : "Not Viewed"}
+            </th>
           </tr>
         </thead>
         <tbody>

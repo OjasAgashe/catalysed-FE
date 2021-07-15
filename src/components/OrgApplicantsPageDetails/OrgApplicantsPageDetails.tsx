@@ -22,6 +22,7 @@ type OrgApplicantsPageDetailsProps = {
     student_not_viewed: number;
   }[];
   searchedNameNotFound: boolean;
+  pageHeaderText: string;
 };
 
 const OrgApplicantsPageDetails = ({
@@ -29,6 +30,7 @@ const OrgApplicantsPageDetails = ({
   fakeData,
   filteredResponseData,
   searchedNameNotFound,
+  pageHeaderText,
 }: OrgApplicantsPageDetailsProps) => {
   return (
     <div className="OrgApplicantsPageDetails">
@@ -39,6 +41,7 @@ const OrgApplicantsPageDetails = ({
             fakeData={fakeData}
             filteredResponseData={filteredResponseData}
             searchedNameNotFound={searchedNameNotFound}
+            pageHeaderText={pageHeaderText}
           />
         ) : (
           <div className="ErrorCompContainer">

@@ -89,6 +89,7 @@ const OrgApplicantsPage = () => {
         fakeData={fakeData}
         filteredResponseData={filteredResponseData}
         searchedNameNotFound={searchedNameNotFound}
+        pageHeaderText={pageHeaderText}
       />
     </div>
   );

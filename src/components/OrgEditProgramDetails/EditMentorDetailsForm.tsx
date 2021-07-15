@@ -108,7 +108,7 @@ const EditMentorDetailsForm = ({
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group>
+        <Form.Group className="NoOfOpeningsFormGroup">
           <Form.Text
             className={`CreateProgramFormText ${
               state.originalData?.status === "PUBLISHED" &&
