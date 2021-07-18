@@ -3,7 +3,12 @@ import { Nav, Navbar } from "react-bootstrap";
 import "./Header.css";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { Logo } from "../../assets/Illustrations/Illustrations";
-import { HOME, LOGIN, ORGANISATION_HOME } from "../../constants/Routes";
+import {
+  HOME,
+  LOGIN,
+  ORGANISATION_HOME,
+  STUDENT_HOME,
+} from "../../constants/Routes";
 import { useCookie } from "../../context/cookie_context/CookieContext";
 import { ORGANISER, STUDENT } from "../../constants/Entities";
 import OrgHomeHeader from "./OrgHomeHeader";
@@ -39,6 +44,8 @@ const Header = () => {
             ? HOME
             : getCatalysedTypeCookie() === ORGANISER
             ? ORGANISATION_HOME
+            : getCatalysedTypeCookie() === STUDENT
+            ? STUDENT_HOME
             : "#"
         }
         className="NavbarBrand"

@@ -23,15 +23,42 @@
     PageNotFound,
     OrgSpecificMentorApplicantDetailsPage,
     OrgSpecificStudentApplicantDetailsPage,
-    StudentDashboard
+    StudentDashboard,
+    StudentUpdatesPage
 */
 
-:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage, .OrgProfileBuilder, .MentorProfileBuilder, .StuProfileBuilder, .OrgCreateProgramPage, .OrgViewSearchProgramPage, .OrgProgramDetailsPage, .OrgProgramInvitationsPage, .OrgProgramParticipantsPage, .OrgEditProgramDetailsPage, .OrgHomePage, .OrgDirectoryPage, .OrgDirectoryMentorPage, .OrgDirectoryStudentPage, .OrgProfileManagePage, .OrgProfileEditPage, .OrgProgramApplicantsPage, .OrgApplicantsPage, .PageNotFoundContainer, .OrgSpecificMentorApplicantDetailsPage, .OrgSpecificStudentApplicantDetailsPage, .StudentDashboardPage) {
+.OrgRegisterPage,
+.LoginPage,
+.StudentMentorRegisterPage,
+.OrgProfileBuilder,
+.MentorProfileBuilder,
+.StuProfileBuilder,
+.OrgCreateProgramPage,
+.OrgViewSearchProgramPage,
+.OrgProgramDetailsPage,
+.OrgProgramInvitationsPage,
+.OrgProgramParticipantsPage,
+.OrgEditProgramDetailsPage,
+.OrgHomePage,
+.OrgDirectoryPage,
+.OrgDirectoryMentorPage,
+.OrgDirectoryStudentPage,
+.OrgProfileManagePage,
+.OrgProfileEditPage,
+.OrgProgramApplicantsPage,
+.OrgApplicantsPage,
+.PageNotFoundContainer,
+.OrgSpecificMentorApplicantDetailsPage,
+.OrgSpecificStudentApplicantDetailsPage,
+.StudentDashboardPage,
+.StudentUpdatesPage {
   background-color: var(--red-100);
   min-height: 85vh;
 }
 
-:is(.OrgRegisterPage, .LoginPage, .StudentMentorRegisterPage) {
+.OrgRegisterPage,
+.LoginPage,
+.StudentMentorRegisterPage {
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -39,11 +66,15 @@
   align-items: center;
 }
 
-:is(.OrgProfileGreetContainer, .MentorProfileGreetContainer, .StuProfileGreetContainer) {
+.OrgProfileGreetContainer,
+.MentorProfileGreetContainer,
+.StuProfileGreetContainer {
   padding: 2rem;
 }
 
-:is(.OrgProfileGreet, .MentorProfileGreet, .StuProfileGreet) {
+.OrgProfileGreet,
+.MentorProfileGreet,
+.StuProfileGreet {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,7 +88,9 @@
 }
 
 @media screen and (max-width: 768px) {
-  :is(.OrgProfileGreet, .MentorProfileGreet, .StuProfileGreet) {
+  .OrgProfileGreet,
+  .MentorProfileGreet,
+  .StuProfileGreet {
     padding: 1rem !important;
   }
 }
@@ -120,11 +153,18 @@
     OrgProgramApplicantDetails 
     OrgDirectoryDetailsPersonalInfo,
     OrgProfileEditSectionOne,
-    OrgProfileEditSectionTwo
-
+    OrgProfileEditSectionTwo,
+    StuUpdatesPageHeader,
+    OrgDirectoryCard,
+    StuUpdatesProgramCard,
+    StuUpdatesOrganisationCard
 */
 
-:is(.OrgRegisterUserForm, .OrgRegisterDetailsForm, .LoginForm, .StudentMentorRegisterBox, .CommonHomeForm) {
+.OrgRegisterUserForm,
+.OrgRegisterDetailsForm,
+.LoginForm,
+.StudentMentorRegisterBox,
+.CommonHomeForm {
   background-color: var(--white);
   padding: 1rem 1.5rem;
   border-radius: 5px;
@@ -194,18 +234,25 @@
   box-shadow: none !important;
 }
 
-:is(.EyeInvisibleIcon, .EyeVisibleIcon) {
+.EyeInvisibleIcon,
+.EyeVisibleIcon {
   color: var(--black);
 }
 
 @media screen and (max-width: 500px) {
-  :is(.OrgRegisterUserForm, .OrgRegisterDetailsForm, .LoginForm, .CommonHomeForm) {
+  .OrgRegisterUserForm,
+  .OrgRegisterDetailsForm,
+  .LoginForm,
+  .CommonHomeForm {
     margin: 0 1rem;
   }
 }
 
 @media screen and (min-width: 520px) {
-  :is(.OrgRegisterUserForm, .OrgRegisterDetailsForm, .LoginForm, .CommonHomeForm) {
+  .OrgRegisterUserForm,
+  .OrgRegisterDetailsForm,
+  .LoginForm,
+  .CommonHomeForm {
     width: 29.25rem;
   }
 }
@@ -500,6 +547,7 @@ input[type="number"] {
   OrgDirectoryPageHeader,
   OrgDirectoryDetailsCommonHeader,
   OrgSpecificApplicantDetailsHeader,
+  StuUpdatesPageHeader
 */
 
 .CommonProgramDetailsHeroText,
@@ -516,7 +564,8 @@ input[type="number"] {
 .PDViewAndRouteLinksContainer,
 .OrgDirectoryMentorOrStudentOptContainer,
 .OrgDirectoryDetailsPIOrCtPOptContainer,
-.OrgSpecificApplicantDetailsOptionContainer {
+.OrgSpecificApplicantDetailsOptionContainer,
+.StuUpdatesProgramsOrOrganisationsOptContainer {
   width: fit-content;
   margin: auto;
   text-align: center;
@@ -527,7 +576,8 @@ input[type="number"] {
 .ProgramDetailsRouteLinks,
 .OrgDirectoryMentorOrStudentOpt,
 .OrgDirectoryDetailsPIOrCtPOpt,
-.OrgSpecificApplicantDetailsOption {
+.OrgSpecificApplicantDetailsOption,
+.StuUpdatesProgramsOrOrganisationsOpt {
   padding: 0 !important;
   font-size: 1.3rem !important;
   width: fit-content;
@@ -544,7 +594,8 @@ input[type="number"] {
   .ProgramDetailsRouteLinks,
   .OrgDirectoryMentorOrStudentOpt,
   .OrgDirectoryDetailsPIOrCtPOpt,
-  .OrgSpecificApplicantDetailsOption {
+  .OrgSpecificApplicantDetailsOption,
+  .StuUpdatesProgramsOrOrganisationsOpt {
     margin: auto 0.4rem !important;
   }
 }
@@ -571,10 +622,11 @@ input[type="number"] {
   OrgDirectoryDetailsCommonHeader,
   OrgProgramDetailsCommon,
   MentorOrStudentTab,
-  OrgSpecificApplicantDetailsHeader
+  OrgSpecificApplicantDetailsHeader,
+  StuUpdatesPageHeader
 */
 
-:is(.OrgDirectoryMentorOrStudentOpt, .OrgDirectoryDetailsPIOrCtPOpt, .OrgSpecificApplicantDetailsOption)
+:is(.OrgDirectoryMentorOrStudentOpt, .OrgDirectoryDetailsPIOrCtPOpt, .OrgSpecificApplicantDetailsOption, .StuUpdatesProgramsOrOrganisationsOpt)
   button {
   color: var(--yellow-700);
   font-weight: 600;
@@ -584,7 +636,7 @@ input[type="number"] {
   border-radius: 5px;
 }
 
-:is(.OrgDirectoryMentorOrStudentOpt, .OrgDirectoryDetailsPIOrCtPOpt, .ProgramDetailsRouteLinks, .MentorOrStudentText, .OrgSpecificApplicantDetailsOption)
+:is(.OrgDirectoryMentorOrStudentOpt, .OrgDirectoryDetailsPIOrCtPOpt, .ProgramDetailsRouteLinks, .MentorOrStudentText, .OrgSpecificApplicantDetailsOption, .StuUpdatesProgramsOrOrganisationsOpt)
   div {
   display: inline-block;
   margin: 0 !important;
@@ -609,13 +661,15 @@ input[type="number"] {
 .OrgDirectoryDetailsPIOrCtPOpt .OrgDirectoryDetailsPIOpt,
 .MentorOrStudentText .MentorOptDiv,
 .OrgSpecificApplicantDetailsOption
-  :is(.OrgSpecificApplicantApplicationOpt, .OrgSpecificApplicantPIOpt) {
+  :is(.OrgSpecificApplicantApplicationOpt, .OrgSpecificApplicantPIOpt),
+.StuUpdatesProgramsOrOrganisationsOpt .StuUpdatesProgramsOpt {
   border-right: 2px solid !important;
 }
 
 .OrgDirectoryMentorOrStudentOpt,
 .OrgDirectoryDetailsPIOrCtPOpt,
-.OrgSpecificApplicantDetailsOption {
+.OrgSpecificApplicantDetailsOption,
+.StuUpdatesProgramsOrOrganisationsOpt {
   box-shadow: 2px 2px 4px var(--yellow-700), -2px -2px 4px var(--yellow-700) !important;
   animation-name: directory-box-shadow-animation;
   animation-iteration-count: infinite;
@@ -724,6 +778,82 @@ input[type="number"] {
   .ErrorCompContainer {
   width: fit-content;
   margin: auto;
+}
+
+/* 
+  OrgDirectoryCard,
+  StuUpdatesProgramCard,
+  StuUpdatesOrganisationCard
+*/
+
+.OrgDirectoryCardContainer,
+.StuUpdatesProgramCardContainer,
+.StuUpdatesOrganisationCardContainer {
+  display: flex;
+  max-width: 25rem;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem;
+  background-color: var(--white);
+  border-radius: 5px;
+  box-shadow: 1px 1px 4px var(--blue-gray-400);
+}
+
+@media screen and (max-width: 420px) {
+  .OrgDirectoryCardContainer,
+  .StuUpdatesProgramCardContainer,
+  .StuUpdatesOrganisationCardContainer {
+    max-width: 23rem;
+  }
+}
+
+:is(.OrgDirectoryCardContainer, .StuUpdatesProgramCardContainer, .StuUpdatesOrganisationCardContainer)
+  .DataContainerDiv {
+  font-size: 1.2rem;
+  width: 19rem;
+}
+
+:is(.OrgDirectoryCardContainer, .StuUpdatesProgramCardContainer, .StuUpdatesOrganisationCardContainer)
+  .NextBtnDiv {
+  padding: 2.8rem 0.5rem;
+  text-align: center;
+  font-weight: 600;
+  color: var(--white);
+  background-color: var(--cyan-shade);
+  border-radius: inherit;
+  width: 6rem;
+}
+
+.NextBtnIconContainer {
+  margin: auto;
+  display: block;
+  border: 1px solid var(--blue-gray-300);
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  box-shadow: 2px 2px 3px var(--blue-gray-400),
+    -1px -1px 3px var(--blue-gray-400);
+  background-color: var(--white);
+}
+
+.NextBtnIconContainer:hover {
+  border-color: var(--blue-gray-400);
+}
+
+.NextBtnIcon {
+  margin-bottom: 0.2rem;
+  font-size: 1.2rem;
+  color: var(--blue-gray-700);
+  stroke-width: 0.8;
+  animation-name: right-move-next-btn;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+}
+
+@keyframes right-move-next-btn {
+  50% {
+    transform: translateX(2px);
+  }
 }
 
 /* page & component */

@@ -20,7 +20,7 @@ const OrgDirectoryCard = ({
           <span className="Text">Name&nbsp;:&nbsp;</span>
           <OverlayTrigger
             placement="bottom"
-            overlay={<Tooltip id="data-email-tooltip">{data.name}</Tooltip>}
+            overlay={<Tooltip id="data-name-tooltip">{data.name}</Tooltip>}
           >
             <span className="Data">
               {data.name.length > 15

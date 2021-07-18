@@ -1,0 +1,19 @@
+.StuUpdatesPageHeaderContainer {
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 1px 10px var(--blue-gray-400);
+  padding-top: 2.5rem;
+}
+
+.ConnectedTextDiv {
+  width: fit-content;
+  background-color: var(--floral-white);
+  font-family: "KoHo", sans-serif;
+  font-weight: 600;
+  font-size: 2.1rem;
+  color: var(--facebook-code);
+  border-radius: 5px;
+  margin: 0 auto 0.5rem;
+  padding: 0rem 0.5rem;
+  box-shadow: 1px 1px 5px var(--blue-gray-400);
+}

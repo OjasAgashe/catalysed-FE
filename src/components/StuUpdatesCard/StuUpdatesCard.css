@@ -1,0 +1,36 @@
+:is(.StuUpdatesProgramCardContainer, .StuUpdatesOrganisationCardContainer)
+  .DataContainerDiv
+  :is(.CardNameDiv, .CardDurationDiv, .CardModeDiv, .CardDescriptionDiv) {
+  margin: 0.2rem 0;
+  padding: 0 1rem;
+  display: flex;
+}
+
+:is(.StuUpdatesProgramCardContainer, .StuUpdatesOrganisationCardContainer)
+  .DataContainerDiv
+  .CardNameDiv {
+  padding-top: 0.5rem;
+}
+
+:is(.StuUpdatesProgramCardContainer, .StuUpdatesOrganisationCardContainer)
+  .DataContainerDiv
+  :is(.CardModeDiv, .CardDescriptionDiv) {
+  padding-bottom: 0.5rem;
+}
+
+:is(.StuUpdatesProgramCardContainer, .StuUpdatesOrganisationCardContainer)
+  .DataContainerDiv
+  :is(.CardNameDiv, .CardDurationDiv, .CardModeDiv, .CardDescriptionDiv)
+  .Text {
+  color: var(--blue-gray-700);
+  font-weight: 600;
+  width: 7rem;
+}
+
+:is(.StuUpdatesProgramCardContainer, .StuUpdatesOrganisationCardContainer)
+  .DataContainerDiv
+  :is(.CardNameDiv, .CardDurationDiv, .CardModeDiv, .CardDescriptionDiv)
+  .Data {
+  color: var(--yellow-700);
+  font-size: 1.15rem !important;
+}

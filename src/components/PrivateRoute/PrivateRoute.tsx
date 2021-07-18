@@ -20,6 +20,7 @@ import {
   STUDENT_PROFILE_BUILDER,
   STUDENT_DASHBOARD,
   ORGANISATION_INVITATIONS,
+  STUDENT_UPDATES,
 } from "../../constants/Routes";
 import MentorProfileBuilder from "../../pages/MentorProfileBuilder/MentorProfileBuilder";
 import OrgProfileBuilder from "../../pages/OrgProfileBuilder/OrgProfileBuilder";
@@ -89,7 +90,11 @@ const PrivateRoute = (props: {
 
     if (catalysedType === STUDENT) {
       if (catalysedCreated) {
-        if ([STUDENT_HOME, STUDENT_DASHBOARD].includes(props.path)) {
+        if (
+          [STUDENT_HOME, STUDENT_DASHBOARD, STUDENT_UPDATES].includes(
+            props.path
+          )
+        ) {
           return (
             <Route path={props.path} exact={props.exact ?? false}>
               {props.children}

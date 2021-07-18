@@ -22,3 +22,4 @@ export const STUDENT_HOME = "/app/student/home";
 export const STUDENT_DASHBOARD = "/app/student/dashboard";
 export const STUDENT_MENTOR_REGISTER = "/app/student-mentor/register";
 export const STUDENT_PROFILE_BUILDER = "/app/student/profile/builder";
+export const STUDENT_UPDATES = "/app/student/updates";

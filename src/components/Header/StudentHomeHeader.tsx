@@ -1,7 +1,11 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { STUDENT_DASHBOARD, STUDENT_HOME } from "../../constants/Routes";
+import {
+  STUDENT_DASHBOARD,
+  STUDENT_HOME,
+  STUDENT_UPDATES,
+} from "../../constants/Routes";
 
 const StudentHomeHeader = () => {
   return (
@@ -21,6 +25,14 @@ const StudentHomeHeader = () => {
         eventKey="2"
       >
         Dashboard
+      </Nav.Link>
+      <Nav.Link
+        as={Link}
+        to={`${STUDENT_UPDATES}?view=PROGRAMS`}
+        className="NavbarCollapseNavItem"
+        eventKey="3"
+      >
+        Updates
       </Nav.Link>
     </>
   );
