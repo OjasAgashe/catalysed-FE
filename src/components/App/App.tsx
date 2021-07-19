@@ -27,6 +27,7 @@ import {
   STUDENT_DASHBOARD,
   ORGANISATION_INVITATIONS,
   STUDENT_UPDATES,
+  STUDENT_UPDATES_DETAILS_PROGRAM,
 } from "../../constants/Routes";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -57,6 +58,8 @@ import OrgSpecificMentorApplicantDetailsPage from "../../pages/OrgSpecificApplic
 import OrgSpecificStudentApplicantDetailsPage from "../../pages/OrgSpecificApplicantDetailsPage/OrgSpecificStudentApplicantDetailsPage";
 import StudentDashboard from "../../pages/StudentDashboard/StudentDashboard";
 import StudentUpdatesPage from "../../pages/StudentUpdatesPage/StudentUpdatesPage";
+import StuUpdatesProgramDetails from "../../pages/StuUpdatesProgramDetails/StuUpdatesProgramDetails";
+import StuUpdatesProgramPeople from "../../pages/StuUpdatesProgramDetails/StuUpdatesProgramPeople";
 
 function App() {
   return (
@@ -131,7 +134,7 @@ function App() {
           <PrivateRoute path={ORGANISATION_INVITATIONS} exact>
             <OrgApplicantsPage />
           </PrivateRoute>
-          
+
           <PrivateRoute path={ORGANISATION_PROFILE_BUILDER} exact>
             <ProfileBuilderProvider>
               <OrgProfileBuilder />
@@ -234,6 +237,24 @@ function App() {
 
           <PrivateRoute path={STUDENT_UPDATES} exact>
             <StudentUpdatesPage />
+          </PrivateRoute>
+
+          <PrivateRoute
+            path={`${STUDENT_UPDATES_DETAILS_PROGRAM}/:programId/details`}
+            exact
+          >
+            <OrgAPIProvider>
+              <StuUpdatesProgramDetails />
+            </OrgAPIProvider>
+          </PrivateRoute>
+
+          <PrivateRoute
+            path={`${STUDENT_UPDATES_DETAILS_PROGRAM}/:programId/people`}
+            exact
+          >
+            <OrgAPIProvider>
+              <StuUpdatesProgramPeople />
+            </OrgAPIProvider>
           </PrivateRoute>
 
           <Route path="*">

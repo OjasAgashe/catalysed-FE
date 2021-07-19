@@ -1,4 +1,6 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
+import { STUDENT_UPDATES_DETAILS_PROGRAM } from "../../constants/Routes";
 import Error from "../Error/Error";
 import StuUpdatesProgramCard from "../StuUpdatesCard/StuUpdatesProgramCard";
 import "./StuUpdatesPrograms.css";
@@ -13,8 +15,10 @@ type StuUpdatesProgramsProps = {
 };
 
 const StuUpdatesPrograms = ({ fakeProgramData }: StuUpdatesProgramsProps) => {
+  const history = useHistory();
+
   const handleUpdatesProgramCardViewAllBtnClick = (id: number) => {
-    console.log(id);
+    history.push(`${STUDENT_UPDATES_DETAILS_PROGRAM}/${id}/details`);
   };
 
   return (

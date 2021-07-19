@@ -24,7 +24,9 @@
     OrgSpecificMentorApplicantDetailsPage,
     OrgSpecificStudentApplicantDetailsPage,
     StudentDashboard,
-    StudentUpdatesPage
+    StudentUpdatesPage,
+    StuUpdatesProgramDetailsPage,
+    StuUpdatesProgramPeoplePage
 */
 
 .OrgRegisterPage,
@@ -51,7 +53,9 @@
 .OrgSpecificMentorApplicantDetailsPage,
 .OrgSpecificStudentApplicantDetailsPage,
 .StudentDashboardPage,
-.StudentUpdatesPage {
+.StudentUpdatesPage,
+.StuUpdatesProgramDetailsPage,
+.StuUpdatesProgramPeoplePage {
   background-color: var(--red-100);
   min-height: 85vh;
 }
@@ -157,7 +161,8 @@
     StuUpdatesPageHeader,
     OrgDirectoryCard,
     StuUpdatesProgramCard,
-    StuUpdatesOrganisationCard
+    StuUpdatesOrganisationCard,
+    StuUpdatesProgramPeopleDetails
 */
 
 .OrgRegisterUserForm,
@@ -465,7 +470,8 @@ input[type="number"] {
     Org Program Details,
     OrgDirectoryDetailsPersonalInfo,
     OrgProfileEditSectionOne,
-    OrgProfileEditSectionTwo
+    OrgProfileEditSectionTwo,
+    StuUpdateProgramPeopleDetails
 */
 
 .GeneralDetailsFormContainer,
@@ -504,7 +510,10 @@ input[type="number"] {
 :is(.CreateProgramFormContainer, .GeneralProgramDetailsContainer, .CoordinatorProgramDetailsContainer, .MentorProgramDetailsContainer, .StudentProgramDetailsContainer)
   .CreateProgramFormText,
 .OrgDirectoryDetailsPersonalContainer .SectionOne .CreateProgramFormText,
-.OrgDirectoryDetailsPersonalContainer .SectionTwo .CreateProgramFormText {
+.OrgDirectoryDetailsPersonalContainer .SectionTwo .CreateProgramFormText,
+.StuUpdatesProgramPeopleDetailsContainer
+  .NameNContactDetailsContainer
+  .CreateProgramFormText {
   font-size: 1.1rem !important;
   margin-right: 1rem;
   color: var(--blue-gray-700);
@@ -687,13 +696,15 @@ input[type="number"] {
   OrgProgramInvitationDetails,
   OrgProgramApplicantDetails,
   OrgApplicantsPageDetails,
-  OrgSpecificApplicantApplicationDetails
+  OrgSpecificApplicantApplicationDetails,
+  StuUpdatesProgramPeopleDetails
 */
 
 .OrgProgramInvitationDetails,
 .OrgProgramApplicantDetails,
 .OrgApplicantsPageDetails,
-.OrgSpecificApplicantApplicationDetailsContainer {
+.OrgSpecificApplicantApplicationDetailsContainer,
+.StuUpdatesProgramPeopleDetails {
   max-width: 1200px;
   margin: auto;
   padding: 2rem;
@@ -701,7 +712,8 @@ input[type="number"] {
 
 .OrgProgramInvitationDetailsContainer,
 .OrgProgramApplicantDetailsContainer,
-.OrgApplicantsPageDetailsContainer {
+.OrgApplicantsPageDetailsContainer,
+.StuUpdatesProgramPeopleDetailsContainer {
   background-color: var(--white);
   padding: 1rem;
 }

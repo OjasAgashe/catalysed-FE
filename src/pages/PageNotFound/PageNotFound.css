@@ -9,7 +9,7 @@
 .PageNotFoundSectionOne,
 .PageNotFoundSectionTwo,
 .PageNotFoundSectionThree {
-  padding: 1rem;
+  padding: 1rem 0;
   text-align: center;
 }
 
@@ -17,6 +17,12 @@
   max-width: 400px;
   border-radius: 5px;
   box-shadow: 1px 1px 10px var(--blue-gray-400);
+}
+
+@media screen and (max-width: 423px) {
+  .PageNotFoundSectionOne img {
+    max-width: 350px;
+  }
 }
 
 .PageNotFoundSectionTwo {

@@ -21,6 +21,7 @@ import {
   STUDENT_DASHBOARD,
   ORGANISATION_INVITATIONS,
   STUDENT_UPDATES,
+  STUDENT_UPDATES_DETAILS_PROGRAM,
 } from "../../constants/Routes";
 import MentorProfileBuilder from "../../pages/MentorProfileBuilder/MentorProfileBuilder";
 import OrgProfileBuilder from "../../pages/OrgProfileBuilder/OrgProfileBuilder";
@@ -91,9 +92,14 @@ const PrivateRoute = (props: {
     if (catalysedType === STUDENT) {
       if (catalysedCreated) {
         if (
-          [STUDENT_HOME, STUDENT_DASHBOARD, STUDENT_UPDATES].includes(
-            props.path
-          )
+          [
+            STUDENT_HOME,
+            STUDENT_DASHBOARD,
+            STUDENT_UPDATES,
+            `${STUDENT_UPDATES_DETAILS_PROGRAM}/:programId/dashboard`,
+            `${STUDENT_UPDATES_DETAILS_PROGRAM}/:programId/details`,
+            `${STUDENT_UPDATES_DETAILS_PROGRAM}/:programId/people`,
+          ].includes(props.path)
         ) {
           return (
             <Route path={props.path} exact={props.exact ?? false}>
