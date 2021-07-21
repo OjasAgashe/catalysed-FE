@@ -40,7 +40,7 @@ const OrganisationRegister = () => {
   }, []);
 
   return (
-    <div className="OrgRegisterPage">
+    <div className="OrgRegisterPage Page">
       <div className="OrgRegisterProgressContainer">
         <div className="OrgRegistrationText">Registration</div>
         <OrgRegisterProgress currentOrgRegister={state.currentOrgRegister} />

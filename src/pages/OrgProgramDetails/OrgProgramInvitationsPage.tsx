@@ -84,7 +84,7 @@ const OrgProgramInvitationsPage = () => {
   ]);
 
   return (
-    <div className="OrgProgramInvitationsPage">
+    <div className="OrgProgramInvitationsPage Page">
       {state.loading && (
         <LoadingProgress
           loading={state.loading}

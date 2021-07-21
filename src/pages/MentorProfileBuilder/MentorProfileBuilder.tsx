@@ -38,7 +38,7 @@ const MentorProfileBuilder = () => {
   }, []);
 
   return (
-    <div className="MentorProfileBuilder">
+    <div className="MentorProfileBuilder Page">
       {showGreet && <Greet setShowGreet={setShowGreet} />}
       {showGreet === false && <MentorProfileBuilderTypeform />}
     </div>

@@ -36,7 +36,7 @@ const OrgProfileBuilder = () => {
   }, []);
 
   return (
-    <div className="OrgProfileBuilder">
+    <div className="OrgProfileBuilder Page">
       {showGreet && <Greet setShowGreet={setShowGreet} />}
       {showGreet === false && <OrgProfileBuilderTypeform />}
     </div>

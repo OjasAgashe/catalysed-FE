@@ -50,7 +50,7 @@ const PageNotFound = () => {
   };
 
   return (
-    <div className="PageNotFoundContainer">
+    <div className="PageNotFoundContainer Page">
       <div className="PageNotFoundSectionOne">
         <img src={Logo} alt="brand logo" />
       </div>

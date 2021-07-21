@@ -46,7 +46,7 @@ const OrgDirectoryMentorDetailsPage = () => {
   }, [getSpecificConnectedMentor, history, mentorId]);
 
   return (
-    <div className="OrgDirectoryMentorPage">
+    <div className="OrgDirectoryMentorPage Page">
       {state.loading && (
         <LoadingProgress
           loading={state.loading}

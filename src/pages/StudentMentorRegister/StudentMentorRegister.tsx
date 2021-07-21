@@ -9,7 +9,7 @@ const StudentMentorRegister = () => {
   }, []);
 
   return (
-    <div className="StudentMentorRegisterPage">
+    <div className="StudentMentorRegisterPage Page">
       <section className="StudentMentorRegisterBox">
         <h1>
           Hey, we're still opening up but anyone can join with an invite from an

@@ -74,7 +74,7 @@ const OrgApplicantsPage = () => {
   }, [location.pathname]);
 
   return (
-    <div className="OrgApplicantsPage">
+    <div className="OrgApplicantsPage Page">
       <OrgApplicantsPageHeader
         searchedName={searchedName}
         setSearchedName={setSearchedName}

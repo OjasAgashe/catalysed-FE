@@ -76,7 +76,7 @@ const OrgProgramParticipantsPage = () => {
   }, [getProgramDetails, getProgramParticipants, history, programId]);
 
   return (
-    <div className="OrgProgramParticipantsPage">
+    <div className="OrgProgramParticipantsPage Page">
       {state.loading && (
         <LoadingProgress
           loading={state.loading}

@@ -57,7 +57,7 @@ const OrgDirectoryPage = () => {
   }, [getConnectedMentors, getConnectedStudents, state.title]);
 
   return state.title ? (
-    <div className="OrgDirectoryPage">
+    <div className="OrgDirectoryPage Page">
       {state.loading && (
         <LoadingProgress
           loading={state.loading}

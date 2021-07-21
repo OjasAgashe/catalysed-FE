@@ -46,7 +46,7 @@ const OrgProgramDetailsPage = () => {
   }, [dispatch, getProgramDetails, history, programId]);
 
   return (
-    <div className="OrgProgramDetailsPage">
+    <div className="OrgProgramDetailsPage Page">
       {state.loading && (
         <LoadingProgress
           loading={state.loading}

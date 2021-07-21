@@ -74,7 +74,7 @@ const StudentUpdatesPage = () => {
   }, [view]);
 
   return (
-    <div className="StudentUpdatesPage">
+    <div className="StudentUpdatesPage Page">
       <StuUpdatesPageHeader view={view} setView={setView} />
 
       {view === "Programs" && (

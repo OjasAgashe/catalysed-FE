@@ -26,7 +26,7 @@ const CreateProgram = () => {
   }, []);
 
   return (
-    <div className="OrgCreateProgramPage">
+    <div className="OrgCreateProgramPage Page">
       {Boolean(state.loadingMessage) && (
         <LoadingProgress
           loading={Boolean(state.loadingMessage)}

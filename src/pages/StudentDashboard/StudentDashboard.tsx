@@ -170,7 +170,7 @@ const StudentDashboard = () => {
   const [clickedCardData, setClickedCardData] = useState<string>("");
 
   return (
-    <div className="StudentDashboardPage">
+    <div className="StudentDashboardPage Page">
       <StudentDashboardCardModal
         setCardTextArray={setCardTextArray}
         showCardModal={showCardModal}

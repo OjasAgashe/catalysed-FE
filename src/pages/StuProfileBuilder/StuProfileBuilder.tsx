@@ -36,7 +36,7 @@ const StuProfileBuilder = () => {
   }, []);
 
   return (
-    <div className="StuProfileBuilder">
+    <div className="StuProfileBuilder Page">
       {showGreet && <Greet setShowGreet={setShowGreet} />}
       {showGreet === false && <StuProfileBuilderTypeform />}
     </div>

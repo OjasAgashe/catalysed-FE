@@ -17,7 +17,7 @@ const OrgHomePage = () => {
   }, []);
 
   return (
-    <div className="OrgHomePage">
+    <div className="OrgHomePage Page">
       {state.loading && (
         <LoadingProgress
           loading={state.loading}

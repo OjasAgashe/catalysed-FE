@@ -65,7 +65,7 @@ const OrgSpecificStudentApplicantDetailsPage = () => {
   ]);
 
   return (
-    <div className="OrgSpecificStudentApplicantDetailsPage">
+    <div className="OrgSpecificStudentApplicantDetailsPage Page">
       {state.loading && (
         <LoadingProgress
           loading={state.loading}

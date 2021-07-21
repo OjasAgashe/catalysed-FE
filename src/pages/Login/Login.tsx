@@ -18,7 +18,7 @@ const Login = () => {
   }, []);
 
   return (
-    <div className="LoginPage">
+    <div className="LoginPage Page">
       {state.loading && (
         <LoadingProgress
           loading={state.loading}

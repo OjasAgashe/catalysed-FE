@@ -22,7 +22,7 @@ const OrgViewSearchProgramPage = () => {
   }, []);
 
   return (
-    <div className="OrgViewSearchProgramPage">
+    <div className="OrgViewSearchProgramPage Page">
       {state.loading && (
         <LoadingProgress
           loading={state.loading}

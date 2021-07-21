@@ -44,7 +44,7 @@ const StuUpdatesProgramDetails = () => {
   }, [getProgramDetails, history, programId]);
 
   return (
-    <div className="StuUpdatesProgramDetailsPage">
+    <div className="StuUpdatesProgramDetailsPage Page">
       {state.loading && (
         <LoadingProgress
           loading={state.loading}

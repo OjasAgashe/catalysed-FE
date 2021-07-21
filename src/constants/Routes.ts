@@ -23,4 +23,5 @@ export const STUDENT_DASHBOARD = "/app/student/dashboard";
 export const STUDENT_MENTOR_REGISTER = "/app/student-mentor/register";
 export const STUDENT_PROFILE_BUILDER = "/app/student/profile/builder";
 export const STUDENT_UPDATES = "/app/student/updates";
+export const STUDENT_UPDATES_DETAILS_ORGANISATION = "/app/student/updates/organisation";
 export const STUDENT_UPDATES_DETAILS_PROGRAM = "/app/student/updates/program";

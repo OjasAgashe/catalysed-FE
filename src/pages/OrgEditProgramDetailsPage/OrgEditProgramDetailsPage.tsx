@@ -125,7 +125,7 @@ const OrgEditProgramDetailsPage = () => {
   }, [dispatch, getProgramDetails, history, programId]);
 
   return (
-    <div className="OrgEditProgramDetailsPage">
+    <div className="OrgEditProgramDetailsPage Page">
       {(state.loading || state.loadingMessage) && (
         <LoadingProgress
           loading={state.loading || (state.loadingMessage ? true : false)}

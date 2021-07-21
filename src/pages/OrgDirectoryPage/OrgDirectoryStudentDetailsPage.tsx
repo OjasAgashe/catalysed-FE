@@ -46,7 +46,7 @@ const OrgDirectoryStudentDetailsPage = () => {
   }, [getSpecificConnectedStudent, history, studentId]);
 
   return (
-    <div className="OrgDirectoryStudentPage">
+    <div className="OrgDirectoryStudentPage Page">
       {state.loading && (
         <LoadingProgress
           loading={state.loading}

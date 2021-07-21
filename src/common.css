@@ -26,36 +26,11 @@
     StudentDashboard,
     StudentUpdatesPage,
     StuUpdatesProgramDetailsPage,
-    StuUpdatesProgramPeoplePage
+    StuUpdatesProgramPeoplePage,
+    StuUpdatesOrganisationDetailsPage
 */
 
-.OrgRegisterPage,
-.LoginPage,
-.StudentMentorRegisterPage,
-.OrgProfileBuilder,
-.MentorProfileBuilder,
-.StuProfileBuilder,
-.OrgCreateProgramPage,
-.OrgViewSearchProgramPage,
-.OrgProgramDetailsPage,
-.OrgProgramInvitationsPage,
-.OrgProgramParticipantsPage,
-.OrgEditProgramDetailsPage,
-.OrgHomePage,
-.OrgDirectoryPage,
-.OrgDirectoryMentorPage,
-.OrgDirectoryStudentPage,
-.OrgProfileManagePage,
-.OrgProfileEditPage,
-.OrgProgramApplicantsPage,
-.OrgApplicantsPage,
-.PageNotFoundContainer,
-.OrgSpecificMentorApplicantDetailsPage,
-.OrgSpecificStudentApplicantDetailsPage,
-.StudentDashboardPage,
-.StudentUpdatesPage,
-.StuUpdatesProgramDetailsPage,
-.StuUpdatesProgramPeoplePage {
+.Page {
   background-color: var(--red-100);
   min-height: 85vh;
 }

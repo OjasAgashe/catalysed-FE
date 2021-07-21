@@ -145,7 +145,7 @@ const OrgProgramApplicantsPage = () => {
   ]);
 
   return (
-    <div className="OrgProgramApplicantsPage">
+    <div className="OrgProgramApplicantsPage Page">
       {state.loading && (
         <LoadingProgress
           loading={state.loading}

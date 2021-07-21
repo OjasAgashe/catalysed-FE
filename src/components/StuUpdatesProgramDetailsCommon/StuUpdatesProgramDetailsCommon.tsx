@@ -39,6 +39,7 @@ const StuUpdatesProgramDetailsCommon = ({
               to={`${STUDENT_UPDATES_DETAILS_PROGRAM}/${programId}/details`}
               className="ProgramDetailsLink Link"
             >
+              {/* Only for Styling Purpose className is used Here */}
               Program Details
             </Link>
           </div>

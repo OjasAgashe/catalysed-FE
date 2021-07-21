@@ -28,6 +28,7 @@ import {
   ORGANISATION_INVITATIONS,
   STUDENT_UPDATES,
   STUDENT_UPDATES_DETAILS_PROGRAM,
+  STUDENT_UPDATES_DETAILS_ORGANISATION,
 } from "../../constants/Routes";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -60,6 +61,7 @@ import StudentDashboard from "../../pages/StudentDashboard/StudentDashboard";
 import StudentUpdatesPage from "../../pages/StudentUpdatesPage/StudentUpdatesPage";
 import StuUpdatesProgramDetails from "../../pages/StuUpdatesProgramDetails/StuUpdatesProgramDetails";
 import StuUpdatesProgramPeople from "../../pages/StuUpdatesProgramDetails/StuUpdatesProgramPeople";
+import StuUpdatesOrganisationDetails from "../../pages/StuUpdatesOrganisationDetails/StuUpdatesOrganisationDetails";
 
 function App() {
   return (
@@ -237,6 +239,13 @@ function App() {
 
           <PrivateRoute path={STUDENT_UPDATES} exact>
             <StudentUpdatesPage />
+          </PrivateRoute>
+
+          <PrivateRoute
+            path={`${STUDENT_UPDATES_DETAILS_ORGANISATION}/:organisationId/details`}
+            exact
+          >
+            <StuUpdatesOrganisationDetails />
           </PrivateRoute>
 
           <PrivateRoute

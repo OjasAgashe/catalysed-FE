@@ -65,7 +65,7 @@ const OrgSpecificMentorApplicantDetailsPage = () => {
   ]);
 
   return (
-    <div className="OrgSpecificMentorApplicantDetailsPage">
+    <div className="OrgSpecificMentorApplicantDetailsPage Page">
       {state.loading && (
         <LoadingProgress
           loading={state.loading}
