@@ -63,6 +63,7 @@ import StuUpdatesProgramDetails from "../../pages/StuUpdatesProgramDetails/StuUp
 import StuUpdatesProgramPeople from "../../pages/StuUpdatesProgramDetails/StuUpdatesProgramPeople";
 import StuUpdatesOrganisationDetails from "../../pages/StuUpdatesOrganisationDetails/StuUpdatesOrganisationDetails";
 import StuUpdatesOrganisationPrograms from "../../pages/StuUpdatesOrganisationDetails/StuUpdatesOrganisationPrograms";
+import OrgInvitationsPage from "../../pages/OrgInvitationsPage/OrgInvitationsPage";
 
 function App() {
   return (
@@ -135,7 +136,7 @@ function App() {
           </PrivateRoute>
 
           <PrivateRoute path={ORGANISATION_INVITATIONS} exact>
-            <OrgApplicantsPage />
+            <OrgInvitationsPage />
           </PrivateRoute>
 
           <PrivateRoute path={ORGANISATION_PROFILE_BUILDER} exact>

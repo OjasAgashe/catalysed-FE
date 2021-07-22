@@ -1,0 +1,72 @@
+.StuUpdatesOrganisationDetailsInfoContainer {
+  padding: 2rem 1rem;
+}
+
+.StuUpdatesOrganisationDetailsInfoContainer :is(.SectionOne, .SectionTwo) {
+  align-items: center;
+}
+
+@media screen and (min-width: 634px) {
+  .StuUpdatesOrganisationDetailsInfoContainer
+    :is(.SectionTwo, .SectionOne)
+    .DataCard {
+    width: 550px;
+  }
+}
+
+.StuUpdatesOrganisationDetailsInfoContainer
+  :is(.SectionOne, .SectionTwo)
+  :is(.SectionOneFirstHalf, .SectionOneSecondHalf, .SectionTwoFirstHalf, .SectionTwoSecondHalf) {
+  margin: 1rem auto;
+}
+
+.StuUpdatesOrganisationDetailsInfoContainer :is(.SectionOne, .SectionTwo) img {
+  max-width: 400px;
+  padding: 0.5rem;
+}
+
+@media screen and (max-width: 455px) {
+  .StuUpdatesOrganisationDetailsInfoContainer
+    :is(.SectionOne, .SectionTwo)
+    img {
+    max-width: 350px;
+  }
+}
+
+.StuUpdatesOrganisationDetailsInfoContainer
+  :is(.SectionOne, .SectionTwo)
+  .CreateProgramFormText {
+  font-weight: 600;
+  padding: 0 0.5rem !important;
+  display: inline-block;
+}
+
+.StuUpdatesOrganisationDetailsInfoContainer
+  :is(.SectionOne, .SectionTwo)
+  .Data {
+  font-size: 1.1rem;
+  display: inline-block;
+}
+
+.StuUpdatesOrganisationDetailsInfoContainer
+  .SectionOne
+  :is(.DataCardName, .DataCardDescription, .DataCardSocialLink, .DataCardWebsiteLink) {
+  margin: 1rem auto !important;
+}
+
+.StuUpdatesOrganisationDetailsInfoContainer .SectionOne .DataCardDescription {
+  min-height: 5rem !important;
+}
+
+.StuUpdatesOrganisationDetailsInfoContainer
+  .SectionOne
+  .DataCardDescription
+  .Data {
+  padding-left: 2rem;
+}
+
+@media screen and (max-width: 1040px) {
+  .StuUpdatesOrganisationDetailsInfoContainer .SectionTwo {
+    flex-direction: column-reverse !important;
+  }
+}

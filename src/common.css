@@ -28,7 +28,8 @@
     StuUpdatesProgramDetailsPage,
     StuUpdatesProgramPeoplePage,
     StuUpdatesOrganisationDetailsPage,
-    StuUpdatesOrganisationProgramsPage
+    StuUpdatesOrganisationProgramsPage,
+    OrgInvitationsPage
 */
 
 .Page {
@@ -139,7 +140,8 @@
     StuUpdatesProgramCard,
     StuUpdatesOrganisationCard,
     StuUpdatesProgramPeopleDetails,
-    StuUpdatesOrganisationProgramsDetails
+    StuUpdatesOrganisationProgramsDetails,
+    StuUpdatesOrganisationDetailsInfo
 */
 
 .OrgRegisterUserForm,
@@ -448,7 +450,8 @@ input[type="number"] {
     OrgDirectoryDetailsPersonalInfo,
     OrgProfileEditSectionOne,
     OrgProfileEditSectionTwo,
-    StuUpdateProgramPeopleDetails
+    StuUpdateProgramPeopleDetails,
+    StuUpdatesOrganisationDetailsInfo
 */
 
 .GeneralDetailsFormContainer,
@@ -468,7 +471,15 @@ input[type="number"] {
   .SectionTwoFirstHalf
   .DataCard,
 .OrgProfileEditSectionOne .SectionOneSecondHalf,
-.OrgProfileEditSectionTwo :is(.SectionTwoFirstHalf, .SectionTwoSecondHalf) {
+.OrgProfileEditSectionTwo :is(.SectionTwoFirstHalf, .SectionTwoSecondHalf),
+.StuUpdatesOrganisationDetailsInfoContainer
+  .SectionOne
+  .SectionOneSecondHalf
+  .DataCard,
+.StuUpdatesOrganisationDetailsInfoContainer
+  .SectionTwo
+  .SectionTwoFirstHalf
+  .DataCard {
   background-color: var(--white);
   padding: 1rem;
   box-shadow: 1px 1px 5px var(--blue-gray-300), -2px -2px 5px var(--white);
@@ -490,7 +501,9 @@ input[type="number"] {
 .OrgDirectoryDetailsPersonalContainer .SectionTwo .CreateProgramFormText,
 .StuUpdatesProgramPeopleDetailsContainer
   .NameNContactDetailsContainer
-  .CreateProgramFormText {
+  .CreateProgramFormText,
+.StuUpdatesOrganisationDetailsInfoContainer .SectionOne .CreateProgramFormText,
+.StuUpdatesOrganisationDetailsInfoContainer .SectionTwo .CreateProgramFormText {
   font-size: 1.1rem !important;
   margin-right: 1rem;
   color: var(--blue-gray-700);
@@ -502,7 +515,9 @@ input[type="number"] {
 .ProgramDetailsContainer
   :is(.ProgramDetailsFirstSection, .ProgramDetailsSecondSection),
 .OrgDirectoryDetailsPersonalContainer .SectionOne,
-.OrgDirectoryDetailsPersonalContainer .SectionTwo {
+.OrgDirectoryDetailsPersonalContainer .SectionTwo,
+.StuUpdatesOrganisationDetailsInfoContainer .SectionOne,
+.StuUpdatesOrganisationDetailsInfoContainer .SectionTwo {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;

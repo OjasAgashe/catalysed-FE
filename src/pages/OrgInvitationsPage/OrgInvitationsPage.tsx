@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import OrgApplicantsPageDetails from "../../components/OrgApplicantsPageDetails/OrgApplicantsPageDetails";
 import OrgApplicantsPageHeader from "../../components/OrgApplicantsPageHeader/OrgApplicantsPageHeader";
 
-const OrgApplicantsPage = () => {
+const OrgInvitationsPage = () => {
   const [searchedName, setSearchedName] = useState("");
   const [filteredResponseData, setFilteredResponseData] = useState<
     {
@@ -56,7 +56,7 @@ const OrgApplicantsPage = () => {
   useEffect(() => {
     document.documentElement.scrollTop = 0;
 
-    document.title = "Org Applicants | CatalysEd";
+    document.title = "Org Invitations | CatalysEd";
   }, []);
 
   return (
@@ -67,7 +67,7 @@ const OrgApplicantsPage = () => {
         setFilteredResponseData={setFilteredResponseData}
         fakeData={fakeData}
         setSearchedNameNotFound={setSearchedNameNotFound}
-        pageHeaderText="Applicants"
+        pageHeaderText="Invitations"
       />
 
       <OrgApplicantsPageDetails
@@ -75,10 +75,10 @@ const OrgApplicantsPage = () => {
         fakeData={fakeData}
         filteredResponseData={filteredResponseData}
         searchedNameNotFound={searchedNameNotFound}
-        pageHeaderText="Applicants"
+        pageHeaderText="Invitations"
       />
     </div>
   );
 };
 
-export default OrgApplicantsPage;
+export default OrgInvitationsPage;

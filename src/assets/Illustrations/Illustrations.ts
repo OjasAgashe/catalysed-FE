@@ -27,6 +27,8 @@ import OrgProgramDetailsDataIllustration from "./org_program_details_data_illust
 import OrgViewAndSearchProgram from "./org_view_and_search_program.svg";
 import ProgramsApplicantsSummaryHeader from "./programs_applicants_summary_header.jpg";
 import StudentUpdatesHeader from "./student_updates_header.jpg";
+import StudentUpdatesOrganisationProfileData from "./student_updates_organisation_profile_data.svg";
+import StudentUpdatesOrganisationSurvey from "./student_updates_organisation_survey.svg";
 
 export {
   CommonHomeBoy,
@@ -57,5 +59,7 @@ export {
   OrgProgramDetailsDataIllustration,
   OrgViewAndSearchProgram,
   ProgramsApplicantsSummaryHeader,
-  StudentUpdatesHeader
+  StudentUpdatesHeader,
+  StudentUpdatesOrganisationProfileData,
+  StudentUpdatesOrganisationSurvey,
 };

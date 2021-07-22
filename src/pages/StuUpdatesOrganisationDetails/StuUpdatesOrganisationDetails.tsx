@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import StuUpdatesOrganisationDetailsCommon from "../../components/StuUpdatesOrganisationDetailsCommon/StuUpdatesOrganisationDetailsCommon";
+import StuUpdatesOrganisationDetailsInfo from "../../components/StuUpdatesOrganisationDetailsInfo/StuUpdatesOrganisationDetailsInfo";
 
 const StuUpdatesOrganisationDetails = () => {
   const { organisationId } = useParams<{ organisationId: string }>();
@@ -17,6 +18,8 @@ const StuUpdatesOrganisationDetails = () => {
         organisationName="CatalysEd"
         organisationId={parseInt(organisationId)}
       />
+
+      <StuUpdatesOrganisationDetailsInfo />
     </div>
   );
 };
