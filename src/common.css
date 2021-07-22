@@ -534,7 +534,8 @@ input[type="number"] {
 :is(.GeneralDetailsForm, .GeneralProgramDetailsDataContainer, .MentorProgramDetailsDataContainer, .StudentProgramDetailsDataContainer)
   .LanguagePreviewer
   .LanguageLi,
-.OrgDirectoryDetailsPersonalContainer .SectionTwo .LanguageLi {
+.OrgDirectoryDetailsPersonalContainer .SectionTwo .LanguageLi,
+.StuUpdatesOrganisationDetailsInfoContainer .SectionTwo .LanguageLi {
   display: inline-block;
   list-style: none;
   background-color: var(--common-home-section-four);

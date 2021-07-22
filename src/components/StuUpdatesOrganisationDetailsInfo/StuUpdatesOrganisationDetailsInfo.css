@@ -6,7 +6,25 @@
   align-items: center;
 }
 
-@media screen and (min-width: 634px) {
+@media screen and (min-width: 437px) {
+  .StuUpdatesOrganisationDetailsInfoContainer .SectionTwo .DataCard {
+    width: 400px;
+  }
+}
+
+@media screen and (min-width: 538px) {
+  .StuUpdatesOrganisationDetailsInfoContainer .SectionTwo .DataCard {
+    width: 500px;
+  }
+}
+
+@media screen and (min-width: 570px) {
+  .StuUpdatesOrganisationDetailsInfoContainer .SectionTwo .DataCard {
+    width: 530px;
+  }
+}
+
+@media screen and (min-width: 590px) {
   .StuUpdatesOrganisationDetailsInfoContainer
     :is(.SectionTwo, .SectionOne)
     .DataCard {
@@ -54,6 +72,12 @@
   margin: 1rem auto !important;
 }
 
+.StuUpdatesOrganisationDetailsInfoContainer
+  .SectionTwo
+  :is(.DataCardAofW, .DataCardContact, .DataCardLocation, .DataCardYofI, .DataCardPrimaryLanguage) {
+  margin: 1.2rem auto !important;
+}
+
 .StuUpdatesOrganisationDetailsInfoContainer .SectionOne .DataCardDescription {
   min-height: 5rem !important;
 }
@@ -63,6 +87,21 @@
   .DataCardDescription
   .Data {
   padding-left: 2rem;
+}
+
+.StuUpdatesOrganisationDetailsInfoContainer
+  :is(.DataCardContact, .DataCardLocation)
+  :is(.DataCardContactPnE, .DataCardLocationRnC) {
+  padding: 0 1rem;
+}
+
+.StuUpdatesOrganisationDetailsInfoContainer
+  .SectionTwo
+  :is(.DataCardContactPhone, .DataCardLocationRegion)
+  :is(.PhoneComma, .RegionComma) {
+  font-size: 1.1rem !important;
+  color: var(--blue-gray-700);
+  font-weight: 600;
 }
 
 @media screen and (max-width: 1040px) {
