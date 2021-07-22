@@ -27,7 +27,8 @@
     StudentUpdatesPage,
     StuUpdatesProgramDetailsPage,
     StuUpdatesProgramPeoplePage,
-    StuUpdatesOrganisationDetailsPage
+    StuUpdatesOrganisationDetailsPage,
+    StuUpdatesOrganisationProgramsPage
 */
 
 .Page {
@@ -137,7 +138,8 @@
     OrgDirectoryCard,
     StuUpdatesProgramCard,
     StuUpdatesOrganisationCard,
-    StuUpdatesProgramPeopleDetails
+    StuUpdatesProgramPeopleDetails,
+    StuUpdatesOrganisationProgramsDetails
 */
 
 .OrgRegisterUserForm,
@@ -672,14 +674,16 @@ input[type="number"] {
   OrgProgramApplicantDetails,
   OrgApplicantsPageDetails,
   OrgSpecificApplicantApplicationDetails,
-  StuUpdatesProgramPeopleDetails
+  StuUpdatesProgramPeopleDetails,
+  StuUpdatesOrganisationProgramsDetails
 */
 
 .OrgProgramInvitationDetails,
 .OrgProgramApplicantDetails,
 .OrgApplicantsPageDetails,
 .OrgSpecificApplicantApplicationDetailsContainer,
-.StuUpdatesProgramPeopleDetails {
+.StuUpdatesProgramPeopleDetails,
+.StuUpdatesOrganisationProgramsDetails {
   max-width: 1200px;
   margin: auto;
   padding: 2rem;
@@ -688,7 +692,8 @@ input[type="number"] {
 .OrgProgramInvitationDetailsContainer,
 .OrgProgramApplicantDetailsContainer,
 .OrgApplicantsPageDetailsContainer,
-.StuUpdatesProgramPeopleDetailsContainer {
+.StuUpdatesProgramPeopleDetailsContainer,
+.StuUpdatesOrganisationProgramsDetailsContainer {
   background-color: var(--white);
   padding: 1rem;
 }

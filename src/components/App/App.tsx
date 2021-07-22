@@ -62,6 +62,7 @@ import StudentUpdatesPage from "../../pages/StudentUpdatesPage/StudentUpdatesPag
 import StuUpdatesProgramDetails from "../../pages/StuUpdatesProgramDetails/StuUpdatesProgramDetails";
 import StuUpdatesProgramPeople from "../../pages/StuUpdatesProgramDetails/StuUpdatesProgramPeople";
 import StuUpdatesOrganisationDetails from "../../pages/StuUpdatesOrganisationDetails/StuUpdatesOrganisationDetails";
+import StuUpdatesOrganisationPrograms from "../../pages/StuUpdatesOrganisationDetails/StuUpdatesOrganisationPrograms";
 
 function App() {
   return (
@@ -246,6 +247,13 @@ function App() {
             exact
           >
             <StuUpdatesOrganisationDetails />
+          </PrivateRoute>
+
+          <PrivateRoute
+            path={`${STUDENT_UPDATES_DETAILS_ORGANISATION}/:organisationId/programs`}
+            exact
+          >
+            <StuUpdatesOrganisationPrograms />
           </PrivateRoute>
 
           <PrivateRoute

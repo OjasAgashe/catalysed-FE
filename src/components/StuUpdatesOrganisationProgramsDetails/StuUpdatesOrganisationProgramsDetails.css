@@ -1,0 +1,20 @@
+.StuUpdatesOrganisationProgramsDetailsContainer .ProgramRunningText {
+  font-size: 1.5rem !important;
+  color: var(--facebook-code) !important;
+  padding: 0.5rem 0.3rem;
+  border-bottom: 2px solid var(--facebook-code);
+}
+
+.StuUpdatesOrganisationProgramsDetailsContainer .ProgramNameDiv {
+  align-items: center;
+  border-bottom: 1px solid var(--blue-gray-300);
+  font-weight: 600;
+  padding: 1rem 0.5rem;
+  font-size: 1.1rem;
+  color: var(--blue-gray-700);
+}
+
+.StuUpdatesOrganisationProgramsDetailsContainer
+  .ProgramNameDiv.LastProgramName {
+  border-bottom: none;
+}

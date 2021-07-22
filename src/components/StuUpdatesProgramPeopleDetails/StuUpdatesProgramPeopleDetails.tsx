@@ -13,7 +13,7 @@ const StuUpdatesProgramPeopleDetails = () => {
         <div className="ProgramPeopleMentor">
           <div className="MentorTextDiv">Mentor</div>
           <div className="MentorUserDetailsContainer">
-            <FaUserCircle className="UserIcon" />
+            <FaUserCircle className="UserIcon MentorUserIcon" />
             <div className="NameNContactDetailsContainer">
               <div>
                 <span className="CreateProgramFormText">Oj</span>
@@ -26,7 +26,7 @@ const StuUpdatesProgramPeopleDetails = () => {
                     <span className="CreateProgramFormText">
                       phone&nbsp;:&nbsp;
                     </span>
-                    <span>
+                    <span className="PhoneNumberDataContainer">
                       <ReactCountryFlag
                         countryCode={getCode("INDIA")}
                         svg
@@ -49,7 +49,7 @@ const StuUpdatesProgramPeopleDetails = () => {
                     <span className="CreateProgramFormText">
                       email&nbsp;:&nbsp;
                     </span>
-                    <span className="Data">oj@gmail.com</span>
+                    <span className="Data EmailData">oj@gmail.com</span>
                   </div>
                 </div>
               </div>
@@ -61,13 +61,13 @@ const StuUpdatesProgramPeopleDetails = () => {
             <div>Other Students</div>
             <div className="StudentCountDiv">2 Students</div>
           </div>
-          <div className="StudentUserDetailsContainer StudentOne">
+          <div className="StudentUserDetailsContainer">
             <FaUserCircle className="UserIcon" />
             <div className="StudentNameDiv">
               <span className="CreateProgramFormText">Rahul Gautam</span>
             </div>
           </div>
-          <div className="StudentUserDetailsContainer">
+          <div className="StudentUserDetailsContainer LastStudent">
             <FaUserCircle className="UserIcon" />
             <div className="StudentNameDiv">
               <span className="CreateProgramFormText">John Deep</span>

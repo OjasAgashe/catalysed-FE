@@ -28,10 +28,11 @@
 
 .ProgramPeopleStudents .StudentUserDetailsContainer {
   align-items: center;
+  border-bottom: 1px solid var(--blue-gray-300);
 }
 
-.ProgramPeopleStudents .StudentUserDetailsContainer.StudentOne {
-  border-bottom: 1px solid var(--blue-gray-300);
+.ProgramPeopleStudents .StudentUserDetailsContainer.LastStudent {
+  border-bottom: none;
 }
 
 :is(.ProgramPeopleMentor, .ProgramPeopleStudents) .UserIcon {
@@ -60,8 +61,31 @@
   margin-left: 0.5rem;
 }
 
+.ProgramPeopleMentor
+  .NameNContactDetailsContainer
+  .PhoneNEmailContactContainer
+  :is(.PhoneNumberDataContainer, .EmailData) {
+  display: inline-block;
+  padding: 0 0.5rem !important;
+}
+
 .ProgramPeopleMentor .NameNContactDetailsContainer .PhoneComma {
   font-size: 1.1rem !important;
   color: var(--blue-gray-700);
   font-weight: 600;
+}
+
+@media screen and (max-width: 400px) {
+  .MentorUserIcon {
+    font-size: 3.3rem !important;
+  }
+}
+
+@media screen and (min-width: 474px) {
+  .ProgramPeopleMentor
+    .NameNContactDetailsContainer
+    .PhoneNEmailContactContainer
+    .PhoneNumberDataContainer {
+    padding: 0 !important;
+  }
 }
