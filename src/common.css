@@ -29,7 +29,12 @@
     StuUpdatesProgramPeoplePage,
     StuUpdatesOrganisationDetailsPage,
     StuUpdatesOrganisationProgramsPage,
-    OrgInvitationsPage
+    OrgInvitationsPage,
+    MentorUpdatesPage,
+    MentorUpdatesOrganisationDetailsPage,
+    MentorUpdatesOrganisationProgramsPage,
+    MentorUpdatesProgramDetailsPage,
+    MentorUpdatesProgramPeoplePage
 */
 
 .Page {

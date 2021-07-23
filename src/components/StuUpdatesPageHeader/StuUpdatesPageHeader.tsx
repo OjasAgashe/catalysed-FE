@@ -2,16 +2,38 @@ import React from "react";
 import { Alert } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { StudentUpdatesHeader } from "../../assets/Illustrations/Illustrations";
-import { STUDENT_UPDATES } from "../../constants/Routes";
+import { MENTOR, STUDENT } from "../../constants/Entities";
+import { MENTOR_UPDATES, STUDENT_UPDATES } from "../../constants/Routes";
 import "./StuUpdatesPageHeader.css";
 
 type StuUpdatesPageHeaderProps = {
   view: string;
   setView: React.Dispatch<React.SetStateAction<string>>;
+  entity: string;
 };
 
-const StuUpdatesPageHeader = ({ view, setView }: StuUpdatesPageHeaderProps) => {
+const StuUpdatesPageHeader = ({
+  view,
+  setView,
+  entity,
+}: StuUpdatesPageHeaderProps) => {
   const history = useHistory();
+
+  const handleProgramsBtnClick = () => {
+    setView("Programs");
+
+    if (entity === STUDENT) history.push(`${STUDENT_UPDATES}?view=PROGRAMS`);
+    else if (entity === MENTOR) history.push(`${MENTOR_UPDATES}?view=PROGRAMS`);
+  };
+
+  const handleOrganisationsBtnClick = () => {
+    setView("Organisations");
+
+    if (entity === STUDENT)
+      history.push(`${STUDENT_UPDATES}?view=ORGANISATIONS`);
+    else if (entity === MENTOR)
+      history.push(`${MENTOR_UPDATES}?view=ORGANISATIONS`);
+  };
 
   return (
     <div
@@ -32,13 +54,7 @@ const StuUpdatesPageHeader = ({ view, setView }: StuUpdatesPageHeaderProps) => {
                 : "NotCurrentSelectedTab"
             } StuUpdatesProgramsOpt`}
           >
-            <button
-              type="button"
-              onClick={() => {
-                setView("Programs");
-                history.push(`${STUDENT_UPDATES}?view=PROGRAMS`);
-              }}
-            >
+            <button type="button" onClick={handleProgramsBtnClick}>
               Programs
             </button>
           </div>
@@ -49,13 +65,7 @@ const StuUpdatesPageHeader = ({ view, setView }: StuUpdatesPageHeaderProps) => {
                 : "NotCurrentSelectedTab"
             }`}
           >
-            <button
-              type="button"
-              onClick={() => {
-                setView("Organisations");
-                history.push(`${STUDENT_UPDATES}?view=ORGANISATIONS`);
-              }}
-            >
+            <button type="button" onClick={handleOrganisationsBtnClick}>
               Organisations
             </button>
           </div>

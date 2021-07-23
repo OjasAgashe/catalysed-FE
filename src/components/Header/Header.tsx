@@ -6,14 +6,16 @@ import { Logo } from "../../assets/Illustrations/Illustrations";
 import {
   HOME,
   LOGIN,
+  MENTOR_HOME,
   ORGANISATION_HOME,
   STUDENT_HOME,
 } from "../../constants/Routes";
 import { useCookie } from "../../context/cookie_context/CookieContext";
-import { ORGANISER, STUDENT } from "../../constants/Entities";
+import { MENTOR, ORGANISER, STUDENT } from "../../constants/Entities";
 import OrgHomeHeader from "./OrgHomeHeader";
 import CommonHomeHeader from "./CommonHomeHeader";
 import StudentHomeHeader from "./StudentHomeHeader";
+import MentorHomeHeader from "./MentorHomeHeader";
 
 const Header = () => {
   const location = useLocation();
@@ -46,6 +48,8 @@ const Header = () => {
             ? ORGANISATION_HOME
             : getCatalysedTypeCookie() === STUDENT
             ? STUDENT_HOME
+            : getCatalysedTypeCookie() === MENTOR
+            ? MENTOR_HOME
             : "#"
         }
         className="NavbarBrand"
@@ -65,6 +69,9 @@ const Header = () => {
 
           {getCatalysedCreatedCookie() &&
             getCatalysedTypeCookie() === STUDENT && <StudentHomeHeader />}
+
+          {getCatalysedCreatedCookie() &&
+            getCatalysedTypeCookie() === MENTOR && <MentorHomeHeader />}
 
           {getCatalysedTokenCookie() ? (
             <Nav.Link

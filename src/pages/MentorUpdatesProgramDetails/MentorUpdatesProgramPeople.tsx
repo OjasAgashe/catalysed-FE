@@ -6,7 +6,7 @@ import StuUpdatesProgramPeopleDetails from "../../components/StuUpdatesProgramPe
 import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
 import { stuUpdatesProgramPeopleReducer } from "../../reducers/stuUpdatesProgramPeopleReducer";
 
-const StuUpdatesProgramPeople = () => {
+const MentorUpdatesProgramPeople = () => {
   const [state, dispatch] = useReducer(stuUpdatesProgramPeopleReducer, {
     loading: true,
     error: "",
@@ -49,7 +49,7 @@ const StuUpdatesProgramPeople = () => {
   }, [getProgramDetails, history, programId]);
 
   return (
-    <div className="StuUpdatesProgramPeoplePage Page">
+    <div className="MentorUpdatesProgramPeoplePage Page">
       {state.loading && (
         <LoadingProgress
           loading={state.loading}
@@ -61,7 +61,7 @@ const StuUpdatesProgramPeople = () => {
       <StuUpdatesProgramDetailsCommon
         programTitle={state.programTitle}
         programId={parseInt(programId)}
-        entity="STUDENT"
+        entity="MENTOR"
       />
 
       <StuUpdatesProgramPeopleDetails />
@@ -69,4 +69,4 @@ const StuUpdatesProgramPeople = () => {
   );
 };
 
-export default StuUpdatesProgramPeople;
+export default MentorUpdatesProgramPeople;

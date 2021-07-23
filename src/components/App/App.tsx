@@ -29,6 +29,9 @@ import {
   STUDENT_UPDATES,
   STUDENT_UPDATES_DETAILS_PROGRAM,
   STUDENT_UPDATES_DETAILS_ORGANISATION,
+  MENTOR_UPDATES,
+  MENTOR_UPDATES_DETAILS_ORGANISATION,
+  MENTOR_UPDATES_DETAILS_PROGRAM,
 } from "../../constants/Routes";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -64,6 +67,11 @@ import StuUpdatesProgramPeople from "../../pages/StuUpdatesProgramDetails/StuUpd
 import StuUpdatesOrganisationDetails from "../../pages/StuUpdatesOrganisationDetails/StuUpdatesOrganisationDetails";
 import StuUpdatesOrganisationPrograms from "../../pages/StuUpdatesOrganisationDetails/StuUpdatesOrganisationPrograms";
 import OrgInvitationsPage from "../../pages/OrgInvitationsPage/OrgInvitationsPage";
+import MentorUpdatesPage from "../../pages/MentorUpdatesPage/MentorUpdatesPage";
+import MentorUpdatesOrganisationDetails from "../../pages/MentorUpdatesOrganisationDetails/MentorUpdatesOrganisationDetails";
+import MentorUpdatesOrganisationPrograms from "../../pages/MentorUpdatesOrganisationDetails/MentorUpdatesOrganisationPrograms";
+import MentorUpdatesProgramDetails from "../../pages/MentorUpdatesProgramDetails/MentorUpdatesProgramDetails";
+import MentorUpdatesProgramPeople from "../../pages/MentorUpdatesProgramDetails/MentorUpdatesProgramPeople";
 
 function App() {
   return (
@@ -93,6 +101,42 @@ function App() {
             <ProfileBuilderProvider>
               <MentorProfileBuilder />
             </ProfileBuilderProvider>
+          </PrivateRoute>
+
+          <PrivateRoute path={MENTOR_UPDATES} exact>
+            <MentorUpdatesPage />
+          </PrivateRoute>
+
+          <PrivateRoute
+            path={`${MENTOR_UPDATES_DETAILS_ORGANISATION}/:organisationId/details`}
+            exact
+          >
+            <MentorUpdatesOrganisationDetails />
+          </PrivateRoute>
+
+          <PrivateRoute
+            path={`${MENTOR_UPDATES_DETAILS_ORGANISATION}/:organisationId/programs`}
+            exact
+          >
+            <MentorUpdatesOrganisationPrograms />
+          </PrivateRoute>
+
+          <PrivateRoute
+            path={`${MENTOR_UPDATES_DETAILS_PROGRAM}/:programId/details`}
+            exact
+          >
+            <OrgAPIProvider>
+              <MentorUpdatesProgramDetails />
+            </OrgAPIProvider>
+          </PrivateRoute>
+
+          <PrivateRoute
+            path={`${MENTOR_UPDATES_DETAILS_PROGRAM}/:programId/people`}
+            exact
+          >
+            <OrgAPIProvider>
+              <MentorUpdatesProgramPeople />
+            </OrgAPIProvider>
           </PrivateRoute>
 
           <PublicRoute path={ORGANISATION_REGISTER} exact>

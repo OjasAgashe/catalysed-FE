@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import StuUpdatesOrganisationDetailsCommon from "../../components/StuUpdatesOrganisationDetailsCommon/StuUpdatesOrganisationDetailsCommon";
 import StuUpdatesOrganisationProgramsDetails from "../../components/StuUpdatesOrganisationProgramsDetails/StuUpdatesOrganisationProgramsDetails";
 
-const StuUpdatesOrganisationPrograms = () => {
+const MentorUpdatesOrganisationPrograms = () => {
   const { organisationId } = useParams<{ organisationId: string }>();
 
   useEffect(() => {
@@ -13,11 +13,11 @@ const StuUpdatesOrganisationPrograms = () => {
   });
 
   return (
-    <div className="StuUpdatesOrganisationProgramsPage Page">
+    <div className="MentorUpdatesOrganisationProgramsPage Page">
       <StuUpdatesOrganisationDetailsCommon
         organisationName="CatalysEd"
         organisationId={parseInt(organisationId)}
-        entity="STUDENT"
+        entity="MENTOR"
       />
 
       <StuUpdatesOrganisationProgramsDetails />
@@ -25,4 +25,4 @@ const StuUpdatesOrganisationPrograms = () => {
   );
 };
 
-export default StuUpdatesOrganisationPrograms;
+export default MentorUpdatesOrganisationPrograms;

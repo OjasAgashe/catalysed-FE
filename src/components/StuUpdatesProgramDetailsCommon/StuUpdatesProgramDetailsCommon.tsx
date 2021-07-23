@@ -2,17 +2,23 @@ import React from "react";
 import { Alert } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import { OrgProgramDetails } from "../../assets/Illustrations/Illustrations";
-import { STUDENT_UPDATES_DETAILS_PROGRAM } from "../../constants/Routes";
+import { STUDENT } from "../../constants/Entities";
+import {
+  MENTOR_UPDATES_DETAILS_PROGRAM,
+  STUDENT_UPDATES_DETAILS_PROGRAM,
+} from "../../constants/Routes";
 import "../OrgProgramDetailsCommon/OrgProgramDetailsCommon.css";
 
 type StuUpdatesProgramDetailsCommonProps = {
   programTitle?: string;
   programId: number;
+  entity: string;
 };
 
 const StuUpdatesProgramDetailsCommon = ({
   programTitle = "",
   programId,
+  entity,
 }: StuUpdatesProgramDetailsCommonProps) => {
   const location = useLocation();
 
@@ -29,14 +35,21 @@ const StuUpdatesProgramDetailsCommon = ({
         <Alert variant="warning" className="ProgramDetailsRouteLinks">
           <div
             className={`${
-              location.pathname.includes(STUDENT_UPDATES_DETAILS_PROGRAM) &&
-              location.pathname.includes("details")
+              location.pathname.includes(
+                entity === STUDENT
+                  ? STUDENT_UPDATES_DETAILS_PROGRAM
+                  : MENTOR_UPDATES_DETAILS_PROGRAM
+              ) && location.pathname.includes("details")
                 ? "CurrentSelectedTab"
                 : "NotCurrentSelectedTab"
             } ProgramDetailsLinkDiv`}
           >
             <Link
-              to={`${STUDENT_UPDATES_DETAILS_PROGRAM}/${programId}/details`}
+              to={`${
+                entity === STUDENT
+                  ? STUDENT_UPDATES_DETAILS_PROGRAM
+                  : MENTOR_UPDATES_DETAILS_PROGRAM
+              }/${programId}/details`}
               className="ProgramDetailsLink Link"
             >
               {/* Only for Styling Purpose className is used Here */}
@@ -46,14 +59,21 @@ const StuUpdatesProgramDetailsCommon = ({
 
           <div
             className={`${
-              location.pathname.includes(STUDENT_UPDATES_DETAILS_PROGRAM) &&
-              location.pathname.includes("dashboard")
+              location.pathname.includes(
+                entity === STUDENT
+                  ? STUDENT_UPDATES_DETAILS_PROGRAM
+                  : MENTOR_UPDATES_DETAILS_PROGRAM
+              ) && location.pathname.includes("dashboard")
                 ? "CurrentSelectedTab"
                 : "NotCurrentSelectedTab"
             } InvitationsLinkDiv`}
           >
             <Link
-              to={`${STUDENT_UPDATES_DETAILS_PROGRAM}/${programId}/dashboard`}
+              to={`${
+                entity === STUDENT
+                  ? STUDENT_UPDATES_DETAILS_PROGRAM
+                  : MENTOR_UPDATES_DETAILS_PROGRAM
+              }/${programId}/dashboard`}
               className="InvitationsLink Link"
             >
               {/* Only for Styling Purpose className is used Here */}
@@ -63,14 +83,21 @@ const StuUpdatesProgramDetailsCommon = ({
 
           <div
             className={`${
-              location.pathname.includes(STUDENT_UPDATES_DETAILS_PROGRAM) &&
-              location.pathname.includes("people")
+              location.pathname.includes(
+                entity === STUDENT
+                  ? STUDENT_UPDATES_DETAILS_PROGRAM
+                  : MENTOR_UPDATES_DETAILS_PROGRAM
+              ) && location.pathname.includes("people")
                 ? "CurrentSelectedTab"
                 : "NotCurrentSelectedTab"
             }`}
           >
             <Link
-              to={`${STUDENT_UPDATES_DETAILS_PROGRAM}/${programId}/people`}
+              to={`${
+                entity === STUDENT
+                  ? STUDENT_UPDATES_DETAILS_PROGRAM
+                  : MENTOR_UPDATES_DETAILS_PROGRAM
+              }/${programId}/people`}
               className="ApplicantsLink Link"
             >
               {/* Only for Styling Purpose className is used Here */}

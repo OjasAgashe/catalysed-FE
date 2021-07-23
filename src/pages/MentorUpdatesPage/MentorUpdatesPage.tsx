@@ -4,7 +4,7 @@ import StuUpdatesPageHeader from "../../components/StuUpdatesPageHeader/StuUpdat
 import StuUpdatesPrograms from "../../components/StuUpdatesPrograms/StuUpdatesPrograms";
 import { useQuery } from "../../custom_hooks/useQuery";
 
-const StudentUpdatesPage = () => {
+const MentorUpdatesPage = () => {
   const query = useQuery();
   const [view, setView] = useState(
     query.get("view") === "PROGRAMS"
@@ -74,24 +74,21 @@ const StudentUpdatesPage = () => {
   }, [view]);
 
   return (
-    <div className="StudentUpdatesPage Page">
-      <StuUpdatesPageHeader view={view} setView={setView} entity="STUDENT" />
+    <div className="MentorUpdatesPage Page">
+      <StuUpdatesPageHeader view={view} setView={setView} entity="MENTOR" />
 
       {view === "Programs" && (
-        <StuUpdatesPrograms
-          fakeProgramData={fakeProgramData}
-          entity="STUDENT"
-        />
+        <StuUpdatesPrograms fakeProgramData={fakeProgramData} entity="MENTOR" />
       )}
 
       {view === "Organisations" && (
         <StuUpdatesOrganisations
           fakeOrganisationData={fakeOrganisationData}
-          entity="STUDENT"
+          entity="MENTOR"
         />
       )}
     </div>
   );
 };
 
-export default StudentUpdatesPage;
+export default MentorUpdatesPage;

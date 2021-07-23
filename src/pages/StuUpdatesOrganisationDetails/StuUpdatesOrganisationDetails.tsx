@@ -17,6 +17,7 @@ const StuUpdatesOrganisationDetails = () => {
       <StuUpdatesOrganisationDetailsCommon
         organisationName="CatalysEd"
         organisationId={parseInt(organisationId)}
+        entity="STUDENT"
       />
 
       <StuUpdatesOrganisationDetailsInfo />

@@ -1,16 +1,16 @@
 import React, { useEffect, useReducer } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
+import OrgProgramDetails from "../../components/OrgProgramDetails/OrgProgramDetails";
 import StuUpdatesProgramDetailsCommon from "../../components/StuUpdatesProgramDetailsCommon/StuUpdatesProgramDetailsCommon";
-import StuUpdatesProgramPeopleDetails from "../../components/StuUpdatesProgramPeopleDetails/StuUpdatesProgramPeopleDetails";
 import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
-import { stuUpdatesProgramPeopleReducer } from "../../reducers/stuUpdatesProgramPeopleReducer";
+import { stuUpdatesProgramDetailsReducer } from "../../reducers/stuUpdatesProgramDetailsReducer";
 
-const StuUpdatesProgramPeople = () => {
-  const [state, dispatch] = useReducer(stuUpdatesProgramPeopleReducer, {
+const MentorUpdatesProgramDetails = () => {
+  const [state, dispatch] = useReducer(stuUpdatesProgramDetailsReducer, {
     loading: true,
     error: "",
-    programTitle: "",
+    responseData: null,
   });
 
   const { programId } = useParams<{ programId: string }>();
@@ -20,36 +20,31 @@ const StuUpdatesProgramPeople = () => {
   useEffect(() => {
     document.documentElement.scrollTop = 0;
 
-    document.title = "Connected Program People | CatalysEd";
+    document.title = "Connected Program Details | CatalysEd";
 
-    const getTitlePeopleDetails = async () => {
+    const getDetails = async () => {
       try {
         dispatch({ type: "error", payload: "" });
-        const programDetailsResponse = await getProgramDetails(
-          parseInt(programId)
-        );
 
-        dispatch({
-          type: "programTitle",
-          payload: programDetailsResponse.data.title,
-        });
+        const response = await getProgramDetails(parseInt(programId));
 
+        dispatch({ type: "responseData", payload: response.data });
         dispatch({ type: "loading", payload: false });
       } catch (error) {
         if (error.response.status === 404) {
           history.push("*");
         } else {
           dispatch({ type: "loading", payload: false });
-          dispatch({ type: "error", payload: "Sorry!! No Data Found" });
+          dispatch({ type: "error", payload: "Sorry!! No Details Found" });
         }
       }
     };
 
-    getTitlePeopleDetails();
+    getDetails();
   }, [getProgramDetails, history, programId]);
 
   return (
-    <div className="StuUpdatesProgramPeoplePage Page">
+    <div className="MentorUpdatesProgramDetailsPage Page">
       {state.loading && (
         <LoadingProgress
           loading={state.loading}
@@ -59,14 +54,14 @@ const StuUpdatesProgramPeople = () => {
       )}
 
       <StuUpdatesProgramDetailsCommon
-        programTitle={state.programTitle}
+        programTitle={state.responseData ? state.responseData.title : ""}
         programId={parseInt(programId)}
-        entity="STUDENT"
+        entity="MENTOR"
       />
 
-      <StuUpdatesProgramPeopleDetails />
+      <OrgProgramDetails state={state} />
     </div>
   );
 };
 
-export default StuUpdatesProgramPeople;
+export default MentorUpdatesProgramDetails;
