@@ -34,7 +34,9 @@
     MentorUpdatesOrganisationDetailsPage,
     MentorUpdatesOrganisationProgramsPage,
     MentorUpdatesProgramDetailsPage,
-    MentorUpdatesProgramPeoplePage
+    MentorUpdatesProgramPeoplePage,
+    MentorRegisterPage,
+    StudentRegisterPage
 */
 
 .Page {
@@ -44,7 +46,9 @@
 
 .OrgRegisterPage,
 .LoginPage,
-.StudentMentorRegisterPage {
+.StudentMentorRegisterPage,
+.MentorRegisterPage,
+.StudentRegisterPage {
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -146,14 +150,19 @@
     StuUpdatesOrganisationCard,
     StuUpdatesProgramPeopleDetails,
     StuUpdatesOrganisationProgramsDetails,
-    StuUpdatesOrganisationDetailsInfo
+    StuUpdatesOrganisationDetailsInfo,
+    MentorRegisterPage,
+    MentorRegister,
+    StudentRegister
 */
 
 .OrgRegisterUserForm,
 .OrgRegisterDetailsForm,
 .LoginForm,
 .StudentMentorRegisterBox,
-.CommonHomeForm {
+.CommonHomeForm,
+.MentorRegisterForm,
+.StudentRegisterForm {
   background-color: var(--white);
   padding: 1rem 1.5rem;
   border-radius: 5px;
@@ -182,7 +191,9 @@
 /* 
     Form Button of LoginForm, 
     OrgRegisterDetails, 
-    OrgRegisterUser 
+    OrgRegisterUser,
+    MentorRegister,
+    StudentRegister
 */
 
 .FormButtonContainer {
@@ -232,7 +243,9 @@
   .OrgRegisterUserForm,
   .OrgRegisterDetailsForm,
   .LoginForm,
-  .CommonHomeForm {
+  .CommonHomeForm,
+  .MentorRegisterForm,
+  .StudentRegisterForm {
     margin: 0 1rem;
   }
 }
@@ -241,7 +254,9 @@
   .OrgRegisterUserForm,
   .OrgRegisterDetailsForm,
   .LoginForm,
-  .CommonHomeForm {
+  .CommonHomeForm, 
+  .MentorRegisterForm,
+  .StudentRegisterForm {
     width: 29.25rem;
   }
 }

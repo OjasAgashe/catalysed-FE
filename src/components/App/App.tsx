@@ -32,6 +32,8 @@ import {
   MENTOR_UPDATES,
   MENTOR_UPDATES_DETAILS_ORGANISATION,
   MENTOR_UPDATES_DETAILS_PROGRAM,
+  MENTOR_REGISTER,
+  STUDENT_REGISTER,
 } from "../../constants/Routes";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -72,6 +74,8 @@ import MentorUpdatesOrganisationDetails from "../../pages/MentorUpdatesOrganisat
 import MentorUpdatesOrganisationPrograms from "../../pages/MentorUpdatesOrganisationDetails/MentorUpdatesOrganisationPrograms";
 import MentorUpdatesProgramDetails from "../../pages/MentorUpdatesProgramDetails/MentorUpdatesProgramDetails";
 import MentorUpdatesProgramPeople from "../../pages/MentorUpdatesProgramDetails/MentorUpdatesProgramPeople";
+import MentorRegisterPage from "../../pages/MentorRegisterPage/MentorRegisterPage";
+import StudentRegisterPage from "../../pages/StudentRegisterPage/StudentRegisterPage";
 
 function App() {
   return (
@@ -102,6 +106,10 @@ function App() {
               <MentorProfileBuilder />
             </ProfileBuilderProvider>
           </PrivateRoute>
+
+          <PublicRoute path={MENTOR_REGISTER} exact>
+            <MentorRegisterPage />
+          </PublicRoute>
 
           <PrivateRoute path={MENTOR_UPDATES} exact>
             <MentorUpdatesPage />
@@ -282,6 +290,10 @@ function App() {
               <StuProfileBuilder />
             </ProfileBuilderProvider>
           </PrivateRoute>
+
+          <PublicRoute path={STUDENT_REGISTER} exact>
+            <StudentRegisterPage />
+          </PublicRoute>
 
           <PrivateRoute path={STUDENT_UPDATES} exact>
             <StudentUpdatesPage />

@@ -1,0 +1,6 @@
+.MentorRegistrationText {
+  font-size: 2rem;
+  color: var(--blue-gray-500);
+  width: fit-content;
+  margin: 1rem auto;
+}
