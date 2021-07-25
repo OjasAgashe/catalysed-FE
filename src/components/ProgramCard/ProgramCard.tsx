@@ -7,8 +7,13 @@ import {
   HeaderBackground,
 } from "../../assets/Illustrations/Illustrations";
 import { useHistory } from "react-router";
-import { ORGANISATION_PROGRAM_DETAILS } from "../../constants/Routes";
+import {
+  MENTOR_SUGGESTED_PROGRAMS,
+  ORGANISATION_PROGRAM_DETAILS,
+  STUDENT_SUGGESTED_PROGRAMS,
+} from "../../constants/Routes";
 import { FiChevronsRight } from "react-icons/fi";
+import { useLocation } from "react-router-dom";
 
 type ProgramCardProps = {
   program: GetProgramMetaListData;
@@ -17,9 +22,22 @@ type ProgramCardProps = {
 
 const ProgramCard = ({ program, classNames = "" }: ProgramCardProps) => {
   const history = useHistory();
+  const location = useLocation();
 
   const handleCardProgramDetailsBtn = () => {
-    history.push(`${ORGANISATION_PROGRAM_DETAILS}/${program.id}/details`);
+    if (
+      location.pathname.includes(ORGANISATION_PROGRAM_DETAILS) &&
+      (location.pathname.includes("all") ||
+        location.pathname.includes("in_progress") ||
+        location.pathname.includes("this_month"))
+    )
+      history.push(`${ORGANISATION_PROGRAM_DETAILS}/${program.id}/details`);
+
+    if (location.pathname.includes(STUDENT_SUGGESTED_PROGRAMS))
+      history.push(`${STUDENT_SUGGESTED_PROGRAMS}/${program.id}/details`);
+
+    if (location.pathname.includes(MENTOR_SUGGESTED_PROGRAMS))
+      history.push(`${MENTOR_SUGGESTED_PROGRAMS}/${program.id}/details`);
   };
 
   return (

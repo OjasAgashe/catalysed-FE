@@ -1,7 +1,11 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { MENTOR_HOME, MENTOR_UPDATES } from "../../constants/Routes";
+import {
+  MENTOR_HOME,
+  MENTOR_SUGGESTED_PROGRAMS,
+  MENTOR_UPDATES,
+} from "../../constants/Routes";
 
 const MentorHomeHeader = () => {
   return (
@@ -21,6 +25,14 @@ const MentorHomeHeader = () => {
         eventKey="2"
       >
         Updates
+      </Nav.Link>
+      <Nav.Link
+        as={Link}
+        to={MENTOR_SUGGESTED_PROGRAMS}
+        className="NavbarCollapseNavItem"
+        eventKey="3"
+      >
+        Programs
       </Nav.Link>
     </>
   );

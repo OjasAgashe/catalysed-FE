@@ -35,6 +35,7 @@ import {
   MENTOR_REGISTER,
   STUDENT_REGISTER,
   STUDENT_SUGGESTED_PROGRAMS,
+  MENTOR_SUGGESTED_PROGRAMS,
 } from "../../constants/Routes";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -80,6 +81,9 @@ import StudentRegisterPage from "../../pages/StudentRegisterPage/StudentRegister
 import StuSuggestedProgramsPage from "../../pages/StuSuggestedProgramsPage/StuSuggestedProgramsPage";
 import StuSuggestedProgramDetails from "../../pages/StuSuggestedProgramDetails/StuSuggestedProgramDetails";
 import StuSuggestedProgramApplication from "../../pages/StuSuggestedProgramDetails/StuSuggestedProgramApplication";
+import MentorSuggestedProgramsPage from "../../pages/MentorSuggestedProgramsPage/MentorSuggestedProgramsPage";
+import MentorSuggestedProgramDetails from "../../pages/MentorSuggestedProgramDetails/MentorSuggestedProgramDetails";
+import MentorSuggestedProgramApplication from "../../pages/MentorSuggestedProgramDetails/MentorSuggestedProgramApplication";
 
 function App() {
   return (
@@ -114,6 +118,28 @@ function App() {
           <PublicRoute path={MENTOR_REGISTER} exact>
             <MentorRegisterPage />
           </PublicRoute>
+
+          <PrivateRoute path={MENTOR_SUGGESTED_PROGRAMS} exact>
+            <OrgAPIProvider>
+              <MentorSuggestedProgramsPage />
+            </OrgAPIProvider>
+          </PrivateRoute>
+
+          <PrivateRoute
+            path={`${MENTOR_SUGGESTED_PROGRAMS}/:programId/application`}
+            exact
+          >
+            <MentorSuggestedProgramApplication />
+          </PrivateRoute>
+
+          <PrivateRoute
+            path={`${MENTOR_SUGGESTED_PROGRAMS}/:programId/details`}
+            exact
+          >
+            <OrgAPIProvider>
+              <MentorSuggestedProgramDetails />
+            </OrgAPIProvider>
+          </PrivateRoute>
 
           <PrivateRoute path={MENTOR_UPDATES} exact>
             <MentorUpdatesPage />

@@ -39,7 +39,10 @@
     StudentRegisterPage,
     StuSuggestedProgramsPage,
     StuSuggestedProgramDetailsPage,
-    StuSuggestedProgramApplicationPage
+    StuSuggestedProgramApplicationPage,
+    MentorSuggestedProgramsPage,
+    MentorSuggestedProgramDetailsPage,
+    MentorSuggestedProgramApplicationPage
 */
 
 .Page {
@@ -505,7 +508,7 @@ input[type="number"] {
   .SectionTwo
   .SectionTwoFirstHalf
   .DataCard,
-  .StuSuggestedProgramApplicationFormContainer {
+.StuSuggestedProgramApplicationFormContainer {
   background-color: var(--white);
   padding: 1rem;
   box-shadow: 1px 1px 5px var(--blue-gray-300), -2px -2px 5px var(--white);

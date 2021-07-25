@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
+import React, { useState } from "react";
 import {
   GetProgramMetaListData,
   OrgViewSearchProgramActionType,
@@ -13,6 +12,7 @@ import ProgramCard from "../ProgramCard/ProgramCard";
 type StudentSuggestedProgramsProps = {
   state: OrgViewSearchProgramState;
   dispatch: React.Dispatch<OrgViewSearchProgramActionType>;
+  programsList: GetProgramMetaListData[];
 };
 
 /*
@@ -23,30 +23,11 @@ type StudentSuggestedProgramsProps = {
 const StudentSuggestedPrograms = ({
   state,
   dispatch,
+  programsList,
 }: StudentSuggestedProgramsProps) => {
-  const { getProgramsMetaList } = useOrgAPI();
-
-  const [programsList, setProgramsList] = useState<GetProgramMetaListData[]>(
-    []
-  );
-
   const [filteredProgramsList, setFilteredProgramsList] = useState<
     GetProgramMetaListData[]
   >([]);
-
-  useEffect(() => {
-    const getPrograms = async () => {
-      try {
-        const response = await getProgramsMetaList();
-        setProgramsList([...response.data]);
-      } catch (error) {
-      } finally {
-        dispatch({ type: "loading", payload: false });
-      }
-    };
-
-    getPrograms();
-  }, [dispatch, getProgramsMetaList]);
 
   return (
     <div className="OrgViewSearchProgram">

@@ -4,16 +4,22 @@ import "../OrgProgramDetailsCommon/OrgProgramDetailsCommon.css";
 import { Alert } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import { OrgEditProgramHeader } from "../../assets/Illustrations/Illustrations";
-import { STUDENT_SUGGESTED_PROGRAMS } from "../../constants/Routes";
+import {
+  MENTOR_SUGGESTED_PROGRAMS,
+  STUDENT_SUGGESTED_PROGRAMS,
+} from "../../constants/Routes";
+import { STUDENT } from "../../constants/Entities";
 
 type StuSuggestedProgramDetailsCommonProps = {
   programTitle: string;
   programId: number;
+  entity: string;
 };
 
 const StuSuggestedProgramDetailsCommon = ({
   programTitle,
   programId,
+  entity,
 }: StuSuggestedProgramDetailsCommonProps) => {
   const location = useLocation();
 
@@ -30,14 +36,21 @@ const StuSuggestedProgramDetailsCommon = ({
         <Alert variant="warning" className="ProgramDetailsRouteLinks">
           <div
             className={`${
-              location.pathname.includes(STUDENT_SUGGESTED_PROGRAMS) &&
-              location.pathname.includes("details")
+              location.pathname.includes(
+                entity === STUDENT
+                  ? STUDENT_SUGGESTED_PROGRAMS
+                  : MENTOR_SUGGESTED_PROGRAMS
+              ) && location.pathname.includes("details")
                 ? "CurrentSelectedTab"
                 : "NotCurrentSelectedTab"
             } ProgramDetailsLinkDiv`}
           >
             <Link
-              to={`${STUDENT_SUGGESTED_PROGRAMS}/${programId}/details`}
+              to={`${
+                entity === STUDENT
+                  ? STUDENT_SUGGESTED_PROGRAMS
+                  : MENTOR_SUGGESTED_PROGRAMS
+              }/${programId}/details`}
               className="ProgramDetailsLink Link"
             >
               {/* Only for Styling Purpose className is used Here */}
@@ -47,14 +60,21 @@ const StuSuggestedProgramDetailsCommon = ({
 
           <div
             className={`${
-              location.pathname.includes(STUDENT_SUGGESTED_PROGRAMS) &&
-              location.pathname.includes("application")
+              location.pathname.includes(
+                entity === STUDENT
+                  ? STUDENT_SUGGESTED_PROGRAMS
+                  : MENTOR_SUGGESTED_PROGRAMS
+              ) && location.pathname.includes("application")
                 ? "CurrentSelectedTab"
                 : "NotCurrentSelectedTab"
             }`}
           >
             <Link
-              to={`${STUDENT_SUGGESTED_PROGRAMS}/${programId}/application`}
+              to={`${
+                entity === STUDENT
+                  ? STUDENT_SUGGESTED_PROGRAMS
+                  : MENTOR_SUGGESTED_PROGRAMS
+              }/${programId}/application`}
               className="ApplicantsLink Link"
             >
               {/* Only for Styling Purpose className is used Here */}

@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import StuSuggestedProgramApplicationForm from "../../components/StuSuggestedProgramApplicationForm/StuSuggestedProgramApplicationForm";
+import MentorSuggestedProgramApplicationForm from "../../components/MentorSuggestedProgramApplicationForm/MentorSuggestedProgramApplicationForm";
 import StuSuggestedProgramDetailsCommon from "../../components/StuSuggestedProgramDetailsCommon/StuSuggestedProgramDetailsCommon";
 
-const StuSuggestedProgramApplication = () => {
+const MentorSuggestedProgramApplication = () => {
   const { programId } = useParams<{ programId: string }>();
 
   useEffect(() => {
@@ -13,16 +13,16 @@ const StuSuggestedProgramApplication = () => {
   }, []);
 
   return (
-    <div className="StuSuggestedProgramApplicationPage Page">
+    <div className="MentorSuggestedProgramApplicationPage Page">
       <StuSuggestedProgramDetailsCommon
-        programTitle="Program Title"
+        programTitle="ProgramTitle"
         programId={parseInt(programId)}
-        entity="STUDENT"
+        entity="MENTOR"
       />
 
-      <StuSuggestedProgramApplicationForm />
+      <MentorSuggestedProgramApplicationForm />
     </div>
   );
 };
 
-export default StuSuggestedProgramApplication;
+export default MentorSuggestedProgramApplication;

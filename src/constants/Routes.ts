@@ -3,6 +3,7 @@ export const LOGIN = "/app/login";
 export const MENTOR_HOME = "/app/mentor/home";
 export const MENTOR_PROFILE_BUILDER = "/app/mentor/profile/builder";
 export const MENTOR_REGISTER = "/app/mentor/register";
+export const MENTOR_SUGGESTED_PROGRAMS = "/app/mentor/suggested/programs";
 export const MENTOR_UPDATES = "/app/mentor/updates";
 export const MENTOR_UPDATES_DETAILS_ORGANISATION =
   "/app/mentor/updates/organisation";

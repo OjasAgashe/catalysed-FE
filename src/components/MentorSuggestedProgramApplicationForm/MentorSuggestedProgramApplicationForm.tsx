@@ -1,9 +1,9 @@
 import React from "react";
-import "./StuSuggestedProgramApplicationForm.css";
 import { GrSend } from "react-icons/gr";
-import ApplicationForm from "./ApplicationForm";
+import "../StuSuggestedProgramApplicationForm/StuSuggestedProgramApplicationForm.css";
+import ApplicationForm from "../StuSuggestedProgramApplicationForm/ApplicationForm";
 
-const StuSuggestedProgramApplicationForm = () => {
+const MentorSuggestedProgramApplicationForm = () => {
   return (
     <div className="StuSuggestedProgramApplicationComp">
       <ApplicationForm />
@@ -17,4 +17,4 @@ const StuSuggestedProgramApplicationForm = () => {
   );
 };
 
-export default StuSuggestedProgramApplicationForm;
+export default MentorSuggestedProgramApplicationForm;

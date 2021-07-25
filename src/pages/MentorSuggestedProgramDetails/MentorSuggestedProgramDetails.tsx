@@ -1,3 +1,8 @@
+/*
+    This page is the same as StuSuggestedProgramDetails Page,
+    Only API call is different
+*/
+
 import React, { useEffect, useReducer } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
@@ -6,7 +11,7 @@ import StuSuggestedProgramDetailsCommon from "../../components/StuSuggestedProgr
 import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
 import { stuUpdatesProgramDetailsReducer } from "../../reducers/stuUpdatesProgramDetailsReducer";
 
-const StuSuggestedProgramDetails = () => {
+const MentorSuggestedProgramDetails = () => {
   const [state, dispatch] = useReducer(stuUpdatesProgramDetailsReducer, {
     loading: true,
     error: "",
@@ -44,7 +49,7 @@ const StuSuggestedProgramDetails = () => {
   }, [getProgramDetails, history, programId]);
 
   return (
-    <div className="StuSuggestedProgramDetailsPage Page">
+    <div className="MentorSuggestedProgramDetailsPage Page">
       {state.loading && (
         <LoadingProgress
           loading={state.loading}
@@ -56,7 +61,7 @@ const StuSuggestedProgramDetails = () => {
       <StuSuggestedProgramDetailsCommon
         programTitle="Program Title"
         programId={parseInt(programId)}
-        entity="STUDENT"
+        entity="MENTOR"
       />
 
       <OrgProgramDetails state={state} />
@@ -64,4 +69,4 @@ const StuSuggestedProgramDetails = () => {
   );
 };
 
-export default StuSuggestedProgramDetails;
+export default MentorSuggestedProgramDetails;
