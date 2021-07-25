@@ -10,7 +10,7 @@ const StuUpdatesOrganisationPrograms = () => {
     document.documentElement.scrollTop = 0;
 
     document.title = "Connected Organisation Programs | CatalysEd";
-  });
+  }, []);
 
   return (
     <div className="StuUpdatesOrganisationProgramsPage Page">

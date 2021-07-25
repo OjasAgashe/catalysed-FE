@@ -1,0 +1,14 @@
+.StuSuggestedProgramDetailsCommonContainer {
+  background-size: cover;
+  background-position: center;
+}
+
+.StuSuggestedProgramDetailsCommonContainer .CommonProgramDetailsHeroText {
+  padding: 2rem 0 1rem 5rem !important;
+}
+
+.StuSuggestedProgramDetailsCommonContainer .CommonProgramDetailsHeroText span {
+  background-color: var(--floral-white);
+  padding: 0 0.5rem;
+  border-radius: 5px;
+}

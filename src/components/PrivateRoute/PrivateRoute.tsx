@@ -26,6 +26,7 @@ import {
   MENTOR_UPDATES,
   MENTOR_UPDATES_DETAILS_ORGANISATION,
   MENTOR_UPDATES_DETAILS_PROGRAM,
+  STUDENT_SUGGESTED_PROGRAMS,
 } from "../../constants/Routes";
 import MentorProfileBuilder from "../../pages/MentorProfileBuilder/MentorProfileBuilder";
 import OrgProfileBuilder from "../../pages/OrgProfileBuilder/OrgProfileBuilder";
@@ -99,6 +100,9 @@ const PrivateRoute = (props: {
           [
             STUDENT_HOME,
             STUDENT_DASHBOARD,
+            STUDENT_SUGGESTED_PROGRAMS,
+            `${STUDENT_SUGGESTED_PROGRAMS}/:programId/application`,
+            `${STUDENT_SUGGESTED_PROGRAMS}/:programId/details`,
             STUDENT_UPDATES,
             `${STUDENT_UPDATES_DETAILS_ORGANISATION}/:organisationId/details`,
             `${STUDENT_UPDATES_DETAILS_ORGANISATION}/:organisationId/programs`,

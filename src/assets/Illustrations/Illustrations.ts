@@ -16,6 +16,7 @@ import OrgDirectoryDetailsBoy from "./org_directory_details_boy.svg";
 import OrgDirectoryDetailsGirl from "./org_directory_details_girl.svg";
 import OrgDirectoryDetailsHeader from "./org_directory_details_header.jpg";
 import OrgEditProgramDetailsIllustration from "./org_edit_program_details_illustration.svg";
+import OrgEditProgramHeader from "./org_edit_program_header.jpg";
 import OrgHomeSectionOne from "./org_home_section_one.jpg";
 import OrgHomeInvitationsInfoCard from "./org_home_invitations_info_card.svg";
 import OrgHomeMentorInfoCard from "./org_home_mentor_info_card.svg";
@@ -26,6 +27,7 @@ import OrgProgramDetails from "./org_program_details.jpg";
 import OrgProgramDetailsDataIllustration from "./org_program_details_data_illustration.svg";
 import OrgViewAndSearchProgram from "./org_view_and_search_program.svg";
 import ProgramsApplicantsSummaryHeader from "./programs_applicants_summary_header.jpg";
+import StudentSuggestedProgramApplication from "./student_suggested_program_application.svg";
 import StudentUpdatesHeader from "./student_updates_header.jpg";
 import StudentUpdatesOrganisationProfileData from "./student_updates_organisation_profile_data.svg";
 import StudentUpdatesOrganisationSurvey from "./student_updates_organisation_survey.svg";
@@ -49,6 +51,7 @@ export {
   OrgDirectoryDetailsGirl,
   OrgDirectoryDetailsHeader,
   OrgEditProgramDetailsIllustration,
+  OrgEditProgramHeader,
   OrgHomeSectionOne,
   OrgHomeInvitationsInfoCard,
   OrgHomeMentorInfoCard,
@@ -59,6 +62,7 @@ export {
   OrgProgramDetailsDataIllustration,
   OrgViewAndSearchProgram,
   ProgramsApplicantsSummaryHeader,
+  StudentSuggestedProgramApplication,
   StudentUpdatesHeader,
   StudentUpdatesOrganisationProfileData,
   StudentUpdatesOrganisationSurvey,

@@ -11,7 +11,7 @@
 }
 
 .ViewAndSearchProgramIllustration {
-  max-width: 400px;
+  max-width: 350px;
   padding: 2rem 1rem 1rem;
   align-self: flex-end;
 }
@@ -84,6 +84,7 @@
 
 :is(.FilterCategorySelectGroup, .SortCategorySelectGroup):focus {
   outline: none !important;
+  box-shadow: none;
 }
 
 :is(.FilterCategorySelectGroup, .SortCategorySelectGroup):hover {

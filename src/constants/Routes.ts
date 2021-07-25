@@ -3,9 +3,10 @@ export const LOGIN = "/app/login";
 export const MENTOR_HOME = "/app/mentor/home";
 export const MENTOR_PROFILE_BUILDER = "/app/mentor/profile/builder";
 export const MENTOR_REGISTER = "/app/mentor/register";
-export const MENTOR_UPDATES = '/app/mentor/updates';
-export const MENTOR_UPDATES_DETAILS_ORGANISATION = '/app/mentor/updates/organisation';
-export const MENTOR_UPDATES_DETAILS_PROGRAM = '/app/mentor/updates/program';
+export const MENTOR_UPDATES = "/app/mentor/updates";
+export const MENTOR_UPDATES_DETAILS_ORGANISATION =
+  "/app/mentor/updates/organisation";
+export const MENTOR_UPDATES_DETAILS_PROGRAM = "/app/mentor/updates/program";
 export const ORGANISATION_APPLICANTS = "/app/organiser/applicants";
 export const ORGANISATION_DIRECTORY_DETAILS_MENTOR =
   "/app/organiser/directory/mentor";
@@ -27,6 +28,8 @@ export const STUDENT_DASHBOARD = "/app/student/dashboard";
 export const STUDENT_MENTOR_REGISTER = "/app/student-mentor/register";
 export const STUDENT_PROFILE_BUILDER = "/app/student/profile/builder";
 export const STUDENT_REGISTER = "/app/student/register";
+export const STUDENT_SUGGESTED_PROGRAMS = "/app/student/suggested/programs";
 export const STUDENT_UPDATES = "/app/student/updates";
-export const STUDENT_UPDATES_DETAILS_ORGANISATION = "/app/student/updates/organisation";
+export const STUDENT_UPDATES_DETAILS_ORGANISATION =
+  "/app/student/updates/organisation";
 export const STUDENT_UPDATES_DETAILS_PROGRAM = "/app/student/updates/program";

@@ -463,7 +463,7 @@ const FilterBar = ({
 
   return (
     <div>
-      <div className="OrgFilterBarText">View &amp; Search</div>
+      <div className="OrgFilterBarText">View and Search Programs</div>
       <FilterBarForm
         state={state}
         handleSearchedTitleChange={handleSearchedTitleChange}

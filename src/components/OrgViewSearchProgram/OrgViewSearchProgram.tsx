@@ -18,6 +18,11 @@ type OrgViewSearchProgramProps = {
   dispatch: React.Dispatch<OrgViewSearchProgramActionType>;
 };
 
+/*
+ * OrgViewSearchProgram: ({ state, dispatch, }: OrgViewSearchProgramProps) => JSX.Element
+ *
+ * Component accepts two props state, and dispatch
+ */
 const OrgViewSearchProgram = ({
   state,
   dispatch,
@@ -130,12 +135,12 @@ const OrgViewSearchProgram = ({
               ["Starting this Month", "On Going"].includes(
                 state.selectedRadioForFilterCategory
               ) ||
-              [
-                "Increasing Duration",
-                "Decreasing Duration",
-                "Newest to Oldest Date",
-                "Oldest to Newest Date",
-              ].includes(state.selectedRadioForSort)) &&
+              ["Increasing Duration", "Decreasing Duration"].includes(
+                state.selectedRadioForSort
+              ) ||
+              ["Newest to Oldest Date", "Oldest to Newest Date"].includes(
+                state.selectedRadioForDateSort
+              )) &&
             filteredProgramsList.length ? (
               [...filteredProgramsList]
                 .reverse()
@@ -159,12 +164,12 @@ const OrgViewSearchProgram = ({
             !["Starting this Month", "On Going"].includes(
               state.selectedRadioForFilterCategory
             ) &&
-            ![
-              "Increasing Duration",
-              "Decreasing Duration",
-              "Newest to Oldest Date",
-              "Oldest to Newest Date",
-            ].includes(state.selectedRadioForSort) &&
+            !["Increasing Duration", "Decreasing Duration"].includes(
+              state.selectedRadioForSort
+            ) &&
+            !["Newest to Oldest Date", "Oldest to Newest Date"].includes(
+              state.selectedRadioForDateSort
+            ) &&
             programsList.length
               ? [...programsList]
                   .reverse()

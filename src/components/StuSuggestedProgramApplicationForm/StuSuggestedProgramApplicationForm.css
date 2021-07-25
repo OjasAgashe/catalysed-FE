@@ -1,0 +1,63 @@
+.StuSuggestedProgramApplicationFormNImg {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap-reverse;
+  padding: 2rem;
+}
+
+.StuSuggestedProgramApplicationFormContainer {
+  width: 550px;
+}
+
+.StuSuggestedProgramApplicationForm .CreateProgramFormText {
+  font-weight: 600;
+  margin: 0.5rem;
+}
+
+.StuSuggestedProgramApplicationForm .CreateProgramFormControl:valid {
+  background-color: var(--blue-gray-100) !important;
+}
+
+.StuSuggestedProgramApplicationForm .CreateProgramFormControl {
+  border: none !important;
+  margin: 1.2rem auto;
+  color: var(--blue-gray-700) !important;
+  font-size: 1.05rem !important;
+  background-color: var(--blue-gray-100) !important;
+}
+
+.StuSuggestedProgramApplicationForm .AnswerTextArea {
+  resize: none !important;
+}
+
+.StuSuggestedProgramApplicationFormNImg .ImageContainer img {
+  max-width: 350px;
+  height: auto;
+  margin: 2rem 0;
+}
+
+.StuSuggestedProgramApplicationComp .ApplyBtnContainer {
+  text-align: center;
+  padding: 2rem;
+}
+
+.StuSuggestedProgramApplicationComp .ApplyBtnContainer .ApplyBtn {
+  border: 1px solid var(--light-blue-300);
+  background-color: var(--light-blue-300);
+  font-size: 1.1rem;
+  padding: 0.3rem 1rem;
+  border-radius: 5px;
+  color: var(--blue-gray-700);
+  font-weight: 600;
+}
+
+.StuSuggestedProgramApplicationComp .ApplyBtnContainer .ApplyBtn:hover {
+  box-shadow: 1px 1px 4px var(--blue-gray-500);
+}
+
+/* Overriding */
+
+.ApplyBtnContainer .ApplyBtn .GrIcon path {
+  stroke: var(--blue-gray-700);
+}

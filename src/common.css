@@ -36,7 +36,10 @@
     MentorUpdatesProgramDetailsPage,
     MentorUpdatesProgramPeoplePage,
     MentorRegisterPage,
-    StudentRegisterPage
+    StudentRegisterPage,
+    StuSuggestedProgramsPage,
+    StuSuggestedProgramDetailsPage,
+    StuSuggestedProgramApplicationPage
 */
 
 .Page {
@@ -153,7 +156,8 @@
     StuUpdatesOrganisationDetailsInfo,
     MentorRegisterPage,
     MentorRegister,
-    StudentRegister
+    StudentRegister,
+    StuSuggestedProgramApplicationForm
 */
 
 .OrgRegisterUserForm,
@@ -254,7 +258,7 @@
   .OrgRegisterUserForm,
   .OrgRegisterDetailsForm,
   .LoginForm,
-  .CommonHomeForm, 
+  .CommonHomeForm,
   .MentorRegisterForm,
   .StudentRegisterForm {
     width: 29.25rem;
@@ -471,7 +475,8 @@ input[type="number"] {
     OrgProfileEditSectionOne,
     OrgProfileEditSectionTwo,
     StuUpdateProgramPeopleDetails,
-    StuUpdatesOrganisationDetailsInfo
+    StuUpdatesOrganisationDetailsInfo,
+    StuSuggestedProgramApplicationForm
 */
 
 .GeneralDetailsFormContainer,
@@ -499,7 +504,8 @@ input[type="number"] {
 .StuUpdatesOrganisationDetailsInfoContainer
   .SectionTwo
   .SectionTwoFirstHalf
-  .DataCard {
+  .DataCard,
+  .StuSuggestedProgramApplicationFormContainer {
   background-color: var(--white);
   padding: 1rem;
   box-shadow: 1px 1px 5px var(--blue-gray-300), -2px -2px 5px var(--white);
@@ -523,7 +529,8 @@ input[type="number"] {
   .NameNContactDetailsContainer
   .CreateProgramFormText,
 .StuUpdatesOrganisationDetailsInfoContainer .SectionOne .CreateProgramFormText,
-.StuUpdatesOrganisationDetailsInfoContainer .SectionTwo .CreateProgramFormText {
+.StuUpdatesOrganisationDetailsInfoContainer .SectionTwo .CreateProgramFormText,
+.StuSuggestedProgramApplicationFormContainer .CreateProgramFormText {
   font-size: 1.1rem !important;
   margin-right: 1rem;
   color: var(--blue-gray-700);
