@@ -84,6 +84,8 @@ import StuSuggestedProgramApplication from "../../pages/StuSuggestedProgramDetai
 import MentorSuggestedProgramsPage from "../../pages/MentorSuggestedProgramsPage/MentorSuggestedProgramsPage";
 import MentorSuggestedProgramDetails from "../../pages/MentorSuggestedProgramDetails/MentorSuggestedProgramDetails";
 import MentorSuggestedProgramApplication from "../../pages/MentorSuggestedProgramDetails/MentorSuggestedProgramApplication";
+import { StudentAPIProvider } from "../../context/api_context/StudentAPIContext";
+import { MentorAPIProvider } from "../../context/api_context/MentorAPIContext";
 
 function App() {
   return (
@@ -129,7 +131,9 @@ function App() {
             path={`${MENTOR_SUGGESTED_PROGRAMS}/:programId/application`}
             exact
           >
-            <MentorSuggestedProgramApplication />
+            <MentorAPIProvider>
+              <MentorSuggestedProgramApplication />
+            </MentorAPIProvider>
           </PrivateRoute>
 
           <PrivateRoute
@@ -335,7 +339,9 @@ function App() {
             path={`${STUDENT_SUGGESTED_PROGRAMS}/:programId/application`}
             exact
           >
-            <StuSuggestedProgramApplication />
+            <StudentAPIProvider>
+              <StuSuggestedProgramApplication />
+            </StudentAPIProvider>
           </PrivateRoute>
 
           <PrivateRoute

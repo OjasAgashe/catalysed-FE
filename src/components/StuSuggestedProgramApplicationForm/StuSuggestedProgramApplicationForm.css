@@ -1,3 +1,7 @@
+.StuSuggestedProgramApplicationComp {
+  padding: 1rem;
+}
+
 .StuSuggestedProgramApplicationFormNImg {
   display: flex;
   justify-content: space-around;
@@ -60,4 +64,12 @@
 
 .ApplyBtnContainer .ApplyBtn .GrIcon path {
   stroke: var(--blue-gray-700);
+}
+
+/*  */
+
+.StuSuggestedApplicationErrorMessage {
+  margin: auto !important;
+  text-align: center;
+  width: fit-content;
 }

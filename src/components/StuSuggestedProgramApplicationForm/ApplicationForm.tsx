@@ -1,12 +1,41 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 import { StudentSuggestedProgramApplication } from "../../assets/Illustrations/Illustrations";
+import {
+  StuSuggestedProgramApplicationActionType,
+  StuSuggestedProgramApplicationState,
+} from "../../types/StuSuggestedProgramApplication";
 
-const ApplicationForm = () => {
+type ApplicationFormProps = {
+  state: StuSuggestedProgramApplicationState;
+  dispatch: React.Dispatch<StuSuggestedProgramApplicationActionType>;
+  answer: string;
+  setAnswer: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const ApplicationForm = ({
+  state,
+  dispatch,
+  answer,
+  setAnswer,
+}: ApplicationFormProps) => {
+  const handleAnswerInputChange: React.ChangeEventHandler<HTMLInputElement> = (
+    event
+  ) => {
+    if (state.validated) dispatch({ type: "validated", payload: false });
+    if (state.error) dispatch({ type: "error", payload: "" });
+
+    setAnswer(event.target.value);
+  };
+
   return (
     <div className="StuSuggestedProgramApplicationFormNImg">
       <div className="StuSuggestedProgramApplicationFormContainer">
-        <Form noValidate className="StuSuggestedProgramApplicationForm">
+        <Form
+          noValidate
+          validated={state.validated}
+          className="StuSuggestedProgramApplicationForm"
+        >
           <Form.Group>
             <Form.Text className="CreateProgramFormText">
               Why do you want to be part of the program ?
@@ -19,9 +48,11 @@ const ApplicationForm = () => {
               name="answer"
               placeholder="Your Answer..."
               className="AnswerTextArea CreateProgramFormControl"
+              value={answer}
+              onChange={handleAnswerInputChange}
             />
             <Form.Control.Feedback type="invalid">
-              Required field.
+              Required field, minimum 10 Characters
             </Form.Control.Feedback>
           </Form.Group>
         </Form>
