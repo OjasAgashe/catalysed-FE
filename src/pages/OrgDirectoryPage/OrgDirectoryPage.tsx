@@ -89,6 +89,10 @@ const OrgDirectoryPage = () => {
         /*
          * Before calling to API, we want to show loading progress.
          * So set loading to true
+         * 
+         * And we are doing this because API will get called each time
+         * the tab changes, and we will get all the current data that 
+         * we will have in our system
          */
         dispatch({ type: "loading", payload: true });
 

@@ -7,6 +7,17 @@ import OrgDirectoryDetailsStudentPersonalInfo from "../../components/OrgDirector
 import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
 import { orgDirectoryDetailsReducer } from "../../reducers/orgDirectoryDetailsReducer";
 
+/*
+ * The logic of this page is the same as OrgDirectoryMentorDetailsPage,
+ * the only difference is that,
+ *
+ * We are storing value of studentId from dynamic parameter of the URL
+ * (first difference)
+ *
+ * And we are using getSpecificConnectedStudent API to get the data of
+ * specific student (second difference)
+ */
+
 const OrgDirectoryStudentDetailsPage = () => {
   const [state, dispatch] = useReducer(orgDirectoryDetailsReducer, {
     choosedOption: "PersonalInfo",
@@ -15,8 +26,12 @@ const OrgDirectoryStudentDetailsPage = () => {
     error: "",
   });
 
+  // first difference
   const { studentId } = useParams<{ studentId: string }>();
+
   const history = useHistory();
+
+  // second difference
   const { getSpecificConnectedStudent } = useOrgAPI();
 
   useEffect(() => {
