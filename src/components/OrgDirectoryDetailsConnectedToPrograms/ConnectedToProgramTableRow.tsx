@@ -7,12 +7,25 @@ type ConnectedToProgramTableRowProps = {
   data: { programId: number; status: string; title: string };
 };
 
+/*
+ * ConnectedToProgramTableRow : component accepts data as the props
+ *
+ * This component will render Row of programs to which the participant (or applicant) is
+ * connected, and Each row will be clickable.
+ *
+ * When the Org will click on any row, then we will push it to the details page of that
+ * particular program
+ */
 const ConnectedToProgramTableRow = ({
   data,
 }: ConnectedToProgramTableRowProps) => {
   const history = useHistory();
 
   const handleProgramTableDataRow = () => {
+    /*
+     * When the Org will click on a row, then push the Org to the details page
+     * of that particular program
+     */
     history.push(`${ORGANISATION_PROGRAM_DETAILS}/${data.programId}/details`);
   };
 
