@@ -18,7 +18,7 @@ type OrgDirectoryDetailsStudentPersonalInfoProps = {
 };
 
 /*
- * OrgDirectoryDetailsPersonalInfo : component accepts two props,
+ * OrgDirectoryDetailsStudentPersonalInfo : component accepts two props,
  * 1) state : of OrgDirectoryStudentDetailsPage
  * 2) applicantState : of OrgSpecificStudentApplicantDetailsPage
  *
