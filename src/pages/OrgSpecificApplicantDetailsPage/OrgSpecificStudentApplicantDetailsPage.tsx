@@ -10,6 +10,13 @@ import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
 import { orgSpecificApplicantDetailsReducer } from "../../reducers/orgSpecificApplicantDetailsReducer";
 import "./OrgSpecificApplicantDetailsPage.css";
 
+/*
+ * The logic of this page is the same as OrgSpecificMentorApplicantDetailsPage,
+ * the only difference is that,
+ *
+ * We are using getSpecificStudentApplicantDetails API to get the data of
+ * specific student applicant
+ */
 const OrgSpecificStudentApplicantDetailsPage = () => {
   const [state, dispatch] = useReducer(orgSpecificApplicantDetailsReducer, {
     choosedOption: "Application",
@@ -23,6 +30,8 @@ const OrgSpecificStudentApplicantDetailsPage = () => {
   const { applicationId, programId } =
     useParams<{ applicationId: string; programId: string }>();
   const history = useHistory();
+
+  // difference
   const { getSpecificStudentApplicantDetails } = useOrgAPI();
 
   useEffect(() => {

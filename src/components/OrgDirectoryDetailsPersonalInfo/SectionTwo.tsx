@@ -8,6 +8,14 @@ type SectionTwoProps = {
   applicantState?: OrgSpecificApplicantDetailsState;
 };
 
+/*
+ * SectionTwo : component accepts state and applicantState as props
+ *
+ * In this we will show data according to state, when we will have value in
+ * state (means applicantState does not contain anything), and we will show
+ * data according to applicantState when we will have
+ * value in applicantState (means state does not contain anything)
+ */
 const SectionTwo = ({ state, applicantState }: SectionTwoProps) => {
   return (
     <div className="SectionTwo">
