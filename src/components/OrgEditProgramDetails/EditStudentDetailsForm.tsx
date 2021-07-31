@@ -36,7 +36,7 @@ const EditStudentDetailsForm = ({
 
       let value: string | boolean = event.target.value;
       if (event.target.name === "isPaid") {
-        value = editedData?.studentFields.isPaid ? false : true;
+        value = editedData?.studentFields?.isPaid ? false : true;
       }
 
       setEditedData(

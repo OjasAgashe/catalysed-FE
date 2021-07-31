@@ -13,12 +13,14 @@ type StuUpdatesApplicationsDataContainerProps = {
   state: StudentUpdatesCommonState;
   dispatch: React.Dispatch<StudentUpdatesCommonActionType>;
   values: StudentUpdatesCommonValues;
+  entity: string;
 };
 
 const StuUpdatesApplicationsDataContainer = ({
   state,
   dispatch,
   values,
+  entity
 }: StuUpdatesApplicationsDataContainerProps) => {
   const handleUpdatesApplicationsStatusDropdownSelect = (
     eventKey: string | null
@@ -186,6 +188,7 @@ const StuUpdatesApplicationsDataContainer = ({
                 <StuUpdatesApplicationsTableRow
                   data={data}
                   key={data.programId}
+                  entity={entity}
                 />
               ))
           ) : (
@@ -214,6 +217,7 @@ const StuUpdatesApplicationsDataContainer = ({
                 <StuUpdatesApplicationsTableRow
                   data={data}
                   key={data.programId}
+                  entity={entity}
                 />
               ))}
         </tbody>

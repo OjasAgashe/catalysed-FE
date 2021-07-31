@@ -6,6 +6,8 @@ export const MENTOR_PROFILE_EDIT = "/app/mentor/profile/edit";
 export const MENTOR_REGISTER = "/app/mentor/register";
 export const MENTOR_SUGGESTED_PROGRAMS = "/app/mentor/suggested/programs";
 export const MENTOR_UPDATES = "/app/mentor/updates";
+export const MENTOR_UPDATES_DETAILS_APPLICATION =
+  "/app/mentor/updates/application";
 export const MENTOR_UPDATES_DETAILS_ORGANISATION =
   "/app/mentor/updates/organisation";
 export const MENTOR_UPDATES_DETAILS_PROGRAM = "/app/mentor/updates/program";
@@ -32,6 +34,8 @@ export const STUDENT_PROFILE_EDIT = "/app/student/profile/edit";
 export const STUDENT_REGISTER = "/app/student/register";
 export const STUDENT_SUGGESTED_PROGRAMS = "/app/student/suggested/programs";
 export const STUDENT_UPDATES = "/app/student/updates";
+export const STUDENT_UPDATES_DETAILS_APPLICATION =
+  "/app/student/updates/application";
 export const STUDENT_UPDATES_DETAILS_ORGANISATION =
   "/app/student/updates/organisation";
 export const STUDENT_UPDATES_DETAILS_PROGRAM = "/app/student/updates/program";

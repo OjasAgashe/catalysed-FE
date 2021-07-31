@@ -90,17 +90,17 @@ const CreateProgramForm = ({ state, dispatch }: CreateProgramFormProps) => {
         answer.ageLimit.from,
         answer.ageLimit.to,
         answer.programLink,
-        answer.coordinator.name,
-        answer.coordinator.email,
-        answer.coordinator.contact.number,
-        answer.mentorFields.applyBy,
-        answer.mentorFields.generalInstructions,
-        answer.mentorFields.openings,
-        answer.mentorFields.subjectRequirements,
-        answer.studentFields.applyBy,
-        answer.studentFields.generalInstructions,
-        answer.studentFields.openings,
-        answer.studentFields.subjectRequirements,
+        answer?.coordinator?.name ?? "",
+        answer?.coordinator?.email ?? "",
+        answer?.coordinator?.contact?.number ?? "",
+        answer?.mentorFields?.applyBy ?? "",
+        answer?.mentorFields?.generalInstructions ?? "",
+        answer?.mentorFields?.openings ?? "",
+        answer?.mentorFields?.subjectRequirements ?? "",
+        answer?.studentFields?.applyBy ?? "",
+        answer?.studentFields?.generalInstructions ?? "",
+        answer?.studentFields?.openings ?? "",
+        answer?.studentFields?.subjectRequirements ?? "",
       ].includes("") === false
     );
   };
@@ -188,7 +188,7 @@ const CreateProgramForm = ({ state, dispatch }: CreateProgramFormProps) => {
      * code length is 4, so the length of the phone number should not be
      * less than equal to 4
      */
-    if (answer.coordinator.contact.number.length <= 4) {
+    if (answer?.coordinator && answer?.coordinator.contact.number.length <= 4) {
       dispatch({ type: "isInvalid", payload: true });
       return;
     }

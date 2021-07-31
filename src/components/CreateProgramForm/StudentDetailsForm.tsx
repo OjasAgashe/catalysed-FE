@@ -36,16 +36,16 @@ const StudentDetailsForm = ({
 
       let value: string | boolean = event.target.value;
       if (event.target.name === "isPaid") {
-        value = answer.studentFields.isPaid ? false : true;
+        value = answer?.studentFields?.isPaid ? false : true;
       }
 
-      setAnswer((prevState) => ({
+      setAnswer((prevState) : CreateProgramData => ({
         ...prevState,
         studentFields: {
           ...prevState.studentFields,
           [event.target.name]: value,
         },
-      }));
+      } as CreateProgramData));
     };
 
   const handleDatePickerChange: (
@@ -71,7 +71,7 @@ const StudentDetailsForm = ({
               (month as number) + 1
             }/${selected_date?.getFullYear()}`,
           },
-        })
+        } as CreateProgramData)
       );
     }
   };
@@ -103,7 +103,7 @@ const StudentDetailsForm = ({
             className="CreateProgramFormControl"
             name="subjectRequirements"
             placeholder="Subjects Required"
-            value={answer.studentFields.subjectRequirements}
+            value={answer?.studentFields?.subjectRequirements}
             onChange={handleStudentDetailsFormChange}
           />
           <Form.Control.Feedback type="invalid">
@@ -124,7 +124,7 @@ const StudentDetailsForm = ({
               placeholder="0"
               min={0}
               className="CreateProgramFormControl InlineFormControl"
-              value={answer.studentFields.openings}
+              value={answer?.studentFields?.openings}
               onChange={handleStudentDetailsFormChange}
             />
             <Form.Control.Feedback type="invalid">
@@ -138,12 +138,12 @@ const StudentDetailsForm = ({
               label="is Paid ?"
               type="checkbox"
               name="isPaid"
-              checked={answer.studentFields.isPaid}
+              checked={answer?.studentFields?.isPaid}
               onChange={handleStudentDetailsFormChange}
             />
           </Col>
 
-          {answer.studentFields.isPaid && (
+          {answer?.studentFields?.isPaid && (
             <Col className="CreateProgramStudentCol">
               <Form.Text className="CreateProgramFormText">
                 Fees:&nbsp;
@@ -155,7 +155,7 @@ const StudentDetailsForm = ({
                 placeholder="0"
                 min={0}
                 className="CreateProgramFormControl InlineFormControl"
-                value={answer.studentFields.programFees}
+                value={answer?.studentFields?.programFees}
                 onChange={handleStudentDetailsFormChange}
               />
             </Col>
@@ -176,7 +176,7 @@ const StudentDetailsForm = ({
             placeholderText="dd/mm/yyyy"
             className="form-control CreateProgramFormControl"
           />
-          {state.validated && answer.studentFields.applyBy === "" && (
+          {state.validated && answer?.studentFields?.applyBy === "" && (
             <FormControl.Feedback type="invalid" style={{ display: "block" }}>
               Required field.
             </FormControl.Feedback>
@@ -192,7 +192,7 @@ const StudentDetailsForm = ({
             name="generalInstructions"
             placeholder="General Instruction"
             className="GeneralInstructionTextArea CreateProgramFormControl"
-            value={answer.studentFields.generalInstructions}
+            value={answer?.studentFields?.generalInstructions}
             onChange={handleStudentDetailsFormChange}
           />
           <Form.Control.Feedback type="invalid">

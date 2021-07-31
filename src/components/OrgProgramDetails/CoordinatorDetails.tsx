@@ -16,12 +16,12 @@ const CoordinatorDetails = ({ state }: CoordinatorDetailsProps) => {
       <div className="CoordinatorProgramDetailsDataContainer">
         <div className="CNameDataContainer">
           <span className="CreateProgramFormText">Name&nbsp;:&nbsp;</span>
-          <span className="Data">{state.responseData?.coordinator.name}</span>
+          <span className="Data">{state.responseData?.coordinator?.name}</span>
         </div>
 
         <div className="CEmailDataContainer">
           <span className="CreateProgramFormText">Email&nbsp;:&nbsp;</span>
-          <span className="Data">{state.responseData?.coordinator.email}</span>
+          <span className="Data">{state.responseData?.coordinator?.email}</span>
         </div>
 
         <div className="CContactDataContainer">
@@ -29,7 +29,7 @@ const CoordinatorDetails = ({ state }: CoordinatorDetailsProps) => {
           <span>
             <ReactCountryFlag
               countryCode={getCode(
-                state.responseData?.coordinator.contact.countryName ?? ""
+                state.responseData?.coordinator?.contact.countryName ?? ""
               )}
               svg
               style={{
@@ -41,11 +41,11 @@ const CoordinatorDetails = ({ state }: CoordinatorDetailsProps) => {
             />
             &nbsp;&nbsp; +
             <span className="Data">
-              {state.responseData?.coordinator.contact.countryCode}
+              {state.responseData?.coordinator?.contact.countryCode}
             </span>
             &nbsp;
             <span className="Data">
-              {state.responseData?.coordinator.contact.number}
+              {state.responseData?.coordinator?.contact.number}
             </span>
           </span>
         </div>

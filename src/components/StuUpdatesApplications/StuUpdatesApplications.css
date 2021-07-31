@@ -1,0 +1,4 @@
+.UpdatesApplicationsTableDataRow:hover {
+  cursor: pointer;
+  box-shadow: 1px 0 10px var(--blue-gray-300);
+}

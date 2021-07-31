@@ -50,16 +50,21 @@ const OrgEditProgramDetails = ({
             break;
 
           case "coordinator":
-            let ckey: keyof CreateProgramData["coordinator"];
-
-            for (ckey in originalDataTemp.coordinator) {
+            let ckey: keyof CreateProgramData["coordinator"] | any;
+            for (ckey in originalDataTemp?.coordinator) {
               switch (ckey) {
                 case "contact":
-                  let cckey: keyof CreateProgramData["coordinator"]["contact"];
-                  for (cckey in originalDataTemp.coordinator.contact) {
+                  let cckey: keyof {
+                    countryName: string;
+                    countryCode: string;
+                    number: string;
+                  };
+                  for (cckey in originalDataTemp?.coordinator?.contact) {
                     if (
-                      originalDataTemp.coordinator.contact[cckey] !=
-                      editedDataTemp.coordinator.contact[cckey]
+                      originalDataTemp?.coordinator?.contact &&
+                      editedDataTemp?.coordinator?.contact &&
+                      originalDataTemp?.coordinator?.contact[cckey] !=
+                        editedDataTemp?.coordinator?.contact[cckey]
                     )
                       return true;
                   }
@@ -67,8 +72,14 @@ const OrgEditProgramDetails = ({
 
                 default:
                   if (
-                    originalDataTemp.coordinator[ckey] !=
-                    editedDataTemp.coordinator[ckey]
+                    originalDataTemp?.coordinator &&
+                    editedDataTemp?.coordinator &&
+                    originalDataTemp?.coordinator[
+                      ckey as keyof CreateProgramData["coordinator"]
+                    ] !=
+                      editedDataTemp?.coordinator[
+                        ckey as keyof CreateProgramData["coordinator"]
+                      ]
                   )
                     return true;
                   break;
@@ -77,24 +88,36 @@ const OrgEditProgramDetails = ({
             break;
 
           case "mentorFields":
-            let mkey: keyof CreateProgramData["mentorFields"];
+            let mkey: keyof CreateProgramData["mentorFields"] | string;
 
             for (mkey in originalDataTemp.mentorFields) {
               if (
-                originalDataTemp.mentorFields[mkey] !=
-                editedDataTemp.mentorFields[mkey]
+                originalDataTemp?.mentorFields &&
+                editedDataTemp?.mentorFields &&
+                originalDataTemp?.mentorFields[
+                  mkey as keyof CreateProgramData["mentorFields"]
+                ] !=
+                  editedDataTemp?.mentorFields[
+                    mkey as keyof CreateProgramData["mentorFields"]
+                  ]
               )
                 return true;
             }
             break;
 
           case "studentFields":
-            let skey: keyof CreateProgramData["studentFields"];
+            let skey: keyof CreateProgramData["studentFields"] | string;
 
             for (skey in originalDataTemp.studentFields) {
               if (
-                originalDataTemp.studentFields[skey] !=
-                editedDataTemp.studentFields[skey]
+                originalDataTemp?.studentFields &&
+                editedDataTemp?.studentFields &&
+                originalDataTemp?.studentFields[
+                  skey as keyof CreateProgramData["studentFields"]
+                ] !=
+                  editedDataTemp?.studentFields[
+                    skey as keyof CreateProgramData["studentFields"]
+                  ]
               )
                 return true;
             }

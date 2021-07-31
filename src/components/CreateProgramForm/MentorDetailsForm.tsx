@@ -27,13 +27,16 @@ const MentorDetailsForm = ({
       if (state.validated) dispatch({ type: "validated", payload: false });
       if (state.error) dispatch({ type: "error", payload: "" });
 
-      setAnswer((prevState) => ({
-        ...prevState,
-        mentorFields: {
-          ...prevState.mentorFields,
-          [event.target.name]: event.target.value,
-        },
-      }));
+      setAnswer(
+        (prevState): CreateProgramData =>
+          ({
+            ...prevState,
+            mentorFields: {
+              ...prevState.mentorFields,
+              [event.target.name]: event.target.value,
+            },
+          } as CreateProgramData)
+      );
     };
 
   const handleDatePickerChange: (
@@ -48,15 +51,16 @@ const MentorDetailsForm = ({
 
     if (month) {
       setAnswer(
-        (prevState): CreateProgramData => ({
-          ...prevState,
-          mentorFields: {
-            ...prevState.mentorFields,
-            applyBy: `${selected_date?.getDate()}/${
-              (month as number) + 1
-            }/${selected_date?.getFullYear()}`,
-          },
-        })
+        (prevState): CreateProgramData =>
+          ({
+            ...prevState,
+            mentorFields: {
+              ...prevState.mentorFields,
+              applyBy: `${selected_date?.getDate()}/${
+                (month as number) + 1
+              }/${selected_date?.getFullYear()}`,
+            },
+          } as CreateProgramData)
       );
     }
   };
@@ -88,7 +92,7 @@ const MentorDetailsForm = ({
             className="CreateProgramFormControl"
             name="subjectRequirements"
             placeholder="Subjects Required"
-            value={answer.mentorFields.subjectRequirements}
+            value={answer?.mentorFields?.subjectRequirements}
             onChange={handleMentorDetailsFormChange}
           />
           <Form.Control.Feedback type="invalid">
@@ -108,7 +112,7 @@ const MentorDetailsForm = ({
             placeholder="0"
             min={0}
             className="CreateProgramFormControl InlineFormControl"
-            value={answer.mentorFields.openings}
+            value={answer?.mentorFields?.openings}
             onChange={handleMentorDetailsFormChange}
           />
           <Form.Control.Feedback type="invalid">
@@ -130,7 +134,7 @@ const MentorDetailsForm = ({
             placeholderText="dd/mm/yyyy"
             className="form-control CreateProgramFormControl"
           />
-          {state.validated && answer.mentorFields.applyBy === "" && (
+          {state.validated && answer?.mentorFields?.applyBy === "" && (
             <FormControl.Feedback type="invalid" style={{ display: "block" }}>
               Required field.
             </FormControl.Feedback>
@@ -146,7 +150,7 @@ const MentorDetailsForm = ({
             name="generalInstructions"
             placeholder="General Instruction"
             className="GeneralInstructionTextArea CreateProgramFormControl"
-            value={answer.mentorFields.generalInstructions}
+            value={answer?.mentorFields?.generalInstructions}
             onChange={handleMentorDetailsFormChange}
           />
           <Form.Control.Feedback type="invalid">

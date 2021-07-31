@@ -8,6 +8,7 @@ import {
 import Error from "../Error/Error";
 import SearchBar from "./SearchBar";
 import StuUpdatesApplicationsDataContainer from "./StuUpdatesApplicationsDataContainer";
+import "./StuUpdatesApplications.css";
 
 type StuUpdatesApplicationsProps = {
   state: StudentUpdatesCommonState;
@@ -133,6 +134,7 @@ const StuUpdatesApplications = ({
               state={state}
               dispatch={dispatch}
               values={values}
+              entity={entity}
             />
           </>
         ) : (

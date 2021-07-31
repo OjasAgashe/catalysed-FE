@@ -1,17 +1,42 @@
 import React from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+import { MENTOR, STUDENT } from "../../constants/Entities";
+import {
+  MENTOR_UPDATES_DETAILS_APPLICATION,
+  STUDENT_UPDATES_DETAILS_APPLICATION,
+} from "../../constants/Routes";
 import { StudentUpdatesCommonResponse } from "../../types/StudentUpdates";
 
 type StuUpdatesApplicationsTableRowProps = {
   data: StudentUpdatesCommonResponse;
+  entity: string;
 };
 
 const StuUpdatesApplicationsTableRow = ({
   data,
+  entity,
 }: StuUpdatesApplicationsTableRowProps) => {
+  const history = useHistory();
+
+  const handleUpdatesApplicationsTableDataRow = () => {
+    if (entity === STUDENT) {
+      history.push(
+        `${STUDENT_UPDATES_DETAILS_APPLICATION}/${data.applicationId}/details`
+      );
+    } else if (entity === MENTOR) {
+      history.push(
+        `${MENTOR_UPDATES_DETAILS_APPLICATION}/${data.applicationId}/details`
+      );
+    }
+  };
+
   return (
     <>
-      <tr className="UpdatesApplicationsTableRow">
+      <tr
+        className="UpdatesApplicationsTableRow UpdatesApplicationsTableDataRow"
+        onClick={handleUpdatesApplicationsTableDataRow}
+      >
         <td className="UpdatesApplicationsTableData">
           <OverlayTrigger
             placement="bottom"

@@ -17,7 +17,7 @@ const MentorProgramDetails = ({ state }: MentorProgramDetailsProps) => {
           </div>
 
           <ul className="LanguagePreviewer">
-            {state.responseData?.mentorFields.subjectRequirements
+            {state.responseData?.mentorFields?.subjectRequirements
               .split(",")
               .map((subject, index) => (
                 <li key={index} className="LanguageLi">
@@ -32,7 +32,7 @@ const MentorProgramDetails = ({ state }: MentorProgramDetailsProps) => {
             Number of Openings&nbsp;:&nbsp;
           </span>
           <span className="Data">
-            {state.responseData?.mentorFields.openings}
+            {state.responseData?.mentorFields?.openings}
           </span>
         </div>
 
@@ -41,7 +41,7 @@ const MentorProgramDetails = ({ state }: MentorProgramDetailsProps) => {
             Apply by Date&nbsp;:&nbsp;
           </span>
           <span className="Data">
-            {state.responseData?.mentorFields.applyBy}
+            {state.responseData?.mentorFields?.applyBy}
           </span>
         </div>
 
@@ -50,7 +50,7 @@ const MentorProgramDetails = ({ state }: MentorProgramDetailsProps) => {
             General Instruction&nbsp;:&nbsp;
           </div>
           <div className="Data">
-            {state.responseData?.mentorFields.generalInstructions}
+            {state.responseData?.mentorFields?.generalInstructions}
           </div>
         </div>
       </div>

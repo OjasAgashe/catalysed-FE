@@ -34,13 +34,16 @@ const CoordinatorDetailsForm = ({
       if (state.isInvalid) dispatch({ type: "isInvalid", payload: false });
       if (state.error) dispatch({ type: "error", payload: "" });
 
-      setAnswer((prevState) => ({
-        ...prevState,
-        coordinator: {
-          ...prevState.coordinator,
-          [event.target.name]: event.target.value,
-        },
-      }));
+      setAnswer(
+        (prevState): CreateProgramData =>
+          ({
+            ...prevState,
+            coordinator: {
+              ...prevState.coordinator,
+              [event.target.name]: event.target.value,
+            },
+          } as CreateProgramData)
+      );
     };
 
   const handlePhoneInputChange = (
@@ -61,13 +64,13 @@ const CoordinatorDetailsForm = ({
       number: value.replace(`${countryInfo.dialCode}`, ""),
     };
 
-    setAnswer((prevState) => ({
+    setAnswer((prevState) : CreateProgramData => ({
       ...prevState,
       coordinator: {
         ...prevState.coordinator,
         contact,
       },
-    }));
+    } as CreateProgramData));
   };
 
   return (
@@ -84,7 +87,7 @@ const CoordinatorDetailsForm = ({
           className="CreateProgramFormControl"
           name="name"
           placeholder="Name"
-          value={answer.coordinator.name}
+          value={answer?.coordinator?.name}
           onChange={handleCoordinatorDetailsFormChange}
           isInvalid={state.isInvalid}
         />
@@ -95,7 +98,7 @@ const CoordinatorDetailsForm = ({
           className="CreateProgramFormControl"
           name="email"
           placeholder="Email"
-          value={answer.coordinator.email}
+          value={answer?.coordinator?.email}
           onChange={handleCoordinatorDetailsFormChange}
           isInvalid={state.isInvalid}
         />

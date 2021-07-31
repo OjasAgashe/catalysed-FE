@@ -13,7 +13,7 @@ export interface CreateProgramData {
     name: string;
     email: string;
     contact: { countryName: string; countryCode: string; number: string };
-  };
+  } | null;
   studentFields: {
     subjectRequirements: string;
     openings: string;
@@ -21,13 +21,13 @@ export interface CreateProgramData {
     isPaid: boolean;
     programFees: string;
     generalInstructions: string;
-  };
+  } | null;
   mentorFields: {
     subjectRequirements: string;
     openings: string;
     applyBy: string;
     generalInstructions: string;
-  };
+  } | null;
 }
 
 export interface CreateProgramState {

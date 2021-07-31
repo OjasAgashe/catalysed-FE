@@ -16,7 +16,7 @@ const StudentProgramDetails = ({ state }: StudentProgramDetailsProps) => {
           </div>
 
           <ul className="LanguagePreviewer">
-            {state.responseData?.studentFields.subjectRequirements
+            {state.responseData?.studentFields?.subjectRequirements
               .split(",")
               .map((subject, index) => (
                 <li key={index} className="LanguageLi">
@@ -31,13 +31,13 @@ const StudentProgramDetails = ({ state }: StudentProgramDetailsProps) => {
             Number of Openings&nbsp;:&nbsp;
           </span>
           <span className="Data">
-            {state.responseData?.studentFields.openings}
+            {state.responseData?.studentFields?.openings}
           </span>
 
           <span className="SProgramFeesDataContainer">
             <span className="CreateProgramFormText FeesText">Fees&nbsp;:&nbsp;</span>
             <span className="Data">
-              {state.responseData?.studentFields.programFees}
+              {state.responseData?.studentFields?.programFees}
             </span>
           </span>
         </div>
@@ -47,7 +47,7 @@ const StudentProgramDetails = ({ state }: StudentProgramDetailsProps) => {
             Apply by Date&nbsp;:&nbsp;
           </span>
           <span className="Data">
-            {state.responseData?.studentFields.applyBy}
+            {state.responseData?.studentFields?.applyBy}
           </span>
         </div>
 
@@ -56,7 +56,7 @@ const StudentProgramDetails = ({ state }: StudentProgramDetailsProps) => {
             General Instruction&nbsp;:&nbsp;
           </div>
           <div className="Data">
-            {state.responseData?.studentFields.generalInstructions}
+            {state.responseData?.studentFields?.generalInstructions}
           </div>
         </div>
       </div>

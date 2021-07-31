@@ -1,3 +1,5 @@
+import { CreateProgramData } from "./CreateProgram";
+
 export interface StudentUpdatesCommonResponse {
   programId: number;
   programName: string;
@@ -54,3 +56,33 @@ export interface StudentUpdatesCommonValues {
     obj2: StudentUpdatesCommonResponse
   ) => 1 | -1;
 }
+
+export interface StudentUpdatesApplicationDetailsResponse {
+  applicationId: number;
+  status: string;
+  appliedOn: string;
+  applicationResponses:
+    | {
+        responseNumber: number;
+        question: string;
+        answer: string;
+      }[]
+    | null;
+  programDetails: CreateProgramData | null;
+}
+
+export interface StudentUpdatesApplicationDetailsState {
+  choosedOption: string;
+  responseData: StudentUpdatesApplicationDetailsResponse | null;
+  loading: boolean;
+  error: string;
+}
+
+export type StudentUpdatesApplicationDetailsActionType =
+  | { type: "choosedOption"; payload: string }
+  | {
+      type: "responseData";
+      payload: StudentUpdatesApplicationDetailsResponse | null;
+    }
+  | { type: "loading"; payload: boolean }
+  | { type: "error"; payload: string };
