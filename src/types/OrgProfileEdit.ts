@@ -27,6 +27,7 @@ export interface OrgProfileEditState {
   loading: boolean;
   loadingMessage: string;
   error: string;
+  putCallError: string;
   validated: boolean;
   phoneValueIsInvalid: boolean;
   socialLinkIsInvalid: boolean;
@@ -44,6 +45,7 @@ export type OrgProfileEditActionType =
   | { type: "loading"; payload: boolean }
   | { type: "loadingMessage"; payload: string }
   | { type: "error"; payload: string }
+  | { type: "putCallError"; payload: string }
   | { type: "validated"; payload: boolean }
   | { type: "phoneValueIsInvalid"; payload: boolean }
   | { type: "socialLinkIsInvalid"; payload: boolean }

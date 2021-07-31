@@ -5,12 +5,15 @@ import OrgProfileEditSectionContainer from "../../components/OrgProfileEditSecti
 import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
 import { orgProfileEditReducer } from "../../reducers/orgProfileEditReducer";
 import { OrgProfileEditData } from "../../types/OrgProfileEdit";
+import Error from "../../components/Error/Error";
+import "./OrgProfileEdit.css";
 
 const OrgProfileEdit = () => {
   const [state, dispatch] = useReducer(orgProfileEditReducer, {
     loading: true,
     loadingMessage: "",
     error: "",
+    putCallError: "",
     validated: false,
     phoneValueIsInvalid: false,
     socialLinkIsInvalid: false,
@@ -73,12 +76,18 @@ const OrgProfileEdit = () => {
 
       <OrgProfileCommonHeader textToShow="Manage Your Profile" />
 
-      <OrgProfileEditSectionContainer
-        state={state}
-        dispatch={dispatch}
-        editedData={editedData}
-        setEditedData={setEditedData}
-      />
+      {state.responseData === null ? (
+        <div className="ErrorDiv">
+          <Error message={state.error} />
+        </div>
+      ) : (
+        <OrgProfileEditSectionContainer
+          state={state}
+          dispatch={dispatch}
+          editedData={editedData}
+          setEditedData={setEditedData}
+        />
+      )}
     </div>
   );
 };

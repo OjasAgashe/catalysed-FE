@@ -1,12 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import "./OrgProfileEditSectionContainer.css";
 
-import SectionOne from "./SectionOne";
-import SectionTwo from "./SectionTwo";
-
-import { MdCancel } from "react-icons/md";
-import { FaSave } from "react-icons/fa";
-import LeavePageModal from "../LeavePageModal/LeavePageModal";
 import { useHistory, useLocation } from "react-router-dom";
 import {
   OrgProfileEditActionType,
@@ -14,6 +8,7 @@ import {
   OrgProfileEditState,
 } from "../../types/OrgProfileEdit";
 import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
+import OrgProfileEditSectionContainerFragment from "./OrgProfileEditSectionContainerFragment";
 
 type OrgProfileEditSectionContainerProps = {
   state: OrgProfileEditState;
@@ -133,6 +128,31 @@ const OrgProfileEditSectionContainer = ({
     );
   };
 
+  const makeAPICall = async (data: OrgProfileEditData) => {
+    try {
+      document.documentElement.scrollTop = 0;
+
+      dispatch({ type: "loadingMessage", payload: "Saving Changes Done..." });
+      dispatch({ type: "putCallError", payload: "" });
+
+      await putOrganisationProfile(data);
+
+      dispatch({ type: "loadingMessage", payload: "" });
+      dispatch({ type: "dataHasChanged", payload: false });
+      dispatch({ type: "responseData", payload: editedData });
+      document.documentElement.scrollTop = 200;
+    } catch (error) {
+      document.documentElement.scrollTop =
+        document.documentElement.scrollHeight;
+
+      dispatch({ type: "loadingMessage", payload: "" });
+      dispatch({
+        type: "putCallError",
+        payload: error.response?.data?.message ?? "",
+      });
+    }
+  };
+
   const handleOrgProfileEditSaveBtn = () => {
     if (state.validated === false)
       dispatch({ type: "validated", payload: true });
@@ -170,34 +190,10 @@ const OrgProfileEditSectionContainer = ({
       return;
     } else {
       let baseURLPresent = false;
-      let code = "";
 
       for (let index = 0; index < possibleSocialBaseURL.length; index++) {
         let baseURL = possibleSocialBaseURL[index];
-
         if (editedData?.organizationDetails.socialMediaLink.includes(baseURL)) {
-          switch (index) {
-            case 0:
-            case 4:
-              code = "TWITTER";
-              break;
-
-            case 1:
-            case 5:
-              code = "LINKED_IN";
-              break;
-
-            case 2:
-            case 6:
-              code = "FACEBOOK";
-              break;
-
-            case 3:
-            case 7:
-              code = "INSTAGRAM";
-              break;
-          }
-
           baseURLPresent = true;
           break;
         }
@@ -207,17 +203,6 @@ const OrgProfileEditSectionContainer = ({
         dispatch({ type: "socialLinkIsInvalid", payload: true });
         document.documentElement.scrollTop = 100;
         return;
-      } else {
-        setEditedData(
-          (prevState): OrgProfileEditData =>
-            ({
-              ...prevState,
-              organizationDetails: {
-                ...prevState?.organizationDetails,
-                socialMediaCode: code,
-              },
-            } as OrgProfileEditData)
-        );
       }
     }
 
@@ -237,7 +222,7 @@ const OrgProfileEditSectionContainer = ({
     }
 
     if (canMakeAPICall()) {
-      console.log("Edited Profile", editedData);
+      makeAPICall(editedData as OrgProfileEditData);
     } else {
       document.documentElement.scrollTop = 100;
     }
@@ -261,49 +246,19 @@ const OrgProfileEditSectionContainer = ({
 
   return (
     <div className="OrgProfileEditSectionContainer">
-      {state.showModal && (
-        <LeavePageModal
-          handleLeavePageModalLeaveBtn={handleLeavePageModalLeaveBtn}
-          handleLeavePageModalStayBtn={handleLeavePageModalStayBtn}
-        />
-      )}
-
-      <SectionOne
-        editedData={editedData}
-        setEditedData={setEditedData}
+      <OrgProfileEditSectionContainerFragment
+        handleOrgProfileEditSaveBtn={handleOrgProfileEditSaveBtn}
+        handleOrgProfileEditDiscardChangesBtn={
+          handleOrgProfileEditDiscardChangesBtn
+        }
+        handleLeavePageModalLeaveBtn={handleLeavePageModalLeaveBtn}
+        handleLeavePageModalStayBtn={handleLeavePageModalStayBtn}
         state={state}
         dispatch={dispatch}
-      />
-
-      <SectionTwo
         editedData={editedData}
         setEditedData={setEditedData}
-        state={state}
-        dispatch={dispatch}
+        possibleSocialBaseURL={possibleSocialBaseURL}
       />
-
-      <div className="OrgProfileEditBtnContainer">
-        <button
-          disabled={!state.dataHasChanged}
-          className={`OrgProfileEditSaveBtn Btn ${
-            state.dataHasChanged ? "" : "EditOrgProfileDetailsDisabledField"
-          }`}
-          onClick={handleOrgProfileEditSaveBtn}
-        >
-          Save
-          <FaSave className="OrgProfileEditSaveBtnIcon" />
-        </button>
-        <button
-          disabled={!state.dataHasChanged}
-          className={`OrgProfileEditDiscardChangesBtn Btn ${
-            state.dataHasChanged ? "" : "EditOrgProfileDetailsDisabledField"
-          }`}
-          onClick={handleOrgProfileEditDiscardChangesBtn}
-        >
-          Discard Changes
-          <MdCancel className="OrgProfileEditDiscardChangesBtnIcon" />
-        </button>
-      </div>
     </div>
   );
 };
