@@ -46,11 +46,7 @@ const StuUpdatesApplicationStatusInfo = ({
           </div>
         </div>
 
-        <div
-          className={`${
-            state?.responseData?.status !== "PENDING" ? "MarginBottom" : ""
-          }`}
-        >
+        <div className="MarginBottom">
           {state?.responseData &&
             state?.responseData?.applicationResponses &&
             state?.responseData?.applicationResponses.map((response) => (

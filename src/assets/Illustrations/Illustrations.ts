@@ -8,6 +8,7 @@ import CreateProgramIllustration from "./create_program_illustration.svg";
 import FooterBackground from "./footer-background.webp";
 import HeaderBackground from "./header-background.webp";
 import Logo from "./logo.png";
+import MentorRegisterIllustration from "./mentor_register.svg";
 import OrgApplicationStatusApproved from "./org_application_status_approved.png";
 import OrgApplicationStatusPending from "./org_application_status_pending.png";
 import OrgApplicationStatusRejected from "./org_application_status_rejected.png";
@@ -27,6 +28,7 @@ import OrgProgramDetails from "./org_program_details.jpg";
 import OrgProgramDetailsDataIllustration from "./org_program_details_data_illustration.svg";
 import OrgViewAndSearchProgram from "./org_view_and_search_program.svg";
 import ProgramsApplicantsSummaryHeader from "./programs_applicants_summary_header.jpg";
+import StudentRegisterIllustration from "./student_register.svg";
 import StudentSuggestedProgramApplication from "./student_suggested_program_application.svg";
 import StudentUpdatesHeader from "./student_updates_header.jpg";
 import StudentUpdatesOrganisationProfileData from "./student_updates_organisation_profile_data.svg";
@@ -43,6 +45,7 @@ export {
   FooterBackground,
   HeaderBackground,
   Logo,
+  MentorRegisterIllustration,
   OrgApplicationStatusApproved,
   OrgApplicationStatusPending,
   OrgApplicationStatusRejected,
@@ -62,6 +65,7 @@ export {
   OrgProgramDetailsDataIllustration,
   OrgViewAndSearchProgram,
   ProgramsApplicantsSummaryHeader,
+  StudentRegisterIllustration,
   StudentSuggestedProgramApplication,
   StudentUpdatesHeader,
   StudentUpdatesOrganisationProfileData,

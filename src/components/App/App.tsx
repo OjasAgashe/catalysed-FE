@@ -39,6 +39,7 @@ import {
   STUDENT_PROFILE_EDIT,
   MENTOR_PROFILE_EDIT,
   STUDENT_UPDATES_DETAILS_APPLICATION,
+  MENTOR_UPDATES_DETAILS_APPLICATION,
 } from "../../constants/Routes";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -92,6 +93,7 @@ import { MentorAPIProvider } from "../../context/api_context/MentorAPIContext";
 import StudentProfileEdit from "../../pages/StudentProfileEdit/StudentProfileEdit";
 import MentorProfileEdit from "../../pages/MentorProfileEdit/MentorProfileEdit";
 import StuUpdatesApplicationDetails from "../../pages/StuUpdatesApplicationDetails/StuUpdatesApplicationDetails";
+import MentorUpdatesApplicationDetails from "../../pages/MentorUpdatesApplicationDetails/MentorUpdatesApplicationDetails";
 
 function App() {
   return (
@@ -158,6 +160,15 @@ function App() {
           <PrivateRoute path={MENTOR_UPDATES} exact>
             <MentorAPIProvider>
               <MentorUpdatesPage />
+            </MentorAPIProvider>
+          </PrivateRoute>
+
+          <PrivateRoute
+            path={`${MENTOR_UPDATES_DETAILS_APPLICATION}/:applicationId/details`}
+            exact
+          >
+            <MentorAPIProvider>
+              <MentorUpdatesApplicationDetails />
             </MentorAPIProvider>
           </PrivateRoute>
 

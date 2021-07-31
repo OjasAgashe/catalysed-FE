@@ -1,12 +1,21 @@
-import React from 'react'
-import MentorRegisterForm from './MentorRegisterForm'
+import React from "react";
+import { MentorRegisterIllustration } from "../../assets/Illustrations/Illustrations";
+import MentorRegisterForm from "./MentorRegisterForm";
+import "./MentorRegister.css";
 
 const MentorRegister = () => {
-    return (
-        <div className="MentorRegister">
-            <MentorRegisterForm />
-        </div>
-    )
-}
+  return (
+    <div className="MentorRegister">
+      <div className="ImageContainer">
+        <img
+          src={MentorRegisterIllustration}
+          alt="mentor register illustration"
+        />
+      </div>
 
-export default MentorRegister
+      <MentorRegisterForm />
+    </div>
+  );
+};
+
+export default MentorRegister;

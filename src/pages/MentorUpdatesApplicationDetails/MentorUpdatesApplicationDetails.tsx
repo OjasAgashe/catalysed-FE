@@ -1,15 +1,16 @@
 import React, { useEffect, useReducer } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
-import { useStudentAPI } from "../../context/api_context/StudentAPIContext";
 import { stuUpdatesApplicationDetailsReducer } from "../../reducers/stuUpdatesApplicationDetailsReducer";
 import Error from "../../components/Error/Error";
-import "./StuUpdatesApplicationDetails.css";
+
 import OrgProgramDetails from "../../components/OrgProgramDetails/OrgProgramDetails";
 import StuUpdatesApplicationDetailsHeader from "../../components/StuUpdatesApplicationDetailsHeader/StuUpdatesApplicationDetailsHeader";
 import StuUpdatesApplicationStatusInfo from "../../components/StuUpdatesApplicationStatusInfo/StuUpdatesApplicationStatusInfo";
+import { useMentorAPI } from "../../context/api_context/MentorAPIContext";
+import "./MentorUpdatesApplicationDetails.css";
 
-const StuUpdatesApplicationDetails = () => {
+const MentorUpdatesApplicationDetails = () => {
   const [state, dispatch] = useReducer(stuUpdatesApplicationDetailsReducer, {
     choosedOption: "Application",
     responseData: null,
@@ -19,7 +20,7 @@ const StuUpdatesApplicationDetails = () => {
 
   const { applicationId } = useParams<{ applicationId: string }>();
   const history = useHistory();
-  const { getSpecificFilledApplicationDetails } = useStudentAPI();
+  const { getSpecificFilledApplicationDetails } = useMentorAPI();
 
   useEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -57,7 +58,7 @@ const StuUpdatesApplicationDetails = () => {
   ]);
 
   return (
-    <div className="StuUpdatesApplicationDetailsPage Page">
+    <div className="MentorUpdatesApplicationDetailsPage Page">
       {state.loading && (
         <LoadingProgress
           loading={state.loading}
@@ -97,4 +98,4 @@ const StuUpdatesApplicationDetails = () => {
   );
 };
 
-export default StuUpdatesApplicationDetails;
+export default MentorUpdatesApplicationDetails;

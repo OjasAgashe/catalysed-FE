@@ -1,0 +1,17 @@
+.MentorRegister {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding: 2rem;
+}
+
+.MentorRegister .ImageContainer {
+  margin: 1rem;
+}
+
+.MentorRegister img {
+  max-width: 350px;
+  height: auto;
+}

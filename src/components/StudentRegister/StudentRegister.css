@@ -1,0 +1,17 @@
+.StudentRegister {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding: 2rem;
+}
+
+.StudentRegister .ImageContainer {
+  margin: 1rem;
+}
+
+.StudentRegister img {
+  max-width: 300px;
+  height: auto;
+}
