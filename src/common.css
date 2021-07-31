@@ -42,7 +42,9 @@
     StuSuggestedProgramApplicationPage,
     MentorSuggestedProgramsPage,
     MentorSuggestedProgramDetailsPage,
-    MentorSuggestedProgramApplicationPage
+    MentorSuggestedProgramApplicationPage,
+    StudentProfileEdit,
+    MentorProfileEdit
 */
 
 .Page {
@@ -160,7 +162,8 @@
     MentorRegisterPage,
     MentorRegister,
     StudentRegister,
-    StuSuggestedProgramApplicationForm
+    StuSuggestedProgramApplicationForm,
+    StuUpdatesApplications
 */
 
 .OrgRegisterUserForm,
@@ -694,7 +697,8 @@ input[type="number"] {
 .MentorOrStudentText .MentorOptDiv,
 .OrgSpecificApplicantDetailsOption
   :is(.OrgSpecificApplicantApplicationOpt, .OrgSpecificApplicantPIOpt),
-.StuUpdatesProgramsOrOrganisationsOpt .StuUpdatesProgramsOpt {
+.StuUpdatesProgramsOrOrganisationsOpt
+  :is(.StuUpdatesProgramsOpt, .StuUpdatesOrganisationsOpt) {
   border-right: 2px solid !important;
 }
 
@@ -721,7 +725,8 @@ input[type="number"] {
   OrgApplicantsPageDetails,
   OrgSpecificApplicantApplicationDetails,
   StuUpdatesProgramPeopleDetails,
-  StuUpdatesOrganisationProgramsDetails
+  StuUpdatesOrganisationProgramsDetails,
+  StuUpdatesApplications
 */
 
 .OrgProgramInvitationDetails,
@@ -729,7 +734,8 @@ input[type="number"] {
 .OrgApplicantsPageDetails,
 .OrgSpecificApplicantApplicationDetailsContainer,
 .StuUpdatesProgramPeopleDetails,
-.StuUpdatesOrganisationProgramsDetails {
+.StuUpdatesOrganisationProgramsDetails,
+.StuUpdatesApplicationsDetails {
   max-width: 1200px;
   margin: auto;
   padding: 2rem;
@@ -739,12 +745,13 @@ input[type="number"] {
 .OrgProgramApplicantDetailsContainer,
 .OrgApplicantsPageDetailsContainer,
 .StuUpdatesProgramPeopleDetailsContainer,
-.StuUpdatesOrganisationProgramsDetailsContainer {
+.StuUpdatesOrganisationProgramsDetailsContainer,
+.StuUpdatesApplicationsDetailsContainer {
   background-color: var(--white);
   padding: 1rem;
 }
 
-.ProgramFilterSortDropdown .btn {
+:is(.ProgramFilterSortDropdown, .UpdatesApplicationsFilterSortDropdown) .btn {
   background-color: inherit !important;
   border: none;
   color: var(--blue-gray-700) !important;
@@ -753,23 +760,25 @@ input[type="number"] {
   padding: 0 !important;
 }
 
-.ProgramFilterSortDropdown .btn:focus {
+:is(.ProgramFilterSortDropdown, .UpdatesApplicationsFilterSortDropdown) .btn:focus {
   box-shadow: none !important;
 }
 
-.ProgramFilterSortDropdown .dropdown-menu {
+:is(.ProgramFilterSortDropdown, .UpdatesApplicationsFilterSortDropdown) .dropdown-menu {
   min-width: fit-content;
 }
 
 .ProgramInvitationTableRow,
-.ProgramApplicantTableRow {
+.ProgramApplicantTableRow,
+.UpdatesApplicationsTableRow {
   text-align: left !important;
   padding-left: 1.5rem !important;
 }
 
 .ProgramInvitationHeader,
 .ProgramApplicantHeader,
-.OrgApplicantsTableHeader {
+.OrgApplicantsTableHeader,
+.UpdatesApplicationsHeader {
   font-size: 1.1rem !important;
   color: var(--blue-gray-700) !important;
   border-top: 2px solid var(--blue-gray-500) !important;
@@ -782,7 +791,8 @@ input[type="number"] {
 }
 
 .ProgramInvitationTableData,
-.ProgramApplicantTableData {
+.ProgramApplicantTableData,
+.UpdatesApplicationsTableData {
   font-size: 1.1rem !important;
   padding: 0.5rem !important;
   max-width: 8rem !important;
@@ -790,20 +800,20 @@ input[type="number"] {
   padding-left: 1.5rem !important;
 }
 
-:is(.ProgramInvitationHeader, .ProgramApplicantHeader).NumericalHeaderColumn,
-:is(.ProgramInvitationTableData, .ProgramApplicantTableData).NumericalColumn {
+:is(.ProgramInvitationHeader, .ProgramApplicantHeader, .UpdatesApplicationsHeader).NumericalHeaderColumn,
+:is(.ProgramInvitationTableData, .ProgramApplicantTableData, .UpdatesApplicationsTableData).NumericalColumn {
   text-align: center !important;
   padding-right: 0 !important;
   padding-left: 0.5rem !important;
 }
 
-:is(.OrgInvitationSearchBar, .OrgProgramApplicantSearchBar)
-  :is(.OrgInvitationSearchFromControl, .OrgProgramApplicantSearchFormControl):valid {
+:is(.OrgInvitationSearchBar, .OrgProgramApplicantSearchBar, .StuUpdatesApplicationsSearchBar)
+  :is(.OrgInvitationSearchFromControl, .OrgProgramApplicantSearchFormControl, .StuUpdatesApplicationsSearchFormControl):valid {
   background-color: var(--blue-gray-100) !important;
 }
 
-:is(.OrgInvitationSearchBar, .OrgProgramApplicantSearchBar)
-  :is(.OrgInvitationSearchFromControl, .OrgProgramApplicantSearchFormControl) {
+:is(.OrgInvitationSearchBar, .OrgProgramApplicantSearchBar, .StuUpdatesApplicationsSearchBar)
+  :is(.OrgInvitationSearchFromControl, .OrgProgramApplicantSearchFormControl, .StuUpdatesApplicationsSearchFormControl) {
   border: 1px solid var(--blue-gray-300) !important;
   max-width: 22rem;
   margin: 1rem 0;
@@ -812,7 +822,7 @@ input[type="number"] {
   background-color: var(--blue-gray-100) !important;
 }
 
-:is(.OrgProgramInvitationDetails, .OrgProgramApplicantDetails, .OrgApplicantsPageDetails)
+:is(.OrgProgramInvitationDetails, .OrgProgramApplicantDetails, .OrgApplicantsPageDetails, .StuUpdatesApplicationsDetails)
   .ErrorCompContainer {
   width: fit-content;
   margin: auto;

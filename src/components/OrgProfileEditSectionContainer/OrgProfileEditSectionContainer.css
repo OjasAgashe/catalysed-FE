@@ -134,3 +134,22 @@
 .SectionTwoSecondHalf .SectionTwoFormControl {
   margin-bottom: 0.57rem;
 }
+
+/*  */
+
+.SectionTwoSecondHalf .react-tel-input .form-control {
+  width: inherit !important;
+  border: none !important;
+  margin: 1.2rem auto;
+  color: var(--blue-gray-700) !important;
+  font-size: 1.05rem !important;
+  background-color: var(--blue-gray-100) !important;
+}
+
+.SectionTwoSecondHalf .react-tel-input .flag-dropdown {
+  left: 1px !important;
+}
+
+.SectionTwoSecondHalf .PhoneInputControl {
+  display: none;
+}

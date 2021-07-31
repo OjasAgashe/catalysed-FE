@@ -8,6 +8,10 @@ interface StudentAPIProviderReturns {
     data: StuSuggestedProgramApplicationData,
     programId: number
   ) => Promise<AxiosResponse<any>>;
+  getAllFilledApplicationsDetails: () => Promise<AxiosResponse<any>>;
+  getSpecificFilledApplicationDetails: (
+    applicationId: number
+  ) => Promise<AxiosResponse<any>>;
 }
 
 const StudentAPIContext = React.createContext<StudentAPIProviderReturns | null>(
@@ -45,8 +49,29 @@ export const StudentAPIProvider: React.FC<React.ReactNode> = (props) => {
     );
   };
 
+  const getAllFilledApplicationsDetails = () => {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.get(`/students/${catalysedId}/applications`, {
+      headers: { Authorization: `Bearer ${catalysedToken}` },
+    });
+  };
+
+  const getSpecificFilledApplicationDetails = (applicationId: number) => {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.get(
+      `students/${catalysedId}/applications/${applicationId}`,
+      { headers: { Authorization: `Bearer ${catalysedToken}` } }
+    );
+  };
+
   const values = {
     postCreateApplication,
+    getAllFilledApplicationsDetails,
+    getSpecificFilledApplicationDetails,
   };
 
   return (

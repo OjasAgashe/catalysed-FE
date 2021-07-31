@@ -1,74 +1,45 @@
 import React from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { OrgProfileManagePersonalInfo } from "../../assets/Illustrations/Illustrations";
+import {
+  OrgProfileEditActionType,
+  OrgProfileEditData,
+  OrgProfileEditState,
+} from "../../types/OrgProfileEdit";
 
 type SectionOneProps = {
-  fakeData: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    organisation: {
-      name: string;
-      description: string;
-      social_link: string;
-      website_link: string;
-      area_of_work: string;
-      contact: {
-        phone: string;
-        email: string;
-      };
-      year_of_inception: string;
-      address: {
-        country: string;
-        region: string;
-      };
-      primary_language: string;
-    };
-  };
-
-  setFakeData: React.Dispatch<
-    React.SetStateAction<{
-      firstName: string;
-      lastName: string;
-      email: string;
-      organisation: {
-        name: string;
-        description: string;
-        social_link: string;
-        website_link: string;
-        area_of_work: string;
-        contact: {
-          phone: string;
-          email: string;
-        };
-        year_of_inception: string;
-        address: {
-          country: string;
-          region: string;
-        };
-        primary_language: string;
-      };
-    }>
+  editedData: OrgProfileEditData | null;
+  setEditedData: React.Dispatch<
+    React.SetStateAction<OrgProfileEditData | null>
   >;
-
-  validated: boolean;
-  setValidated: React.Dispatch<React.SetStateAction<boolean>>;
+  state: OrgProfileEditState;
+  dispatch: React.Dispatch<OrgProfileEditActionType>;
 };
 
 const SectionOne = ({
-  fakeData,
-  setFakeData,
-  validated,
-  setValidated,
+  editedData,
+  setEditedData,
+  state,
+  dispatch,
 }: SectionOneProps) => {
   const handleOrgEditProfileChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
-      if (validated) setValidated(false);
+      if (state.validated) dispatch({ type: "validated", payload: false });
+      if (state.phoneValueIsInvalid)
+        dispatch({ type: "phoneValueIsInvalid", payload: false });
 
-      setFakeData((prevState) => ({
-        ...prevState,
-        [event.target.name]: event.target.value,
-      }));
+      if (state.socialLinkIsInvalid)
+        dispatch({ type: "socialLinkIsInvalid", payload: false });
+      if (state.websiteLinkIsInvalid)
+        dispatch({ type: "websiteLinkIsInvalid", payload: false });
+
+      setEditedData(
+        (prevState): OrgProfileEditData =>
+          ({
+            ...prevState,
+            [event.target.name]: event.target.value,
+          } as OrgProfileEditData)
+      );
     };
 
   return (
@@ -78,7 +49,7 @@ const SectionOne = ({
       </div>
 
       <div className="SectionOneSecondHalf">
-        <Form noValidate validated={validated}>
+        <Form noValidate validated={state.validated}>
           <Form.Text className="FormDetailsText">User Details</Form.Text>
 
           <Row className="SectionOneRow">
@@ -92,7 +63,7 @@ const SectionOne = ({
                 type="text"
                 placeholder="Type..."
                 className="SectionOneFormControl"
-                value={fakeData.firstName}
+                value={editedData?.firstName}
                 onChange={handleOrgEditProfileChange}
               />
               <Form.Control.Feedback type="invalid">
@@ -109,7 +80,7 @@ const SectionOne = ({
                 type="text"
                 placeholder="Type..."
                 className="SectionOneFormControl"
-                value={fakeData.lastName}
+                value={editedData?.lastName}
                 onChange={handleOrgEditProfileChange}
               />
               <Form.Control.Feedback type="invalid">
@@ -126,7 +97,7 @@ const SectionOne = ({
             <Form.Control
               className="SectionOneFormControl EditOrgProfileDetailsDisabledField"
               disabled
-              value={fakeData.email}
+              value={editedData?.email}
             />
           </Form.Group>
         </Form>

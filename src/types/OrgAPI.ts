@@ -1,5 +1,6 @@
 import { AxiosResponse } from "axios";
 import { CreateProgramData } from "./CreateProgram";
+import { OrgProfileEditData } from "./OrgProfileEdit";
 import { OrgInvitationPostData } from "./OrgProgramDetails";
 import { OrgSpecificApplicantDetailsResponse } from "./OrgSpecificApplicantDetails";
 
@@ -54,4 +55,6 @@ export interface OrgAPIProviderReturns {
     data: OrgSpecificApplicantDetailsResponse,
     status: string
   ): Promise<AxiosResponse<any>>;
+  getOrganisationProfile(): Promise<AxiosResponse<any>>;
+  putOrganisationProfile(data: OrgProfileEditData): Promise<AxiosResponse<any>>;
 }

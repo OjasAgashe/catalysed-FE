@@ -1,0 +1,9 @@
+.OrgProfileEditSectionTwo .SectionTwoFormCheck {
+  color: var(--blue-gray-700) !important;
+  font-size: 1.05rem !important;
+  padding: 0.5rem !important;
+}
+
+.OrgProfileEditSectionTwo .GenderFormGroup {
+  margin-bottom: 1.5rem;
+}

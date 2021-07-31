@@ -6,6 +6,7 @@ import { GetProgramMetaListData } from "../../types/OrgViewSearchProgram";
 import { OrgInvitationPostData } from "../../types/OrgProgramDetails";
 import { OrgAPIProviderReturns } from "../../types/OrgAPI";
 import { OrgSpecificApplicantDetailsResponse } from "../../types/OrgSpecificApplicantDetails";
+import { OrgProfileEditData } from "../../types/OrgProfileEdit";
 
 const OrgAPIContext = React.createContext<OrgAPIProviderReturns | null>(null);
 
@@ -305,6 +306,24 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     );
   }
 
+  function getOrganisationProfile() {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.get(`organizations/${catalysedId}/profile`, {
+      headers: { Authorization: `Bearer ${catalysedToken}` },
+    });
+  }
+
+  function putOrganisationProfile(data: OrgProfileEditData) {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.put(`organizations/${catalysedId}/profile`, data, {
+      headers: { Authorization: `Bearer ${catalysedToken}` },
+    });
+  }
+
   const values = {
     postCreateProgramCall,
     getProgramsMetaList,
@@ -326,6 +345,8 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     getSpecificMentorApplicantDetails,
     putSpecificApplicantDetailsAsViewed,
     putStatusOfSpecificApplicantDetails,
+    getOrganisationProfile,
+    putOrganisationProfile,
   };
 
   return (

@@ -1,210 +1,220 @@
 import React from "react";
 import { Col, Form, Row } from "react-bootstrap";
+import {
+  OrgProfileEditActionType,
+  OrgProfileEditData,
+  OrgProfileEditState,
+} from "../../types/OrgProfileEdit";
+
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/material.css";
 
 type SectionTwoProps = {
-  fakeData: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    organisation: {
-      name: string;
-      description: string;
-      social_link: string;
-      website_link: string;
-      area_of_work: string;
-      contact: {
-        phone: string;
-        email: string;
-      };
-      year_of_inception: string;
-      address: {
-        country: string;
-        region: string;
-      };
-      primary_language: string;
-    };
-  };
-
-  setFakeData: React.Dispatch<
-    React.SetStateAction<{
-      firstName: string;
-      lastName: string;
-      email: string;
-      organisation: {
-        name: string;
-        description: string;
-        social_link: string;
-        website_link: string;
-        area_of_work: string;
-        contact: {
-          phone: string;
-          email: string;
-        };
-        year_of_inception: string;
-        address: {
-          country: string;
-          region: string;
-        };
-        primary_language: string;
-      };
-    }>
+  editedData: OrgProfileEditData | null;
+  setEditedData: React.Dispatch<
+    React.SetStateAction<OrgProfileEditData | null>
   >;
+  state: OrgProfileEditState;
+  dispatch: React.Dispatch<OrgProfileEditActionType>;
+};
 
-  validated: boolean;
-  setValidated: React.Dispatch<React.SetStateAction<boolean>>;
-
-  socialLinkIsInvalid: boolean;
-  setSocialLinkIsInvalid: React.Dispatch<React.SetStateAction<boolean>>;
-  websiteLinkIsInvalid: boolean;
-  setWebsiteLinkIsInvalid: React.Dispatch<React.SetStateAction<boolean>>;
+type CountryData = {
+  name: string;
+  countryCode: string;
+  dialCode: string;
+  format: string;
 };
 
 const SectionTwo = ({
-  fakeData,
-  setFakeData,
-  validated,
-  setValidated,
-  socialLinkIsInvalid,
-  setSocialLinkIsInvalid,
-  websiteLinkIsInvalid,
-  setWebsiteLinkIsInvalid,
+  editedData,
+  setEditedData,
+  state,
+  dispatch,
 }: SectionTwoProps) => {
   const handleOrgEditProfileChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
-      if (validated) setValidated(false);
-      if (socialLinkIsInvalid) setSocialLinkIsInvalid(false);
-      if (websiteLinkIsInvalid) setWebsiteLinkIsInvalid(false);
+      if (state.validated) dispatch({ type: "validated", payload: false });
+      if (state.phoneValueIsInvalid)
+        dispatch({ type: "phoneValueIsInvalid", payload: false });
+
+      if (state.socialLinkIsInvalid)
+        dispatch({ type: "socialLinkIsInvalid", payload: false });
+      if (state.websiteLinkIsInvalid)
+        dispatch({ type: "websiteLinkIsInvalid", payload: false });
 
       if (
-        event.target.name === "year_of_inception" &&
+        event.target.name === "yearOfInception" &&
         event.target.value.length > 4
       ) {
         return;
       }
 
-      setFakeData((prevState) => ({
-        ...prevState,
-        organisation: {
-          ...prevState.organisation,
-          [event.target.name]: event.target.value,
-        },
-      }));
+      setEditedData(
+        (prevState): OrgProfileEditData =>
+          ({
+            ...prevState,
+            organizationDetails: {
+              ...prevState?.organizationDetails,
+              [event.target.name]: event.target.value,
+            },
+          } as OrgProfileEditData)
+      );
     };
 
-  const handleOrgEditProfileContactChange: React.ChangeEventHandler<HTMLInputElement> =
-    (event) => {
-      if (validated) setValidated(false);
+  // const handleOrgEditProfileContactChange: React.ChangeEventHandler<HTMLInputElement> =
+  //   (event) => {
+  //     if (state.validated) dispatch({ type: "validated", payload: false });
 
-      setFakeData((prevState) => ({
-        ...prevState,
-        organisation: {
-          ...prevState.organisation,
-          contact: {
-            ...prevState.organisation.contact,
-            [event.target.name]: event.target.value,
+  //     setEditedData((prevState): OrgProfileEditData => ({
+  //       ...prevState,
+  //       organizationDetails: {
+  //         ...prevState.organisation,
+  //         contact: {
+  //           ...prevState.organisation.contact,
+  //           [event.target.name]: event.target.value,
+  //         },
+  //       },
+  //     }));
+  //   };
+
+  const handlePhoneInputChange = (
+    value: string,
+    country: {} | CountryData,
+    event: React.ChangeEvent<HTMLInputElement>,
+    formattedValue: string
+  ) => {
+    if (state.validated) dispatch({ type: "validated", payload: false });
+    if (state.phoneValueIsInvalid)
+      dispatch({ type: "phoneValueIsInvalid", payload: false });
+
+    if (state.socialLinkIsInvalid)
+      dispatch({ type: "socialLinkIsInvalid", payload: false });
+    if (state.websiteLinkIsInvalid)
+      dispatch({ type: "websiteLinkIsInvalid", payload: false });
+
+    dispatch({ type: "phoneValue", payload: value });
+
+    const countryInfo = country as CountryData;
+    const phone = {
+      countryName: countryInfo.name,
+      countryCode: "+" + countryInfo.dialCode,
+      number: value.replace(`${countryInfo.dialCode}`, ""),
+    };
+
+    setEditedData(
+      (prevState): OrgProfileEditData =>
+        ({
+          ...prevState,
+          organizationDetails: {
+            ...prevState?.organizationDetails,
+            phone,
           },
-        },
-      }));
-    };
+        } as OrgProfileEditData)
+    );
+  };
 
   const handleOrgEditProfileAddressChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
-      if (validated) setValidated(false);
+      if (state.validated) dispatch({ type: "validated", payload: false });
 
-      setFakeData((prevState) => ({
-        ...prevState,
-        organisation: {
-          ...prevState.organisation,
-          address: {
-            ...prevState.organisation.address,
-            [event.target.name]: event.target.value,
-          },
-        },
-      }));
+      setEditedData(
+        (prevState): OrgProfileEditData =>
+          ({
+            ...prevState,
+            organizationDetails: {
+              ...prevState?.organizationDetails,
+              address: {
+                ...prevState?.organizationDetails.address,
+                [event.target.name]: event.target.value,
+              },
+            },
+          } as OrgProfileEditData)
+      );
     };
 
   return (
     <section className="OrgProfileEditSectionTwo">
       <div className="SectionTwoFirstHalf">
-        <Form noValidate validated={validated}>
+        <Form noValidate validated={state.validated}>
           <Form.Text className="FormDetailsText">
             Organization Details
-            <Form.Group>
-              <Form.Text className="SectionTwoFormTextLabel EditOrgProfileDetailsDisabledField">
-                name
-              </Form.Text>
-
-              <Form.Control
-                className="SectionTwoFormControl EditOrgProfileDetailsDisabledField"
-                disabled
-                value={fakeData.organisation.name}
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Text className="SectionTwoFormTextLabel">
-                description
-              </Form.Text>
-
-              <Form.Control
-                required
-                name="description"
-                as="textarea"
-                rows={3}
-                minLength={10}
-                placeholder="Write About Your Organisation"
-                className="SectionTwoFormControl SectionTwoTextArea"
-                value={fakeData.organisation.description}
-                onChange={handleOrgEditProfileChange}
-              />
-              <Form.Control.Feedback type="invalid" className="InvalidFeedback">
-                Organisation description is required (and must have atleast 10
-                characters).
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group>
-              <Form.Text className="SectionTwoFormTextLabel">
-                social link
-              </Form.Text>
-
-              <Form.Control
-                required
-                name="social_link"
-                type="url"
-                placeholder="Enter URL..."
-                className="SectionTwoFormControl"
-                value={fakeData.organisation.social_link}
-                onChange={handleOrgEditProfileChange}
-                isInvalid={socialLinkIsInvalid}
-              />
-              <Form.Control.Feedback type="invalid" className="InvalidFeedback">
-                Required field, enter Valid Link.
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group>
-              <Form.Text className="SectionTwoFormTextLabel">
-                website link
-              </Form.Text>
-
-              <Form.Control
-                required
-                name="website_link"
-                type="url"
-                placeholder="Enter URL..."
-                className="SectionTwoFormControl"
-                value={fakeData.organisation.website_link}
-                onChange={handleOrgEditProfileChange}
-                isInvalid={websiteLinkIsInvalid}
-              />
-              <Form.Control.Feedback type="invalid" className="InvalidFeedback">
-                Required field, enter Valid Link.
-              </Form.Control.Feedback>
-            </Form.Group>
           </Form.Text>
+          <Form.Group>
+            <Form.Text className="SectionTwoFormTextLabel EditOrgProfileDetailsDisabledField">
+              name
+            </Form.Text>
+
+            <Form.Control
+              className="SectionTwoFormControl EditOrgProfileDetailsDisabledField"
+              disabled
+              value={editedData?.organizationDetails.name}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Text className="SectionTwoFormTextLabel">
+              description
+            </Form.Text>
+
+            <Form.Control
+              required
+              name="description"
+              as="textarea"
+              rows={3}
+              minLength={10}
+              placeholder="Write About Your Organisation"
+              className="SectionTwoFormControl SectionTwoTextArea"
+              value={editedData?.organizationDetails.description}
+              onChange={handleOrgEditProfileChange}
+            />
+            <Form.Control.Feedback type="invalid" className="InvalidFeedback">
+              Organisation description is required (and must have atleast 10
+              characters).
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group>
+            <Form.Text className="SectionTwoFormTextLabel">
+              social link
+            </Form.Text>
+
+            <Form.Control
+              required
+              name="socialMediaLink"
+              type="url"
+              placeholder="Enter URL..."
+              className="SectionTwoFormControl"
+              value={editedData?.organizationDetails.socialMediaLink}
+              onChange={handleOrgEditProfileChange}
+              isInvalid={state.socialLinkIsInvalid}
+            />
+            <Form.Control.Feedback type="invalid" className="InvalidFeedback">
+              Required field, enter Valid Link (only Twitter, LinkedIn,
+              Facebook, Instagram).
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group>
+            <Form.Text className="SectionTwoFormTextLabel">
+              website link
+            </Form.Text>
+
+            <Form.Control
+              required
+              name="website"
+              type="url"
+              placeholder="Enter URL..."
+              className="SectionTwoFormControl"
+              value={editedData?.organizationDetails.website}
+              onChange={handleOrgEditProfileChange}
+              isInvalid={state.websiteLinkIsInvalid}
+            />
+            <Form.Control.Feedback type="invalid" className="InvalidFeedback">
+              Required field, enter Valid Link.
+            </Form.Control.Feedback>
+          </Form.Group>
         </Form>
       </div>
 
       <div className="SectionTwoSecondHalf">
-        <Form noValidate validated={validated}>
+        <Form noValidate validated={state.validated}>
           <Form.Group>
             <Form.Text className="SectionTwoFormTextLabel EditOrgProfileDetailsDisabledField">
               area of work
@@ -213,7 +223,7 @@ const SectionTwo = ({
             <Form.Control
               disabled
               className="SectionTwoFormControl EditOrgProfileDetailsDisabledField"
-              value={fakeData.organisation.area_of_work}
+              value={editedData?.organizationDetails.workDescription}
             />
           </Form.Group>
 
@@ -228,18 +238,31 @@ const SectionTwo = ({
                     phone
                   </Form.Text>
                   <Form.Control
-                    required
-                    type="tel"
-                    name="phone"
-                    placeholder="Type..."
-                    className="SectionTwoFormControl"
-                    value={fakeData.organisation.contact.phone}
-                    onChange={handleOrgEditProfileContactChange}
+                    className="PhoneInputControl"
+                    isInvalid={state.phoneValueIsInvalid}
                   />
+                  <PhoneInput
+                    country={"in"}
+                    placeholder=""
+                    value={state.phoneValue}
+                    onChange={(value, country, event, formattedValue) =>
+                      handlePhoneInputChange(
+                        value,
+                        country,
+                        event,
+                        formattedValue
+                      )
+                    }
+                    inputProps={{
+                      name: "phone",
+                      required: true,
+                      className: "form-control",
+                    }}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    Required field, please Enter Correct Value.
+                  </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Control.Feedback type="invalid">
-                  Required field, please Enter Correct Value.
-                </Form.Control.Feedback>
               </Col>
               <Col>
                 <Form.Group>
@@ -252,8 +275,8 @@ const SectionTwo = ({
                     name="email"
                     placeholder="Type.."
                     className="SectionTwoFormControl"
-                    value={fakeData.organisation.contact.email}
-                    onChange={handleOrgEditProfileContactChange}
+                    value={editedData?.email}
+                    // onChange={handleOrgEditProfileContactChange}
                   />
                   <Form.Control.Feedback type="invalid">
                     Required field, please Enter Correct Value.
@@ -273,9 +296,9 @@ const SectionTwo = ({
               placeholder="YYYY"
               pattern="[0-9]{4}"
               min={1800}
-              name="year_of_inception"
+              name="yearOfInception"
               className="SectionTwoFormControl"
-              value={fakeData.organisation.year_of_inception}
+              value={editedData?.organizationDetails.yearOfInception}
               onChange={handleOrgEditProfileChange}
             />
             <Form.Control.Feedback type="invalid">
@@ -299,7 +322,7 @@ const SectionTwo = ({
                     type="text"
                     placeholder="Type..."
                     className="SectionTwoFormControl"
-                    value={fakeData.organisation.address.country}
+                    value={editedData?.organizationDetails.address.country}
                     onChange={handleOrgEditProfileAddressChange}
                   />
                   <Form.Control.Feedback type="invalid">
@@ -318,7 +341,7 @@ const SectionTwo = ({
                     type="text"
                     placeholder="Type..."
                     className="SectionTwoFormControl"
-                    value={fakeData.organisation.address.region}
+                    value={editedData?.organizationDetails.address.region}
                     onChange={handleOrgEditProfileAddressChange}
                   />
                   <Form.Control.Feedback type="invalid">
@@ -335,11 +358,11 @@ const SectionTwo = ({
             </Form.Text>
             <Form.Control
               required
-              name="primary_language"
+              name="primaryLanguage"
               type="text"
               placeholder="Type..."
               className="SectionTwoFormControl"
-              value={fakeData.organisation.primary_language}
+              value={editedData?.organizationDetails.primaryLanguage}
               onChange={handleOrgEditProfileChange}
             />
             <Form.Control.Feedback type="invalid">

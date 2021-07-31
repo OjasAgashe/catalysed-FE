@@ -1,18 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer } from "react";
+import { Redirect } from "react-router-dom";
+import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
+import StuUpdatesApplications from "../../components/StuUpdatesApplications/StuUpdatesApplications";
 import StuUpdatesOrganisations from "../../components/StuUpdatesOrganisations/StuUpdatesOrganisations";
 import StuUpdatesPageHeader from "../../components/StuUpdatesPageHeader/StuUpdatesPageHeader";
 import StuUpdatesPrograms from "../../components/StuUpdatesPrograms/StuUpdatesPrograms";
+import { useMentorAPI } from "../../context/api_context/MentorAPIContext";
 import { useQuery } from "../../custom_hooks/useQuery";
+import { stuUpdatesReducer } from "../../reducers/stuUpdatesReducer";
 
 const MentorUpdatesPage = () => {
+  const { getAllFilledApplicationsDetails } = useMentorAPI();
   const query = useQuery();
-  const [view, setView] = useState(
-    query.get("view") === "PROGRAMS"
-      ? "Programs"
-      : query.get("view") === "ORGANISATIONS"
-      ? "Organisations"
-      : ""
-  );
+
+  const [state, dispatch] = useReducer(stuUpdatesReducer, {
+    view:
+      query.get("view") === "PROGRAMS"
+        ? "Programs"
+        : query.get("view") === "ORGANISATIONS"
+        ? "Organisations"
+        : query.get("view") === "APPLICATIONS"
+        ? "Applications"
+        : "",
+    loading: true,
+    searchedName: "",
+    selectedRadioForSort: "All",
+    selectedRadioForFilter: "All",
+    searchedNameNotFound: "",
+    error: "",
+    responseData: null,
+    filteredResponseData: null,
+  });
 
   const fakeProgramData = [
     {
@@ -70,24 +88,71 @@ const MentorUpdatesPage = () => {
 
   useEffect(() => {
     document.documentElement.scrollTop = 0;
-    document.title = `Connected ${view} | CatalysEd`;
-  }, [view]);
+    document.title = `Connected ${state.view} | CatalysEd`;
 
-  return (
-    <div className="MentorUpdatesPage Page">
-      <StuUpdatesPageHeader view={view} setView={setView} entity="MENTOR" />
+    const getDetails = async () => {
+      try {
+        dispatch({ type: "loading", payload: true });
+        dispatch({ type: "error", payload: "" });
 
-      {view === "Programs" && (
+        let response;
+
+        if (state.view === "Applications") {
+          response = await getAllFilledApplicationsDetails();
+        }
+
+        dispatch({ type: "responseData", payload: response?.data });
+      } catch (error) {
+        dispatch({ type: "error", payload: "Sorry!! No Data Found" });
+      } finally {
+        dispatch({ type: "loading", payload: false });
+      }
+    };
+
+    getDetails();
+  }, [getAllFilledApplicationsDetails, state.view]);
+
+  return state.view ? (
+    <div className="StudentUpdatesPage Page">
+      {/*
+       * Till the value of state.loading is true, show
+       * LoadingProgress component
+       */}
+      {state.loading && (
+        <LoadingProgress
+          loading={state.loading}
+          emailSent={false}
+          loadingMessage={`Getting ${state.view} Details...`}
+        />
+      )}
+
+      <StuUpdatesPageHeader
+        view={state.view}
+        dispatch={dispatch}
+        entity="MENTOR"
+      />
+
+      {state.view === "Programs" && (
         <StuUpdatesPrograms fakeProgramData={fakeProgramData} entity="MENTOR" />
       )}
 
-      {view === "Organisations" && (
+      {state.view === "Organisations" && (
         <StuUpdatesOrganisations
           fakeOrganisationData={fakeOrganisationData}
           entity="MENTOR"
         />
       )}
+
+      {state.view === "Applications" && (
+        <StuUpdatesApplications
+          state={state}
+          dispatch={dispatch}
+          entity="MENTOR"
+        />
+      )}
     </div>
+  ) : (
+    <Redirect to="*" />
   );
 };
 

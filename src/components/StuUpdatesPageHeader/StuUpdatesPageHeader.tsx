@@ -4,35 +4,45 @@ import { useHistory } from "react-router-dom";
 import { StudentUpdatesHeader } from "../../assets/Illustrations/Illustrations";
 import { MENTOR, STUDENT } from "../../constants/Entities";
 import { MENTOR_UPDATES, STUDENT_UPDATES } from "../../constants/Routes";
+import { StudentUpdatesCommonActionType } from "../../types/StudentUpdates";
 import "./StuUpdatesPageHeader.css";
 
 type StuUpdatesPageHeaderProps = {
   view: string;
-  setView: React.Dispatch<React.SetStateAction<string>>;
+  dispatch: React.Dispatch<StudentUpdatesCommonActionType>;
   entity: string;
 };
 
 const StuUpdatesPageHeader = ({
   view,
-  setView,
+  dispatch,
   entity,
 }: StuUpdatesPageHeaderProps) => {
   const history = useHistory();
 
   const handleProgramsBtnClick = () => {
-    setView("Programs");
+    dispatch({ type: "view", payload: "Programs" });
 
     if (entity === STUDENT) history.push(`${STUDENT_UPDATES}?view=PROGRAMS`);
     else if (entity === MENTOR) history.push(`${MENTOR_UPDATES}?view=PROGRAMS`);
   };
 
   const handleOrganisationsBtnClick = () => {
-    setView("Organisations");
+    dispatch({ type: "view", payload: "Organisations" });
 
     if (entity === STUDENT)
       history.push(`${STUDENT_UPDATES}?view=ORGANISATIONS`);
     else if (entity === MENTOR)
       history.push(`${MENTOR_UPDATES}?view=ORGANISATIONS`);
+  };
+
+  const handleApplicationsBtnClick = () => {
+    dispatch({ type: "view", payload: "Applications" });
+
+    if (entity === STUDENT)
+      history.push(`${STUDENT_UPDATES}?view=APPLICATIONS`);
+    else if (entity === MENTOR)
+      history.push(`${MENTOR_UPDATES}?view=APPLICATIONS`);
   };
 
   return (
@@ -63,10 +73,21 @@ const StuUpdatesPageHeader = ({
               view === "Organisations"
                 ? "CurrentSelectedTab"
                 : "NotCurrentSelectedTab"
-            }`}
+            } StuUpdatesOrganisationsOpt`}
           >
             <button type="button" onClick={handleOrganisationsBtnClick}>
               Organisations
+            </button>
+          </div>
+          <div
+            className={`${
+              view === "Applications"
+                ? "CurrentSelectedTab"
+                : "NotCurrentSelectedTab"
+            }`}
+          >
+            <button type="button" onClick={handleApplicationsBtnClick}>
+              Applications
             </button>
           </div>
         </Alert>

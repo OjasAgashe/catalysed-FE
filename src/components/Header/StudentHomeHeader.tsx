@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import {
   STUDENT_DASHBOARD,
   STUDENT_HOME,
+  STUDENT_PROFILE_EDIT,
   STUDENT_SUGGESTED_PROGRAMS,
   STUDENT_UPDATES,
 } from "../../constants/Routes";
@@ -42,6 +43,14 @@ const StudentHomeHeader = () => {
         eventKey="4"
       >
         Programs
+      </Nav.Link>
+      <Nav.Link
+        as={Link}
+        to={STUDENT_PROFILE_EDIT}
+        className="NavbarCollapseNavItem"
+        eventKey="5"
+      >
+        Manage Profile
       </Nav.Link>
     </>
   );

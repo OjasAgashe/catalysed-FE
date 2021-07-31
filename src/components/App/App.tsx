@@ -36,6 +36,8 @@ import {
   STUDENT_REGISTER,
   STUDENT_SUGGESTED_PROGRAMS,
   MENTOR_SUGGESTED_PROGRAMS,
+  STUDENT_PROFILE_EDIT,
+  MENTOR_PROFILE_EDIT,
 } from "../../constants/Routes";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -86,6 +88,8 @@ import MentorSuggestedProgramDetails from "../../pages/MentorSuggestedProgramDet
 import MentorSuggestedProgramApplication from "../../pages/MentorSuggestedProgramDetails/MentorSuggestedProgramApplication";
 import { StudentAPIProvider } from "../../context/api_context/StudentAPIContext";
 import { MentorAPIProvider } from "../../context/api_context/MentorAPIContext";
+import StudentProfileEdit from "../../pages/StudentProfileEdit/StudentProfileEdit";
+import MentorProfileEdit from "../../pages/MentorProfileEdit/MentorProfileEdit";
 
 function App() {
   return (
@@ -117,6 +121,10 @@ function App() {
             </ProfileBuilderProvider>
           </PrivateRoute>
 
+          <PrivateRoute path={MENTOR_PROFILE_EDIT} exact>
+            <MentorProfileEdit />
+          </PrivateRoute>
+
           <PublicRoute path={MENTOR_REGISTER} exact>
             <MentorRegisterPage />
           </PublicRoute>
@@ -146,7 +154,9 @@ function App() {
           </PrivateRoute>
 
           <PrivateRoute path={MENTOR_UPDATES} exact>
-            <MentorUpdatesPage />
+            <MentorAPIProvider>
+              <MentorUpdatesPage />
+            </MentorAPIProvider>
           </PrivateRoute>
 
           <PrivateRoute
@@ -232,7 +242,9 @@ function App() {
           </PrivateRoute>
 
           <PrivateRoute path={ORGANISATION_PROFILE_EDIT} exact>
-            <OrgProfileEdit />
+            <OrgAPIProvider>
+              <OrgProfileEdit />
+            </OrgAPIProvider>
           </PrivateRoute>
 
           <PrivateRoute
@@ -325,6 +337,10 @@ function App() {
             </ProfileBuilderProvider>
           </PrivateRoute>
 
+          <PrivateRoute path={STUDENT_PROFILE_EDIT} exact>
+            <StudentProfileEdit />
+          </PrivateRoute>
+
           <PublicRoute path={STUDENT_REGISTER} exact>
             <StudentRegisterPage />
           </PublicRoute>
@@ -354,7 +370,9 @@ function App() {
           </PrivateRoute>
 
           <PrivateRoute path={STUDENT_UPDATES} exact>
-            <StudentUpdatesPage />
+            <StudentAPIProvider>
+              <StudentUpdatesPage />
+            </StudentAPIProvider>
           </PrivateRoute>
 
           <PrivateRoute

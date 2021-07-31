@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import "./OrgProfileEditSectionContainer.css";
 
 import SectionOne from "./SectionOne";
@@ -8,137 +8,94 @@ import { MdCancel } from "react-icons/md";
 import { FaSave } from "react-icons/fa";
 import LeavePageModal from "../LeavePageModal/LeavePageModal";
 import { useHistory, useLocation } from "react-router-dom";
+import {
+  OrgProfileEditActionType,
+  OrgProfileEditData,
+  OrgProfileEditState,
+} from "../../types/OrgProfileEdit";
+import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
 
-const OrgProfileEditSectionContainer = () => {
-  const [validated, setValidated] = useState<boolean>(false);
-  const [socialLinkIsInvalid, setSocialLinkIsInvalid] =
-    useState<boolean>(false);
-  const [websiteLinkIsInvalid, setWebsiteLinkIsInvalid] =
-    useState<boolean>(false);
+type OrgProfileEditSectionContainerProps = {
+  state: OrgProfileEditState;
+  dispatch: React.Dispatch<OrgProfileEditActionType>;
+  editedData: OrgProfileEditData | null;
+  setEditedData: React.Dispatch<
+    React.SetStateAction<OrgProfileEditData | null>
+  >;
+};
 
-  const [dataHasChanged, setDataHasChanged] = useState<boolean>(false);
-  const [showModal, setShowModal] = useState<boolean>(false);
-  const [leave, setLeave] = useState<boolean>(false);
-  const [stay, setStay] = useState<boolean>(false);
-  const [navigateToPath, setNavigateToPath] = useState<string>("");
+const OrgProfileEditSectionContainer = ({
+  state,
+  dispatch,
+  editedData,
+  setEditedData,
+}: OrgProfileEditSectionContainerProps) => {
+  const { putOrganisationProfile } = useOrgAPI();
   const history = useHistory();
   const location = useLocation();
 
-  const responseData = {
-    firstName: "Stefan",
-    lastName: "le",
-    email: "stefan.le@gmail.com",
-    organisation: {
-      name: "catalysed",
-      description: "our aim is to help student",
-      social_link: "https://twitter.com/foo",
-      website_link: "https://catalysed.org",
-      area_of_work: "Education",
-      contact: {
-        phone: "111111111",
-        email: "example@gmail.com",
-      },
-      year_of_inception: "1985",
-      address: {
-        country: "India",
-        region: "Delhi",
-      },
-      primary_language: "English",
-    },
-  };
+  const possibleSocialBaseURL: string[] = [
+    "https://www.twitter.com",
+    "https://www.linkedin.com",
+    "https://www.facebook.com",
+    "https://www.instagram.com",
+    "https://twitter.com",
+    "https://linkedin.com",
+    "https://facebook.com",
+    "https://instagram.com",
+  ];
 
-  const [fakeData, setFakeData] = useState<{
-    firstName: string;
-    lastName: string;
-    email: string;
-    organisation: {
-      name: string;
-      description: string;
-      social_link: string;
-      website_link: string;
-      area_of_work: string;
-      contact: {
-        phone: string;
-        email: string;
-      };
-      year_of_inception: string;
-      address: {
-        country: string;
-        region: string;
-      };
-      primary_language: string;
-    };
-  }>({
-    firstName: "Stefan",
-    lastName: "le",
-    email: "stefan.le@gmail.com",
-    organisation: {
-      name: "catalysed",
-      description: "our aim is to help student",
-      social_link: "https://twitter.com/foo",
-      website_link: "https://catalysed.org",
-      area_of_work: "Education",
-      contact: {
-        phone: "111111111",
-        email: "example@gmail.com",
-      },
-      year_of_inception: "1985",
-      address: {
-        country: "India",
-        region: "Delhi",
-      },
-      primary_language: "English",
-    },
-  });
+  const hasDataChange = useCallback(() => {
+    const responseDataTemp = { ...state.responseData } as OrgProfileEditData;
+    const editedDataTemp = { ...editedData } as OrgProfileEditData;
+
+    if (
+      editedDataTemp?.firstName !== responseDataTemp?.firstName ||
+      editedDataTemp?.lastName !== responseDataTemp?.lastName ||
+      editedDataTemp?.organizationDetails?.description !==
+        responseDataTemp?.organizationDetails?.description ||
+      editedDataTemp?.organizationDetails?.socialMediaCode !==
+        responseDataTemp?.organizationDetails?.socialMediaCode ||
+      editedDataTemp?.organizationDetails?.socialMediaLink !==
+        responseDataTemp?.organizationDetails?.socialMediaLink ||
+      editedDataTemp?.organizationDetails?.website !==
+        responseDataTemp?.organizationDetails?.website ||
+      editedDataTemp?.organizationDetails?.yearOfInception !==
+        responseDataTemp?.organizationDetails?.yearOfInception ||
+      editedDataTemp?.organizationDetails?.primaryLanguage !==
+        responseDataTemp?.organizationDetails?.primaryLanguage ||
+      editedDataTemp?.organizationDetails?.phone.number !==
+        responseDataTemp?.organizationDetails?.phone.number ||
+      editedDataTemp?.organizationDetails?.phone.countryCode !==
+        responseDataTemp?.organizationDetails?.phone.countryCode ||
+      editedDataTemp?.organizationDetails?.address.country !==
+        responseDataTemp?.organizationDetails?.address.country ||
+      editedDataTemp?.organizationDetails?.address.region !==
+        responseDataTemp?.organizationDetails?.address.region
+    ) {
+      return true;
+    }
+
+    return false;
+  }, [editedData, state.responseData]);
 
   useEffect(() => {
-    const hasDataChange = () => {
-      if (
-        fakeData.firstName !== responseData.firstName ||
-        fakeData.lastName !== responseData.lastName ||
-        fakeData.email !== responseData.email ||
-        fakeData.organisation.description !==
-          responseData.organisation.description ||
-        fakeData.organisation.social_link !==
-          responseData.organisation.social_link ||
-        fakeData.organisation.website_link !==
-          responseData.organisation.website_link ||
-        fakeData.organisation.year_of_inception !==
-          responseData.organisation.year_of_inception ||
-        fakeData.organisation.primary_language !==
-          responseData.organisation.primary_language ||
-        fakeData.organisation.contact.phone !==
-          responseData.organisation.contact.phone ||
-        fakeData.organisation.contact.email !==
-          responseData.organisation.contact.email ||
-        fakeData.organisation.address.country !==
-          responseData.organisation.address.country ||
-        fakeData.organisation.address.region !==
-          responseData.organisation.address.region
-      ) {
-        return true;
-      }
-
-      return false;
-    };
-
-    setDataHasChanged(hasDataChange);
+    dispatch({ type: "dataHasChanged", payload: hasDataChange() });
 
     // @ts-ignore
     const unblock = history.block((tx) => {
-      if (dataHasChanged === false) return true;
+      if (state.dataHasChanged === false) return true;
 
-      if (leave) return true;
+      if (state.leave) return true;
 
-      setNavigateToPath(tx.pathname);
+      dispatch({ type: "navigateToPath", payload: tx.pathname });
 
-      if (dataHasChanged) setShowModal(true);
-
+      if (state.dataHasChanged) dispatch({ type: "showModal", payload: true });
       return false;
     });
 
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-      if (dataHasChanged) {
+      if (state.dataHasChanged) {
         event.preventDefault();
         event.returnValue = "";
       }
@@ -151,118 +108,160 @@ const OrgProfileEditSectionContainer = () => {
       unblock();
     };
   }, [
-    dataHasChanged,
-    fakeData.email,
-    fakeData.firstName,
-    fakeData.lastName,
-    fakeData.organisation.address.country,
-    fakeData.organisation.address.region,
-    fakeData.organisation.contact.email,
-    fakeData.organisation.contact.phone,
-    fakeData.organisation.description,
-    fakeData.organisation.primary_language,
-    fakeData.organisation.social_link,
-    fakeData.organisation.website_link,
-    fakeData.organisation.year_of_inception,
+    dispatch,
+    hasDataChange,
     history,
-    leave,
     location.pathname,
-    responseData.email,
-    responseData.firstName,
-    responseData.lastName,
-    responseData.organisation.address.country,
-    responseData.organisation.address.region,
-    responseData.organisation.contact.email,
-    responseData.organisation.contact.phone,
-    responseData.organisation.description,
-    responseData.organisation.primary_language,
-    responseData.organisation.social_link,
-    responseData.organisation.website_link,
-    responseData.organisation.year_of_inception,
-    stay,
+    state.dataHasChanged,
+    state.leave,
   ]);
 
   const canMakeAPICall = () => {
     return (
       [
-        fakeData.firstName,
-        fakeData.lastName,
-        fakeData.organisation.description,
-        fakeData.organisation.social_link,
-        fakeData.organisation.website_link,
-        fakeData.organisation.year_of_inception,
-        fakeData.organisation.primary_language,
-        fakeData.organisation.contact.phone,
-        fakeData.organisation.contact.email,
-        fakeData.organisation.address.country,
-        fakeData.organisation.address.region,
+        editedData?.firstName ?? "",
+        editedData?.lastName ?? "",
+        editedData?.organizationDetails?.description,
+        editedData?.organizationDetails?.socialMediaLink,
+        editedData?.organizationDetails?.website,
+        editedData?.organizationDetails?.yearOfInception,
+        editedData?.organizationDetails?.primaryLanguage,
+        editedData?.organizationDetails?.phone.number,
+        editedData?.organizationDetails?.address?.country,
+        editedData?.organizationDetails?.address?.region,
       ].includes("") === false
     );
   };
 
   const handleOrgProfileEditSaveBtn = () => {
-    if (validated === false) setValidated(true);
+    if (state.validated === false)
+      dispatch({ type: "validated", payload: true });
 
-    const validEmail =
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-
-    if (fakeData.organisation.description.length < 10) {
-      document.documentElement.scrollTop = 100;
-      return;
-    }
-
-    if (parseInt(fakeData.organisation.year_of_inception) < 1800) {
-      return;
-    }
-
-    if (!validEmail.test(fakeData.organisation.contact.email)) {
-      return;
-    }
+    // const validEmail =
+    //   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
     if (
-      fakeData.organisation.social_link.startsWith("https://") === false &&
-      fakeData.organisation.social_link.startsWith("http://") === false
+      editedData?.organizationDetails.description &&
+      editedData?.organizationDetails.description.length < 10
     ) {
-      setSocialLinkIsInvalid(true);
       document.documentElement.scrollTop = 100;
       return;
     }
 
     if (
-      fakeData.organisation.website_link.startsWith("https://") === false &&
-      fakeData.organisation.website_link.startsWith("http://") === false
+      editedData?.organizationDetails.yearOfInception &&
+      parseInt(editedData?.organizationDetails.yearOfInception) < 1800
     ) {
-      setWebsiteLinkIsInvalid(true);
+      return;
+    }
+
+    // if (!validEmail.test(editedData?.organizationDetails.contact.email)) {
+    //   return;
+    // }
+
+    if (
+      editedData?.organizationDetails.socialMediaLink.startsWith("https://") ===
+        false &&
+      editedData?.organizationDetails.socialMediaLink.startsWith("http://") ===
+        false
+    ) {
+      dispatch({ type: "socialLinkIsInvalid", payload: true });
       document.documentElement.scrollTop = 100;
+      return;
+    } else {
+      let baseURLPresent = false;
+      let code = "";
+
+      for (let index = 0; index < possibleSocialBaseURL.length; index++) {
+        let baseURL = possibleSocialBaseURL[index];
+
+        if (editedData?.organizationDetails.socialMediaLink.includes(baseURL)) {
+          switch (index) {
+            case 0:
+            case 4:
+              code = "TWITTER";
+              break;
+
+            case 1:
+            case 5:
+              code = "LINKED_IN";
+              break;
+
+            case 2:
+            case 6:
+              code = "FACEBOOK";
+              break;
+
+            case 3:
+            case 7:
+              code = "INSTAGRAM";
+              break;
+          }
+
+          baseURLPresent = true;
+          break;
+        }
+      }
+
+      if (baseURLPresent === false) {
+        dispatch({ type: "socialLinkIsInvalid", payload: true });
+        document.documentElement.scrollTop = 100;
+        return;
+      } else {
+        setEditedData(
+          (prevState): OrgProfileEditData =>
+            ({
+              ...prevState,
+              organizationDetails: {
+                ...prevState?.organizationDetails,
+                socialMediaCode: code,
+              },
+            } as OrgProfileEditData)
+        );
+      }
+    }
+
+    if (
+      editedData?.organizationDetails.website.startsWith("https://") ===
+        false &&
+      editedData?.organizationDetails.website.startsWith("http://") === false
+    ) {
+      dispatch({ type: "websiteLinkIsInvalid", payload: true });
+      document.documentElement.scrollTop = 100;
+      return;
+    }
+
+    if ((editedData?.organizationDetails?.phone?.number ?? "").length <= 4) {
+      dispatch({ type: "phoneValueIsInvalid", payload: true });
       return;
     }
 
     if (canMakeAPICall()) {
-      console.log("Edited Profile", fakeData);
+      console.log("Edited Profile", editedData);
     } else {
       document.documentElement.scrollTop = 100;
     }
   };
 
   const handleOrgProfileEditDiscardChangesBtn = () => {
-    setFakeData(responseData);
+    setEditedData(state.responseData);
   };
 
   const handleLeavePageModalLeaveBtn = () => {
-    setLeave(true);
-    history.push(navigateToPath);
+    dispatch({ type: "leave", payload: true });
+    history.push(state.navigateToPath);
   };
 
   const handleLeavePageModalStayBtn = () => {
-    setStay(true);
-    setLeave(false);
-    setShowModal(false);
-    setNavigateToPath("");
+    dispatch({ type: "stay", payload: true });
+    dispatch({ type: "leave", payload: false });
+    dispatch({ type: "showModal", payload: false });
+    dispatch({ type: "navigateToPath", payload: "" });
   };
 
   return (
     <div className="OrgProfileEditSectionContainer">
-      {showModal && (
+      {state.showModal && (
         <LeavePageModal
           handleLeavePageModalLeaveBtn={handleLeavePageModalLeaveBtn}
           handleLeavePageModalStayBtn={handleLeavePageModalStayBtn}
@@ -270,28 +269,24 @@ const OrgProfileEditSectionContainer = () => {
       )}
 
       <SectionOne
-        fakeData={fakeData}
-        setFakeData={setFakeData}
-        validated={validated}
-        setValidated={setValidated}
+        editedData={editedData}
+        setEditedData={setEditedData}
+        state={state}
+        dispatch={dispatch}
       />
 
       <SectionTwo
-        fakeData={fakeData}
-        setFakeData={setFakeData}
-        validated={validated}
-        setValidated={setValidated}
-        socialLinkIsInvalid={socialLinkIsInvalid}
-        setSocialLinkIsInvalid={setSocialLinkIsInvalid}
-        websiteLinkIsInvalid={websiteLinkIsInvalid}
-        setWebsiteLinkIsInvalid={setWebsiteLinkIsInvalid}
+        editedData={editedData}
+        setEditedData={setEditedData}
+        state={state}
+        dispatch={dispatch}
       />
 
       <div className="OrgProfileEditBtnContainer">
         <button
-          disabled={!dataHasChanged}
+          disabled={!state.dataHasChanged}
           className={`OrgProfileEditSaveBtn Btn ${
-            dataHasChanged ? "" : "EditOrgProfileDetailsDisabledField"
+            state.dataHasChanged ? "" : "EditOrgProfileDetailsDisabledField"
           }`}
           onClick={handleOrgProfileEditSaveBtn}
         >
@@ -299,9 +294,9 @@ const OrgProfileEditSectionContainer = () => {
           <FaSave className="OrgProfileEditSaveBtnIcon" />
         </button>
         <button
-          disabled={!dataHasChanged}
+          disabled={!state.dataHasChanged}
           className={`OrgProfileEditDiscardChangesBtn Btn ${
-            dataHasChanged ? "" : "EditOrgProfileDetailsDisabledField"
+            state.dataHasChanged ? "" : "EditOrgProfileDetailsDisabledField"
           }`}
           onClick={handleOrgProfileEditDiscardChangesBtn}
         >
