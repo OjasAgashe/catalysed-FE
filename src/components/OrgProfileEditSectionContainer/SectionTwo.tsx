@@ -159,6 +159,13 @@ const SectionTwo = ({
   const handleOrgEditProfileAddressChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
       if (state.validated) dispatch({ type: "validated", payload: false });
+      if (state.phoneValueIsInvalid)
+        dispatch({ type: "phoneValueIsInvalid", payload: false });
+
+      if (state.socialLinkIsInvalid)
+        dispatch({ type: "socialLinkIsInvalid", payload: false });
+      if (state.websiteLinkIsInvalid)
+        dispatch({ type: "websiteLinkIsInvalid", payload: false });
 
       setEditedData(
         (prevState): OrgProfileEditData =>

@@ -1,33 +1,13 @@
 import React from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { OrgProfileManagePersonalInfo } from "../../assets/Illustrations/Illustrations";
+import { StudentProfileEditState } from "../../types/StudentProfileEdit";
 
 type SectionOneProps = {
-  fakeData: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    profileBuilderDetails: {
-      age: string;
-      organisation: string;
-      address: {
-        country: string;
-        region: string;
-      };
-      gender: string;
-      primary_language: string;
-      professional_mentored: string;
-      stable_connection: string;
-      contact: {
-        phone: string;
-        email: string;
-      };
-      device: string;
-    };
-  };
+  state: StudentProfileEditState;
 };
 
-const SectionOne = ({ fakeData }: SectionOneProps) => {
+const SectionOne = ({ state }: SectionOneProps) => {
   return (
     <section className="OrgProfileEditSectionOne">
       <div className="SectionOneFirstHalf">
@@ -45,7 +25,7 @@ const SectionOne = ({ fakeData }: SectionOneProps) => {
               </Form.Text>
               <Form.Control
                 className="SectionOneFormControl EditOrgProfileDetailsDisabledField"
-                value={fakeData.firstName}
+                value={state?.responseData?.firstName}
                 disabled
               />
             </Col>
@@ -56,7 +36,7 @@ const SectionOne = ({ fakeData }: SectionOneProps) => {
               <Form.Control
                 className="SectionOneFormControl EditOrgProfileDetailsDisabledField"
                 disabled
-                value={fakeData.lastName}
+                value={state?.responseData?.lastName}
               />
             </Col>
           </Row>
@@ -69,7 +49,7 @@ const SectionOne = ({ fakeData }: SectionOneProps) => {
             <Form.Control
               className="SectionOneFormControl EditOrgProfileDetailsDisabledField"
               disabled
-              value={fakeData.email}
+              value={state?.responseData?.email}
             />
           </Form.Group>
         </Form>

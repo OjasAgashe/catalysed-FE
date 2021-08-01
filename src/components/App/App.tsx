@@ -351,7 +351,9 @@ function App() {
           </PrivateRoute>
 
           <PrivateRoute path={STUDENT_PROFILE_EDIT} exact>
-            <StudentProfileEdit />
+            <StudentAPIProvider>
+              <StudentProfileEdit />
+            </StudentAPIProvider>
           </PrivateRoute>
 
           <PublicRoute path={STUDENT_REGISTER} exact>

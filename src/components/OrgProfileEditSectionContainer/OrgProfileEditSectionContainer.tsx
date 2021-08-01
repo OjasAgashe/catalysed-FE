@@ -116,14 +116,14 @@ const OrgProfileEditSectionContainer = ({
       [
         editedData?.firstName ?? "",
         editedData?.lastName ?? "",
-        editedData?.organizationDetails?.description,
-        editedData?.organizationDetails?.socialMediaLink,
-        editedData?.organizationDetails?.website,
-        editedData?.organizationDetails?.yearOfInception,
-        editedData?.organizationDetails?.primaryLanguage,
-        editedData?.organizationDetails?.phone.number,
-        editedData?.organizationDetails?.address?.country,
-        editedData?.organizationDetails?.address?.region,
+        editedData?.organizationDetails?.description ?? "",
+        editedData?.organizationDetails?.socialMediaLink ?? "",
+        editedData?.organizationDetails?.website ?? "",
+        editedData?.organizationDetails?.yearOfInception ?? "",
+        editedData?.organizationDetails?.primaryLanguage ?? "",
+        editedData?.organizationDetails?.phone.number ?? "",
+        editedData?.organizationDetails?.address?.country ?? "",
+        editedData?.organizationDetails?.address?.region ?? "",
       ].includes("") === false
     );
   };

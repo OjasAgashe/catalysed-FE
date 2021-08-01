@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import axios, { AxiosResponse } from "axios";
 import { useCookie } from "../cookie_context/CookieContext";
 import { StuSuggestedProgramApplicationData } from "../../types/StuSuggestedProgramApplication";
+import { StudentProfileEditData } from "../../types/StudentProfileEdit";
 
 interface StudentAPIProviderReturns {
   postCreateApplication: (
@@ -11,6 +12,10 @@ interface StudentAPIProviderReturns {
   getAllFilledApplicationsDetails: () => Promise<AxiosResponse<any>>;
   getSpecificFilledApplicationDetails: (
     applicationId: number
+  ) => Promise<AxiosResponse<any>>;
+  getStudentProfile: () => Promise<AxiosResponse<any>>;
+  putStudentProfile: (
+    data: StudentProfileEditData
   ) => Promise<AxiosResponse<any>>;
 }
 
@@ -68,10 +73,30 @@ export const StudentAPIProvider: React.FC<React.ReactNode> = (props) => {
     );
   };
 
+  const getStudentProfile = () => {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.get(`students/${catalysedId}/profile`, {
+      headers: { Authorization: `Bearer ${catalysedToken}` },
+    });
+  };
+
+  const putStudentProfile = (data: StudentProfileEditData) => {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.put(`students/${catalysedId}/profile`, data, {
+      headers: { Authorization: `Bearer ${catalysedToken}` },
+    });
+  };
+
   const values = {
     postCreateApplication,
     getAllFilledApplicationsDetails,
     getSpecificFilledApplicationDetails,
+    getStudentProfile,
+    putStudentProfile,
   };
 
   return (
