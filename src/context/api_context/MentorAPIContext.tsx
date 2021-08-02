@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import axios, { AxiosResponse } from "axios";
 import { useCookie } from "../cookie_context/CookieContext";
 import { StuSuggestedProgramApplicationData } from "../../types/StuSuggestedProgramApplication";
+import { MentorProfileEditData } from "../../types/MentorProfileEdit";
 
 interface MentorAPIProviderReturns {
   postCreateApplication: (
@@ -11,6 +12,10 @@ interface MentorAPIProviderReturns {
   getAllFilledApplicationsDetails: () => Promise<AxiosResponse<any>>;
   getSpecificFilledApplicationDetails: (
     applicationId: number
+  ) => Promise<AxiosResponse<any>>;
+  getMentorProfile: () => Promise<AxiosResponse<any>>;
+  putMentorProfile: (
+    data: MentorProfileEditData
   ) => Promise<AxiosResponse<any>>;
 }
 
@@ -70,10 +75,30 @@ export const MentorAPIProvider: React.FC<React.ReactNode> = (props) => {
     );
   };
 
+  const getMentorProfile = () => {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.get(`mentors/${catalysedId}/profile`, {
+      headers: { Authorization: `Bearer ${catalysedToken}` },
+    });
+  };
+
+  const putMentorProfile = (data: MentorProfileEditData) => {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.put(`mentors/${catalysedId}/profile`, data, {
+      headers: { Authorization: `Bearer ${catalysedToken}` },
+    });
+  };
+
   const values = {
     postCreateApplication,
     getAllFilledApplicationsDetails,
     getSpecificFilledApplicationDetails,
+    getMentorProfile,
+    putMentorProfile,
   };
 
   return (

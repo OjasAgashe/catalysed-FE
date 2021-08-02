@@ -1,10 +1,11 @@
 import React from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { OrgProfileManagePersonalInfo } from "../../assets/Illustrations/Illustrations";
+import { MentorProfileEditState } from "../../types/MentorProfileEdit";
 import { StudentProfileEditState } from "../../types/StudentProfileEdit";
 
 type SectionOneProps = {
-  state: StudentProfileEditState;
+  state: StudentProfileEditState | MentorProfileEditState;
 };
 
 const SectionOne = ({ state }: SectionOneProps) => {

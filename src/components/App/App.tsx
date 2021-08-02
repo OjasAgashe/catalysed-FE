@@ -126,7 +126,9 @@ function App() {
           </PrivateRoute>
 
           <PrivateRoute path={MENTOR_PROFILE_EDIT} exact>
-            <MentorProfileEdit />
+            <MentorAPIProvider>
+              <MentorProfileEdit />
+            </MentorAPIProvider>
           </PrivateRoute>
 
           <PublicRoute path={MENTOR_REGISTER} exact>

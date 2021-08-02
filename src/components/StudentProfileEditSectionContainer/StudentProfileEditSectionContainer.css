@@ -2,6 +2,7 @@
   color: var(--blue-gray-700) !important;
   font-size: 1.05rem !important;
   padding: 0.5rem !important;
+  cursor: pointer;
 }
 
 .OrgProfileEditSectionTwo .GenderFormGroup {
