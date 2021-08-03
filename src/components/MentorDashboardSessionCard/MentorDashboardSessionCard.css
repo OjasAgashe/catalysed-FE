@@ -1,0 +1,40 @@
+.DashboardCard {
+  min-height: 5rem;
+}
+
+.DashboardCard:hover {
+  cursor: pointer;
+  box-shadow: 5px 5px 5px var(--blue-gray-300),
+    -6px -6px 5px var(--blue-gray-100);
+}
+
+.DashboardCardHeader {
+  border: none;
+  text-align: right;
+  padding: 0;
+}
+
+.DashboardCardHeader .PinContainerButton {
+  border: none !important;
+  width: fit-content;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--blue-gray-500) !important;
+  box-shadow: none !important;
+  padding: 0 1rem;
+}
+
+.DashboardCardBody {
+  padding: 0.5rem 1.25rem;
+  color: var(--blue-gray-700);
+}
+
+.DashboardCardBody .DashboardCardTitle,
+.DashboardCardTitle * {
+  font-size: 1.5rem !important;
+}
+
+.DashboardCardBody .DashboardCardText,
+.DashboardCardText * {
+  font-size: 1.2rem !important;
+}

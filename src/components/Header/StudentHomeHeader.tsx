@@ -2,7 +2,6 @@ import React from "react";
 import { Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import {
-  STUDENT_DASHBOARD,
   STUDENT_HOME,
   STUDENT_PROFILE_EDIT,
   STUDENT_SUGGESTED_PROGRAMS,
@@ -22,17 +21,9 @@ const StudentHomeHeader = () => {
       </Nav.Link>
       <Nav.Link
         as={Link}
-        to={STUDENT_DASHBOARD}
-        className="NavbarCollapseNavItem"
-        eventKey="2"
-      >
-        Dashboard
-      </Nav.Link>
-      <Nav.Link
-        as={Link}
         to={`${STUDENT_UPDATES}?view=PROGRAMS`}
         className="NavbarCollapseNavItem"
-        eventKey="3"
+        eventKey="2"
       >
         Updates
       </Nav.Link>
@@ -40,7 +31,7 @@ const StudentHomeHeader = () => {
         as={Link}
         to={STUDENT_SUGGESTED_PROGRAMS}
         className="NavbarCollapseNavItem"
-        eventKey="4"
+        eventKey="3"
       >
         Programs
       </Nav.Link>
@@ -48,7 +39,7 @@ const StudentHomeHeader = () => {
         as={Link}
         to={STUDENT_PROFILE_EDIT}
         className="NavbarCollapseNavItem"
-        eventKey="5"
+        eventKey="4"
       >
         Manage Profile
       </Nav.Link>

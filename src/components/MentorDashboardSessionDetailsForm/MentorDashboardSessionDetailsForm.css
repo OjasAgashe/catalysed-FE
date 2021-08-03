@@ -1,0 +1,124 @@
+.MentorDashboardSessionDetailsForm {
+  max-width: 600px;
+  margin: 1rem auto;
+  border: 2px solid var(--blue-gray-500);
+  border-radius: 5px;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.MentorDashboardSessionDetailsForm :is(.NoteTitleText, .GiveSessionNoteText) {
+  font-size: 1.2rem;
+  color: var(--blue-gray-500);
+  pointer-events: none;
+  position: absolute;
+  padding-left: 0.5rem;
+}
+
+.MentorDashboardSessionDetailsForm .NoteTitleText {
+  padding-top: 2.7rem;
+}
+
+.MentorDashboardSessionDetailsForm
+  :is(.NoteTitleFormControl, .NoteDescriptionFormControl) {
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+  padding: 0.4rem;
+  color: var(--blue-gray-700);
+  background-color: var(--blue-gray-100);
+  border: 1px solid var(--blue-gray-100);
+  border-radius: 5px;
+  word-wrap: break-word;
+}
+
+.MentorDashboardSessionDetailsForm
+  :is(.NoteTitleFormControl, .NoteDescriptionFormControl):focus {
+  border: 1px solid var(--blue-gray-300);
+  outline: none;
+}
+
+.MentorDashboardSessionDetailsForm .AddButtonNColorPickerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.AddButtonNColorPickerContainer .ColorsToPickContainer {
+  position: absolute;
+  background-color: var(--white) !important;
+  border: 1px solid var(--blue-gray-300);
+  border-radius: 5px;
+  margin-bottom: 2.7rem;
+}
+
+.ColorsToPickContainer .Color {
+  margin: 0.3rem 0.5rem 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.ColorsToPickContainer .Color:hover {
+  cursor: pointer;
+  box-shadow: 1px 1px 4px var(--blue-gray-300);
+}
+
+.ColorsToPickContainer .DefaultColor {
+  background-color: var(--white);
+  border: 1px solid var(--blue-gray-300);
+}
+
+.ColorsToPickContainer .RedColor {
+  background-color: var(--color-picker-red);
+}
+
+.ColorsToPickContainer .GreenColor {
+  background-color: var(--color-picker-green);
+}
+
+.ColorsToPickContainer .BlueColor {
+  background-color: var(--color-picker-blue);
+}
+
+.ColorsToPickContainer .YellowColor {
+  background-color: var(--color-picker-yellow);
+}
+
+.MentorDashboardSessionDetailsForm
+  :is(.MentorDashboardSessionDetailsFormButton, .PinContainerButton) {
+  width: fit-content;
+  align-self: flex-end;
+  font-weight: 600;
+}
+
+.MentorDashboardSessionDetailsForm .PinContainerButton {
+  border: none !important;
+  font-size: 1.5rem;
+  color: var(--blue-gray-500) !important;
+  box-shadow: none !important;
+  margin-top: -0.5rem;
+  padding: 0 1rem;
+}
+
+.MentorDashboardSessionDetailsForm .MentorDashboardSessionDetailsFormButton {
+  background-color: var(--instagram-code) !important;
+  border: 1px solid var(--instagram-code) !important;
+  color: var(--white);
+  padding: 0.3rem 1rem;
+}
+
+.MentorDashboardSessionDetailsForm
+  .MentorDashboardSessionDetailsFormButton:hover {
+  box-shadow: 1px 1px 4px var(--instagram-code);
+}
+
+.MentorDashboardSessionDetailsForm
+  .MentorDashboardSessionDetailsFormButton:focus {
+  box-shadow: none;
+}
+
+.MentorDashboardSessionDetailsForm .ColorButton:hover {
+  font-size: 2rem;
+}

@@ -24,7 +24,6 @@ import {
   ORGANISATION_PROFILE_EDIT,
   ORGANISATION_APPLICANTS,
   ORGANISATION_DIRECTORY,
-  STUDENT_DASHBOARD,
   ORGANISATION_INVITATIONS,
   STUDENT_UPDATES,
   STUDENT_UPDATES_DETAILS_PROGRAM,
@@ -68,7 +67,6 @@ import OrgDirectoryMentorDetailsPage from "../../pages/OrgDirectoryPage/OrgDirec
 import OrgDirectoryStudentDetailsPage from "../../pages/OrgDirectoryPage/OrgDirectoryStudentDetailsPage";
 import OrgSpecificMentorApplicantDetailsPage from "../../pages/OrgSpecificApplicantDetailsPage/OrgSpecificMentorApplicantDetailsPage";
 import OrgSpecificStudentApplicantDetailsPage from "../../pages/OrgSpecificApplicantDetailsPage/OrgSpecificStudentApplicantDetailsPage";
-import StudentDashboard from "../../pages/StudentDashboard/StudentDashboard";
 import StudentUpdatesPage from "../../pages/StudentUpdatesPage/StudentUpdatesPage";
 import StuUpdatesProgramDetails from "../../pages/StuUpdatesProgramDetails/StuUpdatesProgramDetails";
 import StuUpdatesProgramPeople from "../../pages/StuUpdatesProgramDetails/StuUpdatesProgramPeople";
@@ -94,6 +92,7 @@ import StudentProfileEdit from "../../pages/StudentProfileEdit/StudentProfileEdi
 import MentorProfileEdit from "../../pages/MentorProfileEdit/MentorProfileEdit";
 import StuUpdatesApplicationDetails from "../../pages/StuUpdatesApplicationDetails/StuUpdatesApplicationDetails";
 import MentorUpdatesApplicationDetails from "../../pages/MentorUpdatesApplicationDetails/MentorUpdatesApplicationDetails";
+import MentorUpdatesProgramDashboard from "../../pages/MentorUpdatesProgramDetails/MentorUpdatesProgramDashboard";
 
 function App() {
   return (
@@ -186,6 +185,13 @@ function App() {
             exact
           >
             <MentorUpdatesOrganisationPrograms />
+          </PrivateRoute>
+
+          <PrivateRoute
+            path={`${MENTOR_UPDATES_DETAILS_PROGRAM}/:programId/dashboard`}
+            exact
+          >
+            <MentorUpdatesProgramDashboard />
           </PrivateRoute>
 
           <PrivateRoute
@@ -336,10 +342,6 @@ function App() {
 
           <PrivateRoute path={STUDENT_HOME} exact>
             <StudentHomePage />
-          </PrivateRoute>
-
-          <PrivateRoute path={STUDENT_DASHBOARD} exact>
-            <StudentDashboard />
           </PrivateRoute>
 
           <PublicRoute path={STUDENT_MENTOR_REGISTER} exact>

@@ -54,7 +54,7 @@ const MentorUpdatesProgramDetails = () => {
       )}
 
       <StuUpdatesProgramDetailsCommon
-        programTitle={state.responseData ? state.responseData.title : ""}
+        programTitle={"Program Title"}
         programId={parseInt(programId)}
         entity="MENTOR"
       />
