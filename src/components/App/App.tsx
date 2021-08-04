@@ -93,6 +93,7 @@ import MentorProfileEdit from "../../pages/MentorProfileEdit/MentorProfileEdit";
 import StuUpdatesApplicationDetails from "../../pages/StuUpdatesApplicationDetails/StuUpdatesApplicationDetails";
 import MentorUpdatesApplicationDetails from "../../pages/MentorUpdatesApplicationDetails/MentorUpdatesApplicationDetails";
 import MentorUpdatesProgramDashboard from "../../pages/MentorUpdatesProgramDetails/MentorUpdatesProgramDashboard";
+import StuUpdatesProgramDashboard from "../../pages/StuUpdatesProgramDetails/StuUpdatesProgramDashboard";
 
 function App() {
   return (
@@ -415,6 +416,13 @@ function App() {
             exact
           >
             <StuUpdatesOrganisationPrograms />
+          </PrivateRoute>
+
+          <PrivateRoute
+            path={`${STUDENT_UPDATES_DETAILS_PROGRAM}/:programId/dashboard`}
+            exact
+          >
+            <StuUpdatesProgramDashboard />
           </PrivateRoute>
 
           <PrivateRoute
