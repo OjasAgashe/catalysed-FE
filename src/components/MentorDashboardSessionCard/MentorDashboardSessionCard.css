@@ -2,6 +2,10 @@
   min-height: 5rem;
 }
 
+.DashboardCard * {
+  background-color: inherit !important;
+}
+
 .DashboardCard:hover {
   cursor: pointer;
   box-shadow: 5px 5px 5px var(--blue-gray-300),

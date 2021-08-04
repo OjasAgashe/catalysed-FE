@@ -66,7 +66,6 @@ const MentorDashboardSessionCardColumn = ({
     index: number,
     data: MentorDashboardSessionDetailsCardData
   ) => {
-    dbDispatch({ type: "showModal", payload: true });
     dbDispatch({ type: "selectedNoteCardData", payload: data });
 
     const tempNoteCardArray = filterNoteCardArray(index, data);
@@ -75,6 +74,8 @@ const MentorDashboardSessionCardColumn = ({
       type: "noteCardArray",
       payload: [...tempNoteCardArray].reverse(),
     });
+
+    dbDispatch({ type: "showModal", payload: true });
   };
 
   const handlePinButtonClick = (

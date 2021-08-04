@@ -38,3 +38,17 @@ export type MentorDashboardSessionDetailsFormActionType =
   | { type: "color"; payload: string }
   | { type: "descriptionClicked"; payload: boolean }
   | { type: "showColorPicker"; payload: boolean };
+
+export interface MentorDashboardSessionEditFormModalState {
+  modalFormData: MentorDashboardSessionDetailsCardData | null;
+  showColorPicker: boolean;
+  dataHasChanged: boolean;
+}
+
+export type MentorDashboardSessionEditFormModalActionType =
+  | {
+      type: "modalFormData";
+      payload: MentorDashboardSessionDetailsCardData | null;
+    }
+  | { type: "showColorPicker"; payload: boolean }
+  | { type: "dataHasChanged"; payload: boolean };

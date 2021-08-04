@@ -20,12 +20,10 @@ const MentorDashboardSessionCard = ({
     <Card className="DashboardCard" style={{ backgroundColor: data.color }}>
       <Card.Header
         className="DashboardCardHeader"
-        style={{ backgroundColor: data.color }}
       >
         <Button
           className="PinContainerButton"
           onClick={pinnedOnClick}
-          style={{ backgroundColor: data.color }}
         >
           {data.pinned ? <AiFillPushpin /> : <AiOutlinePushpin />}
         </Button>
@@ -33,14 +31,12 @@ const MentorDashboardSessionCard = ({
       <Card.Body className="DashboardCardBody" onClick={cardBodyOnClick}>
         <Card.Title
           className="DashboardCardTitle"
-          style={{ backgroundColor: data.color }}
           dangerouslySetInnerHTML={{
             __html: data.sessionNoteTitle,
           }}
         />
         <Card.Text
           className="DashboardCardText"
-          style={{ backgroundColor: data.color }}
           dangerouslySetInnerHTML={{
             __html: data.sessionNoteDescription,
           }}

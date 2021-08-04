@@ -2,6 +2,7 @@ import React, { useEffect, useReducer } from "react";
 import { useParams } from "react-router-dom";
 import MentorDashboardSessionCardColumn from "../../components/MentorDashboardSessionCardColumn/MentorDashboardSessionCardColumn";
 import MentorDashboardSessionDetailsForm from "../../components/MentorDashboardSessionDetailsForm/MentorDashboardSessionDetailsForm";
+import MentorDashboardSessionEditFormModal from "../../components/MentorDashboardSessionEditFormModal/MentorDashboardSessionEditFormModal";
 import StuUpdatesProgramDetailsCommon from "../../components/StuUpdatesProgramDetailsCommon/StuUpdatesProgramDetailsCommon";
 import { mentorUpdatesProgramDashboardReducer } from "../../reducers/mentorUpdatesProgramDashboardReducer";
 import "./MentorUpdatesProgramDashboard.css";
@@ -30,6 +31,13 @@ const MentorUpdatesProgramDashboard = () => {
       />
 
       <div className="MentorUpdatesProgramDashboardDetails">
+        {state.showModal && (
+          <MentorDashboardSessionEditFormModal
+            dbState={state}
+            dbDispatch={dispatch}
+          />
+        )}
+
         <MentorDashboardSessionDetailsForm
           dbState={state}
           dbDispatch={dispatch}

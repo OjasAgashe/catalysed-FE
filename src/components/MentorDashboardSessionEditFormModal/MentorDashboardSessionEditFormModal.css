@@ -1,3 +1,30 @@
-.ModalBodyForm {
-  width: 450px;
+.MentorDashboardSessionEditFormModal .MentorDashboardSessionDetailsForm {
+  margin: 0;
+  border-radius: 3.5px;
+}
+
+.MentorDashboardSessionEditFormModal .AddButtonNColorPickerContainer {
+  margin-top: 1rem;
+}
+
+.MentorDashboardSessionEditFormModal .AddButtonNColorPickerContainer Button {
+  margin: 0 0.5rem;
+}
+
+.MentorDashboardSessionEditFormModal .CloseButton {
+  width: fit-content;
+  font-weight: 600;
+  background-color: var(--white) !important;
+  border: 2px solid var(--instagram-code) !important;
+  color: var(--instagram-code);
+  padding: 0.3rem 1rem;
+}
+
+.MentorDashboardSessionEditFormModal
+  :is(.CloseButton, .MentorDashboardSessionDetailsFormButton):hover {
+  box-shadow: none;
+}
+
+.MentorDashboardSessionEditFormModal .CloseButton:focus {
+  box-shadow: none;
 }
