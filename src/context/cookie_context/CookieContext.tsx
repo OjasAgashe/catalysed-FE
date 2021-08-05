@@ -41,10 +41,25 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
     catalysedToken: string,
     catalysedType: string
   ): void => {
-    document.cookie = `catalysedCreated=${catalysedCreated};path=/;secure`;
-    document.cookie = `catalysedId=${catalysedId};path=/;secure`;
-    document.cookie = `catalysedToken=${catalysedToken};path=/;secure`;
-    document.cookie = `catalysedType=${catalysedType};path=/;secure`;
+    document.cookie = `catalysedCreated=${encodeURIComponent(
+      catalysedCreated
+    )}; path=/`;
+    // secure`;
+
+    document.cookie = `catalysedId=${encodeURIComponent(
+      catalysedId === null ? "" : catalysedId
+    )}; path=/`;
+    // secure`;
+
+    document.cookie = `catalysedToken=${encodeURIComponent(
+      catalysedToken
+    )}; path=/`;
+    // secure`;
+
+    document.cookie = `catalysedType=${encodeURIComponent(
+      catalysedType
+    )}; path=/`;
+    // secure`;
   };
 
   const getAllCookies = (): {
@@ -62,7 +77,10 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
   };
 
   const setCatalysedCreatedCookie = (catalysedCreated: boolean): void => {
-    document.cookie = `catalysedCreated=${catalysedCreated};path=/;secure`;
+    document.cookie = `catalysedCreated=${encodeURIComponent(
+      catalysedCreated
+    )}; path=/`;
+    // secure`;
   };
 
   const getCatalysedCreatedCookie = (): boolean => {
@@ -73,7 +91,7 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
         let [name, value] = allCookies[i].split("=");
 
         if (name.trim() === "catalysedCreated")
-          return value === "true" ? true : false;
+          return decodeURIComponent(value) === "true" ? true : false;
       }
     }
 
@@ -81,7 +99,10 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
   };
 
   const setCatalysedIdCookie = (catalysedId: number | null): void => {
-    document.cookie = `catalysedId=${catalysedId};path=/;secure`;
+    document.cookie = `catalysedId=${encodeURIComponent(
+      catalysedId === null ? "" : catalysedId
+    )}; path=/`;
+    // secure`;
   };
 
   const getCatalysedIdCookie = (): number | null => {
@@ -91,7 +112,8 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
       for (let i = 0; i < allCookies.length; i++) {
         let [name, value] = allCookies[i].split("=");
 
-        if (name.trim() === "catalysedId") return parseInt(value);
+        if (name.trim() === "catalysedId")
+          return parseInt(decodeURIComponent(value));
       }
     }
 
@@ -99,7 +121,10 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
   };
 
   const setCatalysedTokenCookie = (catalysedToken: string): void => {
-    document.cookie = `catalysedToken=${catalysedToken};path=/;secure`;
+    document.cookie = `catalysedToken=${encodeURIComponent(
+      catalysedToken
+    )}; path=/`;
+    // secure`;
   };
 
   const getCatalysedTokenCookie = (): string => {
@@ -109,7 +134,7 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
       for (let i = 0; i < allCookies.length; i++) {
         let [name, value] = allCookies[i].split("=");
 
-        if (name.trim() === "catalysedToken") return value;
+        if (name.trim() === "catalysedToken") return decodeURIComponent(value);
       }
     }
 
@@ -117,7 +142,10 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
   };
 
   const setCatalysedTypeCookie = (catalysedType: string): void => {
-    document.cookie = `catalysedType=${catalysedType};path=/;secure`;
+    document.cookie = `catalysedType=${encodeURIComponent(
+      catalysedType
+    )}; path=/`;
+    // secure`;
   };
 
   const getCatalysedTypeCookie = (): string => {
@@ -127,7 +155,7 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
       for (let i = 0; i < allCookies.length; i++) {
         let [name, value] = allCookies[i].split("=");
 
-        if (name.trim() === "catalysedType") return value;
+        if (name.trim() === "catalysedType") return decodeURIComponent(value);
       }
     }
 
