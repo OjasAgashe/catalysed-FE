@@ -321,6 +321,9 @@ const EditGeneralDetailsForm = ({
               <li key={index} className="LanguageLi">
                 {language}{" "}
                 <button
+                  disabled={
+                    state.originalData?.status === "PUBLISHED" ? true : false
+                  }
                   className="LanguageLiButton"
                   type="button"
                   onClick={() => handleLanguageLiCrossClick(language)}

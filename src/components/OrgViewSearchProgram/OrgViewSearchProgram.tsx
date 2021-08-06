@@ -45,25 +45,21 @@ const OrgViewSearchProgram = ({
   useEffect(() => {
     const getPrograms = async () => {
       try {
-        if (filterBy === "all") {
-          const response = await getProgramsMetaList();
-          setProgramsList([...response.data]);
+        const response = await getProgramsMetaList();
+        setProgramsList([...response.data]);
 
-          dispatch({
-            type: "selectedRadioForFilter",
-            payload: "All",
-          });
+        dispatch({
+          type: "selectedRadioForFilter",
+          payload: "All",
+        });
 
-          dispatch({
-            type: "selectedRadioForFilterCategory",
-            payload: "All",
-          });
-        }
+        dispatch({
+          type: "selectedRadioForFilterCategory",
+          payload: "All",
+        });
 
         if (filterBy === "in_progress") {
           const ongoingPrograms = await getOngoingPrograms();
-
-          setProgramsList([...ongoingPrograms]);
           setFilteredProgramsList([...ongoingPrograms]);
 
           dispatch({
@@ -80,8 +76,6 @@ const OrgViewSearchProgram = ({
         if (filterBy === "this_month") {
           const programsStartingThisMonth =
             await getProgramsStartingThisMonth();
-
-          setProgramsList([...programsStartingThisMonth]);
           setFilteredProgramsList([...programsStartingThisMonth]);
 
           dispatch({

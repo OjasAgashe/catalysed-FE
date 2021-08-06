@@ -9,6 +9,7 @@ import {
 import { useHistory } from "react-router";
 import {
   MENTOR_SUGGESTED_PROGRAMS,
+  ORGANISATION_HOME,
   ORGANISATION_PROGRAM_DETAILS,
   STUDENT_SUGGESTED_PROGRAMS,
 } from "../../constants/Routes";
@@ -26,10 +27,11 @@ const ProgramCard = ({ program, classNames = "" }: ProgramCardProps) => {
 
   const handleCardProgramDetailsBtn = () => {
     if (
-      location.pathname.includes(ORGANISATION_PROGRAM_DETAILS) &&
-      (location.pathname.includes("all") ||
-        location.pathname.includes("in_progress") ||
-        location.pathname.includes("this_month"))
+      (location.pathname.includes(ORGANISATION_PROGRAM_DETAILS) &&
+        (location.pathname.includes("all") ||
+          location.pathname.includes("in_progress") ||
+          location.pathname.includes("this_month"))) ||
+      location.pathname.includes(ORGANISATION_HOME)
     )
       history.push(`${ORGANISATION_PROGRAM_DETAILS}/${program.id}/details`);
 
