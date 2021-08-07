@@ -1,23 +1,9 @@
 import React, { useContext } from "react";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { useCookie } from "../cookie_context/CookieContext";
 import { StuSuggestedProgramApplicationData } from "../../types/StuSuggestedProgramApplication";
 import { MentorProfileEditData } from "../../types/MentorProfileEdit";
-
-interface MentorAPIProviderReturns {
-  postCreateApplication: (
-    data: StuSuggestedProgramApplicationData,
-    programId: number
-  ) => Promise<AxiosResponse<any>>;
-  getAllFilledApplicationsDetails: () => Promise<AxiosResponse<any>>;
-  getSpecificFilledApplicationDetails: (
-    applicationId: number
-  ) => Promise<AxiosResponse<any>>;
-  getMentorProfile: () => Promise<AxiosResponse<any>>;
-  putMentorProfile: (
-    data: MentorProfileEditData
-  ) => Promise<AxiosResponse<any>>;
-}
+import { MentorAPIProviderReturns } from "../../types/MentorAPI";
 
 const MentorAPIContext = React.createContext<MentorAPIProviderReturns | null>(
   null
@@ -93,12 +79,35 @@ export const MentorAPIProvider: React.FC<React.ReactNode> = (props) => {
     });
   };
 
+  const getSuggestedPrograms = () => {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.get(`mentors/${catalysedId}/suggested/programs`, {
+      headers: { Authorization: `Bearer ${catalysedToken}` },
+    });
+  };
+
+  const getSuggestedProgramDetails = (programId: number) => {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.get(
+      `mentors/${catalysedId}/suggested/programs/${programId}`,
+      {
+        headers: { Authorization: `Bearer ${catalysedToken}` },
+      }
+    );
+  };
+
   const values = {
     postCreateApplication,
     getAllFilledApplicationsDetails,
     getSpecificFilledApplicationDetails,
     getMentorProfile,
     putMentorProfile,
+    getSuggestedPrograms,
+    getSuggestedProgramDetails,
   };
 
   return (

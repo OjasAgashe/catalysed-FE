@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer, useState } from "react";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
 import StudentSuggestedPrograms from "../../components/StudentSuggestedPrograms/StudentSuggestedPrograms";
-import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
+import { useStudentAPI } from "../../context/api_context/StudentAPIContext";
 import { orgViewSearchProgramReducer } from "../../reducers/orgViewSearchProgramReducer";
 import { GetProgramMetaListData } from "../../types/OrgViewSearchProgram";
 
@@ -32,7 +32,7 @@ const StuSuggestedProgramsPage = () => {
     []
   );
 
-  const { getProgramsMetaList } = useOrgAPI();
+  const { getSuggestedPrograms } = useStudentAPI();
 
   useEffect(() => {
     /*
@@ -46,7 +46,7 @@ const StuSuggestedProgramsPage = () => {
 
     const getPrograms = async () => {
       try {
-        const response = await getProgramsMetaList();
+        const response = await getSuggestedPrograms();
         setProgramsList([...response.data]);
       } catch (error) {
       } finally {
@@ -55,7 +55,7 @@ const StuSuggestedProgramsPage = () => {
     };
 
     getPrograms();
-  }, [getProgramsMetaList]);
+  }, [getSuggestedPrograms]);
 
   return (
     <div className="StuSuggestedProgramsPage Page">

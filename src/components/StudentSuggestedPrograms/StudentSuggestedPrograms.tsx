@@ -45,7 +45,7 @@ const StudentSuggestedPrograms = ({
               ["Virtual", "In Person"].includes(
                 state.selectedRadioForFilterMode
               ) ||
-              ["Increasing Duration", "Descreasing Duration"].includes(
+              ["Increasing Duration", "Decreasing Duration"].includes(
                 state.selectedRadioForSort
               ) ||
               ["Newest to Oldest Date", "Oldest to Newest Date"].includes(

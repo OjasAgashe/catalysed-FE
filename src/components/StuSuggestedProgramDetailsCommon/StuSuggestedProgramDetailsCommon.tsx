@@ -29,7 +29,7 @@ const StuSuggestedProgramDetailsCommon = ({
       style={{ backgroundImage: `url(${OrgEditProgramHeader})` }}
     >
       <div className="CommonProgramDetailsHeroText">
-        <span>programTitle</span>
+        <span>{programTitle}</span>
       </div>
 
       <div className="PDViewAndRouteLinksContainer">

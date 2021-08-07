@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
 import MentorSuggestedProgramApplicationForm from "../../components/MentorSuggestedProgramApplicationForm/MentorSuggestedProgramApplicationForm";
 import StuSuggestedProgramDetailsCommon from "../../components/StuSuggestedProgramDetailsCommon/StuSuggestedProgramDetailsCommon";
+import { useMentorAPI } from "../../context/api_context/MentorAPIContext";
 import { stuSuggestedProgramApplicationReducer } from "../../reducers/stuSuggestedProgramApplicationReducer";
 
 const MentorSuggestedProgramApplication = () => {
@@ -10,15 +11,27 @@ const MentorSuggestedProgramApplication = () => {
     loading: false,
     error: "",
     validated: false,
+    programTitle: "",
   });
 
   const { programId } = useParams<{ programId: string }>();
+  const { getSuggestedProgramDetails } = useMentorAPI();
 
   useEffect(() => {
     document.documentElement.scrollTop = 0;
 
     document.title = "Suggested Program Application | CatalysEd";
-  }, []);
+
+    const getTitle = async () => {
+      try {
+        const response = await getSuggestedProgramDetails(parseInt(programId));
+
+        dispatch({ type: "programTitle", payload: response.data.title });
+      } catch (error) {}
+    };
+
+    getTitle();
+  }, [getSuggestedProgramDetails, programId]);
 
   return (
     <div className="MentorSuggestedProgramApplicationPage Page">
@@ -31,13 +44,16 @@ const MentorSuggestedProgramApplication = () => {
       )}
 
       <StuSuggestedProgramDetailsCommon
-        programTitle="ProgramTitle"
+        programTitle={state.programTitle}
         programId={parseInt(programId)}
         entity="MENTOR"
       />
 
       <MentorSuggestedProgramApplicationForm
-      state={state} dispatch={dispatch} programId={parseInt(programId)} />
+        state={state}
+        dispatch={dispatch}
+        programId={parseInt(programId)}
+      />
     </div>
   );
 };

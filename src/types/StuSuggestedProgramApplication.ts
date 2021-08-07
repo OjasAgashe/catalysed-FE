@@ -20,9 +20,11 @@ export interface StuSuggestedProgramApplicationState {
   loading: boolean;
   error: string;
   validated: boolean;
+  programTitle: string;
 }
 
 export type StuSuggestedProgramApplicationActionType =
   | { type: "loading"; payload: boolean }
   | { type: "error"; payload: string }
-  | { type: "validated"; payload: boolean };
+  | { type: "validated"; payload: boolean }
+  | { type: "programTitle"; payload: string };

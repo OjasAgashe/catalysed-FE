@@ -136,9 +136,9 @@ function App() {
           </PublicRoute>
 
           <PrivateRoute path={MENTOR_SUGGESTED_PROGRAMS} exact>
-            <OrgAPIProvider>
+            <MentorAPIProvider>
               <MentorSuggestedProgramsPage />
-            </OrgAPIProvider>
+            </MentorAPIProvider>
           </PrivateRoute>
 
           <PrivateRoute
@@ -154,9 +154,9 @@ function App() {
             path={`${MENTOR_SUGGESTED_PROGRAMS}/:programId/details`}
             exact
           >
-            <OrgAPIProvider>
+            <MentorAPIProvider>
               <MentorSuggestedProgramDetails />
-            </OrgAPIProvider>
+            </MentorAPIProvider>
           </PrivateRoute>
 
           <PrivateRoute path={MENTOR_UPDATES} exact>
@@ -366,9 +366,9 @@ function App() {
           </PublicRoute>
 
           <PrivateRoute path={STUDENT_SUGGESTED_PROGRAMS} exact>
-            <OrgAPIProvider>
+            <StudentAPIProvider>
               <StuSuggestedProgramsPage />
-            </OrgAPIProvider>
+            </StudentAPIProvider>
           </PrivateRoute>
 
           <PrivateRoute
@@ -384,9 +384,9 @@ function App() {
             path={`${STUDENT_SUGGESTED_PROGRAMS}/:programId/details`}
             exact
           >
-            <OrgAPIProvider>
+            <StudentAPIProvider>
               <StuSuggestedProgramDetails />
-            </OrgAPIProvider>
+            </StudentAPIProvider>
           </PrivateRoute>
 
           <PrivateRoute path={STUDENT_UPDATES} exact>

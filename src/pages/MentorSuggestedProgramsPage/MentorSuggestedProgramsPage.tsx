@@ -6,7 +6,7 @@
 import React, { useEffect, useReducer, useState } from "react";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
 import StudentSuggestedPrograms from "../../components/StudentSuggestedPrograms/StudentSuggestedPrograms";
-import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
+import { useMentorAPI } from "../../context/api_context/MentorAPIContext";
 import { orgViewSearchProgramReducer } from "../../reducers/orgViewSearchProgramReducer";
 import { GetProgramMetaListData } from "../../types/OrgViewSearchProgram";
 
@@ -26,7 +26,7 @@ const MentorSuggestedProgramsPage = () => {
     []
   );
 
-  const { getProgramsMetaList } = useOrgAPI();
+  const { getSuggestedPrograms } = useMentorAPI();
 
   useEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -35,7 +35,7 @@ const MentorSuggestedProgramsPage = () => {
 
     const getPrograms = async () => {
       try {
-        const response = await getProgramsMetaList();
+        const response = await getSuggestedPrograms();
         setProgramsList([...response.data]);
       } catch (error) {
       } finally {
@@ -44,7 +44,7 @@ const MentorSuggestedProgramsPage = () => {
     };
 
     getPrograms();
-  }, [getProgramsMetaList]);
+  }, [getSuggestedPrograms]);
 
   return (
     <div className="MentorSuggestedProgramsPage Page">

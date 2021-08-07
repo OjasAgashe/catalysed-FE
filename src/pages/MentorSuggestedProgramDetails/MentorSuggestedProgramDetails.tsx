@@ -8,7 +8,7 @@ import { useHistory, useParams } from "react-router-dom";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
 import OrgProgramDetails from "../../components/OrgProgramDetails/OrgProgramDetails";
 import StuSuggestedProgramDetailsCommon from "../../components/StuSuggestedProgramDetailsCommon/StuSuggestedProgramDetailsCommon";
-import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
+import { useMentorAPI } from "../../context/api_context/MentorAPIContext";
 import { stuUpdatesProgramDetailsReducer } from "../../reducers/stuUpdatesProgramDetailsReducer";
 
 const MentorSuggestedProgramDetails = () => {
@@ -20,7 +20,7 @@ const MentorSuggestedProgramDetails = () => {
 
   const { programId } = useParams<{ programId: string }>();
   const history = useHistory();
-  const { getProgramDetails } = useOrgAPI();
+  const { getSuggestedProgramDetails } = useMentorAPI();
 
   useEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -31,7 +31,7 @@ const MentorSuggestedProgramDetails = () => {
       try {
         dispatch({ type: "error", payload: "" });
 
-        const response = await getProgramDetails(parseInt(programId));
+        const response = await getSuggestedProgramDetails(parseInt(programId));
 
         dispatch({ type: "responseData", payload: response.data });
         dispatch({ type: "loading", payload: false });
@@ -46,7 +46,7 @@ const MentorSuggestedProgramDetails = () => {
     };
 
     getDetails();
-  }, [getProgramDetails, history, programId]);
+  }, [getSuggestedProgramDetails, history, programId]);
 
   return (
     <div className="MentorSuggestedProgramDetailsPage Page">
@@ -59,7 +59,7 @@ const MentorSuggestedProgramDetails = () => {
       )}
 
       <StuSuggestedProgramDetailsCommon
-        programTitle="Program Title"
+        programTitle={state.responseData?.title ?? ""}
         programId={parseInt(programId)}
         entity="MENTOR"
       />

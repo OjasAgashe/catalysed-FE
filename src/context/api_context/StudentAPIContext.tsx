@@ -1,23 +1,9 @@
 import React, { useContext } from "react";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { useCookie } from "../cookie_context/CookieContext";
 import { StuSuggestedProgramApplicationData } from "../../types/StuSuggestedProgramApplication";
 import { StudentProfileEditData } from "../../types/StudentProfileEdit";
-
-interface StudentAPIProviderReturns {
-  postCreateApplication: (
-    data: StuSuggestedProgramApplicationData,
-    programId: number
-  ) => Promise<AxiosResponse<any>>;
-  getAllFilledApplicationsDetails: () => Promise<AxiosResponse<any>>;
-  getSpecificFilledApplicationDetails: (
-    applicationId: number
-  ) => Promise<AxiosResponse<any>>;
-  getStudentProfile: () => Promise<AxiosResponse<any>>;
-  putStudentProfile: (
-    data: StudentProfileEditData
-  ) => Promise<AxiosResponse<any>>;
-}
+import { StudentAPIProviderReturns } from "../../types/StudentAPI";
 
 const StudentAPIContext = React.createContext<StudentAPIProviderReturns | null>(
   null
@@ -91,12 +77,35 @@ export const StudentAPIProvider: React.FC<React.ReactNode> = (props) => {
     });
   };
 
+  const getSuggestedPrograms = () => {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.get(`students/${catalysedId}/suggested/programs`, {
+      headers: { Authorization: `Bearer ${catalysedToken}` },
+    });
+  };
+
+  const getSuggestedProgramDetails = (programId: number) => {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.get(
+      `students/${catalysedId}/suggested/programs/${programId}`,
+      {
+        headers: { Authorization: `Bearer ${catalysedToken}` },
+      }
+    );
+  };
+
   const values = {
     postCreateApplication,
     getAllFilledApplicationsDetails,
     getSpecificFilledApplicationDetails,
     getStudentProfile,
     putStudentProfile,
+    getSuggestedPrograms,
+    getSuggestedProgramDetails,
   };
 
   return (
