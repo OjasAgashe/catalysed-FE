@@ -19,4 +19,9 @@ export interface StudentAPIProviderReturns {
   getSuggestedProgramDetails: (
     programId: number
   ) => Promise<AxiosResponse<any>>;
+  getConnectedOrganisations: () => Promise<AxiosResponse<any>>;
+  getConnectedOrganisationDetails: (
+    organisationId: number
+  ) => Promise<AxiosResponse<any>>;
+  getConnectedPrograms: () => Promise<AxiosResponse<any>>;
 }

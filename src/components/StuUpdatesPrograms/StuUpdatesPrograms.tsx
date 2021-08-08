@@ -5,22 +5,18 @@ import {
   MENTOR_UPDATES_DETAILS_PROGRAM,
   STUDENT_UPDATES_DETAILS_PROGRAM,
 } from "../../constants/Routes";
+import { StudentConnectedProgramData } from "../../types/StudentUpdates";
 import Error from "../Error/Error";
 import StuUpdatesProgramCard from "../StuUpdatesCard/StuUpdatesProgramCard";
 import "./StuUpdatesPrograms.css";
 
 type StuUpdatesProgramsProps = {
-  fakeProgramData: {
-    id: number;
-    name: string;
-    duration: string;
-    mode: string;
-  }[];
+  connectedProgramData: StudentConnectedProgramData[] | null;
   entity: string;
 };
 
 const StuUpdatesPrograms = ({
-  fakeProgramData,
+  connectedProgramData,
   entity,
 }: StuUpdatesProgramsProps) => {
   const history = useHistory();
@@ -34,8 +30,8 @@ const StuUpdatesPrograms = ({
 
   return (
     <div className="StuUpdatesProgramsContainer">
-      {fakeProgramData && fakeProgramData.length ? (
-        fakeProgramData.map((data) => (
+      {connectedProgramData && connectedProgramData.length ? (
+        connectedProgramData.map((data: StudentConnectedProgramData) => (
           <StuUpdatesProgramCard
             key={data.id}
             data={data}

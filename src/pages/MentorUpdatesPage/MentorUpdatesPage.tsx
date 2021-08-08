@@ -10,7 +10,11 @@ import { useQuery } from "../../custom_hooks/useQuery";
 import { stuUpdatesReducer } from "../../reducers/stuUpdatesReducer";
 
 const MentorUpdatesPage = () => {
-  const { getAllFilledApplicationsDetails } = useMentorAPI();
+  const {
+    getAllFilledApplicationsDetails,
+    getConnectedOrganisations,
+    getConnectedPrograms,
+  } = useMentorAPI();
   const query = useQuery();
 
   const [state, dispatch] = useReducer(stuUpdatesReducer, {
@@ -29,62 +33,10 @@ const MentorUpdatesPage = () => {
     searchedNameNotFound: "",
     error: "",
     responseData: null,
+    connectedOrgData: null,
+    connectedProgramData: null,
     filteredResponseData: null,
   });
-
-  const fakeProgramData = [
-    {
-      id: 1,
-      name: "abc",
-      duration: "3",
-      mode: "VIRTUAL",
-    },
-    {
-      id: 2,
-      name: "HTML5 Language",
-      duration: "5",
-      mode: "IN_PERSON",
-    },
-    {
-      id: 3,
-      name: "ABC",
-      duration: "7",
-      mode: "VIRTUAL",
-    },
-    {
-      id: 4,
-      name: "CSS3 AND HTML5 AND JAVASCRIPT",
-      duration: "2",
-      mode: "IN_PERSON",
-    },
-  ];
-
-  const fakeOrganisationData = [
-    {
-      id: 1,
-      name: "CatalyseEd",
-      description:
-        "We aim to help every child colour the world by facilitating easy and streamlined access to quality guidance and education by providing them with a platform that helps them unveil their potential and introduce them to phenomenal and unforeseen opportunities.",
-    },
-    {
-      id: 2,
-      name: "CatalyseEdCatalyseEd",
-      description:
-        "We aim to help every child colour the world by facilitating easy and streamlined access to quality guidance and education by providing them with a platform that helps them unveil their potential and introduce them to phenomenal and unforeseen opportunities.",
-    },
-    {
-      id: 3,
-      name: "CatalyseEdCatalyseEdCatalyseEd",
-      description:
-        "We aim to help every child colour the world by facilitating easy and streamlined access to quality guidance and education by providing them with a platform that helps them unveil their potential and introduce them to phenomenal and unforeseen opportunities.",
-    },
-    {
-      id: 4,
-      name: "CatalyseEd CatalyseEd",
-      description:
-        "We aim to help every child colour the world by facilitating easy and streamlined access to quality guidance and education by providing them with a platform that helps them unveil their potential and introduce them to phenomenal and unforeseen opportunities.",
-    },
-  ];
 
   useEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -99,9 +51,18 @@ const MentorUpdatesPage = () => {
 
         if (state.view === "Applications") {
           response = await getAllFilledApplicationsDetails();
+          dispatch({ type: "responseData", payload: response?.data });
         }
 
-        dispatch({ type: "responseData", payload: response?.data });
+        if (state.view === "Organisations") {
+          response = await getConnectedOrganisations();
+          dispatch({ type: "connectedOrgData", payload: response?.data });
+        }
+
+        if (state.view === "Programs") {
+          response = await getConnectedPrograms();
+          dispatch({ type: "connectedProgramData", payload: response?.data });
+        }
       } catch (error) {
         dispatch({ type: "error", payload: "Sorry!! No Data Found" });
       } finally {
@@ -110,7 +71,12 @@ const MentorUpdatesPage = () => {
     };
 
     getDetails();
-  }, [getAllFilledApplicationsDetails, state.view]);
+  }, [
+    getAllFilledApplicationsDetails,
+    getConnectedOrganisations,
+    getConnectedPrograms,
+    state.view,
+  ]);
 
   return state.view ? (
     <div className="StudentUpdatesPage Page">
@@ -133,12 +99,15 @@ const MentorUpdatesPage = () => {
       />
 
       {state.view === "Programs" && (
-        <StuUpdatesPrograms fakeProgramData={fakeProgramData} entity="MENTOR" />
+        <StuUpdatesPrograms
+          connectedProgramData={state.connectedProgramData}
+          entity="MENTOR"
+        />
       )}
 
       {state.view === "Organisations" && (
         <StuUpdatesOrganisations
-          fakeOrganisationData={fakeOrganisationData}
+          connectedOrgData={state.connectedOrgData}
           entity="MENTOR"
         />
       )}

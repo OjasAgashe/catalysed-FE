@@ -1,13 +1,10 @@
 import React from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { BsChevronDoubleRight } from "react-icons/bs";
+import { StudentConnectedOrgData } from "../../types/StudentUpdates";
 
 type StuUpdatesOrganisationCardProps = {
-  data: {
-    id: number;
-    name: string;
-    description: string;
-  };
+  data: StudentConnectedOrgData;
   handleUpdatesOrganisationCardViewAllBtnClick: (id: number) => void;
 };
 

@@ -5,21 +5,18 @@ import {
   MENTOR_UPDATES_DETAILS_ORGANISATION,
   STUDENT_UPDATES_DETAILS_ORGANISATION,
 } from "../../constants/Routes";
+import { StudentConnectedOrgData } from "../../types/StudentUpdates";
 import Error from "../Error/Error";
 import StuUpdatesOrganisationCard from "../StuUpdatesCard/StuUpdatesOrganisationCard";
 import "./StuUpdatesOrganisations.css";
 
 type StuUpdatesOrganisationsProps = {
-  fakeOrganisationData: {
-    id: number;
-    name: string;
-    description: string;
-  }[];
+  connectedOrgData: StudentConnectedOrgData[] | null;
   entity: string;
 };
 
 const StuUpdatesOrganisations = ({
-  fakeOrganisationData,
+  connectedOrgData,
   entity,
 }: StuUpdatesOrganisationsProps) => {
   const history = useHistory();
@@ -33,8 +30,8 @@ const StuUpdatesOrganisations = ({
 
   return (
     <div className="StuUpdatesOrganisationsContainer">
-      {fakeOrganisationData && fakeOrganisationData.length ? (
-        fakeOrganisationData.map((data) => (
+      {connectedOrgData && connectedOrgData.length ? (
+        connectedOrgData.map((data: StudentConnectedOrgData) => (
           <StuUpdatesOrganisationCard
             key={data.id}
             data={data}

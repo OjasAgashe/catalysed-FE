@@ -178,39 +178,45 @@ function App() {
             path={`${MENTOR_UPDATES_DETAILS_ORGANISATION}/:organisationId/details`}
             exact
           >
-            <MentorUpdatesOrganisationDetails />
+            <MentorAPIProvider>
+              <MentorUpdatesOrganisationDetails />
+            </MentorAPIProvider>
           </PrivateRoute>
 
           <PrivateRoute
             path={`${MENTOR_UPDATES_DETAILS_ORGANISATION}/:organisationId/programs`}
             exact
           >
-            <MentorUpdatesOrganisationPrograms />
+            <MentorAPIProvider>
+              <MentorUpdatesOrganisationPrograms />
+            </MentorAPIProvider>
           </PrivateRoute>
 
           <PrivateRoute
             path={`${MENTOR_UPDATES_DETAILS_PROGRAM}/:programId/dashboard`}
             exact
           >
-            <MentorUpdatesProgramDashboard />
+            <MentorAPIProvider>
+              <MentorUpdatesProgramDashboard />
+            </MentorAPIProvider>
           </PrivateRoute>
 
           <PrivateRoute
             path={`${MENTOR_UPDATES_DETAILS_PROGRAM}/:programId/details`}
             exact
           >
-            <OrgAPIProvider>
+            <MentorAPIProvider>
               <MentorUpdatesProgramDetails />
-            </OrgAPIProvider>
+            </MentorAPIProvider>
           </PrivateRoute>
 
           <PrivateRoute
             path={`${MENTOR_UPDATES_DETAILS_PROGRAM}/:programId/people`}
             exact
           >
-            <OrgAPIProvider>
+            <MentorAPIProvider>
               <MentorUpdatesProgramPeople />
-            </OrgAPIProvider>
+            </MentorAPIProvider>
           </PrivateRoute>
 
           <PublicRoute path={ORGANISATION_REGISTER} exact>
@@ -408,39 +414,45 @@ function App() {
             path={`${STUDENT_UPDATES_DETAILS_ORGANISATION}/:organisationId/details`}
             exact
           >
-            <StuUpdatesOrganisationDetails />
+            <StudentAPIProvider>
+              <StuUpdatesOrganisationDetails />
+            </StudentAPIProvider>
           </PrivateRoute>
 
           <PrivateRoute
             path={`${STUDENT_UPDATES_DETAILS_ORGANISATION}/:organisationId/programs`}
             exact
           >
-            <StuUpdatesOrganisationPrograms />
+            <StudentAPIProvider>
+              <StuUpdatesOrganisationPrograms />
+            </StudentAPIProvider>
           </PrivateRoute>
 
           <PrivateRoute
             path={`${STUDENT_UPDATES_DETAILS_PROGRAM}/:programId/dashboard`}
             exact
           >
-            <StuUpdatesProgramDashboard />
+            <StudentAPIProvider>
+              <StuUpdatesProgramDashboard />
+            </StudentAPIProvider>
           </PrivateRoute>
 
           <PrivateRoute
             path={`${STUDENT_UPDATES_DETAILS_PROGRAM}/:programId/details`}
             exact
           >
-            <OrgAPIProvider>
+            <StudentAPIProvider>
               <StuUpdatesProgramDetails />
-            </OrgAPIProvider>
+            </StudentAPIProvider>
           </PrivateRoute>
 
           <PrivateRoute
             path={`${STUDENT_UPDATES_DETAILS_PROGRAM}/:programId/people`}
             exact
           >
-            <OrgAPIProvider>
+            <StudentAPIProvider>
               <StuUpdatesProgramPeople />
-            </OrgAPIProvider>
+            </StudentAPIProvider>
           </PrivateRoute>
 
           <Route path="*">

@@ -1,15 +1,11 @@
 import React from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { BsChevronDoubleRight } from "react-icons/bs";
+import { StudentConnectedProgramData } from "../../types/StudentUpdates";
 import "./StuUpdatesCard.css";
 
 type StuUpdatesProgramCardProps = {
-  data: {
-    id: number;
-    name: string;
-    duration: string;
-    mode: string;
-  };
+  data: StudentConnectedProgramData;
   handleUpdatesProgramCardViewAllBtnClick: (id: number) => void;
 };
 
@@ -21,21 +17,21 @@ const StuUpdatesProgramCard = ({
     <div className="StuUpdatesProgramCardContainer">
       <div className="DataContainerDiv">
         <div className="CardNameDiv">
-          <span className="Text">Name&nbsp;:&nbsp;</span>
+          <span className="Text">Title&nbsp;:&nbsp;</span>
           <OverlayTrigger
             placement="bottom"
-            overlay={<Tooltip id="data-name-tooltip">{data.name}</Tooltip>}
+            overlay={<Tooltip id="data-name-tooltip">{data.title}</Tooltip>}
           >
             <span className="Data">
-              {data.name.length > 15
-                ? `${data.name.substring(0, 15)}...`
-                : data.name}
+              {data.title.length > 15
+                ? `${data.title.substring(0, 15)}...`
+                : data.title}
             </span>
           </OverlayTrigger>
         </div>
         <div className="CardDurationDiv">
           <span className="Text">Duration&nbsp;:&nbsp;</span>
-          <span className="Data">{data.duration} months</span>
+          <span className="Data">{data.durationInMonths} months</span>
         </div>
         <div className="CardModeDiv">
           <span className="Text">Mode&nbsp;:&nbsp;</span>

@@ -1,4 +1,25 @@
 import { CreateProgramData } from "./CreateProgram";
+import { GetProgramMetaListData } from "./OrgViewSearchProgram";
+
+export interface StudentConnectedOrgData {
+  id: number;
+  name: string;
+  description: string;
+  orgLogo: null;
+  website: string;
+  socialMediaCode: string;
+  socialMediaLink: string;
+}
+
+export interface StudentConnectedProgramData {
+  id: number;
+  title: string;
+  tentativeStartDate: string;
+  durationInMonths: number;
+  mode: string;
+  languageRequirements: string;
+  status: string;
+}
 
 export interface StudentUpdatesCommonResponse {
   programId: number;
@@ -17,6 +38,8 @@ export interface StudentUpdatesCommonState {
   searchedNameNotFound: string;
   error: string;
   responseData: StudentUpdatesCommonResponse[] | null;
+  connectedOrgData: StudentConnectedOrgData[] | null;
+  connectedProgramData: StudentConnectedProgramData[] | null;
   filteredResponseData: StudentUpdatesCommonResponse[] | null;
 }
 
@@ -28,7 +51,15 @@ export type StudentUpdatesCommonActionType =
   | { type: "selectedRadioForFilter"; payload: string }
   | { type: "searchedNameNotFound"; payload: string }
   | { type: "error"; payload: string }
-  | { type: "responseData"; payload: StudentUpdatesCommonResponse[] | null }
+  | {
+      type: "responseData";
+      payload: StudentUpdatesCommonResponse[] | null;
+    }
+  | { type: "connectedOrgData"; payload: StudentConnectedOrgData[] | null }
+  | {
+      type: "connectedProgramData";
+      payload: StudentConnectedProgramData[] | null;
+    }
   | {
       type: "filteredResponseData";
       payload: StudentUpdatesCommonResponse[] | null;
@@ -84,5 +115,42 @@ export type StudentUpdatesApplicationDetailsActionType =
       type: "responseData";
       payload: StudentUpdatesApplicationDetailsResponse | null;
     }
+  | { type: "loading"; payload: boolean }
+  | { type: "error"; payload: string };
+
+export interface StudentUpdatesOrgDetailsResponse {
+  orgDetails: {
+    address: {
+      country: string;
+      region: string;
+    };
+    workDescription: string;
+    phone: {
+      countryCode: string;
+      countryName: string;
+      number: string;
+    };
+    contactEmail: string;
+    description: string;
+    name: string;
+    primaryLanguage: string;
+    website: string;
+    socialMediaCode: string;
+    socialMediaLink: string;
+    yearOfInception: string;
+  } | null;
+  programs: GetProgramMetaListData[] | null;
+}
+
+export interface StudentUpdatesOrganisationDetailsState {
+  view: string;
+  responseData: StudentUpdatesOrgDetailsResponse | null;
+  loading: boolean;
+  error: string;
+}
+
+export type StudentUpdatesOrganisationDetailsActionType =
+  | { type: "view"; payload: string }
+  | { type: "responseData"; payload: StudentUpdatesOrgDetailsResponse | null }
   | { type: "loading"; payload: boolean }
   | { type: "error"; payload: string };

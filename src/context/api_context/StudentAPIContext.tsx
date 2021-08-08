@@ -98,6 +98,34 @@ export const StudentAPIProvider: React.FC<React.ReactNode> = (props) => {
     );
   };
 
+  const getConnectedOrganisations = () => {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.get(`/user/${catalysedId}/connected/organizations`, {
+      headers: { Authorization: `Bearer ${catalysedToken}` },
+    });
+  };
+
+  const getConnectedOrganisationDetails = (organisationId: number) => {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.get(
+      `/user/${catalysedId}/connected/organizations/${organisationId}`,
+      { headers: { Authorization: `Bearer ${catalysedToken}` } }
+    );
+  };
+
+  const getConnectedPrograms = () => {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.get(`/students/${catalysedId}/programs`, {
+      headers: { Authorization: `Bearer ${catalysedToken}` },
+    });
+  };
+
   const values = {
     postCreateApplication,
     getAllFilledApplicationsDetails,
@@ -106,6 +134,9 @@ export const StudentAPIProvider: React.FC<React.ReactNode> = (props) => {
     putStudentProfile,
     getSuggestedPrograms,
     getSuggestedProgramDetails,
+    getConnectedOrganisations,
+    getConnectedOrganisationDetails,
+    getConnectedPrograms,
   };
 
   return (
