@@ -3,19 +3,22 @@ import { useHistory, useParams } from "react-router-dom";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
 import StuUpdatesProgramDetailsCommon from "../../components/StuUpdatesProgramDetailsCommon/StuUpdatesProgramDetailsCommon";
 import StuUpdatesProgramPeopleDetails from "../../components/StuUpdatesProgramPeopleDetails/StuUpdatesProgramPeopleDetails";
-import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
+import { useStudentAPI } from "../../context/api_context/StudentAPIContext";
 import { stuUpdatesProgramPeopleReducer } from "../../reducers/stuUpdatesProgramPeopleReducer";
+import { StuUpdatesProgramPeopleResponse } from "../../types/StuUpdatesProgramDetails";
 
 const StuUpdatesProgramPeople = () => {
   const [state, dispatch] = useReducer(stuUpdatesProgramPeopleReducer, {
     loading: true,
     error: "",
     programTitle: "",
+    responseData: null,
   });
 
   const { programId } = useParams<{ programId: string }>();
   const history = useHistory();
-  const { getProgramDetails } = useOrgAPI();
+  const { getConnectedProgramDetails, getConnectedProgramParticipants } =
+    useStudentAPI();
 
   useEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -25,7 +28,11 @@ const StuUpdatesProgramPeople = () => {
     const getTitlePeopleDetails = async () => {
       try {
         dispatch({ type: "error", payload: "" });
-        const programDetailsResponse = await getProgramDetails(
+
+        const programDetailsResponse = await getConnectedProgramDetails(
+          parseInt(programId)
+        );
+        const response = await getConnectedProgramParticipants(
           parseInt(programId)
         );
 
@@ -33,6 +40,7 @@ const StuUpdatesProgramPeople = () => {
           type: "programTitle",
           payload: programDetailsResponse.data.title,
         });
+        dispatch({ type: "responseData", payload: response.data });
 
         dispatch({ type: "loading", payload: false });
       } catch (error) {
@@ -46,7 +54,12 @@ const StuUpdatesProgramPeople = () => {
     };
 
     getTitlePeopleDetails();
-  }, [getProgramDetails, history, programId]);
+  }, [
+    getConnectedProgramDetails,
+    getConnectedProgramParticipants,
+    history,
+    programId,
+  ]);
 
   return (
     <div className="StuUpdatesProgramPeoplePage Page">
@@ -64,7 +77,11 @@ const StuUpdatesProgramPeople = () => {
         entity="STUDENT"
       />
 
-      <StuUpdatesProgramPeopleDetails />
+      <StuUpdatesProgramPeopleDetails
+        responseData={
+          state.responseData as StuUpdatesProgramPeopleResponse | null
+        }
+      />
     </div>
   );
 };

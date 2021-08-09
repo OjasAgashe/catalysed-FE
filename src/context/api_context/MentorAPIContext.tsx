@@ -128,6 +128,27 @@ export const MentorAPIProvider: React.FC<React.ReactNode> = (props) => {
     });
   };
 
+  const getConnectedProgramDetails = (programId: number) => {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.get(`mentors/${catalysedId}/programs/${programId}`, {
+      headers: { Authorization: `Bearer ${catalysedToken}` },
+    });
+  };
+
+  const getConnectedProgramParticipants = (programId: number) => {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.get(
+      `/mentors/${catalysedId}/programs/${programId}/participants`,
+      {
+        headers: { Authorization: `Bearer ${catalysedToken}` },
+      }
+    );
+  };
+
   const values = {
     postCreateApplication,
     getAllFilledApplicationsDetails,
@@ -139,6 +160,8 @@ export const MentorAPIProvider: React.FC<React.ReactNode> = (props) => {
     getConnectedOrganisations,
     getConnectedOrganisationDetails,
     getConnectedPrograms,
+    getConnectedProgramDetails,
+    getConnectedProgramParticipants,
   };
 
   return (

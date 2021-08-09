@@ -3,7 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
 import OrgProgramDetails from "../../components/OrgProgramDetails/OrgProgramDetails";
 import StuUpdatesProgramDetailsCommon from "../../components/StuUpdatesProgramDetailsCommon/StuUpdatesProgramDetailsCommon";
-import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
+import { useStudentAPI } from "../../context/api_context/StudentAPIContext";
 import { stuUpdatesProgramDetailsReducer } from "../../reducers/stuUpdatesProgramDetailsReducer";
 
 const StuUpdatesProgramDetails = () => {
@@ -15,7 +15,7 @@ const StuUpdatesProgramDetails = () => {
 
   const { programId } = useParams<{ programId: string }>();
   const history = useHistory();
-  const { getProgramDetails } = useOrgAPI();
+  const { getConnectedProgramDetails } = useStudentAPI();
 
   useEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -26,7 +26,7 @@ const StuUpdatesProgramDetails = () => {
       try {
         dispatch({ type: "error", payload: "" });
 
-        const response = await getProgramDetails(parseInt(programId));
+        const response = await getConnectedProgramDetails(parseInt(programId));
 
         dispatch({ type: "responseData", payload: response.data });
         dispatch({ type: "loading", payload: false });
@@ -41,7 +41,7 @@ const StuUpdatesProgramDetails = () => {
     };
 
     getDetails();
-  }, [getProgramDetails, history, programId]);
+  }, [getConnectedProgramDetails, history, programId]);
 
   return (
     <div className="StuUpdatesProgramDetailsPage Page">

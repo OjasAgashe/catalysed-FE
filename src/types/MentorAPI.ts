@@ -24,4 +24,10 @@ export interface MentorAPIProviderReturns {
     organisationId: number
   ) => Promise<AxiosResponse<any>>;
   getConnectedPrograms: () => Promise<AxiosResponse<any>>;
+  getConnectedProgramDetails: (
+    programId: number
+  ) => Promise<AxiosResponse<any>>;
+  getConnectedProgramParticipants: (
+    programId: number
+  ) => Promise<AxiosResponse<any>>;
 }

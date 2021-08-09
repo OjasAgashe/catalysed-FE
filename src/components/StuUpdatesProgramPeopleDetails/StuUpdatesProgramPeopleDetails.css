@@ -24,13 +24,14 @@
 .ProgramPeopleStudents .StudentUserDetailsContainer {
   display: flex;
   padding: 1rem;
+  border-bottom: 1px solid var(--blue-gray-300);
 }
 
 .ProgramPeopleStudents .StudentUserDetailsContainer {
   align-items: center;
-  border-bottom: 1px solid var(--blue-gray-300);
 }
 
+.ProgramPeopleMentor .MentorUserDetailsContainer.LastMentor,
 .ProgramPeopleStudents .StudentUserDetailsContainer.LastStudent {
   border-bottom: none;
 }

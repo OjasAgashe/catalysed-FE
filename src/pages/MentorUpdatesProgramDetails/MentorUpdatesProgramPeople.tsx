@@ -1,21 +1,24 @@
 import React, { useEffect, useReducer } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
+import MentorUpdatesProgramPeopleDetails from "../../components/MentorUpdatesProgramPeopleDetails/MentorUpdatesProgramPeopleDetails";
 import StuUpdatesProgramDetailsCommon from "../../components/StuUpdatesProgramDetailsCommon/StuUpdatesProgramDetailsCommon";
-import StuUpdatesProgramPeopleDetails from "../../components/StuUpdatesProgramPeopleDetails/StuUpdatesProgramPeopleDetails";
-import { useOrgAPI } from "../../context/api_context/OrgAPIContext";
+import { useMentorAPI } from "../../context/api_context/MentorAPIContext";
 import { stuUpdatesProgramPeopleReducer } from "../../reducers/stuUpdatesProgramPeopleReducer";
+import { MentorUpdatesProgramPeopleResponse } from "../../types/MentorUpdatesProgramDetails";
 
 const MentorUpdatesProgramPeople = () => {
   const [state, dispatch] = useReducer(stuUpdatesProgramPeopleReducer, {
     loading: true,
     error: "",
     programTitle: "",
+    responseData: null,
   });
 
   const { programId } = useParams<{ programId: string }>();
   const history = useHistory();
-  const { getProgramDetails } = useOrgAPI();
+  const { getConnectedProgramDetails, getConnectedProgramParticipants } =
+    useMentorAPI();
 
   useEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -25,7 +28,11 @@ const MentorUpdatesProgramPeople = () => {
     const getTitlePeopleDetails = async () => {
       try {
         dispatch({ type: "error", payload: "" });
-        const programDetailsResponse = await getProgramDetails(
+
+        const programDetailsResponse = await getConnectedProgramDetails(
+          parseInt(programId)
+        );
+        const response = await getConnectedProgramParticipants(
           parseInt(programId)
         );
 
@@ -33,6 +40,7 @@ const MentorUpdatesProgramPeople = () => {
           type: "programTitle",
           payload: programDetailsResponse.data.title,
         });
+        dispatch({ type: "responseData", payload: response.data });
 
         dispatch({ type: "loading", payload: false });
       } catch (error) {
@@ -46,7 +54,12 @@ const MentorUpdatesProgramPeople = () => {
     };
 
     getTitlePeopleDetails();
-  }, [getProgramDetails, history, programId]);
+  }, [
+    getConnectedProgramDetails,
+    getConnectedProgramParticipants,
+    history,
+    programId,
+  ]);
 
   return (
     <div className="MentorUpdatesProgramPeoplePage Page">
@@ -59,12 +72,16 @@ const MentorUpdatesProgramPeople = () => {
       )}
 
       <StuUpdatesProgramDetailsCommon
-        programTitle={"Program Title"}
+        programTitle={state.programTitle}
         programId={parseInt(programId)}
         entity="MENTOR"
       />
 
-      <StuUpdatesProgramPeopleDetails />
+      <MentorUpdatesProgramPeopleDetails
+        responseData={
+          state.responseData as MentorUpdatesProgramPeopleResponse | null
+        }
+      />
     </div>
   );
 };

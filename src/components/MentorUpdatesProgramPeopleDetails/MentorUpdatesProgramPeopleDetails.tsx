@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
-import "./StuUpdatesProgramPeopleDetails.css";
-import { FaUserCircle } from "react-icons/fa";
+import { MentorUpdatesProgramPeopleResponse } from "../../types/MentorUpdatesProgramDetails";
+import "../StuUpdatesProgramPeopleDetails/StuUpdatesProgramPeopleDetails.css";
+import StuUpdatesProgramPeopleMentorDetails from "../StuUpdatesProgramPeopleDetails/StuUpdatesProgramPeopleMentorDetails";
 
-import { StuUpdatesProgramPeopleResponse } from "../../types/StuUpdatesProgramDetails";
-import StuUpdatesProgramPeopleMentorDetails from "./StuUpdatesProgramPeopleMentorDetails";
-
-type StuUpdatesProgramPeopleDetailsProps = {
-  responseData: StuUpdatesProgramPeopleResponse | null;
+type MentorUpdatesProgramPeopleDetailsProps = {
+  responseData: MentorUpdatesProgramPeopleResponse | null;
 };
 
-const StuUpdatesProgramPeopleDetails = ({
+const MentorUpdatesProgramPeopleDetails = ({
   responseData,
-}: StuUpdatesProgramPeopleDetailsProps) => {
+}: MentorUpdatesProgramPeopleDetailsProps) => {
   const [noOfStudents, setNoOfStudents] = useState<number>(0);
   const [noOfMentors, setNoOfMentors] = useState<number>(0);
 
@@ -19,16 +17,16 @@ const StuUpdatesProgramPeopleDetails = ({
     setNoOfStudents(
       responseData === null
         ? 0
-        : responseData.students === null
+        : responseData.studentParticipants === null
         ? 0
-        : responseData.students.length
+        : responseData.studentParticipants.length
     );
     setNoOfMentors(
       responseData === null
         ? 0
-        : responseData.mentors === null
+        : responseData.mentorParticipants === null
         ? 0
-        : responseData.mentors.length
+        : responseData.mentorParticipants.length
     );
   }, [responseData]);
 
@@ -38,9 +36,9 @@ const StuUpdatesProgramPeopleDetails = ({
         <div className="ProgramPeopleMentor">
           <div className="MentorTextDiv">Mentor</div>
 
-          {responseData?.mentors && (
+          {responseData?.mentorParticipants && (
             <>
-              {responseData.mentors.map((mentor, index) => {
+              {responseData.mentorParticipants.map((mentor, index) => {
                 if (index !== noOfMentors - 1) {
                   return (
                     <StuUpdatesProgramPeopleMentorDetails mentor={mentor} />
@@ -56,32 +54,25 @@ const StuUpdatesProgramPeopleDetails = ({
             </>
           )}
         </div>
-        <div className="ProgramPeopleStudents">
+        <div className="ProgramPeopleMentor">
           <div className="StudentTextNCountContainer">
             <div>Other Students</div>
             <div className="StudentCountDiv">{noOfStudents} Students</div>
           </div>
-          {responseData?.students && (
+          {responseData?.studentParticipants && (
             <>
-              {responseData.students.map((student, index) => {
+              {responseData.studentParticipants.map((student, index) => {
                 if (index !== noOfStudents - 1) {
                   return (
-                    <div className="StudentUserDetailsContainer">
-                      <FaUserCircle className="UserIcon" />
-                      <div className="StudentNameDiv">
-                        <span className="CreateProgramFormText">{student}</span>
-                      </div>
-                    </div>
+                    <StuUpdatesProgramPeopleMentorDetails mentor={student} />
                   );
                 }
 
                 return (
-                  <div className="StudentUserDetailsContainer LastStudent">
-                    <FaUserCircle className="UserIcon" />
-                    <div className="StudentNameDiv">
-                      <span className="CreateProgramFormText">{student}</span>
-                    </div>
-                  </div>
+                  <StuUpdatesProgramPeopleMentorDetails
+                    mentor={student}
+                    classNames="LastMentor"
+                  />
                 );
               })}
             </>
@@ -92,4 +83,4 @@ const StuUpdatesProgramPeopleDetails = ({
   );
 };
 
-export default StuUpdatesProgramPeopleDetails;
+export default MentorUpdatesProgramPeopleDetails;
