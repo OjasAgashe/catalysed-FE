@@ -5,8 +5,13 @@ import SectionHeadingDiv from "./SectionHeadingDiv";
 import NextBtnDiv from "./NextBtnDiv";
 import { ORGANISATION_DIRECTORY } from "../../constants/Routes";
 import { useHistory } from "react-router-dom";
+import { OrgHomeDataResponse } from "../../types/OrgHome";
 
-const MentorInfoCard = () => {
+type MentorInfoCardProps = {
+  mentorSummary: OrgHomeDataResponse["mentorSummary"] | null;
+};
+
+const MentorInfoCard = ({ mentorSummary }: MentorInfoCardProps) => {
   const history = useHistory();
 
   const handleMentorInfoNextBtnClick = () => {
@@ -19,12 +24,15 @@ const MentorInfoCard = () => {
       <div className="StatNImgContainer">
         <div className="StatDivContainer">
           <div className="TotalStatDiv">
-            <CurrentStatDiv divHeadingText="Total" divHeadingValue="0" />
+            <CurrentStatDiv
+              divHeadingText="Total"
+              divHeadingValue={String(mentorSummary?.total ?? "")}
+            />
           </div>
           <div className="NewThisMonthDiv">
             <CurrentStatDiv
               divHeadingText="New This Month"
-              divHeadingValue="0"
+              divHeadingValue={String(mentorSummary?.newThisMonth ?? "")}
             />
           </div>
         </div>

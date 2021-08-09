@@ -89,13 +89,13 @@ const MentorProfileEdit = () => {
         <div className="ErrorDiv">
           <Error message={state.error} />
         </div>
-      ) : (
-        <MentorProfileEditSectionContainer
-          state={state}
-          dispatch={dispatch}
-          editedData={editedData}
-          setEditedData={setEditedData}
-        />
+      ) : (<></>
+        // <MentorProfileEditSectionContainer
+        //   state={state}
+        //   dispatch={dispatch}
+        //   editedData={editedData}
+        //   setEditedData={setEditedData}
+        // />
       )}
     </div>
   );

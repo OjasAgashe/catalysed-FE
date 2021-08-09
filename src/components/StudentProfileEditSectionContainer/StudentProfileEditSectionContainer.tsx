@@ -117,8 +117,7 @@ const StudentProfileEditSectionContainer = ({
       dispatch({ type: "loadingMessage", payload: "Saving Changes Done..." });
       dispatch({ type: "putCallError", payload: "" });
 
-      // await putStudentProfile(data);
-      console.log(data);
+      await putStudentProfile(data);
 
       dispatch({ type: "loadingMessage", payload: "" });
       dispatch({ type: "dataHasChanged", payload: false });

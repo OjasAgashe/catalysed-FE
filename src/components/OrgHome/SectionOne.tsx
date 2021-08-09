@@ -1,7 +1,12 @@
 import React from "react";
 import { OrgHomeSectionOne } from "../../assets/Illustrations/Illustrations";
+import { OrgHomeState } from "../../types/OrgHome";
 
-const SectionOne = () => {
+type SectionOneProps = {
+  state: OrgHomeState;
+};
+
+const SectionOne = ({ state }: SectionOneProps) => {
   return (
     <section
       style={{
@@ -10,7 +15,9 @@ const SectionOne = () => {
       className="OrgHomeSectionOneContainer"
     >
       <div className="TextContainer">
-        <span className="WelcomeSpan">Welcome OrgName !!</span>
+        <span className="WelcomeSpan">
+          Welcome {state.responseData?.orgName ?? ""} !!
+        </span>
         <span className="HelpTextSpanOne">
           You know that you can help and save
         </span>

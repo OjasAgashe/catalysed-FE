@@ -18,7 +18,11 @@ type OrgHomeProps = {
 };
 
 const OrgHome = ({ state, dispatch }: OrgHomeProps) => {
-  const { getProgramsStartingThisMonth, getOngoingPrograms } = useOrgAPI();
+  const {
+    getProgramsStartingThisMonth,
+    getOngoingPrograms,
+    getOrgHomePageData,
+  } = useOrgAPI();
 
   useEffect(() => {
     const sortDateFromNewToOldByUsing = (
@@ -47,10 +51,13 @@ const OrgHome = ({ state, dispatch }: OrgHomeProps) => {
         : -1;
     };
 
-    const getPrograms = async () => {
+    const getDashboardData = async () => {
       try {
+        const homeResponseData = await getOrgHomePageData();
         const programsStartingThisMonth = await getProgramsStartingThisMonth();
         const ongoingPrograms = await getOngoingPrograms();
+
+        dispatch({ type: "responseData", payload: homeResponseData.data });
 
         dispatch({
           type: "programsStartingThisMonth",
@@ -71,12 +78,17 @@ const OrgHome = ({ state, dispatch }: OrgHomeProps) => {
       }
     };
 
-    getPrograms();
-  }, [dispatch, getOngoingPrograms, getProgramsStartingThisMonth]);
+    getDashboardData();
+  }, [
+    dispatch,
+    getOngoingPrograms,
+    getOrgHomePageData,
+    getProgramsStartingThisMonth,
+  ]);
 
   return (
     <div className="OrgHomeSectionContainer">
-      <SectionOne />
+      <SectionOne state={state}/>
       <section className="OrgHomeSectionTwo">
         <div className="CreateProgramTextContainer">
           <Alert variant="info" className="CreateProgramText">
@@ -91,8 +103,8 @@ const OrgHome = ({ state, dispatch }: OrgHomeProps) => {
         <SectionThree state={state} />
         <SectionFour state={state} />
       </div>
-      <SectionFive />
-      <SectionSix />
+      <SectionFive state={state}/>
+      <SectionSix state={state}/>
     </div>
   );
 };

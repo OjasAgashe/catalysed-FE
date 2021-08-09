@@ -8,6 +8,7 @@ const OrgHomePage = () => {
     loading: true,
     programsStartingThisMonth: [],
     ongoingPrograms: [],
+    responseData: null,
   });
 
   useEffect(() => {

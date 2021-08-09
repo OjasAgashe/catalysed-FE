@@ -324,6 +324,15 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     });
   }
 
+  function getOrgHomePageData() {
+    const catalysedToken = getCatalysedTokenCookie();
+    const catalysedId = getCatalysedIdCookie();
+
+    return instance.get(`organizations/${catalysedId}/homepage`, {
+      headers: { Authorization: `Bearer ${catalysedToken}` },
+    });
+  }
+
   const values = {
     postCreateProgramCall,
     getProgramsMetaList,
@@ -347,6 +356,7 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     putStatusOfSpecificApplicantDetails,
     getOrganisationProfile,
     putOrganisationProfile,
+    getOrgHomePageData,
   };
 
   return (

@@ -5,8 +5,15 @@ import SectionHeadingDiv from "./SectionHeadingDiv";
 import NextBtnDiv from "./NextBtnDiv";
 import { useHistory } from "react-router-dom";
 import { ORGANISATION_INVITATIONS } from "../../constants/Routes";
+import { OrgHomeDataResponse } from "../../types/OrgHome";
 
-const InvitationsInfoCard = () => {
+type InvitationsInfoCardProps = {
+  invitationsSummary: OrgHomeDataResponse["invitationsSummary"] | null;
+};
+
+const InvitationsInfoCard = ({
+  invitationsSummary,
+}: InvitationsInfoCardProps) => {
   const history = useHistory();
 
   const handleInvitationsInfoNextBtnClick = () => {
@@ -18,7 +25,10 @@ const InvitationsInfoCard = () => {
       <SectionHeadingDiv headingText="Invitations" />
       <div className="StatNImgContainer">
         <div className="TotalStatDiv">
-          <CurrentStatDiv divHeadingText="Total" divHeadingValue="0" />
+          <CurrentStatDiv
+            divHeadingText="Total"
+            divHeadingValue={String(invitationsSummary?.total ?? "")}
+          />
         </div>
         <div className="InvitationsInfoCardImgContainer">
           <img
@@ -29,8 +39,14 @@ const InvitationsInfoCard = () => {
         </div>
       </div>
       <div className="AcceptedNPendingContainer">
-        <CurrentStatDiv divHeadingText="Accepted" divHeadingValue="0" />
-        <CurrentStatDiv divHeadingText="Pending" divHeadingValue="0" />
+        <CurrentStatDiv
+          divHeadingText="Accepted"
+          divHeadingValue={String(invitationsSummary?.accepted ?? "")}
+        />
+        <CurrentStatDiv
+          divHeadingText="Pending"
+          divHeadingValue={String(invitationsSummary?.pending ?? "")}
+        />
       </div>
       <NextBtnDiv onClick={handleInvitationsInfoNextBtnClick} />
     </div>

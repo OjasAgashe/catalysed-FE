@@ -124,8 +124,7 @@ const MentorProfileEditSectionContainer = ({
       });
       dispatch({ type: "putCallError", payload: "" });
 
-      // await putMentorProfile(data);
-      console.log(data);
+      await putMentorProfile(data);
 
       dispatch({ type: "loadingMessage", payload: "" });
       dispatch({ type: "dataHasChanged", payload: false });

@@ -57,4 +57,5 @@ export interface OrgAPIProviderReturns {
   ): Promise<AxiosResponse<any>>;
   getOrganisationProfile(): Promise<AxiosResponse<any>>;
   putOrganisationProfile(data: OrgProfileEditData): Promise<AxiosResponse<any>>;
+  getOrgHomePageData(): Promise<AxiosResponse<any>>;
 }
