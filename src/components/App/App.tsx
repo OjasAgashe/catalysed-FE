@@ -71,11 +71,9 @@ import StudentUpdatesPage from "../../pages/StudentUpdatesPage/StudentUpdatesPag
 import StuUpdatesProgramDetails from "../../pages/StuUpdatesProgramDetails/StuUpdatesProgramDetails";
 import StuUpdatesProgramPeople from "../../pages/StuUpdatesProgramDetails/StuUpdatesProgramPeople";
 import StuUpdatesOrganisationDetails from "../../pages/StuUpdatesOrganisationDetails/StuUpdatesOrganisationDetails";
-import StuUpdatesOrganisationPrograms from "../../pages/StuUpdatesOrganisationDetails/StuUpdatesOrganisationPrograms";
 import OrgInvitationsPage from "../../pages/OrgInvitationsPage/OrgInvitationsPage";
 import MentorUpdatesPage from "../../pages/MentorUpdatesPage/MentorUpdatesPage";
 import MentorUpdatesOrganisationDetails from "../../pages/MentorUpdatesOrganisationDetails/MentorUpdatesOrganisationDetails";
-import MentorUpdatesOrganisationPrograms from "../../pages/MentorUpdatesOrganisationDetails/MentorUpdatesOrganisationPrograms";
 import MentorUpdatesProgramDetails from "../../pages/MentorUpdatesProgramDetails/MentorUpdatesProgramDetails";
 import MentorUpdatesProgramPeople from "../../pages/MentorUpdatesProgramDetails/MentorUpdatesProgramPeople";
 import MentorRegisterPage from "../../pages/MentorRegisterPage/MentorRegisterPage";
@@ -188,7 +186,7 @@ function App() {
             exact
           >
             <MentorAPIProvider>
-              <MentorUpdatesOrganisationPrograms />
+              <MentorUpdatesOrganisationDetails />
             </MentorAPIProvider>
           </PrivateRoute>
 
@@ -424,7 +422,7 @@ function App() {
             exact
           >
             <StudentAPIProvider>
-              <StuUpdatesOrganisationPrograms />
+              <StuUpdatesOrganisationDetails />
             </StudentAPIProvider>
           </PrivateRoute>
 

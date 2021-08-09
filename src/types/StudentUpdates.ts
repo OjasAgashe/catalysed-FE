@@ -143,14 +143,14 @@ export interface StudentUpdatesOrgDetailsResponse {
 }
 
 export interface StudentUpdatesOrganisationDetailsState {
-  view: string;
+  choosedOption: string;
   responseData: StudentUpdatesOrgDetailsResponse | null;
   loading: boolean;
   error: string;
 }
 
 export type StudentUpdatesOrganisationDetailsActionType =
-  | { type: "view"; payload: string }
+  | { type: "choosedOption"; payload: string }
   | { type: "responseData"; payload: StudentUpdatesOrgDetailsResponse | null }
   | { type: "loading"; payload: boolean }
   | { type: "error"; payload: string };

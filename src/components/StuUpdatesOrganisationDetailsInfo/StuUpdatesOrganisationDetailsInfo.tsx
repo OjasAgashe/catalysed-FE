@@ -2,12 +2,19 @@ import React from "react";
 import "./StuUpdatesOrganisationDetailsInfo.css";
 import SectionOne from "./SectionOne";
 import SectionTwo from "./SectionTwo";
+import { StudentUpdatesOrgDetailsResponse } from "../../types/StudentUpdates";
 
-const StuUpdatesOrganisationDetailsInfo = () => {
+type StuUpdatesOrganisationDetailsInfoProps = {
+  orgDetails: StudentUpdatesOrgDetailsResponse["orgDetails"];
+};
+
+const StuUpdatesOrganisationDetailsInfo = ({
+  orgDetails,
+}: StuUpdatesOrganisationDetailsInfoProps) => {
   return (
     <div className="StuUpdatesOrganisationDetailsInfoContainer">
-      <SectionOne />
-      <SectionTwo />
+      <SectionOne orgDetails={orgDetails} />
+      <SectionTwo orgDetails={orgDetails} />
     </div>
   );
 };

@@ -71,21 +71,17 @@ const StuUpdatesApplicationDetails = () => {
       {state.error.length === 0 ? (
         <>
           {state.choosedOption === "Application" && (
-            <>
-              <StuUpdatesApplicationStatusInfo state={state} />
-            </>
+            <StuUpdatesApplicationStatusInfo state={state} />
           )}
 
           {state.choosedOption === "Program Details" && (
-            <>
-              <OrgProgramDetails
-                state={{
-                  loading: state.loading,
-                  error: state.error,
-                  responseData: state.responseData?.programDetails ?? null,
-                }}
-              />
-            </>
+            <OrgProgramDetails
+              state={{
+                loading: state.loading,
+                error: state.error,
+                responseData: state.responseData?.programDetails ?? null,
+              }}
+            />
           )}
         </>
       ) : (

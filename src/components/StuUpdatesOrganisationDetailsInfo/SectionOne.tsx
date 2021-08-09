@@ -1,8 +1,13 @@
 import React from "react";
 import { StudentUpdatesOrganisationProfileData } from "../../assets/Illustrations/Illustrations";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { StudentUpdatesOrgDetailsResponse } from "../../types/StudentUpdates";
 
-const SectionOne = () => {
+type SectionOneProps = {
+  orgDetails: StudentUpdatesOrgDetailsResponse["orgDetails"];
+};
+
+const SectionOne = ({ orgDetails }: SectionOneProps) => {
   return (
     <div className="SectionOne">
       <div className="SectionOneFirstHalf">
@@ -16,7 +21,7 @@ const SectionOne = () => {
         <div className="DataCard">
           <div className="DataCardName">
             <span className="CreateProgramFormText">Name&nbsp;:&nbsp;</span>
-            <span className="Data">CatalysEd</span>
+            <span className="Data">{orgDetails?.name}</span>
           </div>
 
           <div className="DataCardDescription">
@@ -28,30 +33,14 @@ const SectionOne = () => {
                 placement="bottom"
                 overlay={
                   <Tooltip id="datacard-description-tooltip">
-                    We aim to help every child colour the world by facilitating
-                    easy and streamlined access to quality guidance and
-                    education by providing them with a platform that helps them
-                    unveil their potential and introduce them to phenomenal and
-                    unforeseen opportunities.
+                    {orgDetails?.description}
                   </Tooltip>
                 }
               >
                 <span className="Data">
-                  {`We aim to help every child colour the world by facilitating easy
-                and streamlined access to quality guidance and education by
-                providing them with a platform that helps them unveil their
-                potential and introduce them to phenomenal and unforeseen
-                opportunities.`.length > 150
-                    ? `${`We aim to help every child colour the world by facilitating easy
-                and streamlined access to quality guidance and education by
-                providing them with a platform that helps them unveil their
-                potential and introduce them to phenomenal and unforeseen
-                opportunities.`.substring(0, 150)}...`
-                    : `We aim to help every child colour the world by facilitating easy
-                and streamlined access to quality guidance and education by
-                providing them with a platform that helps them unveil their
-                potential and introduce them to phenomenal and unforeseen
-                opportunities.`}
+                  {(orgDetails?.description ?? "").length > 150
+                    ? `${(orgDetails?.description ?? "").substring(0, 150)}...`
+                    : orgDetails?.description}
                 </span>
               </OverlayTrigger>
             </div>
@@ -62,11 +51,11 @@ const SectionOne = () => {
               Social Link&nbsp;:&nbsp;
             </span>
             <a
-              href="https://www.catalysed.org/"
+              href={orgDetails?.socialMediaLink}
               target="_blank"
               rel="noreferrer"
             >
-              <span className="Data">https://www.catalysed.org/</span>
+              <span className="Data">{orgDetails?.socialMediaLink}</span>
             </a>
           </div>
 
@@ -74,12 +63,8 @@ const SectionOne = () => {
             <span className="CreateProgramFormText">
               Website Link&nbsp;:&nbsp;
             </span>
-            <a
-              href="https://www.catalysed.org/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <span className="Data">https://www.catalysed.org/</span>
+            <a href={orgDetails?.website} target="_blank" rel="noreferrer">
+              <span className="Data">{orgDetails?.website}</span>
             </a>
           </div>
         </div>

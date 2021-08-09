@@ -6,3 +6,8 @@
 .StuUpdatesOrganisationDetailsCommonContainer .CommonProgramDetailsHeroText {
   padding: 2rem 0 1rem 5rem !important;
 }
+
+.StuUpdatesOrganisationDetailsCommonContainer button {
+  background-color: inherit !important;
+  border: none !important;
+}

@@ -3,25 +3,57 @@ import { ProgramsApplicantsSummaryHeader } from "../../assets/Illustrations/Illu
 import "./StuUpdatesOrganisationDetailsCommon.css";
 import "../OrgProgramDetailsCommon/OrgProgramDetailsCommon.css";
 import { Alert } from "react-bootstrap";
-import { Link, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import {
   MENTOR_UPDATES_DETAILS_ORGANISATION,
   STUDENT_UPDATES_DETAILS_ORGANISATION,
 } from "../../constants/Routes";
-import { STUDENT } from "../../constants/Entities";
+import { MENTOR, STUDENT } from "../../constants/Entities";
+import {
+  StudentUpdatesOrganisationDetailsActionType,
+  StudentUpdatesOrganisationDetailsState,
+} from "../../types/StudentUpdates";
 
 type StuUpdatesOrganisationDetailsCommonProps = {
-  organisationName?: string;
+  state: StudentUpdatesOrganisationDetailsState;
+  dispatch: React.Dispatch<StudentUpdatesOrganisationDetailsActionType>;
   organisationId: number;
   entity: string;
 };
 
 const StuUpdatesOrganisationDetailsCommon = ({
-  organisationName = "",
+  state,
+  dispatch,
   organisationId,
   entity,
 }: StuUpdatesOrganisationDetailsCommonProps) => {
-  const location = useLocation();
+  const history = useHistory();
+
+  const handleDetailsBtnClick = () => {
+    dispatch({ type: "choosedOption", payload: "Details" });
+
+    if (entity === STUDENT)
+      history.push(
+        `${STUDENT_UPDATES_DETAILS_ORGANISATION}/${organisationId}/details`
+      );
+    else if (entity === MENTOR)
+      history.push(
+        `${MENTOR_UPDATES_DETAILS_ORGANISATION}/${organisationId}/details`
+      );
+  };
+
+  const handleProgramsBtnClick = () => {
+    dispatch({ type: "choosedOption", payload: "Programs" });
+
+    if (entity === STUDENT)
+      history.push(
+        `${STUDENT_UPDATES_DETAILS_ORGANISATION}/${organisationId}/programs`
+      );
+    else if (entity === MENTOR)
+      history.push(
+        `${MENTOR_UPDATES_DETAILS_ORGANISATION}/${organisationId}/programs`
+      );
+  };
 
   return (
     <div
@@ -29,57 +61,43 @@ const StuUpdatesOrganisationDetailsCommon = ({
       style={{ backgroundImage: `url(${ProgramsApplicantsSummaryHeader})` }}
     >
       <div className="CommonProgramDetailsHeroText">
-        <span>{organisationName}</span>
+        <span>{state.responseData?.orgDetails?.name ?? ""}</span>
       </div>
 
       <div className="PDViewAndRouteLinksContainer">
         <Alert variant="warning" className="ProgramDetailsRouteLinks">
           <div
             className={`${
-              location.pathname.includes(
-                entity === STUDENT
-                  ? STUDENT_UPDATES_DETAILS_ORGANISATION
-                  : MENTOR_UPDATES_DETAILS_ORGANISATION
-              ) && location.pathname.includes("details")
+              state.choosedOption === "Details"
                 ? "CurrentSelectedTab"
                 : "NotCurrentSelectedTab"
             } ProgramDetailsLinkDiv`}
           >
-            <Link
-              to={`${
-                entity === STUDENT
-                  ? STUDENT_UPDATES_DETAILS_ORGANISATION
-                  : MENTOR_UPDATES_DETAILS_ORGANISATION
-              }/${organisationId}/details`}
+            <button
               className="ProgramDetailsLink Link"
+              type="button"
+              onClick={handleDetailsBtnClick}
             >
               {/* Only for Styling Purpose className is used Here */}
               Details
-            </Link>
+            </button>
           </div>
 
           <div
             className={`${
-              location.pathname.includes(
-                entity === STUDENT
-                  ? STUDENT_UPDATES_DETAILS_ORGANISATION
-                  : MENTOR_UPDATES_DETAILS_ORGANISATION
-              ) && location.pathname.includes("programs")
+              state.choosedOption === "Programs"
                 ? "CurrentSelectedTab"
                 : "NotCurrentSelectedTab"
             }`}
           >
-            <Link
-              to={`${
-                entity === STUDENT
-                  ? STUDENT_UPDATES_DETAILS_ORGANISATION
-                  : MENTOR_UPDATES_DETAILS_ORGANISATION
-              }/${organisationId}/programs`}
+            <button
               className="ApplicantsLink Link"
+              type="button"
+              onClick={handleProgramsBtnClick}
             >
               {/* Only for Styling Purpose className is used Here */}
               Programs
-            </Link>
+            </button>
           </div>
         </Alert>
       </div>

@@ -4,8 +4,13 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 // @ts-ignore
 import ReactCountryFlag from "react-country-flag";
 import { getCode } from "country-list";
+import { StudentUpdatesOrgDetailsResponse } from "../../types/StudentUpdates";
 
-const SectionTwo = () => {
+type SectionTwoProps = {
+  orgDetails: StudentUpdatesOrgDetailsResponse["orgDetails"];
+};
+
+const SectionTwo = ({ orgDetails }: SectionTwoProps) => {
   return (
     <div className="SectionTwo">
       <div className="SectionTwoFirstHalf">
@@ -14,7 +19,7 @@ const SectionTwo = () => {
             <span className="CreateProgramFormText">
               Area of Work&nbsp;:&nbsp;
             </span>
-            <span className="Data">Education</span>
+            <span className="Data">{orgDetails?.workDescription}</span>
           </div>
 
           <div className="DataCardContact">
@@ -27,7 +32,7 @@ const SectionTwo = () => {
                 </span>
                 <span>
                   <ReactCountryFlag
-                    countryCode={getCode("INDIA")}
+                    countryCode={getCode(orgDetails?.phone.countryName ?? "")}
                     svg
                     style={{
                       width: "1.5em",
@@ -37,9 +42,9 @@ const SectionTwo = () => {
                     }}
                   />
                   &nbsp;&nbsp;
-                  <span className="Data">+ 91 </span>
+                  <span className="Data">{orgDetails?.phone.countryCode}</span>
                   &nbsp;
-                  <span className="Data">0044556633</span>
+                  <span className="Data">{orgDetails?.phone.number}</span>
                 </span>
                 <span className="PhoneComma">&nbsp;,</span>
               </div>
@@ -51,10 +56,12 @@ const SectionTwo = () => {
                 <OverlayTrigger
                   placement="bottom"
                   overlay={
-                    <Tooltip id="datacard-email-tooltip">oj@gmail.com </Tooltip>
+                    <Tooltip id="datacard-email-tooltip">
+                      {orgDetails?.contactEmail}
+                    </Tooltip>
                   }
                 >
-                  <span className="Data">oj@gmail.com</span>
+                  <span className="Data">{orgDetails?.contactEmail}</span>
                 </OverlayTrigger>
               </div>
             </div>
@@ -68,7 +75,7 @@ const SectionTwo = () => {
                 <span className="CreateProgramFormText">
                   region&nbsp;:&nbsp;
                 </span>
-                <span className="Data">Delhi</span>
+                <span className="Data">{orgDetails?.address.region}</span>
                 <span className="RegionComma">&nbsp;,</span>
               </div>
 
@@ -76,7 +83,7 @@ const SectionTwo = () => {
                 <span className="CreateProgramFormText">
                   country&nbsp;:&nbsp;
                 </span>
-                <span className="Data">India</span>
+                <span className="Data">{orgDetails?.address.country}</span>
               </div>
             </div>
           </div>
@@ -85,14 +92,14 @@ const SectionTwo = () => {
             <span className="CreateProgramFormText">
               Year of Inception&nbsp;:&nbsp;
             </span>
-            <span className="Data">2000</span>
+            <span className="Data">{orgDetails?.yearOfInception}</span>
           </div>
 
           <div className="DataCardPrimaryLanguage">
             <span className="CreateProgramFormText">
               Primary Language&nbsp;:&nbsp;
             </span>
-            <span className="LanguageLi">English</span>
+            <span className="LanguageLi">{orgDetails?.primaryLanguage}</span>
           </div>
         </div>
       </div>

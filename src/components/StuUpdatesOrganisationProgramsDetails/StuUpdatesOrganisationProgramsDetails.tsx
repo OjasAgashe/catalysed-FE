@@ -1,16 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { StudentUpdatesOrgDetailsResponse } from "../../types/StudentUpdates";
 import "./StuUpdatesOrganisationProgramsDetails.css";
 
-const StuUpdatesOrganisationProgramsDetails = () => {
+type StuUpdatesOrganisationProgramsDetialsProps = {
+  programs: StudentUpdatesOrgDetailsResponse["programs"];
+};
+
+const StuUpdatesOrganisationProgramsDetails = ({
+  programs,
+}: StuUpdatesOrganisationProgramsDetialsProps) => {
+  const [noOfPrograms, setNoOfPrograms] = useState<number>(0);
+
+  useEffect(() => {
+    setNoOfPrograms(programs === null ? 0 : programs.length);
+  }, [programs]);
+
   return (
     <div className="StuUpdatesOrganisationProgramsDetails">
       <div className="StuUpdatesOrganisationProgramsDetailsContainer">
         <div className="ProgramRunningText">
           Programs running by Organisation
         </div>
-        <div className="ProgramNameDiv">First Program Name</div>
-        <div className="ProgramNameDiv">Second Program Name</div>
-        <div className="ProgramNameDiv LastProgramName">Third Program Name</div>
+
+        {programs && (
+          <>
+            {programs.map((program, index) => {
+              if (index !== noOfPrograms - 1) {
+                return <div className="ProgramNameDiv">{program.title}</div>;
+              }
+              return (
+                <div className="ProgramNameDiv LastProgramName">
+                  {program.title}
+                </div>
+              );
+            })}
+          </>
+        )}
       </div>
     </div>
   );
