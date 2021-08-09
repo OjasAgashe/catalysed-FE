@@ -15,7 +15,7 @@ export interface StudentProfileEditData {
     countryName: string;
     number: string;
   };
-  address: {
+  location: {
     country: string;
     region: string;
   };

@@ -166,8 +166,8 @@ const SectionTwo = ({
         (prevState): MentorProfileEditData =>
           ({
             ...prevState,
-            address: {
-              ...prevState?.address,
+            location: {
+              ...prevState?.location,
               [event.target.name]: event.target.name,
             },
           } as MentorProfileEditData)

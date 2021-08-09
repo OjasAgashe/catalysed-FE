@@ -45,8 +45,8 @@ const StudentProfileEditSectionContainer = ({
         responseDataTemp?.previouslyMentored ||
       editedDataTemp?.stableConnection !== responseDataTemp?.stableConnection ||
       editedDataTemp?.primaryDevice !== responseDataTemp?.primaryDevice ||
-      editedDataTemp?.address.country !== responseDataTemp?.address.country ||
-      editedDataTemp?.address.region !== responseDataTemp?.address.region ||
+      editedDataTemp?.location.country !== responseDataTemp?.location.country ||
+      editedDataTemp?.location.region !== responseDataTemp?.location.region ||
       editedDataTemp?.phone.number !== responseDataTemp?.phone.number ||
       editedDataTemp?.phone.countryCode !== responseDataTemp?.phone.countryCode
     ) {
@@ -96,8 +96,8 @@ const StudentProfileEditSectionContainer = ({
   const canMakeAPICall = () => {
     return (
       [
-        editedData?.address?.country ?? "",
-        editedData?.address?.region ?? "",
+        editedData?.location.country ?? "",
+        editedData?.location.region ?? "",
         editedData?.birthYear ?? "",
         editedData?.phone.number ?? "",
         editedData?.primaryDevice ?? "",

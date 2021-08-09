@@ -17,7 +17,7 @@ export interface MentorProfileEditData {
     countryName: string;
     number: string;
   };
-  address: {
+  location: {
     country: string;
     region: string;
   };

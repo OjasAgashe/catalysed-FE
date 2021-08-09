@@ -260,7 +260,7 @@ const SectionTwoFragment = ({
                     type="text"
                     placeholder="Type..."
                     className="SectionTwoFormControl"
-                    value={editedData?.address?.country}
+                    value={editedData?.location.country}
                     onChange={handleStudentEditProfileAddressChange}
                   />
                   <Form.Control.Feedback type="invalid">
@@ -279,7 +279,7 @@ const SectionTwoFragment = ({
                     type="text"
                     placeholder="Type..."
                     className="SectionTwoFormControl"
-                    value={editedData?.address?.region}
+                    value={editedData?.location.region}
                     onChange={handleStudentEditProfileAddressChange}
                   />
                   <Form.Control.Feedback type="invalid">

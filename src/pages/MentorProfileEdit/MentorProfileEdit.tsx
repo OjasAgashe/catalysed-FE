@@ -42,25 +42,14 @@ const MentorProfileEdit = () => {
 
         const response = await getMentorProfile();
 
-        const dataTempObj = {
-          ...response.data,
-          primaryLanguage: "English",
-          phone: {
-            countryCode: "+91",
-            countryName: "INDIA",
-            number: "1212121212",
-          },
-          address: { country: "India", region: "Delhi" },
-        };
-
-        dispatch({ type: "responseData", payload: dataTempObj });
+        dispatch({ type: "responseData", payload: response.data });
 
         dispatch({
           type: "phoneValue",
-          payload: dataTempObj.phone.countryCode + dataTempObj.phone.number,
+          payload: response.data.phone.countryCode + response.data.phone.number,
         });
 
-        setEditedData(dataTempObj);
+        setEditedData(response.data);
       } catch (error) {
         dispatch({ type: "error", payload: "Sorry!! No Details Found" });
       } finally {
@@ -89,13 +78,13 @@ const MentorProfileEdit = () => {
         <div className="ErrorDiv">
           <Error message={state.error} />
         </div>
-      ) : (<></>
-        // <MentorProfileEditSectionContainer
-        //   state={state}
-        //   dispatch={dispatch}
-        //   editedData={editedData}
-        //   setEditedData={setEditedData}
-        // />
+      ) : (
+        <MentorProfileEditSectionContainer
+          state={state}
+          dispatch={dispatch}
+          editedData={editedData}
+          setEditedData={setEditedData}
+        />
       )}
     </div>
   );

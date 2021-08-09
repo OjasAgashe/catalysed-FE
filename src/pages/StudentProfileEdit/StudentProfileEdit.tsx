@@ -78,13 +78,13 @@ const StudentProfileEdit = () => {
         <div className="ErrorDiv">
           <Error message={state.error} />
         </div>
-      ) : (<></>
-        // <StudentProfileEditSectionContainer
-        //   state={state}
-        //   dispatch={dispatch}
-        //   editedData={editedData}
-        //   setEditedData={setEditedData}
-        // />
+      ) : (
+        <StudentProfileEditSectionContainer
+          state={state}
+          dispatch={dispatch}
+          editedData={editedData}
+          setEditedData={setEditedData}
+        />
       )}
     </div>
   );

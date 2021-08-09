@@ -153,8 +153,8 @@ const SectionTwo = ({
         (prevState): StudentProfileEditData =>
           ({
             ...prevState,
-            address: {
-              ...prevState?.address,
+            location: {
+              ...prevState?.location,
               [event.target.name]: event.target.name,
             },
           } as StudentProfileEditData)
