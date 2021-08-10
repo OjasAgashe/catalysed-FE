@@ -64,7 +64,9 @@ const LoginForm = ({ state, dispatch }: LoginFormProps) => {
           response.data.user.profileCreated,
           response.data.user.id,
           response.data.jwt,
-          response.data.user.userType
+          response.data.user.userType,
+          response.data.user.userName,
+          response.data.user.orgName ?? ""
         );
 
         switch (response.data.user.userType) {

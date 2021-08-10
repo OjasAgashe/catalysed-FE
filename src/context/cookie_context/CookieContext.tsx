@@ -5,7 +5,9 @@ interface CookieProviderReturns {
     catalysedCreated: boolean,
     catalysedId: number | null,
     catalysedToken: string,
-    catalysedType: string
+    catalysedType: string,
+    catalysedUserName: string,
+    catalysedOrgName: string
   ) => void;
 
   getAllCookies: () => {
@@ -13,6 +15,8 @@ interface CookieProviderReturns {
     catalysedId: number | null;
     catalysedToken: string;
     catalysedType: string;
+    catalysedUserName: string;
+    catalysedOrgName: string;
   };
 
   setCatalysedCreatedCookie: (catalysedCreated: boolean) => void;
@@ -26,6 +30,12 @@ interface CookieProviderReturns {
 
   setCatalysedTypeCookie: (catalysedType: string) => void;
   getCatalysedTypeCookie: () => string;
+
+  setCatalysedUserNameCookie: (catalysedUserName: string) => void;
+  getCatalysedUserNameCookie: () => string;
+
+  setCatalysedOrgNameCookie: (catalysedOrgName: string) => void;
+  getCatalysedOrgNameCookie: () => string;
 }
 
 const CookieContext = React.createContext<CookieProviderReturns | null>(null);
@@ -39,7 +49,9 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
     catalysedCreated: boolean,
     catalysedId: number | null,
     catalysedToken: string,
-    catalysedType: string
+    catalysedType: string,
+    catalysedUserName: string,
+    catalysedOrgName: string
   ): void => {
     document.cookie = `catalysedCreated=${encodeURIComponent(
       catalysedCreated
@@ -60,6 +72,16 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
       catalysedType
     )}; path=/`;
     // secure`;
+
+    document.cookie = `catalysedUserName=${encodeURIComponent(
+      catalysedUserName
+    )}; path=/`;
+    // secure`;
+
+    document.cookie = `catalysedOrgName=${encodeURIComponent(
+      catalysedOrgName
+    )}; path=/`;
+    // secure`;
   };
 
   const getAllCookies = (): {
@@ -67,13 +89,24 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
     catalysedId: number | null;
     catalysedToken: string;
     catalysedType: string;
+    catalysedUserName: string;
+    catalysedOrgName: string;
   } => {
     const catalysedCreated = getCatalysedCreatedCookie();
     const catalysedId = getCatalysedIdCookie();
     const catalysedToken = getCatalysedTokenCookie();
     const catalysedType = getCatalysedTypeCookie();
+    const catalysedUserName = getCatalysedUserNameCookie();
+    const catalysedOrgName = getCatalysedOrgNameCookie();
 
-    return { catalysedCreated, catalysedId, catalysedToken, catalysedType };
+    return {
+      catalysedCreated,
+      catalysedId,
+      catalysedToken,
+      catalysedType,
+      catalysedUserName,
+      catalysedOrgName,
+    };
   };
 
   const setCatalysedCreatedCookie = (catalysedCreated: boolean): void => {
@@ -162,6 +195,50 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
     return "";
   };
 
+  const setCatalysedUserNameCookie = (catalysedUserName: string): void => {
+    document.cookie = `catalysedUserName=${encodeURIComponent(
+      catalysedUserName
+    )}; path=/`;
+    // secure`;
+  };
+
+  const getCatalysedUserNameCookie = (): string => {
+    if (document.cookie) {
+      const allCookies = [...document.cookie.split(";")].reverse();
+
+      for (let i = 0; i < allCookies.length; i++) {
+        let [name, value] = allCookies[i].split("=");
+
+        if (name.trim() === "catalysedUserName")
+          return decodeURIComponent(value);
+      }
+    }
+
+    return "";
+  };
+
+  const setCatalysedOrgNameCookie = (catalysedOrgName: string): void => {
+    document.cookie = `catalysedOrgName=${encodeURIComponent(
+      catalysedOrgName
+    )}; path=/`;
+    // secure`;
+  };
+
+  const getCatalysedOrgNameCookie = (): string => {
+    if (document.cookie) {
+      const allCookies = [...document.cookie.split(";")].reverse();
+
+      for (let i = 0; i < allCookies.length; i++) {
+        let [name, value] = allCookies[i].split("=");
+
+        if (name.trim() === "catalysedOrgName")
+          return decodeURIComponent(value);
+      }
+    }
+
+    return "";
+  };
+
   const values = {
     setAllCookies,
     getAllCookies,
@@ -177,6 +254,12 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
 
     setCatalysedTypeCookie,
     getCatalysedTypeCookie,
+
+    setCatalysedUserNameCookie,
+    getCatalysedUserNameCookie,
+
+    setCatalysedOrgNameCookie,
+    getCatalysedOrgNameCookie,
   };
 
   return (

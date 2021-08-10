@@ -50,15 +50,16 @@ const SectionTwoFragment = ({
               required
               name="age"
               type="number"
-              pattern="[0-9]{2}"
-              min={18}
-              placeholder="YY"
+              // pattern="[0-9]{2}"
+              // min={18}
+              // placeholder="YY"
               className="SectionTwoFormControl"
               value={new Date().getFullYear() - Number(editedData?.birthYear)}
               onChange={handleMentorEditProfileChange}
             />
             <Form.Control.Feedback type="invalid">
-              Required field, only valid YY (&gt;= 18).
+              Required field
+              {/* , only valid YY (&gt;= 18). */}
             </Form.Control.Feedback>
           </Form.Group>
 
@@ -221,55 +222,27 @@ const SectionTwoFragment = ({
           </Form.Group>
 
           <Form.Group>
-            <Form.Text className="SectionTwoFormTextLabel ContactLabel">
-              contact&nbsp;:&nbsp;
-            </Form.Text>
-            <Row>
-              <Col>
-                <Form.Group>
-                  <Form.Text className="SectionTwoFormTextLabel PhoneLabel">
-                    phone
-                  </Form.Text>
-                  <Form.Control
-                    className="PhoneInputControl"
-                    isInvalid={state.phoneValueIsInvalid}
-                  />
-                  <PhoneInput
-                    country={"in"}
-                    placeholder=""
-                    value={state.phoneValue}
-                    onChange={(value, country, event, formattedValue) =>
-                      handlePhoneInputChange(
-                        value,
-                        country,
-                        event,
-                        formattedValue
-                      )
-                    }
-                    inputProps={{
-                      name: "phone",
-                      required: true,
-                      className: "form-control",
-                    }}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    Required field, please Enter Correct Value.
-                  </Form.Control.Feedback>
-                </Form.Group>
-              </Col>
-              <Col>
-                <Form.Group>
-                  <Form.Text className="SectionTwoFormTextLabel EmailLabel EditOrgProfileDetailsDisabledField">
-                    email
-                  </Form.Text>
-                  <Form.Control
-                    className="SectionTwoFormControl EditOrgProfileDetailsDisabledField"
-                    disabled
-                    value={editedData?.email}
-                  />
-                </Form.Group>
-              </Col>
-            </Row>
+            <Form.Text className="SectionTwoFormTextLabel">phone</Form.Text>
+            <Form.Control
+              className="PhoneInputControl"
+              isInvalid={state.phoneValueIsInvalid}
+            />
+            <PhoneInput
+              country={"in"}
+              placeholder=""
+              value={state.phoneValue}
+              onChange={(value, country, event, formattedValue) =>
+                handlePhoneInputChange(value, country, event, formattedValue)
+              }
+              inputProps={{
+                name: "phone",
+                required: true,
+                className: "form-control",
+              }}
+            />
+            <Form.Control.Feedback type="invalid">
+              Required field, please Enter Correct Value.
+            </Form.Control.Feedback>
           </Form.Group>
 
           <Form.Group>

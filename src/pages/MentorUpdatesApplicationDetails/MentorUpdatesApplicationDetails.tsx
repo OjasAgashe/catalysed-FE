@@ -25,10 +25,6 @@ const MentorUpdatesApplicationDetails = () => {
   useEffect(() => {
     document.documentElement.scrollTop = 0;
 
-    document.title = `Connected Application ${
-      state.choosedOption === "Application" ? "Details" : "Program Details"
-    } | CatalysEd`;
-
     const getDetails = async () => {
       try {
         dispatch({ type: "error", payload: "" });
@@ -50,12 +46,7 @@ const MentorUpdatesApplicationDetails = () => {
     };
 
     getDetails();
-  }, [
-    applicationId,
-    getSpecificFilledApplicationDetails,
-    history,
-    state.choosedOption,
-  ]);
+  }, [applicationId, getSpecificFilledApplicationDetails, history]);
 
   return (
     <div className="MentorUpdatesApplicationDetailsPage Page">

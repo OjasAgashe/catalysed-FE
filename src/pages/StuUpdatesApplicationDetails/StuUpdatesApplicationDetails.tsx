@@ -24,10 +24,6 @@ const StuUpdatesApplicationDetails = () => {
   useEffect(() => {
     document.documentElement.scrollTop = 0;
 
-    document.title = `Connected Application ${
-      state.choosedOption === "Application" ? "Details" : "Program Details"
-    } | CatalysEd`;
-
     const getDetails = async () => {
       try {
         dispatch({ type: "error", payload: "" });
@@ -49,12 +45,7 @@ const StuUpdatesApplicationDetails = () => {
     };
 
     getDetails();
-  }, [
-    applicationId,
-    getSpecificFilledApplicationDetails,
-    history,
-    state.choosedOption,
-  ]);
+  }, [applicationId, getSpecificFilledApplicationDetails, history]);
 
   return (
     <div className="StuUpdatesApplicationDetailsPage Page">

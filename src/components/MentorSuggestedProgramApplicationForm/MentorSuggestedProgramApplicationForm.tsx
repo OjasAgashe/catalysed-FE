@@ -10,6 +10,8 @@ import {
 } from "../../types/StuSuggestedProgramApplication";
 import { MENTOR } from "../../constants/Entities";
 import { useMentorAPI } from "../../context/api_context/MentorAPIContext";
+import { useHistory } from "react-router-dom";
+import { MENTOR_UPDATES_DETAILS_APPLICATION } from "../../constants/Routes";
 
 type MentorSuggestedProgramApplicationFormProps = {
   state: StuSuggestedProgramApplicationState;
@@ -25,6 +27,7 @@ const MentorSuggestedProgramApplicationForm = ({
   const [answer, setAnswer] = useState<string>("");
 
   const { postCreateApplication } = useMentorAPI();
+  const history = useHistory();
 
   const makeAPICall = async (data: StuSuggestedProgramApplicationData) => {
     try {
@@ -36,7 +39,9 @@ const MentorSuggestedProgramApplicationForm = ({
       const response = await postCreateApplication(data, programId);
 
       dispatch({ type: "loading", payload: false });
-      console.log(response);
+      history.push(
+        `${MENTOR_UPDATES_DETAILS_APPLICATION}/${response.data.id}/details`
+      );
     } catch (error) {
       document.documentElement.scrollTop =
         document.documentElement.scrollHeight;

@@ -31,7 +31,7 @@ const Header = () => {
   const history = useHistory();
 
   const handleSignOut = () => {
-    setAllCookies(false, null, "", "");
+    setAllCookies(false, null, "", "", "", "");
 
     history.push(HOME);
   };

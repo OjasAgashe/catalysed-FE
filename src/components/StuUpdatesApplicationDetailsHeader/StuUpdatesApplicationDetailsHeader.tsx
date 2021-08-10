@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Alert } from "react-bootstrap";
 import { OrgProfileCommonHeaderImg } from "../../assets/Illustrations/Illustrations";
 import {
@@ -16,6 +16,12 @@ const StuUpdatesApplicationDetailsHeader = ({
   state,
   dispatch,
 }: StuUpdatesApplicationDetailsHeaderProps) => {
+  useEffect(() => {
+    document.title = `Connected Application ${
+      state.choosedOption === "Application" ? "Details" : "Program Details"
+    } | CatalysEd`;
+  }, [state.choosedOption]);
+
   return (
     <div
       className="OrgSpecificApplicantDetailsHeaderContainer"

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineDoubleRight } from "react-icons/ai";
 import MentorProfileBuilderTypeform from "../../components/MentorProfileBuilderTypeform/MentorProfileBuilderTypeform";
+import { useCookie } from "../../context/cookie_context/CookieContext";
 import "./MentorProfileBuilder.css";
 
 type GreetProps = {
@@ -8,13 +9,13 @@ type GreetProps = {
 };
 
 const Greet = ({ setShowGreet }: GreetProps) => {
+  const { getCatalysedUserNameCookie } = useCookie();
+
   return (
     <div className="MentorProfileGreetContainer">
       <div className="MentorProfileGreet">
-        <h2>Welcome Mentor_name</h2>
-        <h4>
-          We are glad that you want to be a mentor of Organization_name !!
-        </h4>
+        <h2>Welcome {getCatalysedUserNameCookie()}</h2>
+        <h4>We are glad that you want to be a mentor on Catalysed !!</h4>
         <h4 className="Leth4">
           Let's create a profile that will help establish your existence on
           CatalysEd

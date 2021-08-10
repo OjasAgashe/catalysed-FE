@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineDoubleRight } from "react-icons/ai";
 import StuProfileBuilderTypeform from "../../components/StuProfileBuilderTypeform/StuProfileBuilderTypeform";
+import { useCookie } from "../../context/cookie_context/CookieContext";
 import "./StuProfileBuilder.css";
 
 type GreetProps = {
@@ -8,11 +9,13 @@ type GreetProps = {
 };
 
 const Greet = ({ setShowGreet }: GreetProps) => {
+  const { getCatalysedUserNameCookie } = useCookie();
+
   return (
     <div className="StuProfileGreetContainer">
       <div className="StuProfileGreet">
-        <h2>Welcome Student_name</h2>
-        <h4>We are glad that you want to be a part of Organization_name !!</h4>
+        <h2>Welcome {getCatalysedUserNameCookie()}</h2>
+        <h4>We are glad that you want to be a part of Catalysed !!</h4>
         <h4 className="Leth4">
           Let's create a profile that will help establish your existence on
           CatalysEd

@@ -19,6 +19,7 @@ import TypeformProgress from "../TypeformProgress/TypeformProgress";
 import { useProfileBuilder } from "../../context/api_context/ProfileBuilderContext";
 import { useHistory } from "react-router-dom";
 import { MENTOR_HOME } from "../../constants/Routes";
+import { useCookie } from "../../context/cookie_context/CookieContext";
 
 const MentorProfileBuilderTypeform = () => {
   const [state, dispatch] = useReducer(mentorProfileBuilderReducer, {
@@ -35,6 +36,7 @@ const MentorProfileBuilderTypeform = () => {
   const typeformRef = useRef<TypeForm>();
   const { postProfileCall } = useProfileBuilder();
   const history = useHistory();
+  const { setCatalysedCreatedCookie } = useCookie();
 
   const [answer, setAnswer] = useState<MentorProfileBuilderData>({
     birthYear: "",
@@ -95,7 +97,7 @@ const MentorProfileBuilderTypeform = () => {
   const sendData = async (data: any) => {
     try {
       await postProfileCall("mentor", data);
-      document.cookie = "catalysedCreated=true;secure";
+      setCatalysedCreatedCookie(true);
       history.push(MENTOR_HOME);
     } catch (error) {
       console.log(error);

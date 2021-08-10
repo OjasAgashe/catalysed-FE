@@ -151,10 +151,15 @@ const MentorProfileEditSectionContainer = ({
       return;
     }
 
-    if (new Date().getFullYear() - Number(editedData?.birthYear) < 18) {
+    if (editedData?.birthYear === "NaN") {
       document.documentElement.scrollTop = 100;
       return;
     }
+
+    // if (new Date().getFullYear() - Number(editedData?.birthYear) < 18) {
+    //   document.documentElement.scrollTop = 100;
+    //   return;
+    // }
 
     if (canMakeAPICall()) {
       makeAPICall(editedData as MentorProfileEditData);

@@ -27,9 +27,12 @@ const QuestionOne = ({
     if (state.submitClicked)
       dispatch({ type: "submitClicked", payload: false });
 
-    const onlyAlphabets = /^[a-zA-Z]*$/;
+    const onlyAlphabets = /^[a-zA-Z][a-zA-z ]*$/;
 
-    if (onlyAlphabets.test(event.target.value) === false) {
+    if (
+      event.target.value !== "" &&
+      onlyAlphabets.test(event.target.value) === false
+    ) {
       return;
     }
 

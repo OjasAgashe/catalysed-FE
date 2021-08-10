@@ -144,7 +144,7 @@ const OrgRegisterDetails = ({
 
       dispatch({ type: "validated", payload: true });
 
-      const onlyAlphabets = /^[a-zA-Z]*$/;
+      const onlyAlphabets = /^[a-zA-Z][a-zA-z ]*$/;
 
       if (
         orgRegisterData.orgDetails.name &&

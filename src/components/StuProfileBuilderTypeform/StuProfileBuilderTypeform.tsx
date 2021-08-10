@@ -18,6 +18,7 @@ import TypeformProgress from "../TypeformProgress/TypeformProgress";
 import { useProfileBuilder } from "../../context/api_context/ProfileBuilderContext";
 import { useHistory } from "react-router-dom";
 import { STUDENT_HOME } from "../../constants/Routes";
+import { useCookie } from "../../context/cookie_context/CookieContext";
 
 const StuProfileBuilderTypeform = () => {
   const [state, dispatch] = useReducer(stuProfileBuilderReducer, {
@@ -33,6 +34,7 @@ const StuProfileBuilderTypeform = () => {
   const typeformRef = useRef<TypeForm>();
   const { postProfileCall } = useProfileBuilder();
   const history = useHistory();
+  const { setCatalysedCreatedCookie } = useCookie();
 
   const [answer, setAnswer] = useState<StudentProfileBuilderData>({
     birthYear: "",
@@ -91,7 +93,7 @@ const StuProfileBuilderTypeform = () => {
   const sendData = async (data: StudentProfileBuilderData) => {
     try {
       await postProfileCall("student", data);
-      document.cookie = "catalysedCreated=true;secure";
+      setCatalysedCreatedCookie(true);
       history.push(STUDENT_HOME);
     } catch (error) {
       console.log(error);

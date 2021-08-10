@@ -86,9 +86,9 @@ const SectionTwo = ({
           break;
 
         case "age":
-          if (event.target.value.length > 2) {
-            return;
-          }
+          // if (event.target.value.length > 2) {
+          //   return;
+          // }
 
           setEditedData(
             (prevState): StudentProfileEditData =>
@@ -102,9 +102,12 @@ const SectionTwo = ({
           break;
 
         default:
-          const onlyAlphabets = /^[a-zA-Z]*$/;
+          const onlyAlphabets = /^[a-zA-Z][a-zA-z ]*$/;
 
-          if (onlyAlphabets.test(event.target.value) === false) {
+          if (
+            event.target.value !== "" &&
+            onlyAlphabets.test(event.target.value) === false
+          ) {
             return;
           }
 

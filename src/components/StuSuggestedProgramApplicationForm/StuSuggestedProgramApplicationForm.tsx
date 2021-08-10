@@ -10,6 +10,8 @@ import {
 import Error from "../Error/Error";
 import { STUDENT } from "../../constants/Entities";
 import { useStudentAPI } from "../../context/api_context/StudentAPIContext";
+import { useHistory } from "react-router-dom";
+import { STUDENT_UPDATES_DETAILS_APPLICATION } from "../../constants/Routes";
 
 type StuSuggestedProgramApplicationFormProps = {
   state: StuSuggestedProgramApplicationState;
@@ -25,6 +27,7 @@ const StuSuggestedProgramApplicationForm = ({
   const [answer, setAnswer] = useState<string>("");
 
   const { postCreateApplication } = useStudentAPI();
+  const history = useHistory();
 
   const makeAPICall = async (data: StuSuggestedProgramApplicationData) => {
     try {
@@ -36,7 +39,9 @@ const StuSuggestedProgramApplicationForm = ({
       const response = await postCreateApplication(data, programId);
 
       dispatch({ type: "loading", payload: false });
-      console.log(response);
+      history.push(
+        `${STUDENT_UPDATES_DETAILS_APPLICATION}/${response.data.id}/details`
+      );
     } catch (error) {
       document.documentElement.scrollTop =
         document.documentElement.scrollHeight;

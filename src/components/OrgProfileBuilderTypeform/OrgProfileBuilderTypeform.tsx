@@ -14,6 +14,7 @@ import TypeformProgress from "../TypeformProgress/TypeformProgress";
 import { useProfileBuilder } from "../../context/api_context/ProfileBuilderContext";
 import { useHistory } from "react-router-dom";
 import { ORGANISATION_HOME } from "../../constants/Routes";
+import { useCookie } from "../../context/cookie_context/CookieContext";
 
 const OrgProfileBuilderTypeform = () => {
   const [state, dispatch] = useReducer(orgProfileBuilderReducer, {
@@ -28,6 +29,7 @@ const OrgProfileBuilderTypeform = () => {
   const typeformRef = useRef<TypeForm>();
   const { postProfileCall } = useProfileBuilder();
   const history = useHistory();
+  const { setCatalysedCreatedCookie } = useCookie();
 
   const [answer, setAnswer] = useState<OrgProfileBuilderData>({
     workDescription: "",
@@ -66,7 +68,7 @@ const OrgProfileBuilderTypeform = () => {
   const sendData = async (data: OrgProfileBuilderData) => {
     try {
       await postProfileCall("organization", data);
-      document.cookie = "catalysedCreated=true;secure";
+      setCatalysedCreatedCookie(true);
       history.push(ORGANISATION_HOME);
     } catch (error) {
       console.log(error);
