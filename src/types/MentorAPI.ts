@@ -30,4 +30,6 @@ export interface MentorAPIProviderReturns {
   getConnectedProgramParticipants: (
     programId: number
   ) => Promise<AxiosResponse<any>>;
+  getConnectedAboutToStartPrograms: () => Promise<any[]>;
+  getConnectedRunningPrograms: () => Promise<any[]>;
 }

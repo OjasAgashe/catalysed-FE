@@ -1,0 +1,38 @@
+.OrgHomeSectionContainer .StudentSectionSixContainer {
+  padding: 2rem;
+}
+
+.OrgHomeSectionContainer .StudentSectionSixContainer .DashboardCard {
+  position: unset;
+}
+
+.OrgHomeSectionContainer .OrgInfoCard .StatNImgContainer {
+  align-items: center;
+}
+
+.OrgHomeSectionContainer
+  .OrgInfoCard
+  :is(.OrgNameDiv, .OrgSocialLink, .OrgWebsiteLink) {
+  margin: 0.5rem auto !important;
+}
+
+.OrgHomeSectionContainer .OrgInfoCard .OrgWebsiteLink {
+  margin-bottom: 0rem !important;
+}
+
+.OrgHomeSectionContainer .OrgInfoCard .CreateProgramFormText {
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 0 0.5rem !important;
+  display: inline-block;
+}
+
+.OrgHomeSectionContainer .OrgInfoCard a {
+  text-decoration: none;
+}
+
+.OrgHomeSectionContainer .OrgInfoCard .Data {
+  font-size: 1.1rem;
+  display: block;
+  padding-left: 2rem;
+}

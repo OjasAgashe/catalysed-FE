@@ -114,7 +114,9 @@ function App() {
           </PublicRoute>
 
           <PrivateRoute path={MENTOR_HOME} exact>
-            <MentorHomePage />
+            <MentorAPIProvider>
+              <MentorHomePage />
+            </MentorAPIProvider>
           </PrivateRoute>
 
           <PrivateRoute path={MENTOR_PROFILE_BUILDER} exact>
@@ -250,11 +252,9 @@ function App() {
           </PrivateRoute>
 
           <PrivateRoute path={ORGANISATION_HOME} exact>
-            <ProfileBuilderProvider>
               <OrgAPIProvider>
                 <OrgHomePage />
               </OrgAPIProvider>
-            </ProfileBuilderProvider>
           </PrivateRoute>
 
           <PrivateRoute path={ORGANISATION_INVITATIONS} exact>
@@ -346,7 +346,9 @@ function App() {
           </PrivateRoute>
 
           <PrivateRoute path={STUDENT_HOME} exact>
-            <StudentHomePage />
+            <StudentAPIProvider>
+              <StudentHomePage />
+            </StudentAPIProvider>
           </PrivateRoute>
 
           <PublicRoute path={STUDENT_MENTOR_REGISTER} exact>
