@@ -2,13 +2,14 @@ import React from "react";
 import "./StuSuggestedProgramDetailsCommon.css";
 import "../OrgProgramDetailsCommon/OrgProgramDetailsCommon.css";
 import { Alert } from "react-bootstrap";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { OrgEditProgramHeader } from "../../assets/Illustrations/Illustrations";
 import {
   MENTOR_SUGGESTED_PROGRAMS,
   STUDENT_SUGGESTED_PROGRAMS,
 } from "../../constants/Routes";
-import { STUDENT } from "../../constants/Entities";
+import { MENTOR, STUDENT } from "../../constants/Entities";
+import NestedPageBackBtn from "../NestedPageBackBtn/NestedPageBackBtn";
 
 type StuSuggestedProgramDetailsCommonProps = {
   programTitle: string;
@@ -22,16 +23,23 @@ const StuSuggestedProgramDetailsCommon = ({
   entity,
 }: StuSuggestedProgramDetailsCommonProps) => {
   const location = useLocation();
+  const history = useHistory();
+
+  const handleNestedPageBackBtnClick = () => {
+    if (entity === STUDENT) history.push(STUDENT_SUGGESTED_PROGRAMS);
+    else if (entity === MENTOR) history.push(MENTOR_SUGGESTED_PROGRAMS);
+  };
 
   return (
     <div
       className="StuSuggestedProgramDetailsCommonContainer"
       style={{ backgroundImage: `url(${OrgEditProgramHeader})` }}
     >
+      <NestedPageBackBtn onClick={handleNestedPageBackBtnClick} />
+
       <div className="CommonProgramDetailsHeroText">
         <span>{programTitle}</span>
       </div>
-
       <div className="PDViewAndRouteLinksContainer">
         <Alert variant="warning" className="ProgramDetailsRouteLinks">
           <div

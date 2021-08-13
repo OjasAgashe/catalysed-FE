@@ -58,7 +58,11 @@ const MentorUpdatesApplicationDetails = () => {
         />
       )}
 
-      <StuUpdatesApplicationDetailsHeader state={state} dispatch={dispatch} />
+      <StuUpdatesApplicationDetailsHeader
+        state={state}
+        dispatch={dispatch}
+        entity="MENTOR"
+      />
 
       {state.error.length === 0 ? (
         <>

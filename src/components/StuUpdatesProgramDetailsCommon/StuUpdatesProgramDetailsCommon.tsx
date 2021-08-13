@@ -1,12 +1,15 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { OrgProgramDetails } from "../../assets/Illustrations/Illustrations";
-import { STUDENT } from "../../constants/Entities";
+import { MENTOR, STUDENT } from "../../constants/Entities";
 import {
+  MENTOR_UPDATES,
   MENTOR_UPDATES_DETAILS_PROGRAM,
+  STUDENT_UPDATES,
   STUDENT_UPDATES_DETAILS_PROGRAM,
 } from "../../constants/Routes";
+import NestedPageBackBtn from "../NestedPageBackBtn/NestedPageBackBtn";
 import "../OrgProgramDetailsCommon/OrgProgramDetailsCommon.css";
 
 type StuUpdatesProgramDetailsCommonProps = {
@@ -21,12 +24,22 @@ const StuUpdatesProgramDetailsCommon = ({
   entity,
 }: StuUpdatesProgramDetailsCommonProps) => {
   const location = useLocation();
+  const history = useHistory();
+
+  const handleNestedPageBackBtnClick = () => {
+    if (entity === STUDENT)
+      history.push(`${STUDENT_UPDATES}?view=PROGRAMS`);
+    else if (entity === MENTOR)
+      history.push(`${MENTOR_UPDATES}?view=PROGRAMS`);
+  }
 
   return (
     <div
       className="CommonProgramDetailsDiv"
       style={{ backgroundImage: `url(${OrgProgramDetails})` }}
     >
+      <NestedPageBackBtn onClick={handleNestedPageBackBtnClick}/>
+
       <div className="CommonProgramDetailsHeroText">
         <span>{programTitle}</span>
       </div>

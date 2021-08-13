@@ -603,6 +603,12 @@ input[type="number"] {
   font-weight: 600 !important;
 }
 
+.CommonProgramDetailsHeroText, 
+.OrgSpecificApplicantDetailsHeaderHeroText {
+  padding: 0rem !important;
+  padding-left: 5rem !important;
+}
+
 .PDViewAndRouteLinksContainer,
 .OrgDirectoryMentorOrStudentOptContainer,
 .OrgDirectoryDetailsPIOrCtPOptContainer,

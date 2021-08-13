@@ -3,11 +3,9 @@
   background-position: center;
 }
 
-.StuUpdatesOrganisationDetailsCommonContainer .CommonProgramDetailsHeroText {
-  padding: 2rem 0 1rem 5rem !important;
-}
-
-.StuUpdatesOrganisationDetailsCommonContainer button {
+.StuUpdatesOrganisationDetailsCommonContainer
+  .PDViewAndRouteLinksContainer
+  button {
   background-color: inherit !important;
   border: none !important;
 }

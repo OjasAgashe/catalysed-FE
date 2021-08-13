@@ -1,8 +1,9 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { OrgProgramDetails } from "../../assets/Illustrations/Illustrations";
 import { ORGANISATION_PROGRAM_DETAILS } from "../../constants/Routes";
+import NestedPageBackBtn from "../NestedPageBackBtn/NestedPageBackBtn";
 import "./OrgProgramDetailsCommon.css";
 
 type OrgProgramDetailsCommonProps = {
@@ -15,16 +16,22 @@ const OrgProgramDetailsCommon = ({
   programId,
 }: OrgProgramDetailsCommonProps) => {
   const location = useLocation();
+  const history = useHistory();
+
+  const handleNestedPageBackBtnClick = () => {
+    history.push("#");
+    };
 
   return (
     <div
       className="CommonProgramDetailsDiv"
       style={{ backgroundImage: `url(${OrgProgramDetails})` }}
     >
+      <NestedPageBackBtn onClick={handleNestedPageBackBtnClick} />
+
       <div className="CommonProgramDetailsHeroText">
         <span>{programTitle}</span>
       </div>
-
       <div className="PDViewAndRouteLinksContainer">
         <Alert variant="warning" className="ProgramDetailsRouteLinks">
           <div

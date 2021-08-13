@@ -5,7 +5,9 @@ import "../OrgProgramDetailsCommon/OrgProgramDetailsCommon.css";
 import { Alert } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import {
+  MENTOR_UPDATES,
   MENTOR_UPDATES_DETAILS_ORGANISATION,
+  STUDENT_UPDATES,
   STUDENT_UPDATES_DETAILS_ORGANISATION,
 } from "../../constants/Routes";
 import { MENTOR, STUDENT } from "../../constants/Entities";
@@ -13,6 +15,7 @@ import {
   StudentUpdatesOrganisationDetailsActionType,
   StudentUpdatesOrganisationDetailsState,
 } from "../../types/StudentUpdates";
+import NestedPageBackBtn from "../NestedPageBackBtn/NestedPageBackBtn";
 
 type StuUpdatesOrganisationDetailsCommonProps = {
   state: StudentUpdatesOrganisationDetailsState;
@@ -55,11 +58,20 @@ const StuUpdatesOrganisationDetailsCommon = ({
       );
   };
 
+  const handleNestedPageBackBtnClick = () => {
+    if (entity === STUDENT)
+      history.push(`${STUDENT_UPDATES}?view=ORGANISATIONS`);
+    else if (entity === MENTOR)
+      history.push(`${MENTOR_UPDATES}?view=ORGANISATIONS`);
+  };
+
   return (
     <div
       className="StuUpdatesOrganisationDetailsCommonContainer"
       style={{ backgroundImage: `url(${ProgramsApplicantsSummaryHeader})` }}
     >
+      <NestedPageBackBtn onClick={handleNestedPageBackBtnClick} />
+
       <div className="CommonProgramDetailsHeroText">
         <span>{state.responseData?.orgDetails?.name ?? ""}</span>
       </div>

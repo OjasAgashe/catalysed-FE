@@ -1,32 +1,49 @@
 import React, { useEffect } from "react";
 import { Alert } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import { OrgProfileCommonHeaderImg } from "../../assets/Illustrations/Illustrations";
+import { MENTOR, STUDENT } from "../../constants/Entities";
+import { MENTOR_UPDATES, STUDENT_UPDATES } from "../../constants/Routes";
 import {
   StudentUpdatesApplicationDetailsActionType,
   StudentUpdatesApplicationDetailsState,
 } from "../../types/StudentUpdates";
+import NestedPageBackBtn from "../NestedPageBackBtn/NestedPageBackBtn";
 import "../OrgSpecificApplicantDetailsHeader/OrgSpecificApplicantDetailsHeader.css";
 
 type StuUpdatesApplicationDetailsHeaderProps = {
   state: StudentUpdatesApplicationDetailsState;
   dispatch: React.Dispatch<StudentUpdatesApplicationDetailsActionType>;
+  entity: string;
 };
 
 const StuUpdatesApplicationDetailsHeader = ({
   state,
   dispatch,
+  entity,
 }: StuUpdatesApplicationDetailsHeaderProps) => {
+  const history = useHistory();
+
   useEffect(() => {
     document.title = `Connected Application ${
       state.choosedOption === "Application" ? "Details" : "Program Details"
     } | CatalysEd`;
   }, [state.choosedOption]);
 
+  const handleNestedPageBackBtnClick = () => {
+    if (entity === STUDENT)
+      history.push(`${STUDENT_UPDATES}?view=APPLICATIONS`);
+    else if (entity === MENTOR)
+      history.push(`${MENTOR_UPDATES}?view=APPLICATIONS`);
+  };
+
   return (
     <div
       className="OrgSpecificApplicantDetailsHeaderContainer"
       style={{ backgroundImage: `url(${OrgProfileCommonHeaderImg})` }}
     >
+      <NestedPageBackBtn onClick={handleNestedPageBackBtnClick} />
+
       <div className="OrgSpecificApplicantDetailsHeaderHeroText">
         <span>{state.responseData?.programDetails?.title}</span>
       </div>

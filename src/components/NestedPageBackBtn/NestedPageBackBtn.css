@@ -1,0 +1,16 @@
+.NestedPageButton {
+  margin: 1rem 2rem;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  border: 4px double var(--blue-gray-700);
+  cursor: pointer;
+}
+
+.NestedPageButton .NestedPageBackBtnIcon {
+  margin-bottom: 3px;
+  color: var(--blue-gray-700);
+}
+
+.NestedPageButton:hover {
+  box-shadow: 1px 1px 4px var(--blue-gray-400);
+}
