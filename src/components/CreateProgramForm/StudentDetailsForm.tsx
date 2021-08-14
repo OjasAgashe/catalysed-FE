@@ -23,31 +23,54 @@ type StudentDetailsFormProps = {
   dispatch: React.Dispatch<CreateProgramActionType>;
 };
 
+/*
+ * StudentDetialsForm : component accepts four props,
+ * and has the same reason as the GeneralDetailsForm
+ * Component has
+ */
 const StudentDetailsForm = ({
   answer,
   setAnswer,
   state,
   dispatch,
 }: StudentDetailsFormProps) => {
+  /*
+   *  function handling onChange event of input fields of StudentDetailsForm
+   */
   const handleStudentDetailsFormChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
+      /*
+       * If we have shown any kind of error, then hide it
+       */
       if (state.validated) dispatch({ type: "validated", payload: false });
       if (state.error) dispatch({ type: "error", payload: "" });
 
       let value: string | boolean = event.target.value;
+
+      /*
+       * if the input field name is isPaid, then change its value to not
+       * of the previous value of answer.studentFields.isPaid
+       */
       if (event.target.name === "isPaid") {
         value = answer?.studentFields?.isPaid ? false : true;
       }
 
-      setAnswer((prevState) : CreateProgramData => ({
-        ...prevState,
-        studentFields: {
-          ...prevState.studentFields,
-          [event.target.name]: value,
-        },
-      } as CreateProgramData));
+      setAnswer(
+        (prevState): CreateProgramData =>
+          ({
+            ...prevState,
+            studentFields: {
+              ...prevState.studentFields,
+              [event.target.name]: value,
+            },
+          } as CreateProgramData)
+      );
     };
 
+  /*
+   * Using the same logic, we are using on GeneralDetialsForm component
+   * to handle the change event of Date picker
+   */
   const handleDatePickerChange: (
     date: Date | [Date, Date] | null,
     event: React.SyntheticEvent<any, Event> | undefined
@@ -63,15 +86,16 @@ const StudentDetailsForm = ({
 
     if (month) {
       setAnswer(
-        (prevState): CreateProgramData => ({
-          ...prevState,
-          studentFields: {
-            ...prevState.studentFields,
-            applyBy: `${selected_date?.getDate()}/${
-              (month as number) + 1
-            }/${selected_date?.getFullYear()}`,
-          },
-        } as CreateProgramData)
+        (prevState): CreateProgramData =>
+          ({
+            ...prevState,
+            studentFields: {
+              ...prevState.studentFields,
+              applyBy: `${selected_date?.getDate()}/${
+                (month as number) + 1
+              }/${selected_date?.getFullYear()}`,
+            },
+          } as CreateProgramData)
       );
     }
   };
@@ -143,6 +167,9 @@ const StudentDetailsForm = ({
             />
           </Col>
 
+          {/*
+           * So fees input field, only when the program is a paid one
+           */}
           {answer?.studentFields?.isPaid && (
             <Col className="CreateProgramStudentCol">
               <Form.Text className="CreateProgramFormText">

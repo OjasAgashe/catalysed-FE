@@ -16,14 +16,25 @@ type MentorDetailsFormProps = {
   dispatch: React.Dispatch<CreateProgramActionType>;
 };
 
+/*
+ * MentorDetialsForm : component accepts four props,
+ * and has the same reason as the GeneralDetailsForm
+ * Component has
+ */
 const MentorDetailsForm = ({
   answer,
   setAnswer,
   state,
   dispatch,
 }: MentorDetailsFormProps) => {
+  /*
+   *  function handling onChange event of input fields of MentorDetailsForm
+   */
   const handleMentorDetailsFormChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
+      /*
+       * If we have shown any kind of error, then hide it
+       */
       if (state.validated) dispatch({ type: "validated", payload: false });
       if (state.error) dispatch({ type: "error", payload: "" });
 
@@ -39,6 +50,10 @@ const MentorDetailsForm = ({
       );
     };
 
+  /*
+   * Using the same logic, we are using on GeneralDetialsForm component
+   * to handle the change event of Date picker
+   */
   const handleDatePickerChange: (
     date: Date | [Date, Date] | null,
     event: React.SyntheticEvent<any, Event> | undefined

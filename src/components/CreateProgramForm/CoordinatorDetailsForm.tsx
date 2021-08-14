@@ -22,14 +22,25 @@ type CountryData = {
   format: string;
 };
 
+/*
+ * CoordiantorDetialsForm : component accepts four props,
+ * and has the same reason as the GeneralDetailsForm
+ * Component has
+ */
 const CoordinatorDetailsForm = ({
   answer,
   setAnswer,
   state,
   dispatch,
 }: CoordinatorDetailsFormProps) => {
+  /*
+   * function handling onChange event of input fields of CoordinatorDetailsForm
+   */
   const handleCoordinatorDetailsFormChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
+      /*
+       * If we have shown any kind of error before, then hide it
+       */
       if (state.validated) dispatch({ type: "validated", payload: false });
       if (state.isInvalid) dispatch({ type: "isInvalid", payload: false });
       if (state.error) dispatch({ type: "error", payload: "" });
@@ -46,17 +57,32 @@ const CoordinatorDetailsForm = ({
       );
     };
 
+  /*
+   * function handling change event for phone input
+   */
   const handlePhoneInputChange = (
     value: string,
     country: {} | CountryData,
     event: React.ChangeEvent<HTMLInputElement>,
     formattedValue: string
   ) => {
+    /*
+     * If we have shown any kind of error before, then hide it
+     */
     if (state.validated) dispatch({ type: "validated", payload: false });
     if (state.isInvalid) dispatch({ type: "isInvalid", payload: false });
 
+    /*
+     * set the entered value of phone in phoneValue state
+     */
     dispatch({ type: "phoneValue", payload: value });
 
+    /*
+     * the format the external Phone package sends for the entered Phone value
+     * is different from the format we are storing in our backend. So to synchronize
+     * with it, we are extracting the part of the entered phone value and converting
+     * it in correct format
+     */
     const countryInfo = country as CountryData;
     const contact = {
       countryName: countryInfo.name,
@@ -64,13 +90,19 @@ const CoordinatorDetailsForm = ({
       number: value.replace(`${countryInfo.dialCode}`, ""),
     };
 
-    setAnswer((prevState) : CreateProgramData => ({
-      ...prevState,
-      coordinator: {
-        ...prevState.coordinator,
-        contact,
-      },
-    } as CreateProgramData));
+    /*
+     * setting the correct format of phone in contact attribute of answer
+     */
+    setAnswer(
+      (prevState): CreateProgramData =>
+        ({
+          ...prevState,
+          coordinator: {
+            ...prevState.coordinator,
+            contact,
+          },
+        } as CreateProgramData)
+    );
   };
 
   return (
@@ -103,6 +135,11 @@ const CoordinatorDetailsForm = ({
           isInvalid={state.isInvalid}
         />
 
+        {/*
+         * this form control we are using to show the validation error message,
+         *
+         * It does not take user input
+         */}
         <Form.Control className="phoneFormControl" />
         <PhoneInput
           country={"in"}

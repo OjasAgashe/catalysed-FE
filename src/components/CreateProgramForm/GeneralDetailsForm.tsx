@@ -17,6 +17,13 @@ type GeneralDetailsFormProps = {
   dispatch: React.Dispatch<CreateProgramActionType>;
 };
 
+/*
+ * GeneralDetailsForm : component accepts four props,
+ * 1. answer : to set value of input fields
+ * 2. setAnswer : to set the changed values of input fields
+ * 3. state : to check the values of some validating states
+ * 4. dispatch: to set the values of some validation states
+ */
 const GeneralDetailsForm = ({
   answer,
   setAnswer,
@@ -24,6 +31,10 @@ const GeneralDetailsForm = ({
   dispatch,
 }: GeneralDetailsFormProps) => {
   useEffect(() => {
+    /*
+     * set the value of languageRequirements property of answer, as string
+     * of names of languages
+     */
     setAnswer(
       (prevState): CreateProgramData => ({
         ...prevState,
@@ -32,11 +43,19 @@ const GeneralDetailsForm = ({
     );
   }, [setAnswer, state.selectedLanguages]);
 
+  /*
+   * function handling onChange event of input fields of GeneralDetailsForm
+   */
   const handleGeneralDetailsFormChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
+      /*
+       * If we have shown any kind of error ( either validation or api call )
+       * before, then hide it
+       */
       if (state.validated) dispatch({ type: "validated", payload: false });
       if (state.error) dispatch({ type: "error", payload: "" });
 
+      // handles the onChange event of age input field
       if (["from", "to"].includes(event.target.name)) {
         setAnswer(
           (prevState): CreateProgramData => ({
@@ -51,8 +70,22 @@ const GeneralDetailsForm = ({
         event.target.name === "programLink" &&
         event.target.validity.valid === false
       ) {
+        /* Instead of directly setting value for programLink attribute of
+         * answer
+         *
+         * Store the value of programLink input field in urlInput state, till
+         * the value of programLink input field is not valid
+         *
+         * We are doing this so that we can show UI nicely to the Org, and
+         * programLink attribute of answer has only valid value
+         */
         dispatch({ type: "urlInput", payload: event.target.value });
       } else {
+        /*
+         * Now, If the programLink input field has valid value then
+         * save its value in programLink attribute of answer as well as
+         * in urlInput state
+         */
         if (event.target.name === "programLink") {
           dispatch({ type: "urlInput", payload: event.target.value });
         }
@@ -66,13 +99,33 @@ const GeneralDetailsForm = ({
       }
     };
 
+  /*
+   * function handling onChange event of Date picker, as we are using external package
+   * to show nice UI of Date picker, we are using an alone function to handle
+   * its change
+   */
   const handleDatePickerChange: (
     date: Date | [Date, Date] | null,
     event: React.SyntheticEvent<any, Event> | undefined
   ) => void = (selectedDate) => {
+    /*
+     * store the value of selected Date in selected temporary start date state
+     */
     dispatch({ type: "selectedTSDate", payload: selectedDate as Date | null });
+
+    /*
+     * If we have shown some error before, then hide it
+     */
     if (state.validated) dispatch({ type: "validated", payload: false });
 
+    /*
+     * the format of Date the Date picker package gives, is different from the
+     * format we are storing in our backend.
+     *
+     * So to set correct Date format in backend we are extracting value of
+     * Date, Month and Year from the selected date by Org, and storing it in
+     * tentativeStartDate property of answer
+     */
     const selected_date = selectedDate as Date | null;
     let month = selected_date?.getMonth();
 
@@ -88,6 +141,14 @@ const GeneralDetailsForm = ({
     }
   };
 
+  /*
+   * function handling onChange event of language selector, in this function
+   * we are storing array of values of selected languages in selectedLanguages
+   * state,
+   *
+   * And when value of selectedLanguages state will change, through function in
+   * useEffect we will set value of languageRequirements attribute of answer
+   */
   const handleLanguageChange: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
@@ -104,6 +165,10 @@ const GeneralDetailsForm = ({
     }
   };
 
+  /*
+   * handle click event of cross button, when the Org wants to remove
+   * a language from languageRequirement
+   */
   const handleLanguageLiCrossClick = (language: string) => {
     dispatch({
       type: "selectedLanguages",

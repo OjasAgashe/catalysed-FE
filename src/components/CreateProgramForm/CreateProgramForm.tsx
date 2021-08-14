@@ -207,10 +207,25 @@ const CreateProgramForm = ({ state, dispatch }: CreateProgramFormProps) => {
     }
   };
 
+  /*
+   * function handling flow when DRAFT button gets clicked
+   */
   const handleDraftBtnClick = () => {
+    /*
+     * If we have shown any error before, then hide it
+     */
     dispatch({ type: "error", payload: "" });
 
+    /*
+     * To save a program as Draft, the title value should be filled.
+     *
+     * If title has no value, then the program cannot be saved as Draft
+     */
     if (answer.title === "") {
+      /*
+       * Show proper message to the Org, when it tries to save the program
+       * as Draft, with no value of Title
+       */
       dispatch({
         type: "error",
         payload: 'To "save to draft", atleast fill the title.',
@@ -218,6 +233,9 @@ const CreateProgramForm = ({ state, dispatch }: CreateProgramFormProps) => {
       return;
     }
 
+    /*
+     * If Title has value, then simply call API to save the program as Draft
+     */
     makeAPICall("SAVED_TO_DRAFT", "Saving to draft...");
   };
 
@@ -270,6 +288,10 @@ const CreateProgramForm = ({ state, dispatch }: CreateProgramFormProps) => {
           Publish <GiStamper />
         </Button>
       </div>
+
+      {/*
+       * If error has value, then show it below the buttons
+       */}
       {state.error && (
         <Error message={state.error} className="CreateProgramErrorMessage" />
       )}

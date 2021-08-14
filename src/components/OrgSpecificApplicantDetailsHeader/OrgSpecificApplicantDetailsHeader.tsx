@@ -1,10 +1,13 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
+import { useHistory, useParams } from "react-router-dom";
 import { OrgProfileCommonHeaderImg } from "../../assets/Illustrations/Illustrations";
+import { ORGANISATION_PROGRAM_DETAILS } from "../../constants/Routes";
 import {
   OrgSpecificApplicantDetailsActionType,
   OrgSpecificApplicantDetailsState,
 } from "../../types/OrgSpecificApplicantDetails";
+import NestedPageBackBtn from "../NestedPageBackBtn/NestedPageBackBtn";
 import "./OrgSpecificApplicantDetailsHeader.css";
 
 type OrgSpecificApplicantDetailsHeaderProps = {
@@ -16,11 +19,20 @@ const OrgSpecificApplicantDetailsHeader = ({
   state,
   dispatch,
 }: OrgSpecificApplicantDetailsHeaderProps) => {
+  const history = useHistory();
+  const { programId } = useParams<{ programId: string }>();
+
+  const handleNestedPageBackBtnClick = () => {
+    history.push(`${ORGANISATION_PROGRAM_DETAILS}/${programId}/applicants`);
+  };
+
   return (
     <div
       className="OrgSpecificApplicantDetailsHeaderContainer"
       style={{ backgroundImage: `url(${OrgProfileCommonHeaderImg})` }}
     >
+      <NestedPageBackBtn onClick={handleNestedPageBackBtnClick} />
+
       <div className="OrgSpecificApplicantDetailsHeaderHeroText">
         <span>
           {state.responseData?.applicationDetails?.applicantType === "MENTOR"

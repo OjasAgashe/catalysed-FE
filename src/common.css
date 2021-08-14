@@ -1,3 +1,14 @@
+/*
+  This file is containing style which is common among 
+  various pages, components, and between page and component
+
+  To find the style of a component and page easily, I have 
+  mentioned the names of page and component before styling them
+
+  And if you want to know about styling of any component, then you 
+  can check the line number from user agent of browser
+ */
+
 /* Pages */
 
 /* 
@@ -543,7 +554,10 @@ input[type="number"] {
 .StuUpdatesOrganisationDetailsInfoContainer .SectionOne .CreateProgramFormText,
 .StuUpdatesOrganisationDetailsInfoContainer .SectionTwo .CreateProgramFormText,
 .StuSuggestedProgramApplicationFormContainer .CreateProgramFormText,
-.OrgInfoCard .OrgInfoDetailsContainer .OrgNameLinkDetailsContainer .CreateProgramFormText {
+.OrgInfoCard
+  .OrgInfoDetailsContainer
+  .OrgNameLinkDetailsContainer
+  .CreateProgramFormText {
   font-size: 1.1rem !important;
   margin-right: 1rem;
   color: var(--blue-gray-700);
@@ -603,7 +617,7 @@ input[type="number"] {
   font-weight: 600 !important;
 }
 
-.CommonProgramDetailsHeroText, 
+.CommonProgramDetailsHeroText,
 .OrgSpecificApplicantDetailsHeaderHeroText {
   padding: 0rem !important;
   padding-left: 5rem !important;
