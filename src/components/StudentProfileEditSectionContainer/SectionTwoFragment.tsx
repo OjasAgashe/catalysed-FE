@@ -237,7 +237,7 @@ const SectionTwoFragment = ({
                     onChange={handleStudentEditProfileAddressChange}
                   />
                   <Form.Control.Feedback type="invalid">
-                    Required field, only Alphabets.
+                    Required field
                   </Form.Control.Feedback>
                 </Form.Group>
               </Col>
@@ -256,7 +256,7 @@ const SectionTwoFragment = ({
                     onChange={handleStudentEditProfileAddressChange}
                   />
                   <Form.Control.Feedback type="invalid">
-                    Required field, only Alphabets.
+                    Required field
                   </Form.Control.Feedback>
                 </Form.Group>
               </Col>

@@ -292,7 +292,7 @@ const SectionTwoFragment = ({
                     onChange={handleMentorEditProfileAddressChange}
                   />
                   <Form.Control.Feedback type="invalid">
-                    Required field, only Alphabets.
+                    Required field
                   </Form.Control.Feedback>
                 </Form.Group>
               </Col>
@@ -311,7 +311,7 @@ const SectionTwoFragment = ({
                     onChange={handleMentorEditProfileAddressChange}
                   />
                   <Form.Control.Feedback type="invalid">
-                    Required field, only Alphabets.
+                    Required field
                   </Form.Control.Feedback>
                 </Form.Group>
               </Col>

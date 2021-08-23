@@ -26,6 +26,14 @@ const SectionFour = ({ state }: SectionFourProps) => {
     }
   };
 
+  const handleProgramCardClick = (id: number) => {
+    if (state.entity === STUDENT) {
+      history.push(`${STUDENT_SUGGESTED_PROGRAMS}/${id}/details`);
+    } else if (state.entity === MENTOR) {
+      history.push(`${MENTOR_SUGGESTED_PROGRAMS}/${id}/details`);
+    }
+  };
+
   return (
     <section className="OrgHomeSectionFourContainer">
       <SectionHeadingDiv headingText="Suggested Programs" />
@@ -39,6 +47,7 @@ const SectionFour = ({ state }: SectionFourProps) => {
             <ProgramCard
               program={program}
               key={program.id}
+              handleEntityCardClick={() => handleProgramCardClick(program.id)}
               classNames="ProgramCardBackgroundColor"
             />
           ))}

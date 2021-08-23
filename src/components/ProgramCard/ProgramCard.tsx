@@ -19,9 +19,14 @@ import { useLocation } from "react-router-dom";
 type ProgramCardProps = {
   program: GetProgramMetaListData;
   classNames?: string;
+  handleEntityCardClick?: () => void;
 };
 
-const ProgramCard = ({ program, classNames = "" }: ProgramCardProps) => {
+const ProgramCard = ({
+  program,
+  handleEntityCardClick,
+  classNames = "",
+}: ProgramCardProps) => {
   const history = useHistory();
   const location = useLocation();
 
@@ -45,7 +50,7 @@ const ProgramCard = ({ program, classNames = "" }: ProgramCardProps) => {
   return (
     <div
       className={`ProgramCard ${classNames}`}
-      onClick={handleCardProgramDetailsBtn}
+      onClick={handleEntityCardClick ?? handleCardProgramDetailsBtn}
     >
       <div
         className="ProgramCardTitle"
@@ -113,7 +118,7 @@ const ProgramCard = ({ program, classNames = "" }: ProgramCardProps) => {
         <button
           type="button"
           className="ViewDetailsBtn"
-          onClick={handleCardProgramDetailsBtn}
+          onClick={handleEntityCardClick ?? handleCardProgramDetailsBtn}
         >
           Show more
           <span>

@@ -43,7 +43,7 @@ const OrgInfoCard = ({ state }: OrgInfoCardProps) => {
           </div>
           <div className="OrgSocialLink">
             <span className="CreateProgramFormText">
-              Socail Media Link&nbsp;:&nbsp;
+              Social Media Link&nbsp;:&nbsp;
             </span>
             <OverlayTrigger
               placement="bottom"

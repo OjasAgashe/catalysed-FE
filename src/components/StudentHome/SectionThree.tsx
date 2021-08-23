@@ -1,7 +1,12 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { MENTOR, STUDENT } from "../../constants/Entities";
-import { MENTOR_UPDATES, STUDENT_UPDATES } from "../../constants/Routes";
+import {
+  MENTOR_UPDATES,
+  MENTOR_UPDATES_DETAILS_PROGRAM,
+  STUDENT_UPDATES,
+  STUDENT_UPDATES_DETAILS_PROGRAM,
+} from "../../constants/Routes";
 import { StudentHomeState } from "../../types/StudentHome";
 import NextBtnDiv from "../OrgHome/NextBtnDiv";
 import SectionHeadingDiv from "../OrgHome/SectionHeadingDiv";
@@ -23,6 +28,14 @@ const SectionThree = ({ state }: SectionThreeProps) => {
     }
   };
 
+  const handleProgramCardClick = (id: number) => {
+    if (state.entity === STUDENT) {
+      history.push(`${STUDENT_UPDATES_DETAILS_PROGRAM}/${id}/details`);
+    } else if (state.entity === MENTOR) {
+      history.push(`${MENTOR_UPDATES_DETAILS_PROGRAM}/${id}/details`);
+    }
+  };
+
   return (
     <section className="OrgHomeSectionThreeContainer">
       <SectionHeadingDiv headingText="Connected Programs" />
@@ -36,6 +49,7 @@ const SectionThree = ({ state }: SectionThreeProps) => {
             <ProgramCard
               program={program}
               key={program.id}
+              handleEntityCardClick={() => handleProgramCardClick(program.id)}
               classNames="ProgramCardBackgroundColor"
             />
           ))}
@@ -62,6 +76,7 @@ const SectionThree = ({ state }: SectionThreeProps) => {
             <ProgramCard
               program={program}
               key={program.id}
+              handleEntityCardClick={() => handleProgramCardClick(program.id)}
               classNames="ProgramCardBackgroundColor"
             />
           ))}

@@ -158,7 +158,7 @@ const SectionTwo = ({
             ...prevState,
             location: {
               ...prevState?.location,
-              [event.target.name]: event.target.name,
+              [event.target.name]: event.target.value,
             },
           } as StudentProfileEditData)
       );

@@ -98,10 +98,10 @@ const OrgProgramParticipantsPage = () => {
         <div className="OrgProgramParticipantsDetailsContainer">
           {((state.showMentorDetails &&
             state.mentorParticipantResponseData !== null &&
-            state.mentorParticipantResponseData.length) ||
+            state.mentorParticipantResponseData.length !== 0) ||
             (state.showStudentDetails &&
               state.studentParticipantResponseData !== null &&
-              state.studentParticipantResponseData.length)) && (
+              state.studentParticipantResponseData.length !== 0)) && (
             <OrgProgramParticipantFilterBar
               state={state}
               dispatch={dispatch}
