@@ -1,3 +1,4 @@
+import AlreadyAccountExistResponse from "../../assets/Illustrations/already_account_exist_response.svg";
 import CommonHomeBoy from "../../assets/Illustrations/common_home_boy.jpg";
 import CommonHomeBuilding from "../../assets/Illustrations/common_home_building.jpg";
 import CommonHomeCalendar from "../../assets/Illustrations/common_home_calendar.jpg";
@@ -7,6 +8,7 @@ import CommonHomeSearch from "../../assets/Illustrations/common_home_search.jpg"
 import CreateProgramIllustration from "../../assets/Illustrations/create_program_illustration.svg";
 import FooterBackground from "../../assets/Illustrations/footer-background.jpg";
 import HeaderBackground from "../../assets/Illustrations/header-background.jpg";
+import InvalidInviteResponse from "../../assets/Illustrations/invalid_invite_response.svg";
 import Logo from "../../assets/Illustrations/logo.png";
 import MentorRegisterIllustration from "../../assets/Illustrations/mentor_register.svg";
 import OrgApplicationStatusApproved from "../../assets/Illustrations/org_application_status_approved.png";
@@ -35,6 +37,7 @@ import StudentUpdatesOrganisationProfileData from "../../assets/Illustrations/st
 import StudentUpdatesOrganisationSurvey from "../../assets/Illustrations/student_updates_organisation_survey.svg";
 
 export {
+  AlreadyAccountExistResponse,
   CommonHomeBoy,
   CommonHomeBuilding,
   CommonHomeCalendar,
@@ -44,6 +47,7 @@ export {
   CreateProgramIllustration,
   FooterBackground,
   HeaderBackground,
+  InvalidInviteResponse,
   Logo,
   MentorRegisterIllustration,
   OrgApplicationStatusApproved,

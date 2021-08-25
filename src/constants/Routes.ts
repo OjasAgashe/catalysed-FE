@@ -1,4 +1,6 @@
 export const HOME = "/";
+export const INVITE_ALREADY_ACCEPTED = "/app/invite/already-accepted";
+export const INVITE_INVALID = "/app/invite/invalid";
 export const LOGIN = "/app/login";
 export const MENTOR_HOME = "/app/mentor/home";
 export const MENTOR_PROFILE_BUILDER = "/app/mentor/profile/builder";

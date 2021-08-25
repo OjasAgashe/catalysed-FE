@@ -39,6 +39,8 @@ import {
   MENTOR_PROFILE_EDIT,
   STUDENT_UPDATES_DETAILS_APPLICATION,
   MENTOR_UPDATES_DETAILS_APPLICATION,
+  INVITE_ALREADY_ACCEPTED,
+  INVITE_INVALID,
 } from "../../constants/Routes";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -92,6 +94,8 @@ import StuUpdatesApplicationDetails from "../../pages/StuUpdatesApplicationDetai
 import MentorUpdatesApplicationDetails from "../../pages/MentorUpdatesApplicationDetails/MentorUpdatesApplicationDetails";
 import MentorUpdatesProgramDashboard from "../../pages/MentorUpdatesProgramDetails/MentorUpdatesProgramDashboard";
 import StuUpdatesProgramDashboard from "../../pages/StuUpdatesProgramDetails/StuUpdatesProgramDashboard";
+import InvalidInvite from "../../pages/InvitePage/InvalidInvite";
+import AlreadyAcceptedInvite from "../../pages/InvitePage/AlreadyAcceptedInvite";
 
 function App() {
   return (
@@ -99,6 +103,10 @@ function App() {
       <Router>
         <Header />
         <Switch>
+          <PublicRoute path={INVITE_ALREADY_ACCEPTED} exact>
+            <AlreadyAcceptedInvite />
+          </PublicRoute>
+
           <PrivateRoute path={ORGANISATION_PROGRAM_CREATE} exact>
             <OrgAPIProvider>
               <CreateProgram />
@@ -107,6 +115,10 @@ function App() {
 
           <PublicRoute path={HOME} exact>
             <Home />
+          </PublicRoute>
+
+          <PublicRoute path={INVITE_INVALID} exact>
+            <InvalidInvite />
           </PublicRoute>
 
           <PublicRoute path={LOGIN} exact>
@@ -252,9 +264,9 @@ function App() {
           </PrivateRoute>
 
           <PrivateRoute path={ORGANISATION_HOME} exact>
-              <OrgAPIProvider>
-                <OrgHomePage />
-              </OrgAPIProvider>
+            <OrgAPIProvider>
+              <OrgHomePage />
+            </OrgAPIProvider>
           </PrivateRoute>
 
           <PrivateRoute path={ORGANISATION_INVITATIONS} exact>

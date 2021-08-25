@@ -59,7 +59,9 @@
     MentorUpdatesProgramDashboardPage,
     StuUpdatesProgramDashboard,
     StudentHomePage,
-    MentorHomePage
+    MentorHomePage,
+    InvalidInvite,
+    AlreadyAcceptedInvite
 */
 
 .Page {

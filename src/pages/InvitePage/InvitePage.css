@@ -1,0 +1,28 @@
+:is(.AlreadyAcceptedInvitePage, .InvalidInvitePage) section {
+  max-width: 800px;
+  margin: auto;
+  padding: 1rem;
+  text-align: center;
+  color: var(--blue-gray-600);
+}
+
+.AlreadyAcceptedInvitePage img {
+  margin-top: 1rem;
+  max-width: 350px;
+}
+
+.InvalidInvitePage img {
+  margin-top: 1rem;
+  max-width: 270px;
+}
+
+:is(.AlreadyAcceptedInvitePage, .InvalidInvitePage) p {
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 1rem;
+}
+
+.InvalidInvitePage p {
+  max-width: 600px;
+  margin: auto;
+}
