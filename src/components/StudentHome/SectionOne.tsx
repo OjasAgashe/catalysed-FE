@@ -1,14 +1,19 @@
 import React from "react";
 import { OrgHomeSectionOne } from "../../assets/Illustrations/Illustrations";
+import { useCookie } from "../../context/cookie_context/CookieContext";
 
 const SectionOne = () => {
+  const { getCatalysedUserNameCookie } = useCookie();
+
   return (
     <section
       style={{ backgroundImage: `url(${OrgHomeSectionOne})` }}
       className="OrgHomeSectionOneContainer"
     >
       <div className="TextContainer">
-        <span className="WelcomeSpan">Welcome Name !!</span>
+        <span className="WelcomeSpan">
+          Welcome {getCatalysedUserNameCookie()} !!
+        </span>
         <span className="HelpTextSpanOne">
           Thanks for believing on CatalysEd
         </span>
