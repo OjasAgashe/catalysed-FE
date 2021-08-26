@@ -36,7 +36,12 @@ const OrgRegisterDetailsForm = ({
 }: OrgRegisterDetailsFormProps) => {
   return (
     <>
+      {/*
+       * If there is any error we get after calling the API, then show
+       * it above the "details" step form
+       */}
       {state.error && <Error message={state.error} />}
+
       <Form
         noValidate
         validated={state.validated}

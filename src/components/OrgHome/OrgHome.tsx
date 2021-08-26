@@ -25,6 +25,9 @@ const OrgHome = ({ state, dispatch }: OrgHomeProps) => {
   } = useOrgAPI();
 
   useEffect(() => {
+    /*
+     * Function to sort the Date from New to Old
+     */
     const sortDateFromNewToOldByUsing = (
       obj1: GetProgramMetaListData,
       obj2: GetProgramMetaListData
@@ -38,6 +41,9 @@ const OrgHome = ({ state, dispatch }: OrgHomeProps) => {
         : 1;
     };
 
+    /*
+     * Function to sort the Date from Old to New
+     */
     const sortDateFromOldToNewByUsing = (
       obj1: GetProgramMetaListData,
       obj2: GetProgramMetaListData
@@ -51,14 +57,29 @@ const OrgHome = ({ state, dispatch }: OrgHomeProps) => {
         : -1;
     };
 
+    /*
+     * Function to call API, to get Dashboard Data
+     */
     const getDashboardData = async () => {
       try {
+        // get Dashboard Data
         const homeResponseData = await getOrgHomePageData();
+
+        // get Programs starting this month
         const programsStartingThisMonth = await getProgramsStartingThisMonth();
+
+        // get ongoing Programs
         const ongoingPrograms = await getOngoingPrograms();
 
+        // store the Dashboard Data
         dispatch({ type: "responseData", payload: homeResponseData.data });
 
+        /*
+         * store the first three Programs (sorted from Old Date to New Date)
+         * starting this month
+         *
+         * We will show the most recent 3 programs starting this month
+         */
         dispatch({
           type: "programsStartingThisMonth",
           payload: programsStartingThisMonth
@@ -66,6 +87,11 @@ const OrgHome = ({ state, dispatch }: OrgHomeProps) => {
             .slice(0, 3),
         });
 
+        /*
+         * store the first three ongoing Programs (sorted from New Date to Old Date)
+         *
+         * We will show the least recent 3 ongoing programs
+         */
         dispatch({
           type: "ongoingPrograms",
           payload: ongoingPrograms
@@ -74,6 +100,9 @@ const OrgHome = ({ state, dispatch }: OrgHomeProps) => {
         });
       } catch (error) {
       } finally {
+        /*
+         * When we get each Data, we will hide the LoadingProgress component
+         */
         dispatch({ type: "loading", payload: false });
       }
     };
@@ -88,7 +117,9 @@ const OrgHome = ({ state, dispatch }: OrgHomeProps) => {
 
   return (
     <div className="OrgHomeSectionContainer">
-      <SectionOne state={state}/>
+      {/* Show SectionOne component */}
+      <SectionOne state={state} />
+
       <section className="OrgHomeSectionTwo">
         <div className="CreateProgramTextContainer">
           <Alert variant="info" className="CreateProgramText">
@@ -99,12 +130,20 @@ const OrgHome = ({ state, dispatch }: OrgHomeProps) => {
           </Alert>
         </div>
       </section>
+
       <div className="SectionThreeAndFourContainer">
+        {/* Show SectionThree component */}
         <SectionThree state={state} />
+
+        {/* Show SectionFour component */}
         <SectionFour state={state} />
       </div>
-      <SectionFive state={state}/>
-      <SectionSix state={state}/>
+
+      {/* Show SectionFive component */}
+      <SectionFive state={state} />
+
+      {/* Show SectionSix component */}
+      <SectionSix state={state} />
     </div>
   );
 };

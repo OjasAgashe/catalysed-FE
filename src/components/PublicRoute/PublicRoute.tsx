@@ -11,6 +11,10 @@ import {
 import { MENTOR, ORGANISER, STUDENT } from "../../constants/Entities";
 import { useCookie } from "../../context/cookie_context/CookieContext";
 
+/*
+ * PublicRoute: component to handle Public Route of the app, route that
+ * every entity can visit
+ */
 const PublicRoute = (props: {
   children: React.ReactNode;
   path: string;
@@ -20,6 +24,10 @@ const PublicRoute = (props: {
   const history = useHistory();
 
   useEffect(() => {
+    /*
+     * If user is already logged in, but still tries to visit public URL
+     * then redirect it to its respected Home or Profile Builder page.
+     */
     switch (getCatalysedTypeCookie()) {
       case ORGANISER:
         if (getCatalysedCreatedCookie()) {

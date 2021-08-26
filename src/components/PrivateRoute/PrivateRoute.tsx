@@ -37,6 +37,10 @@ import OrgProfileBuilder from "../../pages/OrgProfileBuilder/OrgProfileBuilder";
 import StuProfileBuilder from "../../pages/StuProfileBuilder/StuProfileBuilder";
 import { useCookie } from "../../context/cookie_context/CookieContext";
 
+/*
+ * PrivateRoute: component to handle Private Route of the app, routes for each
+ * entity that another entity cannot access
+ */
 const PrivateRoute = (props: {
   children: React.ReactNode;
   path: string;
@@ -49,12 +53,19 @@ const PrivateRoute = (props: {
   } = useCookie();
   const location = useLocation();
 
+  /*
+   * Function checking the requested route by a logged in user have
+   * access to logged in user or not
+   */
   const validatedRender = (
     catalysedType: string,
     catalysedCreated: boolean
   ) => {
+    // if the logged in user is ORGANISER
     if (catalysedType === ORGANISER) {
+      // if the ORGANISER has created his profile
       if (catalysedCreated) {
+        // if the requested path is one of the below mentioned paths
         if (
           [
             ORGANISATION_APPLICANTS,
@@ -75,18 +86,28 @@ const PrivateRoute = (props: {
             `${ORGANISATION_PROGRAM_VIEW_SEARCH}/:filterBy`,
           ].includes(props.path)
         ) {
+          // then take the ORGANISER to the requested path
           return (
             <Route path={props.path} exact={props.exact ?? false}>
               {props.children}
             </Route>
           );
         } else {
+          /*
+           * if the requested path is not in the paths mentioned above
+           * then redirect ORGANISER to its HOME
+           */
           return <Redirect to={ORGANISATION_HOME} />;
         }
       } else {
+        /*
+         * if ORANISER has not created its profile, and tries to vist any path
+         * then redirect it to its PROFILE BUILDER page
+         */
         if (location.pathname !== ORGANISATION_PROFILE_BUILDER) {
           return <Redirect to={ORGANISATION_PROFILE_BUILDER} />;
         } else {
+          // else take the ORGANISER to its PROFILE BUILDER page
           return (
             <ProfileBuilderProvider>
               <Route path={ORGANISATION_PROFILE_BUILDER}>
@@ -98,8 +119,11 @@ const PrivateRoute = (props: {
       }
     }
 
+    // if the logged in user is STUDENT
     if (catalysedType === STUDENT) {
+      // if the STUDENT has created his profile
       if (catalysedCreated) {
+        // if the requested path is one of the below mentioned paths
         if (
           [
             STUDENT_HOME,
@@ -116,18 +140,28 @@ const PrivateRoute = (props: {
             `${STUDENT_UPDATES_DETAILS_PROGRAM}/:programId/people`,
           ].includes(props.path)
         ) {
+          // then take the STUDENT to the requested path
           return (
             <Route path={props.path} exact={props.exact ?? false}>
               {props.children}
             </Route>
           );
         } else {
+          /*
+           * If the requested path is not in the paths mentioned above
+           * then redirect STUDENT to its HOME
+           */
           return <Redirect to={STUDENT_HOME} />;
         }
       } else {
+        /*
+         * If STUDENT has not created its profile, and tries to visit any path
+         * then redirect it to its PROFILE BUILDER page
+         */
         if (location.pathname !== STUDENT_PROFILE_BUILDER) {
           return <Redirect to={STUDENT_PROFILE_BUILDER} />;
         } else {
+          // else take the STUDENT to its PROFILE BUILDER page
           return (
             <ProfileBuilderProvider>
               <Route path={STUDENT_PROFILE_BUILDER}>
@@ -139,8 +173,11 @@ const PrivateRoute = (props: {
       }
     }
 
+    // if the logged in user is MENTOR
     if (catalysedType === MENTOR) {
+      // if the MENTOR has created his profile
       if (catalysedCreated) {
+        // if the requested path is one of the below mentioned paths
         if (
           [
             MENTOR_HOME,
@@ -157,18 +194,28 @@ const PrivateRoute = (props: {
             `${MENTOR_UPDATES_DETAILS_PROGRAM}/:programId/people`,
           ].includes(props.path)
         ) {
+          // then take the MENTOR to the requested path
           return (
             <Route path={props.path} exact={props.exact ?? false}>
               {props.children}
             </Route>
           );
         } else {
+          /*
+           * If the requested path is not in the paths mentioned above then
+           * redirect MENTOR to its HOME
+           */
           return <Redirect to={MENTOR_HOME} />;
         }
       } else {
+        /*
+         * If MENTOR has not created his profile, and tries to visit any path
+         * then redirect it to its PROFILE BUILDER page
+         */
         if (location.pathname !== MENTOR_PROFILE_BUILDER) {
           return <Redirect to={MENTOR_PROFILE_BUILDER} />;
         } else {
+          // else take the MENOTR to its PROFILE BUILDER page
           return (
             <ProfileBuilderProvider>
               <Route path={MENTOR_PROFILE_BUILDER}>
@@ -183,6 +230,17 @@ const PrivateRoute = (props: {
     return <Redirect to={LOGIN} />;
   };
 
+  /*
+   * If user is not logged in and tries to visit a private route, then
+   * redirects it to Login Page
+   *
+   * And if the user is logged in and tries to visit a private route,
+   * then before redirecting to the requested route. First check that the
+   * logged in entity can access the requested route or not.
+   *
+   * Like a logged in organisation should not be able to visit routes for
+   * a student and mentor
+   */
   return getCatalysedTokenCookie() ? (
     validatedRender(getCatalysedTypeCookie(), getCatalysedCreatedCookie())
   ) : (

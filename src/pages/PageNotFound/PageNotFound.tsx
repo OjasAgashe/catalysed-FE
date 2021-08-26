@@ -1,3 +1,9 @@
+/*
+ * We will render this page whenever anyone tries to visit
+ * an URL that is not valid, or tries to visit a page which
+ * does not exist any more
+ */
+
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Logo } from "../../assets/Illustrations/Illustrations";
@@ -21,18 +27,33 @@ const PageNotFound = () => {
   const history = useHistory();
 
   useEffect(() => {
+    /*
+     * Whenever anyone visits this page first time,
+     * We want the scroll bar position on the top
+     */
     document.documentElement.scrollTop = 0;
 
+    // set document title
     document.title = "Page Not Found | CatalysEd";
   }, []);
 
+  /*
+   * Back to Home button click handler
+   */
   const handleBackToHomeClick = () => {
+    /*
+     * if the user is not logged in, then redirect to Common Home
+     */
     if (
       getCatalysedTokenCookie() === "" ||
       getCatalysedCreatedCookie() === false
     ) {
       history.push(HOME);
     } else {
+      /*
+       * else redirect to respected Home for the Organisation,
+       * Student, and Mentor based on CatalysedType Cookie
+       */
       switch (getCatalysedTypeCookie()) {
         case ORGANISER:
           history.push(ORGANISATION_HOME);

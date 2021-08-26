@@ -14,6 +14,11 @@ type SectionFourProps = {
 const SectionFour = ({ state }: SectionFourProps) => {
   const history = useHistory();
 
+  /*
+   * On click of View all Button in Ongoing Programs section, we will
+   * push the Org to View and Search Program page with filter applied for
+   * status as PUBLISHED and category as ONGOING
+   */
   const handleSectionFourNextBtnClick = () => {
     history.push(`${ORGANISATION_PROGRAM_VIEW_SEARCH}/in_progress`);
   };
@@ -22,8 +27,16 @@ const SectionFour = ({ state }: SectionFourProps) => {
     <section className="OrgHomeSectionFourContainer">
       <SectionHeadingDiv headingText="Ongoing Programs" />
       {state.ongoingPrograms.length === 0 ? (
+        /*
+         * If there are no programs in state.ongoingPrograms, then show
+         * an Error
+         */
         <ErrorNoProgramsDiv />
       ) : (
+        /*
+         * And If there are programs in state.ongoingPrograms, then show that
+         * Programs
+         */
         <div className="ProgramCardContainer">
           {state.ongoingPrograms.map((program: any) => (
             <ProgramCard

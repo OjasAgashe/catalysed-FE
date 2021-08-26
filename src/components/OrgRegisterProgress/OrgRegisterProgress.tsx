@@ -6,6 +6,10 @@ type OrgRegisterProgressProps = {
   currentOrgRegister: string;
 };
 
+/*
+ * OrgRegisterProgress: component to show the current step in organisation
+ * registration. It accepts currentOrgRegister as the props
+ */
 const OrgRegisterProgress = ({
   currentOrgRegister,
 }: OrgRegisterProgressProps) => {
