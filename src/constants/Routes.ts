@@ -1,3 +1,7 @@
+/*
+ * This file contains constant for all the valid routes of the app
+ */
+
 export const HOME = "/";
 export const INVITE_ALREADY_ACCEPTED = "/app/invite/already-accepted";
 export const INVITE_INVALID = "/app/invite/invalid";

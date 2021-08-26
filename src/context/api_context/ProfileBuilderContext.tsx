@@ -1,3 +1,8 @@
+/*
+ * This file contains API functions related to creating Profile
+ * of each entity
+ */
+
 import React, { useContext } from "react";
 import axios, { AxiosResponse } from "axios";
 import { OrgProfileBuilderData } from "../../types/OrganisationProfileBuilder";
@@ -13,21 +18,39 @@ interface ProfileBuilderProviderReturns {
   getProfileCall: (entity: string) => Promise<AxiosResponse<any>>;
 }
 
+/*
+ * Creating ProfileBuilderContext that can have either null or
+ * ProfileBuilderProviderReturns Interface property
+ */
 const ProfileBuilderContext =
   React.createContext<ProfileBuilderProviderReturns | null>(null);
 
+/*
+ * Creating useProfileBuilder custom hook, so that we did not write
+ * useContext(ProfileBuilderContext) everywhere we need profile building
+ * related API functions
+ */
 export function useProfileBuilder() {
   return useContext(ProfileBuilderContext) as ProfileBuilderProviderReturns;
 }
 
 export const ProfileBuilderProvider: React.FC<React.ReactNode> = (props) => {
+  /*
+   * Creating axios instance with baseURL of the app
+   */
   const instance = axios.create({
     baseURL:
       "http://catalyseddev-env.eba-qewmmmrf.us-east-1.elasticbeanstalk.com/",
   });
 
+  /*
+   * Destructing getCatalysedTokenCookie value from useCookie hook
+   */
   const { getCatalysedTokenCookie } = useCookie();
 
+  /*
+   * Function to call Create Profile API
+   */
   function postProfileCall(
     entity: string,
     data: OrgProfileBuilderData | StudentProfileBuilderData | any
@@ -39,6 +62,9 @@ export const ProfileBuilderProvider: React.FC<React.ReactNode> = (props) => {
     });
   }
 
+  /*
+   * Function to call API to get Created Profile, if we need
+   */
   function getProfileCall(entity: string) {
     const catalysedToken = getCatalysedTokenCookie();
 
@@ -47,6 +73,9 @@ export const ProfileBuilderProvider: React.FC<React.ReactNode> = (props) => {
     });
   }
 
+  /*
+   * ProfileBuilderContext consumer can consume all these values
+   */
   const values = {
     getProfileCall,
     postProfileCall,

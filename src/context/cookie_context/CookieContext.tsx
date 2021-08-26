@@ -1,3 +1,8 @@
+/*
+ * This file contains all the functions related to cookies,
+ * that we have used in our project
+ */
+
 import React, { useContext } from "react";
 
 interface CookieProviderReturns {
@@ -38,13 +43,24 @@ interface CookieProviderReturns {
   getCatalysedOrgNameCookie: () => string;
 }
 
+/*
+ * Creating CookieContext that can have either null or
+ * CookieProviderReturns Interface property
+ */
 const CookieContext = React.createContext<CookieProviderReturns | null>(null);
 
+/*
+ * Creating useCookie custom hook, so that we did not write
+ * the useContext(CookieContext) everywhere we need cookie
+ */
 export function useCookie() {
   return useContext(CookieContext) as CookieProviderReturns;
 }
 
 export const CookieProvider: React.FC<React.ReactNode> = (props) => {
+  /*
+   * Function to set all the Cookies at Once
+   */
   const setAllCookies = (
     catalysedCreated: boolean,
     catalysedId: number | null,
@@ -84,6 +100,9 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
     // secure`;
   };
 
+  /*
+   * Function to get all the Cookies at Once
+   */
   const getAllCookies = (): {
     catalysedCreated: boolean;
     catalysedId: number | null;
@@ -109,6 +128,9 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
     };
   };
 
+  /*
+   * Function to set CatalysedCreated cookie
+   */
   const setCatalysedCreatedCookie = (catalysedCreated: boolean): void => {
     document.cookie = `catalysedCreated=${encodeURIComponent(
       catalysedCreated
@@ -116,6 +138,9 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
     // secure`;
   };
 
+  /*
+   * Function to get CatalysedCreated cookie
+   */
   const getCatalysedCreatedCookie = (): boolean => {
     if (document.cookie) {
       const allCookies = [...document.cookie.split(";")].reverse();
@@ -131,6 +156,9 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
     return false;
   };
 
+  /*
+   * Function to set CatalysedId cookie
+   */
   const setCatalysedIdCookie = (catalysedId: number | null): void => {
     document.cookie = `catalysedId=${encodeURIComponent(
       catalysedId === null ? "" : catalysedId
@@ -138,6 +166,9 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
     // secure`;
   };
 
+  /*
+   * Function to get CatalysedId cookie
+   */
   const getCatalysedIdCookie = (): number | null => {
     if (document.cookie) {
       const allCookies = [...document.cookie.split(";")].reverse();
@@ -153,6 +184,9 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
     return null;
   };
 
+  /*
+   * Function to set CatalysedToken cookie
+   */
   const setCatalysedTokenCookie = (catalysedToken: string): void => {
     document.cookie = `catalysedToken=${encodeURIComponent(
       catalysedToken
@@ -160,6 +194,9 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
     // secure`;
   };
 
+  /*
+   * Function to get CatalysedToken cookie
+   */
   const getCatalysedTokenCookie = (): string => {
     if (document.cookie) {
       const allCookies = [...document.cookie.split(";")].reverse();
@@ -174,6 +211,9 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
     return "";
   };
 
+  /*
+   * Function to set CatalysedType cookie
+   */
   const setCatalysedTypeCookie = (catalysedType: string): void => {
     document.cookie = `catalysedType=${encodeURIComponent(
       catalysedType
@@ -181,6 +221,9 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
     // secure`;
   };
 
+  /*
+   * Function to get CatalysedType cookie
+   */
   const getCatalysedTypeCookie = (): string => {
     if (document.cookie) {
       const allCookies = [...document.cookie.split(";")].reverse();
@@ -195,6 +238,9 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
     return "";
   };
 
+  /*
+   * Function to set CatalysedUserName cookie
+   */
   const setCatalysedUserNameCookie = (catalysedUserName: string): void => {
     document.cookie = `catalysedUserName=${encodeURIComponent(
       catalysedUserName
@@ -202,6 +248,9 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
     // secure`;
   };
 
+  /*
+   * Function to get CatalysedUserName cookie
+   */
   const getCatalysedUserNameCookie = (): string => {
     if (document.cookie) {
       const allCookies = [...document.cookie.split(";")].reverse();
@@ -217,6 +266,9 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
     return "";
   };
 
+  /*
+   * Function to set CatalysedOrgName cookie
+   */
   const setCatalysedOrgNameCookie = (catalysedOrgName: string): void => {
     document.cookie = `catalysedOrgName=${encodeURIComponent(
       catalysedOrgName
@@ -224,6 +276,9 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
     // secure`;
   };
 
+  /*
+   * Function to get CatalysedOrgName cookie
+   */
   const getCatalysedOrgNameCookie = (): string => {
     if (document.cookie) {
       const allCookies = [...document.cookie.split(";")].reverse();
@@ -239,6 +294,9 @@ export const CookieProvider: React.FC<React.ReactNode> = (props) => {
     return "";
   };
 
+  /*
+   * CookieContext consumer can consume all these values
+   */
   const values = {
     setAllCookies,
     getAllCookies,

@@ -1,3 +1,8 @@
+/*
+ * This file contains all the API functions related to
+ * an Organisation
+ */
+
 import React, { useCallback, useContext, useMemo } from "react";
 import axios from "axios";
 import { useCookie } from "../cookie_context/CookieContext";
@@ -8,18 +13,36 @@ import { OrgAPIProviderReturns } from "../../types/OrgAPI";
 import { OrgSpecificApplicantDetailsResponse } from "../../types/OrgSpecificApplicantDetails";
 import { OrgProfileEditData } from "../../types/OrgProfileEdit";
 
+/*
+ * Creating OrgAPIContext that can have either null or OrgAPIProviderReturns
+ * Interface property
+ */
 const OrgAPIContext = React.createContext<OrgAPIProviderReturns | null>(null);
 
+/*
+ * Creating useOrgAPI custom hook, so that we did not write
+ * useContext(OrgAPIContext) everywhere we need API functions
+ * related to an Organisation
+ */
 export function useOrgAPI() {
   return useContext(OrgAPIContext) as OrgAPIProviderReturns;
 }
 
 export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
+  /*
+   * Creating axios instance with baseURL of the app
+   */
   const instance = axios.create({
     baseURL:
       "http://catalyseddev-env.eba-qewmmmrf.us-east-1.elasticbeanstalk.com/",
   });
 
+  /*
+   * Storing value of todays Date,
+   *
+   * We need this to filter program starting this month, and
+   * ongoing programs
+   */
   const todaysFullDate = useMemo(() => {
     const currDate = new Date(Date.now());
     return {
@@ -29,8 +52,15 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     };
   }, []);
 
+  /*
+   * Destructing getCatalysedTokenCookie and getCatalysedIdCookie value
+   * from useCookie hook
+   */
   const { getCatalysedTokenCookie, getCatalysedIdCookie } = useCookie();
 
+  /*
+   * Function to call Create Program API
+   */
   function postCreateProgramCall(data: CreateProgramData) {
     const catalysedToken = getCatalysedTokenCookie();
 
@@ -39,6 +69,9 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     });
   }
 
+  /*
+   * Function to call get API, to get Program Meta List
+   */
   const getProgramsMetaList = useCallback(() => {
     const catalysedToken = getCatalysedTokenCookie();
     const catalysedId = getCatalysedIdCookie();
@@ -48,6 +81,9 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     });
   }, [getCatalysedIdCookie, getCatalysedTokenCookie, instance]);
 
+  /*
+   * Function to call get API, to get specific Program Details
+   */
   function getProgramDetails(programId: number) {
     const catalysedToken = getCatalysedTokenCookie();
 
@@ -56,6 +92,10 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     });
   }
 
+  /*
+   * Function to call put API, to put changes done after
+   * editing Program Details
+   */
   function putUpdatedProgramDetails(
     programId: number,
     data: CreateProgramData
@@ -67,6 +107,10 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     });
   }
 
+  /*
+   * Function to call put API, to put the status of a Program
+   * from Draft to Publish
+   */
   function putUpdatedProgramStatusToPublish(
     programId: number,
     data: CreateProgramData
@@ -78,6 +122,9 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     });
   }
 
+  /*
+   * Function to get Meta List of the Programs starting this month
+   */
   const getProgramsStartingThisMonth = useCallback(async () => {
     const response = await getProgramsMetaList();
 
@@ -111,6 +158,9 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     todaysFullDate.todaysYear,
   ]);
 
+  /*
+   * Function to get Meta List of the ongoing Programs
+   */
   const getOngoingPrograms = useCallback(async () => {
     const response = await getProgramsMetaList();
 
@@ -141,6 +191,10 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     todaysFullDate.todaysYear,
   ]);
 
+  /*
+   * Function to call get API, to get all the Invitations of a
+   * specific Program
+   */
   function getProgramInvitations(programId: number) {
     const catalysedToken = getCatalysedTokenCookie();
 
@@ -149,6 +203,9 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     });
   }
 
+  /*
+   * Function to call Create Invitation API for a specific Program
+   */
   function postProgramInvitations(
     programId: number,
     data: OrgInvitationPostData
@@ -164,6 +221,10 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     );
   }
 
+  /*
+   * Function to call get API, to get all the Participants of a
+   * specific Program
+   */
   function getProgramParticipants(programId: number) {
     const catalysedToken = getCatalysedTokenCookie();
 
@@ -172,6 +233,10 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     });
   }
 
+  /*
+   * Function to call get API, to get all the Connected Mentors of
+   * a specific Program
+   */
   function getConnectedMentors() {
     const catalysedToken = getCatalysedTokenCookie();
     const catalysedId = getCatalysedIdCookie();
@@ -181,6 +246,10 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     });
   }
 
+  /*
+   * Function to call get API, to get all the Connected Students of a
+   * specific Program
+   */
   function getConnectedStudents() {
     const catalysedToken = getCatalysedTokenCookie();
     const catalysedId = getCatalysedIdCookie();
@@ -193,6 +262,10 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     );
   }
 
+  /*
+   * Function to call get API, to get details of a specific Connected Mentor
+   * with the Organisation
+   */
   function getSpecificConnectedMentor(mentorId: number) {
     const catalysedToken = getCatalysedTokenCookie();
     const catalysedId = getCatalysedIdCookie();
@@ -205,6 +278,10 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     );
   }
 
+  /*
+   * Function to call get API, to get details of a specific Connected Student
+   * with the Organisation
+   */
   function getSpecificConnectedStudent(studentId: number) {
     const catalysedToken = getCatalysedTokenCookie();
     const catalysedId = getCatalysedIdCookie();
@@ -217,6 +294,10 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     );
   }
 
+  /*
+   * Function to call get API, to get all the Student Applications
+   * for a Program
+   */
   function getStudentApplicationForProgram(programId: number) {
     const catalysedToken = getCatalysedTokenCookie();
     const catalysedId = getCatalysedIdCookie();
@@ -229,6 +310,10 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     );
   }
 
+  /*
+   * Function to call get API, to get all the Mentor Applications
+   * for a Program
+   */
   function getMentorApplicationForProgram(programId: number) {
     const catalysedToken = getCatalysedTokenCookie();
     const catalysedId = getCatalysedIdCookie();
@@ -241,6 +326,10 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     );
   }
 
+  /*
+   * Function to call get API, to get the details of a specific Student
+   * Application Details
+   */
   function getSpecificStudentApplicantDetails(
     programId: number,
     applicationId: number
@@ -256,6 +345,10 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     );
   }
 
+  /*
+   * Function to call get API, to get the details of a specific Student
+   * Application Details
+   */
   function getSpecificMentorApplicantDetails(
     programId: number,
     applicationId: number
@@ -271,6 +364,10 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     );
   }
 
+  /*
+   * Function to call put API, to put that the Organisation has viewed
+   * the Applicant Application
+   */
   function putSpecificApplicantDetailsAsViewed(
     programId: number,
     applicationId: number,
@@ -288,6 +385,10 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     );
   }
 
+  /*
+   * Function to call put API, to put that the Organisation has Accepted or
+   * Rejected the applicant application
+   */
   function putStatusOfSpecificApplicantDetails(
     programId: number,
     applicationId: number,
@@ -306,6 +407,9 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     );
   }
 
+  /*
+   * Function to call get API, to get the Organisation Profile Details
+   */
   function getOrganisationProfile() {
     const catalysedToken = getCatalysedTokenCookie();
     const catalysedId = getCatalysedIdCookie();
@@ -315,6 +419,10 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     });
   }
 
+  /*
+   * Function to call put API, to put the edited Organisation Profile
+   * Details
+   */
   function putOrganisationProfile(data: OrgProfileEditData) {
     const catalysedToken = getCatalysedTokenCookie();
     const catalysedId = getCatalysedIdCookie();
@@ -324,6 +432,9 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     });
   }
 
+  /*
+   * Function to call get API, to get the Organisation HomePage Details
+   */
   function getOrgHomePageData() {
     const catalysedToken = getCatalysedTokenCookie();
     const catalysedId = getCatalysedIdCookie();
@@ -333,6 +444,9 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     });
   }
 
+  /*
+   * OrgAPIContext consumer can consume all these values
+   */
   const values = {
     postCreateProgramCall,
     getProgramsMetaList,

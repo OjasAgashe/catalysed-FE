@@ -1,3 +1,7 @@
+/*
+ * This file exports all the used Images, Illustrations in the project
+ */
+
 import AlreadyAccountExistResponse from "../../assets/Illustrations/already_account_exist_response.svg";
 import CommonHomeBoy from "../../assets/Illustrations/common_home_boy.jpg";
 import CommonHomeBuilding from "../../assets/Illustrations/common_home_building.jpg";
