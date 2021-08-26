@@ -1,3 +1,7 @@
+/*
+ * Database of Languages, to show option in language select input
+ */
+
 export const Languages = [
   { value: "Select your language", code: "" },
   { value: "English", code: "EN" },
