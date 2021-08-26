@@ -24,27 +24,60 @@ type LoginFormProps = {
   dispatch: React.Dispatch<LoginActionType>;
 };
 
+/*
+ * LoginForm: component accepts two props,
+ *
+ * state: Login Page state
+ * dispatch: Login Page dispatch
+ */
 const LoginForm = ({ state, dispatch }: LoginFormProps) => {
+  /*
+   * creating state to maintain value of email and password
+   * that we will send in Login API Call
+   */
   const [loginData, setLoginData] = useState<LoginData>({
     email: "",
     password: "",
   });
 
+  // postLoginCall: to call Login API with email and password
   const { postLoginCall } = useAuth();
+
+  /*
+   * setAllCookies: to set the cookies with the response data of
+   * successful Login API Call
+   */
   const { setAllCookies } = useCookie();
+
+  /*
+   * To push after setting the cookies, to profile builder page or
+   * home page, based on the value of profileCreated
+   */
   const history = useHistory();
 
+  /*
+   * function to handle the input change of email and password
+   */
   const handleLoginChange: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
+    /*
+     * If previously, we have shown any validation error, then hide it first
+     */
     if (state.validated) dispatch({ type: "validated", payload: false });
 
+    /*
+     * Then set the email or password value based on the target name
+     */
     setLoginData((prevState: LoginData) => ({
       ...prevState,
       [event.target.name]: event.target.value,
     }));
   };
 
+  /*
+   * Function to call the Login API
+   */
   const handleLoginFormSubmit: React.FormEventHandler<HTMLFormElement> = async (
     event
   ) => {
@@ -53,13 +86,25 @@ const LoginForm = ({ state, dispatch }: LoginFormProps) => {
     dispatch({ type: "validated", payload: true });
 
     if (event.currentTarget.checkValidity() === true) {
+      // If the form passes all the check validity, only then call the API
+
       try {
+        // Show the loading bar
         dispatch({ type: "loading", payload: true });
+
+        // Previously, If we have shown any error then hide it
         dispatch({ type: "error", payload: "" });
 
+        // Call the Login API with email and password (loginData)
         const response = await postLoginCall(loginData);
+
+        // After successful API Call hide the loading bar
         dispatch({ type: "loading", payload: false });
 
+        /*
+         * Set all the required cookies from the data attribute of
+         * response, that we will get from successful API Call
+         */
         setAllCookies(
           response.data.user.profileCreated,
           response.data.user.id,
@@ -69,6 +114,10 @@ const LoginForm = ({ state, dispatch }: LoginFormProps) => {
           response.data.user.orgName ?? ""
         );
 
+        /*
+         * Based on the type of user, push it to the respected Home
+         * or Profile Builder Page
+         */
         switch (response.data.user.userType) {
           case ORGANISER:
             if (response.data.user.profileCreated) {
@@ -96,7 +145,15 @@ const LoginForm = ({ state, dispatch }: LoginFormProps) => {
             break;
         }
       } catch (error) {
+        /*
+         * If there is an error (API Call is not successful), then first
+         * hide the loading bar
+         */
         dispatch({ type: "loading", payload: false });
+
+        /*
+         * And then show the error
+         */
         dispatch({
           type: "error",
           payload: error.response?.data?.message ?? "",
@@ -107,7 +164,9 @@ const LoginForm = ({ state, dispatch }: LoginFormProps) => {
 
   return (
     <div className="LoginFormContainer">
+      {/* If there is any error, show it above the form */}
       {state.error && <Error message={state.error} />}
+
       <Form
         noValidate
         validated={state.validated}

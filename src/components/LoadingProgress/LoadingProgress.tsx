@@ -9,6 +9,14 @@ type LoadingProgressProps = {
   loadingMessage: string;
 };
 
+/*
+ * LoadingProgress: component accepts three props,
+ *
+ * loading: to show the BounceLoader
+ * emailSent: to show the emailSent Message, in case of
+ * Org Registration
+ * loadingMessage: to store the value of loading message to show
+ */
 const LoadingProgress = ({
   loading,
   emailSent,
@@ -17,6 +25,9 @@ const LoadingProgress = ({
   return (
     <div className="LoadingProgressModal">
       <div className="LoadingProgressContainer">
+        {/*
+         * Show the loading BounceLoader, with the loading Message
+         */}
         {loading && (
           <div className="BounceLoaderContainer">
             <BounceLoader color="#2bc0ef" css="display:block; margin:0 auto;" />
@@ -24,6 +35,10 @@ const LoadingProgress = ({
             <span>{loadingMessage}</span>
           </div>
         )}
+
+        {/*
+         * Show the emailSent Message
+         */}
         {emailSent && (
           <div className="EmailSentIconContainer">
             <AiFillCheckCircle className="EmailSentTickIcon" />
