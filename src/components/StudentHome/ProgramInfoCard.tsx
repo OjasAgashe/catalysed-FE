@@ -1,3 +1,7 @@
+/*
+ * Component to show Program Info in a Card on Current entity (Student or Mentor) Home
+ */
+
 import React from "react";
 import CurrentStatDiv from "../OrgHome/CurrentStatDiv";
 import SectionHeadingDiv from "../OrgHome/SectionHeadingDiv";

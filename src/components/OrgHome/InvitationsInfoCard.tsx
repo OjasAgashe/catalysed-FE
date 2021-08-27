@@ -1,3 +1,7 @@
+/*
+ * Component showing Invitations Info in a Card on Org Home
+ */
+
 import React from "react";
 import { OrgHomeInvitationsInfoCard } from "../../assets/Illustrations/Illustrations";
 import CurrentStatDiv from "./CurrentStatDiv";

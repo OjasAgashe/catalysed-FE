@@ -36,6 +36,9 @@ const OrgApplicantsPageDetails = ({
     <div className="OrgApplicantsPageDetails">
       <div className="OrgApplicantsPageDetailsContainer">
         {fakeData.length ? (
+          /*
+           * Show the table only when we have some data
+           */
           <OrgApplicantsPageDataContainer
             searchedName={searchedName}
             fakeData={fakeData}
@@ -44,6 +47,9 @@ const OrgApplicantsPageDetails = ({
             pageHeaderText={pageHeaderText}
           />
         ) : (
+          /*
+           * else show an error message
+           */
           <div className="ErrorCompContainer">
             <Error message="No Applicants Yet !!" />
           </div>

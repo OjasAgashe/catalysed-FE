@@ -1,3 +1,7 @@
+/*
+ * Component to show Org Info in a Card on Current entity (Student or Mentor) Home
+ */
+
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { MENTOR, STUDENT } from "../../constants/Entities";

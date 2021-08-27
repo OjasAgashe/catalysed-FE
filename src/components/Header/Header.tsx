@@ -20,6 +20,12 @@ import MentorHomeHeader from "./MentorHomeHeader";
 const Header = () => {
   const location = useLocation();
 
+  /*
+   * Whenever the path changes, we will render Header again
+   *
+   * We are doing this, so that Header gets update based on the current
+   * situation, either it is logged in or logged out
+   */
   useEffect(() => {}, [location.pathname]);
 
   const {
@@ -30,14 +36,21 @@ const Header = () => {
   } = useCookie();
   const history = useHistory();
 
+  // Function to handle Click on Sign Out
   const handleSignOut = () => {
+    // set All Cookies to empty
     setAllCookies(false, null, "", "", "", "");
 
+    // and push to Common Home
     history.push(HOME);
   };
 
   return (
     <Navbar collapseOnSelect expand="lg" className="Navbar">
+      {/*
+       * Based on the cookie value, change the Link route of the
+       * Brand
+       */}
       <Navbar.Brand
         as={Link}
         to={
@@ -62,6 +75,14 @@ const Header = () => {
 
       <Navbar.Collapse className="NavbarCollapse" id="navbar-nav">
         <Nav>
+          {/*
+           * Based on the value of cookies, Show either
+           * CommonHomeHeader: if no one has logged in,
+           * OrgHomeHeader: if logged in user is an Org,
+           * StudentHomeHeader: if logged in user is a Student,
+           * MentorHomeHeader: if logged in user is a Mentor
+           */}
+
           {getCatalysedTokenCookie() === "" && <CommonHomeHeader />}
 
           {getCatalysedCreatedCookie() &&
@@ -73,6 +94,11 @@ const Header = () => {
           {getCatalysedCreatedCookie() &&
             getCatalysedTypeCookie() === MENTOR && <MentorHomeHeader />}
 
+          {/*
+           * Don't show the Sign Out button, if no one has logged in.
+           *
+           * Else show it
+           */}
           {getCatalysedTokenCookie() ? (
             <Nav.Link
               className="NavbarCollapseNavItem SignOutBtn"

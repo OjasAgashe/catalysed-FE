@@ -1,3 +1,7 @@
+/*
+ * Component to Show Current stats of the cards on Org Home
+ */
+
 import React from "react";
 
 type CurrentStatDivProps = {

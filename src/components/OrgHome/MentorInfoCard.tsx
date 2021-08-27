@@ -1,3 +1,7 @@
+/*
+ * Component showing Mentor Info in a Card on Org Home
+ */
+
 import React from "react";
 import { OrgHomeMentorInfoCard } from "../../assets/Illustrations/Illustrations";
 import CurrentStatDiv from "./CurrentStatDiv";

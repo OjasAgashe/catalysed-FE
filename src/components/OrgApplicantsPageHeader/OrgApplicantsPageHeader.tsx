@@ -40,19 +40,35 @@ const OrgApplicantsPageHeader = ({
   setSearchedNameNotFound,
   pageHeaderText,
 }: OrgApplicantsPageHeaderProps) => {
+  /*
+   * Function to handle the Searched Name input
+   */
   const handleOrgApplicantsSearch: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
+      // set the value that the use entered in input to searchedName
       setSearchedName(event.target.value);
+
+      /*
+       * If we have shown any error message before, then hide it
+       */
       setSearchedNameNotFound(false);
 
+      /*
+       * filter the response data based on the entered value
+       */
       let tempFilteredData = fakeData.filter((data) =>
         data.program_name
           .toLowerCase()
           .includes(event.target.value.toLowerCase())
       );
 
+      // set the result after filtering to filteredResponseData
       setFilteredResponseData(tempFilteredData);
 
+      /*
+       * If we do not get any data after filtering then set the value
+       * of searchedNameNotFound to true
+       */
       if (event.target.value !== "" && tempFilteredData.length === 0) {
         setSearchedNameNotFound(true);
       }

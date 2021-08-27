@@ -1,9 +1,21 @@
+/*
+ * This page shows the summary of applicants connected to an Org
+ */
+
 import React, { useEffect, useState } from "react";
 import OrgApplicantsPageDetails from "../../components/OrgApplicantsPageDetails/OrgApplicantsPageDetails";
 import OrgApplicantsPageHeader from "../../components/OrgApplicantsPageHeader/OrgApplicantsPageHeader";
 
 const OrgApplicantsPage = () => {
+  /*
+   * searchedName: To store the value of searched item
+   */
   const [searchedName, setSearchedName] = useState("");
+
+  /*
+   * filteredResponseData: To store the filtered response data, filtered
+   * based on the value of searchedName
+   */
   const [filteredResponseData, setFilteredResponseData] = useState<
     {
       id: number;
@@ -14,6 +26,12 @@ const OrgApplicantsPage = () => {
       student_not_viewed: number;
     }[]
   >([]);
+
+  /*
+   * When we will have no Data based on the value of searchedName, we
+   * will set the value of searchedNameNotFound to true, then will show
+   * message accordingly
+   */
   const [searchedNameNotFound, setSearchedNameNotFound] = useState(false);
 
   const fakeData = [
@@ -54,13 +72,22 @@ const OrgApplicantsPage = () => {
   ];
 
   useEffect(() => {
+    /*
+     * Whenever anyone visits this page first time, we want the
+     * scrollbar position on top
+     */
     document.documentElement.scrollTop = 0;
 
+    // set the document title
     document.title = "Org Applicants | CatalysEd";
   }, []);
 
   return (
     <div className="OrgApplicantsPage Page">
+      {/*
+       * Show OrgApplicantsPageHeader component
+       * with pageHeaderText="Applicants"
+       */}
       <OrgApplicantsPageHeader
         searchedName={searchedName}
         setSearchedName={setSearchedName}
@@ -70,6 +97,10 @@ const OrgApplicantsPage = () => {
         pageHeaderText="Applicants"
       />
 
+      {/*
+       * Show OrgApplicantsPageDetails component
+       * with pageHeaderText="Applicants
+       */}
       <OrgApplicantsPageDetails
         searchedName={searchedName}
         fakeData={fakeData}

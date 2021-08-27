@@ -26,6 +26,9 @@ const StudentHome = ({ state, dispatch }: StudentHomeProps) => {
   } = useStudentAPI();
 
   useEffect(() => {
+    /*
+     * Function to Sort Date from Old to New
+     */
     const sortDateFromOldToNewByUsing = (
       obj1: StudentConnectedProgramData,
       obj2: StudentConnectedProgramData
@@ -39,13 +42,24 @@ const StudentHome = ({ state, dispatch }: StudentHomeProps) => {
         : -1;
     };
 
+    /*
+     * Function to get all the Data related to Student Home
+     */
     const getDashboardData = async () => {
       try {
+        // get running programs
         const connectedRunningPrograms = await getConnectedRunningPrograms();
+
+        // get programs about to start
         const connectedAboutToStartPrograms =
           await getConnectedAboutToStartPrograms();
+
+        // get suggested programs
         const suggestedProgramsResponse = await getSuggestedPrograms();
 
+        /*
+         * Store the 3 least recent running programs
+         */
         dispatch({
           type: "runningPrograms",
           payload: connectedRunningPrograms
@@ -53,6 +67,9 @@ const StudentHome = ({ state, dispatch }: StudentHomeProps) => {
             .slice(0, 3),
         });
 
+        /*
+         * Store the 3 least recent about to start programs
+         */
         dispatch({
           type: "aboutToStartPrograms",
           payload: connectedAboutToStartPrograms
@@ -60,6 +77,9 @@ const StudentHome = ({ state, dispatch }: StudentHomeProps) => {
             .slice(0, 3),
         });
 
+        /*
+         * Store first 3 suggested programs
+         */
         dispatch({
           type: "suggestedPrograms",
           payload: suggestedProgramsResponse.data.slice(0, 3),
@@ -80,13 +100,23 @@ const StudentHome = ({ state, dispatch }: StudentHomeProps) => {
 
   return (
     <div className="OrgHomeSectionContainer">
+      {/* Show SectionOne component */}
       <SectionOne />
+
       <section className="OrgHomeSectionTwo"></section>
+
       <div className="SectionThreeAndFourContainer">
+        {/* Show SectionThree component */}
         <SectionThree state={state} />
+
+        {/* Show SectionFour component */}
         <SectionFour state={state} />
       </div>
+
+      {/* Show SectionFive component */}
       <SectionFive state={state} />
+
+      {/* Show SectionSix component */}
       <SectionSix />
     </div>
   );

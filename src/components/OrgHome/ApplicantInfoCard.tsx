@@ -1,3 +1,7 @@
+/*
+ * Component showing Applicants Info in a Card on Org Home
+ */
+
 import React from "react";
 import CurrentStatDiv from "./CurrentStatDiv";
 import SectionHeadingDiv from "./SectionHeadingDiv";

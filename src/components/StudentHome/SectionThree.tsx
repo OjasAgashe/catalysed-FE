@@ -20,6 +20,11 @@ type SectionThreeProps = {
 const SectionThree = ({ state }: SectionThreeProps) => {
   const history = useHistory();
 
+  /*
+   * On click of View all Button in About to Start and Running Programs section,
+   * We will push the current entity (Mentor Or Student), to there respected Updates
+   * Pages
+   */
   const handleSectionThreeNextBtnClick = () => {
     if (state.entity === STUDENT) {
       history.push(`${STUDENT_UPDATES}?view=PROGRAMS`);
@@ -28,6 +33,11 @@ const SectionThree = ({ state }: SectionThreeProps) => {
     }
   };
 
+  /*
+   * On click of the Program Card, showing in About to Start and Running section,
+   * We will push the current entity to there respected details page of the 
+   * updates program
+   */
   const handleProgramCardClick = (id: number) => {
     if (state.entity === STUDENT) {
       history.push(`${STUDENT_UPDATES_DETAILS_PROGRAM}/${id}/details`);
@@ -38,12 +48,23 @@ const SectionThree = ({ state }: SectionThreeProps) => {
 
   return (
     <section className="OrgHomeSectionThreeContainer">
+      {/*
+       * Using SectionHeadingDiv component of OrgHome, to show Heading
+       */}
       <SectionHeadingDiv headingText="Connected Programs" />
 
       <div className="ApplicantsSubHeading">Running</div>
       {state.runningPrograms.length === 0 ? (
+        /*
+         * If there are no programs in state.runningPrograms, then show
+         * an Error
+         */
         <SectionThreeErrorDiv entity={state.entity} />
       ) : (
+        /*
+         * And If there are programs in state.runningPrograms, then show
+         * that Programs
+         */
         <div className="ProgramCardContainer">
           {state.runningPrograms.map((program) => (
             <ProgramCard
@@ -69,8 +90,16 @@ const SectionThree = ({ state }: SectionThreeProps) => {
 
       <div className="ApplicantsSubHeading">About to Start</div>
       {state.aboutToStartPrograms.length === 0 ? (
+        /*
+         * If there are no programs in state.aboutToStartPrograms, then
+         * Show an Error
+         */
         <SectionThreeErrorDiv entity={state.entity} />
       ) : (
+        /*
+         * And If there are programs in state.aboutToStartPrograms, then
+         * Show that Programs
+         */
         <div className="ProgramCardContainer">
           {state.aboutToStartPrograms.map((program) => (
             <ProgramCard

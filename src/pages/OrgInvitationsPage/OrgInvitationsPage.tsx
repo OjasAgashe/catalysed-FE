@@ -1,8 +1,15 @@
+/*
+ * This page shows the summary of invitations of an Org
+ */
+
 import React, { useEffect, useState } from "react";
 import OrgApplicantsPageDetails from "../../components/OrgApplicantsPageDetails/OrgApplicantsPageDetails";
 import OrgApplicantsPageHeader from "../../components/OrgApplicantsPageHeader/OrgApplicantsPageHeader";
 
 const OrgInvitationsPage = () => {
+  /*
+   * All the states to store data are same as OrgApplicantsPage
+   */
   const [searchedName, setSearchedName] = useState("");
   const [filteredResponseData, setFilteredResponseData] = useState<
     {
@@ -54,13 +61,22 @@ const OrgInvitationsPage = () => {
   ];
 
   useEffect(() => {
+    /*
+     * Whenever anyone visits this page first time, we want the
+     * scrollbar position on top
+     */
     document.documentElement.scrollTop = 0;
 
+    // set the document title
     document.title = "Org Invitations | CatalysEd";
   }, []);
 
   return (
     <div className="OrgApplicantsPage Page">
+      {/*
+       * Show OrgApplicantsPageHeader component
+       * with pageHeaderText="Invitations"
+       */}
       <OrgApplicantsPageHeader
         searchedName={searchedName}
         setSearchedName={setSearchedName}
@@ -70,6 +86,10 @@ const OrgInvitationsPage = () => {
         pageHeaderText="Invitations"
       />
 
+      {/*
+       * Show OrgApplicantsPageDetails component
+       * with pageHeaderText="Invitations"
+       */}
       <OrgApplicantsPageDetails
         searchedName={searchedName}
         fakeData={fakeData}

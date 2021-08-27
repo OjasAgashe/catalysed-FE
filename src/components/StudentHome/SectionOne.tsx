@@ -12,6 +12,7 @@ const SectionOne = () => {
     >
       <div className="TextContainer">
         <span className="WelcomeSpan">
+          {/* Showing current logged entity name */}
           Welcome {getCatalysedUserNameCookie()} !!
         </span>
         <span className="HelpTextSpanOne">

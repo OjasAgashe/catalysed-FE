@@ -60,12 +60,18 @@ const OrgApplicantsPageDataContainer = ({
         </thead>
         <tbody>
           {searchedName && filteredResponseData.length ? (
+            /*
+             * If we have some filtered Data then show that Data
+             */
             [...filteredResponseData]
               .reverse()
               .map((data) => (
                 <OrgApplicantsPageTableRow data={data} key={data.id} />
               ))
           ) : (
+            /*
+             * else If we have no filtered Data then show an Error Message
+             */
             <tr
               style={searchedNameNotFound === false ? { display: "none" } : {}}
             >
@@ -76,10 +82,16 @@ const OrgApplicantsPageDataContainer = ({
               </td>
             </tr>
           )}
-          {searchedName === "" &&
-            fakeData.map((data) => (
-              <OrgApplicantsPageTableRow data={data} key={data.id} />
-            ))}
+          {
+            /*
+             * If user has not entered any thing to search, then show
+             * whole data
+             */
+            searchedName === "" &&
+              fakeData.map((data) => (
+                <OrgApplicantsPageTableRow data={data} key={data.id} />
+              ))
+          }
         </tbody>
       </Table>
     </div>

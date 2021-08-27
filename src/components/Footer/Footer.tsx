@@ -18,8 +18,8 @@ const Footer = () => {
         </Link>
       </div>
       <div className="FooterCopyright">
-        {/* Change Year */}© {new Date(Date.now()).getFullYear()} CatalysEd,
-        Org.
+        {/* Changing Year value every Year */}©{" "}
+        {new Date(Date.now()).getFullYear()} CatalysEd, Org.
       </div>
     </div>
   );

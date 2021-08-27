@@ -48,6 +48,10 @@ const SectionSix = () => {
 
   return (
     <section className="StudentSectionSixContainer">
+      {/*
+       * Using SectionHeadingDiv component of Org Home, to show
+       * the heading
+       */}
       <SectionHeadingDiv headingText="Pinned Message" />
 
       <div className="MentorDashboardSessionCardColumnContainer">

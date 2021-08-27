@@ -18,6 +18,11 @@ type SectionFourProps = {
 const SectionFour = ({ state }: SectionFourProps) => {
   const history = useHistory();
 
+  /*
+   * On click of View all Button in Suggested Programs section, we will
+   * push the current entity (Mentor or Student), to there respected
+   * Suggested Programs Pages
+   */
   const handleSectionFourNextBtnClick = () => {
     if (state.entity === STUDENT) {
       history.push(STUDENT_SUGGESTED_PROGRAMS);
@@ -26,6 +31,11 @@ const SectionFour = ({ state }: SectionFourProps) => {
     }
   };
 
+  /*
+   * On click of the Program Card, showing in Suggested Programs section,
+   * We will push the current entity to there respected suggested program
+   * details page
+   */
   const handleProgramCardClick = (id: number) => {
     if (state.entity === STUDENT) {
       history.push(`${STUDENT_SUGGESTED_PROGRAMS}/${id}/details`);
@@ -36,12 +46,24 @@ const SectionFour = ({ state }: SectionFourProps) => {
 
   return (
     <section className="OrgHomeSectionFourContainer">
+      {/*
+       * Using SectionHeadingDiv component of OrgHome, to show Heading
+       */}
       <SectionHeadingDiv headingText="Suggested Programs" />
+
       {state.suggestedPrograms.length === 0 ? (
+        /*
+         * If there are no programs in state.suggestedPrograms, then show an
+         * Error
+         */
         <Alert variant="danger" className="ErrorNoProgramsDiv">
           Sorry !! We have no Suggested Programs for you
         </Alert>
       ) : (
+        /*
+         * And If there are programs in state.suggestedPrograms, then show
+         * that Programs
+         */
         <div className="ProgramCardContainer">
           {state.suggestedPrograms.map((program) => (
             <ProgramCard
