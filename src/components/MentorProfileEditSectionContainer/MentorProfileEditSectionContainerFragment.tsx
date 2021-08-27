@@ -1,3 +1,9 @@
+/*
+ * The logic for this file is much like the logic of OrgProfileEditSectionContainerFragment
+ * file, the difference is that we are dealing with Mentor Profile data, in place
+ * of Organisation Profile data
+ */
+
 import React from "react";
 import {
   MentorProfileEditActionType,

@@ -1,3 +1,9 @@
+/*
+ * The logic for this file is much like the logic of OrgProfileEditSectionContainer
+ * file, the difference is that we are dealing with Student Profile data, in place
+ * of Organisation Profile data
+ */
+
 import React, { useCallback, useEffect } from "react";
 import "../OrgProfileEditSectionContainer/OrgProfileEditSectionContainer.css";
 import "./StudentProfileEditSectionContainer.css";

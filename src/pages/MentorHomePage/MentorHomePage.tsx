@@ -1,3 +1,8 @@
+/*
+ * This page contains states and components much like StudentHomePage,
+ * only In place of StudentHome we are using MentorHome here
+ */
+
 import React, { useEffect, useReducer } from "react";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
 import MentorHome from "../../components/MentorHome/MentorHome";

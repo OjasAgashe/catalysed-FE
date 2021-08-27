@@ -1,3 +1,9 @@
+/*
+ * The logic for this file is much like the logic of OrgProfileEdit file,
+ * the difference is that we are dealing with Mentor Profile data, in place
+ * of Organisation Profile data
+ */
+
 import React, { useEffect, useReducer, useState } from "react";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
 import OrgProfileCommonHeader from "../../components/OrgProfileCommonHeader/OrgProfileCommonHeader";

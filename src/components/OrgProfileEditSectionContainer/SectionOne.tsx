@@ -22,8 +22,18 @@ const SectionOne = ({
   state,
   dispatch,
 }: SectionOneProps) => {
+  /*
+   * Function to handle changes done in Input fields that has been
+   * shown in SectionOne
+   */
   const handleOrgEditProfileChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
+      /*
+       * Set the value of state.validated to false, if previously it is true.
+       * 
+       * And do the same for state.phoneValueIsInvalid, state.socialLinkIsInvalid
+       * , and state.websiteLinkIsInvalid
+       */
       if (state.validated) dispatch({ type: "validated", payload: false });
       if (state.phoneValueIsInvalid)
         dispatch({ type: "phoneValueIsInvalid", payload: false });

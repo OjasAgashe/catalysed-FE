@@ -32,6 +32,12 @@ const SectionTwo = ({
 }: SectionTwoProps) => {
   const handleOrgEditProfileChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
+      /*
+       * Set the value of state.validated to false, if previously it is true.
+       *
+       * And do the same for state.phoneValueIsInvalid, state.socialLinkIsInvalid
+       * , and state.websiteLinkIsInvalid
+       */
       if (state.validated) dispatch({ type: "validated", payload: false });
       if (state.phoneValueIsInvalid)
         dispatch({ type: "phoneValueIsInvalid", payload: false });
@@ -59,6 +65,12 @@ const SectionTwo = ({
           } as OrgProfileEditData)
       );
 
+      /*
+       * If the target name is socialMediaLink then extract the code of the
+       * base URL of that link
+       *
+       * Same that we are doing in Organisation Registration
+       */
       if (event.target.name === "socialMediaLink") {
         let code = "";
 
@@ -120,12 +132,21 @@ const SectionTwo = ({
   //     }));
   //   };
 
+  /*
+   * Function to handle changed done in Phone Input field
+   */
   const handlePhoneInputChange = (
     value: string,
     country: {} | CountryData,
     event: React.ChangeEvent<HTMLInputElement>,
     formattedValue: string
   ) => {
+    /*
+     * Set the value of state.validated to false, if previously it is true.
+     *
+     * And do the same for state.phoneValueIsInvalid, state.socialLinkIsInvalid
+     * , and state.websiteLinkIsInvalid
+     */
     if (state.validated) dispatch({ type: "validated", payload: false });
     if (state.phoneValueIsInvalid)
       dispatch({ type: "phoneValueIsInvalid", payload: false });
@@ -156,8 +177,17 @@ const SectionTwo = ({
     );
   };
 
+  /*
+   * Function to handle changes done in address input fields
+   */
   const handleOrgEditProfileAddressChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
+      /*
+       * Set the value of state.validated to false, if previously it is true.
+       *
+       * And do the same for state.phoneValueIsInvalid, state.socialLinkIsInvalid
+       * , and state.websiteLinkIsInvalid
+       */
       if (state.validated) dispatch({ type: "validated", payload: false });
       if (state.phoneValueIsInvalid)
         dispatch({ type: "phoneValueIsInvalid", payload: false });
@@ -184,6 +214,7 @@ const SectionTwo = ({
 
   return (
     <section className="OrgProfileEditSectionTwo">
+      {/* Show SectionTwoFragment component */}
       <SectionTwoFragment
         state={state}
         editedData={editedData}

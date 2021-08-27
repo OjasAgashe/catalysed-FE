@@ -1,3 +1,9 @@
+/*
+ * This page has logic much like StudentHome, only difference is that
+ * we are using MentorAPI to get Running Programs, About To Start Programs,
+ * and Suggested Programs, and not StudentAPI
+ */
+
 import React, { useEffect } from "react";
 import { useMentorAPI } from "../../context/api_context/MentorAPIContext";
 import {

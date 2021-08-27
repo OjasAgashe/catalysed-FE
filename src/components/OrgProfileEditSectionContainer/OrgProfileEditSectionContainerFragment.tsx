@@ -40,6 +40,10 @@ const OrgProfileEditSectionContainerFragment = ({
 }: OrgProfileEditSectionContainerFragmentProps) => {
   return (
     <>
+      {/*
+       * If state.showModal has true value, then show the LeavePageModal
+       * component
+       */}
       {state.showModal && (
         <LeavePageModal
           handleLeavePageModalLeaveBtn={handleLeavePageModalLeaveBtn}
@@ -47,6 +51,7 @@ const OrgProfileEditSectionContainerFragment = ({
         />
       )}
 
+      {/* Show SectionOne */}
       <SectionOne
         editedData={editedData}
         setEditedData={setEditedData}
@@ -54,6 +59,7 @@ const OrgProfileEditSectionContainerFragment = ({
         dispatch={dispatch}
       />
 
+      {/* Show SectionTwo */}
       <SectionTwo
         editedData={editedData}
         setEditedData={setEditedData}
@@ -62,6 +68,9 @@ const OrgProfileEditSectionContainerFragment = ({
         possibleSocialBaseURL={possibleSocialBaseURL}
       />
 
+      {/*
+       * Show Save and Discard Changes button
+       */}
       <div className="OrgProfileEditBtnContainer">
         <button
           disabled={!state.dataHasChanged}
@@ -84,6 +93,10 @@ const OrgProfileEditSectionContainerFragment = ({
           <MdCancel className="OrgProfileEditDiscardChangesBtnIcon" />
         </button>
       </div>
+
+      {/*
+       * If we have any error in putCallError, then show it
+       */}
       {state.putCallError && (
         <Error message={state.putCallError} className="ErrorMessage" />
       )}
