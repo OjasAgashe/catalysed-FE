@@ -6,6 +6,11 @@ type NestedPageBackBtnProps = {
   onClick: () => void;
 };
 
+/*
+ * This component will be visible on the nested pages, to
+ * give user functionality to go logical back
+ */
+
 const NestedPageBackBtn = ({ onClick }: NestedPageBackBtnProps) => {
   return (
     <button className="NestedPageButton" onClick={onClick}>

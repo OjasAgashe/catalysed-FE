@@ -9,6 +9,11 @@ type StuUpdatesProgramCardProps = {
   handleUpdatesProgramCardViewAllBtnClick: (id: number) => void;
 };
 
+/*
+ * This component will be visible on the pages, on which we will need Cards
+ * like on Stu Updates Page (Program Tab)
+ */
+
 const StuUpdatesProgramCard = ({
   data,
   handleUpdatesProgramCardViewAllBtnClick,

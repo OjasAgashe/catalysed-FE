@@ -8,6 +8,11 @@ type StuUpdatesOrganisationCardProps = {
   handleUpdatesOrganisationCardViewAllBtnClick: (id: number) => void;
 };
 
+/*
+ * This component will be visible on the pages, on which we will need Cards
+ * like on Stu Updates Page (Organisation Tab)
+ */
+
 const StuUpdatesOrganisationCard = ({
   data,
   handleUpdatesOrganisationCardViewAllBtnClick,

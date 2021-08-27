@@ -28,6 +28,9 @@ const StuSuggestedProgramsPage = () => {
     selectedRadioForFilterCategory: "",
   });
 
+  /*
+   * To store meta list of all the programs
+   */
   const [programsList, setProgramsList] = useState<GetProgramMetaListData[]>(
     []
   );
@@ -46,10 +49,14 @@ const StuSuggestedProgramsPage = () => {
 
     const getPrograms = async () => {
       try {
+        // get the list
         const response = await getSuggestedPrograms();
+
+        // store the list
         setProgramsList([...response.data]);
       } catch (error) {
       } finally {
+        // after getting the data, hide LoadingProgress component
         dispatch({ type: "loading", payload: false });
       }
     };

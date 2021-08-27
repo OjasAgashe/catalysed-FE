@@ -22,6 +22,18 @@ type ProgramCardProps = {
   handleEntityCardClick?: () => void;
 };
 
+/*
+ * ProgramCard : component accepts 3 props
+ *
+ * program : data to show
+ * classNames : optional, any className to add
+ * handleEntityCardClick : optional, function to use when we
+ * do not want to use handleCardProgramDetailsBtn function
+ *
+ * we will use handleEntityCardClick function from Student and
+ * Mentor Home, in place of handleCardProgramDetailsBtn function
+ */
+
 const ProgramCard = ({
   program,
   handleEntityCardClick,
@@ -40,9 +52,11 @@ const ProgramCard = ({
     )
       history.push(`${ORGANISATION_PROGRAM_DETAILS}/${program.id}/details`);
 
+    // This will check from Student Suggested Page
     if (location.pathname.includes(STUDENT_SUGGESTED_PROGRAMS))
       history.push(`${STUDENT_SUGGESTED_PROGRAMS}/${program.id}/details`);
 
+    // This will check from Mentor Suggested Page
     if (location.pathname.includes(MENTOR_SUGGESTED_PROGRAMS))
       history.push(`${MENTOR_SUGGESTED_PROGRAMS}/${program.id}/details`);
   };
@@ -50,6 +64,9 @@ const ProgramCard = ({
   return (
     <div
       className={`ProgramCard ${classNames}`}
+      /*
+       * If handleEntityCardClick is not undefined then use it
+       */
       onClick={handleEntityCardClick ?? handleCardProgramDetailsBtn}
     >
       <div
@@ -118,6 +135,9 @@ const ProgramCard = ({
         <button
           type="button"
           className="ViewDetailsBtn"
+          /*
+           * If handleEntityCardClick is not undefined then use it
+           */
           onClick={handleEntityCardClick ?? handleCardProgramDetailsBtn}
         >
           Show more

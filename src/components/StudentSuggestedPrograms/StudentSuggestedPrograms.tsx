@@ -25,12 +25,16 @@ const StudentSuggestedPrograms = ({
   dispatch,
   programsList,
 }: StudentSuggestedProgramsProps) => {
+  /*
+   * To store meta list of all the filtered programs
+   */
   const [filteredProgramsList, setFilteredProgramsList] = useState<
     GetProgramMetaListData[]
   >([]);
 
   return (
     <div className="OrgViewSearchProgram">
+      {/* Show FilterBar component */}
       <FilterBar
         state={state}
         dispatch={dispatch}
@@ -41,6 +45,13 @@ const StudentSuggestedPrograms = ({
       <div className="ProgramCardContainer">
         {programsList.length ? (
           <>
+            {/*
+             * If the user has searched any Title, or has choosed any filter,
+             * or has choosed any sorting option then show the programs list based
+             * on that
+             *
+             * If we have any program
+             */}
             {(state.searchedTitle ||
               ["Virtual", "In Person"].includes(
                 state.selectedRadioForFilterMode
@@ -58,6 +69,11 @@ const StudentSuggestedPrograms = ({
                   <ProgramCard program={program} key={program.id} />
                 ))
             ) : (
+              /*
+               * If we do not have any programs based on the searching, filtering
+               * or sorting
+               * Then show an Error
+               */
               <div
                 style={
                   state.searchedNotPresentText === "" ? { display: "none" } : {}
@@ -66,6 +82,11 @@ const StudentSuggestedPrograms = ({
                 <Error message={state.searchedNotPresentText} />
               </div>
             )}
+
+            {/*
+             * If the user has not searched any Title, or choosed any filtering or
+             * sorting option, then Show it the whole Programs
+             */}
             {state.searchedTitle === "" &&
             !["Virtual", "In Person"].includes(
               state.selectedRadioForFilterMode
@@ -85,6 +106,10 @@ const StudentSuggestedPrograms = ({
               : ""}
           </>
         ) : (
+          /*
+           * If we do not get any programs meta list from the API
+           * call than show an Error
+           */
           <div>
             <Error message="Sorry !! No programs found" />
           </div>

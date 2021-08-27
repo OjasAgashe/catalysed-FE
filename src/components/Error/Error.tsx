@@ -9,7 +9,12 @@ type ErrorProps = {
   className?: string;
 };
 
-const Error = ({ message, className="" }: ErrorProps) => {
+/*
+ * This component we will show on Registration, when an already
+ * registered user tries to register again
+ */
+
+const Error = ({ message, className = "" }: ErrorProps) => {
   return (
     <Alert variant="danger" className={`FormError ${className}`}>
       {message === "User already registered in system - Please Login" ? (

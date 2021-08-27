@@ -1,3 +1,9 @@
+/*
+ * This is same as FilterBar file in OrgViewSearchProgram component
+ *
+ * And its commenting is same too
+ */
+
 import React, { useCallback, useMemo } from "react";
 import {
   GetProgramMetaListData,

@@ -1,3 +1,8 @@
+/*
+ * This page we will show when the user tries to access an invalid
+ * Invite
+ */
+
 import React from "react";
 import { InvalidInviteResponse } from "../../assets/Illustrations/Illustrations";
 import "./InvitePage.css";

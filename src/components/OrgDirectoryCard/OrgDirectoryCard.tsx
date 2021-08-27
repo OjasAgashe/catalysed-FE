@@ -9,6 +9,11 @@ type OrgDirectoryCardProps = {
   handleDirectoryCardViewAllBtnClick: (id: number) => void;
 };
 
+/*
+ * This component will be visible on the pages, on which we will
+ * need Cards like on Org Directory Page
+ */
+
 const OrgDirectoryCard = ({
   data,
   handleDirectoryCardViewAllBtnClick,

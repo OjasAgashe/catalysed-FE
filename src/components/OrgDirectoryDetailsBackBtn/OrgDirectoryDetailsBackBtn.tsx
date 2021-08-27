@@ -8,6 +8,11 @@ import {
 
 import "./OrgDirectoryDetailsBackBtn.css";
 
+/*
+ * This component will be visible on the Org pages, on which
+ * we want to redirect back to the Org Directory Page
+ */
+
 const OrgDirectoryDetailsBackBtn = () => {
   const history = useHistory();
   const location = useLocation();

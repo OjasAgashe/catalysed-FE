@@ -34,6 +34,10 @@ const OrgSpecificApplicantApplicationDetails = ({
   } = useOrgAPI();
 
   useEffect(() => {
+    /*
+     * After 3 seconds of render, of this component, call the API
+     * to change its view Status to true from false
+     */
     const timer = setTimeout(async () => {
       if (
         state.responseData &&
@@ -61,15 +65,30 @@ const OrgSpecificApplicantApplicationDetails = ({
     state.responseData,
   ]);
 
+  /*
+   * Function to handle click of Accept button or Reject button
+   *
+   * In statusTxt, we will send "Accept" or "Reject" string
+   */
   const handleBtnClick = async (statusTxt: string) => {
+    // we will do all validation, only if we have some data
     if (state.responseData) {
+      // scroll on Top of the page
       document.documentElement.scrollTop = 0;
 
       try {
+        // Show LoadingProgress Component with loadingMessage
         dispatch({ type: "loadingMessage", payload: "Working On It..." });
         dispatch({ type: "loading", payload: true });
+
+        /*
+         * If previously, we have shown any error then hide it
+         */
         dispatch({ type: "error", payload: "" });
 
+        /*
+         * Create data in acceptable format by API
+         */
         const data = {
           ...state.responseData,
           applicationDetails: {
@@ -78,6 +97,7 @@ const OrgSpecificApplicantApplicationDetails = ({
           },
         } as OrgSpecificApplicantDetailsResponse;
 
+        // Call API
         await putStatusOfSpecificApplicantDetails(
           parseInt(programId),
           parseInt(applicationId),
@@ -85,12 +105,25 @@ const OrgSpecificApplicantApplicationDetails = ({
           statusTxt
         );
 
+        // On Successful call of the API hide LoadingProgress component
         dispatch({ type: "loading", payload: false });
+
+        /*
+         * Rerender Page, to update the UI based on the current Status
+         */
         dispatch({ type: "reRenderComponent", payload: true });
       } catch (error) {
+        /*
+         * If we got 404 error, while calling the API, then
+         * push the Org to PageNotFound
+         */
         if (error.response.status === 404) {
           history.push("*");
         } else {
+          /*
+           * If we got any other error, then 404, then first hide the
+           * LoadingProgress component and show that error
+           */
           dispatch({ type: "loading", payload: false });
           dispatch({
             type: "error",

@@ -15,6 +15,14 @@ type OrgSpecificApplicantDetailsHeaderProps = {
   dispatch: React.Dispatch<OrgSpecificApplicantDetailsActionType>;
 };
 
+/*
+ * OrgSpecificApplicantDetailsHeader : component accepts state and dispatch
+ * as the props
+ *
+ * You can refer comments of OrgDirectoryDetailsCommonHeader, if you did not
+ * understand what we are doing here
+ */
+
 const OrgSpecificApplicantDetailsHeader = ({
   state,
   dispatch,

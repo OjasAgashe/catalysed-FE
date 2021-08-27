@@ -1,3 +1,9 @@
+/*
+ * This page we will show when the user has already accepted the Invite,
+ *
+ * that an Organisation had emailed him
+ */
+
 import React from "react";
 import { Link } from "react-router-dom";
 import { AlreadyAccountExistResponse } from "../../assets/Illustrations/Illustrations";

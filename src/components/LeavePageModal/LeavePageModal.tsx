@@ -9,6 +9,11 @@ type LeavePageModalProps = {
   handleLeavePageModalStayBtn: any;
 };
 
+/*
+ * This modal will be visible on the pages, in which user will try
+ * to navigate without saving the changes done
+ */
+
 const LeavePageModal = ({
   handleLeavePageModalLeaveBtn,
   handleLeavePageModalStayBtn,
