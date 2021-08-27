@@ -19,6 +19,11 @@ type OrgProgramParticipantCardProps = {
   state: OrgProgramParticipantState;
 };
 
+/*
+ * This component will be visible on OrgProgramMentor (or Student)
+ * Participant component
+ */
+
 const OrgProgramParticipantCard = ({
   details,
   state,
@@ -27,10 +32,18 @@ const OrgProgramParticipantCard = ({
 
   const handleParticipantCardClick = () => {
     if (state.showMentorDetails) {
+      /*
+       * If currently we are showing mentor participants, then push
+       * on mentor details page
+       */
       history.push(
         `${ORGANISATION_DIRECTORY_DETAILS_MENTOR}/${details.id}/details`
       );
     } else if (state.showStudentDetails) {
+      /*
+       * If currently we are showing student participants, then push
+       * on student details page
+       */
       history.push(
         `${ORGANISATION_DIRECTORY_DETAILS_STUDENT}/${details.id}/details`
       );

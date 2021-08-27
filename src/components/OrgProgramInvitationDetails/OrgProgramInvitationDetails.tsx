@@ -17,10 +17,15 @@ const OrgProgramInvitationDetails = ({
   state,
   dispatch,
 }: OrgProgramInvitationDetailsProps) => {
+  /*
+   * To store the filtered list of Invitations based on the searched
+   * name, or choosed filter option
+   */
   const [filteredResponseData, setFilteredResponseData] = useState<
     OrgInvitationResponseData[]
   >([]);
 
+  // Filter the Accepted Invitations from the whole sended Invitations
   const filterAcceptedResponseData = useMemo(
     () =>
       state.responseData !== null &&
@@ -28,12 +33,14 @@ const OrgProgramInvitationDetails = ({
     [state.responseData]
   );
 
+  // Filter the Accepted Invitations from tempFilteredData
   const filterAcceptedTempFilteredData = useCallback(
     (tempFilteredData: OrgInvitationResponseData[]) =>
       tempFilteredData.filter((data) => data.responseStatus === "ACCEPTED"),
     []
   );
 
+  // Filter the Pending Invitations from the whole sended Invitations
   const filterPendingResponseData = useMemo(
     () =>
       state.responseData !== null &&
@@ -41,12 +48,14 @@ const OrgProgramInvitationDetails = ({
     [state.responseData]
   );
 
+  // Filter the Pending Invitations from tempFilteredData
   const filterPendingTempFilteredData = useCallback(
     (tempFilteredData: OrgInvitationResponseData[]) =>
       tempFilteredData.filter((data) => data.responseStatus === "PENDING"),
     []
   );
 
+  // Filter the Mentor Invitations from the whole sended Invitations
   const filterMentorResponseData = useMemo(
     () =>
       state.responseData !== null &&
@@ -54,12 +63,14 @@ const OrgProgramInvitationDetails = ({
     [state.responseData]
   );
 
+  // Filter the Mentor Invitations from tempFilteredData
   const filterMentorTempFilteredData = useCallback(
     (tempFilteredData: OrgInvitationResponseData[]) =>
       tempFilteredData.filter((data) => data.userType === "MENTOR"),
     []
   );
 
+  // Filter the Student Invitations from the whole sended Invitations
   const filterStudentResponseData = useMemo(
     () =>
       state.responseData !== null &&
@@ -67,12 +78,14 @@ const OrgProgramInvitationDetails = ({
     [state.responseData]
   );
 
+  // Filter the Student Invitations from tempFilteredData
   const filterStudentTempFilteredData = useCallback(
     (tempFilteredData: OrgInvitationResponseData[]) =>
       tempFilteredData.filter((data) => data.userType === "STUDENT"),
     []
   );
 
+  // Use this helper function to Sort Date by Latest
   const sortDateByLatestUsing = useCallback(
     (obj1: OrgInvitationResponseData, obj2: OrgInvitationResponseData) => {
       const DateOne = new Date(obj1.sentAt);
@@ -96,6 +109,7 @@ const OrgProgramInvitationDetails = ({
     []
   );
 
+  // Use this helper function to Sort Date by Oldest
   const sortDateByOldestUsing = useCallback(
     (obj1: OrgInvitationResponseData, obj2: OrgInvitationResponseData) => {
       const DateOne = new Date(obj1.sentAt);
@@ -123,6 +137,9 @@ const OrgProgramInvitationDetails = ({
     <div className="OrgProgramInvitationDetails">
       <div className="OrgProgramInvitationDetailsContainer">
         {state.responseData !== null && state.responseData.length ? (
+          /*
+           * Show the list of Invitations only when we have something to Show
+           */
           <>
             <SearchBar
               state={state}
@@ -154,6 +171,9 @@ const OrgProgramInvitationDetails = ({
             />
           </>
         ) : (
+          /*
+           * When we have nothing to show then show an error
+           */
           <div className="ErrorCompContainer">
             <Error message="You have not sent any Invitation yet !!" />
           </div>

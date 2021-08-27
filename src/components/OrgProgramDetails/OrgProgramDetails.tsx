@@ -15,13 +15,17 @@ type OrgProgramDetailsProps = {
 const OrgProgramDetails = ({ state }: OrgProgramDetailsProps) => {
   return (
     <div>
+      {/* If state.error has any value then show it */}
       {state.error && (
         <Error message={state.error} className="OrgDetailsNotFound" />
       )}
 
+      {/* If we get any data only then show the details */}
       {state.responseData && (
         <section className="ProgramDetailsContainer">
           <div className="ProgramDetailsFirstSection">
+
+            {/* Show GeneralProgramDetails component */}
             <GeneralProgramDetails state={state} />
             <div className="ProgramDetailsFirstSubSection">
               <img
@@ -29,11 +33,17 @@ const OrgProgramDetails = ({ state }: OrgProgramDetailsProps) => {
                 alt="org program details data illustration"
                 className="OrgProgramDetailsDataIllustration"
               />
+            
+              {/* Show CoordinatorDetails component */}
               <CoordinatorDetails state={state} />
             </div>
           </div>
           <div className="ProgramDetailsSecondSection">
+
+            {/* Show MentorProgramDetails component */}
             <MentorProgramDetails state={state} />
+
+            {/* Show StudentProgramDetails component */}
             <StudentProgramDetails state={state} />
           </div>
         </section>

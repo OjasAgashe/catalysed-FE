@@ -1,3 +1,8 @@
+/*
+ * This component is same as OrgProgramInvitationDetails, difference is that
+ * we are dealing with applicants data
+ */
+
 import React, { useCallback, useMemo, useState } from "react";
 import {
   OrgProgramApplicantActionType,

@@ -17,6 +17,11 @@ type MentorOrStudentTabProps = {
   programApplicantDispatch?: React.Dispatch<OrgProgramApplicantActionType> | null;
 };
 
+/*
+ * This component will be visible on the pages, on which we want to show
+ * the Tab to select Mentor or Student
+ */
+
 const MentorOrStudentTab = ({
   programParticipantState = null,
   programParticipantDispatch = null,
@@ -24,6 +29,10 @@ const MentorOrStudentTab = ({
   programApplicantState = null,
   programApplicantDispatch = null,
 }: MentorOrStudentTabProps) => {
+  /*
+   * Function to handle click on Mentor according to
+   * Partcipant and Applicant of a Program for an Org
+   */
   const handleMentorClick = () => {
     if (programParticipantDispatch !== null) {
       programParticipantDispatch({
@@ -90,6 +99,10 @@ const MentorOrStudentTab = ({
     }
   };
 
+  /*
+   * Function to handle click on Student according to
+   * Partcipant and Applicant of a Program for an Org
+   */
   const handleStudentClick = () => {
     if (programParticipantDispatch !== null) {
       programParticipantDispatch({

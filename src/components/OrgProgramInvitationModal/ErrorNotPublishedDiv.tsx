@@ -7,6 +7,11 @@ type ErrorNotPublishedDivProps = {
   programId: string;
 };
 
+/*
+ * This component will be visible on Invitation Modal, when the
+ * program status will not be published
+ */
+
 const ErrorNotPublishedDiv = ({ programId }: ErrorNotPublishedDivProps) => {
   return (
     <Alert variant="danger" className="ErrorNotPublishedDiv">

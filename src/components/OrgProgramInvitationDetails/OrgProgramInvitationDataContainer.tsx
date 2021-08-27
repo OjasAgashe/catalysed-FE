@@ -57,6 +57,11 @@ const OrgProgramInvitationDataContainer = ({
   sortDateByLatestUsing,
   sortDateByOldestUsing,
 }: OrgProgramInvitationDataContainerProps) => {
+  /*
+   * Function in this file is much similar like filter handler
+   * functions in OrgViewAndSearch
+   */
+
   const handleProgramInvitationSentDropdownSelect = (
     eventKey: string | null
   ) => {

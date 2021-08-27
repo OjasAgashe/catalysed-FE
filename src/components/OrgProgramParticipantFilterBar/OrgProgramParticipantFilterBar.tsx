@@ -20,21 +20,42 @@ const OrgProgramParticipantFilterBar = ({
   dispatch,
   setFilteredParticipantData,
 }: OrgProgramParticipantFilterBarProps) => {
+  /*
+   * Function to handle the changes done in search input field
+   */
   const handleSearchBarFormChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
+      // Store the searchedName in state.searchedName
       dispatch({ type: "searchedName", payload: event.target.value });
+
+      // If previously, we have shown any error then hide it
       dispatch({ type: "searchedNotPresentText", payload: "" });
 
       let responseData: OrgProgramParticipantData[] | [] = [];
 
       if (state.showMentorDetails)
+        /*
+         * If currently we are showing Mentor Details, then store
+         * mentor Data in responseData.
+         *
+         * From which we will filter
+         */
         responseData =
           state.mentorParticipantResponseData as OrgProgramParticipantData[];
 
       if (state.showStudentDetails)
+        /*
+         * If currently we are showing Student Details, then store
+         * student Data in responseData.
+         *
+         * And then we will filter
+         */
         responseData =
           state.studentParticipantResponseData as OrgProgramParticipantData[];
 
+      /*
+       * Filter the data based on Name or Email
+       */
       let tempFilteredData = responseData.filter((data) => {
         const firstName = data.firstName === null ? "" : data.firstName;
         const lastName = data.lastName === null ? "" : data.lastName;
@@ -47,7 +68,10 @@ const OrgProgramParticipantFilterBar = ({
         );
       });
 
+      // Store the filteredData
       setFilteredParticipantData(tempFilteredData);
+
+      // If there is nothing in filteredData then show the Error
       if (event.target.value && tempFilteredData.length === 0) {
         dispatch({
           type: "searchedNotPresentText",

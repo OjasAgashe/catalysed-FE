@@ -1,3 +1,8 @@
+/*
+ * This file is same as OrgProgramMentorParticipant page, the only difference
+ * is that we are dealing with student data
+ */
+
 import React from "react";
 import {
   OrgProgramParticipantData,
@@ -26,7 +31,11 @@ const OrgProgramStudentParticipant = ({
         <>
           {state.searchedName && filteredParticipantData.length ? (
             filteredParticipantData.map((details) => (
-              <OrgProgramParticipantCard details={details} key={details.id} state={state} />
+              <OrgProgramParticipantCard
+                details={details}
+                key={details.id}
+                state={state}
+              />
             ))
           ) : (
             <div
@@ -39,7 +48,11 @@ const OrgProgramStudentParticipant = ({
           )}
           {state.searchedName === "" &&
             state.studentParticipantResponseData.map((details) => (
-              <OrgProgramParticipantCard details={details} key={details.id} state={state} />
+              <OrgProgramParticipantCard
+                details={details}
+                key={details.id}
+                state={state}
+              />
             ))}
         </>
       ) : (

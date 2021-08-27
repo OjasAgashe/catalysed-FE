@@ -8,6 +8,11 @@ type OrgNoProgramParticipantErrorProps = {
   programId: string;
 };
 
+/*
+ * This component will be visible on OrgProgramMentor (or Student)
+ * Participant component, when there is no participants for a program
+ */
+
 const OrgNoProgramParticipantError = ({
   programId,
 }: OrgNoProgramParticipantErrorProps) => {

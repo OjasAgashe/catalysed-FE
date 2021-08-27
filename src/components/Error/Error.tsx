@@ -12,6 +12,9 @@ type ErrorProps = {
 /*
  * This component we will show on Registration, when an already
  * registered user tries to register again
+ *
+ * And this component will also be visible on the components, on
+ * which we want to show any error with a message
  */
 
 const Error = ({ message, className = "" }: ErrorProps) => {

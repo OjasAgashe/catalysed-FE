@@ -45,6 +45,10 @@ const SearchBar = ({
   sortDateByLatestUsing,
   sortDateByOldestUsing,
 }: SearchBarProps) => {
+  /*
+   * This function is much similar like search handler function of
+   * OrgViewAndSearch
+   */
   const handleSearchBarFormChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
       dispatch({ type: "searchedName", payload: event.target.value });
