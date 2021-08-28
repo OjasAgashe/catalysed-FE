@@ -85,6 +85,7 @@ const MentorProfileEdit = () => {
           <Error message={state.error} />
         </div>
       ) : (
+        // Show MentorProfileEditSectionContainer component
         <MentorProfileEditSectionContainer
           state={state}
           dispatch={dispatch}

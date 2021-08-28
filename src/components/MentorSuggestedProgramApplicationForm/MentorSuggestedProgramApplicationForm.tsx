@@ -1,3 +1,8 @@
+/*
+ * This component is much same as StuSuggestedProgramApplicationForm,
+ * Only instead of Student we are dealing with Mentor data
+ */
+
 import React, { useState } from "react";
 import { GrSend } from "react-icons/gr";
 import "../StuSuggestedProgramApplicationForm/StuSuggestedProgramApplicationForm.css";

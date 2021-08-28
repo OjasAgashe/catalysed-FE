@@ -26,6 +26,10 @@ const StuSuggestedProgramDetailsCommon = ({
   const history = useHistory();
 
   const handleNestedPageBackBtnClick = () => {
+    /*
+     * Based on the current Entity (Student or Mentor), push to the
+     * respected suggested programs
+     */
     if (entity === STUDENT) history.push(STUDENT_SUGGESTED_PROGRAMS);
     else if (entity === MENTOR) history.push(MENTOR_SUGGESTED_PROGRAMS);
   };

@@ -7,6 +7,10 @@ import { useStudentAPI } from "../../context/api_context/StudentAPIContext";
 import { stuUpdatesProgramDetailsReducer } from "../../reducers/stuUpdatesProgramDetailsReducer";
 
 const StuSuggestedProgramDetails = () => {
+  /*
+   * state and useEffect in this file is same as in OrgProgramDetailsPage file
+   * of OrgProgramDetails page
+   */
   const [state, dispatch] = useReducer(stuUpdatesProgramDetailsReducer, {
     loading: true,
     error: "",
@@ -45,6 +49,7 @@ const StuSuggestedProgramDetails = () => {
 
   return (
     <div className="StuSuggestedProgramDetailsPage Page">
+      {/* Show LoadingProgress component */}
       {state.loading && (
         <LoadingProgress
           loading={state.loading}
@@ -53,12 +58,14 @@ const StuSuggestedProgramDetails = () => {
         />
       )}
 
+      {/* Show StuSuggestedProgramDetailsCommon component */}
       <StuSuggestedProgramDetailsCommon
         programTitle={state.responseData?.title ?? ""}
         programId={parseInt(programId)}
         entity="STUDENT"
       />
 
+      {/* Show OrgProgramDetails component */}
       <OrgProgramDetails state={state} />
     </div>
   );

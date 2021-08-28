@@ -150,6 +150,7 @@ const StudentProfileEditSectionContainer = ({
       return;
     }
 
+    // If birthYear has NaN value then show the Error
     if (editedData?.birthYear === "NaN") {
       document.documentElement.scrollTop = 100;
       return;

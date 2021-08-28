@@ -85,6 +85,7 @@ const StudentProfileEdit = () => {
           <Error message={state.error} />
         </div>
       ) : (
+        // Show StudentProfileEditSectionContainer component
         <StudentProfileEditSectionContainer
           state={state}
           dispatch={dispatch}

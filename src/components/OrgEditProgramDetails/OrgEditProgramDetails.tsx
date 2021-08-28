@@ -227,7 +227,7 @@ const OrgEditProgramDetails = ({
       // Show LoadingProgress component
       dispatch({ type: "loadingMessage", payload: message });
 
-      // Previously If we have show any validatedError, then hide it
+      // Previously If we have shown any validatedError, then hide it
       dispatch({ type: "validationError", payload: "" });
 
       // Get the id of Program (stored with which in backend)

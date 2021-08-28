@@ -1,3 +1,11 @@
+/*
+ * This page is much same as StuSuggestedProgramApplication of StuSuggestedProgramDetails
+ * page,
+ *
+ * the difference is in API call, and instead of StuSuggestedProgramApplicationForm
+ * we are showing MentorSuggestedProgramApplicationForm
+ */
+
 import React, { useEffect, useReducer } from "react";
 import { useParams } from "react-router-dom";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
@@ -49,6 +57,7 @@ const MentorSuggestedProgramApplication = () => {
         entity="MENTOR"
       />
 
+      {/* Show MentorSuggestedProgramApplicationForm component */}
       <MentorSuggestedProgramApplicationForm
         state={state}
         dispatch={dispatch}

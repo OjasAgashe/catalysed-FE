@@ -19,12 +19,23 @@ const ApplicationForm = ({
   answer,
   setAnswer,
 }: ApplicationFormProps) => {
+  /*
+   * Function to handle input field of application form
+   */
   const handleAnswerInputChange: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
+    /*
+     * Stop the validation, when user is inputing something
+     */
     if (state.validated) dispatch({ type: "validated", payload: false });
+
+    /*
+     * If we have shown any error, then hide it
+     */
     if (state.error) dispatch({ type: "error", payload: "" });
 
+    // Set the answer
     setAnswer(event.target.value);
   };
 

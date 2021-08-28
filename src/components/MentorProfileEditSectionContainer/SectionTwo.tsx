@@ -1,3 +1,10 @@
+/*
+ * This file is much same as SectionTwo of StudentProfileEditSectionContainer
+ * component
+ *
+ * Only we are dealing with Mentor Data
+ */
+
 import React from "react";
 import {
   MentorProfileEditActionType,

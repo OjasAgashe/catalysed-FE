@@ -30,6 +30,11 @@ const SectionTwo = ({
 }: SectionTwoProps) => {
   const handleStudentEditProfileChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
+      /*
+       * Set the value of state.validated to false, if it was true
+       *
+       * And do same for state.phoneValueIsInvalid
+       */
       if (state.validated) dispatch({ type: "validated", payload: false });
       if (state.phoneValueIsInvalid)
         dispatch({ type: "phoneValueIsInvalid", payload: false });
@@ -121,6 +126,9 @@ const SectionTwo = ({
       }
     };
 
+  /*
+   * Much same like of SectionTwo of OrgProfileEditSectionContainer component
+   */
   const handlePhoneInputChange = (
     value: string,
     country: {} | CountryData,
@@ -146,6 +154,9 @@ const SectionTwo = ({
     );
   };
 
+  /*
+   * Much same like SectionTwo of OrgProfileEditSectionContainer component
+   */
   const handleStudentEditProfileAddressChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
       if (state.validated) dispatch({ type: "validated", payload: false });
