@@ -23,6 +23,11 @@ const EditGeneralDetailsForm = ({
   editedData,
   setEditedData,
 }: EditGeneralDetailsFormProps) => {
+  /*
+   * useEffect and other functions in this file is same as GeneralDetailsFrom
+   * file of CreateProgramForm component
+   */
+
   useEffect(() => {
     setEditedData(
       (prevState): CreateProgramData =>

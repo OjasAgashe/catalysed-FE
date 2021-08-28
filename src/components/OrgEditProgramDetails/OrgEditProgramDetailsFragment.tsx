@@ -42,6 +42,10 @@ const OrgEditProgramDetailsFragment = ({
 }: OrgEditProgramDetailsFragmentProps) => {
   return (
     <>
+      {/*
+       * If state.showModal has true value, then show the LeavePageModal
+       * component
+       */}
       {state.showModal && (
         <LeavePageModal
           handleLeavePageModalLeaveBtn={handleLeavePageModalLeaveBtn}
@@ -49,6 +53,7 @@ const OrgEditProgramDetailsFragment = ({
         />
       )}
       <div className="CreateProgramFirstSection">
+        {/* Show EditGeneralDetailsForm component */}
         <EditGeneralDetailsForm
           state={state}
           dispatch={dispatch}
@@ -61,6 +66,8 @@ const OrgEditProgramDetailsFragment = ({
             alt="edit program details illustration"
             className="CreateProgramIllustration"
           />
+
+          {/* Show EditCoordinatorDetailsForm component */}
           <EditCoordinatorDetailsForm
             state={state}
             dispatch={dispatch}
@@ -70,12 +77,15 @@ const OrgEditProgramDetailsFragment = ({
         </div>
       </div>
       <div className="CreateProgramSecondSection">
+        {/* Show EditMentorDetailsForm component */}
         <EditMentorDetailsForm
           state={state}
           dispatch={dispatch}
           editedData={editedData}
           setEditedData={setEditedData}
         />
+
+        {/* Show EditStudentDetailsForm component */}
         <EditStudentDetailsForm
           state={state}
           dispatch={dispatch}
@@ -83,6 +93,8 @@ const OrgEditProgramDetailsFragment = ({
           setEditedData={setEditedData}
         />
       </div>
+
+      {/* Show Publish and Save to Draft button */}
       <div className="EditProgramDetails CreateProgramButtonContainer">
         {state.originalData?.status !== "PUBLISHED" && (
           <Button
@@ -100,6 +112,8 @@ const OrgEditProgramDetailsFragment = ({
           Publish <GiStamper />
         </Button>
       </div>
+
+      {/* If validationError has value, then show it below the buttons */}
       {state.validationError && (
         <Error
           message={state.validationError}

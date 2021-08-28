@@ -22,6 +22,11 @@ const EditMentorDetailsForm = ({
   editedData,
   setEditedData,
 }: EditMentorDetailsFormProps) => {
+  /*
+   * Functions in this file is same as in MentorDetailsForm file of
+   * CreateProgramForm component
+   */
+
   const handleMentorDetailsFormChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
       if (state.validated) dispatch({ type: "validated", payload: false });

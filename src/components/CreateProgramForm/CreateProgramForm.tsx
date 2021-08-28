@@ -25,6 +25,7 @@ type CreateProgramFormProps = {
 
 /*
  * CreateProgramForm : component accepts two props, state and
+ * dispatch
  */
 const CreateProgramForm = ({ state, dispatch }: CreateProgramFormProps) => {
   /*
@@ -173,10 +174,11 @@ const CreateProgramForm = ({ state, dispatch }: CreateProgramFormProps) => {
     dispatch({ type: "validated", payload: true });
 
     /*
-     * If Org has entered every required field, then check we have got
-     * any language input or not.
+     * If user has selected any language then set it to true.
      *
-     * It is also a required field
+     * We are doing this, so in useEffect of GeneralDetailsForm file
+     * we can convert the selected array of languages into comma separated
+     * strings
      */
     if (Boolean(state.selectedLanguages.length) === false) {
       dispatch({ type: "isLanguageSelected", payload: true });

@@ -29,6 +29,11 @@ const EditStudentDetailsForm = ({
   editedData,
   setEditedData,
 }: EditStudentDetailsFormProps) => {
+  /*
+   * Functions in this file is same as in StudentDetailsForm file of
+   * CreateProgramForm component
+   */
+
   const handleStudentDetailsFormChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
       if (state.validated) dispatch({ type: "validated", payload: false });

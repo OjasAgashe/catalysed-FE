@@ -33,6 +33,15 @@ const OrgEditProgramDetails = ({
     useOrgAPI();
   const history = useHistory();
 
+  /*
+   * Function to know that user has changed something or not,
+   * If he has changed something then we will get boolean value
+   * true, else we will get boolean value false
+   *
+   * In this function, we are comparing each editable field that
+   * we got from API call (stored in state.originalData) and editable
+   * field presents in editedData
+   */
   const hasDataChange = useCallback(() => {
     const originalDataTemp = { ...state.originalData } as CreateProgramData;
     const editedDataTemp = { ...editedData } as CreateProgramData;
@@ -133,6 +142,10 @@ const OrgEditProgramDetails = ({
     return false;
   }, [editedData, state.originalData]);
 
+  /*
+   * This useEffect is same as useEffect of OrgProfileEditSectionContainer
+   * component
+   */
   useEffect(() => {
     dispatch({ type: "dataHasChanged", payload: hasDataChange() });
 
@@ -172,6 +185,11 @@ const OrgEditProgramDetails = ({
     state.originalData,
   ]);
 
+  /*
+   * Function to check that we can make an API call or not,
+   * as to make an API call all the required fields should have
+   * some value, and not empty string
+   */
   const canMakeAPICall = () => {
     return (
       [
@@ -198,13 +216,21 @@ const OrgEditProgramDetails = ({
     );
   };
 
+  // Function making API call
   const makeAPICall = async (status: string, message: string) => {
     try {
+      /*
+       * Before calling API, scroll on Top of the page
+       */
       document.documentElement.scrollTop = 0;
 
+      // Show LoadingProgress component
       dispatch({ type: "loadingMessage", payload: message });
+
+      // Previously If we have show any validatedError, then hide it
       dispatch({ type: "validationError", payload: "" });
 
+      // Get the id of Program (stored with which in backend)
       const id = state.originalData?.id as CreateProgramData["id"];
 
       if (
@@ -212,6 +238,12 @@ const OrgEditProgramDetails = ({
         status === "PUBLISHED" &&
         state.originalData?.status === "SAVED_TO_DRAFT"
       ) {
+        /*
+         * If nothing has been changed in Data, only user want to
+         * change status of the Program from DRAFT to PUBLISH
+         *
+         * then call putUpdatedProgramStatusToPublish API
+         */
         await putUpdatedProgramStatusToPublish(
           parseInt(id),
           editedData as CreateProgramData
@@ -223,23 +255,53 @@ const OrgEditProgramDetails = ({
           state.originalData?.status === "PUBLISHED"
         )
       ) {
+        /*
+         * If data has not been changed, and user click to PUBLISH, and
+         * the program was already has the status PUBLISHED, then don't call
+         * the API.
+         *
+         * Else call the API
+         */
         await putUpdatedProgramDetails(
           parseInt(id),
           editedData as CreateProgramData
         );
       }
 
+      // After calling API, hide the LoadingProgress component
       dispatch({ type: "loadingMessage", payload: "" });
+
+      // Set the value of state.dataHasChanged to false
       dispatch({ type: "dataHasChanged", payload: false });
+
+      /*
+       * Make originalData same as editedData, as editedData is
+       * what with which we have make the above call.
+       * And now, after successful call, it becomes the Original Data
+       */
       dispatch({ type: "originalData", payload: editedData });
+
+      /*
+       * After doing all the above things, push the Org on Program Details
+       * Page. To show the updated details
+       */
       history.push(
         `${ORGANISATION_PROGRAM_DETAILS}/${state.originalData?.id}/details`
       );
     } catch (error) {
+      /*
+       * If we got any error, while calling API, then scroll to
+       * the bottom of the page
+       */
       document.documentElement.scrollTop =
         document.documentElement.scrollHeight;
 
+      /*
+       * Hide the LoadingProgress component
+       */
       dispatch({ type: "loadingMessage", payload: "" });
+
+      // Show the Error below the buttons
       dispatch({
         type: "validationError",
         payload: error.response?.data?.message ?? "",
@@ -247,6 +309,7 @@ const OrgEditProgramDetails = ({
     }
   };
 
+  // This is same as in CreateProgramForm component
   const handlePublishBtnClick = () => {
     dispatch({ type: "validated", payload: true });
 
@@ -265,6 +328,7 @@ const OrgEditProgramDetails = ({
     }
   };
 
+  // This is same as in CreateProgramForm component
   const handleDraftBtnClick = () => {
     dispatch({ type: "validationError", payload: "" });
 
@@ -279,11 +343,13 @@ const OrgEditProgramDetails = ({
     makeAPICall("SAVED_TO_DRAFT", "Saving to draft...");
   };
 
+  // This is same as in OrgProfileEditSectionContainer component
   const handleLeavePageModalLeaveBtn = () => {
     dispatch({ type: "leave", payload: true });
     history.push(state.navigateToPath);
   };
 
+  // This is same as in OrgProfileEditSectionContainer component
   const handleLeavePageModalStayBtn = () => {
     dispatch({ type: "stay", payload: true });
     dispatch({ type: "leave", payload: false });
@@ -294,8 +360,16 @@ const OrgEditProgramDetails = ({
   return (
     <section className="CreateProgramFormContainer">
       {state.error ? (
+        /*
+         * If we have got any error, while getting the origingal details
+         * then show that Error
+         */
         <Error message={state.error} className="OrgDetailsNotFound" />
       ) : (
+        /*
+         * If we have not got any error, then show
+         * OrgEditProgramDetialsFragment
+         */
         <OrgEditProgramDetailsFragment
           handleLeavePageModalLeaveBtn={handleLeavePageModalLeaveBtn}
           handleLeavePageModalStayBtn={handleLeavePageModalStayBtn}

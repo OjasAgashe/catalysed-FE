@@ -93,7 +93,7 @@ const OrgProfileEdit = () => {
             response.data.organizationDetails.phone.number,
         });
 
-        // intialially the new data would be same as old data
+        // initially the new data would be same as old data
         setEditedData(response.data);
       } catch (error) {
         /*

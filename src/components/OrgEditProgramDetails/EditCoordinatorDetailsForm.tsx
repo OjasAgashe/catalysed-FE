@@ -28,6 +28,11 @@ const EditCoordinatorDetailsForm = ({
   editedData,
   setEditedData,
 }: EditCoordinatorDetailsFormProps) => {
+  /*
+   * Functions in this file are same as in CoordinatorDetailsForm file of
+   * CreateProgramForm component
+   */
+
   const handleCoordinatorDetailsFormChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
       if (state.validated) dispatch({ type: "validated", payload: false });
