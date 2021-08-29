@@ -22,6 +22,16 @@ import { MENTOR_HOME } from "../../constants/Routes";
 import { useCookie } from "../../context/cookie_context/CookieContext";
 
 const MentorProfileBuilderTypeform = () => {
+  /*
+   * This file is much same as StuProfileBuilderTypeform file of
+   * StuProfileBuilderTypeform
+   */
+
+  /*
+   * state.isProfMentorYes: to store that mentor has professionally
+   * mentored before or not, if he has then show number of experience
+   * input
+   */
   const [state, dispatch] = useReducer(mentorProfileBuilderReducer, {
     isInvalid: false,
     validated: false,

@@ -21,6 +21,17 @@ import { STUDENT_HOME } from "../../constants/Routes";
 import { useCookie } from "../../context/cookie_context/CookieContext";
 
 const StuProfileBuilderTypeform = () => {
+  /*
+   * It has state more like of OrgProfileBuilderTypeform,
+   *
+   * state.radioQuestion: to store the question number of radio
+   * type questions, so that we can maintain the correct
+   * value of answered question in now.
+   *
+   * As if we are currently on a radio question, which is 7th
+   * question, then two radio questions has already been passed,
+   * and now should have minimum value 2.
+   */
   const [state, dispatch] = useReducer(stuProfileBuilderReducer, {
     isInvalid: false,
     validated: false,
@@ -30,6 +41,11 @@ const StuProfileBuilderTypeform = () => {
     submitClicked: false,
     phoneValue: "",
   });
+
+  /*
+   * This file is much same as OrgProfileBuilderTypeform file of
+   * OrgProfileBuilderTypeform
+   */
 
   const typeformRef = useRef<TypeForm>();
   const { postProfileCall } = useProfileBuilder();
@@ -65,6 +81,10 @@ const StuProfileBuilderTypeform = () => {
 
     switch (state.radioQuestion) {
       case 7:
+        /*
+         * If radio question has value 7, it means user has seen
+         * 4 radio questions and state.now should have minimum value of 4
+         */
         count += 4;
         break;
       case 5:
@@ -129,6 +149,11 @@ const StuProfileBuilderTypeform = () => {
 
   const handleNextBtnOnClick = () => {
     let value = typeformRef.current.state.current;
+
+    /*
+     * On click of next button, we are checking if this is a
+     * radio question or not
+     */
     if ([2, 4, 5, 7].includes(value) && value > state.radioQuestion) {
       dispatch({ type: "radioQuestion", payload: value });
     }

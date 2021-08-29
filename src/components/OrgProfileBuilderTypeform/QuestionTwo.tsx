@@ -52,11 +52,21 @@ const QuestionTwo = ({
     event: React.ChangeEvent<HTMLInputElement>,
     formattedValue: string
   ) => {
+    /*
+     * If previously, we have started validation of form then stop it
+     */
     if (state.validated) dispatch({ type: "validated", payload: false });
+
+    // Stop showing any Error
     if (state.isInvalid) dispatch({ type: "isInvalid", payload: false });
 
+    // Store the entered value in state.phoneValue
     dispatch({ type: "phoneValue", payload: value });
 
+    /*
+     * Now extract the information from entered value, that we have
+     * need. And then store it
+     */
     const countryInfo = country as CountryData;
     const phone = {
       countryName: countryInfo.name,

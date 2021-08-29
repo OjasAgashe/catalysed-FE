@@ -26,6 +26,10 @@ const QuestionThree = ({
       if (state.submitClicked)
         dispatch({ type: "submitClicked", payload: false });
 
+      /*
+       * only YYYY pattern is acceptable, so does not allow to enter
+       * more than 4 characters
+       */
       if (event.target.value.length > 4) {
         return;
       }

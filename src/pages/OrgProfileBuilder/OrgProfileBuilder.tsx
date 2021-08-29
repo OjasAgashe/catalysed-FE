@@ -8,6 +8,10 @@ type GreetProps = {
   setShowGreet: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+/*
+ * Greet: component to show Greeting, before asking questions of
+ * profile building
+ */
 const Greet = ({ setShowGreet }: GreetProps) => {
   const { getCatalysedUserNameCookie, getCatalysedOrgNameCookie } = useCookie();
 
@@ -35,14 +39,25 @@ const OrgProfileBuilder = () => {
   const [showGreet, setShowGreet] = useState<boolean>(true);
 
   useEffect(() => {
+    /*
+     * Whenever anyone visits this page first time, we want
+     * the scroll bar on Top
+     */
     document.documentElement.scrollTop = 0;
 
+    // Set the document title
     document.title = "Org Profile Builder | CatalysEd";
   }, []);
 
   return (
     <div className="OrgProfileBuilder Page">
+      {/* Till the showGreet is true, Show Greet component */}
       {showGreet && <Greet setShowGreet={setShowGreet} />}
+
+      {/*
+       * And when showGreet becomes false, show
+       * OrgProfleBuilderTypeform component
+       */}
       {showGreet === false && <OrgProfileBuilderTypeform />}
     </div>
   );

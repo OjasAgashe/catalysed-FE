@@ -21,6 +21,10 @@ const QuestionThree = ({
   state,
   dispatch,
 }: QuestionThreeProps) => {
+  /*
+   * This file is much same as QuestionThree of StuProfileBuilderTypeform
+   */
+
   const handleQuestionThreeCountryChange: React.ChangeEventHandler<HTMLInputElement> =
     (value) => {
       if (state.validated) dispatch({ type: "validated", payload: false });

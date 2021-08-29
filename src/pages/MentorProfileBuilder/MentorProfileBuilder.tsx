@@ -4,6 +4,12 @@ import MentorProfileBuilderTypeform from "../../components/MentorProfileBuilderT
 import { useCookie } from "../../context/cookie_context/CookieContext";
 import "./MentorProfileBuilder.css";
 
+/*
+ * This file is much same as OrgProfileBuilder, only
+ * we are using MentorProfileBuilderTypeform instead of
+ * OrgProfileBuilderTypeform
+ */
+
 type GreetProps = {
   setShowGreet: React.Dispatch<React.SetStateAction<boolean>>;
 };

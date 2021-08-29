@@ -66,11 +66,18 @@ const QuestionFour = ({
           value={answer.location.country}
           onChange={handleQuestionFourCountryChange}
         />
+
+        {/*
+         * If submit button clicked and country has no value, then
+         * show an Error
+         */}
         {state.submitClicked && answer.location.country === "" && (
           <Form.Text className="LocationDropdown">
             Required field, select One Option.
           </Form.Text>
         )}
+
+        {/* If country has any value, only then give option for region */}
         {answer.location.country && (
           <Form.Control
             className="QuestionFormControl RegionDropdown"
@@ -80,6 +87,11 @@ const QuestionFour = ({
             as={RegionDropdown}
           />
         )}
+
+        {/*
+         * If country has any value, and submit button clicked, and region
+         * has no value, then show an Error
+         */}
         {answer.location.country &&
           state.submitClicked &&
           answer.location.region === "" && (

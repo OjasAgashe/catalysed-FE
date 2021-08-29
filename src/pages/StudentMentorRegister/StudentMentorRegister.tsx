@@ -1,6 +1,15 @@
 import React, { useEffect } from "react";
 import "./StudentMentorRegister.css";
 
+/*
+ * As for now, We are not giving access to mentor or student to
+ * directly register
+ *
+ * They will register when they will get invite from an Org
+ *
+ * So this file will show message to them
+ */
+
 const StudentMentorRegister = () => {
   useEffect(() => {
     document.documentElement.scrollTop = 0;

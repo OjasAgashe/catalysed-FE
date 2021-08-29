@@ -27,20 +27,11 @@ const QuestionSix = ({
     if (state.submitClicked)
       dispatch({ type: "submitClicked", payload: false });
 
-    // if (event.target.name === "yes_no" && event.target.value === "true") {
-    //   dispatch({ type: "isProfMentorYes", payload: true });
-    //   setAnswer((prevState) => ({
-    //     ...prevState,
-    //     previouslyMentored: { ...prevState.previouslyMentored, yoe: "0-2" },
-    //   }));
-    // } else {
-    //   if (state.isProfMentorYes)
-    //     dispatch({ type: "isProfMentorYes", payload: false });
-    // }
-
     let value: string | number | boolean = event.target.value;
     if (event.target.name === "yes_no") {
       value = value === "true" ? true : false;
+
+      dispatch({ type: "isProfMentorYes", payload: value });
     }
 
     setAnswer((prevState) => ({

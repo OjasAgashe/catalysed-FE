@@ -3,6 +3,15 @@ import { MentorRegisterIllustration } from "../../assets/Illustrations/Illustrat
 import MentorRegisterForm from "./MentorRegisterForm";
 import "./MentorRegister.css";
 
+/*
+ * This file has no validation, at the time of
+ * API Integration also validate the input fields.
+ *
+ * This file will have validation much similar like
+ * OrgRegisterUser component, and also confirms once
+ * before validating
+ */
+
 const MentorRegister = () => {
   return (
     <div className="MentorRegister">
@@ -13,6 +22,7 @@ const MentorRegister = () => {
         />
       </div>
 
+      {/* Show MentorRegisterForm component */}
       <MentorRegisterForm />
     </div>
   );

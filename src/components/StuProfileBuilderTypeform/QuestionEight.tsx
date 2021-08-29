@@ -29,6 +29,10 @@ const QuestionEight = ({
   state,
   dispatch,
 }: QuestionEightProps) => {
+  /*
+   * This file has logic much same as QuestionTwo of OrgProfileBuilderTypeform
+   */
+
   const handleQuestionEightChange: React.ChangeEventHandler<HTMLInputElement> =
     (event) => {
       if (state.validated) dispatch({ type: "validated", payload: false });

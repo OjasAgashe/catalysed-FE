@@ -23,10 +23,19 @@ const QuestionOne = ({
   const handleQuestionOneChange: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
+    /*
+     * If previously, we have started validation of form then stop it
+     */
     if (state.validated) dispatch({ type: "validated", payload: false });
+
+    // Stop showing any error
     if (state.submitClicked)
       dispatch({ type: "submitClicked", payload: false });
 
+    /*
+     * If user is entering anything other than alphabets and space,
+     * then does not allow it
+     */
     const onlyAlphabets = /^[a-zA-Z][a-zA-z ]*$/;
 
     if (
@@ -36,6 +45,7 @@ const QuestionOne = ({
       return;
     }
 
+    // If it has entered accepted characters, then store it
     setAnswer((prevState) => ({
       ...prevState,
       workDescription: event.target.value,

@@ -23,10 +23,19 @@ const QuestionOne = ({
   const handleQuestionOneChange: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
+    /*
+     * If previously, we have started validation of form then stop it
+     */
     if (state.validated) dispatch({ type: "validated", payload: false });
+
+    // Stop showing any error
     if (state.submitClicked)
       dispatch({ type: "submitClicked", payload: false });
 
+    /*
+     * only YY pattern is acceptable, so does not allow to enter
+     * more than 2 characters
+     */
     if (event.target.value.length > 2) {
       return;
     }
@@ -38,7 +47,6 @@ const QuestionOne = ({
       ).toString(),
     }));
   };
-
 
   return (
     <motion.div

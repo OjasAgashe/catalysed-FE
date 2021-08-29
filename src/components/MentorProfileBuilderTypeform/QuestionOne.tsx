@@ -20,6 +20,10 @@ const QuestionOne = ({
   state,
   dispatch,
 }: QuestionOneProps) => {
+  /*
+   * This file is much same as QuestionOne of StuProfileBuilderTypeform
+   */
+
   const handleQuestionOneChange: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {

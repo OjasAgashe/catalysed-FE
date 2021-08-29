@@ -20,6 +20,10 @@ const QuestionTwo = ({
   state,
   dispatch,
 }: QuestionTwoProps) => {
+  /*
+   * This file has logic much same as QuestionOne of OrgProfileBuilderTypeform
+   */
+
   const handleQuestionTwoChange: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {

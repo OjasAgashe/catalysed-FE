@@ -4,6 +4,12 @@ import StuProfileBuilderTypeform from "../../components/StuProfileBuilderTypefor
 import { useCookie } from "../../context/cookie_context/CookieContext";
 import "./StuProfileBuilder.css";
 
+/*
+ * This file is much same as OrgProfileBuilder, only
+ * we are using StuProfileBuilderTypeform instead of
+ * OrgProfileBuilderTypeform
+ */
+
 type GreetProps = {
   setShowGreet: React.Dispatch<React.SetStateAction<boolean>>;
 };
