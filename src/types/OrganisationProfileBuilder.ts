@@ -1,3 +1,7 @@
+/*
+ * This file contains Types related to Organisation Profile Builder
+ */
+
 export interface OrgProfileBuilderData {
   workDescription: string;
   contactDetails: {

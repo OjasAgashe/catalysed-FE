@@ -1,3 +1,7 @@
+/*
+ * This file contains Reducer Function of components/MentorProfileBuilderTypeform
+ */
+
 import {
   MentorProfileBuilderActionType,
   MentorProfileBuilderState,

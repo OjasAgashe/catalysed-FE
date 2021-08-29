@@ -1,3 +1,7 @@
+/*
+ * This file contains Types related to Stu Updates Program Details
+ */
+
 import { CreateProgramData } from "./CreateProgram";
 import { MentorUpdatesProgramPeopleResponse } from "./MentorUpdatesProgramDetails";
 

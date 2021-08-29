@@ -1,3 +1,7 @@
+/*
+ * This file contains Types related to Mentor Updates Program Details
+ */
+
 export interface MentorUpdatesProgramPeopleStudentParticipantsResponse {
   id: number;
   firstName: string;

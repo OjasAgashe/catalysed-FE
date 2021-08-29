@@ -1,3 +1,7 @@
+/*
+ * This file contains Types related to Mentor Profile Edit
+ */
+
 export interface MentorProfileEditData {
   id: number;
   email: string;

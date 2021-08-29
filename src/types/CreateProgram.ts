@@ -1,3 +1,8 @@
+/*
+* This file contains Types of components/CreateProgramForm and 
+* pages/CreateProgram
+ */
+
 export interface CreateProgramData {
   id: string;
   status: string;

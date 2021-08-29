@@ -1,3 +1,7 @@
+/*
+ * This file contains Reducer Function of pages/OrgEditProgramDetailsPage
+ */
+
 import {
   OrgEditProgramDetailsActionType,
   OrgEditProgramDetailsState,

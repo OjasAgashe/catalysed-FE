@@ -1,3 +1,7 @@
+/*
+ * This file contains Types related to Student Updates
+ */
+
 import { CreateProgramData } from "./CreateProgram";
 import { GetProgramMetaListData } from "./OrgViewSearchProgram";
 

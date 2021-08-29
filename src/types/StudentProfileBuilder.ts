@@ -1,3 +1,7 @@
+/*
+ * This file contains Types related to Student Profile Builder
+ */
+
 export interface StudentProfileBuilderData {
   birthYear: string;
   organization: string;
@@ -31,4 +35,3 @@ export type StudentProfileBuilderActionType =
   | { type: "radioQuestion"; payload: number }
   | { type: "submitClicked"; payload: boolean }
   | { type: "phoneValue"; payload: string };
-

@@ -1,3 +1,7 @@
+/*
+ * This file contains Types related to Stu Suggested Program Application
+ */
+
 export interface StuSuggestedProgramApplicationData {
   id: null;
   userId?: number;

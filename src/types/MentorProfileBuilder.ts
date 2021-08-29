@@ -1,3 +1,7 @@
+/*
+ * This file contains Types related to Mentor Profile Builder
+ */
+
 export interface MentorProfileBuilderData {
   birthYear: string;
   organization: string;

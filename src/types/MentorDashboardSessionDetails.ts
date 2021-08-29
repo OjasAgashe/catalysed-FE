@@ -1,3 +1,7 @@
+/*
+ * This file contains Types related to Mentor Dashboard
+ */
+
 export interface MentorDashboardSessionDetailsCardData {
   sessionNoteTitle: string;
   sessionNoteDescription: string;

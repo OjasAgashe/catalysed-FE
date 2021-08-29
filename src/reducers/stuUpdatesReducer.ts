@@ -1,3 +1,7 @@
+/*
+ * This file contains Reducer Function of pages/StudentUpdatesPage
+ */
+
 import {
   StudentUpdatesCommonActionType,
   StudentUpdatesCommonState,

@@ -1,3 +1,7 @@
+/*
+ * This file contains Reducer Function of pages/StudentHomePage
+ */
+
 import { StudentHomeActionType, StudentHomeState } from "../types/StudentHome";
 
 export const studentHomeReducer = (

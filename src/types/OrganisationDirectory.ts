@@ -1,3 +1,7 @@
+/*
+ * This file contains Types related to Organisation Directory
+ */
+
 export interface OrganisationDirectoryCommonResponse {
   id: number;
   type: string;

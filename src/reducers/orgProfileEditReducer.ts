@@ -1,3 +1,7 @@
+/*
+ * This file contains Reducer Function of pages/OrgProfileEdit
+ */
+
 import {
   OrgProfileEditActionType,
   OrgProfileEditState,

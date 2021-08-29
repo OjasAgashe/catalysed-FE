@@ -1,3 +1,7 @@
+/*
+ * This file contains Reducer Function of pages/StudentProfileEdit
+ */
+
 import {
   StudentProfileEditActionType,
   StudentProfileEditState,

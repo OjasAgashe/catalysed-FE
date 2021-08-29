@@ -1,3 +1,7 @@
+/*
+ * This file contains Types related to Org Edit Program Details
+ */
+
 import {
   CreateProgramActionType,
   CreateProgramData,

@@ -1,3 +1,7 @@
+/*
+ * This file contains Types related to Student Profile Edit
+ */
+
 export interface StudentProfileEditData {
   id: number;
   email: string;

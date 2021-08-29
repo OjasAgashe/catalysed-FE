@@ -1,3 +1,7 @@
+/*
+ * This file contains Types related to Org View Search Program
+ */
+
 export interface GetProgramMetaListData {
   id: number;
   title: string;

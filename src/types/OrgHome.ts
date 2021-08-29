@@ -1,3 +1,7 @@
+/*
+ * This file contains Types related to Org Home
+ */
+
 import { GetProgramMetaListData } from "./OrgViewSearchProgram";
 
 export interface OrgHomeDataResponse {

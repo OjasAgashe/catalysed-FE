@@ -1,3 +1,7 @@
+/*
+ * This file contains Types of pages/Login and components/LoginForm
+ */
+
 export interface LoginData {
   email: string;
   password: string;

@@ -1,3 +1,7 @@
+/*
+ * This file contains Types related to Student Home
+ */
+
 import { StudentConnectedProgramData } from "./StudentUpdates";
 
 export interface StudentHomeState {

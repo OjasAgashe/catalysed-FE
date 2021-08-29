@@ -1,3 +1,7 @@
+/*
+ * This file contains Types related to Org Profile Edit
+ */
+
 export interface OrgProfileEditData {
   email: string;
   firstName: string;

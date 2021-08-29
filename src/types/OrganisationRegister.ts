@@ -1,3 +1,7 @@
+/*
+ * This file contains Types related to Organisation Register
+ */
+
 export interface OrgRegisterData {
   firstName: string;
   lastName: string;

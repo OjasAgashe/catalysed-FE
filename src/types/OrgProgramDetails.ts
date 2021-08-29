@@ -1,3 +1,7 @@
+/*
+ * This file contains Types related to Org Program Details
+ */
+
 import { CreateProgramData } from "./CreateProgram";
 
 export interface OrgProgramDetailsState {

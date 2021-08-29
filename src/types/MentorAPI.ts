@@ -1,3 +1,7 @@
+/*
+ * This file contains Types of context/api_context
+ */
+
 import { AxiosResponse } from "axios";
 import { MentorProfileEditData } from "./MentorProfileEdit";
 import { StuSuggestedProgramApplicationData } from "./StuSuggestedProgramApplication";

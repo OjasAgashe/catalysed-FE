@@ -1,3 +1,7 @@
+/*
+ * This file contains Types related to Org Specific Applicant Details
+ */
+
 import { OrgDirectoryDetailsCommonResponse } from "./OrganisationDirectory";
 
 export interface OrgSpecificApplicantApplicationResponse {

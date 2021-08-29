@@ -1,3 +1,7 @@
+/*
+ * This file contains Reducer Function of components/OrgRegisterDetails
+ */
+
 import {
   OrgRegisterDetailsActionType,
   OrgRegisterDetailsState,
