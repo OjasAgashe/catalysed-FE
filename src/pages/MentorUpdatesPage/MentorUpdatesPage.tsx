@@ -1,3 +1,7 @@
+/*
+ * This file is same as StudentUpdatesPage file
+ */
+
 import React, { useEffect, useReducer } from "react";
 import { Redirect } from "react-router-dom";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";

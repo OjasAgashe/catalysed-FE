@@ -12,10 +12,14 @@ type StuUpdatesProgramPeopleDetailsProps = {
 const StuUpdatesProgramPeopleDetails = ({
   responseData,
 }: StuUpdatesProgramPeopleDetailsProps) => {
+  /*
+   * To store the total number of Students and Mentors
+   */
   const [noOfStudents, setNoOfStudents] = useState<number>(0);
   const [noOfMentors, setNoOfMentors] = useState<number>(0);
 
   useEffect(() => {
+    // Set the number of Students
     setNoOfStudents(
       responseData === null
         ? 0
@@ -23,6 +27,8 @@ const StuUpdatesProgramPeopleDetails = ({
         ? 0
         : responseData.students.length
     );
+
+    // Set the number of Mentors
     setNoOfMentors(
       responseData === null
         ? 0

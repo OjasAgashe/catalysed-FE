@@ -17,6 +17,32 @@ const StudentUpdatesPage = () => {
   } = useStudentAPI();
   const query = useQuery();
 
+  /*
+   * state.view: to store the current selected Tab on Updates page
+   *
+   * state.loading: to show the LoadingProgress component, till we are
+   * getting the details
+   *
+   * state.searchedName: to store the name that user want to search on
+   * Application Tab
+   *
+   * state.selectedRadioForSort, state.selectedRadioForFilter: is to store the
+   * selected option for filter and sort
+   *
+   * state.searchedNameNotFound: to show the error, when there is no data
+   * we found in respect of searched name
+   *
+   * state.error: to show the error, if we get any during API call
+   *
+   * state.responseData: to store the Applications data
+   *
+   * state.connectedOrgData: to store the Organisation data
+   *
+   * state.connectedProgramData: to store the Program data
+   *
+   * state.filteredResponseData: to store the filtered data
+   */
+
   const [state, dispatch] = useReducer(stuUpdatesReducer, {
     view:
       query.get("view") === "PROGRAMS"
@@ -39,40 +65,77 @@ const StudentUpdatesPage = () => {
   });
 
   useEffect(() => {
+    /*
+     * Whenever anyone visits this page first time, we want
+     * the scroll position on Top
+     */
     document.documentElement.scrollTop = 0;
+
+    // set the document title
     document.title = `Connected ${state.view} | CatalysEd`;
 
+    // Function to call API and get Data
     const getDetails = async () => {
       try {
+        // Show LoadingProgress component before API call
         dispatch({ type: "loading", payload: true });
+
+        // If previously, we have shown any error then hide it
         dispatch({ type: "error", payload: "" });
 
         let response;
 
         if (state.view === "Applications") {
+          /*
+           * If currently user selected Applications Tab, then
+           * get Application Data
+           */
+
+          // Call API
           response = await getAllFilledApplicationsDetails();
+
+          // Store Data
           dispatch({ type: "responseData", payload: response?.data });
         }
 
         if (state.view === "Organisations") {
+          /*
+           * If currently user selected Organisations Tab, then
+           * get Organisation Data
+           */
+
+          // Call API
           response = await getConnectedOrganisations();
+
+          // Store Data
           dispatch({ type: "connectedOrgData", payload: response?.data });
         }
 
         if (state.view === "Programs") {
+          /*
+           * If currently user selected Programs Tab, then
+           * get Program Data
+           */
+
+          // Call API
           response = await getConnectedPrograms();
+
+          // Store Data
           dispatch({
             type: "connectedProgramData",
             payload: response?.data,
           });
         }
       } catch (error) {
+        // If while calling the API we got any error, then show it
         dispatch({ type: "error", payload: "Sorry!! No Data Found" });
       } finally {
+        // After doing all the above stuff, hide LoadingProgress
         dispatch({ type: "loading", payload: false });
       }
     };
 
+    // Call getDetails function
     getDetails();
   }, [
     getAllFilledApplicationsDetails,
@@ -95,12 +158,17 @@ const StudentUpdatesPage = () => {
         />
       )}
 
+      {/* Show StuUpdatesPageHeader component */}
       <StuUpdatesPageHeader
         view={state.view}
         dispatch={dispatch}
         entity="STUDENT"
       />
 
+      {/*
+       * If currently Programs Tab is selected, then show StuUpdatesPrograms
+       * component
+       */}
       {state.view === "Programs" && (
         <StuUpdatesPrograms
           connectedProgramData={state.connectedProgramData}
@@ -108,6 +176,10 @@ const StudentUpdatesPage = () => {
         />
       )}
 
+      {/*
+       * If currently Organisations Tab is selected, then show
+       * StuUpdatesOrganisations component
+       */}
       {state.view === "Organisations" && (
         <StuUpdatesOrganisations
           connectedOrgData={state.connectedOrgData}
@@ -115,6 +187,10 @@ const StudentUpdatesPage = () => {
         />
       )}
 
+      {/*
+       * If currently Applications Tab is selected, then show
+       * StuUpdatesApplications component
+       */}
       {state.view === "Applications" && (
         <StuUpdatesApplications
           state={state}
@@ -124,6 +200,10 @@ const StudentUpdatesPage = () => {
       )}
     </div>
   ) : (
+    /*
+     * If currently state.view is empty (means user has not
+     * selected any Tab), then redirect it to PageNotFound
+     */
     <Redirect to="*" />
   );
 };

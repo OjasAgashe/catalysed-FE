@@ -18,13 +18,17 @@ const StudentDashboardSessionCardColumn = ({
   noteCardArray,
   setNoteCardArray,
 }: StudentDashboardSessionCardColumnProps) => {
+  // To check that there is any Pinned Note present or Not
   const [hasPinnedNote, setHasPinnedNote] = useState<boolean>(false);
+
+  // To check that there is any Others Note present or Not
   const [hasOthersNote, setHasOthersNote] = useState<boolean>(false);
 
   useEffect(() => {
     let foundPinned = false;
     let foundOthers = false;
 
+    // Function checking for Pinned and Others Note
     for (let value of noteCardArray) {
       if (value.pinned && !foundPinned) {
         setHasPinnedNote(true);
@@ -46,6 +50,9 @@ const StudentDashboardSessionCardColumn = ({
     if (!foundOthers) setHasOthersNote(false);
   }, [noteCardArray]);
 
+  /*
+   * Function to get Data of all Cards, that has not been clicked
+   */
   const filterNoteCardArray = (
     index: number,
     data: MentorDashboardSessionDetailsCardData
@@ -60,12 +67,18 @@ const StudentDashboardSessionCardColumn = ({
       );
   };
 
+  // Function handling functionality of Pinning and Unpinning a Note
   const handlePinButtonClick = (
     index: number,
     data: MentorDashboardSessionDetailsCardData
   ) => {
+    // Get all the Cards Data, other then what is clicked
     const tempNoteCardArray = [...filterNoteCardArray(index, data)].reverse();
 
+    /*
+     * Now set the pinned property of clicked Card Data
+     * to opposite of its previous value
+     */
     setNoteCardArray([...tempNoteCardArray, { ...data, pinned: !data.pinned }]);
   };
 

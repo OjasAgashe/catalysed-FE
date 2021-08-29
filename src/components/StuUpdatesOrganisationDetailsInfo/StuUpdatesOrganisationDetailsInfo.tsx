@@ -13,7 +13,10 @@ const StuUpdatesOrganisationDetailsInfo = ({
 }: StuUpdatesOrganisationDetailsInfoProps) => {
   return (
     <div className="StuUpdatesOrganisationDetailsInfoContainer">
+      {/* Show SectionOne */}
       <SectionOne orgDetails={orgDetails} />
+
+      {/* Show SectionTwo */}
       <SectionTwo orgDetails={orgDetails} />
     </div>
   );

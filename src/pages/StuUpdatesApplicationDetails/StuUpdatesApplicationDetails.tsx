@@ -10,6 +10,15 @@ import StuUpdatesApplicationDetailsHeader from "../../components/StuUpdatesAppli
 import StuUpdatesApplicationStatusInfo from "../../components/StuUpdatesApplicationStatusInfo/StuUpdatesApplicationStatusInfo";
 
 const StuUpdatesApplicationDetails = () => {
+  /*
+   * state.choosedOption: to store the current selected Tab value
+   *
+   * state.responseData: to store the Data, that we will get from API call
+   *
+   * state.loading: to show LoadingProgress till we are getting Data
+   *
+   * state.error: to show any error, if we get from API call
+   */
   const [state, dispatch] = useReducer(stuUpdatesApplicationDetailsReducer, {
     choosedOption: "Application",
     responseData: null,
@@ -21,6 +30,11 @@ const StuUpdatesApplicationDetails = () => {
   const history = useHistory();
   const { getSpecificFilledApplicationDetails } = useStudentAPI();
 
+  /*
+   * This useEffect is much same as useEffect of StuUpdatesOrganisationDetails
+   *
+   * Only API call is different
+   */
   useEffect(() => {
     document.documentElement.scrollTop = 0;
 
@@ -49,6 +63,7 @@ const StuUpdatesApplicationDetails = () => {
 
   return (
     <div className="StuUpdatesApplicationDetailsPage Page">
+      {/* Show LoadingProgress component */}
       {state.loading && (
         <LoadingProgress
           loading={state.loading}
@@ -57,6 +72,7 @@ const StuUpdatesApplicationDetails = () => {
         />
       )}
 
+      {/* Show StuUpdatesApplicationDetailsHeader component */}
       <StuUpdatesApplicationDetailsHeader
         state={state}
         dispatch={dispatch}
@@ -64,12 +80,23 @@ const StuUpdatesApplicationDetails = () => {
       />
 
       {state.error.length === 0 ? (
+        /*
+         * Show Data only when we have no error
+         */
         <>
           {state.choosedOption === "Application" && (
+            /*
+             * If current selected Tab is "Application", then
+             * Show StuUpdatesApplicationStatusInfo component
+             */
             <StuUpdatesApplicationStatusInfo state={state} />
           )}
 
           {state.choosedOption === "Program Details" && (
+            /*
+             * If current selected Tab is "Program Details", then
+             * Show OrgProgramDetails component
+             */
             <OrgProgramDetails
               state={{
                 loading: state.loading,
@@ -80,6 +107,7 @@ const StuUpdatesApplicationDetails = () => {
           )}
         </>
       ) : (
+        // Else Show error
         <div className="ErrorDiv">
           <Error message={state.error} />
         </div>

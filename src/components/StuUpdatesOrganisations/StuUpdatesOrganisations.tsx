@@ -21,6 +21,12 @@ const StuUpdatesOrganisations = ({
 }: StuUpdatesOrganisationsProps) => {
   const history = useHistory();
 
+  /*
+   * Function to handle click on StuUpdatesProgramCard,
+   *
+   * When the user will click, push them to their respected
+   * details page
+   */
   const handleUpdatesOrganisationCardViewAllBtnClick = (id: number) => {
     if (entity === STUDENT)
       history.push(`${STUDENT_UPDATES_DETAILS_ORGANISATION}/${id}/details`);
@@ -31,6 +37,9 @@ const StuUpdatesOrganisations = ({
   return (
     <div className="StuUpdatesOrganisationsContainer">
       {connectedOrgData && connectedOrgData.length ? (
+        /*
+         * If we have any programs to show, then show it
+         */
         connectedOrgData.map((data: StudentConnectedOrgData) => (
           <StuUpdatesOrganisationCard
             key={data.id}
@@ -41,6 +50,7 @@ const StuUpdatesOrganisations = ({
           />
         ))
       ) : (
+        // Else show an Error
         <Error message="Sorry !!! No Data Found" />
       )}
     </div>

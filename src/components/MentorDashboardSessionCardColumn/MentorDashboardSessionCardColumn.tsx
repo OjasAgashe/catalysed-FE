@@ -20,6 +20,11 @@ const MentorDashboardSessionCardColumn = ({
   dbState,
   dbDispatch,
 }: MentorDashboardSessionCardColumnProps) => {
+  /*
+   * Functions in this file is much same as in
+   * StudentDashboardSessionCardColumn component
+   */
+
   const [hasPinnedNote, setHasPinnedNote] = useState<boolean>(false);
   const [hasOthersNote, setHasOthersNote] = useState<boolean>(false);
 
@@ -62,19 +67,27 @@ const MentorDashboardSessionCardColumn = ({
       );
   };
 
+  /*
+  * Function handling functionality of Edit Details of already
+  * Created Card
+  */
   const handleCardBodyClick = (
     index: number,
     data: MentorDashboardSessionDetailsCardData
   ) => {
+    // Store the details of selectedCard
     dbDispatch({ type: "selectedNoteCardData", payload: data });
 
+    // Get all the Cards Data, other then the selectedCard
     const tempNoteCardArray = filterNoteCardArray(index, data);
 
+    // Store the tempNoteCardArray in noteCardArray
     dbDispatch({
       type: "noteCardArray",
       payload: [...tempNoteCardArray].reverse(),
     });
 
+    // Show the modal to edit details
     dbDispatch({ type: "showModal", payload: true });
   };
 

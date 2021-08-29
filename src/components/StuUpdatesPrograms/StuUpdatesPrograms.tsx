@@ -21,6 +21,12 @@ const StuUpdatesPrograms = ({
 }: StuUpdatesProgramsProps) => {
   const history = useHistory();
 
+  /*
+   * Function to handle click on StuUpdatesProgramCard,
+   *
+   * When the user will click, push them to their respected
+   * details page
+   */
   const handleUpdatesProgramCardViewAllBtnClick = (id: number) => {
     if (entity === STUDENT)
       history.push(`${STUDENT_UPDATES_DETAILS_PROGRAM}/${id}/details`);
@@ -31,6 +37,9 @@ const StuUpdatesPrograms = ({
   return (
     <div className="StuUpdatesProgramsContainer">
       {connectedProgramData && connectedProgramData.length ? (
+        /*
+         * If we have any programs to show, then show it
+         */
         connectedProgramData.map((data: StudentConnectedProgramData) => (
           <StuUpdatesProgramCard
             key={data.id}
@@ -41,6 +50,7 @@ const StuUpdatesPrograms = ({
           />
         ))
       ) : (
+        // Else show an Error
         <Error message="Sorry !!! No Data Found" />
       )}
     </div>

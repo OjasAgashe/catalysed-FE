@@ -9,9 +9,13 @@ type StuUpdatesOrganisationProgramsDetialsProps = {
 const StuUpdatesOrganisationProgramsDetails = ({
   programs,
 }: StuUpdatesOrganisationProgramsDetialsProps) => {
+  /*
+   * To store the total number of programs
+   */
   const [noOfPrograms, setNoOfPrograms] = useState<number>(0);
 
   useEffect(() => {
+    // Set total number of programs
     setNoOfPrograms(programs === null ? 0 : programs.length);
   }, [programs]);
 
@@ -24,6 +28,7 @@ const StuUpdatesOrganisationProgramsDetails = ({
 
         {programs && (
           <>
+            {/* Show Programs only when we have something to show */}
             {programs.map((program, index) => {
               if (index !== noOfPrograms - 1) {
                 return <div className="ProgramNameDiv">{program.title}</div>;

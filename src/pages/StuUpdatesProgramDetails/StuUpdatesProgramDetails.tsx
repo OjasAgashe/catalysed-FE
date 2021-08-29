@@ -7,6 +7,11 @@ import { useStudentAPI } from "../../context/api_context/StudentAPIContext";
 import { stuUpdatesProgramDetailsReducer } from "../../reducers/stuUpdatesProgramDetailsReducer";
 
 const StuUpdatesProgramDetails = () => {
+  /*
+   * The logic for this file is much same as OrgProgramDetailsPage
+   * file of OrgProgramDetails page
+   */
+
   const [state, dispatch] = useReducer(stuUpdatesProgramDetailsReducer, {
     loading: true,
     error: "",
@@ -53,6 +58,7 @@ const StuUpdatesProgramDetails = () => {
         />
       )}
 
+      {/* Show StuUpdatesProgramDetailsCommon component */}
       <StuUpdatesProgramDetailsCommon
         programTitle={state.responseData ? state.responseData.title : ""}
         programId={parseInt(programId)}

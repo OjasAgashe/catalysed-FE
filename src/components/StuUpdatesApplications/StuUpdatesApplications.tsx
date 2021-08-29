@@ -1,3 +1,8 @@
+/*
+ * This file is much same as OrgProgramInvitationDetails file of
+ * OrgProgramInvitationDetails component
+ */
+
 import React, { useCallback, useMemo } from "react";
 import {
   StudentUpdatesCommonActionType,

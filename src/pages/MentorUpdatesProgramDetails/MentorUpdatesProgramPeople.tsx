@@ -8,6 +8,11 @@ import { stuUpdatesProgramPeopleReducer } from "../../reducers/stuUpdatesProgram
 import { MentorUpdatesProgramPeopleResponse } from "../../types/MentorUpdatesProgramDetails";
 
 const MentorUpdatesProgramPeople = () => {
+  /*
+   * The logic of this file is much same as StuUpdatesProgramPeople file
+   * of StuUpdatseProgramDetails page
+   */
+
   const [state, dispatch] = useReducer(stuUpdatesProgramPeopleReducer, {
     loading: true,
     error: "",
@@ -77,6 +82,7 @@ const MentorUpdatesProgramPeople = () => {
         entity="MENTOR"
       />
 
+      {/* Show MentorUpdatesProgramPeopleDetails component */}
       <MentorUpdatesProgramPeopleDetails
         responseData={
           state.responseData as MentorUpdatesProgramPeopleResponse | null

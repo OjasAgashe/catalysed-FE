@@ -26,19 +26,21 @@ const StuUpdatesProgramDetailsCommon = ({
   const location = useLocation();
   const history = useHistory();
 
+  /*
+   * On click of back button, push the user to their
+   * respected pages from which they come on this page
+   */
   const handleNestedPageBackBtnClick = () => {
-    if (entity === STUDENT)
-      history.push(`${STUDENT_UPDATES}?view=PROGRAMS`);
-    else if (entity === MENTOR)
-      history.push(`${MENTOR_UPDATES}?view=PROGRAMS`);
-  }
+    if (entity === STUDENT) history.push(`${STUDENT_UPDATES}?view=PROGRAMS`);
+    else if (entity === MENTOR) history.push(`${MENTOR_UPDATES}?view=PROGRAMS`);
+  };
 
   return (
     <div
       className="CommonProgramDetailsDiv"
       style={{ backgroundImage: `url(${OrgProgramDetails})` }}
     >
-      <NestedPageBackBtn onClick={handleNestedPageBackBtnClick}/>
+      <NestedPageBackBtn onClick={handleNestedPageBackBtnClick} />
 
       <div className="CommonProgramDetailsHeroText">
         <span>{programTitle}</span>

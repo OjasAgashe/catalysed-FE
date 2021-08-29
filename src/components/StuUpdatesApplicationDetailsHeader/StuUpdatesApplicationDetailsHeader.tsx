@@ -25,11 +25,15 @@ const StuUpdatesApplicationDetailsHeader = ({
   const history = useHistory();
 
   useEffect(() => {
+    /*
+     * Set the document title, based on the current selected Tab
+     */
     document.title = `Connected Application ${
       state.choosedOption === "Application" ? "Details" : "Program Details"
     } | CatalysEd`;
   }, [state.choosedOption]);
 
+  // Function to handle click on Back button
   const handleNestedPageBackBtnClick = () => {
     if (entity === STUDENT)
       history.push(`${STUDENT_UPDATES}?view=APPLICATIONS`);

@@ -6,6 +6,11 @@ import { MentorDashboardSessionDetailsCardData } from "../../types/MentorDashboa
 import "../MentorUpdatesProgramDetails/MentorUpdatesProgramDashboard.css";
 
 const StuUpdatesProgramDashboard = () => {
+  /*
+   * In this file, there is no integration of API. We are showing fake
+   * Data
+   */
+
   const [noteCardArray, setNoteCardArray] = useState<
     MentorDashboardSessionDetailsCardData[]
   >([

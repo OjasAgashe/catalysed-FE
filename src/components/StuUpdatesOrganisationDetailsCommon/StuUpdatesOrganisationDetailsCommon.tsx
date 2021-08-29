@@ -32,6 +32,7 @@ const StuUpdatesOrganisationDetailsCommon = ({
 }: StuUpdatesOrganisationDetailsCommonProps) => {
   const history = useHistory();
 
+  // Function handling click on Details Tab
   const handleDetailsBtnClick = () => {
     dispatch({ type: "choosedOption", payload: "Details" });
 
@@ -45,6 +46,7 @@ const StuUpdatesOrganisationDetailsCommon = ({
       );
   };
 
+  // Function handling click on Programs Tab
   const handleProgramsBtnClick = () => {
     dispatch({ type: "choosedOption", payload: "Programs" });
 
@@ -58,6 +60,7 @@ const StuUpdatesOrganisationDetailsCommon = ({
       );
   };
 
+  // Function handling click on Back button
   const handleNestedPageBackBtnClick = () => {
     if (entity === STUDENT)
       history.push(`${STUDENT_UPDATES}?view=ORGANISATIONS`);

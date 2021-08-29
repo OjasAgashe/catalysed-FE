@@ -22,6 +22,14 @@ const MentorDashboardSessionEditFormModal = ({
   dbState,
   dbDispatch,
 }: MentorDashboardSessionEditFormModalProps) => {
+  /*
+   * state.modalFormData: to store the new Data of selected Card.
+   * Initially it will have value of selected Card.
+   *
+   * state.showColorPicker: to show or hide colar picker
+   *
+   * state.dataHasChanged: to check that data has changed or Not.
+   */
   const [state, dispatch] = useReducer(
     mentorDashboardSessionEditFormModalReducer,
     {
@@ -31,6 +39,13 @@ const MentorDashboardSessionEditFormModal = ({
     }
   );
 
+  /*
+   * Function to check data has changed or Not
+   *
+   * In this function, we are comparing value of form Data to value
+   * of selected card Data. And if any value is not same it means that
+   * data has changed.
+   */
   const hasDataChanged = useCallback(() => {
     const modalFormData =
       state.modalFormData as MentorDashboardSessionDetailsCardData;
@@ -46,15 +61,27 @@ const MentorDashboardSessionEditFormModal = ({
 
   useEffect(() => {
     if (!hasDataChanged()) {
+      /*
+       * if data has not changed, then the value of form data and
+       * selected card data should be same
+       */
       dispatch({
         type: "modalFormData",
         payload: dbState.selectedNoteCardData,
       });
     }
 
+    /*
+     * Each time any value changes check that data has changed or Not.
+     * And store its value in state.dataHasChanged
+     */
     dispatch({ type: "dataHasChanged", payload: hasDataChanged() });
   }, [dbState.selectedNoteCardData, hasDataChanged]);
 
+  /*
+   * Function to handle click on Pin option, set value of pinned
+   * property of form to opposite of its previous
+   */
   const handlePinButtonClick = () => {
     dispatch({
       type: "modalFormData",
@@ -65,6 +92,7 @@ const MentorDashboardSessionEditFormModal = ({
     });
   };
 
+  // Function to handle changes done in Title field
   const handleNoteTitleOnInputEvent: React.FormEventHandler<HTMLDivElement> = (
     event
   ) => {
@@ -78,6 +106,7 @@ const MentorDashboardSessionEditFormModal = ({
     });
   };
 
+  // Function to handle changes done in Description field
   const handleNoteDescriptionOnInputEvent: React.FormEventHandler<HTMLDivElement> =
     (event) => {
       const currentInnerHtml = event.currentTarget.innerHTML;
@@ -90,7 +119,12 @@ const MentorDashboardSessionEditFormModal = ({
       });
     };
 
+  // Function to handle color picker option
   const handleColorPicker = (colorString: string) => {
+    /*
+     * If any color selected then set its value in color
+     * property of form Data
+     */
     dispatch({
       type: "modalFormData",
       payload: {
@@ -99,33 +133,45 @@ const MentorDashboardSessionEditFormModal = ({
       } as MentorDashboardSessionDetailsCardData,
     });
 
+    // And then close the color picker
     dispatch({
       type: "showColorPicker",
       payload: !state.showColorPicker,
     });
   };
 
+  // Function to handle close of modal
   const handleModalCloseEvent = () => {
     const noteCardArray =
       dbState.noteCardArray as MentorDashboardSessionDetailsCardData[];
     const selectedNoteCardData =
       dbState.selectedNoteCardData as MentorDashboardSessionDetailsCardData;
 
+    /*
+     * On closing the modal (without saving), Ignore the changes done
+     * saved the old selected card data in noteCardArray
+     */
     dbDispatch({
       type: "noteCardArray",
       payload: [...noteCardArray, selectedNoteCardData],
     });
+
+    // And then hide the modal
     dbDispatch({ type: "showModal", payload: false });
   };
 
+  // Function to handle click on Save button
   const handleModalSaveChangedBtnClick = () => {
     const modalFormData =
       state.modalFormData as MentorDashboardSessionDetailsCardData;
 
+    // Save the New Data in place of Old Data, in noteCardArray
     dbDispatch({
       type: "noteCardArray",
       payload: [...dbState.noteCardArray, modalFormData],
     });
+
+    // And then hide the modal
     dbDispatch({ type: "showModal", payload: false });
   };
 
@@ -202,6 +248,7 @@ const MentorDashboardSessionEditFormModal = ({
 
         <div className="AddButtonNColorPickerContainer">
           {state.showColorPicker && (
+            // Color Palette
             <div role="tooltip" className="ColorsToPickContainer">
               <span
                 className="DefaultColor Color"
@@ -226,6 +273,10 @@ const MentorDashboardSessionEditFormModal = ({
             </div>
           )}
 
+          {/*
+           * Color Picker button, on click of which the color palette
+           * will become visible
+           */}
           <Button
             className="PinContainerButton"
             onClick={() =>

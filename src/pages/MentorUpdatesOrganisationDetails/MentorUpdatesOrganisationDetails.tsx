@@ -1,3 +1,8 @@
+/*
+ * This file is much same as StuUpdatesOrganisationDetails page, only
+ * we are dealing with Mentor Data instead of Student
+ */
+
 import React, { useEffect, useReducer } from "react";
 import { useHistory, useLocation, useParams } from "react-router-dom";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";

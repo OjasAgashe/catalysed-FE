@@ -1,3 +1,8 @@
+/*
+ * This file is much same as SearchBar file of OrgProgramInvitationDetails
+ * component
+ */
+
 import React from "react";
 import { Form } from "react-bootstrap";
 import {

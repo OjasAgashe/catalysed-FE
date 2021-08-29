@@ -20,6 +20,9 @@ const StuUpdatesPageHeader = ({
 }: StuUpdatesPageHeaderProps) => {
   const history = useHistory();
 
+  /*
+   * Handle click on Programs Tab
+   */
   const handleProgramsBtnClick = () => {
     dispatch({ type: "view", payload: "Programs" });
 
@@ -27,6 +30,9 @@ const StuUpdatesPageHeader = ({
     else if (entity === MENTOR) history.push(`${MENTOR_UPDATES}?view=PROGRAMS`);
   };
 
+  /*
+   * Handle click on Organisations Tab
+   */
   const handleOrganisationsBtnClick = () => {
     dispatch({ type: "view", payload: "Organisations" });
 
@@ -36,6 +42,9 @@ const StuUpdatesPageHeader = ({
       history.push(`${MENTOR_UPDATES}?view=ORGANISATIONS`);
   };
 
+  /*
+   * Handle click on Applications Tab
+   */
   const handleApplicationsBtnClick = () => {
     dispatch({ type: "view", payload: "Applications" });
 

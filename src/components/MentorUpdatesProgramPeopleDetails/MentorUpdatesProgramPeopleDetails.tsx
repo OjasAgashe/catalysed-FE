@@ -10,6 +10,10 @@ type MentorUpdatesProgramPeopleDetailsProps = {
 const MentorUpdatesProgramPeopleDetails = ({
   responseData,
 }: MentorUpdatesProgramPeopleDetailsProps) => {
+  /*
+   * This component is much same as StuUpdatesProgramPeopleDetails component
+   */
+
   const [noOfStudents, setNoOfStudents] = useState<number>(0);
   const [noOfMentors, setNoOfMentors] = useState<number>(0);
 

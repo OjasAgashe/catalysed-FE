@@ -5,6 +5,11 @@ import { AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
 
 import "./MentorDashboardSessionCard.css";
 
+/*
+ * This component has been used on the pages, on which we
+ * need Cards like on Mentor Dashboard page
+ */
+
 type MentorDashboardSessionCardProps = {
   data: MentorDashboardSessionDetailsCardData;
   cardBodyOnClick?: () => void;
@@ -18,13 +23,8 @@ const MentorDashboardSessionCard = ({
 }: MentorDashboardSessionCardProps) => {
   return (
     <Card className="DashboardCard" style={{ backgroundColor: data.color }}>
-      <Card.Header
-        className="DashboardCardHeader"
-      >
-        <Button
-          className="PinContainerButton"
-          onClick={pinnedOnClick}
-        >
+      <Card.Header className="DashboardCardHeader">
+        <Button className="PinContainerButton" onClick={pinnedOnClick}>
           {data.pinned ? <AiFillPushpin /> : <AiOutlinePushpin />}
         </Button>
       </Card.Header>

@@ -1,3 +1,8 @@
+/*
+ * This file is much similar as OrgProgramInvitationDataContainer file of
+ * OrgProgramInvitationDetails component
+ */
+
 import React from "react";
 import { Dropdown, DropdownButton, Table } from "react-bootstrap";
 import {
@@ -20,7 +25,7 @@ const StuUpdatesApplicationsDataContainer = ({
   state,
   dispatch,
   values,
-  entity
+  entity,
 }: StuUpdatesApplicationsDataContainerProps) => {
   const handleUpdatesApplicationsStatusDropdownSelect = (
     eventKey: string | null

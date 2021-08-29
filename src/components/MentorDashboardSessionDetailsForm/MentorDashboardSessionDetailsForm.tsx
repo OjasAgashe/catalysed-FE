@@ -19,6 +19,22 @@ const MentorDashboardSessionDetailsForm = ({
   dbState,
   dbDispatch,
 }: MentorDashboardSessionDetailsFormProps) => {
+  /*
+   * state.sessionNoteTitle: to store the Title of new Card (or Note)
+   *
+   * state.sessionNoteDescription: to store the Description of new Card
+   * (or Note)
+   *
+   * state.pinned: to store the pinned property for new Card
+   *
+   * state.color: to store the color property for new Card
+   *
+   * state.descriptionClicked: to store the state that description field
+   * is clicked on Not. As when it will get clicked, we will show field
+   * for Title too.
+   *
+   * state.showColorPicker: to store the state to show Color Picker or Not
+   */
   const [state, dispatch] = useReducer(
     mentorDashboardSessionDetailsFormReducer,
     {
@@ -31,8 +47,10 @@ const MentorDashboardSessionDetailsForm = ({
     }
   );
 
+  // To store reference to Description field
   const descriptionRef = useRef<HTMLDivElement | null>(null);
 
+  // Function to handle changes done in Title field
   const handleNoteTitleOnInputEvent: React.FormEventHandler<HTMLDivElement> = (
     event
   ) => {
@@ -42,6 +60,7 @@ const MentorDashboardSessionDetailsForm = ({
     });
   };
 
+  // Function to handle changes done in Description field
   const handleNoteDescriptionOnInputEvent: React.FormEventHandler<HTMLDivElement> =
     (event) => {
       dispatch({
@@ -50,8 +69,13 @@ const MentorDashboardSessionDetailsForm = ({
       });
     };
 
+  // Function to handle click on Add button
   const handleAddButtonClick = () => {
     if (state.sessionNoteTitle || state.sessionNoteDescription) {
+      /*
+       * Add a new Card (of Note), only when either sessionNoteTitle or
+       * sessionNoteDescription, or both has value
+       */
       dbDispatch({
         type: "noteCardArray",
         payload: [
@@ -66,9 +90,11 @@ const MentorDashboardSessionDetailsForm = ({
       });
 
       if (descriptionRef && descriptionRef.current) {
+        // Empty Description field
         descriptionRef.current.innerHTML = "";
       }
 
+      // Set all the states to their initial value
       dispatch({ type: "sessionNoteTitle", payload: "" });
       dispatch({ type: "sessionNoteDescription", payload: "" });
       dispatch({ type: "color", payload: "#fff" });
@@ -77,8 +103,12 @@ const MentorDashboardSessionDetailsForm = ({
     }
   };
 
+  // Handle click on ColorPicker
   const handleColorPicker = (colorString: string) => {
+    // On click of a color, set that color value in state.color
     dispatch({ type: "color", payload: colorString });
+
+    // Hide the ColorPicker
     dispatch({
       type: "showColorPicker",
       payload: !state.showColorPicker,
@@ -90,6 +120,7 @@ const MentorDashboardSessionDetailsForm = ({
       className="MentorDashboardSessionDetailsForm"
       style={{ backgroundColor: state.color }}
     >
+      {/* Show Pin option, only when description gets clicked */}
       {state.descriptionClicked && (
         <Button
           className="PinContainerButton"
@@ -99,6 +130,8 @@ const MentorDashboardSessionDetailsForm = ({
           {state.pinned ? <AiFillPushpin /> : <AiOutlinePushpin />}
         </Button>
       )}
+
+      {/* Show Title field, only when description gets clicked */}
       {state.descriptionClicked && (
         <>
           <div
@@ -122,6 +155,7 @@ const MentorDashboardSessionDetailsForm = ({
           ></div>
         </>
       )}
+
       <div
         className="GiveSessionNoteText"
         style={
@@ -151,6 +185,7 @@ const MentorDashboardSessionDetailsForm = ({
 
       <div className="AddButtonNColorPickerContainer">
         {state.showColorPicker && (
+          // Color Palette
           <div role="tooltip" className="ColorsToPickContainer">
             <span
               className="DefaultColor Color"
@@ -175,6 +210,10 @@ const MentorDashboardSessionDetailsForm = ({
           </div>
         )}
 
+        {/*
+         * Show button of ColorPicker, on click of which we
+         * will show Color Palette
+         */}
         <Button
           className="PinContainerButton"
           style={{ backgroundColor: state.color }}

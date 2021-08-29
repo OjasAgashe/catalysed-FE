@@ -1,3 +1,8 @@
+/*
+ * This file is much same as StuUpdatesProgramDetails file of
+ * StuUpdatesProgramDetails page
+ */
+
 import React, { useEffect, useReducer } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import LoadingProgress from "../../components/LoadingProgress/LoadingProgress";
