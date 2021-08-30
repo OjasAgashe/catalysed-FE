@@ -3,6 +3,7 @@ import { Nav, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import {
   HOME,
+  INVITE_DEVELOPMENT,
   ORGANISATION_REGISTER,
   STUDENT_MENTOR_REGISTER,
 } from "../../constants/Routes";
@@ -17,6 +18,16 @@ const CommonHomeHeader = () => {
         eventKey="1"
       >
         Home
+      </Nav.Link>
+
+      {/* This is for Development only */}
+      <Nav.Link
+        as={Link}
+        to={INVITE_DEVELOPMENT}
+        className="NavbarCollapseNavItem"
+        eventKey="11"
+      >
+        Invite
       </Nav.Link>
 
       <NavDropdown

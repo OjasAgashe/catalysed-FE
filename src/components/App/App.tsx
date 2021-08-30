@@ -41,6 +41,8 @@ import {
   MENTOR_UPDATES_DETAILS_APPLICATION,
   INVITE_ALREADY_ACCEPTED,
   INVITE_INVALID,
+  INVITE_KEY_VALIDATE,
+  INVITE_DEVELOPMENT,
 } from "../../constants/Routes";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -96,6 +98,9 @@ import MentorUpdatesProgramDashboard from "../../pages/MentorUpdatesProgramDetai
 import StuUpdatesProgramDashboard from "../../pages/StuUpdatesProgramDetails/StuUpdatesProgramDashboard";
 import InvalidInvite from "../../pages/InvitePage/InvalidInvite";
 import AlreadyAcceptedInvite from "../../pages/InvitePage/AlreadyAcceptedInvite";
+import ValidateInvitationKey from "../../pages/InvitePage/ValidateInvitationKey";
+import InviteForDevelopment from "../../pages/InvitePage/InviteForDevelopment";
+import { InviteAPIProvider } from "../../context/api_context/InviteAPIContext";
 
 function App() {
   return (
@@ -115,6 +120,13 @@ function App() {
 
           <PublicRoute path={HOME} exact>
             <Home />
+          </PublicRoute>
+
+          {/* This is for Development only */}
+          <PublicRoute path={INVITE_DEVELOPMENT} exact>
+            <InviteAPIProvider>
+              <InviteForDevelopment />
+            </InviteAPIProvider>
           </PublicRoute>
 
           <PublicRoute path={INVITE_INVALID} exact>
@@ -466,6 +478,12 @@ function App() {
               <StuUpdatesProgramPeople />
             </StudentAPIProvider>
           </PrivateRoute>
+
+          <PublicRoute path={`${INVITE_KEY_VALIDATE}/:invitationKey`} exact>
+            <InviteAPIProvider>
+              <ValidateInvitationKey />
+            </InviteAPIProvider>
+          </PublicRoute>
 
           <Route path="*">
             <PageNotFound />
