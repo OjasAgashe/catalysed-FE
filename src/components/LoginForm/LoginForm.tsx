@@ -111,7 +111,8 @@ const LoginForm = ({ state, dispatch }: LoginFormProps) => {
           response.data.jwt,
           response.data.user.userType,
           response.data.user.userName,
-          response.data.user.orgName ?? ""
+          response.data.user.orgName ?? "",
+          response.data.user.orgId
         );
 
         /*

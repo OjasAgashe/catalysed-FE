@@ -53,10 +53,10 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
   }, []);
 
   /*
-   * Destructing getCatalysedTokenCookie and getCatalysedIdCookie value
-   * from useCookie hook
+   * Destructing getCatalysedTokenCookie and getCatalysedOrgIdCookie
+   * value from useCookie hook
    */
-  const { getCatalysedTokenCookie, getCatalysedIdCookie } = useCookie();
+  const { getCatalysedTokenCookie, getCatalysedOrgIdCookie } = useCookie();
 
   /*
    * Function to call Create Program API
@@ -74,12 +74,12 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
    */
   const getProgramsMetaList = useCallback(() => {
     const catalysedToken = getCatalysedTokenCookie();
-    const catalysedId = getCatalysedIdCookie();
+    const catalysedOrgId = getCatalysedOrgIdCookie();
 
-    return instance.get(`/organization/${catalysedId}/programs`, {
+    return instance.get(`/organization/${catalysedOrgId}/programs`, {
       headers: { Authorization: `Bearer ${catalysedToken}` },
     });
-  }, [getCatalysedIdCookie, getCatalysedTokenCookie, instance]);
+  }, [getCatalysedOrgIdCookie, getCatalysedTokenCookie, instance]);
 
   /*
    * Function to call get API, to get specific Program Details
@@ -239,11 +239,14 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
    */
   function getConnectedMentors() {
     const catalysedToken = getCatalysedTokenCookie();
-    const catalysedId = getCatalysedIdCookie();
+    const catalysedOrgId = getCatalysedOrgIdCookie();
 
-    return instance.get(`organization/${catalysedId}/connections?type=MENTOR`, {
-      headers: { Authorization: `Bearer ${catalysedToken}` },
-    });
+    return instance.get(
+      `organization/${catalysedOrgId}/connections?type=MENTOR`,
+      {
+        headers: { Authorization: `Bearer ${catalysedToken}` },
+      }
+    );
   }
 
   /*
@@ -252,10 +255,10 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
    */
   function getConnectedStudents() {
     const catalysedToken = getCatalysedTokenCookie();
-    const catalysedId = getCatalysedIdCookie();
+    const catalysedOrgId = getCatalysedOrgIdCookie();
 
     return instance.get(
-      `organization/${catalysedId}/connections?type=STUDENT`,
+      `organization/${catalysedOrgId}/connections?type=STUDENT`,
       {
         headers: { Authorization: `Bearer ${catalysedToken}` },
       }
@@ -268,10 +271,10 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
    */
   function getSpecificConnectedMentor(mentorId: number) {
     const catalysedToken = getCatalysedTokenCookie();
-    const catalysedId = getCatalysedIdCookie();
+    const catalysedOrgId = getCatalysedOrgIdCookie();
 
     return instance.get(
-      `organization/${catalysedId}/connections/mentors/${mentorId}`,
+      `organization/${catalysedOrgId}/connections/mentors/${mentorId}`,
       {
         headers: { Authorization: `Bearer ${catalysedToken}` },
       }
@@ -284,10 +287,10 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
    */
   function getSpecificConnectedStudent(studentId: number) {
     const catalysedToken = getCatalysedTokenCookie();
-    const catalysedId = getCatalysedIdCookie();
+    const catalysedOrgId = getCatalysedOrgIdCookie();
 
     return instance.get(
-      `organization/${catalysedId}/connections/students/${studentId}`,
+      `organization/${catalysedOrgId}/connections/students/${studentId}`,
       {
         headers: { Authorization: `Bearer ${catalysedToken}` },
       }
@@ -300,10 +303,10 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
    */
   function getStudentApplicationForProgram(programId: number) {
     const catalysedToken = getCatalysedTokenCookie();
-    const catalysedId = getCatalysedIdCookie();
+    const catalysedOrgId = getCatalysedOrgIdCookie();
 
     return instance.get(
-      `organizations/${catalysedId}/programs/${programId}/applications?applicantType=STUDENT`,
+      `organizations/${catalysedOrgId}/programs/${programId}/applications?applicantType=STUDENT`,
       {
         headers: { Authorization: `Bearer ${catalysedToken}` },
       }
@@ -316,10 +319,10 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
    */
   function getMentorApplicationForProgram(programId: number) {
     const catalysedToken = getCatalysedTokenCookie();
-    const catalysedId = getCatalysedIdCookie();
+    const catalysedOrgId = getCatalysedOrgIdCookie();
 
     return instance.get(
-      `organizations/${catalysedId}/programs/${programId}/applications?applicantType=MENTOR`,
+      `organizations/${catalysedOrgId}/programs/${programId}/applications?applicantType=MENTOR`,
       {
         headers: { Authorization: `Bearer ${catalysedToken}` },
       }
@@ -335,10 +338,10 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     applicationId: number
   ) {
     const catalysedToken = getCatalysedTokenCookie();
-    const catalysedId = getCatalysedIdCookie();
+    const catalysedOrgId = getCatalysedOrgIdCookie();
 
     return instance.get(
-      `organizations/${catalysedId}/programs/${programId}/student/applications/${applicationId}`,
+      `organizations/${catalysedOrgId}/programs/${programId}/student/applications/${applicationId}`,
       {
         headers: { Authorization: `Bearer ${catalysedToken}` },
       }
@@ -354,10 +357,10 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     applicationId: number
   ) {
     const catalysedToken = getCatalysedTokenCookie();
-    const catalysedId = getCatalysedIdCookie();
+    const catalysedOrgId = getCatalysedOrgIdCookie();
 
     return instance.get(
-      `organizations/${catalysedId}/programs/${programId}/mentor/applications/${applicationId}`,
+      `organizations/${catalysedOrgId}/programs/${programId}/mentor/applications/${applicationId}`,
       {
         headers: { Authorization: `Bearer ${catalysedToken}` },
       }
@@ -374,10 +377,10 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     data: OrgSpecificApplicantDetailsResponse
   ) {
     const catalysedToken = getCatalysedTokenCookie();
-    const catalysedId = getCatalysedIdCookie();
+    const catalysedOrgId = getCatalysedOrgIdCookie();
 
     return instance.put(
-      `organizations/${catalysedId}/programs/${programId}/applications/${applicationId}/viewed`,
+      `organizations/${catalysedOrgId}/programs/${programId}/applications/${applicationId}/viewed`,
       data,
       {
         headers: { Authorization: `Bearer ${catalysedToken}` },
@@ -396,10 +399,10 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
     status: string
   ) {
     const catalysedToken = getCatalysedTokenCookie();
-    const catalysedId = getCatalysedIdCookie();
+    const catalysedOrgId = getCatalysedOrgIdCookie();
 
     return instance.put(
-      `organizations/${catalysedId}/programs/${programId}/applications/${applicationId}/update?status=${status}`,
+      `organizations/${catalysedOrgId}/programs/${programId}/applications/${applicationId}/update?status=${status}`,
       data,
       {
         headers: { Authorization: `Bearer ${catalysedToken}` },
@@ -412,9 +415,9 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
    */
   function getOrganisationProfile() {
     const catalysedToken = getCatalysedTokenCookie();
-    const catalysedId = getCatalysedIdCookie();
+    const catalysedOrgId = getCatalysedOrgIdCookie();
 
-    return instance.get(`organizations/${catalysedId}/profile`, {
+    return instance.get(`organizations/${catalysedOrgId}/profile`, {
       headers: { Authorization: `Bearer ${catalysedToken}` },
     });
   }
@@ -425,9 +428,9 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
    */
   function putOrganisationProfile(data: OrgProfileEditData) {
     const catalysedToken = getCatalysedTokenCookie();
-    const catalysedId = getCatalysedIdCookie();
+    const catalysedOrgId = getCatalysedOrgIdCookie();
 
-    return instance.put(`organizations/${catalysedId}/profile`, data, {
+    return instance.put(`organizations/${catalysedOrgId}/profile`, data, {
       headers: { Authorization: `Bearer ${catalysedToken}` },
     });
   }
@@ -437,9 +440,9 @@ export const OrgAPIProvider: React.FC<React.ReactNode> = (props) => {
    */
   function getOrgHomePageData() {
     const catalysedToken = getCatalysedTokenCookie();
-    const catalysedId = getCatalysedIdCookie();
+    const catalysedOrgId = getCatalysedOrgIdCookie();
 
-    return instance.get(`organizations/${catalysedId}/homepage`, {
+    return instance.get(`organizations/${catalysedOrgId}/homepage`, {
       headers: { Authorization: `Bearer ${catalysedToken}` },
     });
   }

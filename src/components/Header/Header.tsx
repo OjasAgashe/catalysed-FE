@@ -39,7 +39,7 @@ const Header = () => {
   // Function to handle Click on Sign Out
   const handleSignOut = () => {
     // set All Cookies to empty
-    setAllCookies(false, null, "", "", "", "");
+    setAllCookies(false, null, "", "", "", "", null);
 
     // and push to Common Home
     history.push(HOME);
