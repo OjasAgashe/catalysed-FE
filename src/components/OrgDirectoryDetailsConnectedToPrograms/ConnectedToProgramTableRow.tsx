@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { ORGANISATION_PROGRAM_DETAILS } from "../../constants/Routes";
 
 type ConnectedToProgramTableRowProps = {
-  data: { programId: number; status: string; title: string };
+  data: { mode: string; programId: number; status: string; title: string };
 };
 
 /*
@@ -48,7 +48,7 @@ const ConnectedToProgramTableRow = ({
           </OverlayTrigger>
         </td>
         <td className="ProgramInvitationTableData">
-          {data.status === "PUBLISHED" ? "Published" : "In Draft"}
+          {data.mode === "InPerson" ? "In Person" : data.mode}
         </td>
       </tr>
     </>

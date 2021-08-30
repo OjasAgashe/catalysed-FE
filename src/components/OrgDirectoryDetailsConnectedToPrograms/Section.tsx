@@ -17,10 +17,10 @@ type SectionProps = {
 const Section = ({ state = null, applicantState = null }: SectionProps) => {
   /*
    * We are maintaining filteredResponseData, selectedRadioForFilterState, and
-   * noFilteredData states because the Org can filter programs based on current
-   * program status,
+   * noFilteredData states because the Org can filter programs based on the
+   * program mode,
    *
-   * That's program is in PUBLISHED state, or it is in SAVED_TO_DRAFT state
+   * That's program is in Virtual mode, or it is in InPerson mode
    *
    * sectionState.filteredResponseData : will contain the filtered data
    *
@@ -40,17 +40,32 @@ const Section = ({ state = null, applicantState = null }: SectionProps) => {
     }
   );
 
+  // useEffect(() => {
+  //   console.log("state", state);
+  //   console.log("applicant state", applicantState);
+  //   console.log(
+  //     "selectedRadioForFilterState",
+  //     sectionState.selectedRadioForFilterState
+  //   );
+  //   console.log("filteredResponseData", sectionState.filteredResponseData);
+  // }, [
+  //   applicantState,
+  //   sectionState.filteredResponseData,
+  //   sectionState.selectedRadioForFilterState,
+  //   state,
+  // ]);
+
   /*
-   * filtering all the data, when status of the program is "PUBLISHED"
+   * filtering all the data, when mode of the program is "Virtual"
    */
-  const filterActiveResponseData = useMemo(() => {
+  const filterVirtualResponseData = useMemo(() => {
     /*
      * if we have value of state (means we do not have value of applicantState),
      * then filter its value
      */
     if (state?.responseData?.connectPrograms.length)
       return state?.responseData?.connectPrograms.filter(
-        (data) => data.status === "PUBLISHED"
+        (data) => data.mode === "Virtual"
       );
 
     /*
@@ -67,12 +82,12 @@ const Section = ({ state = null, applicantState = null }: SectionProps) => {
     ) {
       // applicant type is Mentor
       return applicantState?.responseData?.mentorDetails?.connectPrograms.filter(
-        (data) => data.status === "PUBLISHED"
+        (data) => data.mode === "Virtual"
       );
     } else {
       //  applicant type is Student
       return applicantState?.responseData?.studentDetails?.connectPrograms.filter(
-        (data) => data.status === "PUBLISHED"
+        (data) => data.mode === "Virtual"
       );
     }
   }, [
@@ -83,15 +98,15 @@ const Section = ({ state = null, applicantState = null }: SectionProps) => {
   ]);
 
   /*
-   * In this function, we are filtering all the data when status of the
-   * program is "SAVED_TO_DRAFT"
+   * In this function, we are filtering all the data when mode of the
+   * program is "InPerson"
    *
    * Everything else is same as above method
    */
-  const filterInactiveResponseData = useMemo(() => {
+  const filterInPersonResponseData = useMemo(() => {
     if (state?.responseData?.connectPrograms.length)
       return state?.responseData?.connectPrograms.filter(
-        (data) => data.status === "SAVED_TO_DRAFT"
+        (data) => data.mode === "InPerson"
       );
 
     if (
@@ -99,11 +114,11 @@ const Section = ({ state = null, applicantState = null }: SectionProps) => {
       "MENTOR"
     ) {
       return applicantState?.responseData?.mentorDetails?.connectPrograms.filter(
-        (data) => data.status === "SAVED_TO_DRAFT"
+        (data) => data.mode === "InPerson"
       );
     } else {
       return applicantState?.responseData?.studentDetails?.connectPrograms.filter(
-        (data) => data.status === "SAVED_TO_DRAFT"
+        (data) => data.mode === "InPerson"
       );
     }
   }, [
@@ -114,7 +129,7 @@ const Section = ({ state = null, applicantState = null }: SectionProps) => {
   ]);
 
   /*
-   * function handling dropdown select of Program Status,
+   * function handling dropdown select of Program Mode,
    * according to which we will filter our data
    */
   const handleDirectoryDetailsStateDropdownSelect = (
@@ -137,14 +152,15 @@ const Section = ({ state = null, applicantState = null }: SectionProps) => {
       sectionDispatch({ type: "noFilteredData", payload: "" });
 
       let tempFilteredData:
-        | { programId: number; status: string; title: string }[] = [];
+        | { mode: string; programId: number; status: string; title: string }[] =
+        [];
 
       // if we have value of state, then store its value in tempFilteredData
       if (state?.responseData?.connectPrograms.length)
         tempFilteredData = [...state?.responseData?.connectPrograms];
 
       /*
-       *  if we have value of applicantState, then store its value in tempFilteredData
+       * if we have value of applicantState, then store its value in tempFilteredData
        *
        * Do it based on the applicant type
        */
@@ -168,22 +184,24 @@ const Section = ({ state = null, applicantState = null }: SectionProps) => {
       }
 
       /*
-       * Now, If the Org has selected "Published" dropdown option, then filter the
-       * data according to "PUBLISHED" status of the program
+       * Now, If the Org has selected "Virtual" dropdown option, then filter the
+       * data according to "Virtual" mode of the program
        */
-      if (eventKey === "Published")
-        tempFilteredData = filterActiveResponseData as {
+      if (eventKey === "Virtual")
+        tempFilteredData = filterVirtualResponseData as {
+          mode: string;
           programId: number;
           status: string;
           title: string;
         }[];
 
       /*
-       * If the Org has selected "In Draft" dropdown option, then filter the data
-       * according to "SAVED_TO_DRAFT" status
+       * If the Org has selected "In Person" dropdown option, then filter the data
+       * according to "InPerson" mode
        */
-      if (eventKey === "In Draft")
-        tempFilteredData = filterInactiveResponseData as {
+      if (eventKey === "In Person")
+        tempFilteredData = filterInPersonResponseData as {
+          mode: string;
           programId: number;
           status: string;
           title: string;
@@ -216,7 +234,7 @@ const Section = ({ state = null, applicantState = null }: SectionProps) => {
             <th className="ProgramInvitationHeader">Program Name</th>
             <th className="ProgramInvitationHeader">
               <DropdownButton
-                title={`Program Status${
+                title={`Program Mode${
                   /*
                    * If the Org has selected dropdown option other than none,
                    * then show the selected option in drodpown title
@@ -234,16 +252,16 @@ const Section = ({ state = null, applicantState = null }: SectionProps) => {
                   None
                 </Dropdown.Item>
                 <Dropdown.Item
-                  eventKey="Published"
+                  eventKey="Virtual"
                   onSelect={handleDirectoryDetailsStateDropdownSelect}
                 >
-                  Published
+                  Virtual
                 </Dropdown.Item>
                 <Dropdown.Item
-                  eventKey="In Draft"
+                  eventKey="In Person"
                   onSelect={handleDirectoryDetailsStateDropdownSelect}
                 >
-                  In Draft
+                  In Person
                 </Dropdown.Item>
               </DropdownButton>
             </th>
@@ -256,7 +274,7 @@ const Section = ({ state = null, applicantState = null }: SectionProps) => {
            *
            * Else show message of sectionState.noFilterData
            */}
-          {["Published", "In Draft"].includes(
+          {["Virtual", "In Person"].includes(
             sectionState.selectedRadioForFilterState
           ) &&
           sectionState.filteredResponseData &&
@@ -282,41 +300,48 @@ const Section = ({ state = null, applicantState = null }: SectionProps) => {
 
           {/*
            * If sectionState.selectedRadioForFilterState does not contain
-           * "Published" or "In Draft" as value, then show the all data (not
+           * "Virtual" or "In Person" as value, then show the all data (not
            * filtered)
            */}
-          {!["Published", "In Draft"].includes(
+          {!["Virtual", "In Person"].includes(
             sectionState.selectedRadioForFilterState
-          ) && state
-            ? state?.responseData?.connectPrograms &&
-              [...state?.responseData?.connectPrograms]
-                .reverse()
-                .map((data) => (
-                  <ConnectedToProgramTableRow
-                    data={data}
-                    key={data.programId}
-                  />
-                ))
-            : applicantState?.responseData?.applicationDetails.applicantType ===
-              "MENTOR"
-            ? applicantState?.responseData?.mentorDetails?.connectPrograms &&
-              [...applicantState?.responseData?.mentorDetails?.connectPrograms]
-                .reverse()
-                .map((data) => (
-                  <ConnectedToProgramTableRow
-                    data={data}
-                    key={data.programId}
-                  />
-                ))
-            : applicantState?.responseData?.studentDetails?.connectPrograms &&
-              [...applicantState?.responseData?.studentDetails?.connectPrograms]
-                .reverse()
-                .map((data) => (
-                  <ConnectedToProgramTableRow
-                    data={data}
-                    key={data.programId}
-                  />
-                ))}
+          ) &&
+            (state
+              ? state?.responseData?.connectPrograms &&
+                [...state?.responseData?.connectPrograms]
+                  .reverse()
+                  .map((data) => (
+                    <ConnectedToProgramTableRow
+                      data={data}
+                      key={data.programId}
+                    />
+                  ))
+              : applicantState?.responseData?.applicationDetails
+                  .applicantType === "MENTOR"
+              ? applicantState?.responseData?.mentorDetails?.connectPrograms &&
+                [
+                  ...applicantState?.responseData?.mentorDetails
+                    ?.connectPrograms,
+                ]
+                  .reverse()
+                  .map((data) => (
+                    <ConnectedToProgramTableRow
+                      data={data}
+                      key={data.programId}
+                    />
+                  ))
+              : applicantState?.responseData?.studentDetails?.connectPrograms &&
+                [
+                  ...applicantState?.responseData?.studentDetails
+                    ?.connectPrograms,
+                ]
+                  .reverse()
+                  .map((data) => (
+                    <ConnectedToProgramTableRow
+                      data={data}
+                      key={data.programId}
+                    />
+                  )))}
         </tbody>
       </Table>
     </div>

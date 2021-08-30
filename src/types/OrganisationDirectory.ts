@@ -48,7 +48,12 @@ export interface OrgDirectoryDetailsCommonResponse {
   gender: string;
   stableConnection: boolean;
   previouslyMentored: boolean;
-  connectPrograms: { programId: number; status: string; title: string }[];
+  connectPrograms: {
+    mode: string;
+    programId: number;
+    status: string;
+    title: string;
+  }[];
   qualification?: string;
   profession?: string;
   experience?: number;
@@ -73,7 +78,7 @@ export type OrgDirectoryDetailsCommonActionType =
 
 export interface OrgDirectoryDetailsCTPSectionState {
   filteredResponseData:
-    | { programId: number; status: string; title: string }[]
+    | { mode: string; programId: number; status: string; title: string }[]
     | null;
   selectedRadioForFilterState: string;
   noFilteredData: string;
