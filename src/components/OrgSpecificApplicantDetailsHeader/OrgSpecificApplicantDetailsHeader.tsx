@@ -1,8 +1,9 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
-import { useHistory, useParams } from "react-router-dom";
+// import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { OrgProfileCommonHeaderImg } from "../../assets/Illustrations/Illustrations";
-import { ORGANISATION_PROGRAM_DETAILS } from "../../constants/Routes";
+// import { ORGANISATION_PROGRAM_DETAILS } from "../../constants/Routes";
 import {
   OrgSpecificApplicantDetailsActionType,
   OrgSpecificApplicantDetailsState,
@@ -28,10 +29,15 @@ const OrgSpecificApplicantDetailsHeader = ({
   dispatch,
 }: OrgSpecificApplicantDetailsHeaderProps) => {
   const history = useHistory();
-  const { programId } = useParams<{ programId: string }>();
+  // const { programId } = useParams<{ programId: string }>();
 
+  /*
+   * On Click of the Back button, take the user to last accessed
+   * path
+   */
   const handleNestedPageBackBtnClick = () => {
-    history.push(`${ORGANISATION_PROGRAM_DETAILS}/${programId}/applicants`);
+    // history.push(`${ORGANISATION_PROGRAM_DETAILS}/${programId}/applicants`);
+    history.goBack();
   };
 
   return (

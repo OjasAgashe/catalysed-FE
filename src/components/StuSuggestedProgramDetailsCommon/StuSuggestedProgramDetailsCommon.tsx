@@ -8,7 +8,8 @@ import {
   MENTOR_SUGGESTED_PROGRAMS,
   STUDENT_SUGGESTED_PROGRAMS,
 } from "../../constants/Routes";
-import { MENTOR, STUDENT } from "../../constants/Entities";
+// import { MENTOR, STUDENT } from "../../constants/Entities";
+import { STUDENT } from "../../constants/Entities";
 import NestedPageBackBtn from "../NestedPageBackBtn/NestedPageBackBtn";
 
 type StuSuggestedProgramDetailsCommonProps = {
@@ -25,13 +26,19 @@ const StuSuggestedProgramDetailsCommon = ({
   const location = useLocation();
   const history = useHistory();
 
+  /*
+   * On Click of the Back button, take the user to last accessed
+   * path
+   */
   const handleNestedPageBackBtnClick = () => {
     /*
      * Based on the current Entity (Student or Mentor), push to the
      * respected suggested programs
      */
-    if (entity === STUDENT) history.push(STUDENT_SUGGESTED_PROGRAMS);
-    else if (entity === MENTOR) history.push(MENTOR_SUGGESTED_PROGRAMS);
+    // if (entity === STUDENT) history.push(STUDENT_SUGGESTED_PROGRAMS);
+    // else if (entity === MENTOR) history.push(MENTOR_SUGGESTED_PROGRAMS);
+
+    history.goBack();
   };
 
   return (

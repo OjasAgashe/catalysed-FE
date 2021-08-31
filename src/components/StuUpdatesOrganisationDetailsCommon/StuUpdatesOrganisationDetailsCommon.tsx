@@ -5,9 +5,9 @@ import "../OrgProgramDetailsCommon/OrgProgramDetailsCommon.css";
 import { Alert } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import {
-  MENTOR_UPDATES,
+  // MENTOR_UPDATES,
   MENTOR_UPDATES_DETAILS_ORGANISATION,
-  STUDENT_UPDATES,
+  // STUDENT_UPDATES,
   STUDENT_UPDATES_DETAILS_ORGANISATION,
 } from "../../constants/Routes";
 import { MENTOR, STUDENT } from "../../constants/Entities";
@@ -62,10 +62,12 @@ const StuUpdatesOrganisationDetailsCommon = ({
 
   // Function handling click on Back button
   const handleNestedPageBackBtnClick = () => {
-    if (entity === STUDENT)
-      history.push(`${STUDENT_UPDATES}?view=ORGANISATIONS`);
-    else if (entity === MENTOR)
-      history.push(`${MENTOR_UPDATES}?view=ORGANISATIONS`);
+    // if (entity === STUDENT)
+    //   history.push(`${STUDENT_UPDATES}?view=ORGANISATIONS`);
+    // else if (entity === MENTOR)
+    //   history.push(`${MENTOR_UPDATES}?view=ORGANISATIONS`);
+
+    history.goBack();
   };
 
   return (

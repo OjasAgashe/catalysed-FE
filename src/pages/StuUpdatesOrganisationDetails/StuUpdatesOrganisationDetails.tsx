@@ -51,6 +51,22 @@ const StuUpdatesOrganisationDetails = () => {
     // Set the document title
     document.title = `Connected Organisation ${state.choosedOption} | CatalysEd`;
 
+    /*
+     * Whenever this page gets re-render, based on current location set the
+     * choosedOption value
+     */
+    dispatch({
+      type: "choosedOption",
+      payload:
+        location.pathname.includes(STUDENT_UPDATES_DETAILS_ORGANISATION) &&
+        location.pathname.includes("details")
+          ? "Details"
+          : location.pathname.includes(STUDENT_UPDATES_DETAILS_ORGANISATION) &&
+            location.pathname.includes("programs")
+          ? "Programs"
+          : "",
+    });
+
     // Function to call API, and get Data
     const getDetails = async () => {
       try {
@@ -91,6 +107,7 @@ const StuUpdatesOrganisationDetails = () => {
   }, [
     getConnectedOrganisationDetails,
     history,
+    location.pathname,
     organisationId,
     state.choosedOption,
   ]);

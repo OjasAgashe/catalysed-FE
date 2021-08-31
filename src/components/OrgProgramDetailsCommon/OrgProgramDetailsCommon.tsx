@@ -19,16 +19,11 @@ const OrgProgramDetailsCommon = ({
   const history = useHistory();
 
   /*
-   * This function is still to complete
-   *
-   * As we can reach this page from View and Search page with
-   * all or this_month or in_progress as the Parameter in URL
-   * . So have to ask, on click of this button where we have to
-   * redirect View_and_Search/all or View_and_Search/this_month
-   * or to View_and_Search/in_progress
+   * On Click of the Back button, take the user to last accessed
+   * path
    */
   const handleNestedPageBackBtnClick = () => {
-    history.push("#");
+    history.goBack();
   };
 
   return (

@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { Alert } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { OrgProfileCommonHeaderImg } from "../../assets/Illustrations/Illustrations";
-import { MENTOR, STUDENT } from "../../constants/Entities";
-import { MENTOR_UPDATES, STUDENT_UPDATES } from "../../constants/Routes";
+// import { MENTOR, STUDENT } from "../../constants/Entities";
+// import { MENTOR_UPDATES, STUDENT_UPDATES } from "../../constants/Routes";
 import {
   StudentUpdatesApplicationDetailsActionType,
   StudentUpdatesApplicationDetailsState,
@@ -35,10 +35,12 @@ const StuUpdatesApplicationDetailsHeader = ({
 
   // Function to handle click on Back button
   const handleNestedPageBackBtnClick = () => {
-    if (entity === STUDENT)
-      history.push(`${STUDENT_UPDATES}?view=APPLICATIONS`);
-    else if (entity === MENTOR)
-      history.push(`${MENTOR_UPDATES}?view=APPLICATIONS`);
+    // if (entity === STUDENT)
+    //   history.push(`${STUDENT_UPDATES}?view=APPLICATIONS`);
+    // else if (entity === MENTOR)
+    //   history.push(`${MENTOR_UPDATES}?view=APPLICATIONS`);
+
+    history.goBack();
   };
 
   return (

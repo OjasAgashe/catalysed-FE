@@ -2,11 +2,12 @@ import React from "react";
 import { Alert } from "react-bootstrap";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { OrgProgramDetails } from "../../assets/Illustrations/Illustrations";
-import { MENTOR, STUDENT } from "../../constants/Entities";
+// import { MENTOR, STUDENT } from "../../constants/Entities";
+import { STUDENT } from "../../constants/Entities";
 import {
-  MENTOR_UPDATES,
+  // MENTOR_UPDATES,
   MENTOR_UPDATES_DETAILS_PROGRAM,
-  STUDENT_UPDATES,
+  // STUDENT_UPDATES,
   STUDENT_UPDATES_DETAILS_PROGRAM,
 } from "../../constants/Routes";
 import NestedPageBackBtn from "../NestedPageBackBtn/NestedPageBackBtn";
@@ -31,8 +32,10 @@ const StuUpdatesProgramDetailsCommon = ({
    * respected pages from which they come on this page
    */
   const handleNestedPageBackBtnClick = () => {
-    if (entity === STUDENT) history.push(`${STUDENT_UPDATES}?view=PROGRAMS`);
-    else if (entity === MENTOR) history.push(`${MENTOR_UPDATES}?view=PROGRAMS`);
+    // if (entity === STUDENT) history.push(`${STUDENT_UPDATES}?view=PROGRAMS`);
+    // else if (entity === MENTOR) history.push(`${MENTOR_UPDATES}?view=PROGRAMS`);
+
+    history.goBack();
   };
 
   return (

@@ -40,6 +40,18 @@ const MentorUpdatesOrganisationDetails = () => {
 
     document.title = `Connected Organisation ${state.choosedOption} | CatalysEd`;
 
+    dispatch({
+      type: "choosedOption",
+      payload:
+        location.pathname.includes(MENTOR_UPDATES_DETAILS_ORGANISATION) &&
+        location.pathname.includes("details")
+          ? "Details"
+          : location.pathname.includes(MENTOR_UPDATES_DETAILS_ORGANISATION) &&
+            location.pathname.includes("programs")
+          ? "Programs"
+          : "",
+    });
+
     const getDetails = async () => {
       try {
         dispatch({ type: "error", payload: "" });
@@ -64,6 +76,7 @@ const MentorUpdatesOrganisationDetails = () => {
   }, [
     getConnectedOrganisationDetails,
     history,
+    location.pathname,
     organisationId,
     state.choosedOption,
   ]);
