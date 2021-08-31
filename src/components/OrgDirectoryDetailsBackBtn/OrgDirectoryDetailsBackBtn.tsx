@@ -1,9 +1,11 @@
 import React from "react";
 import { FiChevronsLeft } from "react-icons/fi";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import {
   ORGANISATION_DIRECTORY,
   ORGANISATION_DIRECTORY_DETAILS_MENTOR,
+  ORGANISATION_DIRECTORY_DETAILS_STUDENT,
+  ORGANISATION_PROGRAM_DETAILS,
 } from "../../constants/Routes";
 
 import "./OrgDirectoryDetailsBackBtn.css";
@@ -16,13 +18,17 @@ import "./OrgDirectoryDetailsBackBtn.css";
 const OrgDirectoryDetailsBackBtn = () => {
   const history = useHistory();
   const location = useLocation();
+  const { programId } = useParams<{ programId: string }>();
 
   const handleOrgDirectoryDetailsBackBtnClick = () => {
-    history.push(
-      location.pathname.includes(ORGANISATION_DIRECTORY_DETAILS_MENTOR)
-        ? `${ORGANISATION_DIRECTORY}?type=MENTOR`
-        : `${ORGANISATION_DIRECTORY}?type=STUDENT`
-    );
+    if (location.pathname.includes(ORGANISATION_DIRECTORY_DETAILS_MENTOR))
+      history.push(`${ORGANISATION_DIRECTORY}?type=MENTOR`);
+
+    if (location.pathname.includes(ORGANISATION_DIRECTORY_DETAILS_STUDENT))
+      history.push(`${ORGANISATION_DIRECTORY}?type=STUDENT`);
+
+    if (location.pathname.includes(ORGANISATION_PROGRAM_DETAILS))
+      history.push(`${ORGANISATION_PROGRAM_DETAILS}/${programId}/participants`);
   };
 
   return (
@@ -31,7 +37,7 @@ const OrgDirectoryDetailsBackBtn = () => {
         className="OrgDirectoryDetailsBackBtn"
         onClick={handleOrgDirectoryDetailsBackBtnClick}
       >
-        <FiChevronsLeft className="LeftArrowBtn" /> Go back to Directory
+        <FiChevronsLeft className="LeftArrowBtn" /> Go back
       </button>
     </div>
   );

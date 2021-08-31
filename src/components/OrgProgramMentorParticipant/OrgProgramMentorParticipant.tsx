@@ -38,6 +38,7 @@ const OrgProgramMentorParticipant = ({
                 details={details}
                 key={details.id}
                 state={state}
+                programId={programId}
               />
             ))
           ) : (
@@ -61,6 +62,7 @@ const OrgProgramMentorParticipant = ({
                 details={details}
                 key={details.id}
                 state={state}
+                programId={programId}
               />
             ))}
         </>

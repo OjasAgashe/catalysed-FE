@@ -83,6 +83,8 @@ const PrivateRoute = (props: {
             `${ORGANISATION_PROGRAM_DETAILS}/:programId/edit`,
             `${ORGANISATION_PROGRAM_DETAILS}/:programId/invitations`,
             `${ORGANISATION_PROGRAM_DETAILS}/:programId/participants`,
+            `${ORGANISATION_PROGRAM_DETAILS}/:programId/participants/mentor/:mentorId/details`,
+            `${ORGANISATION_PROGRAM_DETAILS}/:programId/participants/student/:studentId/details`,
             `${ORGANISATION_PROGRAM_VIEW_SEARCH}/:filterBy`,
           ].includes(props.path)
         ) {

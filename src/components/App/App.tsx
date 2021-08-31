@@ -267,7 +267,25 @@ function App() {
           </PrivateRoute>
 
           <PrivateRoute
+            path={`${ORGANISATION_PROGRAM_DETAILS}/:programId/participants/mentor/:mentorId/details`}
+            exact
+          >
+            <OrgAPIProvider>
+              <OrgDirectoryMentorDetailsPage />
+            </OrgAPIProvider>
+          </PrivateRoute>
+
+          <PrivateRoute
             path={`${ORGANISATION_DIRECTORY_DETAILS_STUDENT}/:studentId/details`}
+            exact
+          >
+            <OrgAPIProvider>
+              <OrgDirectoryStudentDetailsPage />
+            </OrgAPIProvider>
+          </PrivateRoute>
+
+          <PrivateRoute
+            path={`${ORGANISATION_PROGRAM_DETAILS}/:programId/participants/student/:studentId/details`}
             exact
           >
             <OrgAPIProvider>

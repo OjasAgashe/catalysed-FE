@@ -8,15 +8,13 @@ import "./OrgProgramParticipantCard.css";
 // @ts-ignore
 import ReactCountryFlag from "react-country-flag";
 import { getCode } from "country-list";
-import {
-  ORGANISATION_DIRECTORY_DETAILS_MENTOR,
-  ORGANISATION_DIRECTORY_DETAILS_STUDENT,
-} from "../../constants/Routes";
 import { useHistory } from "react-router-dom";
+import { ORGANISATION_PROGRAM_DETAILS } from "../../constants/Routes";
 
 type OrgProgramParticipantCardProps = {
   details: OrgProgramParticipantData;
   state: OrgProgramParticipantState;
+  programId: string;
 };
 
 /*
@@ -27,6 +25,7 @@ type OrgProgramParticipantCardProps = {
 const OrgProgramParticipantCard = ({
   details,
   state,
+  programId,
 }: OrgProgramParticipantCardProps) => {
   const history = useHistory();
 
@@ -37,7 +36,7 @@ const OrgProgramParticipantCard = ({
        * on mentor details page
        */
       history.push(
-        `${ORGANISATION_DIRECTORY_DETAILS_MENTOR}/${details.id}/details`
+        `${ORGANISATION_PROGRAM_DETAILS}/${programId}/participants/mentor/${details.id}/details`
       );
     } else if (state.showStudentDetails) {
       /*
@@ -45,7 +44,7 @@ const OrgProgramParticipantCard = ({
        * on student details page
        */
       history.push(
-        `${ORGANISATION_DIRECTORY_DETAILS_STUDENT}/${details.id}/details`
+        `${ORGANISATION_PROGRAM_DETAILS}/${programId}/participants/student/${details.id}/details`
       );
     }
   };
